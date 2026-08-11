@@ -31,7 +31,8 @@ probability, which does not exist in the repo yet.
   reviewed; 2 defects found and fixed — the HH overlap tint was
   overwritten, the 6×6 side note center-aligned into the grid —
   re-rendered, re-verified clean)
-- [ ] Phase 3: topic README complete, `make test` green
+- [x] Phase 3: topic README complete, `make test` green (full `make
+  check` run, exit 0; all nine references human-verified)
 - [ ] Phase 4: local review clean
 - [ ] Phase 5: PR open, drafts cleaned, 1080p60 render verified
 
