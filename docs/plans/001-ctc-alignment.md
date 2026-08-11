@@ -31,7 +31,9 @@ the combinatorics topic predate it, so the record starts here.
   check` run, exit 0; two references already human-verified)
 - [x] Phase 4: local review clean — one finding (reset the human-verified
   reference ticks), declined with reasoning in ADR 006
-- [ ] Phase 5: PR open, drafts cleaned, 1080p render verified
+- [x] Phase 5: PR open (#2), drafts cleaned, 1080p render verified
+  (11 files across both modules; every duration exactly the scripted
+  time ÷ 0.75 after the pacing change below)
 
 ## Verified technical anchors (from the research pass)
 
@@ -108,4 +110,19 @@ space.
 
 ## Review notes
 
-(filled in at the end)
+- Local CodeRabbit pass: one finding, declined (ADR 006 — human-verified
+  reference ticks stay ticked).
+- PR bot pass: three findings — the same checkbox reset (declined, ADR
+  006), and two accepted: CLAUDE.md/README wording had drifted from ADR
+  004 on docstring length, and the plan's phase table now spells
+  `make clean-drafts` in full.
+- Watching feedback landed two repo-wide rules mid-review, both now in
+  CLAUDE.md under motion discipline: scenes render at the native 0.75×
+  pace (`PLAYBACK_SPEED` in `utils/scene.py` — player-side slowdown was
+  juddering 60 fps output), and in-place text swaps are sequenced rather
+  than crossfaded. The pacing change's first draft double-stretched
+  waits; caught by an end-to-end duration check and pinned by a test.
+- References in both topic READMEs were opened, verified, and ticked by
+  the maintainer during the session.
+
+Follow-up (next branch): `probability/` per the gaps section above.
