@@ -43,7 +43,13 @@ close predates the fix.
   both pinned below), scene design finalized below
 - [x] Phase 1: plan + topic skeleton, `make check` green (171 tests —
   the new topic joined the contract suite; `--list` prints the stub)
-- [ ] Phase 2: all scenes render at draft; verified per CLAUDE.md checklist
+- [x] Phase 2: all scenes render at draft; verified per CLAUDE.md
+  checklist (6 files, distinct names, 28–38 s; 45 frames reviewed
+  covering every beat's steady state plus transition windows; five
+  layout defects found by eye and fixed — the scene-1 labels floating
+  above the ceiling line, the scene-2 caption crowding the panel tags,
+  and scene 6's edge-to-edge recall line, clipped right column, and
+  ln-2 tag sitting on the mirror line; box-leak check clean in all six)
 - [ ] Phase 3: README + wiki complete, `make test` green
 - [ ] Phase 4: local review + audit clean
 - [ ] Phase 5: PR, drafts cleaned, 1080p60 render verified (this series
