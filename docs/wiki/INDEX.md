@@ -1,6 +1,6 @@
 # Graph index
 
-Last audited: `67713b8` (2026-08-11, incremental — plan-004 branch)
+Last audited: `726b19e` (2026-08-11, incremental — plan-005 branch)
 
 The stamp is a commit hash: the state of the repo this graph was last
 reconciled against. The `connection-auditor` diffs from it instead of
@@ -31,15 +31,18 @@ Status: **delivered** (both ends exist and the content makes the link) or
 | `independence` | `conditional-probability` | delivered | `TheRestrictedSquare` delivers the deferred renormalized slice; `IndependenceRevisited` re-reads the stepped cut as P(A\|B) and rederives P(A\|B) = P(A) |
 | `counting-rules` | `conditional-probability` | delivered | `TheMultiplicationRule` speaks the rule of product back ("the counting rule of product, carrying probabilities") and checks the chain against C(13,3)/C(52,3) |
 | `conditional-probability` | `bayes-rule` | delivered | `ThroughTheFrontDoor` divides the exact identity `TwoSlicesOneSquare` left on screen; `OneTestTwoPatients` factors the counted prevalence pair; `YesterdaysPosterior` repeats the CI license verbatim; `TheHostsProtocol` closes the Monty deferral with Rosenthal's variants |
-| `bayes-rule` | `logarithms` | delivered | `TheEvidenceRuler` re-plots `YesterdaysPosterior`'s ladder in base 3 — each head adds exactly +2, H-then-T returns to exactly 0; evidence as distance, decibans named |
+| `bayes-rule` | `logarithms` | delivered | `TheEvidenceRuler` re-plots `YesterdaysPosterior`'s ladder in base 3 — each head adds exactly +2, and two tails walk the marker back to exactly 0; evidence as distance, decibans named |
 | `ctc-alignment` | `logarithms` | delivered | `TheUnderflowCliff` delivers `deep_learning/`'s log-space bullet: the 0.1³²⁴ hard zero, the −324 log sum, and Graves' log-add identity for the trellis's additions (2012 book, correctly attributed) |
 | `ctc-alignment` | *(beam search / gradient / peaky dynamics)* | promised | `deep_learning/README.md` Ideas not yet built |
-| `ctc-alignment` | *(dynamic programming as its own concept)* | promised | `deep_learning/README.md` row 5 when-useful ("the same dynamic-programming move as the HMM forward algorithm"); plan 001 gaps |
+| `ctc-alignment` | *(dynamic programming as its own concept)* | promised | `deep_learning/README.md` row 5 when-useful; plan 001 gaps. A future build inherits log-space for free: `TheUnderflowCliff` already shows the recursion's additions need the log-add identity |
 | `counting-rules` | *(binomial distribution — future random variables)* | promised | `combinatorics/README.md` row 3 when-useful names it; lands when `probability/` grows random variables |
 | `independence` | *(softmax, likelihood, log-likelihood)* | promised | `probability/README.md` Ideas — the remaining half of the CTC bridge |
 | `independence` | *(law of large numbers)* | promised | `probability/README.md` Ideas; `WhenToUseIt`'s swamping beat is the seed |
 | `independence` | *(random variables)* | promised | `probability/README.md` Ideas |
 | `counting-rules` | *(Pascal, stars & bars, inclusion–exclusion, binomial theorem)* | promised | `combinatorics/README.md` Ideas not yet built |
+| `logarithms` | *(e and ln — a `calculus/` topic)* | promised | `algebra/README.md` Scope exclusion + Ideas; on screen ("that story waits"); root README likely-next; the compound-interest table sits verified in plan 005's anchors |
+| `logarithms` | *(the log-odds inference scene in `probability/`)* | promised | `algebra/README.md` Ideas ("this series builds the ruler; that series owns the inference") — the residual of the delivered bayes→logarithms edge |
+| `logarithms` | *(information as log-counting — bits, entropy)* | promised | `algebra/README.md` Ideas; `ShrinkCounts`' −log₂ = 4 is the HHTH cell's surprisal, one caption short of "4 bits" |
 
 ## Shared visual devices
 
@@ -76,6 +79,12 @@ one topic should meet the same picture, upgraded, in the next:
   `CountingItOut`): whole-people counts carrying the prior in the
   numbers themselves — completed by the Bayes series' Diseasitis count
   (18/42 = 3/7).
+- **The quartered unit square** (`ChainsOfTrials` → `ShrinkCounts`):
+  the (1/2)⁴ cell, first as a probability, then re-read as four
+  halvings — negative logs fall out of a picture the viewer owns.
+- **The odds ladder** (`YesterdaysPosterior` → `TheEvidenceRuler`):
+  the multiplicative waterfall and the additive ruler are the same
+  data — the tree/waterfall lineage extended into log space.
 - **The two-slices reading** (`TwoSlicesOneSquare` → `TheOddsForm`):
   one overlap, two denominators — the geometric form of the transposed
   conditional, and the picture the odds form was built on.

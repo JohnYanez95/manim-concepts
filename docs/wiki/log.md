@@ -171,3 +171,20 @@ reordered.
   front page; Apache 2.0 license; repo made public
 - branch note: first cut sat on a stale main (PR #5 was still open);
   pull-and-verify caught it, merge completed, branch re-cut
+
+## [2026-08-11] audit | incremental, plan 005 branch
+
+- scope: diffed 67713b8..726b19e (9 commits); changed files only
+- findings: 4 promised-not-delivered, 5 delivered-not-recorded,
+  3 possible-not-yet-made, 4 graph-health — all applied
+- the picture-is-a-claim rule caught on the flipped edge itself: three
+  documents promised a return-to-zero the ruler never walked; fixed in
+  the scene's favour (H, H, T, T — the marker comes home)
+- stale-at-delivery occurrences 4 and 5 (probability Scope, the
+  deep_learning log-space bullet) repaired; logarithms gains its three
+  out-promise rows; calculus/e is the new strongest open promise
+- devices recorded: the quartered square's fourth series; the odds
+  ladder into log space
+- structural fix: phase 3 now includes re-rendering the welcome gif
+  when a topic lands (the hand-listed topic row is a staleness surface)
+- stamp: advance to 726b19e

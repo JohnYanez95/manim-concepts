@@ -424,7 +424,9 @@ class TheEvidenceRuler(ConceptScene):
 
         arc3, tag3 = step(4, 2, "T: −2", WARM)
         self.play(Create(arc3), FadeIn(tag3), marker.animate.move_to(axis.number_to_point(2)))
-        cancel = caption("a tail subtracts it back — H then T lands exactly where it started")
+        arc4, tag4 = step(2, 0, "T: −2", WARM)
+        self.play(Create(arc4), FadeIn(tag4), marker.animate.move_to(axis.number_to_point(0)))
+        cancel = caption("two heads out, two tails back — the marker returns to exactly 0")
         cancel.next_to(same, DOWN, buff=0.3)
         self.play(FadeIn(cancel))
         self.wait(0.9)

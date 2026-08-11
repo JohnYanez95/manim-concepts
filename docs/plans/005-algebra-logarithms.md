@@ -43,7 +43,13 @@ re-cut from the true tip. The fresh-branch rule earns its keep again.
 - [x] Phase 3: README + wiki complete, `make test` green (node
   `logarithms` added; BOTH double-unlock edges flipped delivered with
   on-screen citations; log entry carries the stale-main near-miss)
-- [ ] Phase 4: local review clean
+- [x] Phase 4: local review clean — CodeRabbit: two findings, both
+  accepted (Graves' a ≥ b convention stated on the identity; the gif
+  exception narrowed). Audit: 16 findings applied — including the
+  picture-is-a-claim catch on the flipped edge itself (the ruler now
+  walks home), staleness occurrences 4–5 repaired, logarithms' three
+  out-promises recorded, and the welcome-gif re-render added to the
+  phase 3 gate as a structural fix.
 - [ ] Phase 5: PR open, drafts cleaned, 1080p60 render verified
 
 ## Verified technical anchors (from the source-verifier report)
@@ -131,7 +137,9 @@ from exponents, never float log calls.
    and slow-is-not-bounded: name any N, 2^N sits on the strip.
 5. `TheEvidenceRuler` — consumer #1. `YesterdaysPosterior`'s odds
    ladder re-plotted on the base-3 ruler: each head adds exactly +2
-   (0 → 2 → 4; odds 1, 9, 81), H-then-T walks back to exactly 0.
+   (0 → 2 → 4; odds 1, 9, 81), and two tails walk it back to exactly
+   0 (built as H, H, T, T — the audit caught the earlier prose
+   promising a return the walk did not perform).
    "Each head multiplies by 9" becomes "each head adds the same
    length." Deciban lore as a caption (Turing; ~1 deciban is the
    smallest evidence humans perceive).
@@ -153,8 +161,27 @@ logs are irrational).
 
 ## Known material gaps (for the PR body)
 
-(named after scene design settles)
+- **`calculus/` is the new strongest open promise**: it unlocks e and
+  the natural log (one on-screen caption + three documents promise the
+  deferral's payoff), and the compound-interest table in this plan's
+  anchors is the ready seed.
+- The log-odds *inference* scene in `probability/` — this series built
+  the ruler; that series owns the inference (the recorded residual of
+  the delivered edge).
+- Information as log-counting (bits, entropy): `ShrinkCounts`' −log₂ =
+  4 is the surprisal of the HHTH cell, one caption short of "4 bits" —
+  the bridge toward an information-theory topic.
 
 ## Review notes
 
-(filled in at the end)
+- The auditor caught the picture-is-a-claim rule violated on the very
+  edge this branch flips: three documents promised a return-to-zero
+  the ruler never walked. Fixed in the scene's favour (H, H, T, T).
+- CodeRabbit's a ≥ b catch on the log-add identity was the round's
+  best precision finding — the safety caption was true only under a
+  convention the display never stated.
+- calculus/ is now the strongest open promise (it unlocks e); the
+  log-odds inference scene and the bits/entropy bridge are recorded
+  residuals with their seeds named.
+
+Follow-up (next branch): `calculus/`, or the log-odds inference scene.

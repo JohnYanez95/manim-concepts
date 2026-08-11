@@ -51,7 +51,7 @@ its assumptions forbid it.
 | 2 | `TheBlankToken` | $\mathcal{B}$: merge repeats, **then** drop $\varepsilon$ | CTC adds one output class $\varepsilon$ — "nothing new to emit". | Bare per-frame emission with repeat-merging can never write a double letter (HELLO → HELO) and forces held sounds to emit; $\varepsilon$ fixes both, and only the merge-then-drop order keeps it working. | Reading any CTC model's raw output stream; vocabulary design — blank and word-space are different tokens. |
 | 3 | `ManyPathsOneWord` | $P(Y\mid X)=\sum_{\pi\in\mathcal{B}^{-1}(Y)}\prod_{t=1}^{T} y^t_{\pi_t}$ | A transcript's probability is the **sum** over every path that collapses to it, not the best path's probability. | All 15 paths for AB at $T{=}4$, enumerated and collapsed on screen; each is one product of per-frame probabilities, and no single one is the answer. | The loss ASR/OCR models actually train on; why greedy decoding can return the wrong transcript. |
 | 4 | `CountingAlignments` | $\lvert\mathcal{B}^{-1}(Y)\rvert=\binom{T+U}{T-U}$ | How big the sum from scene 3 really is. | The multiplicative rule gives $3^4{=}81$ raw paths at $T{=}4$, of which 15 spell AB; the repeat-free count is $\binom{T+U}{T-U}$, and at $T{=}100$, $U{=}50$ that is $\approx 2\times10^{40}$ — enumeration is dead on arrival. | Recognising when a sum must be reorganised rather than enumerated — the counting step `combinatorics/` promised, and the cliffhanger the trellis resolves. |
-| 5 | `TheForwardTrellis` | $\alpha_t(s)=\bigl(\alpha_{t-1}(s)+\alpha_{t-1}(s{-}1)+\alpha_{t-1}(s{-}2)\bigr)\,y^t_{z'_s}$ | The exponential sum computed exactly on a $(2U{+}1)\times T$ grid. | Paths sharing a prefix share their $\alpha$; the grid's edges *are* the collapse semantics (the $s{-}2$ skip is legal only over a blank between different letters), and the two final nodes sum to the same 15 from scene 3. | The forward pass inside every CTC loss implementation; the same dynamic-programming move as the HMM forward algorithm. |
+| 5 | `TheForwardTrellis` | $\alpha_t(s)=\bigl(\alpha_{t-1}(s)+\alpha_{t-1}(s{-}1)+\alpha_{t-1}(s{-}2)\bigr)\,y^t_{z'_s}$ | The exponential sum computed exactly on a $(2U{+}1)\times T$ grid. | Paths sharing a prefix share their $\alpha$; the grid's edges *are* the collapse semantics (the $s{-}2$ skip is legal only over a blank between different letters), and the two final nodes sum to the same 15 from scene 3. | The forward pass inside every CTC loss implementation; the same dynamic-programming move as the HMM forward algorithm — run in log space in practice, since the raw product dies fast (float32: 46 frames at p = 0.1; see [`algebra/`](../algebra/README.md)). |
 | 6 | `WhenToUseIt` | — | Which problems CTC fits, and which its assumptions forbid. | Monotonic alignment, output no longer than input, and per-frame conditional independence are exactly the trellis's shape — break one and the grid no longer describes the task. | Choose CTC for monotonic transduction; reach for attention when outputs reorder (translation); add an external language model because independence leaves language on the table; never read spike timing as segmentation. |
 
 Renders are numbered to match, so a directory listing plays in the same
@@ -112,9 +112,9 @@ Rough queue, in roughly the order they build on each other:
 - The gradient identity — per-frame gradient is softmax output minus
   posterior occupancy, which is what makes the error-signal figure
   legible.
-- Log-space computation: why the product of hundreds of probabilities
-  underflows and how log-sum-exp restores it. Blocked on the same
-  missing logarithms concept as `probability/`'s log-odds idea — one
-  logs series closes both.
+- ~~Log-space computation~~ — delivered by
+  [`algebra/`](../algebra/README.md)'s `TheUnderflowCliff`: the
+  0.1³²⁴ hard zero, the −324 log sum, and Graves' log-add identity
+  for the trellis's additions (float32 dies at 46 frames).
 - Forced alignment done right: label priors and alignment-aware variants,
   since raw CTC spikes are not timestamps.
