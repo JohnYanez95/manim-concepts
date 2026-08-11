@@ -24,12 +24,18 @@ Deliberately **not** covered here:
 
 ### counting_rules_manim.py
 
-| Scene | Idea | Formula | Visual argument |
-| --- | --- | --- | --- |
-| `MultiplicativeRule` | Independent stages multiply | $N = n_1 n_2 \cdots n_k$ | A tree with $3 \times 4 = 12$ leaf paths, re-cast as a grid so the product is literally the area of a rectangle. |
-| `PermutationRule` | Order matters | $P^n_r = \dfrac{n!}{(n-r)!}$ | Slot-filling from a shrinking pool (5, 4, 3), then the factorial identity by cancelling the unwanted tail $2 \times 1$. |
-| `CombinationRule` | Order does not matter | $C^n_r = \dbinom{n}{r} = \dfrac{n!}{r!\,(n-r)!}$ | The $3!$ orderings of $\{A,C,E\}$ collapse to one set — every combination was overcounted $r!$ times, so divide. |
-| `PartitionRule` | Split into labelled groups | $N = \dfrac{n!}{n_1!\,n_2!\cdots n_k!}$ | $6!$ row orderings chopped into blocks of 3/2/1, then divide out the within-block orderings that change nothing. |
+Watch in order. Each scene divides out something the previous one overcounted,
+so `PartitionRule` does not land without `CombinationRule` before it.
+
+| # | Scene | Idea | Formula | Visual argument |
+| --- | --- | --- | --- | --- |
+| 1 | `MultiplicativeRule` | Independent stages multiply | $N = n_1 n_2 \cdots n_k$ | A tree with $3 \times 4 = 12$ leaf paths, re-cast as a grid so the product is literally the area of a rectangle. |
+| 2 | `PermutationRule` | Order matters | $P^n_r = \dfrac{n!}{(n-r)!}$ | Slot-filling from a shrinking pool (5, 4, 3), then the factorial identity by cancelling the unwanted tail $2 \times 1$. |
+| 3 | `CombinationRule` | Order does not matter | $C^n_r = \dbinom{n}{r} = \dfrac{n!}{r!\,(n-r)!}$ | The $3!$ orderings of $\{A,C,E\}$ collapse to one set — every combination was overcounted $r!$ times, so divide. |
+| 4 | `PartitionRule` | Split into labelled groups | $N = \dfrac{n!}{n_1!\,n_2!\cdots n_k!}$ | $6!$ row orderings chopped into blocks of 3/2/1, then divide out the within-block orderings that change nothing. |
+
+Renders are numbered to match, so a directory listing plays in the same order:
+`01_MultiplicativeRule.mp4` … `04_PartitionRule.mp4`.
 
 Render them:
 

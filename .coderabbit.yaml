@@ -76,6 +76,13 @@ reviews:
         - A table row missing its visual-argument cell. That column is what
           stops two scenes from re-explaining the same intuition.
         - A missing References or "Ideas not yet built" section.
+        - An unnumbered concepts table, or numbering that does not run 1..n in
+          the order the scenes are defined in the module. Scenes in a module
+          build toward one idea, so source order is viewing order: renders are
+          named from it (`03_CombinationRule.mp4`) and a reader should be able
+          to work through a topic sequentially, or at minimum see the
+          trajectory. A reordered scene without a matching README update is a
+          finding even though both files are individually valid.
 
         Reference verification is HUMAN-GATED. `- [ ]` means unverified and
         `- [x]` means a person opened the link and vouched for it.
@@ -109,6 +116,17 @@ reviews:
           is scoped per scene deliberately: manim writes the finished output
           path back into the global config, and a batch-wide scope makes every
           scene overwrite the first scene's file.
+
+    - path: "tests/**"
+      instructions: |
+        The suite is deliberately narrow. Do NOT ask for pixel or
+        frame-comparison tests of rendered output, or for coverage of the
+        animation code itself — those fail on a font or manim update without
+        anything being wrong, and that is a decision already taken.
+
+        DO flag a test that renders actual video. The render path is mocked on
+        purpose; a test that shells out to a real render makes the suite take
+        minutes and depend on ffmpeg and LaTeX.
 
     - path: "pyproject.toml"
       instructions: |

@@ -49,10 +49,17 @@ watching it first. Each topic README has four parts, in this order:
 1. **Scope** — a short high-level explanation of what the topic covers *and
    what it deliberately does not*. The second half matters more: without it a
    topic quietly becomes a junk drawer.
-2. **A concepts table** — one row per concept file, listing each scene, the
-   idea it carries, the formula it lands on, and the visual argument it makes.
-   The visual-argument column is what stops two scenes from re-explaining the
-   same intuition.
+2. **A numbered concepts table** — one row per scene, listing its position,
+   the idea it carries, the formula it lands on, and the visual argument it
+   makes. The visual-argument column is what stops two scenes from
+   re-explaining the same intuition.
+
+   The numbering is not decoration. Scenes in a module build toward one idea,
+   so **source order is viewing order**: renders are named from it
+   (`03_CombinationRule.mp4`), `--list` prints it, and the table must agree
+   with both. Someone landing on a topic should be able to watch it top to
+   bottom, or at minimum see the trajectory without playing anything.
+   `tests/test_topic_contract.py` fails if the table and the code disagree.
 3. **References** — the outside sources the topic is built from, under the
    verification rule below.
 4. **Ideas not yet built** — the queue, so the gap between what exists and
@@ -122,8 +129,26 @@ re-renders what changed. Pass `--no-cache` if a stale partial is suspected.
 | `make render FILE=… [QUALITY=…] [SCENE=…]` | Render one module (1080p60 unless `QUALITY` says otherwise) |
 | `make render-all [QUALITY=draft]` | Render every concept module |
 | `make lint` / `make fmt` | Ruff check / format |
-| `make check` | Everything the commit gate runs, without committing |
+| `make test` | Run the test suite |
+| `make check` | Ruff, tests and every hook, without committing |
+| `make clean-drafts` | Delete sub-1080p renders, keep the final ones |
 | `make clean` | Delete all rendered output |
+
+### Working on a scene
+
+Iterating at 1080p is a waste of wall-clock, so the loop is draft-first:
+
+1. `--quality draft` (480p15) until the scene is right.
+2. Check the render actually worked — count the files, and look at a frame.
+   "It produced a file" is not verification.
+3. Open a PR for the topic; let the review land.
+4. Finalise, then `make clean-drafts` and render at the 1080p default.
+
+```bash
+uv run python combinatorics/counting_rules_manim.py -q draft   # iterate
+make clean-drafts                                              # then finalise
+uv run python combinatorics/counting_rules_manim.py            # 1080p60
+```
 
 ## Adding a concept
 
@@ -178,7 +203,7 @@ fresh set of hex codes:
 | `utils/theme.py` | Colours (`ACCENT`, `COOL`, `WARM`, `GOOD`, `MUTED`), the `PALETTE` cycle, the type scale |
 | `utils/scene.py` | `ConceptScene` — applies the background, provides `self.title()` |
 | `utils/mobjects.py` | `token`, `chip`, `boxed`, `header`, `caption` |
-| `utils/render.py` | `render_cli` — the flags above |
+| `utils/render.py` | `render_cli` — the flags above, and the scene numbering |
 
 Colours carry meaning and should be used for it: `ACCENT` is the result being
 built toward, `WARM` is what gets cancelled or overcounted, `GOOD` is a
@@ -194,6 +219,22 @@ from utils import ACCENT, ConceptScene, render_cli, token
 `utils` resolves from any topic directory because the project installs itself
 as a package (see the comment at the top of `pyproject.toml`) — there is no
 `sys.path` manipulation in any concept file.
+
+## Tests
+
+`make test`. The suite is deliberately narrow — there are no pixel or
+frame-comparison tests, because they fail on a font update without anything
+being wrong. What is covered is the part that can be wrong silently:
+
+- `tests/test_render.py` — scene discovery, ordering, filename numbering,
+  selection and its error paths, quality mapping. Includes a regression test
+  for the one real bug found so far: a batch of scenes rendering into a single
+  file.
+- `tests/test_topic_contract.py` — enforces the contract above mechanically.
+  Every topic has a README with all four sections, its Scope states exclusions,
+  every scene is documented and listed, the table's numbering matches source
+  order, and every reference carries a verification checkbox. Review can only
+  see a diff; this catches a topic that has drifted since.
 
 ## Conventions
 
