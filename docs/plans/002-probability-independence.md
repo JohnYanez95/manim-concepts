@@ -18,7 +18,7 @@ probability, which does not exist in the repo yet.
 | 1 | Plan committed, topic dir, README skeleton, scene stubs | `make check` |
 | 2 | Scenes, iterated at `--quality draft`; renders verified (count, names, ffprobe frames + durations, extracted frames) | Draft renders verified by eye |
 | 3 | Concepts table with all three levels, references as `- [ ]`, links back to `combinatorics/` and `deep_learning/`; root README topics row | `make test` |
-| 4 | Local CodeRabbit pass, findings addressed | Review clean |
+| 4 | Local CodeRabbit pass + `connection-auditor` pass, findings addressed | Review clean |
 | 5 | PR (body names conditional probability as the next branch), bot review, finalise | `make clean-drafts` + 1080p60 render |
 
 ## Checklist
@@ -33,7 +33,8 @@ probability, which does not exist in the repo yet.
   re-rendered, re-verified clean)
 - [x] Phase 3: topic README complete, `make test` green (full `make
   check` run, exit 0; all nine references human-verified)
-- [ ] Phase 4: local review clean
+- [ ] Phase 4: local review clean (CodeRabbit + connection-auditor, both
+  resolved before Phase 5)
 - [ ] Phase 5: PR open, drafts cleaned, 1080p60 render verified
 
 ## Verified technical anchors (from the research pass)
