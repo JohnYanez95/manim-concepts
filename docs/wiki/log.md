@@ -71,3 +71,49 @@ reordered.
 - final 1080p60 render verified: 6 files, native 0.75× pace
 - next: plan 003, conditional probability — fresh branch after merge;
   carries ctc→conditional residual and the renormalized-slice picture
+
+## [2026-08-11] series | plan 003, conditional probability (in progress)
+
+- node built: `conditional-probability`
+  (probability/conditional_probability_manim.py, six scenes; closer is
+  `WhenToCondition` — sibling module owns the `WhenToUseIt` name)
+- edges closed: `independence` → `conditional-probability` (renormalized
+  slice delivered; stepped cut named as P(A|B));
+  `ctc-alignment` → `conditional-probability` (conditional independence
+  taught with the two-coin example; "given the input" named)
+- edge promised: `conditional-probability` → Bayes series (the series
+  ends at the named front door)
+- devices extended: stepped-cut lineage named; shrinking pool's factors
+  licensed as conditional probabilities
+- also this branch: CodeRabbit tuned for the bookkeeping (see plan 003)
+
+## [2026-08-11] audit | incremental, plan 003 branch
+
+- scope: diffed 75e5cf9..23c47f2 (11 commits — seed-audit application,
+  PR #3 merge, full plan-003 branch); changed files only, no full crawl
+- findings: 3 promised-not-delivered, 3 delivered-not-recorded,
+  4 possible-not-yet-made, 3 graph-health
+- both edges into conditional-probability verified delivered against
+  scene content, not just the README
+- Bayes is now promised on screen twice plus four documents — the
+  strongest open promise; INDEX row's citation undersells it
+- new delivered edge to record: counting-rules → conditional-probability
+  (TheMultiplicationRule speaks the rule of product back; C(13,3) check)
+- devices to record: square-drawn-as-tree, natural-frequency chips,
+  two-slices reading — all inherited by the promised Bayes series
+- stale: deep_learning Scope still queues conditional independence,
+  which WhenToCondition delivered; plan 003 gaps section still blank
+- possible: LOTP ↔ forward trellis (anchors the promised DP edge);
+  tree↔grid inversion; 1/16 is ChainsOfTrials' cell; explaining-away
+  verified but unbuilt
+- stamp: advance to 23c47f2
+
+## [2026-08-11] series | plan 003 finalised (PR #4)
+
+- final 1080p60 render verified: 6 files, native 0.75x pace
+- review round: one finding (tuned config's first trial — zero
+  bookkeeping churn), the stepped-A geometry fix, applied
+- maintainer caught a frame-sampling blind spot (scene 1 overlap);
+  lesson recorded in plan 003's review notes
+- next: Bayes' rule — the repo's strongest open promise, seeded by
+  the front door, the cohort chips, the protocol lesson, and Rosenthal

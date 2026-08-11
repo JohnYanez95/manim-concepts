@@ -3,10 +3,15 @@
 ## Scope
 
 Probability as proportion, built visually: the sample space as a unit
-square, events as regions, probability as area. The first series covers
-**independence** — the product rule P(A∩B) = P(A)·P(B) as the *primary*
-definition, why it is the probability-weighted upgrade of the counting
-grid, the confusions it attracts, and the product over a chain of trials.
+square, events as regions, probability as area. Two series so far. The
+first covers **independence** — the product rule P(A∩B) = P(A)·P(B) as
+the *primary* definition, why it is the probability-weighted upgrade of
+the counting grid, the confusions it attracts, and the product over a
+chain of trials. The second covers **conditional probability** —
+restriction and renormalization on the same square, the multiplication
+rule, total probability and trees, the inversion fallacy, and
+conditional independence — closing the promises the first series and
+the CTC series left open.
 
 This topic exists because two earlier ones promised it: the
 [multiplicative rule](../combinatorics/README.md) counts pairs as
@@ -15,16 +20,17 @@ from counts to areas; and the CTC series in
 [`deep_learning/`](../deep_learning/README.md) multiplies per-frame
 probabilities. This series teaches the unconditional product that move
 rests on; the conditional form CTC actually assumes (frames independent
-*given the input*) is deferred to the conditional-probability series.
+*given the input*) is taught in the conditional series below.
 
 Deliberately **not** covered here:
 
-- Conditional probability. P(A|B), the equivalent characterization of
-  independence via P(A|B) = P(A) (defined only when P(B) > 0), and
-  Bayes' rule are the next series on their own branch — this one
-  teaches the product form first precisely because it needs no
-  conditioning (and survives zero-probability events). The
-  renormalized-slice picture is deferred entirely to that series.
+- Bayes' rule. The conditional series ends deliberately at its front
+  door — P(A)·P(B|A) = P(B)·P(A|B), named and left. The full treatment
+  (odds form, the waterfall device, Monty Hall done honestly with the
+  host's protocol) is its own future series.
+- Conditioning on probability-zero events. The definition requires
+  P(B) > 0; the continuous story (Borel–Kolmogorov) is genuinely
+  treacherous, and honest silence beats false generality.
 - Random variables, distributions, and expectation. Events only.
 - Measure-theoretic formality. "Probability is area" is used as a
   faithful picture, not developed as measure theory.
@@ -57,6 +63,31 @@ Render them:
 uv run python probability/independence_manim.py            # all six, 1080p60
 uv run python probability/independence_manim.py --list
 uv run python probability/independence_manim.py -s TheProductRule -q draft
+```
+
+### conditional_probability_manim.py
+
+Watch after the independence series — its centerpiece re-reads that
+series' own stepped-cut picture. The first two scenes build conditioning
+as restriction and name what the step always was; the middle three are
+the machinery (multiplication rule, total probability, trees) and the
+inversion; the last is what you actually condition on, closing the
+conditional-independence residual the CTC series left open.
+
+| # | Scene | Formula | What it says | Why it's true | When it's useful |
+| --- | --- | --- | --- | --- | --- |
+| 1 | `TheRestrictedSquare` | $P(A\mid B)=\dfrac{P(A\cap B)}{P(B)}$ | Conditioning is restriction then renormalization: throw away what B rules out, re-measure inside what is left. | Three coins by recount (1/8 → 1/4 given the first is heads); on the square, dimming outside B and stretching the band by 1/P(B) preserves every within-band proportion — the slice is a genuine probability space. Defined only for P(B) > 0. | Every "given that…" question; the formula is the picture's bookkeeping, which is why it comes last. |
+| 2 | `IndependenceRevisited` | $P(A\mid B)=P(A)$ | The stepped cut from the independence series was conditional probability all along — the step's height inside the band is P(A\|B). | The step flattening *is* P(A\|B) = P(A), the equivalent characterization of independence on P(B) > 0. The die jewel re-read: P(even \| {1,2,3,4}) = 2/4 = 1/2 ✓; P(even \| {1,2,3}) = 1/3 ✗. Disjoint re-read: P(A\|B) = 0 — maximal information. Conditioning never mutates the original measure — P(A) still answers in the old one (the closing caption pins it). | Recognizing independence as "conditioning changes nothing" — and why the product form stays the definition (it survives P(B) = 0 and is symmetric). |
+| 3 | `TheMultiplicationRule` | $P(A\cap B)=P(B)\,P(A\mid B)$ | The definition read backwards: a joint probability is a width times a conditional height. | It is one rectangle on the square — the counting rule of product carrying probabilities. The chain rule extends it ("n! theorems in one": every expansion order is valid). Time reversal costs nothing: P(S₁\|S₂) = 12/51 = P(S₂\|S₁) — conditioning is re-measuring, not re-running. | The license the independence series used without a name: (4/52)(3/51) = 1/221 is P(A₁)·P(A₂\|A₁) — every sequential-sampling computation, and the shrinking pool made rigorous. |
+| 4 | `TotalProbabilityAndTrees` | $P(A)=\sum_i P(B_i)\,P(A\mid B_i)$ | An unconditional probability is the weighted average of its conditional pieces over a partition. | Columns of width P(Bᵢ) carrying rectangles of height P(A\|Bᵢ) tile the square — total probability is "add up the rectangles". A tree is the same square drawn: branches carry conditional probabilities, leaves are intersections, and the sum over circled leaves is the same addition. On the repo's die: P(even) = 1/3·1/2 + 2/3·1/2 = 1/2. | Splitting a hard probability over cases; reading and writing tree diagrams without confusing conditional labels for joint ones. It is also the law the CTC forward trellis runs on — each α-column is total probability over predecessor states. |
+| 5 | `TwoSlicesOneSquare` | $P(A\mid B)\neq P(B\mid A)$ | The two conditionals share their numerator and nothing else — the inversion fallacy, drawn. | The same overlap read as a share of the B-band versus the A-band. Exact hit: P(first H \| five H) = 1 vs P(five H \| first H) = 1/16. The prevalence pair: one 9/10-sensitive, 1/10-false-positive test gives P(sick\|+) = 1/2 at 10% prevalence and 1/12 at 1% — whole-person counts — the prior carried by the counts themselves. | The transposed conditional (prosecutor's fallacy, base-rate neglect) — and the series' exit: P(A)P(B\|A) = P(B)P(A\|B) is Bayes' front door, left for the next series. |
+| 6 | `WhenToCondition` | — | When conditioning is the tool, and what exactly you condition on. | The conditioning event includes *how you learned it*: the four two-children family chips give 1/3 given "at least one girl" but 1/2 once the announcement rule is drawn as weights. Conditional independence is a third thing: two coins (9/10 vs 1/10 heads) are marginally dependent (41/100 ≠ 1/4) yet independent given the coin — the common-cause beat made quantitative. | Sequential draws, diagnosis (sensitivity and specificity stay two numbers), protocol-aware conditioning; CTC's "independent given the input" finally taught. Monty Hall deferred to the Bayes series, where the host's protocol can be handled honestly. |
+
+Renders: `01_TheRestrictedSquare.mp4` … `06_WhenToCondition.mp4`.
+
+```bash
+uv run python probability/conditional_probability_manim.py
+uv run python probability/conditional_probability_manim.py --list
 ```
 
 See the [root README](../README.md) for the full flag list.
@@ -93,16 +124,49 @@ entries start unchecked until a human does the same.
 - [X] [Böcherer-Linder et al., unit squares vs tree diagrams](https://link.springer.com/chapter/10.1007/978-3-319-72871-1_5)
       — the evidence base for preferring the square.
 
+From the plan-003 research pass
+([`docs/plans/003-probability-conditional.md`](../docs/plans/003-probability-conditional.md)),
+for the conditional series:
+
+- [X] [Blitzstein & Hwang, Introduction to Probability, chs. 1–2 excerpt](https://law-and-algorithms.github.io/assets/files/Probability_Book_Excerpt_BlitzsteinHwang.pdf)
+      — Def 2.2.1 and Thms 2.3.1–2.3.6 quoted verbatim in the plan's
+      anchors; "conditional probabilities are probabilities".
+- [X] [MIT 18.05, Reading 3: conditional probability](https://math.mit.edu/~dav/05.dir/class3-prep.pdf)
+      — the consensus spine: reduced sample space first, trees as the
+      multiplication rule drawn, "souped up rule of product".
+- [X] [Seeing Theory, ch. 2: compound probability](https://seeing-theory.brown.edu/compound-probability/index.html)
+      — the interactive sample-space-shrinking device scene 1 inherits.
+- [X] [3blue1brown, "The quick proof of Bayes' theorem"](https://www.3blue1brown.com/lessons/bayes-theorem-quick)
+      — the two-slices picture behind `TwoSlicesOneSquare` and the
+      series' exit line.
+- [X] [Böcherer-Linder & Eichler 2017 (Frontiers, open access)](https://www.frontiersin.org/journals/psychology/articles/10.3389/fpsyg.2016.02026/full)
+      — unit square beats tree at quantifying the subset relation; both
+      improve with natural frequencies.
+- [X] [Rosenthal, "Monty Hall, Monty Fall, Monty Crawl"](https://probability.ca/jeff/writing/montyfall.pdf)
+      — why the host's protocol changes the answer; the reason Monty
+      Hall is deferred to the Bayes series.
+- [X] [Wikipedia, Conditional probability](https://en.wikipedia.org/wiki/Conditional_probability)
+      — the definition, the P(B) > 0 requirement, and the
+      Borel–Kolmogorov caveat kept out of scope.
+- [X] [Wikipedia, Conditional independence](https://en.wikipedia.org/wiki/Conditional_independence)
+      — the definition behind `WhenToCondition`'s CTC closer.
+- [X] [Wikipedia, Boy or girl paradox](https://en.wikipedia.org/wiki/Boy_or_girl_paradox)
+      — Gardner's retraction and the protocol-dependence the
+      two-children beat draws.
+
 ## Ideas not yet built
 
 Rough queue, in roughly the order they build on each other:
 
-- Conditional probability — the next series, on its own branch:
-  P(A|B) as renormalized area, the multiplication rule
-  P(A∩B) = P(B)·P(A|B), independence rederived as P(A|B) = P(A), trees.
-- Bayes' rule, once conditioning exists.
+- Bayes' rule — conditioning now exists, and the conditional series
+  ends at its front door: the odds form, the waterfall device, the
+  prevalence pair completed, and Monty Hall with the host's protocol
+  done honestly (Rosenthal).
 - Per-frame softmax as a distribution, likelihood and log-likelihood —
   the remaining half of the bridge promised to `deep_learning/`.
+- Explaining away — the verified-but-unbuilt half of the conditional
+  independence story (independence ⇏ CI: two fair flips given "exactly
+  one head", 0 ≠ 1/4; plan 003's anchors).
 - The law of large numbers properly: swamping quantified, absolute vs
   relative deviation.
 - Random variables and distributions — the die as a function, not a set.

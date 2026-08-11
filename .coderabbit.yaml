@@ -20,17 +20,18 @@
 # this configuration asks CodeRabbit to spend its attention on.
 language: "en-US"
 
+# Comments in this file are for humans only — the config is parsed against
+# CodeRabbit's schema, so guidance the reviewer should actually FOLLOW must
+# live in tone_instructions, path_instructions, or CLAUDE.md (which the
+# cloud bot auto-reads as code guidelines). That lesson was learned here:
+# a comment block pointing at the declined-findings record was ignored for
+# three review rounds because comments never reach the model.
+tone_instructions: "Review code and factual claims for correctness. Do not nitpick prose style, formatting, or record-keeping conventions in docs/ — the repo has its own machinery for those."
+
 reviews:
-  # Read before flagging anything: docs/adr/ records findings that were
-  # already considered and declined, one numbered ADR each, with the reasoning.
-  # Do not re-raise one of those without new evidence — the render-all quality
-  # default was raised, declined, and raised again verbatim a round later,
-  # which is pure churn.
-  # CLAUDE.md is the authoritative ruleset; README.md is its short version, so
-  # judge a rule against CLAUDE.md rather than flagging the README for brevity.
-  # "chill" over "assertive" on purpose — see the note above. This is a
-  # personal research repo, not a production service; a wall of nitpicks on a
-  # visualisation costs more than it catches.
+  # "chill" over "assertive" on purpose. This is a personal research repo,
+  # not a production service; a wall of nitpicks on a visualisation costs
+  # more than it catches. ("quiet" is the next lever if noise persists.)
   profile: "chill"
   auto_review:
     enabled: true
@@ -42,6 +43,10 @@ reviews:
     # Render output. Gitignored already; this is belt and braces so a forced
     # add never turns into a review of binary video.
     - "!media/**"
+    # The wiki's append-only operations log. Entries are immutable history —
+    # reviewing them produces only requests to rewrite the past, which the
+    # log's own contract forbids.
+    - "!docs/wiki/log.md"
     # uv.lock is deliberately NOT excluded. It is generated, but a lockfile
     # diff is where a dependency change becomes visible, and that is exactly
     # the thing worth a second pair of eyes. It only churns when dependencies
@@ -109,17 +114,21 @@ reviews:
           trajectory. A reordered scene without a matching README update is a
           finding even though both files are individually valid.
 
-        Reference verification is HUMAN-GATED. `- [ ]` means unverified and
-        `- [x]` means a person opened the link and vouched for it.
+        Reference verification is HUMAN-GATED. `- [ ]` means unverified;
+        `- [x]` (or `- [X]`) means a person opened the link and vouched for
+        it. The full protocol is ADR 006 in docs/adr/.
         - Unverified entries are NOT a defect. Never ask for a `- [ ]` to be
           resolved, justified, or removed before merge; they are a to-do list.
-        - DO flag any diff that flips `- [ ]` to `- [x]` without a human
-          plausibly having done so — in particular in a commit authored or
-          co-authored by a bot or an AI assistant, or in a change that ticks
-          several boxes at once alongside unrelated edits. An automated tick
-          defeats the only purpose the checkbox has.
-        - DO flag a new reference added as `- [x]`. Every entry starts
-          unchecked, without exception.
+        - Ticks recorded in a commit whose message states the maintainer
+          verified the sources are the LEGITIMATE path — the maintainer ticks
+          boxes in their working tree and the change is committed on their
+          behalf, so a bot/AI co-author trailer on that commit is expected and
+          is NOT evidence of an automated tick. Do not ask for such ticks to
+          be reverted; that finding has been raised and declined four times.
+        - DO flag a tick whose commit message makes NO claim of human
+          verification, and DO flag a brand-new reference entry that appears
+          already ticked in the same change that introduces it with no
+          verification statement.
 
     - path: "utils/**"
       instructions: |
@@ -162,6 +171,44 @@ reviews:
         comment saying why the rule is being suppressed. The existing
         F403/F405 exemption is commented; the list should stay short and
         justified rather than growing into a way to silence findings.
+
+    - path: "docs/adr/**"
+      instructions: |
+        Architecture Decision Records: immutable records of decisions already
+        made, including review findings that were considered and DECLINED
+        with reasoning. Before flagging anything anywhere in this repo, treat
+        a decision recorded here as settled — re-raising one without new
+        evidence is the exact churn this directory exists to stop. Review ADR
+        files themselves only for internal factual self-contradiction; do not
+        propose reversing, restyling, or updating a recorded decision.
+
+    - path: "docs/plans/**"
+      instructions: |
+        Numbered series plans — point-in-time records that are updated as
+        phases complete and kept as history. Review only for factual errors
+        in newly added material. Do not ask for full research transcripts or
+        per-claim provenance beyond the verified-anchors digest: ADR 007
+        records that the digest (each number with its verification method) is
+        the durable artifact, deliberately. Checklists and phase tables
+        reflect the plan at the time it was written; do not flag them for
+        drifting from later process evolution.
+
+    - path: "docs/wiki/**"
+      instructions: |
+        The repo's connection graph — maintained by the repo's own
+        connection-auditor agent on its own cadence, with an audit stamp and
+        an append-only log (the log is excluded from review entirely). Review
+        INDEX.md only for factual errors in newly added rows — a claimed
+        edge whose citation plainly does not exist. Do not review this
+        directory as prose: wording, table style, and organization are the
+        graph machinery's concern, not review's.
+
+    - path: ".claude/agents/**"
+      instructions: |
+        Agent role definitions — operational prompts, not documentation.
+        Review for genuine contradictions with CLAUDE.md's rules or unsafe
+        tool grants; do not flag prose style, tone, or formatting inside the
+        prompt body.
 
 knowledge_base:
   learnings:
