@@ -188,3 +188,13 @@ reordered.
 - structural fix: phase 3 now includes re-rendering the welcome gif
   when a topic lands (the hand-listed topic row is a staleness surface)
 - stamp: advance to 726b19e
+
+## [2026-08-11] series | plan 005 finalised (PR #6)
+
+- final 1080p60 render verified: 6 files, native 0.75x pace; the
+  ruler's walk-home confirmed at full resolution
+- review round: 2 CodeRabbit findings (the a >= b convention, the gif
+  exception) + 16 audit findings, all applied
+- the repo is public, licensed Apache 2.0, and its front page explains
+  itself (welcome gif + workflow diagram)
+- next: calculus/ (unlocks e and ln), or the log-odds inference scene

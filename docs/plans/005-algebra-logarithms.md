@@ -50,7 +50,9 @@ re-cut from the true tip. The fresh-branch rule earns its keep again.
   walks home), staleness occurrences 4–5 repaired, logarithms' three
   out-promises recorded, and the welcome-gif re-render added to the
   phase 3 gate as a structural fix.
-- [ ] Phase 5: PR open, drafts cleaned, 1080p60 render verified
+- [x] Phase 5: PR open (#6), drafts cleaned, 1080p60 render verified
+  (6 files, 1920×1080/60, frame counts consistent with the native
+  pace; the ruler's walk-home spot-checked at full resolution)
 
 ## Verified technical anchors (from the source-verifier report)
 
