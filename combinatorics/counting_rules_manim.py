@@ -408,5 +408,69 @@ class PartitionRule(ConceptScene):
         self.wait(2)
 
 
+class WhenToUseIt(ConceptScene):
+    """Which rule a problem needs, and why all four are the same rule."""
+
+    def construct(self):
+        self.play(FadeIn(self.title("Which Rule, and When"), shift=0.3 * DOWN))
+
+        # Level three of the narrative: the first four scenes establish what
+        # each rule says and why it is true, and stop. Without this one the
+        # module teaches four formulas instead of a way of deciding.
+        cases = [
+            ("k stages, each with its own menu", "Multiplicative"),
+            ("Pick r of n — order is the answer", "Permutation"),
+            ("Pick r of n — order irrelevant", "Combination"),
+            ("Deal n into labelled groups", "Partition"),
+        ]
+
+        questions = VGroup(*[Text(q, font_size=21) for q, _ in cases])
+        questions.arrange(DOWN, buff=0.66, aligned_edge=LEFT)
+        questions.to_edge(LEFT, buff=0.7).shift(0.25 * DOWN)
+
+        rules = VGroup(*[Text(r, font_size=23, weight=BOLD, color=ACCENT) for _, r in cases])
+        rules.arrange(DOWN, buff=0.66, aligned_edge=LEFT)
+        rules.to_edge(RIGHT, buff=1.5).shift(0.25 * DOWN)
+        for question, rule in zip(questions, rules, strict=True):
+            rule.match_y(question)
+
+        # One x for every arrow, past the widest question, so the column reads
+        # as a single mapping rather than four unrelated statements.
+        start_x = questions.get_right()[0] + 0.3
+        end_x = rules.get_left()[0] - 0.3
+        arrows = VGroup(
+            *[
+                Arrow(
+                    np.array([start_x, question.get_y(), 0]),
+                    np.array([end_x, question.get_y(), 0]),
+                    buff=0,
+                    color=MUTED,
+                    stroke_width=3,
+                    max_tip_length_to_length_ratio=0.18,
+                )
+                for question in questions
+            ]
+        )
+
+        for question, arrow, rule in zip(questions, arrows, rules, strict=True):
+            self.play(
+                FadeIn(question, shift=0.2 * RIGHT),
+                GrowArrow(arrow),
+                FadeIn(rule, shift=0.2 * LEFT),
+                run_time=0.65,
+            )
+        self.wait(0.8)
+
+        # The transferable idea: the four are one rule with a correction, which
+        # is what makes them worth remembering as a set.
+        takeaway = Text(
+            "All four are the product rule — minus the orderings you don't care about",
+            font_size=22,
+        )
+        takeaway.to_edge(DOWN, buff=0.75)
+        self.play(FadeIn(takeaway, shift=0.2 * UP), Create(boxed(takeaway, buff=0.26)))
+        self.wait(2)
+
+
 if __name__ == "__main__":
     raise SystemExit(render_cli())
