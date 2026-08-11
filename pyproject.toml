@@ -49,6 +49,11 @@ select = [
     "B",    # bugbear
     "UP",   # pyupgrade
     "SIM",  # simplify
+    # Keeps utils/__init__.py's __all__ ordered. Ruff owns this rather than a
+    # test: its ordering groups by case (SCREAMING, then CamelCase, then
+    # snake_case) and re-implementing that in an assertion is a fragile copy of
+    # someone else's convention.
+    "RUF022",  # __all__ is not sorted
 ]
 
 [tool.ruff.lint.per-file-ignores]
