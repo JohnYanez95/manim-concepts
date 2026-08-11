@@ -179,19 +179,22 @@ From the plan-004 research pass
 ([`docs/plans/004-probability-bayes.md`](../docs/plans/004-probability-bayes.md)),
 for the Bayes series:
 
-- [ ] [3blue1brown, "The medical test paradox"](https://www.3blue1brown.com/lessons/better-bayes)
+- [X] [3blue1brown, "The medical test paradox"](https://www.3blue1brown.com/lessons/better-bayes)
       — the Bayes factor as the test's one number; the odds-form update
       as the exact rule (his frequency counts round; the repo's do not).
-- [ ] [Arbital, "Waterfall diagrams and relative odds"](https://www.lesswrong.com/w/waterfall-diagram?lens=bayes_waterfall_diseasitis)
+- [X] [Yudkowsky, Santamaria, So8res, Robert Eidschun, et al.,
+  "Waterfall diagrams and relative odds"](https://www.lesswrong.com/w/waterfall-diagram?lens=bayes_waterfall_diseasitis)
       — the waterfall as the odds form; Diseasitis 1:4 × 3:1 = 3:4.
-- [ ] [Arbital, "Bayes' rule: odds form"](https://www.lesswrong.com/w/bayes-rule-odds-form?lens=introduction-to-bayes-rule-odds-form)
+- [X] [Yudkowsky, So8res, Smith, et al., "Bayes' rule: odds form"](https://www.lesswrong.com/w/bayes-rule-odds-form?lens=introduction-to-bayes-rule-odds-form)
       — prior odds × relative likelihoods = posterior odds.
-- [ ] [MIT 18.05, class 11: Bayesian updating](https://math.mit.edu/~dav/05.dir/class11-prep.pdf)
+- [X] [MIT 18.05, class 11: Bayesian updating](https://math.mit.edu/~dav/05.dir/class11-prep.pdf)
       — the update table; yesterday's posterior as today's prior; the
       likelihood column is not a distribution.
-- [ ] [Gigerenzer & Hoffrage 1995, "How to Improve Bayesian Reasoning Without Instruction"](https://www.semanticscholar.org/paper/49045496d186fec8ba8348a752de2a16b1739ef5)
+- [X] [Gigerenzer & Hoffrage 1995, "How to Improve Bayesian Reasoning Without Instruction"](https://www.semanticscholar.org/paper/49045496d186fec8ba8348a752de2a16b1739ef5)
       — natural frequency formats and why they work.
-- [ ] [Weber, Binder & Krauss 2018 (natural frequencies)](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6194348/)
+- [X] [Weber, Binder & Krauss 2018, "Why Can Only 24% Solve Bayesian
+  Reasoning Problems in Natural Frequencies: Frequency Phobia in Spite
+  of Probability Blindness"](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6194348/)
       — the 4% vs 24% meta-analysis figure and why normalized
       frequencies lose the benefit.
 - [X] [Wikipedia, Conditional probability](https://en.wikipedia.org/wiki/Conditional_probability)
