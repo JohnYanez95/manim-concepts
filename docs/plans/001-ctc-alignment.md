@@ -22,7 +22,7 @@ the combinatorics topic predate it, so the record starts here.
 - [x] Branch from updated main
 - [x] Phase 0a: technical verification report received
 - [x] Phase 0b: pedagogy report received, scene design finalized below
-- [ ] Phase 1: rules + plan + skeleton, `make check` green
+- [x] Phase 1: rules + plan + skeleton, `make check` green
 - [ ] Phase 2: all scenes render at draft; verified per CLAUDE.md checklist
 - [ ] Phase 3: topic README complete, `make test` green
 - [ ] Phase 4: local review clean
