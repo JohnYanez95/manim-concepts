@@ -136,16 +136,24 @@ re-renders what changed. Pass `--no-cache` if a stale partial is suspected.
 
 ### Working on a scene
 
-Iterating at 1080p is a waste of wall-clock, so the loop is draft-first:
+Every non-trivial change starts with a plan broken into numbered phases, each
+ending in a commit gate that has to be green before the next phase starts. The
+last phase is always a fully rendered PR — a plan that stops at "the code
+works" is not finished.
+
+Iterating at 1080p is a waste of wall-clock, so the loop itself is draft-first:
 
 1. `--quality draft` (480p15) until the scene is right.
 2. Check the render actually worked — count the files, and look at a frame.
    "It produced a file" is not verification.
-3. Open a PR for the topic; let the review land.
-4. Finalise, then `make clean-drafts` and render at the 1080p default.
+3. Run the CodeRabbit review locally, **before** opening the PR, and address
+   what it finds. The PR should open clean rather than accumulate rounds.
+4. Open the PR; the bot reviews it as an independent second pass.
+5. Finalise, then `make clean-drafts` and render at the 1080p default.
 
 ```bash
 uv run python combinatorics/counting_rules_manim.py -q draft   # iterate
+# ... local review pass, then PR ...
 make clean-drafts                                              # then finalise
 uv run python combinatorics/counting_rules_manim.py            # 1080p60
 ```

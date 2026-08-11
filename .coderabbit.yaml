@@ -2,6 +2,12 @@
 #
 # Review policy for the GitHub bot.
 #
+# Note the workflow this assumes: the CodeRabbit review runs locally on the
+# branch BEFORE the PR is opened (cheap first pass, findings fixed in place),
+# and this bot review is the second, independent pass on the PR itself. The two
+# do not share state — a clean local run does not pre-satisfy the bot, and that
+# redundancy is deliberate. See CLAUDE.md for the full loop.
+#
 # The posture here is deliberately lax on code style and strict on structure.
 # Style is already fully settled by machines that run before the PR exists:
 # ruff decides formatting, line length, import order and PEP 8, and

@@ -4,15 +4,41 @@ Rules for working in this repo, derived from failures that actually happened
 here and from review feedback. Keep this lean — add a rule when something goes
 wrong twice, not speculatively.
 
-## Workflow: draft first, finalise last
+## Step 0: plan before touching a file
 
-Never render at the default 1080p while iterating. The loop is:
+Any topic, any concept, anything non-trivial starts with a written plan broken
+into numbered **phases**, each ending in a **commit gate** — a named checkpoint
+that must be green before the next phase begins. No phase starts on top of a
+red one, and each gate is one commit.
 
-1. `--quality draft` (480p15) until the scene is right. Fast enough to iterate.
-2. Verify the render — see below. "The file exists" is not verification.
-3. Open a PR for the topic. Let CodeRabbit review it.
-4. Address the review, finalise.
-5. `make clean-drafts`, then render at the 1080p default.
+The final phase is always a fully rendered PR. A plan that stops at "code
+works" is not finished.
+
+A new topic looks like this:
+
+| Phase | Work | Commit gate |
+| --- | --- | --- |
+| 1 | Topic dir, README skeleton, first scene stub | `make check` |
+| 2 | Scenes, iterated at draft quality | Draft renders verified by eye |
+| 3 | Numbered concepts table, references as `- [ ]` | `make test` |
+| 4 | Local CodeRabbit pass, findings addressed | Review clean |
+| 5 | PR, bot review, finalise | `clean-drafts` + 1080p render |
+
+## Workflow: draft first, review before PR, finalise last
+
+Never render at the default 1080p while iterating.
+
+1. **Plan** — step 0 above.
+2. **Iterate** at `--quality draft` (480p15). Fast enough to actually loop.
+3. **Verify the render** — see below. "The file exists" is not verification.
+4. **Run the CodeRabbit review locally, before opening the PR.** Use the
+   `coderabbit:code-review` skill on the branch. This is not optional and it
+   is not the same as the bot: catching findings here means the PR opens clean
+   instead of accumulating review rounds. Address what it finds, then re-run.
+5. **Open the PR.** The bot reviews it as an independent second pass.
+6. **Address the bot review and finalise.**
+7. **`make clean-drafts`, then render at the 1080p default.** The PR is only
+   done once the final render exists.
 
 `make clean-drafts` removes sub-1080p output and keeps finals; `make clean`
 removes everything.
