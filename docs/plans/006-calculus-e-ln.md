@@ -41,7 +41,8 @@ close predates the fix.
   `fix/underflow-cliff-box-leak` after the fold-in decision
 - [x] Phase 0: research reports received (pedagogy + source-verifier,
   both pinned below), scene design finalized below
-- [ ] Phase 1: plan + topic skeleton, `make check` green
+- [x] Phase 1: plan + topic skeleton, `make check` green (171 tests —
+  the new topic joined the contract suite; `--list` prints the stub)
 - [ ] Phase 2: all scenes render at draft; verified per CLAUDE.md checklist
 - [ ] Phase 3: README + wiki complete, `make test` green
 - [ ] Phase 4: local review + audit clean
