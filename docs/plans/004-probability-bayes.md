@@ -34,7 +34,10 @@ claim"; transition-window frame checks).
   the tick stands — because "deferred to the Bayes series" became
   stale the moment this branch existed)
 - [x] Phase 2: all scenes render at draft; verified per CLAUDE.md checklist
-  (6 distinct numbered files; durations 23–30 s; 16 frames reviewed;
+  (verification script ran FIRST — every displayed number plus the
+  Monty Small dial enumerated, resolving the anchors' verify-before-
+  animating flag; then: 6 distinct numbered files; durations 23–30 s;
+  16 frames reviewed;
   one LaTeX crash — the \quadP adjacent-string bug — plus three layout
   fixes: the renaming beat now clears the old identity first, the
   invariance pools relabel to 9:12 with the picture, and scene 6's
@@ -44,7 +47,15 @@ claim"; transition-window frame checks).
   `bayes-rule` added; the strongest-promise edge flipped delivered with
   three citations; log-odds promised; Monty Small's Ideas bullet
   retired — enumerated and now on screen)
-- [ ] Phase 4: local review clean
+- [x] Phase 4: local review clean — CodeRabbit: six findings, five
+  accepted (the Monty Small record written into the anchors rather than
+  the claim weakened; Fall's likelihood triple corrected in two docs;
+  the stale Bayes Ideas bullet removed; the halved-rates labels), one
+  declined (ADR 006 — noting the local CLI does not honor
+  path_instructions, confirming the research caveat; the cloud bot is
+  the tuned channel). Audit: 15 findings applied, including the
+  logarithms double-unlock cross-reference. The transition-window rule
+  caught its first live bug: the rate-label crossfade.
 - [ ] Phase 5: PR open, drafts cleaned, 1080p60 render verified
 
 ## Verified technical anchors (from the source-verifier report)
@@ -78,8 +89,12 @@ enumeration, no floats · [both] two independent routes agree.
   lowest available (prob 2/3, switch wins 1/2) or is forced high
   (prob 1/3, switch wins with certainty). The Proportionality
   Principle is "essentially a re-statement of Bayes' Theorem" — the
-  odds form with uniform prior. Monty Small's 1/(1+p) quoted but NOT
-  independently enumerated — verify before animating any slider.
+  odds form with uniform prior. Monty Small's 1/(1+p) was initially
+  quoted-only; the Phase 2 verification script then enumerated it, and
+  the record is: p ∈ {0, 1/4, 1/2, 3/4, 1} → P(switch wins) = 1, 4/5,
+  2/3, 4/7, 1/2 — exact, matching 1/(1+p) at every value. That is what
+  cleared the dial for screen and licenses the module docstring's
+  "machine-verified" claim.
 - Iterated-update candidates [both]: urns (3R1B vs 1R3B, LR 3: 1:1 →
   3:1 → 9:1; red-then-blue cancels to exactly 1/2); the repo's own
   two-coin pair has LR 9 — the same factor as the prevalence test.
@@ -136,7 +151,7 @@ moment LRs first multiply.
 6. `TheHostsProtocol` — Monty at last, as ordinary Bayes with three
    streams (uniform prior over car positions) and the likelihood of
    the host's *action* under his protocol: standard (1/2, 1, 0) →
-   switch 2/3; Monty Fall (1, 1, 0) → 1/2; Monty Crawl forced-high →
+   switch 2/3; Monty Fall (1/2, 1/2, 0) → 1/2; Monty Crawl forced-high →
    switch wins certainly. Same revealed fact, three different answers
    — the two-children announcement lesson completed at series scale.
    Rosenthal's proportionality principle named as "Bayes with a
@@ -153,8 +168,29 @@ random variables).
 
 ## Known material gaps (for the PR body)
 
-(named after scene design settles)
+- **Logarithms are now the highest-leverage missing concept**: one
+  logs series unblocks TWO promises in two topics — `bayes-rule` →
+  log-odds (evidence as addition) and `deep_learning/`'s log-space
+  numerical-stability bullet. Neither queue knew about the other until
+  this branch's audit; both now cross-reference.
+- Explaining-away: verified in plan 003, still unbuilt, and previously
+  aimless — now aimed at the log-odds/graphical-models neighbourhood,
+  next to "condition on the way it happened".
+- Softmax / likelihood / log-likelihood — the last CTC bridge half;
+  `ThroughTheFrontDoor` naming "likelihood" on screen gives the future
+  scene its citation anchor.
 
 ## Review notes
 
-(filled in at the end)
+- The two review mechanisms converged on Monty Small from opposite
+  directions — the bot said "remove the unsupported claim", the auditor
+  said "the claim is true but unrecorded; write it down". The auditor's
+  fix was right: anchors now carry the five p values and exact results,
+  and "machine-verified" is a record, not testimony.
+- The transition-window frame rule (added this branch) caught its first
+  real bug: the 90%→45% rate-label crossfade ghosting mid-swap.
+- Recurring genre, third and fourth occurrences: promising documents
+  going stale at delivery (INDEX device bullets; the plan's own gaps
+  placeholder). The auditor now flags it by name every run.
+
+Follow-up (next branch): logarithms — one series, two promises closed.

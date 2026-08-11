@@ -308,6 +308,16 @@ class TheOddsForm(ConceptScene):
             Text("9", font_size=LABEL_SIZE, color=GOOD),
             Text("12", font_size=LABEL_SIZE, color=WARM),
         )
+        # The rate labels are part of the same claim: 90%/30% on screen
+        # under a caption saying 45%/15% would be the picture contradicting
+        # the math again.
+        halved_tags = VGroup(
+            Text("45% pass", font_size=SMALL_SIZE, color=GOOD).next_to(falls[0], LEFT, 0.2),
+            Text("15% pass", font_size=SMALL_SIZE, color=WARM).next_to(falls[1], RIGHT, 0.2),
+        )
+        # Sequenced per motion discipline: the old rate labels leave fully
+        # before the halved ones occupy the same spots.
+        self.play(FadeOut(pass_tags), run_time=0.4)
         self.play(
             sick_pool.animate.stretch(0.5, 0),
             healthy_pool.animate.stretch(0.5, 0),
@@ -316,7 +326,7 @@ class TheOddsForm(ConceptScene):
         )
         new_tags[0].next_to(sick_pool, DOWN, buff=0.15)
         new_tags[1].next_to(healthy_pool, DOWN, buff=0.15)
-        self.play(FadeIn(new_tags), run_time=0.4)
+        self.play(FadeIn(new_tags), FadeIn(halved_tags), run_time=0.4)
         still = MathTex(r"9{:}12 = 3{:}4", font_size=34, color=ACCENT)
         still.next_to(halved, DOWN, buff=0.25)
         self.play(Write(still))
@@ -332,6 +342,7 @@ class TheOddsForm(ConceptScene):
             sick_pool,
             healthy_pool,
             new_tags,
+            halved_tags,
             halved,
             still,
             setup,

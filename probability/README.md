@@ -101,7 +101,7 @@ See the [root README](../README.md) for the full flag list.
 Watch after the conditional series — scene 1 divides the exact identity
 its last scene left on screen. The middle four are where the new content
 lives: counts, the odds form, the factorized prevalence pair, and
-iteration; the last closes the repo's oldest deferred promise.
+iteration; the last closes the repo's strongest deferred promise.
 
 | # | Scene | Formula | What it says | Why it's true | When it's useful |
 | --- | --- | --- | --- | --- | --- |
@@ -110,7 +110,7 @@ iteration; the last closes the repo's oldest deferred promise.
 | 3 | `TheOddsForm` | $\text{post odds}=\text{prior odds}\times LR$ | Only ratios matter: prior odds times the likelihood ratio is the whole law. | The waterfall — streams at prior widths 1:4, pass-through 3:1, pool at 3:4 → 3/7 — is the square-drawn-as-a-tree with renormalization deferred; the chips, the tree, and the two slices were one object all along. Scale streams or fractions and the pool ratio never moves. | The form in which updating is a single multiplication; keep 3:4 and 3/7 visibly distinct. |
 | 4 | `OneTestTwoPatients` | $1{:}9\times 9 = 1{:}1,\quad 1{:}99\times 9 = 1{:}11$ | One test has one number (LR = 9); the posterior belongs to the patient. | The prevalence pair completed as a factorization: the counted 9/18 and 9/108 fall out as 1/2 and 1/12 from the same LR against two priors. "90% accurate" is one word hiding two numbers, read as a posterior. | The medical-test paradox, the prosecutor's fallacy in update clothing — a posterior can never be stated without its prior. |
 | 5 | `YesterdaysPosterior` | $1{:}1\xrightarrow{\times 9}9{:}1\xrightarrow{\times 9}81{:}1$ | Yesterday's posterior is today's prior; likelihood ratios multiply. | On the repo's own two coins (LR 9 per head): H → 9:1, HH → 81:1, and H-then-T lands back at exactly 1:1 — impossible if evidence replaced belief, automatic if it reweights. Multiplying is licensed only by conditional independence given the hypothesis — `WhenToCondition`'s lesson, said on screen. | Sequential evidence done right: chained tests, accumulating observations; a zero prior stays zero under any evidence. |
-| 6 | `TheHostsProtocol` | $\text{post}\propto\text{prior}\times P(\text{action}\mid\text{hyp})$ | Monty Hall is ordinary Bayes once the likelihood is the host's behavior, not the revealed fact. | Three streams (uniform prior over car positions): standard protocol (1/2, 1, 0) → switch 2/3; Monty Fall (1, 1, 0) → 1/2; Monty Crawl forced-high → switch wins certainly. Same door opened, three answers — the announcement-protocol lesson at series scale. | Rosenthal's proportionality principle as everyday Bayes: diagnosis, spam, forensics — and the closing rule of the whole topic: condition on what happened *the way it happened*, then multiply. |
+| 6 | `TheHostsProtocol` | $\text{post}\propto\text{prior}\times P(\text{action}\mid\text{hyp})$ | Monty Hall is ordinary Bayes once the likelihood is the host's behavior, not the revealed fact. | Three streams (uniform prior over car positions): standard protocol (1/2, 1, 0) → switch 2/3; Monty Fall (1/2, 1/2, 0) → 1/2; Monty Crawl forced-high → switch wins certainly. Same door opened, three answers — the announcement-protocol lesson at series scale. | Rosenthal's proportionality principle as everyday Bayes: diagnosis, spam, forensics — and the closing rule of the whole topic: condition on what happened *the way it happened*, then multiply. |
 
 Renders: `01_ThroughTheFrontDoor.mp4` … `06_TheHostsProtocol.mp4`.
 
@@ -210,17 +210,15 @@ for the Bayes series:
 
 Rough queue, in roughly the order they build on each other:
 
-- Bayes' rule — conditioning now exists, and the conditional series
-  ends at its front door: the odds form, the waterfall device, the
-  prevalence pair completed, and Monty Hall with the host's protocol
-  done honestly (Rosenthal).
 - Per-frame softmax as a distribution, likelihood and log-likelihood —
   the remaining half of the bridge promised to `deep_learning/`.
 - Explaining away — the verified-but-unbuilt half of the conditional
   independence story (independence ⇏ CI: two fair flips given "exactly
   one head", 0 ≠ 1/4; plan 003's anchors).
 - Log-odds — evidence as addition; the natural sequel to "each head
-  multiplies by 9", once logarithms exist somewhere in the repo.
+  multiplies by 9", once logarithms exist somewhere in the repo. The
+  same missing concept unblocks `deep_learning/`'s log-space bullet —
+  one logs series closes two promises.
 - The law of large numbers properly: swamping quantified, absolute vs
   relative deviation.
 - Random variables and distributions — the die as a function, not a set.
