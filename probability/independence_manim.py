@@ -316,10 +316,16 @@ class OneDieTwoEvents(ConceptScene):
 
         # --- one pip decides it -------------------------------------------------
         self.play(FadeOut(check), FadeOut(verdict))
+        # The bar morph is geometry — the boundary visibly sliding one pip is
+        # the point. The label is text, so per motion discipline it leaves
+        # before its replacement arrives rather than crossfading in place.
         new_bar = b_bar(3)
         new_tag = Text("B = at most 3", font_size=LABEL_SIZE, color=B_COLOR)
         new_tag.next_to(new_bar, DOWN, buff=0.2).align_to(strip, LEFT)
-        self.play(Transform(bar, new_bar), Transform(b_tag, new_tag))
+        self.play(FadeOut(b_tag), run_time=0.4)
+        self.play(Transform(bar, new_bar))
+        b_tag = new_tag
+        self.play(FadeIn(b_tag), run_time=0.4)
         recheck = MathTex(
             r"\tfrac{1}{2}\cdot\tfrac{1}{2} = \tfrac{1}{4}",
             r"\neq \tfrac{1}{6} = P(\{2\})\ \times",
