@@ -137,19 +137,21 @@ re-renders what changed. Pass `--no-cache` if a stale partial is suspected.
 
 ### Working on a scene
 
-Every non-trivial change starts with a plan broken into numbered phases. Each
-phase ends in a **named commit gate** — one commit, and it has to be green
-before the next phase starts. The last phase is always a fully rendered PR: a
-plan that stops at "the code works" is not finished.
+[`CLAUDE.md`](CLAUDE.md) is the authoritative contributor ruleset — planning,
+verification, colour discipline, structure. This section is the short version;
+where the two disagree, `CLAUDE.md` wins. Declined review findings and their
+reasoning live in [`docs/decisions.md`](docs/decisions.md).
+
+Every non-trivial change starts with a plan broken into numbered phases, each
+ending in a named commit gate that must be green before the next phase starts.
+The last phase is always a fully rendered PR.
 
 Iterating at 1080p is a waste of wall-clock, so the loop itself is draft-first:
 
 1. `--quality draft` (480p15) until the scene is right.
-2. Check the render actually worked. Confirm you got the expected number of
-   files and that their names differ, probe one with `ffprobe` for frame count
-   and duration, and when layout or colour changed, pull a frame out with
-   `ffmpeg` and look at it. "It produced a file" is not verification — the two
-   render bugs found so far both passed that check.
+2. Check the render actually worked — "it produced a file" is not
+   verification, and both render bugs found so far passed that check.
+   [`CLAUDE.md`](CLAUDE.md) has the checklist.
 3. Run the CodeRabbit review locally, **before** opening the PR, and address
    what it finds. The PR should open clean rather than accumulate rounds.
 4. Open the PR; the bot reviews it as an independent second pass.

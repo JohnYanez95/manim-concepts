@@ -21,6 +21,12 @@
 language: "en-US"
 
 reviews:
+  # Read before flagging anything: docs/decisions.md records findings that were
+  # already considered and declined, with the reasoning. Do not re-raise one of
+  # those without new evidence — the render-all quality default was raised,
+  # declined, and raised again verbatim a round later, which is pure churn.
+  # CLAUDE.md is the authoritative ruleset; README.md is its short version, so
+  # judge a rule against CLAUDE.md rather than flagging the README for brevity.
   # "chill" over "assertive" on purpose — see the note above. This is a
   # personal research repo, not a production service; a wall of nitpicks on a
   # visualisation costs more than it catches.

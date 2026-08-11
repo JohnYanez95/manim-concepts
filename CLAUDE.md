@@ -4,6 +4,12 @@ Rules for working in this repo, derived from failures that actually happened
 here and from review feedback. Keep this lean — add a rule when something goes
 wrong twice, not speculatively.
 
+This file is authoritative. `README.md` carries a shorter, user-facing version
+of the same workflow; where they disagree, this one wins, and a rule should be
+stated in full in exactly one of them. Review findings that were considered and
+declined live in [`docs/decisions.md`](docs/decisions.md) — check it before
+re-opening an argument.
+
 ## Step 0: plan before touching a file
 
 Any topic, any concept, anything non-trivial starts with a written plan broken
@@ -43,7 +49,7 @@ Never render at the default 1080p while iterating.
 `make clean-drafts` removes sub-1080p output and keeps finals; `make clean`
 removes everything.
 
-## Verifying a render
+## Verifying anything
 
 A render that produced a file is not a render that worked. Two failures here
 both passed a naive existence check:
@@ -52,6 +58,18 @@ both passed a naive existence check:
   names differ.
 - Use `ffprobe` for frame count and duration, and extract a frame with
   `ffmpeg` and actually look at it when layout or colour changed.
+
+**Never judge a gate through a pipe.** This has bitten three times: `$?` after
+a pipeline reports the *last* command's status, not the interesting one; a
+`grep` filter over `make check` hid a failing format check and made a red gate
+look green; and `make list` piped into `sed` swallowed a module that could not
+even import. Run `make check` unfiltered and read the exit code. When a test
+harness pipes, use `PIPESTATUS`.
+
+Also verify the verification: when adding a test that is supposed to catch
+something, break the thing on purpose, watch the test fail, then restore. Two
+tests in this repo passed against code that was already correct and would have
+passed against code that was not.
 
 ## Manim gotchas found here
 
