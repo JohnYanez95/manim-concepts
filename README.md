@@ -40,9 +40,10 @@ command, so none of them are committed.
 | Topic | Concepts |
 | --- | --- |
 | [`combinatorics/`](combinatorics/README.md) | Multiplication rule, permutations, combinations, partitions |
+| [`deep_learning/`](deep_learning/README.md) | CTC alignment: the blank token, paths and their collapse, counting alignments, the forward trellis |
 
 Topics are added as they are written. Likely next: `probability/`,
-`calculus/`, `linear_algebra/`, `deep_learning/`. The layout is expected to
+`calculus/`, `linear_algebra/`. The layout is expected to
 drift — if a topic only ever holds one file, it can collapse into a flatter
 arrangement later without anything else changing.
 
@@ -146,7 +147,7 @@ re-renders what changed. Pass `--no-cache` if a stale partial is suspected.
 [`CLAUDE.md`](CLAUDE.md) is the authoritative contributor ruleset — planning,
 verification, colour discipline, structure. This section is the short version;
 where the two disagree, `CLAUDE.md` wins. Declined review findings and their
-reasoning live in [`docs/decisions.md`](docs/decisions.md).
+reasoning live as numbered ADRs in [`docs/adr/`](docs/adr/README.md).
 
 Every non-trivial change starts with a plan broken into numbered phases, each
 ending in a named commit gate that must be green before the next phase starts.
@@ -186,7 +187,8 @@ uv run python combinatorics/counting_rules_manim.py            # 1080p60
 
    `render_cli` finds every scene defined in the module automatically, in
    source order — there is no list to keep in sync.
-4. Give each scene a one-line docstring. It is what `--list` prints.
+4. Give each scene a docstring with a one-line summary first — `--list`
+   prints that line.
 5. Add a row to the topic README's concepts table, and add whatever you
    worked from to its references as `- [ ]`. Leave it unchecked; verifying it
    is the reader's job, not the author's.

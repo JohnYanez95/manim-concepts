@@ -59,15 +59,15 @@ Every entry below was suggested rather than confirmed, so all of them start
 unchecked. Open one, confirm it covers what the entry claims, and tick it
 yourself; nothing automated will.
 
-- [ ] [Rule of product](https://en.wikipedia.org/wiki/Rule_of_product) — the
+- [X] [Rule of product](https://en.wikipedia.org/wiki/Rule_of_product) — the
       multiplicative rule and its independence assumption.
-- [ ] [Permutation](https://en.wikipedia.org/wiki/Permutation) — the $k$-
+- [X] [Permutation](https://en.wikipedia.org/wiki/Permutation) — the $k$-
       permutation case that `PermutationRule` animates.
-- [ ] [Combination](https://en.wikipedia.org/wiki/Combination) — binomial
+- [X] [Combination](https://en.wikipedia.org/wiki/Combination) — binomial
       coefficients and the overcounting argument.
-- [ ] [Multinomial theorem](https://en.wikipedia.org/wiki/Multinomial_theorem)
+- [X] [Multinomial theorem](https://en.wikipedia.org/wiki/Multinomial_theorem)
       — the multinomial coefficient behind `PartitionRule`.
-- [ ] [Twelvefold way](https://en.wikipedia.org/wiki/Twelvefold_way) — the
+- [X] [Twelvefold way](https://en.wikipedia.org/wiki/Twelvefold_way) — the
       map of which counting problem is which; useful for deciding what the
       scenes above are *not* covering.
 
