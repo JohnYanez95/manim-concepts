@@ -40,9 +40,10 @@ command, so none of them are committed.
 | Topic | Concepts |
 | --- | --- |
 | [`combinatorics/`](combinatorics/README.md) | Multiplication rule, permutations, combinations, partitions |
+| [`deep_learning/`](deep_learning/README.md) | CTC alignment: the blank token, paths and their collapse, counting alignments, the forward trellis |
 
 Topics are added as they are written. Likely next: `probability/`,
-`calculus/`, `linear_algebra/`, `deep_learning/`. The layout is expected to
+`calculus/`, `linear_algebra/`. The layout is expected to
 drift — if a topic only ever holds one file, it can collapse into a flatter
 arrangement later without anything else changing.
 

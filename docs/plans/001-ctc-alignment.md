@@ -27,7 +27,8 @@ the combinatorics topic predate it, so the record starts here.
   (6 distinct numbered files, ffprobe durations 13–30 s, 23 extracted
   frames reviewed; 4 layout collisions found and fixed, re-rendered,
   re-extracted, clean)
-- [ ] Phase 3: topic README complete, `make test` green
+- [x] Phase 3: topic README complete, `make test` green (full `make
+  check` run, exit 0; two references already human-verified)
 - [ ] Phase 4: local review clean
 - [ ] Phase 5: PR open, drafts cleaned, 1080p render verified
 

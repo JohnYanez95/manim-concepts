@@ -89,7 +89,7 @@ claims, and tick it yourself; nothing automated will.
       attention models.
 - [X] [CMU 11-785, recitation 8: CTC](http://www.cs.cmu.edu/afs/cs/user/bhiksha/WWW/courses/deeplearning/Fall.2018/www/recitations/recitation8.pdf)
       — the "CTC is a family of losses" framing that demystifies the blank.
-- [ ] [HuggingFace Audio Course, ch. 3: CTC](https://huggingface.co/learn/audio-course/en/chapter3/ctc)
+- [X] [HuggingFace Audio Course, ch. 3: CTC](https://huggingface.co/learn/audio-course/en/chapter3/ctc)
       — practical anchors: real frame rates, and blank vs. word-space in
       real vocabularies.
 - [ ] [Zeyer et al., 2021 — Why does CTC result in peaky behavior?](https://arxiv.org/abs/2105.14849)
