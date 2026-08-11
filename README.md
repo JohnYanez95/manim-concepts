@@ -9,7 +9,8 @@ of topics built so far](docs/assets/welcome.gif)
 
 *Rendered by the repo itself —
 [`docs/assets/welcome_scene.py`](docs/assets/welcome_scene.py), through
-the same shared layer every concept scene uses.*
+the same shared layer every concept scene uses; regeneration commands in
+[`docs/assets/README.md`](docs/assets/README.md).*
 
 The bias of this repo is that a formula should be the *last* thing on screen,
 not the first. Every scene shows the object being reasoned about, does the

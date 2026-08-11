@@ -11,7 +11,7 @@ evidence ruler for Bayes and the underflow cliff for CTC.
     MultiplyIsAdd        hops add; the slide rule; the base is a unit
     ShrinkCounts         probabilities are shrink counts; log 0 is -inf
     TheEvidenceRuler     each head adds exactly +2 — evidence as length
-    TheUnderflowCliff    the value row dies at 2^-1075; the counter walks on
+    TheUnderflowCliff    0.1^324 is exactly zero; the counter walks on
 
 Every number on screen is exact and machine-verified in plan 005; every
 integer log is written from its exponent, never computed by a float log
@@ -450,6 +450,8 @@ class TheEvidenceRuler(ConceptScene):
             tag2,
             arc3,
             tag3,
+            arc4,
+            tag4,
             same,
             cancel,
             deciban,

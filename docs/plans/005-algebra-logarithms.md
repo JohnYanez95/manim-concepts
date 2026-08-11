@@ -114,7 +114,8 @@ never Diseasitis (irrational logs). All on-screen integer logs come
 from exponents, never float log calls.
 
 1. `TheCountingStrip` — exponents as counted multiplications: the
-   two-row strip (0,1,2,… over 1,2,4,…,1024). Invert the question,
+   two-row strip (0,1,2,… over 1,2,4,…,256 as rendered; the anchors'
+   ladder runs to 1024). Invert the question,
    not the function: "2 to the what is 64?" — a logarithm reads the
    counter row. Definition boxed with its full conditions (b > 0,
    b ≠ 1 because 1's ladder never moves, x > 0).
@@ -146,7 +147,8 @@ from exponents, never float log calls.
    length." Deciban lore as a caption (Turing; ~1 deciban is the
    smallest evidence humans perceive).
 6. `TheUnderflowCliff` — consumer #2. The value row falls off
-   float64's floor (0.5^1074 survives, 0.5^1075 == 0; 0.1^324 == 0)
+   float64's floor — rendered as the 0.1³²³/0.1³²⁴ beat with the
+   2⁻¹⁰⁷⁴ floor caption (the 0.5-power variant stays in the anchors) —
    while the counter row walks on (log₁₀ sum exactly −324); Graves
    quoted ("soon lead to underflows"); log-sum-exp as the one move
    the trellis's *additions* need — log₂(2⁻¹⁰ + 2⁻¹⁰) = −9 exactly,

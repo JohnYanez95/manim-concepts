@@ -9,7 +9,7 @@ sequenceDiagram
     participant CA as connection-auditor
 
     M->>C: start the TOPIC branch
-    C->>C: checkout main, pull, verify the tip<br/>branch feat/TOPIC
+    C->>C: checkout main, pull, verify the tip<br/>cut a FRESH feat/TOPIC from it — never stack
 
     rect rgba(120, 120, 160, 0.12)
         note over C, SV: Phase 0 — research before any scene
@@ -24,7 +24,7 @@ sequenceDiagram
         note over C, B: Phases 1 to 3 — build, gated
         C->>B: Phase 1 — skeleton and README (make check)
         C->>C: Phase 2 — verification script first,<br/>then scenes at draft, frames eyeballed<br/>(incl. transition windows)
-        C->>B: Phase 3 — concepts table, references unchecked,<br/>wiki node, edges, log (make test)
+        C->>B: Phase 3 — concepts table, references unchecked,<br/>wiki node, edges, log — a new topic<br/>re-renders the welcome gif (make test)
         M->>B: opens each reference, ticks the boxes<br/>(human-gated, ADR 006)
     end
 

@@ -67,14 +67,6 @@ select = [
     "F403",  # `from manim import *` used
     "F405",  # name may be undefined, or defined from star imports
 ]
-# The README's welcome animation is a scene file too — same idiom, same
-# reasoning as above — but deliberately NOT named `_manim.py`, so the
-# Makefile glob, `make render-all`, and the topic-contract tests skip it
-# (it is repo furniture, not a concept module).
-"docs/assets/welcome_scene.py" = [
-    "F403",  # `from manim import *` used
-    "F405",  # name may be undefined, or defined from star imports
-]
 # The tests reach into _select and _discover_scenes on purpose. Those are the
 # functions with the actual branching, and testing only the public render_cli
 # around them would mean rendering video to assert on argument parsing.

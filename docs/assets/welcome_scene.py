@@ -7,20 +7,21 @@ language.
 
 Render (from the repo root):
     uv run python docs/assets/welcome_scene.py -q draft
-    ffmpeg palette pass — see docs/assets/README note in the root README.
+    then the ffmpeg palette pass in docs/assets/README.md.
 """
 
-from manim import *
+from manim import DOWN, RIGHT, UP, Arrow, Create, FadeIn, GrowArrow, LaggedStart, Text, VGroup
 
 from utils import (
     ACCENT,
     BODY_SIZE,
+    COOL,
+    GOOD,
     LABEL_SIZE,
     MUTED,
     ConceptScene,
     boxed,
     chip,
-    palette,
     render_cli,
 )
 
@@ -36,11 +37,14 @@ class Welcome(ConceptScene):
         ).next_to(self.head, DOWN, buff=0.35)
         self.play(FadeIn(motto), run_time=0.7)
 
+        # The three levels are an ordered progression, not unranked
+        # categories, so they carry semantic colours: the claim (primary
+        # quantity), the argument building the result, the confirmed tool.
         levels = (
             VGroup(
-                chip("what is it saying?", palette(0), width=3.3),
-                chip("why is it true?", palette(1), width=3.0),
-                chip("when is it useful?", palette(2), width=3.3),
+                chip("what is it saying?", COOL, width=3.3),
+                chip("why is it true?", ACCENT, width=3.0),
+                chip("when is it useful?", GOOD, width=3.3),
             )
             .arrange(RIGHT, buff=0.9)
             .move_to(0.7 * UP)
