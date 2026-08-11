@@ -10,6 +10,9 @@ media/
 *.svg
 !docs/**/*.png
 !docs/**/*.svg
+# The README's welcome animation is the one committed render: small,
+# palette-optimized, and regenerated from docs/assets/welcome_scene.py.
+!docs/**/*.gif
 
 # --- Environments --------------------------------------------------------------
 .venv/

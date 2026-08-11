@@ -1,0 +1,47 @@
+sequenceDiagram
+    autonumber
+    actor M as Maintainer
+    participant C as Claude (main agent)
+    participant PR as pedagogy-researcher
+    participant SV as source-verifier
+    participant B as Bookkeeping<br/>(plans, wiki, ADRs)
+    participant CR as CodeRabbit<br/>(local CLI + PR bot)
+    participant CA as connection-auditor
+
+    M->>C: start the TOPIC branch
+    C->>C: checkout main, pull, verify the tip<br/>branch feat/TOPIC
+
+    rect rgba(120, 120, 160, 0.12)
+        note over C, SV: Phase 0 — research before any scene
+        C->>PR: how is this best taught?
+        C->>SV: verify every number and claim
+        PR-->>C: ordering, devices, misconceptions, sources
+        SV-->>C: anchors with method tags<br/>(quoted, computed-exact, flags)
+        C->>B: plan NNN — anchors and scene design pinned
+    end
+
+    rect rgba(120, 160, 120, 0.12)
+        note over C, B: Phases 1 to 3 — build, gated
+        C->>B: Phase 1 — skeleton and README (make check)
+        C->>C: Phase 2 — verification script first,<br/>then scenes at draft, frames eyeballed<br/>(incl. transition windows)
+        C->>B: Phase 3 — concepts table, references unchecked,<br/>wiki node, edges, log (make test)
+        M->>B: opens each reference, ticks the boxes<br/>(human-gated, ADR 006)
+    end
+
+    rect rgba(160, 140, 100, 0.12)
+        note over C, CA: Phase 4 — two independent reviews
+        C->>CR: local review (tuned config)
+        C->>CA: graph-first incremental audit<br/>(diff from the wiki stamp)
+        CR-->>C: content findings
+        CA-->>C: promised, delivered, possible, health
+        C->>B: findings applied or declined via ADR<br/>log appended, stamp advanced
+    end
+
+    rect rgba(160, 120, 120, 0.12)
+        note over M, CR: Phase 5 — ship
+        C->>M: PR (body names the next branch's gaps)
+        CR-->>C: bot review (second pass) — resolved
+        C->>C: make clean-drafts, render 1080p60<br/>verify count, ffprobe, frames
+        C->>B: plan closed, finalise log entry
+        M->>C: merge — next series cuts fresh from main
+    end
