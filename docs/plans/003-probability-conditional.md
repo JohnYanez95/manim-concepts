@@ -126,7 +126,7 @@ rewritten; LOTP before trees-as-notation; independence rederived; end
 one visible step short of Bayes. Square primary, trees second (the
 research literature's finding), natural frequencies wherever people are
 counted. Monty Hall deferred to the Bayes series by name (protocol
-sensitivity per Rosenthal); the two-children square carries the
+sensitivity per Rosenthal); the two-children families carry the
 protocol lesson instead.
 
 1. `TheRestrictedSquare` — restriction first: three coins (1/8 → 1/4
@@ -141,8 +141,9 @@ protocol lesson instead.
    equivalent characterization on P(B) > 0, never as the definition.
    The die jewel through the lens: P(even|{1,2,3,4}) = 1/2 ✓;
    P(even|{1,2,3}) = 1/3 ✗ — one pip, again. Mutually exclusive
-   re-read: P(A|B) = 0, maximal information. Both squares stay on
-   screen: conditioning never mutates the original measure.
+   re-read: P(A|B) = 0, maximal information. The closing caption pins
+   that conditioning never mutates the original measure — P(A) still
+   answers in the old one.
 3. `TheMultiplicationRule` — the definition rewritten:
    P(A∩B) = P(B)·P(A|B), a rectangle identity ("souped up rule of
    product" — the combinatorics bridge speaks it back). The aces
@@ -162,7 +163,7 @@ protocol lesson instead.
    the integer-exact prevalence pair — same 9/10-sensitive,
    1/10-false-positive test; prevalence 1/10 → P(sick|+) = 9/18 = 1/2;
    prevalence 1/100 → 9/108 = 1/12 — natural-frequency counts of
-   whole people, the prior as visible column width. Ends at Bayes'
+   whole people — the prior carried by the counts themselves. Ends at Bayes'
    front door: P(A)P(B|A) = P(B)P(A|B), named and left for the next
    series.
 6. `WhenToCondition` — level 3 (renamed from the house `WhenToUseIt`
@@ -171,9 +172,9 @@ protocol lesson instead.
    Where conditioning is the tool: sequential
    draws (the shrinking pool now has a name), diagnosis (keep
    sensitivity and specificity as two numbers, never one "accuracy"),
-   and what you actually condition on: the two-children four-cell
-   square with the announcement protocol drawn in (1/2 vs 1/3 — the
-   conditioning event includes how you learned it). Closes the CTC
+   and what you actually condition on: the four two-children family
+   chips with the announcement rule drawn as weights (1/3 becomes 1/2
+   — the conditioning event includes how you learned it). Closes the CTC
    edge: conditional independence as a third thing — the two-coin
    example (marginally dependent, 41/100 ≠ 1/4; independent given the
    coin) is the common-cause beat made quantitative, and "given the

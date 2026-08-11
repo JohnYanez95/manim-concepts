@@ -739,15 +739,15 @@ class WhenToCondition(ConceptScene):
         self.play(FadeIn(self.title("When to Condition"), shift=0.3 * DOWN))
 
         cases = [
-            ("Sequential draws — the pool shrinks", "multiplication rule", True),
-            ("A positive test — two numbers, not one", "condition on the evidence", True),
-            ("\u201cAt least one girl\u2026\u201d", "condition on the protocol", True),
-            ("CTC's per-frame product", "independent given the input", True),
+            ("Sequential draws — the pool shrinks", "multiplication rule"),
+            ("A positive test — two numbers, not one", "condition on the evidence"),
+            ("\u201cAt least one girl\u2026\u201d", "condition on the protocol"),
+            ("CTC's per-frame product", "independent given the input"),
         ]
-        questions = VGroup(*[Text(q, font_size=21) for q, _, _ in cases])
+        questions = VGroup(*[Text(q, font_size=21) for q, _ in cases])
         questions.arrange(DOWN, buff=0.55, aligned_edge=LEFT)
         questions.to_edge(LEFT, buff=0.8).shift(1.5 * UP)
-        verdicts = VGroup(*[Text(v, font_size=21, weight=BOLD, color=ACCENT) for _, v, _ in cases])
+        verdicts = VGroup(*[Text(v, font_size=21, weight=BOLD, color=ACCENT) for _, v in cases])
         verdicts.arrange(DOWN, buff=0.55, aligned_edge=LEFT).to_edge(RIGHT, buff=0.8)
         for question, verdict in zip(questions, verdicts, strict=True):
             verdict.match_y(question)
@@ -775,22 +775,71 @@ class WhenToCondition(ConceptScene):
             )
         self.wait(0.6)
 
-        # The protocol beat: the same fact, two conditioning events.
-        protocol = VGroup(
-            MathTex(r"P(\text{GG} \mid \text{at least one girl}) = \tfrac{1}{3}", font_size=30),
-            MathTex(
-                r"P(\text{GG} \mid \text{parent mentioned a girl}) = \tfrac{1}{2}",
-                font_size=30,
-                color=ACCENT,
+        # The protocol beat: the same fact, two conditioning events — with the
+        # four families and the announcement rule drawn, not asserted. The
+        # mapping leaves first; this beat needs the room.
+        self.play(FadeOut(VGroup(questions, arrows, verdicts)))
+
+        families = VGroup(*[chip(k, MUTED, width=1.15) for k in ["GG", "GB", "BG", "BB"]])
+        families.arrange(RIGHT, buff=0.4).move_to(1.55 * UP)
+        fam_tag = caption("two children, four equally likely families")
+        fam_tag.next_to(families, UP, buff=0.3)
+        self.play(
+            LaggedStart(*[FadeIn(c, scale=0.8) for c in families], lag_ratio=0.12),
+            FadeIn(fam_tag),
+        )
+        # Conditioning on the bare fact: BB leaves, three cells survive.
+        self.play(families[3].animate.set_color(WARM), run_time=0.4)
+        self.play(FadeOut(families[3], shift=0.3 * DOWN), run_time=0.6)
+        bare = MathTex(
+            r"P(\text{GG} \mid \text{at least one girl}) = \tfrac{1}{3}", font_size=32
+        ).move_to(0.35 * UP)
+        self.play(Write(bare))
+        self.wait(0.5)
+
+        # The announcement rule, drawn as weights: a GG parent always mentions
+        # a girl; a mixed-family parent only half the time. Weights 1/4, 1/8,
+        # 1/8 — and the posterior is 1/2, not 1/3.
+        weights = VGroup(
+            MathTex(r"\times 1", font_size=28, color=GOOD).next_to(families[0], DOWN, buff=0.22),
+            MathTex(r"\times \tfrac{1}{2}", font_size=28, color=WARM).next_to(
+                families[1], DOWN, buff=0.22
             ),
-            caption("the conditioning event includes how you learned it"),
-        ).arrange(DOWN, buff=0.28)
-        protocol.move_to(1.35 * DOWN)
-        self.play(LaggedStart(*[FadeIn(p) for p in protocol], lag_ratio=0.25))
+            MathTex(r"\times \tfrac{1}{2}", font_size=28, color=WARM).next_to(
+                families[2], DOWN, buff=0.22
+            ),
+        )
+        rule_note = caption('the announcement rule: a mixed family says "girl" half the time')
+        rule_note.next_to(bare, DOWN, buff=0.35)
+        self.play(FadeIn(weights), FadeIn(rule_note))
+        protocol_eq = MathTex(
+            r"P(\text{GG} \mid \text{parent mentioned a girl})"
+            r" = \frac{1/4}{1/4 + 1/8 + 1/8} = \tfrac{1}{2}",
+            font_size=32,
+            color=ACCENT,
+        ).next_to(rule_note, DOWN, buff=0.4)
+        lesson = caption("the conditioning event includes how you learned it")
+        lesson.next_to(protocol_eq, DOWN, buff=0.3)
+        self.play(Write(protocol_eq))
+        self.play(FadeIn(lesson))
         self.wait(0.9)
 
         # The CTC residual, closed with exact numbers.
-        self.play(FadeOut(VGroup(questions, arrows, verdicts, protocol)))
+        self.play(
+            FadeOut(
+                VGroup(
+                    families[0],
+                    families[1],
+                    families[2],
+                    fam_tag,
+                    bare,
+                    weights,
+                    rule_note,
+                    protocol_eq,
+                    lesson,
+                )
+            )
+        )
         ci_head = Text(
             "And a third kind of independence — conditional:", font_size=BODY_SIZE
         ).move_to(1.55 * UP)

@@ -67,7 +67,7 @@ one topic should meet the same picture, upgraded, in the next:
   *as* a grid; `TotalProbabilityAndTrees` draws the square *as* a tree —
   the same move, inverted, one series apart.
 - **Natural-frequency cohort chips** (`TwoSlicesOneSquare`): whole-people
-  counts with the prior as visible column width — the device the
+  counts carrying the prior in the numbers themselves — the device the
   promised Bayes series inherits and completes.
 - **The two-slices reading** (`TwoSlicesOneSquare`): one overlap, two
   denominators — the geometric form of the transposed conditional, and
