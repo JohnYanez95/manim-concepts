@@ -32,7 +32,8 @@ re-cut from the true tip. The fresh-branch rule earns its keep again.
 
 - [x] Branch from updated main (re-cut after completing the PR #5 merge)
 - [x] Phase 0: research reports received, scene design finalized below
-- [ ] Phase 1: plan + topic skeleton, `make check` green
+- [x] Phase 1: plan + topic skeleton, `make check` green (committed
+  at 3bf168c; box ticked late)
 - [x] Phase 2: all scenes render at draft; verified per CLAUDE.md checklist
   (verification script first — incl. the numpy dtype checks both
   reports demanded, yielding the float32-dies-at-46-frames fact now on

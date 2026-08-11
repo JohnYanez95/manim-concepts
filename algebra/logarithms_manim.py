@@ -510,14 +510,17 @@ class TheUnderflowCliff(ConceptScene):
         ).move_to(1.7 * UP)
         self.play(FadeIn(need))
         lse = MathTex(
-            r"\ln(a + b) = \ln a + \ln\!\left(1 + e^{\ln b - \ln a}\right)",
+            r"\ln(a + b) = \ln a + \ln\!\left(1 + e^{\ln b - \ln a}\right) \quad (a \ge b)",
             font_size=44,
             color=ACCENT,
         ).move_to(0.7 * UP)
         exact_bit = MathTex(
             r"\log_2(2^{-10} + 2^{-10}) = -9\ \text{exactly}", font_size=36
         ).next_to(lse, DOWN, buff=0.4)
-        safe = caption("safe because the max factors out — the shifted terms live in [0, 1]")
+        safe = caption(
+            "the convention a ≥ b makes a the max — it factors out, and the\n"
+            "shifted term lives in (0, 1]: nothing can overflow"
+        )
         safe.next_to(exact_bit, DOWN, buff=0.3)
         attribution = caption(
             "the 2006 CTC paper rescaled (Rabiner-style); log space is the 2012 book,"
