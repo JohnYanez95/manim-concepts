@@ -3,7 +3,7 @@
 ## Scope
 
 Probability as proportion, built visually: the sample space as a unit
-square, events as regions, probability as area. Two series so far. The
+square, events as regions, probability as area. Three series so far. The
 first covers **independence** — the product rule P(A∩B) = P(A)·P(B) as
 the *primary* definition, why it is the probability-weighted upgrade of
 the counting grid, the confusions it attracts, and the product over a
@@ -11,7 +11,11 @@ chain of trials. The second covers **conditional probability** —
 restriction and renormalization on the same square, the multiplication
 rule, total probability and trees, the inversion fallacy, and
 conditional independence — closing the promises the first series and
-the CTC series left open.
+the CTC series left open. The third covers **Bayes' rule** — the
+one-line division through the door the conditional series left open,
+the odds form and the waterfall, natural-frequency computation, iterated
+updating, and Monty Hall done honestly with the host's protocol as the
+likelihood.
 
 This topic exists because two earlier ones promised it: the
 [multiplicative rule](../combinatorics/README.md) counts pairs as
@@ -24,10 +28,10 @@ rests on; the conditional form CTC actually assumes (frames independent
 
 Deliberately **not** covered here:
 
-- Bayes' rule. The conditional series ends deliberately at its front
-  door — P(A)·P(B|A) = P(B)·P(A|B), named and left. The full treatment
-  (odds form, the waterfall device, Monty Hall done honestly with the
-  host's protocol) is its own future series.
+- Log-odds. "Each head adds another factor of 9" foreshadows them, but
+  no logarithms exist in the repo yet.
+- Composite-hypothesis Bayes factors and continuous priors — both need
+  machinery (integration, random variables) the repo does not teach.
 - Conditioning on probability-zero events. The definition requires
   P(B) > 0; the continuous story (Borel–Kolmogorov) is genuinely
   treacherous, and honest silence beats false generality.
@@ -92,6 +96,31 @@ uv run python probability/conditional_probability_manim.py --list
 
 See the [root README](../README.md) for the full flag list.
 
+### bayes_rule_manim.py
+
+Watch after the conditional series — scene 1 divides the exact identity
+its last scene left on screen. The middle four are where the new content
+lives: counts, the odds form, the factorized prevalence pair, and
+iteration; the last closes the repo's oldest deferred promise.
+
+| # | Scene | Formula | What it says | Why it's true | When it's useful |
+| --- | --- | --- | --- | --- | --- |
+| 1 | `ThroughTheFrontDoor` | $P(A\mid B)=\dfrac{P(B\mid A)\,P(A)}{P(B)}$ | Bayes' rule is the front-door identity divided by P(B) — one line, then three names: prior, likelihood, posterior. | The division is the two-slices picture re-read; the denominator is total probability over the hypothesis columns — both already on screen in the conditional series. Positivity is inherited. | The level-one claim of the series: evidence does not determine beliefs, it updates them — posterior ∝ prior × likelihood, normalize last. |
+| 2 | `CountingItOut` | $\tfrac{18}{18+24}=\tfrac{3}{7}$ | The first Bayes computation needs no formula — count whole people. | Diseasitis on the cohort chips: 100 students → 20 sick (18 positive), 80 healthy (24 positive); the answer is the share of positives who are sick. The prior travels inside the counts, which is why counts cure base-rate neglect. | The format that turns 4% correct into 24% (and gynecologists from 21% to 87%) — how to actually communicate a posterior. |
+| 3 | `TheOddsForm` | $\text{post odds}=\text{prior odds}\times LR$ | Only ratios matter: prior odds times the likelihood ratio is the whole law. | The waterfall — streams at prior widths 1:4, pass-through 3:1, pool at 3:4 → 3/7 — is the square-drawn-as-a-tree with renormalization deferred; the chips, the tree, and the two slices were one object all along. Scale streams or fractions and the pool ratio never moves. | The form in which updating is a single multiplication; keep 3:4 and 3/7 visibly distinct. |
+| 4 | `OneTestTwoPatients` | $1{:}9\times 9 = 1{:}1,\quad 1{:}99\times 9 = 1{:}11$ | One test has one number (LR = 9); the posterior belongs to the patient. | The prevalence pair completed as a factorization: the counted 9/18 and 9/108 fall out as 1/2 and 1/12 from the same LR against two priors. "90% accurate" is one word hiding two numbers, read as a posterior. | The medical-test paradox, the prosecutor's fallacy in update clothing — a posterior can never be stated without its prior. |
+| 5 | `YesterdaysPosterior` | $1{:}1\xrightarrow{\times 9}9{:}1\xrightarrow{\times 9}81{:}1$ | Yesterday's posterior is today's prior; likelihood ratios multiply. | On the repo's own two coins (LR 9 per head): H → 9:1, HH → 81:1, and H-then-T lands back at exactly 1:1 — impossible if evidence replaced belief, automatic if it reweights. Multiplying is licensed only by conditional independence given the hypothesis — `WhenToCondition`'s lesson, said on screen. | Sequential evidence done right: chained tests, accumulating observations; a zero prior stays zero under any evidence. |
+| 6 | `TheHostsProtocol` | $\text{post}\propto\text{prior}\times P(\text{action}\mid\text{hyp})$ | Monty Hall is ordinary Bayes once the likelihood is the host's behavior, not the revealed fact. | Three streams (uniform prior over car positions): standard protocol (1/2, 1, 0) → switch 2/3; Monty Fall (1, 1, 0) → 1/2; Monty Crawl forced-high → switch wins certainly. Same door opened, three answers — the announcement-protocol lesson at series scale. | Rosenthal's proportionality principle as everyday Bayes: diagnosis, spam, forensics — and the closing rule of the whole topic: condition on what happened *the way it happened*, then multiply. |
+
+Renders: `01_ThroughTheFrontDoor.mp4` … `06_TheHostsProtocol.mp4`.
+
+```bash
+uv run python probability/bayes_rule_manim.py
+uv run python probability/bayes_rule_manim.py --list
+```
+
+See the [root README](../README.md) for the full flag list.
+
 ## References
 
 Ticks are human-gated — see
@@ -143,8 +172,28 @@ for the conditional series:
       — unit square beats tree at quantifying the subset relation; both
       improve with natural frequencies.
 - [X] [Rosenthal, "Monty Hall, Monty Fall, Monty Crawl"](https://probability.ca/jeff/writing/montyfall.pdf)
-      — why the host's protocol changes the answer; the reason Monty
-      Hall is deferred to the Bayes series.
+      — why the host's protocol changes the answer; the variants
+      `TheHostsProtocol` animates.
+
+From the plan-004 research pass
+([`docs/plans/004-probability-bayes.md`](../docs/plans/004-probability-bayes.md)),
+for the Bayes series:
+
+- [ ] [3blue1brown, "The medical test paradox"](https://www.3blue1brown.com/lessons/better-bayes)
+      — the Bayes factor as the test's one number; the odds-form update
+      as the exact rule (his frequency counts round; the repo's do not).
+- [ ] [Arbital, "Waterfall diagrams and relative odds"](https://www.lesswrong.com/w/waterfall-diagram?lens=bayes_waterfall_diseasitis)
+      — the waterfall as the odds form; Diseasitis 1:4 × 3:1 = 3:4.
+- [ ] [Arbital, "Bayes' rule: odds form"](https://www.lesswrong.com/w/bayes-rule-odds-form?lens=introduction-to-bayes-rule-odds-form)
+      — prior odds × relative likelihoods = posterior odds.
+- [ ] [MIT 18.05, class 11: Bayesian updating](https://math.mit.edu/~dav/05.dir/class11-prep.pdf)
+      — the update table; yesterday's posterior as today's prior; the
+      likelihood column is not a distribution.
+- [ ] [Gigerenzer & Hoffrage 1995, "How to Improve Bayesian Reasoning Without Instruction"](https://www.semanticscholar.org/paper/49045496d186fec8ba8348a752de2a16b1739ef5)
+      — natural frequency formats and why they work.
+- [ ] [Weber, Binder & Krauss 2018 (natural frequencies)](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6194348/)
+      — the 4% vs 24% meta-analysis figure and why normalized
+      frequencies lose the benefit.
 - [X] [Wikipedia, Conditional probability](https://en.wikipedia.org/wiki/Conditional_probability)
       — the definition, the P(B) > 0 requirement, and the
       Borel–Kolmogorov caveat kept out of scope.
@@ -167,6 +216,10 @@ Rough queue, in roughly the order they build on each other:
 - Explaining away — the verified-but-unbuilt half of the conditional
   independence story (independence ⇏ CI: two fair flips given "exactly
   one head", 0 ≠ 1/4; plan 003's anchors).
+- Log-odds — evidence as addition; the natural sequel to "each head
+  multiplies by 9", once logarithms exist somewhere in the repo.
+- Monty Small's 1/(1+p) protocol dial (Rosenthal) — quoted in plan 004
+  but not yet independently enumerated; verify before animating.
 - The law of large numbers properly: swamping quantified, absolute vs
   relative deviation.
 - Random variables and distributions — the die as a function, not a set.
