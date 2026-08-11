@@ -223,3 +223,23 @@ reordered.
   anchors part-verified in plan 005) over random variables
 - stamp: unchanged at 726b19e; advance to plan 006's merge commit when
   `feat/calculus-e-ln` lands
+
+## [2026-08-11] series | plan 006, e and ln (in progress)
+
+- node built: `e-and-ln` (calculus/e_and_ln_manim.py, six scenes; new
+  calculus/ topic)
+- the strongest open promise closed: logarithms -> e-and-ln.
+  TheSplitYear replays the deferral caption, TheNaturalStride names
+  the mystery constants as ln, and TheDebtRepaid re-reads the
+  underflow identity — the graph's only on-screen debt, repaid
+- independence -> softmax row updated: the e-half of its double gate
+  is delivered; the row now waits on random variables alone
+- calculus/ opens one batched out-promise row (derivative toolkit,
+  ln as area, Euler's formula, growth in the wild)
+- device recorded: the counting strip re-ruled — definition ->
+  base-as-unit -> natural units, across algebra/ and calculus/
+- root README likely-next updated: random variables leads (per the
+  CTC roadmap), linear_algebra/ still listed pending the maintainer
+  call the finalisation audit raised
+- riding this branch as pre-phase: the box-leak fix + audit
+  bookkeeping; algebra scene 6 re-renders at this branch's finalise

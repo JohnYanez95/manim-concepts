@@ -75,7 +75,15 @@ class Welcome(ConceptScene):
             VGroup(
                 *[
                     Text(t, font_size=LABEL_SIZE, color=MUTED)
-                    for t in ["counting", "CTC", "independence", "conditioning", "Bayes", "logs"]
+                    for t in [
+                        "counting",
+                        "CTC",
+                        "independence",
+                        "conditioning",
+                        "Bayes",
+                        "logs",
+                        "e & ln",
+                    ]
                 ]
             )
             .arrange(RIGHT, buff=0.55)

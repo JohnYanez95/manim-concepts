@@ -16,6 +16,7 @@ crawling every page; whoever applies an audit's findings updates it.
 | `conditional-probability` | `probability/conditional_probability_manim.py` | Renormalized area, the multiplication rule, LOTP and trees, the inversion, conditional independence |
 | `bayes-rule` | `probability/bayes_rule_manim.py` | The division named, whole-people counting, the odds form and waterfall, the factored prevalence pair, iterated updating, the host's protocol |
 | `logarithms` | `algebra/logarithms_manim.py` | The counting strip: multiplying is adding counters; the evidence ruler; the underflow cliff and log-sum-exp |
+| `e-and-ln` | `calculus/e_and_ln_manim.py` | e as the self-paced base: Bernoulli's ceiling, the mystery constants, ln as the natural counter row; the underflow identity re-read |
 
 ## Edges
 
@@ -36,19 +37,25 @@ Status: **delivered** (both ends exist and the content makes the link) or
 | `ctc-alignment` | *(beam search / gradient / peaky dynamics)* | promised | `deep_learning/README.md` Ideas not yet built |
 | `ctc-alignment` | *(dynamic programming as its own concept)* | promised | `deep_learning/README.md` row 5 when-useful; plan 001 gaps. A future build inherits log-space for free: `TheUnderflowCliff` already shows the recursion's additions need the log-add identity |
 | `counting-rules` | *(binomial distribution — future random variables)* | promised | `combinatorics/README.md` row 3 when-useful names it; lands when `probability/` grows random variables |
-| `independence` | *(softmax, likelihood, log-likelihood)* | promised | `probability/README.md` Ideas — the remaining half of the CTC bridge |
+| `independence` | *(softmax, likelihood, log-likelihood)* | promised | `probability/README.md` Ideas — the remaining half of the CTC bridge; the e-half of its gate is now delivered by `e-and-ln` (`calculus/README.md` Scope points here), leaving only random variables |
 | `independence` | *(law of large numbers)* | promised | `probability/README.md` Ideas; `WhenToUseIt`'s swamping beat is the seed |
 | `independence` | *(random variables)* | promised | `probability/README.md` Ideas |
 | `counting-rules` | *(Pascal, stars & bars, inclusion–exclusion, binomial theorem)* | promised | `combinatorics/README.md` Ideas not yet built |
-| `logarithms` | *(e and ln — a `calculus/` topic)* | promised | `algebra/README.md` Scope exclusion + Ideas; on screen ("that story waits"); root README likely-next; the compound-interest table sits verified in plan 005's anchors |
+| `logarithms` | `e-and-ln` | delivered | `TheSplitYear` replays `MultiplyIsAdd`'s deferral caption on screen ("the wait ends here"); `TheNaturalStride` names the mystery constants as ln and re-rules the strip in natural units; `TheDebtRepaid` re-reads `TheUnderflowCliff`'s identity symbol by symbol — the graph's only on-screen debt, closed |
 | `logarithms` | *(the log-odds inference scene in `probability/`)* | promised | `algebra/README.md` Ideas ("this series builds the ruler; that series owns the inference") — the residual of the delivered bayes→logarithms edge |
 | `logarithms` | *(information as log-counting — bits, entropy)* | promised | `algebra/README.md` Ideas; `ShrinkCounts`' −log₂ = 4 is the HHTH cell's surprisal, one caption short of "4 bits" |
+| `e-and-ln` | *(derivative toolkit, ln as area under 1/t, Euler's formula, growth in the wild)* | promised | `calculus/README.md` Ideas not yet built; the first two are also Scope exclusions stated with their reasons |
 
 ## Shared visual devices
 
 Device lineage matters for consistency — a viewer who learns a picture in
 one topic should meet the same picture, upgraded, in the next:
 
+- **The counting strip, re-ruled** (`TheCountingStrip` →
+  `MultiplyIsAdd` → `TheNaturalStride`): the same two-row strip running
+  through three scenes — first the definition, then base-as-unit, and
+  finally the counter row disclosed as ln in nature's units; the
+  mystery constants obey the strip's laws before they are named.
 - **The outer-product grid**: `MultiplicativeRule` (counting) →
   `CountingAlignments` (raw path space) → `TheProductRule` (2×2 and 6×6,
   reweighted to probability) → the aligned unit square.

@@ -50,7 +50,13 @@ close predates the fix.
   above the ceiling line, the scene-2 caption crowding the panel tags,
   and scene 6's edge-to-edge recall line, clipped right column, and
   ln-2 tag sitting on the mirror line; box-leak check clean in all six)
-- [ ] Phase 3: README + wiki complete, `make test` green
+- [x] Phase 3: README + wiki complete, `make test` green (node
+  `e-and-ln` added; the strongest open promise flipped delivered with
+  on-screen citations; the softmax row's e-gate cleared; the strip
+  device lineage recorded; welcome gif re-rendered with the e & ln
+  row — 366 KB, verified by frame; one prose-is-a-claim catch on this
+  series' own Scope, the softmax "foreshadowed in the closer" line
+  softened to match the built closer)
 - [ ] Phase 4: local review + audit clean
 - [ ] Phase 5: PR, drafts cleaned, 1080p60 render verified (this series
   plus the scene-6 re-render)
