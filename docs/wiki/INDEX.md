@@ -15,6 +15,7 @@ crawling every page; whoever applies an audit's findings updates it.
 | `ctc-alignment` | `deep_learning/ctc_alignment_manim.py` | CTC: collapse map, alignment counting, forward trellis |
 | `independence` | `probability/independence_manim.py` | The product rule as definition; the aligned unit square |
 | `conditional-probability` | `probability/conditional_probability_manim.py` | Renormalized area, the multiplication rule, LOTP and trees, the inversion, conditional independence |
+| `bayes-rule` | `probability/bayes_rule_manim.py` | The division named, whole-people counting, the odds form and waterfall, iterated updating, the host's protocol |
 
 ## Edges
 
@@ -29,7 +30,8 @@ Status: **delivered** (both ends exist and the content makes the link) or
 | `ctc-alignment` | `conditional-probability` | delivered | `WhenToCondition` teaches conditional independence with the exact two-coin example and names "independent given the input" — the conditional half of PR #2's bridge, closed |
 | `independence` | `conditional-probability` | delivered | `TheRestrictedSquare` delivers the deferred renormalized slice; `IndependenceRevisited` re-reads the stepped cut as P(A\|B) and rederives P(A\|B) = P(A) |
 | `counting-rules` | `conditional-probability` | delivered | `TheMultiplicationRule` speaks the rule of product back ("the counting rule of product, carrying probabilities") and checks the chain against C(13,3)/C(52,3) |
-| `conditional-probability` | *(Bayes' rule series)* | promised | On screen twice: `TwoSlicesOneSquare` ends at the named front door, `WhenToCondition` defers Monty Hall to it. Plus `probability/README.md` Scope + Ideas (odds form, waterfall, prevalence pair completed, Rosenthal's protocol) and rows 5–6 when-useful cells — the repo's strongest open promise |
+| `conditional-probability` | `bayes-rule` | delivered | `ThroughTheFrontDoor` divides the exact identity `TwoSlicesOneSquare` left on screen; `OneTestTwoPatients` factors the counted prevalence pair; `TheHostsProtocol` closes the Monty deferral with Rosenthal's variants |
+| `bayes-rule` | *(log-odds — evidence as addition)* | promised | `probability/README.md` Ideas; `YesterdaysPosterior`'s multiply-per-head foreshadows it; blocked on logarithms existing in the repo |
 | `ctc-alignment` | *(beam search / gradient / peaky dynamics)* | promised | `deep_learning/README.md` Ideas not yet built |
 | `ctc-alignment` | *(dynamic programming as its own concept)* | promised | `deep_learning/README.md` row 5 when-useful ("the same dynamic-programming move as the HMM forward algorithm"); plan 001 gaps |
 | `counting-rules` | *(binomial distribution — future random variables)* | promised | `combinatorics/README.md` row 3 when-useful names it; lands when `probability/` grows random variables |

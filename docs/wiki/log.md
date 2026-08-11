@@ -117,3 +117,18 @@ reordered.
   lesson recorded in plan 003's review notes
 - next: Bayes' rule — the repo's strongest open promise, seeded by
   the front door, the cohort chips, the protocol lesson, and Rosenthal
+
+## [2026-08-11] series | plan 004, Bayes' rule (in progress)
+
+- node built: `bayes-rule` (probability/bayes_rule_manim.py, six scenes)
+- edge closed: `conditional-probability` -> `bayes-rule` — the repo's
+  strongest open promise (on screen twice + four documents), delivered
+  through the front door, the factored prevalence pair, and the host's
+  protocol
+- edge promised: `bayes-rule` -> log-odds (blocked on logarithms)
+- Monty Small's 1/(1+p) enumerated in the phase-2 verification script
+  (five values of p) — graduated from verify-first caption to on-screen
+  beat; its Ideas bullet retired
+- device note: the waterfall is the square-drawn-as-tree with the
+  division deferred — the three inherited devices named as one object
+  on screen in TheOddsForm

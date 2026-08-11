@@ -33,8 +33,17 @@ claim"; transition-window frame checks).
   reference's description updated — the source still covers the claim,
   the tick stands — because "deferred to the Bayes series" became
   stale the moment this branch existed)
-- [ ] Phase 2: all scenes render at draft; verified per CLAUDE.md checklist
-- [ ] Phase 3: README + wiki complete, `make test` green
+- [x] Phase 2: all scenes render at draft; verified per CLAUDE.md checklist
+  (6 distinct numbered files; durations 23–30 s; 16 frames reviewed;
+  one LaTeX crash — the \quadP adjacent-string bug — plus three layout
+  fixes: the renaming beat now clears the old identity first, the
+  invariance pools relabel to 9:12 with the picture, and scene 6's
+  table header became a caption; one self-inflicted span-replace
+  deleted the rows definition and was rebuilt)
+- [x] Phase 3: README + wiki complete, `make test` green (node
+  `bayes-rule` added; the strongest-promise edge flipped delivered with
+  three citations; log-odds promised; Monty Small's Ideas bullet
+  retired — enumerated and now on screen)
 - [ ] Phase 4: local review clean
 - [ ] Phase 5: PR open, drafts cleaned, 1080p60 render verified
 

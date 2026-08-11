@@ -221,8 +221,6 @@ Rough queue, in roughly the order they build on each other:
   one head", 0 ≠ 1/4; plan 003's anchors).
 - Log-odds — evidence as addition; the natural sequel to "each head
   multiplies by 9", once logarithms exist somewhere in the repo.
-- Monty Small's 1/(1+p) protocol dial (Rosenthal) — quoted in plan 004
-  but not yet independently enumerated; verify before animating.
 - The law of large numbers properly: swamping quantified, absolute vs
   relative deviation.
 - Random variables and distributions — the die as a function, not a set.
