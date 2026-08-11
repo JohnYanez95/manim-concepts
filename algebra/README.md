@@ -54,35 +54,38 @@ Ticks are human-gated — see
 [reference verification](../README.md#reference-verification-is-human-gated).
 Every entry below came out of the plan-005 research pass
 ([`docs/plans/005-algebra-logarithms.md`](../docs/plans/005-algebra-logarithms.md))
-and starts unchecked until a human verifies it.
+and starts unchecked until a human verifies it. All twelve below
+were verified by the maintainer, who directed the ticks be recorded.
 
-- [ ] [OpenStax College Algebra 2e, §6.3 Logarithmic Functions](https://openstax.org/books/college-algebra-2e/pages/6-3-logarithmic-functions)
+- [x] [OpenStax College Algebra 2e, §6.3 Logarithmic Functions](https://openstax.org/books/college-algebra-2e/pages/6-3-logarithmic-functions)
       — the definition with its domain conditions, quoted in the plan's
       anchors.
-- [ ] [OpenStax College Algebra 2e, §6.5 Logarithmic Properties](https://openstax.org/books/college-algebra-2e/pages/6-5-logarithmic-properties)
+- [x] [OpenStax College Algebra 2e, §6.5 Logarithmic Properties](https://openstax.org/books/college-algebra-2e/pages/6-5-logarithmic-properties)
       — the three laws and change of base (conditions completed in the
       anchors; no fetched source boxes them all at once).
-- [ ] [3blue1brown, "Triangle of Power"](https://www.3blue1brown.com/lessons/triangle-of-power)
+- [x] [3blue1brown, "Triangle of Power"](https://www.3blue1brown.com/lessons/triangle-of-power)
       — one triple, three notations; the scene 2 device.
-- [ ] [Better Explained, "Using Logarithms in the Real World"](https://betterexplained.com/articles/using-logs-in-the-real-world/)
+- [x] [Better Explained, "Using Logarithms in the Real World"](https://betterexplained.com/articles/using-logs-in-the-real-world/)
       — logs as counting multiplicative steps; the wild scales.
-- [ ] [Kenney & Kastberg, "Links in Learning Logarithms"](https://files.eric.ed.gov/fulltext/EJ1093384.pdf)
+- [x] [Kenney & Kastberg, "Links in Learning Logarithms"](https://files.eric.ed.gov/fulltext/EJ1093384.pdf)
       — the documented misconceptions (cancel/disappear, ln = log, the
       inverse-graph failure) this series designs against.
-- [ ] [Emory Math 108, logarithms via the triangle of power](https://mathcenter.oxford.emory.edu/site/math108/logs/)
+- [x] [Emory Math 108, logarithms via the triangle of power](https://mathcenter.oxford.emory.edu/site/math108/logs/)
       — the laws derived from the triangle; log₂3 irrational.
-- [ ] [Wikipedia, Slide rule](https://en.wikipedia.org/wiki/Slide_rule)
+- [x] [Wikipedia, Slide rule](https://en.wikipedia.org/wiki/Slide_rule)
       — Gunter/Oughtred history; multiplication as added lengths.
-- [ ] [Wikipedia, Double-precision floating-point format](https://en.wikipedia.org/wiki/Double-precision_floating-point_format)
+- [x] [Wikipedia, Double-precision floating-point format](https://en.wikipedia.org/wiki/Double-precision_floating-point_format)
       — the float64 normal/subnormal extremes behind the cliff.
-- [ ] [Wikipedia, LogSumExp](https://en.wikipedia.org/wiki/LogSumExp)
+- [x] [Wikipedia, LogSumExp](https://en.wikipedia.org/wiki/LogSumExp)
       — the max-shifted identity and why it is finite.
-- [ ] [Graves, Supervised Sequence Labelling with RNNs, §7.3.1](https://www.cs.toronto.edu/~graves/preprint.pdf)
-      — the log-add identity for CTC's forward recursion (the 2012
-      book; the 2006 paper rescaled instead).
-- [ ] [Good, "Weight of Evidence: A Brief Survey"](https://www.cs.tufts.edu/~nr/cs257/archive/jack-good/weight-of-evidence.pdf)
+- [x] [Graves, Supervised Sequence Labelling with RNNs, §7.3.1](https://www.cs.toronto.edu/~graves/preprint.pdf)
+      — cited here, in an algebra topic, because CTC lives in this RNN
+      book: §7.3.1 is where the log-add identity for the forward
+      recursion appears (the 2012 book; the 2006 paper rescaled
+      instead). Scene 6's primary source.
+- [x] [Good, "Weight of Evidence: A Brief Survey"](https://www.cs.tufts.edu/~nr/cs257/archive/jack-good/weight-of-evidence.pdf)
       — log Bayes factors and Turing's deciban, behind scene 5's lore.
-- [ ] [LessWrong/Arbital, "Bayes' rule: log-odds form"](https://www.lesswrong.com/w/bayes-rule-log-odds-form)
+- [x] [LessWrong/Arbital, "Bayes' rule: log-odds form"](https://www.lesswrong.com/w/bayes-rule-log-odds-form)
       — evidence in bits; 0 and 1 as ±∞ on the evidence ruler.
 
 ## Ideas not yet built
