@@ -66,7 +66,7 @@ def rgb_to_hex(rgb: np.ndarray) -> str:
     measuring distances between unshowable values is what caused the bug in
     the docstring above.
     """
-    red, green, blue = (int(round(v * 255)) for v in np.clip(rgb, 0, 1))
+    red, green, blue = (round(v * 255) for v in np.clip(rgb, 0, 1))
     return f"#{red:02x}{green:02x}{blue:02x}"
 
 

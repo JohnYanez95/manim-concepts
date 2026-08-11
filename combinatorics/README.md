@@ -39,12 +39,12 @@ So `PartitionRule` does not land without `CombinationRule` before it.
 | 5 | `WhenToUseIt` | — | Which rule a problem needs | Four problem shapes mapped to the rule each one calls for, then the observation that all four are the product rule with unwanted orderings divided out. | Reading an unfamiliar counting problem and knowing which tool it wants — the step between having the formulas and being able to use them. |
 
 Renders are numbered to match, so a directory listing plays in the same order:
-`01_MultiplicativeRule.mp4` … `04_PartitionRule.mp4`.
+`01_MultiplicativeRule.mp4` … `05_WhenToUseIt.mp4`.
 
 Render them:
 
 ```bash
-uv run python combinatorics/counting_rules_manim.py                     # all four, 1080p60
+uv run python combinatorics/counting_rules_manim.py                     # all five, 1080p60
 uv run python combinatorics/counting_rules_manim.py --list
 uv run python combinatorics/counting_rules_manim.py -s PermutationRule -q draft
 ```
