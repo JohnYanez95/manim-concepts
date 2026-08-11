@@ -73,21 +73,21 @@ Every entry below came out of the plan-001 research pass
 all of them start unchecked. Open one, confirm it covers what the entry
 claims, and tick it yourself; nothing automated will.
 
-- [ ] [Graves et al., 2006 — Connectionist Temporal Classification](https://www.cs.toronto.edu/~graves/icml_2006.pdf)
+- [X] [Graves et al., 2006 — Connectionist Temporal Classification](https://www.cs.toronto.edu/~graves/icml_2006.pdf)
       — the original ICML paper; source of the collapse map, the forward
       recurrence, and the trellis figure (whose example target is CAT).
-- [ ] [Hannun, "Sequence Modeling with CTC", Distill 2017](https://distill.pub/2017/ctc/)
+- [X] [Hannun, "Sequence Modeling with CTC", Distill 2017](https://distill.pub/2017/ctc/)
       — the canonical visual explanation; the alignment table, trellis and
       counting arguments here follow its lineage.
-- [ ] [Scheidl, "An Intuitive Explanation of CTC"](https://harald-scheidl.medium.com/intuitively-understanding-connectionist-temporal-classification-3797e43a86c)
+- [X] [Scheidl, "An Intuitive Explanation of CTC"](https://harald-scheidl.medium.com/intuitively-understanding-connectionist-temporal-classification-3797e43a86c)
       — the smallest fully numeric loss example (one letter, two frames).
-- [ ] [Ogun, "Breaking down the CTC Loss"](https://ogunlao.github.io/blog/2020/07/17/breaking-down-ctc-loss.html)
+- [X] [Ogun, "Breaking down the CTC Loss"](https://ogunlao.github.io/blog/2020/07/17/breaking-down-ctc-loss.html)
       — worked forward/backward grids for "door"; states the skip rule
       precisely.
-- [ ] [Stanford CS224S, lecture 10: end-to-end ASR](https://web.stanford.edu/class/cs224s/semesters/2022-spring/lecture-slides/224s.22.lec10.pdf)
+- [X] [Stanford CS224S, lecture 10: end-to-end ASR](https://web.stanford.edu/class/cs224s/semesters/2022-spring/lecture-slides/224s.22.lec10.pdf)
       — CTC in context: language-model fusion and the comparison with
       attention models.
-- [ ] [CMU 11-785, recitation 8: CTC](http://www.cs.cmu.edu/afs/cs/user/bhiksha/WWW/courses/deeplearning/Fall.2018/www/recitations/recitation8.pdf)
+- [X] [CMU 11-785, recitation 8: CTC](http://www.cs.cmu.edu/afs/cs/user/bhiksha/WWW/courses/deeplearning/Fall.2018/www/recitations/recitation8.pdf)
       — the "CTC is a family of losses" framing that demystifies the blank.
 - [ ] [HuggingFace Audio Course, ch. 3: CTC](https://huggingface.co/learn/audio-course/en/chapter3/ctc)
       — practical anchors: real frame rates, and blank vs. word-space in

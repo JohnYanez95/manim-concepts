@@ -26,8 +26,10 @@ NUMBERED_ROW = re.compile(r"^\|\s*(\d+)\s*\|\s*`([A-Za-z_][A-Za-z0-9_]*)`\s*\|")
 # pass a Scope section that never states an exclusion.
 STATES_AN_EXCLUSION = re.compile(r"\bnot\b")
 
-# A reference list item, which must carry a verification checkbox.
-REFERENCE_ITEM = re.compile(r"^\s*-\s+(\[[ x]\])\s")
+# A reference list item, which must carry a verification checkbox. Both tick
+# spellings are accepted: humans write "[X]" as often as "[x]", GitHub renders
+# both as checked, and a human's tick must never red the gate over its case.
+REFERENCE_ITEM = re.compile(r"^\s*-\s+(\[[ xX]\])\s")
 
 
 def topic_dirs() -> list[Path]:
