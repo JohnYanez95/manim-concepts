@@ -112,9 +112,12 @@ reviews:
         DO flag:
         - Star imports. The `from manim import *` exemption is scoped to
           `*/*_manim.py` and does not extend to this package.
-        - A new public name that is not re-exported in `utils/__init__.py`'s
-          `__all__`. Concept modules import from the package root only, so an
-          un-exported helper is invisible to them.
+        - A new public name that `utils/__init__.py` does not both import and
+          list in `__all__`. The two do different jobs: the import is what
+          makes `from utils import X` resolve for a concept module, while
+          `__all__` covers wildcard imports and satisfies ruff F401, which
+          rejects an unlisted re-export. Flag either half being missing — not
+          only the `__all__` half.
         - A constructor in `mobjects.py` that animates or plays. This module
           returns mobjects; composition and timing belong to the scene.
         - Behaviour that depends on the current working directory. Render

@@ -90,8 +90,11 @@ This is what review caught, twice, so check it before writing a scene:
 - Every scene needs a one-line docstring — it is what `--list` prints.
 - No `SCENES = [...]` list. `render_cli()` discovers scenes in source order.
 - No `sys.path` manipulation. The project installs itself as a package.
-- A new public name in `utils/` must be re-exported in `utils/__init__.py`'s
-  `__all__`, or concept modules cannot see it.
+- A new public name in `utils/` has to be **imported into**
+  `utils/__init__.py` *and* listed in `__all__`. These do different jobs: the
+  import is what makes `from utils import X` resolve in a concept module,
+  while `__all__` covers wildcard imports and keeps ruff quiet — F401 rejects
+  a re-export that is not listed. Doing only one of the two fails.
 - `from manim import *` is allowed **only** in `*/*_manim.py`. `utils/` imports
   explicitly.
 
