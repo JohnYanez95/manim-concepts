@@ -1,0 +1,172 @@
+# yaml-language-server: $schema=https://coderabbit.ai/integrations/schema.v2.json
+#
+# Review policy for the GitHub bot.
+#
+# Note the workflow this assumes: the CodeRabbit review runs locally on the
+# branch BEFORE the PR is opened (cheap first pass, findings fixed in place),
+# and this bot review is the second, independent pass on the PR itself. The two
+# do not share state — a clean local run does not pre-satisfy the bot, and that
+# redundancy is deliberate. See CLAUDE.md for the full loop.
+#
+# The posture here is deliberately lax on code style and strict on structure.
+# Style is already fully settled by machines that run before the PR exists:
+# ruff decides formatting, line length, import order and PEP 8, and
+# markdownlint decides prose. A bot re-litigating any of that is pure noise,
+# and noise is what makes people stop reading review comments.
+#
+# What tooling cannot check is whether the repo still hangs together: whether a
+# new topic brought its README, whether a scene reuses the shared layer instead
+# of re-inventing it, whether a colour was used for its meaning. That is what
+# this configuration asks CodeRabbit to spend its attention on.
+language: "en-US"
+
+reviews:
+  # Read before flagging anything: docs/decisions.md records findings that were
+  # already considered and declined, with the reasoning. Do not re-raise one of
+  # those without new evidence — the render-all quality default was raised,
+  # declined, and raised again verbatim a round later, which is pure churn.
+  # CLAUDE.md is the authoritative ruleset; README.md is its short version, so
+  # judge a rule against CLAUDE.md rather than flagging the README for brevity.
+  # "chill" over "assertive" on purpose — see the note above. This is a
+  # personal research repo, not a production service; a wall of nitpicks on a
+  # visualisation costs more than it catches.
+  profile: "chill"
+  auto_review:
+    enabled: true
+    drafts: false
+  high_level_summary: true
+  poem: false
+
+  path_filters:
+    # Render output. Gitignored already; this is belt and braces so a forced
+    # add never turns into a review of binary video.
+    - "!media/**"
+    # uv.lock is deliberately NOT excluded. It is generated, but a lockfile
+    # diff is where a dependency change becomes visible, and that is exactly
+    # the thing worth a second pair of eyes. It only churns when dependencies
+    # actually move, so the review noise is bounded.
+
+  path_instructions:
+    - path: "**/*_manim.py"
+      instructions: |
+        Concept modules — animation source. Ruff owns style here; do NOT flag
+        formatting, line length, import order, naming conventions, or the
+        `from manim import *` star import (that is the documented manim idiom
+        and is a deliberate, scoped lint exemption declared in pyproject.toml).
+        Magic numbers for geometry — coordinates, buffs, run_times — are how
+        Manim layout is written. Do not ask for them to be named constants.
+
+        The narrative spine is three levels of understanding: what is it
+        saying, why is it true, when is it useful. A module is expected to
+        climb all three — not necessarily per scene, but across its sequence.
+        DO flag a module whose scenes never reach "when is it useful", since
+        that is the standing failure mode.
+
+        DO flag structural drift away from the shared layer:
+        - A hardcoded hex colour instead of a name from `utils.theme`. The
+          palette is the repo's visual identity; a one-off hex is how it rots.
+        - A colour used against its meaning. ACCENT is the result being built
+          toward, WARM is what gets cancelled or overcounted, GOOD is a
+          confirmed object, MUTED is scaffolding. PALETTE is a categorical
+          cycle for "N distinct things with no ranking" and carries no meaning
+          — reaching into it for a semantic role is a finding.
+        - Re-implementing something `utils.mobjects` already provides
+          (`token`, `chip`, `boxed`, `header`, `caption`) inline.
+        - A Scene that subclasses `Scene` directly instead of `ConceptScene`,
+          or sets `camera.background_color` by hand.
+        - A scene class with no docstring. The first line is what `--list`
+          prints, so a missing one degrades the CLI, not just the source.
+        - A hand-maintained `SCENES = [...]` list. `render_cli()` discovers
+          scenes automatically; a manual list drifts silently.
+        - `sys.path` manipulation to reach `utils`. The project is installed as
+          a package precisely so this is never needed.
+
+    - path: "*/README.md"
+      instructions: |
+        Topic READMEs. The contract is defined under "The topic contract" in
+        the root README; check this file against it rather than against
+        general documentation taste.
+
+        DO flag:
+        - A missing Scope section, or a Scope that says only what IS covered.
+          The explicit "deliberately not covered" half is the part that keeps a
+          topic from becoming a junk drawer, and omitting it is a finding.
+        - A concept file in this directory with no row in the concepts table,
+          or a table row for a scene that no longer exists.
+        - A table row that does not answer all three levels of understanding:
+          what it says, why it's true, when it's useful. The third is the one
+          that gets skipped — "why is it true" is the satisfying part to write,
+          so authors stop there and the topic teaches a fact instead of a tool.
+          A blank "when it's useful" is a gap in the teaching, not a formatting
+          nit, and should be flagged as such.
+        - A missing References or "Ideas not yet built" section.
+        - An unnumbered concepts table, or numbering that does not run 1..n in
+          the order the scenes are defined in the module. Scenes in a module
+          build toward one idea, so source order is viewing order: renders are
+          named from it (`03_CombinationRule.mp4`) and a reader should be able
+          to work through a topic sequentially, or at minimum see the
+          trajectory. A reordered scene without a matching README update is a
+          finding even though both files are individually valid.
+
+        Reference verification is HUMAN-GATED. `- [ ]` means unverified and
+        `- [x]` means a person opened the link and vouched for it.
+        - Unverified entries are NOT a defect. Never ask for a `- [ ]` to be
+          resolved, justified, or removed before merge; they are a to-do list.
+        - DO flag any diff that flips `- [ ]` to `- [x]` without a human
+          plausibly having done so — in particular in a commit authored or
+          co-authored by a bot or an AI assistant, or in a change that ticks
+          several boxes at once alongside unrelated edits. An automated tick
+          defeats the only purpose the checkbox has.
+        - DO flag a new reference added as `- [x]`. Every entry starts
+          unchecked, without exception.
+
+    - path: "utils/**"
+      instructions: |
+        The shared layer. Held to a higher bar than concept modules, because
+        every topic inherits whatever lands here.
+
+        DO flag:
+        - Star imports. The `from manim import *` exemption is scoped to
+          `*/*_manim.py` and does not extend to this package.
+        - A new public name that `utils/__init__.py` does not both import and
+          list in `__all__`. The two do different jobs: the import is what
+          makes `from utils import X` resolve for a concept module, while
+          `__all__` covers wildcard imports and satisfies ruff F401, which
+          rejects an unlisted re-export. Flag either half being missing — not
+          only the `__all__` half.
+        - A constructor in `mobjects.py` that animates or plays. This module
+          returns mobjects; composition and timing belong to the scene.
+        - Behaviour that depends on the current working directory. Render
+          output is pinned to `<repo>/media` via `media_root()` so that a
+          module renders identically from anywhere.
+        - Manim global-config state left mutated across a render. `tempconfig`
+          is scoped per scene deliberately: manim writes the finished output
+          path back into the global config, and a batch-wide scope makes every
+          scene overwrite the first scene's file.
+
+    - path: "tests/**"
+      instructions: |
+        The suite is deliberately narrow. Do NOT ask for pixel or
+        frame-comparison tests of rendered output, or for coverage of the
+        animation code itself — those fail on a font or manim update without
+        anything being wrong, and that is a decision already taken.
+
+        DO flag a test that renders actual video. The render path is mocked on
+        purpose; a test that shells out to a real render makes the suite take
+        minutes and depend on ffmpeg and LaTeX.
+
+    - path: "pyproject.toml"
+      instructions: |
+        DO flag a new entry in `[tool.ruff.lint.per-file-ignores]` that has no
+        comment saying why the rule is being suppressed. The existing
+        F403/F405 exemption is commented; the list should stay short and
+        justified rather than growing into a way to silence findings.
+
+knowledge_base:
+  learnings:
+    scope: "local"
+  code_guidelines:
+    enabled: true
+
+chat:
+  auto_reply: true

@@ -1,0 +1,25 @@
+# markdownlint config. Defaults are kept except where a rule asks for something
+# the content physically cannot give.
+#
+# MD013 (line length) stays ON at 80 for prose — the docs are written to wrap,
+# and reflowed prose keeps diffs readable. It is switched off for the two
+# constructs that cannot wrap without becoming wrong:
+#
+#   tables      — the scene/formula tables carry LaTeX cells that are already
+#                 wider than 80 columns before the pipes; breaking a row breaks
+#                 the table.
+#   code_blocks — render commands must stay copy-pasteable, and a shell line
+#                 split anywhere but a continuation is no longer the command
+#                 that was actually run.
+config:
+  MD013:
+    tables: false
+    code_blocks: false
+  # MD060 defaults to "consistent", which infers the intended style from the
+  # first table it sees — so a table whose cells happen to line up silently
+  # switches the whole file to "aligned" and every other table becomes an
+  # error. Pinning "compact" (single space each side of every pipe) means the
+  # rule checks one fixed thing, and nobody has to pad cells to a column width
+  # that the next edit will break.
+  MD060:
+    style: compact

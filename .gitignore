@@ -1,0 +1,39 @@
+# --- Render output: never in git ---------------------------------------------
+# Every video in this repo is reproducible from its source module in one command.
+# Committing renders would make the repo grow without bound and turn every
+# re-render into a binary diff.
+media/
+*.mp4
+*.gif
+*.mov
+*.png
+*.svg
+!docs/**/*.png
+!docs/**/*.svg
+
+# --- Environments --------------------------------------------------------------
+.venv/
+venv/
+__pycache__/
+*.pyc
+.ruff_cache/
+.pytest_cache/
+.mypy_cache/
+
+# --- LaTeX build artifacts (MathTex shells out to latex) -----------------------
+*.aux
+*.dvi
+*.fls
+*.fdb_latexmk
+*.synctex.gz
+
+# --- Editor / OS ---------------------------------------------------------------
+# WSL writes a :Zone.Identifier alternate-data-stream file next to anything
+# downloaded on the Windows side. Pure metadata, never content.
+*:Zone.Identifier
+.DS_Store
+*.swp
+
+# --- Agent workspace -----------------------------------------------------------
+.claude/settings.local.json
+CLAUDE.local.md

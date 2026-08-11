@@ -1,0 +1,40 @@
+# Pre-commit gate. Intent: make review cheap by removing every mechanical
+# objection before the diff is opened.
+#
+# Scoping rule (deliberate): PEP 8 / whitespace hooks apply to Python only.
+# Markdown gives trailing double-space a meaning, so it is excluded from the
+# whitespace hooks and gets its own linter instead.
+#
+# Install once:  make hooks
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v6.0.0
+    hooks:
+      - id: trailing-whitespace
+        exclude: '\.md$'
+      - id: end-of-file-fixer
+        exclude: '\.md$'
+      - id: check-yaml
+      - id: check-toml
+      - id: check-json
+      - id: check-merge-conflict
+      - id: check-case-conflict
+      # Renders must never reach git. .gitignore is the first line of defence;
+      # this is the backstop that catches a stray `git add -f media/` or a video
+      # dropped into a topic directory by hand. 512 KB is comfortably above any
+      # source file here and far below any render.
+      - id: check-added-large-files
+        args: [--maxkb=512]
+
+  # Python only, by construction — ruff does not read .md or .yaml.
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.15.11
+    hooks:
+      - id: ruff
+        args: [--fix]
+      - id: ruff-format
+
+  - repo: https://github.com/DavidAnson/markdownlint-cli2
+    rev: v0.22.0
+    hooks:
+      - id: markdownlint-cli2

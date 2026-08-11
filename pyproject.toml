@@ -1,0 +1,79 @@
+# manim-concepts — intuitive Manim visualisations of core concepts.
+#
+# The root project is a real installed package, not just a dependency manifest.
+# That is load-bearing: `python combinatorics/counting_rules_manim.py` puts
+# `combinatorics/` on sys.path, NOT the repo root, so `from utils import ...`
+# would fail. Declaring `utils` as the wheel's package makes `uv run` install the
+# project editable, and the import resolves from any working directory without a
+# sys.path hack in every concept module.
+#
+# Build the environment with:  make venv
+[project]
+name = "manim-concepts"
+version = "0.1.0"
+description = "Intuitive Manim visualisations of core mathematical and ML concepts"
+requires-python = ">=3.12"
+dependencies = [
+    "manim>=0.19",
+]
+
+[dependency-groups]
+dev = [
+    "pre-commit>=4.0",
+    "pytest>=8.0",
+    "ruff>=0.15",
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+# Only the shared library ships. Topic directories are script directories, not
+# packages — they have no __init__.py and are never imported.
+packages = ["utils"]
+
+# ---------------------------------------------------------------------------
+# Ruff — PEP 8 enforcement and formatting for Python sources only.
+# ---------------------------------------------------------------------------
+[tool.ruff]
+line-length = 100
+target-version = "py312"
+
+[tool.ruff.lint]
+select = [
+    "E",    # pycodestyle errors  (PEP 8)
+    "W",    # pycodestyle warnings
+    "F",    # pyflakes
+    "I",    # import sorting
+    "B",    # bugbear
+    "UP",   # pyupgrade
+    "SIM",  # simplify
+    # Keeps utils/__init__.py's __all__ ordered. Ruff owns this rather than a
+    # test: its ordering groups by case (SCREAMING, then CamelCase, then
+    # snake_case) and re-implementing that in an assertion is a fragile copy of
+    # someone else's convention.
+    "RUF022",  # __all__ is not sorted
+]
+
+[tool.ruff.lint.per-file-ignores]
+# Concept modules keep `from manim import *`. This is the idiom Manim's own docs
+# and every upstream example use, and it is not laziness: a single scene touches
+# forty-odd names (Text, VGroup, MathTex, FadeIn, LaggedStart, Brace, UP, LEFT,
+# ...), so the explicit form would be a forty-line import block per file that has
+# to be edited every time an animation changes. The exemption is scoped to the
+# `_manim.py` glob — `utils/` is library code and imports explicitly.
+"*/*_manim.py" = [
+    "F403",  # `from manim import *` used
+    "F405",  # name may be undefined, or defined from star imports
+]
+# The tests reach into _select and _discover_scenes on purpose. Those are the
+# functions with the actual branching, and testing only the public render_cli
+# around them would mean rendering video to assert on argument parsing.
+"tests/**" = ["SLF001"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+# Manim emits SyntaxWarnings from a pydub dependency on import; they are not
+# ours to fix and would otherwise bury real warnings.
+filterwarnings = ["ignore::SyntaxWarning"]
