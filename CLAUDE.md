@@ -6,9 +6,13 @@ wrong twice, not speculatively.
 
 This file is authoritative. `README.md` carries a shorter, user-facing version
 of the same workflow; where they disagree, this one wins, and a rule should be
-stated in full in exactly one of them. Review findings that were considered and
-declined live in [`docs/decisions.md`](docs/decisions.md) — check it before
-re-opening an argument.
+stated in full in exactly one of them.
+
+The repo keeps its own books in `docs/`: plans live in
+[`docs/plans/`](docs/plans/) (see Step 0), and decisions — including review
+findings that were considered and declined — live as numbered ADRs in
+[`docs/adr/`](docs/adr/README.md). Check the ADRs before re-opening an
+argument.
 
 ## The narrative: three levels of understanding
 
@@ -38,6 +42,25 @@ into numbered **phases**, each ending in a **commit gate** — a named checkpoin
 that must be green before the next phase begins. No phase starts on top of a
 red one, and each gate is one commit.
 
+**Plans are repo history, not scratch.** Every plan lives in `docs/plans/` as
+`NNN-slug.md`, numbered in the order begun, and is committed with the work it
+gates. The directory is the track record of how this platform grew — how a
+topic was scoped, what the research found, and what was deliberately deferred
+— so a plan is updated as its phases complete, not deleted when they do.
+
+**A new series starts on a fresh branch cut from an updated `main`.** Check out
+`main`, pull, then branch — never stack a topic on another feature branch. The
+first topic branch here was nearly built on a stale scaffold branch while the
+scaffold PR had already merged; only the pull caught it.
+
+**Before designing any scenes, research how the material is best conveyed.**
+Find the canonical explanations and what order they teach in, the visual
+devices they rely on, the misconceptions learners actually report, and verify
+the technical details against primary sources — an animation that is subtly
+wrong is worse than no animation. The scene design in the plan states what it
+borrows and from where, and every source consulted lands in the topic README's
+References as `- [ ]`.
+
 The final phase is always a fully rendered PR. A plan that stops at "code
 works" is not finished.
 
@@ -45,6 +68,7 @@ A new topic looks like this:
 
 | Phase | Work | Commit gate |
 | --- | --- | --- |
+| 0 | Fresh branch from pulled `main`; research pass on how to teach the material | Scene design written into the plan |
 | 1 | Topic dir, README skeleton, first scene stub | `make check` |
 | 2 | Scenes, iterated at draft quality | Draft renders verified by eye |
 | 3 | Numbered concepts table, references as `- [ ]` | `make test` |

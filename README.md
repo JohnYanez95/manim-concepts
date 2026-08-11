@@ -146,7 +146,7 @@ re-renders what changed. Pass `--no-cache` if a stale partial is suspected.
 [`CLAUDE.md`](CLAUDE.md) is the authoritative contributor ruleset — planning,
 verification, colour discipline, structure. This section is the short version;
 where the two disagree, `CLAUDE.md` wins. Declined review findings and their
-reasoning live in [`docs/decisions.md`](docs/decisions.md).
+reasoning live as numbered ADRs in [`docs/adr/`](docs/adr/README.md).
 
 Every non-trivial change starts with a plan broken into numbered phases, each
 ending in a named commit gate that must be green before the next phase starts.
