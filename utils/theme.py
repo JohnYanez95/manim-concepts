@@ -48,16 +48,16 @@ BG = "#0f1117"
 # Not hand-picked. Solved by tools/solve_palette.py, which minimises drift from
 # the original palette subject to the constraints in the module docstring. Re-run
 # `uv run python tools/solve_palette.py --verify` after touching any hex here.
-ACCENT = "#ffcc67"
-COOL = "#60cded"
-WARM = "#f87965"
-GOOD = "#91fcae"
-MUTED = "#93979e"
+ACCENT = "#ffcc5f"
+COOL = "#66d9ff"
+WARM = "#ea6c58"
+GOOD = "#93ffb2"
+MUTED = "#91959c"
 
 # --- Categorical cycle ------------------------------------------------------
 # Mutually >= dE 52 and >= dE 20 from every semantic colour above, so the
 # categorical cycle can never be mistaken for a semantic statement.
-PALETTE = ["#009ba9", "#ff7189", "#7bd26c", "#eab77b", "#c490e8"]
+PALETTE = ["#009ba9", "#ff7189", "#7cd26c", "#eab77b", "#d1a0ff"]
 
 
 def palette(index: int) -> str:

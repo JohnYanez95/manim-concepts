@@ -122,8 +122,3 @@ def simulate(colour: str, matrix: np.ndarray) -> str:
     that the original buggy solver skipped.
     """
     return rgb_to_hex(_from_linear(matrix @ _to_linear(hex_to_rgb(colour))))
-
-
-def in_gamut(rgb: np.ndarray, tolerance: float = 1e-6) -> bool:
-    """Whether an sRGB triple is displayable without clipping."""
-    return bool(np.all(rgb >= -tolerance) and np.all(rgb <= 1 + tolerance))

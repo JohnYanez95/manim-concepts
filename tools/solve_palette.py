@@ -17,7 +17,7 @@ would make "keep this recognisably gold" inexpressible.
 
     minimise    total dE from the current palette
     subject to  every semantic pair            >= 30 dE normally
-                every semantic pair            >= 25 dE under deuteranopia
+                every semantic pair            >= 25 dE under deuteranopia (solved to 30)
                                                >= 25 dE under protanopia
                 every colour vs background     >= 45 dE
                 every colour vs white          >= 20 dE   (not body text)
@@ -64,11 +64,18 @@ SEMANTIC_SPEC = {
     "COOL": (195, 275, 52, 88, 25, 90),
     "WARM": (15, 58, 38, 70, 30, 90),
     "GOOD": (112, 172, 74, 97, 22, 90),
-    "MUTED": (None, None, 55, 74, 0, 10),
+    "MUTED": (None, None, 44, 70, 0, 10),
 }
 
 MIN_PAIR = 30.0
+# The constraint the palette must satisfy, and what --verify checks.
 MIN_CVD = 25.0
+# The solver aims higher than the constraint on purpose. Solving *to* the
+# constraint lands colours exactly on the boundary, where hex quantisation then
+# tips one pair a hundredth of a dE under and --verify rejects the solver's own
+# output. Thresholds are layered: solve at 30, verify at 25, and the test suite
+# gates at 15 — each with room above the next.
+SOLVE_CVD = 30.0
 MIN_BG = 45.0
 MIN_WHITE = 20.0
 
@@ -108,7 +115,7 @@ def evaluate(colours: dict[str, str], *, targets: dict[str, str]) -> tuple[float
         violation += _penalty(MIN_PAIR - delta_e(colours[a], colours[b]))
         for matrix in (DEUTERANOPIA, PROTANOPIA):
             separation = delta_e(simulate(colours[a], matrix), simulate(colours[b], matrix))
-            violation += _penalty(MIN_CVD - separation)
+            violation += _penalty(SOLVE_CVD - separation)
     drift = sum(delta_e(colours[n], targets[n]) for n in names)
     return drift, violation
 
@@ -187,7 +194,11 @@ def report(semantic: dict[str, str], categorical: list[str]) -> bool:
         normal = delta_e(semantic[a], semantic[b])
         deut = delta_e(simulate(semantic[a], DEUTERANOPIA), simulate(semantic[b], DEUTERANOPIA))
         prot = delta_e(simulate(semantic[a], PROTANOPIA), simulate(semantic[b], PROTANOPIA))
-        bad = normal < MIN_PAIR or min(deut, prot) < 15.0
+        # Checked against the solver's own target, not the looser floor the
+        # test suite enforces. --verify answers "does this palette still meet
+        # what the solver was asked for", and reporting OK at 15 while the
+        # constraint says 25 would make that answer a lie.
+        bad = normal < MIN_PAIR or min(deut, prot) < MIN_CVD
         ok &= not bad
         print(f"  {a:7}/{b:7} {normal:8.1f}{deut:8.1f}{prot:8.1f}{'   <-- FAILS' if bad else ''}")
 

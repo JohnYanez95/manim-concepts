@@ -151,7 +151,7 @@ def test_categorical_colours_do_not_alias_the_semantic_ones(index):
     assert nearest[0] > 20, f"PALETTE[{index}] is indistinguishable from {nearest[1]}"
 
 
-@pytest.mark.parametrize("i,j", list(combinations(range(5), 2)))
+@pytest.mark.parametrize("i,j", list(combinations(range(len(theme.PALETTE)), 2)))
 def test_categorical_colours_are_distinct(i, j):
     assert delta_e(theme.PALETTE[i], theme.PALETTE[j]) > 28
 
