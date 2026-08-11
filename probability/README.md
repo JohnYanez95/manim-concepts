@@ -128,29 +128,29 @@ From the plan-003 research pass
 ([`docs/plans/003-probability-conditional.md`](../docs/plans/003-probability-conditional.md)),
 for the conditional series:
 
-- [ ] [Blitzstein & Hwang, Introduction to Probability, chs. 1–2 excerpt](https://law-and-algorithms.github.io/assets/files/Probability_Book_Excerpt_BlitzsteinHwang.pdf)
+- [X] [Blitzstein & Hwang, Introduction to Probability, chs. 1–2 excerpt](https://law-and-algorithms.github.io/assets/files/Probability_Book_Excerpt_BlitzsteinHwang.pdf)
       — Def 2.2.1 and Thms 2.3.1–2.3.6 quoted verbatim in the plan's
       anchors; "conditional probabilities are probabilities".
-- [ ] [MIT 18.05, Reading 3: conditional probability](https://math.mit.edu/~dav/05.dir/class3-prep.pdf)
+- [X] [MIT 18.05, Reading 3: conditional probability](https://math.mit.edu/~dav/05.dir/class3-prep.pdf)
       — the consensus spine: reduced sample space first, trees as the
       multiplication rule drawn, "souped up rule of product".
-- [ ] [Seeing Theory, ch. 2: compound probability](https://seeing-theory.brown.edu/compound-probability/index.html)
+- [X] [Seeing Theory, ch. 2: compound probability](https://seeing-theory.brown.edu/compound-probability/index.html)
       — the interactive sample-space-shrinking device scene 1 inherits.
-- [ ] [3blue1brown, "The quick proof of Bayes' theorem"](https://www.3blue1brown.com/lessons/bayes-theorem-quick)
+- [X] [3blue1brown, "The quick proof of Bayes' theorem"](https://www.3blue1brown.com/lessons/bayes-theorem-quick)
       — the two-slices picture behind `TwoSlicesOneSquare` and the
       series' exit line.
-- [ ] [Böcherer-Linder & Eichler 2017 (Frontiers, open access)](https://www.frontiersin.org/journals/psychology/articles/10.3389/fpsyg.2016.02026/full)
+- [X] [Böcherer-Linder & Eichler 2017 (Frontiers, open access)](https://www.frontiersin.org/journals/psychology/articles/10.3389/fpsyg.2016.02026/full)
       — unit square beats tree at quantifying the subset relation; both
       improve with natural frequencies.
-- [ ] [Rosenthal, "Monty Hall, Monty Fall, Monty Crawl"](https://probability.ca/jeff/writing/montyfall.pdf)
+- [X] [Rosenthal, "Monty Hall, Monty Fall, Monty Crawl"](https://probability.ca/jeff/writing/montyfall.pdf)
       — why the host's protocol changes the answer; the reason Monty
       Hall is deferred to the Bayes series.
-- [ ] [Wikipedia, Conditional probability](https://en.wikipedia.org/wiki/Conditional_probability)
+- [X] [Wikipedia, Conditional probability](https://en.wikipedia.org/wiki/Conditional_probability)
       — the definition, the P(B) > 0 requirement, and the
       Borel–Kolmogorov caveat kept out of scope.
-- [ ] [Wikipedia, Conditional independence](https://en.wikipedia.org/wiki/Conditional_independence)
+- [X] [Wikipedia, Conditional independence](https://en.wikipedia.org/wiki/Conditional_independence)
       — the definition behind `WhenToCondition`'s CTC closer.
-- [ ] [Wikipedia, Boy or girl paradox](https://en.wikipedia.org/wiki/Boy_or_girl_paradox)
+- [X] [Wikipedia, Boy or girl paradox](https://en.wikipedia.org/wiki/Boy_or_girl_paradox)
       — Gardner's retraction and the protocol-dependence the
       two-children beat draws.
 

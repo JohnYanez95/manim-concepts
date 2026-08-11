@@ -47,7 +47,9 @@ flight) so reviews stop re-litigating the repo's bookkeeping.
   diffed 11 commits from the stamp, no full crawl, findings applied
   (stale deep_learning Scope again, the counting→conditional edge,
   three inherited devices, LOTP↔trellis clause, explaining-away seed).
-- [ ] Phase 5: PR open, drafts cleaned, 1080p60 render verified
+- [x] Phase 5: PR open (#4), drafts cleaned, 1080p60 render verified
+  (6 files, 1920×1080/60, frame counts consistent with the native
+  pace, spot frame reviewed)
 
 ## CodeRabbit tuning (Phase 1, applied from the research report)
 

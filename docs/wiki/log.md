@@ -107,3 +107,13 @@ reordered.
   tree↔grid inversion; 1/16 is ChainsOfTrials' cell; explaining-away
   verified but unbuilt
 - stamp: advance to 23c47f2
+
+## [2026-08-11] series | plan 003 finalised (PR #4)
+
+- final 1080p60 render verified: 6 files, native 0.75x pace
+- review round: one finding (tuned config's first trial — zero
+  bookkeeping churn), the stepped-A geometry fix, applied
+- maintainer caught a frame-sampling blind spot (scene 1 overlap);
+  lesson recorded in plan 003's review notes
+- next: Bayes' rule — the repo's strongest open promise, seeded by
+  the front door, the cohort chips, the protocol lesson, and Rosenthal
