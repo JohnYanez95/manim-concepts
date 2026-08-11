@@ -123,6 +123,11 @@ something, break the thing on purpose, watch the test fail, then restore. Two
 tests in this repo passed against code that was already correct and would have
 passed against code that was not.
 
+Extracted frames are **samples**, not proof: a text overlap lived entirely
+between two sample points and only the maintainer's eyes caught it. When a
+scene replaces text in place, extract frames *inside the transition window*,
+not just at the beats before and after it.
+
 ## Manim gotchas found here
 
 - **Global config leaks across renders.** On finishing, manim writes the output
@@ -165,6 +170,24 @@ This is what review caught, twice, so check it before writing a scene:
   pace inside a scene, and never add a `wait` override to "complete" the
   mechanism: waits route through `play` and would stretch twice — the first
   draft shipped exactly that bug.
+
+## The picture is a claim
+
+Two lessons review keeps re-teaching, so check them before every scene:
+
+- **Geometry carries the repo's grammar, so a frame can contradict the math
+  on screen.** Straight perpendicular cuts *mean* independence here — a scene
+  drew them while teaching dependence; and a biased-die equation computed for
+  B = {1,2,3,4} sat under a bar showing {1,2,3}. Whenever an equation is on
+  screen, ask what the picture next to it asserts under the repo's own
+  conventions, and make them agree.
+- **Prose describing a scene is checked against the built scene.** README
+  table cells, plan design sections, and wiki edges have all claimed beats no
+  scene contains ("both squares stay on screen", "the prior as column width",
+  a foreshadowed teaser that was never built). When a phase closes, the
+  design prose is updated to describe what was *built* — or the missing beat
+  is built. A promise of a visual is either rendered or removed, never left
+  standing.
 
 ## Structure
 

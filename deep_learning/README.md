@@ -113,6 +113,8 @@ Rough queue, in roughly the order they build on each other:
   posterior occupancy, which is what makes the error-signal figure
   legible.
 - Log-space computation: why the product of hundreds of probabilities
-  underflows and how log-sum-exp restores it.
+  underflows and how log-sum-exp restores it. Blocked on the same
+  missing logarithms concept as `probability/`'s log-odds idea — one
+  logs series closes both.
 - Forced alignment done right: label priors and alignment-aware variants,
   since raw CTC spikes are not timestamps.

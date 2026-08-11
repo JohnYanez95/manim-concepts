@@ -117,3 +117,45 @@ reordered.
   lesson recorded in plan 003's review notes
 - next: Bayes' rule — the repo's strongest open promise, seeded by
   the front door, the cohort chips, the protocol lesson, and Rosenthal
+
+## [2026-08-11] series | plan 004, Bayes' rule (in progress)
+
+- node built: `bayes-rule` (probability/bayes_rule_manim.py, six scenes)
+- edge closed: `conditional-probability` -> `bayes-rule` — the repo's
+  strongest open promise (on screen twice + four documents), delivered
+  through the front door, the factored prevalence pair, and the host's
+  protocol
+- edge promised: `bayes-rule` -> log-odds (blocked on logarithms)
+- Monty Small's 1/(1+p) enumerated in the phase-2 verification script
+  (five values of p) — graduated from verify-first caption to on-screen
+  beat; its Ideas bullet retired
+- device note: the waterfall is the square-drawn-as-tree with the
+  division deferred — the three inherited devices named as one object
+  on screen in TheOddsForm
+
+## [2026-08-11] audit | incremental, plan 004 branch
+
+- scope: diffed 23c47f2..67713b8 (9 commits — plan-003 finalisation and
+  PR #4 merge, full plan-004 branch); changed files only, no full crawl
+- findings: 3 promised-not-delivered, 4 delivered-not-recorded,
+  4 possible-not-yet-made, 4 graph-health
+- conditional→bayes verified delivered against scene content; the
+  Monty/Fall/Crawl arithmetic and the 1/(1+p) endpoints re-checked
+- Monty Small bookkeeping was incoherent (anchors said "NOT enumerated"
+  while the docstring claimed verification): fixed by writing the
+  record into the anchors — five p values with exact results
+- INDEX device bullets still called the Bayes series "promised" — the
+  watch-every-series staleness, third occurrence; fixed
+- one logarithms concept closes two promises (bayes→log-odds and
+  deep_learning's log-space bullet) — both queues now cross-reference
+- plan 004 known-gaps placeholder filled (same genre, second time)
+- stamp: advance to 67713b8
+
+## [2026-08-11] series | plan 004 finalised (PR #5)
+
+- final 1080p60 render verified: 6 files, native 0.75x pace
+- review round: bot and auditor converged on Monty Small from opposite
+  sides; the record won over the claim — anchors carry the enumeration
+- transition-window rule's first live catch: the rate-label crossfade
+- next: logarithms — one series, two promises closed (bayes→log-odds
+  and deep_learning's log-space bullet)

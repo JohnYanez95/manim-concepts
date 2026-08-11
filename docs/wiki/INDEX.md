@@ -1,7 +1,6 @@
 # Graph index
 
-Last audited: `23c47f2` (2026-08-11, first incremental audit — diffed
-from the previous stamp)
+Last audited: `67713b8` (2026-08-11, incremental — plan-004 branch)
 
 The stamp is a commit hash: the state of the repo this graph was last
 reconciled against. The `connection-auditor` diffs from it instead of
@@ -15,6 +14,7 @@ crawling every page; whoever applies an audit's findings updates it.
 | `ctc-alignment` | `deep_learning/ctc_alignment_manim.py` | CTC: collapse map, alignment counting, forward trellis |
 | `independence` | `probability/independence_manim.py` | The product rule as definition; the aligned unit square |
 | `conditional-probability` | `probability/conditional_probability_manim.py` | Renormalized area, the multiplication rule, LOTP and trees, the inversion, conditional independence |
+| `bayes-rule` | `probability/bayes_rule_manim.py` | The division named, whole-people counting, the odds form and waterfall, the factored prevalence pair, iterated updating, the host's protocol |
 
 ## Edges
 
@@ -29,7 +29,8 @@ Status: **delivered** (both ends exist and the content makes the link) or
 | `ctc-alignment` | `conditional-probability` | delivered | `WhenToCondition` teaches conditional independence with the exact two-coin example and names "independent given the input" — the conditional half of PR #2's bridge, closed |
 | `independence` | `conditional-probability` | delivered | `TheRestrictedSquare` delivers the deferred renormalized slice; `IndependenceRevisited` re-reads the stepped cut as P(A\|B) and rederives P(A\|B) = P(A) |
 | `counting-rules` | `conditional-probability` | delivered | `TheMultiplicationRule` speaks the rule of product back ("the counting rule of product, carrying probabilities") and checks the chain against C(13,3)/C(52,3) |
-| `conditional-probability` | *(Bayes' rule series)* | promised | On screen twice: `TwoSlicesOneSquare` ends at the named front door, `WhenToCondition` defers Monty Hall to it. Plus `probability/README.md` Scope + Ideas (odds form, waterfall, prevalence pair completed, Rosenthal's protocol) and rows 5–6 when-useful cells — the repo's strongest open promise |
+| `conditional-probability` | `bayes-rule` | delivered | `ThroughTheFrontDoor` divides the exact identity `TwoSlicesOneSquare` left on screen; `OneTestTwoPatients` factors the counted prevalence pair; `YesterdaysPosterior` repeats the CI license verbatim; `TheHostsProtocol` closes the Monty deferral with Rosenthal's variants |
+| `bayes-rule` | *(log-odds — evidence as addition)* | promised | `probability/README.md` Ideas; `YesterdaysPosterior`'s multiply-per-head foreshadows it; blocked on logarithms existing in the repo |
 | `ctc-alignment` | *(beam search / gradient / peaky dynamics)* | promised | `deep_learning/README.md` Ideas not yet built |
 | `ctc-alignment` | *(dynamic programming as its own concept)* | promised | `deep_learning/README.md` row 5 when-useful ("the same dynamic-programming move as the HMM forward algorithm"); plan 001 gaps |
 | `counting-rules` | *(binomial distribution — future random variables)* | promised | `combinatorics/README.md` row 3 when-useful names it; lands when `probability/` grows random variables |
@@ -49,8 +50,10 @@ one topic should meet the same picture, upgraded, in the next:
 - **"Divide out / drop what doesn't matter" in WARM**: cancelled
   orderings (combinatorics) → merged repeats and dropped blanks (CTC) →
   failed product tests (independence).
-- **The closing `WhenToUseIt` mapping scene**: same layout in all three
-  series — problem shapes on the left, verdicts on the right.
+- **The closing `WhenToUseIt` mapping scene**: same layout in four
+  series (including `WhenToCondition`) — problem shapes left, verdicts
+  right. `TheHostsProtocol` deliberately breaks the pattern: its close
+  is a caption trio, since the protocol table already did the mapping.
 - **The chain product**: `PermutationRule`'s slot chain →
   `ManyPathsOneWord`'s per-frame product annotation → `ChainsOfTrials`'
   progressive square subdivision. One device, three series.
@@ -64,11 +67,17 @@ one topic should meet the same picture, upgraded, in the next:
   `IndependenceRevisited` — the step's height inside the band *is*
   P(A\|B), and flattening is independence.
 - **Tree ↔ grid, both directions**: `MultiplicativeRule` recasts a tree
-  *as* a grid; `TotalProbabilityAndTrees` draws the square *as* a tree —
-  the same move, inverted, one series apart.
-- **Natural-frequency cohort chips** (`TwoSlicesOneSquare`): whole-people
-  counts carrying the prior in the numbers themselves — the device the
-  promised Bayes series inherits and completes.
-- **The two-slices reading** (`TwoSlicesOneSquare`): one overlap, two
-  denominators — the geometric form of the transposed conditional, and
-  the picture behind the promised odds form.
+  *as* a grid; `TotalProbabilityAndTrees` draws the square *as* a tree;
+  `TheOddsForm`'s waterfall is that tree with the final division
+  deferred — three forms of one object, named on screen.
+- **Natural-frequency cohort chips** (`TwoSlicesOneSquare` →
+  `CountingItOut`): whole-people counts carrying the prior in the
+  numbers themselves — completed by the Bayes series' Diseasitis count
+  (18/42 = 3/7).
+- **The two-slices reading** (`TwoSlicesOneSquare` → `TheOddsForm`):
+  one overlap, two denominators — the geometric form of the transposed
+  conditional, and the picture the odds form was built on.
+- **The two-coin example** (`WhenToCondition` → `YesterdaysPosterior`):
+  one pair of coins, LR 9 — first the common-cause lesson, then the
+  iterated-update engine; the same factor as the prevalence test, named
+  on screen ("one number, two stories").
