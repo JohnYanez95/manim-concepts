@@ -465,8 +465,12 @@ class WhenToUseIt(ConceptScene):
 
         # The transferable idea: the four are one rule with a correction, which
         # is what makes them worth remembering as a set.
+        # Precise rather than pleasing: "all four are the product rule minus the
+        # orderings you don't care about" reads well but implies MultiplicativeRule
+        # divides something, and it divides nothing. Multiplying is the base move;
+        # dividing is a correction applied only when orderings are equivalent.
         takeaway = Text(
-            "All four are the product rule — minus the orderings you don't care about",
+            "Multiply the choices — divide only when orderings mean the same outcome",
             font_size=22,
         )
         takeaway.to_edge(DOWN, buff=0.75)

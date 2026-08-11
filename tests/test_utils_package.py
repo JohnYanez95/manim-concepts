@@ -94,6 +94,46 @@ def test_docstring_examples_parse(source):
                 pytest.fail(f"{source.name} docstring example does not parse: {exc}\n{snippet}")
 
 
+def conceptscene_example() -> str:
+    """The code block from ConceptScene's docstring, dedented."""
+    tree = ast.parse((REPO / "utils" / "scene.py").read_text(encoding="utf-8"))
+    node = next(n for n in tree.body if isinstance(n, ast.ClassDef) and n.name == "ConceptScene")
+    blocks = CODE_BLOCK.findall(ast.get_docstring(node, clean=False) or "")
+    assert blocks, "ConceptScene's docstring no longer contains a code example"
+    return textwrap.dedent(blocks[-1])
+
+
+def test_documented_example_wraps_title_in_an_animation():
+    """Guards the actual docstring text, not an equivalent written by hand.
+
+    The example used to be ``self.play(self.title("My Rule"))``, which raises.
+    The test below pins the underlying invariant, but it would happily pass
+    while the docstring said the wrong thing again — so this one parses the
+    documented snippet and checks the shape of the call.
+    """
+    tree = ast.parse(conceptscene_example())
+    plays = [
+        node
+        for node in ast.walk(tree)
+        if isinstance(node, ast.Call)
+        and isinstance(node.func, ast.Attribute)
+        and node.func.attr == "play"
+    ]
+    assert plays, "the ConceptScene example no longer calls self.play"
+
+    for call in plays:
+        for argument in call.args:
+            passed_bare = (
+                isinstance(argument, ast.Call)
+                and isinstance(argument.func, ast.Attribute)
+                and argument.func.attr == "title"
+            )
+            assert not passed_bare, (
+                "the documented example passes self.title(...) straight into self.play(), "
+                "which raises TypeError — wrap it in an animation such as FadeIn"
+            )
+
+
 def test_title_must_be_wrapped_in_an_animation():
     """Pins the invariant the ConceptScene docstring example got wrong.
 
