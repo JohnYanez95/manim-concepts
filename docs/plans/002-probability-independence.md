@@ -35,7 +35,9 @@ probability, which does not exist in the repo yet.
   check` run, exit 0; all nine references human-verified)
 - [x] Phase 4: local review clean (CodeRabbit + connection-auditor, both
   resolved before Phase 5)
-- [ ] Phase 5: PR open, drafts cleaned, 1080p60 render verified
+- [x] Phase 5: PR open (#3), drafts cleaned, 1080p60 render verified
+  (6 files, 1920×1080/60, frame counts consistent with the native
+  pace, spot frame reviewed)
 
 ## Verified technical anchors (from the research pass)
 

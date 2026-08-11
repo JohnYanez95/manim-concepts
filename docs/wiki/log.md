@@ -62,3 +62,12 @@ reordered.
   (re-render; queued in its Ideas); Bernstein ↔ inclusion–exclusion
   device reuse (recorded, acts at build time)
 - stamp: set to `75e5cf9`
+
+## [2026-08-11] series | plan 002 finalised (PR #3)
+
+- corrects the plan-002 entry's "pending" line: seed audit applied and
+  stamped (see previous entry)
+- two CodeRabbit rounds resolved; declines recorded (ADR 006, ADR 007)
+- final 1080p60 render verified: 6 files, native 0.75× pace
+- next: plan 003, conditional probability — fresh branch after merge;
+  carries ctc→conditional residual and the renormalized-slice picture
