@@ -10,7 +10,7 @@ reorganised without touching a single scene.
 """
 
 from utils.mobjects import boxed, caption, chip, header, token
-from utils.render import QUALITIES, media_root, render_cli
+from utils.render import QUALITIES, media_root, numbered_stem, render_cli, scene_order
 from utils.scene import ConceptScene
 from utils.theme import (
     ACCENT,
@@ -50,7 +50,9 @@ __all__ = [
     "chip",
     "header",
     "media_root",
+    "numbered_stem",
     "palette",
     "render_cli",
+    "scene_order",
     "token",
 ]

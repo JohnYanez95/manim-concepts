@@ -31,7 +31,7 @@ from types import FrameType
 
 from manim import Scene, tempconfig
 
-__all__ = ["QUALITIES", "media_root", "render_cli"]
+__all__ = ["QUALITIES", "media_root", "numbered_stem", "render_cli", "scene_order"]
 
 
 # Long names for manim's quality presets. The -ql/-qm/-qh/-qk spelling is
@@ -92,6 +92,30 @@ def _discover_scenes(namespace: dict[str, object]) -> list[type[Scene]]:
         and obj.__module__ == module_name
         and not obj.__name__.startswith("_")
     ]
+
+
+def scene_order(scenes: Sequence[type[Scene]]) -> dict[str, int]:
+    """Map each scene name to its 1-based position in the module.
+
+    Source order *is* the intended viewing order — a concept module is written
+    as a sequence that builds toward one idea, so the order the scenes are
+    defined in is the order someone should watch them in.
+    """
+    return {scene.__name__: i for i, scene in enumerate(scenes, start=1)}
+
+
+def numbered_stem(scene: type[Scene], order: dict[str, int]) -> str:
+    """Output filename stem for `scene`, prefixed with its position.
+
+    ``02_PermutationRule``. The prefix is what lets a directory listing be
+    watched top to bottom without cross-referencing the topic README.
+
+    The position is taken over *every* scene in the module, never over the
+    selected subset: rendering the third scene on its own must still produce
+    ``03_``, or the number would mean something different depending on which
+    flags were passed.
+    """
+    return f"{order[scene.__name__]:02d}_{scene.__name__}"
 
 
 def _build_parser(description: str, scenes: Sequence[type[Scene]]) -> argparse.ArgumentParser:
@@ -195,9 +219,12 @@ def render_cli(
     args = _build_parser(description, scenes).parse_args(argv)
 
     if args.list_only:
+        # Numbered, because the list doubles as the viewing order.
+        listing_order = scene_order(scenes)
         for scene in scenes:
             summary = (scene.__doc__ or "").strip().splitlines()
-            print(f"{scene.__name__:<24}{summary[0] if summary else ''}".rstrip())
+            position = listing_order[scene.__name__]
+            print(f"{position:>2}. {scene.__name__:<24}{summary[0] if summary else ''}".rstrip())
         return 0
 
     selected = _select(scenes, args.scene_names)
@@ -206,6 +233,8 @@ def render_cli(
         return 1
 
     root = media_root()
+    order = scene_order(scenes)
+
     overrides = {
         "quality": QUALITIES[args.quality],
         "media_dir": str(root),
@@ -216,22 +245,21 @@ def render_cli(
         # Manim names the output directory after the input file's stem. Without
         # this, every module's renders would collide in one anonymous folder.
         "input_file": str(namespace.get("__file__", "")),
-        # Must be reset for every scene. On finishing a render, manim writes the
-        # finished path back into the global config
-        # (SceneFileWriter.print_file_ready_message), and the *next* scene's
-        # init_output_directories prefers config["output_file"] over the scene
-        # name — so a whole batch silently collapses onto the first scene's
-        # filename. Clearing it, plus the per-scene tempconfig below, is what
-        # keeps four scenes producing four files.
-        "output_file": None,
     }
 
-    for index, scene_class in enumerate(selected, start=1):
-        print(f"[{index}/{len(selected)}] {scene_class.__name__} ({args.quality})")
-        # One config scope per scene, not one for the batch: tempconfig restores
-        # the global config on exit, which discards any state a render leaked
-        # into it before the next scene starts.
-        with tempconfig(overrides):
+    for position, scene_class in enumerate(selected, start=1):
+        stem = numbered_stem(scene_class, order)
+        print(f"[{position}/{len(selected)}] {stem} ({args.quality})")
+        # One config scope per scene, not one for the batch. Two things depend
+        # on this. First, output_file has to differ per scene, and manim reads
+        # it from the global config. Second, on finishing a render manim writes
+        # the finished path *back* into that global config
+        # (SceneFileWriter.print_file_ready_message), and the next scene's
+        # init_output_directories prefers config["output_file"] over the scene
+        # name — so a batch sharing one scope silently collapses onto the first
+        # scene's filename. tempconfig restores the config on exit, which
+        # discards that leak before the next scene starts.
+        with tempconfig({**overrides, "output_file": stem}):
             scene_class().render()
 
     print(f"\nOutput under {root}")
