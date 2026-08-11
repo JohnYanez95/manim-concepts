@@ -86,3 +86,24 @@ reordered.
 - devices extended: stepped-cut lineage named; shrinking pool's factors
   licensed as conditional probabilities
 - also this branch: CodeRabbit tuned for the bookkeeping (see plan 003)
+
+## [2026-08-11] audit | incremental, plan 003 branch
+
+- scope: diffed 75e5cf9..23c47f2 (11 commits — seed-audit application,
+  PR #3 merge, full plan-003 branch); changed files only, no full crawl
+- findings: 3 promised-not-delivered, 3 delivered-not-recorded,
+  4 possible-not-yet-made, 3 graph-health
+- both edges into conditional-probability verified delivered against
+  scene content, not just the README
+- Bayes is now promised on screen twice plus four documents — the
+  strongest open promise; INDEX row's citation undersells it
+- new delivered edge to record: counting-rules → conditional-probability
+  (TheMultiplicationRule speaks the rule of product back; C(13,3) check)
+- devices to record: square-drawn-as-tree, natural-frequency chips,
+  two-slices reading — all inherited by the promised Bayes series
+- stale: deep_learning Scope still queues conditional independence,
+  which WhenToCondition delivered; plan 003 gaps section still blank
+- possible: LOTP ↔ forward trellis (anchors the promised DP edge);
+  tree↔grid inversion; 1/16 is ChainsOfTrials' cell; explaining-away
+  verified but unbuilt
+- stamp: advance to 23c47f2

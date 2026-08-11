@@ -93,7 +93,10 @@ class TheRestrictedSquare(ConceptScene):
             font_size=RESULT_SIZE,
             color=ACCENT,
         ).move_to(eighth)
-        self.play(FadeOut(eighth), run_time=0.3)
+        # news leaves WITH the old equation: the recount's caption lands in
+        # news's spot, and motion discipline says the space must be empty
+        # before the replacement arrives.
+        self.play(FadeOut(eighth), FadeOut(news), run_time=0.4)
         self.play(Write(recount))
         smaller = caption("a smaller world — recount inside it").next_to(recount, DOWN, buff=0.3)
         self.play(FadeIn(smaller))
@@ -101,7 +104,7 @@ class TheRestrictedSquare(ConceptScene):
 
         # --- the same move on the square ---------------------------------------
         remaining = VGroup(*[chips[i] for i in range(4)])
-        self.play(FadeOut(VGroup(remaining, target, recount, smaller, news, prompt)))
+        self.play(FadeOut(VGroup(remaining, target, recount, smaller, prompt)))
 
         side = 3.0
         square = Square(side_length=side, stroke_width=3, color=MUTED).move_to(
@@ -605,12 +608,30 @@ class TwoSlicesOneSquare(ConceptScene):
         b_band = Rectangle(
             width=side * 0.45, height=side, stroke_width=0, fill_color=B_COLOR, fill_opacity=0.25
         ).align_to(square, DL)
-        a_band = Rectangle(
-            width=side, height=side * 0.3, stroke_width=0, fill_color=A_COLOR, fill_opacity=0.25
-        ).align_to(square, DL)
+        # A steps at the B boundary — tall inside B, short outside. Straight
+        # perpendicular bands would draw an independent pair (the previous
+        # scenes taught exactly that), and the inversion point is stronger
+        # when the conditionals differ because the events are dependent, not
+        # only because the denominators do.
+        a_band = VGroup(
+            Rectangle(
+                width=side * 0.45,
+                height=side * 0.45,
+                stroke_width=0,
+                fill_color=A_COLOR,
+                fill_opacity=0.25,
+            ).align_to(square, DL),
+            Rectangle(
+                width=side * 0.55,
+                height=side * 0.18,
+                stroke_width=0,
+                fill_color=A_COLOR,
+                fill_opacity=0.25,
+            ).align_to(square, DR),
+        )
         overlap = Rectangle(
             width=side * 0.45,
-            height=side * 0.3,
+            height=side * 0.45,
             stroke_width=0,
             fill_color=ACCENT,
             fill_opacity=0.6,

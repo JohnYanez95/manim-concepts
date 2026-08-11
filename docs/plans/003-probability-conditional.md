@@ -39,7 +39,14 @@ flight) so reviews stop re-litigating the repo's bookkeeping.
   promised edges into `conditional-probability` flipped to delivered
   with on-screen citations; Bayes front-door promise recorded; device
   lineages extended; log entry appended)
-- [ ] Phase 4: local review clean
+- [x] Phase 4: local review clean — the tuned config's first trial
+  returned ONE finding (down from 4 and 8 in plan 002's rounds), zero
+  bookkeeping noise, and it was a real content catch: scene 5's
+  perpendicular bands drew an independent pair while making a point
+  about dependence; fixed with a stepped A. The incremental audit
+  diffed 11 commits from the stamp, no full crawl, findings applied
+  (stale deep_learning Scope again, the counting→conditional edge,
+  three inherited devices, LOTP↔trellis clause, explaining-away seed).
 - [ ] Phase 5: PR open, drafts cleaned, 1080p60 render verified
 
 ## CodeRabbit tuning (Phase 1, applied from the research report)
@@ -177,8 +184,34 @@ beats false generality).
 
 ## Known material gaps (for the PR body)
 
-(named after scene design settles; Bayes at minimum stays queued)
+- **Bayes' rule** — now the repo's most heavily promised target,
+  promised on screen twice (`TwoSlicesOneSquare`'s front door,
+  `WhenToCondition`'s Monty deferral) plus four documents. The next
+  probability branch; this series handed it four seeds (the front-door
+  identity, the cohort chips to complete, the protocol lesson, the
+  Rosenthal reference).
+- Softmax as a distribution, likelihood, log-likelihood — the remaining
+  half of the CTC bridge, still queued.
+- The explaining-away counterexample (independence ⇏ conditional
+  independence: two fair flips given "exactly one head", 0 ≠ 1/4) is
+  verified in this plan's anchors but unbuilt — seed for the Bayes or a
+  graphical-models series.
 
 ## Review notes
 
-(filled in at the end)
+- Maintainer caught a motion-discipline violation frame-sampling missed
+  (scene 1's news/caption overlap) — fixed and the lesson recorded:
+  extracted frames are spot checks, not proof of no-overlap between
+  samples.
+- Incremental connection audit: graph-first procedure held (11 commits
+  diffed, changed files only); all findings applied; stamp advanced to
+  23c47f2. Notable: deep_learning's Scope went stale the same way it
+  did last audit — the promising document is never updated when its
+  promise is delivered; watch for it every series.
+- Tuned CodeRabbit, first trial: one finding, zero bookkeeping churn —
+  the scene 5 stepped-A geometry catch, accepted. The config change
+  (path_instructions + tone + the checkbox-protocol rewrite) did what
+  the research said it would.
+
+Follow-up (next branch): Bayes' rule — the repo's strongest open
+promise, seeded four ways by this series.

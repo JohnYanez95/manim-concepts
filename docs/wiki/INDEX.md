@@ -1,6 +1,7 @@
 # Graph index
 
-Last audited: `75e5cf9` (2026-08-11, seed audit — full crawl by design)
+Last audited: `23c47f2` (2026-08-11, first incremental audit — diffed
+from the previous stamp)
 
 The stamp is a commit hash: the state of the repo this graph was last
 reconciled against. The `connection-auditor` diffs from it instead of
@@ -27,7 +28,8 @@ Status: **delivered** (both ends exist and the content makes the link) or
 | `ctc-alignment` | `independence` | delivered (unconditional half) | `deep_learning/README.md` Scope names the split; `ChainsOfTrials` teaches the unconditional per-frame product |
 | `ctc-alignment` | `conditional-probability` | delivered | `WhenToCondition` teaches conditional independence with the exact two-coin example and names "independent given the input" — the conditional half of PR #2's bridge, closed |
 | `independence` | `conditional-probability` | delivered | `TheRestrictedSquare` delivers the deferred renormalized slice; `IndependenceRevisited` re-reads the stepped cut as P(A\|B) and rederives P(A\|B) = P(A) |
-| `conditional-probability` | *(Bayes' rule series)* | promised | `probability/README.md` Scope + Ideas; `TwoSlicesOneSquare` ends at the named front door |
+| `counting-rules` | `conditional-probability` | delivered | `TheMultiplicationRule` speaks the rule of product back ("the counting rule of product, carrying probabilities") and checks the chain against C(13,3)/C(52,3) |
+| `conditional-probability` | *(Bayes' rule series)* | promised | On screen twice: `TwoSlicesOneSquare` ends at the named front door, `WhenToCondition` defers Monty Hall to it. Plus `probability/README.md` Scope + Ideas (odds form, waterfall, prevalence pair completed, Rosenthal's protocol) and rows 5–6 when-useful cells — the repo's strongest open promise |
 | `ctc-alignment` | *(beam search / gradient / peaky dynamics)* | promised | `deep_learning/README.md` Ideas not yet built |
 | `ctc-alignment` | *(dynamic programming as its own concept)* | promised | `deep_learning/README.md` row 5 when-useful ("the same dynamic-programming move as the HMM forward algorithm"); plan 001 gaps |
 | `counting-rules` | *(binomial distribution — future random variables)* | promised | `combinatorics/README.md` row 3 when-useful names it; lands when `probability/` grows random variables |
@@ -61,3 +63,12 @@ one topic should meet the same picture, upgraded, in the next:
   (`NotMutualExclusivity`) → named as conditional probability itself in
   `IndependenceRevisited` — the step's height inside the band *is*
   P(A\|B), and flattening is independence.
+- **Tree ↔ grid, both directions**: `MultiplicativeRule` recasts a tree
+  *as* a grid; `TotalProbabilityAndTrees` draws the square *as* a tree —
+  the same move, inverted, one series apart.
+- **Natural-frequency cohort chips** (`TwoSlicesOneSquare`): whole-people
+  counts with the prior as visible column width — the device the
+  promised Bayes series inherits and completes.
+- **The two-slices reading** (`TwoSlicesOneSquare`): one overlap, two
+  denominators — the geometric form of the transposed conditional, and
+  the picture behind the promised odds form.
