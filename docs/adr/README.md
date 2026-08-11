@@ -20,3 +20,4 @@ part.
 | [003](003-readme-skeleton-does-not-import-numpy.md) | The README scene skeleton does not `import numpy` |
 | [004](004-scene-docstrings-may-exceed-one-line.md) | Scene docstrings may exceed one line |
 | [005](005-no-pixel-or-frame-comparison-tests.md) | No pixel or frame-comparison tests of rendered output |
+| [006](006-human-ticked-references-stay-ticked.md) | Human-ticked reference checkboxes stay ticked |

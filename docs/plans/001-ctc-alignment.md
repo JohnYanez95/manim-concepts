@@ -29,7 +29,8 @@ the combinatorics topic predate it, so the record starts here.
   re-extracted, clean)
 - [x] Phase 3: topic README complete, `make test` green (full `make
   check` run, exit 0; two references already human-verified)
-- [ ] Phase 4: local review clean
+- [x] Phase 4: local review clean — one finding (reset the human-verified
+  reference ticks), declined with reasoning in ADR 006
 - [ ] Phase 5: PR open, drafts cleaned, 1080p render verified
 
 ## Verified technical anchors (from the research pass)
