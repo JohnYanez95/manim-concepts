@@ -33,7 +33,7 @@ probability, which does not exist in the repo yet.
   re-rendered, re-verified clean)
 - [x] Phase 3: topic README complete, `make test` green (full `make
   check` run, exit 0; all nine references human-verified)
-- [ ] Phase 4: local review clean (CodeRabbit + connection-auditor, both
+- [x] Phase 4: local review clean (CodeRabbit + connection-auditor, both
   resolved before Phase 5)
 - [ ] Phase 5: PR open, drafts cleaned, 1080p60 render verified
 
@@ -120,4 +120,21 @@ independence and reinforce the mutual-exclusivity confusion.
 
 ## Review notes
 
-(filled in at the end)
+- Seed connection audit (first `connection-auditor` run, full crawl by
+  design): 18 findings across the four sections, all reconciled — see
+  the wiki log entry. Highlights: a stale cross-topic claim, the
+  overstated ctc→independence edge, a phantom foreshadowed beat, and
+  two high-value connections made (shrinking pool, common cause).
+- CodeRabbit round 1: four findings — motion-discipline violation in
+  scene 3 (fixed; the rule's own author broke it), auditor gate missing
+  from the plan (fixed), full-transcript embedding (declined, ADR 007),
+  reference untick (declined, ADR 006).
+- CodeRabbit round 2: eight findings — five precision fixes accepted
+  (positive-probability qualifiers, P(B) > 0, the Scope overclaim about
+  what this series teaches CTC, PartitionRule's mis-attributed CTC
+  count), three declined (ADR 006, ADR 007, and an append-only log
+  entry's wording).
+
+Follow-up (next branch): `probability/` conditional probability as
+plan 003 — carrying the conditional-independence residual, the
+renormalized-slice picture, and the P(A|B) = P(A) rederivation.

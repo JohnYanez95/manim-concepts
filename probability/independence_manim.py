@@ -366,7 +366,14 @@ class OneDieTwoEvents(ConceptScene):
 
 
 class NotMutualExclusivity(ConceptScene):
-    """Mutually exclusive events are not independent; they are maximally dependent."""
+    """Mutually exclusive events (with positive probability) are never independent.
+
+    The qualifier matters: a zero-probability event is trivially
+    independent of everything, including events it is disjoint from. The
+    scene's on-screen example (even vs odd) has positive probabilities, so
+    the footnote lives here and in the README rather than on screen —
+    plan 002 called it a footnote, not a scene.
+    """
 
     def construct(self):
         self.play(FadeIn(self.title("Not Mutual Exclusivity"), shift=0.3 * DOWN))
