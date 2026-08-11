@@ -35,8 +35,10 @@ reviews:
     # Render output. Gitignored already; this is belt and braces so a forced
     # add never turns into a review of binary video.
     - "!media/**"
-    # Resolver output, not authored code.
-    - "!uv.lock"
+    # uv.lock is deliberately NOT excluded. It is generated, but a lockfile
+    # diff is where a dependency change becomes visible, and that is exactly
+    # the thing worth a second pair of eyes. It only churns when dependencies
+    # actually move, so the review noise is bounded.
 
   path_instructions:
     - path: "**/*_manim.py"

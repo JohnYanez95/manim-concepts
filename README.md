@@ -6,8 +6,9 @@ The bias of this repo is that a formula should be the *last* thing on screen,
 not the first. Every scene shows the object being reasoned about, does the
 reasoning visibly, and lets the expression fall out of what was just seen.
 
-Concepts are grouped by topic. Each topic is a directory, each concept is one
-runnable file inside it, and every file renders itself:
+Concepts are grouped by topic. Each topic is a directory holding one or more
+**concept modules** — a single runnable `*_manim.py` file per concept, each
+defining the scenes for it — and every module renders itself:
 
 ```bash
 uv run python combinatorics/counting_rules_manim.py
@@ -136,10 +137,10 @@ re-renders what changed. Pass `--no-cache` if a stale partial is suspected.
 
 ### Working on a scene
 
-Every non-trivial change starts with a plan broken into numbered phases, each
-ending in a commit gate that has to be green before the next phase starts. The
-last phase is always a fully rendered PR — a plan that stops at "the code
-works" is not finished.
+Every non-trivial change starts with a plan broken into numbered phases. Each
+phase ends in a **named commit gate** — one commit, and it has to be green
+before the next phase starts. The last phase is always a fully rendered PR: a
+plan that stops at "the code works" is not finished.
 
 Iterating at 1080p is a waste of wall-clock, so the loop itself is draft-first:
 
@@ -229,7 +230,7 @@ from utils import ACCENT, ConceptScene, render_cli, token
 
 `utils` resolves from any topic directory because the project installs itself
 as a package (see the comment at the top of `pyproject.toml`) — there is no
-`sys.path` manipulation in any concept file.
+`sys.path` manipulation in any concept module.
 
 ## Tests
 
