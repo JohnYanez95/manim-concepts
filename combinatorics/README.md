@@ -53,11 +53,11 @@ See the [root README](../README.md) for the full flag list.
 
 ## References
 
-Unchecked means **unverified** — see
+Ticks are human-gated — see
 [reference verification](../README.md#reference-verification-is-human-gated).
-Every entry below was suggested rather than confirmed, so all of them start
-unchecked. Open one, confirm it covers what the entry claims, and tick it
-yourself; nothing automated will.
+Every entry below was suggested unverified and started unchecked; all
+were then opened, confirmed, and ticked by the maintainer. Future
+entries start unchecked until a human does the same.
 
 - [X] [Rule of product](https://en.wikipedia.org/wiki/Rule_of_product) — the
       multiplicative rule and its independence assumption.

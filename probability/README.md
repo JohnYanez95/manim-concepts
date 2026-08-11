@@ -63,12 +63,13 @@ See the [root README](../README.md) for the full flag list.
 
 ## References
 
-Unchecked means **unverified** — see
+Ticks are human-gated — see
 [reference verification](../README.md#reference-verification-is-human-gated).
 Every entry below came out of the plan-002 research pass
-([`docs/plans/002-probability-independence.md`](../docs/plans/002-probability-independence.md)),
-so all of them start unchecked. Open one, confirm it covers what the
-entry claims, and tick it yourself; nothing automated will.
+([`docs/plans/002-probability-independence.md`](../docs/plans/002-probability-independence.md))
+and started unchecked; all nine were then opened, confirmed, and ticked
+by the maintainer, who also corrected author attributions. Future
+entries start unchecked until a human does the same.
 
 - [X] [TsviBT, Jaime Sevilla Mollina, "Two independent events: Square visualization"](https://www.lesswrong.com/w/4cl)
       — the aligned-square device the whole series leans on.

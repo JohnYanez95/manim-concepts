@@ -340,6 +340,14 @@ class OneDieTwoEvents(ConceptScene):
 
         # --- and the measure decides it too -------------------------------------
         self.play(FadeOut(recheck), FadeOut(new_verdict))
+        # The biased-die numbers are for the FIRST pair (B back at {1,2,3,4}),
+        # so the picture restores it before the claim — the 16/49 vs 2/7 line
+        # must never sit under a three-cell bar.
+        self.play(FadeOut(b_tag), run_time=0.4)
+        self.play(Transform(bar, b_bar(4)))
+        b_tag = Text("B = at most 4", font_size=LABEL_SIZE, color=B_COLOR)
+        b_tag.next_to(bar, DOWN, buff=0.2).align_to(strip, LEFT)
+        self.play(FadeIn(b_tag), run_time=0.4)
         biased = Text(
             "bias the die (double weight on 6) and even the first pair breaks:",
             font_size=BODY_SIZE,

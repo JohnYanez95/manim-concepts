@@ -68,12 +68,13 @@ See the [root README](../README.md) for the full flag list.
 
 ## References
 
-Unchecked means **unverified** — see
+Ticks are human-gated — see
 [reference verification](../README.md#reference-verification-is-human-gated).
 Every entry below came out of the plan-001 research pass
-([`docs/plans/001-ctc-alignment.md`](../docs/plans/001-ctc-alignment.md)), so
-all of them start unchecked. Open one, confirm it covers what the entry
-claims, and tick it yourself; nothing automated will.
+([`docs/plans/001-ctc-alignment.md`](../docs/plans/001-ctc-alignment.md))
+and started unchecked; all were then opened, confirmed, and ticked by
+the maintainer. Future entries start unchecked until a human does the
+same.
 
 - [X] [Graves et al., 2006 — Connectionist Temporal Classification](https://www.cs.toronto.edu/~graves/icml_2006.pdf)
       — the original ICML paper; source of the collapse map, the forward
