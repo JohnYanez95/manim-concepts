@@ -15,7 +15,7 @@ the combinatorics topic predate it, so the record starts here.
 | 2 | Scenes, iterated at `--quality draft`; renders verified (count, names, ffprobe, extracted frames) | Draft renders verified by eye |
 | 3 | Numbered concepts table with all three levels, references as `- [ ]`, links back to `combinatorics/`; root README topics row | `make test` |
 | 4 | Local CodeRabbit pass, findings addressed | Review clean |
-| 5 | PR (body names the material gaps → next branch), bot review, finalise | `clean-drafts` + 1080p render |
+| 5 | PR (body names the material gaps → next branch), bot review, finalise | `make clean-drafts` + 1080p render |
 
 ## Checklist
 

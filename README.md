@@ -187,7 +187,8 @@ uv run python combinatorics/counting_rules_manim.py            # 1080p60
 
    `render_cli` finds every scene defined in the module automatically, in
    source order — there is no list to keep in sync.
-4. Give each scene a one-line docstring. It is what `--list` prints.
+4. Give each scene a docstring with a one-line summary first — `--list`
+   prints that line.
 5. Add a row to the topic README's concepts table, and add whatever you
    worked from to its references as `- [ ]`. Leave it unchecked; verifying it
    is the reader's job, not the author's.
