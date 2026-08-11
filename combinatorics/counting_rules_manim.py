@@ -20,7 +20,6 @@ from manim import *
 from utils import (
     ACCENT,
     BODY_SIZE,
-    COOL,
     FORMULA_SIZE,
     GOOD,
     LABEL_SIZE,
@@ -138,8 +137,11 @@ class MultiplicativeRule(ConceptScene):
 
         equation = MathTex(r"3", r"\times", r"4", r"=", r"12", font_size=54)
         equation.next_to(grid, DOWN, buff=0.55)
-        equation[0].set_color(COOL)
-        equation[2].set_color(GOOD)
+        # The two stage counts are unranked categories, not semantic roles —
+        # neither shirts nor pants is "the primary quantity". Only the result
+        # earns a named colour.
+        equation[0].set_color(palette(0))
+        equation[2].set_color(palette(1))
         equation[4].set_color(ACCENT)
         self.play(Write(equation))
         self.wait(0.8)
@@ -261,9 +263,11 @@ class CombinationRule(ConceptScene):
         prompt.next_to(self.head, DOWN, buff=0.28)
         self.play(FadeIn(prompt))
 
-        # 3! orderings of the same set collapse to one
+        # 3! orderings of the same set collapse to one. These six ARE the
+        # overcount — the same role the cancelled 2 x 1 tail plays in
+        # PermutationRule — so they take WARM, not a neutral colour.
         words = ["ACE", "AEC", "CAE", "CEA", "EAC", "ECA"]
-        column = VGroup(*[Text(word, font_size=30, color=COOL) for word in words])
+        column = VGroup(*[Text(word, font_size=30, color=WARM) for word in words])
         column.arrange(DOWN, buff=0.28).move_to(3.6 * LEFT + 0.4 * DOWN)
         self.play(
             LaggedStart(*[FadeIn(w, shift=0.2 * RIGHT) for w in column], lag_ratio=0.12),
