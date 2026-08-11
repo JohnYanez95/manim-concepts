@@ -15,11 +15,14 @@ class ConceptScene(Scene):
     is exactly the kind of copy-paste that lets one scene drift off-palette
     without anyone noticing.
 
-    Subclasses implement ``construct`` as usual::
+    Subclasses implement ``construct`` as usual. ``title`` returns a mobject
+    rather than an animation, so it needs wrapping in one::
+
+        from manim import DOWN, FadeIn
 
         class MyRule(ConceptScene):
             def construct(self):
-                self.play(self.title("My Rule"))
+                self.play(FadeIn(self.title("My Rule"), shift=0.3 * DOWN))
     """
 
     def setup(self) -> None:

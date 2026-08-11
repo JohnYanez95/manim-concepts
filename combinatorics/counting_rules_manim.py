@@ -48,8 +48,10 @@ class MultiplicativeRule(ConceptScene):
         self.play(FadeIn(subtitle))
 
         # --- build the tree ---------------------------------------------------
-        root = Dot(point=[-5.9, 0, 0], radius=0.09, color=WHITE)
-        root_label = Text("start", font_size=SMALL_SIZE).next_to(root, LEFT, buff=0.15)
+        # The root and its label are scaffolding — the tree has to start
+        # somewhere, but the eye belongs on the coloured branches, not here.
+        root = Dot(point=[-5.9, 0, 0], radius=0.09, color=MUTED)
+        root_label = Text("start", font_size=SMALL_SIZE, color=MUTED).next_to(root, LEFT, buff=0.15)
 
         shirts = ["A", "B", "C"]
         pants = ["1", "2", "3", "4"]
