@@ -24,8 +24,11 @@ Deliberately **not** covered here:
 
 ### counting_rules_manim.py
 
-Watch in order. Each scene divides out something the previous one overcounted,
-so `PartitionRule` does not land without `CombinationRule` before it.
+Watch in order. The first two establish how to count arrangements — the product
+rule, then the same product written in factorial form. Dividing out an
+overcount only starts at the third: `CombinationRule` removes the $r!$
+orderings of a chosen set, and `PartitionRule` applies that same move blockwise.
+So `PartitionRule` does not land without `CombinationRule` before it.
 
 | # | Scene | Idea | Formula | Visual argument |
 | --- | --- | --- | --- | --- |

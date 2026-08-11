@@ -83,6 +83,21 @@ def test_topic_readme_has_every_required_section(topic):
 
 
 @pytest.mark.parametrize("topic", TOPICS, ids=lambda p: p.name)
+def test_topic_readme_sections_are_in_the_declared_order(topic):
+    """The contract lists the four sections *in an order*, so check the order.
+
+    Scope before the table before references is how a reader decides whether a
+    topic is the one they want before being shown its contents.
+    """
+    text = (topic / "README.md").read_text(encoding="utf-8")
+    positions = [text.index(heading) for heading in REQUIRED_SECTIONS if heading in text]
+    assert positions == sorted(positions), (
+        f"{topic.name}/README.md sections are out of order; expected "
+        f"{' → '.join(REQUIRED_SECTIONS)}"
+    )
+
+
+@pytest.mark.parametrize("topic", TOPICS, ids=lambda p: p.name)
 def test_scope_says_what_is_not_covered(topic):
     """The exclusions half is what keeps a topic from becoming a junk drawer."""
     scope = section((topic / "README.md").read_text(encoding="utf-8"), "## Scope").lower()
@@ -95,6 +110,34 @@ def test_scope_says_what_is_not_covered(topic):
 def test_every_module_is_listed_in_its_topic_readme(module):
     text = (module.parent / "README.md").read_text(encoding="utf-8")
     assert module.name in text, f"{module.name} has no entry in {module.parent.name}/README.md"
+
+
+@pytest.mark.parametrize("module", MODULES, ids=lambda p: p.name)
+def test_scenes_subclass_conceptscene(module):
+    """Subclassing `Scene` directly skips the shared background and title.
+
+    `scenes_in` matches any base ending in "Scene" precisely so that a class
+    inheriting `Scene` is still *found* here and can be reported, rather than
+    slipping past the whole contract suite unnoticed.
+    """
+    wrong = [
+        scene.name
+        for scene in scenes_in(module)
+        if not any(isinstance(b, ast.Name) and b.id == "ConceptScene" for b in scene.bases)
+    ]
+    assert not wrong, f"{module.name}: scenes not subclassing ConceptScene: {wrong}"
+
+
+@pytest.mark.parametrize("module", MODULES, ids=lambda p: p.name)
+def test_module_has_the_render_cli_entry_point(module):
+    """Without it the module is not runnable, which is the repo's whole premise.
+
+    `uv run python <topic>/<concept>_manim.py` is the documented way to render
+    anything here; a concept file missing the block is importable but dead.
+    """
+    text = module.read_text(encoding="utf-8")
+    assert 'if __name__ == "__main__":' in text, f"{module.name} has no __main__ block"
+    assert "render_cli()" in text, f"{module.name} does not call render_cli()"
 
 
 @pytest.mark.parametrize("module", MODULES, ids=lambda p: p.name)

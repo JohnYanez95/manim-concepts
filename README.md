@@ -144,8 +144,11 @@ works" is not finished.
 Iterating at 1080p is a waste of wall-clock, so the loop itself is draft-first:
 
 1. `--quality draft` (480p15) until the scene is right.
-2. Check the render actually worked — count the files, and look at a frame.
-   "It produced a file" is not verification.
+2. Check the render actually worked. Confirm you got the expected number of
+   files and that their names differ, probe one with `ffprobe` for frame count
+   and duration, and when layout or colour changed, pull a frame out with
+   `ffmpeg` and look at it. "It produced a file" is not verification — the two
+   render bugs found so far both passed that check.
 3. Run the CodeRabbit review locally, **before** opening the PR, and address
    what it finds. The PR should open clean rather than accumulate rounds.
 4. Open the PR; the bot reviews it as an independent second pass.
