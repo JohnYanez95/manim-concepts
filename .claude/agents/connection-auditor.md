@@ -12,15 +12,28 @@ promise each other ("when is it useful" cells point forward; scope
 sections point back), and an unfulfilled or unrecorded promise is a gap
 in the teaching.
 
-Read, at minimum:
+**Start from the graph, not from the content.** Your first read is always
+`docs/wiki/INDEX.md`: it carries a `Last audited:` stamp (commit hash)
+recording the state the graph was last reconciled against. From there,
+work incrementally:
 
-- every topic `README.md` — especially the three-level concepts tables
-  (the "when it's useful" column is where forward promises live) and the
+1. `git diff --name-only <stamp>..HEAD` (plus `git log --oneline
+   <stamp>..HEAD`) tells you which content changed since the last audit.
+   Read **only** those files in full, plus any file an existing edge
+   cites whose row you have reason to doubt.
+2. Unchanged content is represented by its edges — trust the graph for
+   it. Do not naively crawl every topic README on every run.
+3. Fall back to a full crawl only when the stamp is missing, the stamp's
+   commit is unreachable, or spot-checks show the graph has drifted from
+   content it claims to describe (say so in the report if you do this).
+
+What to read in the changed set:
+
+- topic `README.md`s — especially the three-level concepts tables (the
+  "when it's useful" column is where forward promises live) and the
   Scope sections (where backward links live)
 - `docs/plans/*.md` — the "known material gaps" and "ideas not yet
   built" sections are explicit promises
-- `docs/wiki/` — the recorded graph: `INDEX.md` for nodes and edges,
-  node pages for detail
 - merged PR descriptions if reachable (`git log`, `gh pr list --state
   merged` when available) — gaps named there are promises too
 
@@ -43,6 +56,7 @@ Report four things, each as its own section:
    have drifted from the content they describe.
 
 Be specific: cite file and line/section for every claim. Do not edit any
-file — you report; the main agent decides and applies. Rank findings
-within each section by how much teaching value the connection carries,
-not by ease of fixing.
+file — you report; the main agent decides and applies, and updates the
+`Last audited:` stamp when it has reconciled your findings into the
+graph. Rank findings within each section by how much teaching value the
+connection carries, not by ease of fixing.

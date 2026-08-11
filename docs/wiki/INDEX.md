@@ -1,5 +1,11 @@
 # Graph index
 
+Last audited: *(pending first audit — plan 002 branch)*
+
+The stamp is a commit hash: the state of the repo this graph was last
+reconciled against. The `connection-auditor` diffs from it instead of
+crawling every page; whoever applies an audit's findings updates it.
+
 ## Nodes
 
 | Node | Where | One line |
