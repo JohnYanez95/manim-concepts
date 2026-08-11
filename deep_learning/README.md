@@ -92,7 +92,7 @@ claims, and tick it yourself; nothing automated will.
 - [X] [HuggingFace Audio Course, ch. 3: CTC](https://huggingface.co/learn/audio-course/en/chapter3/ctc)
       — practical anchors: real frame rates, and blank vs. word-space in
       real vocabularies.
-- [ ] [Zeyer et al., 2021 — Why does CTC result in peaky behavior?](https://arxiv.org/abs/2105.14849)
+- [X] [Zeyer et al., 2021 — Why does CTC result in peaky behavior?](https://arxiv.org/abs/2105.14849)
       — the analysis behind the spiky outputs mentioned in `WhenToUseIt`.
 
 ## Ideas not yet built
