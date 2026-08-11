@@ -30,8 +30,15 @@ flight) so reviews stop re-litigating the repo's bookkeeping.
   (config committed separately at 76f1348; skeleton includes the
   `WhenToCondition` rename to avoid a same-README class-name collision
   with the sibling module's `WhenToUseIt`)
-- [ ] Phase 2: all scenes render at draft; verified per CLAUDE.md checklist
-- [ ] Phase 3: README + wiki complete, `make test` green
+- [x] Phase 2: all scenes render at draft; verified per CLAUDE.md checklist
+  (6 distinct numbered files; durations 24–42 s; 22 extracted frames
+  reviewed; two lint stalls caught by PIPESTATUS before any render ran;
+  one contrast fix — the dim beat's discarded half now WARM at 0.45
+  against B at 0.4 — re-rendered and re-verified)
+- [x] Phase 3: README + wiki complete, `make test` green (graph: both
+  promised edges into `conditional-probability` flipped to delivered
+  with on-screen citations; Bayes front-door promise recorded; device
+  lineages extended; log entry appended)
 - [ ] Phase 4: local review clean
 - [ ] Phase 5: PR open, drafts cleaned, 1080p60 render verified
 

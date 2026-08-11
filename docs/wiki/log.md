@@ -71,3 +71,18 @@ reordered.
 - final 1080p60 render verified: 6 files, native 0.75× pace
 - next: plan 003, conditional probability — fresh branch after merge;
   carries ctc→conditional residual and the renormalized-slice picture
+
+## [2026-08-11] series | plan 003, conditional probability (in progress)
+
+- node built: `conditional-probability`
+  (probability/conditional_probability_manim.py, six scenes; closer is
+  `WhenToCondition` — sibling module owns the `WhenToUseIt` name)
+- edges closed: `independence` → `conditional-probability` (renormalized
+  slice delivered; stepped cut named as P(A|B));
+  `ctc-alignment` → `conditional-probability` (conditional independence
+  taught with the two-coin example; "given the input" named)
+- edge promised: `conditional-probability` → Bayes series (the series
+  ends at the named front door)
+- devices extended: stepped-cut lineage named; shrinking pool's factors
+  licensed as conditional probabilities
+- also this branch: CodeRabbit tuned for the bookkeeping (see plan 003)

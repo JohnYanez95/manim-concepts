@@ -13,7 +13,7 @@ crawling every page; whoever applies an audit's findings updates it.
 | `counting-rules` | `combinatorics/counting_rules_manim.py` | The four elementary counting rules; the grid as outer product of stages |
 | `ctc-alignment` | `deep_learning/ctc_alignment_manim.py` | CTC: collapse map, alignment counting, forward trellis |
 | `independence` | `probability/independence_manim.py` | The product rule as definition; the aligned unit square |
-| `conditional-probability` | *(not built — next series; promised in plan 002's gaps)* | Renormalized area, P(A∩B) = P(B)·P(A\|B), Bayes |
+| `conditional-probability` | `probability/conditional_probability_manim.py` | Renormalized area, the multiplication rule, LOTP and trees, the inversion, conditional independence |
 
 ## Edges
 
@@ -25,8 +25,9 @@ Status: **delivered** (both ends exist and the content makes the link) or
 | `counting-rules` | `ctc-alignment` | delivered | `PartitionRule` when-useful cell promised "the counting step behind CTC"; `CountingAlignments` delivers it (3⁴ raw paths, C(T+U, T−U)) |
 | `counting-rules` | `independence` | delivered | `probability/README.md` Scope: the multiplication grid reweighted from counts to areas; `ProbabilityAsArea` + `TheProductRule` |
 | `ctc-alignment` | `independence` | delivered (unconditional half) | `deep_learning/README.md` Scope names the split; `ChainsOfTrials` teaches the unconditional per-frame product |
-| `ctc-alignment` | `conditional-probability` | promised | the conditional half of PR #2's bridge: "frames independent *given the input*" is on screen in `WhenToUseIt` (deep_learning) but taught nowhere |
-| `independence` | `conditional-probability` | promised | `probability/README.md` Scope + Ideas; plan 002 gaps |
+| `ctc-alignment` | `conditional-probability` | delivered | `WhenToCondition` teaches conditional independence with the exact two-coin example and names "independent given the input" — the conditional half of PR #2's bridge, closed |
+| `independence` | `conditional-probability` | delivered | `TheRestrictedSquare` delivers the deferred renormalized slice; `IndependenceRevisited` re-reads the stepped cut as P(A\|B) and rederives P(A\|B) = P(A) |
+| `conditional-probability` | *(Bayes' rule series)* | promised | `probability/README.md` Scope + Ideas; `TwoSlicesOneSquare` ends at the named front door |
 | `ctc-alignment` | *(beam search / gradient / peaky dynamics)* | promised | `deep_learning/README.md` Ideas not yet built |
 | `ctc-alignment` | *(dynamic programming as its own concept)* | promised | `deep_learning/README.md` row 5 when-useful ("the same dynamic-programming move as the HMM forward algorithm"); plan 001 gaps |
 | `counting-rules` | *(binomial distribution — future random variables)* | promised | `combinatorics/README.md` row 3 when-useful names it; lands when `probability/` grows random variables |
@@ -53,6 +54,10 @@ one topic should meet the same picture, upgraded, in the next:
   progressive square subdivision. One device, three series.
 - **The shrinking pool**: `PermutationRule`'s pool-that-depletes is
   sampling without replacement — the same picture that breaks
-  independence in `WhenToUseIt` (probability, the aces row). The
-  dependent case has the same counting ancestry the independent case
-  does.
+  independence in `WhenToUseIt` (probability, the aces row), and whose
+  per-draw factors `TheMultiplicationRule` finally names as conditional
+  probabilities (the 1/221 license).
+- **The stepped cut**: dependence as the cut that steps
+  (`NotMutualExclusivity`) → named as conditional probability itself in
+  `IndependenceRevisited` — the step's height inside the band *is*
+  P(A\|B), and flattening is independence.

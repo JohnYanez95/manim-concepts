@@ -41,10 +41,10 @@ command, so none of them are committed.
 | --- | --- |
 | [`combinatorics/`](combinatorics/README.md) | Multiplication rule, permutations, combinations, partitions |
 | [`deep_learning/`](deep_learning/README.md) | CTC alignment: the blank token, paths and their collapse, counting alignments, the forward trellis |
-| [`probability/`](probability/README.md) | Independence: probability as area, the product rule, chains of trials |
+| [`probability/`](probability/README.md) | Independence (probability as area, the product rule, chains of trials); conditional probability (the renormalized slice, total probability, the inversion) |
 
-Topics are added as they are written. Likely next: conditional
-probability (in `probability/`), `calculus/`, `linear_algebra/`. The
+Topics are added as they are written. Likely next: Bayes' rule (in
+`probability/`), `calculus/`, `linear_algebra/`. The
 layout is expected to drift — if a topic only ever holds one file, it can
 collapse into a flatter arrangement later without anything else changing.
 
