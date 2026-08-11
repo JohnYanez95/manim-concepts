@@ -20,6 +20,7 @@ dependencies = [
 [dependency-groups]
 dev = [
     "pre-commit>=4.0",
+    "pytest>=8.0",
     "ruff>=0.15",
 ]
 
@@ -61,3 +62,13 @@ select = [
     "F403",  # `from manim import *` used
     "F405",  # name may be undefined, or defined from star imports
 ]
+# The tests reach into _select and _discover_scenes on purpose. Those are the
+# functions with the actual branching, and testing only the public render_cli
+# around them would mean rendering video to assert on argument parsing.
+"tests/**" = ["SLF001"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+# Manim emits SyntaxWarnings from a pydub dependency on import; they are not
+# ours to fix and would otherwise bury real warnings.
+filterwarnings = ["ignore::SyntaxWarning"]
