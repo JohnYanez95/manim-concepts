@@ -56,7 +56,9 @@ claim"; transition-window frame checks).
   the tuned channel). Audit: 15 findings applied, including the
   logarithms double-unlock cross-reference. The transition-window rule
   caught its first live bug: the rate-label crossfade.
-- [ ] Phase 5: PR open, drafts cleaned, 1080p60 render verified
+- [x] Phase 5: PR open (#5), drafts cleaned, 1080p60 render verified
+  (6 files, 1920×1080/60, frame counts consistent with the native
+  pace, spot frame reviewed)
 
 ## Verified technical anchors (from the source-verifier report)
 

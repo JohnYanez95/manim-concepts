@@ -150,3 +150,12 @@ reordered.
   deep_learning's log-space bullet) — both queues now cross-reference
 - plan 004 known-gaps placeholder filled (same genre, second time)
 - stamp: advance to 67713b8
+
+## [2026-08-11] series | plan 004 finalised (PR #5)
+
+- final 1080p60 render verified: 6 files, native 0.75x pace
+- review round: bot and auditor converged on Monty Small from opposite
+  sides; the record won over the claim — anchors carry the enumeration
+- transition-window rule's first live catch: the rate-label crossfade
+- next: logarithms — one series, two promises closed (bayes→log-odds
+  and deep_learning's log-space bullet)
