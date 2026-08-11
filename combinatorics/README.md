@@ -33,9 +33,9 @@ So `PartitionRule` does not land without `CombinationRule` before it.
 | # | Scene | Formula | What it says | Why it's true | When it's useful |
 | --- | --- | --- | --- | --- | --- |
 | 1 | `MultiplicativeRule` | $N = n_1 n_2 \cdots n_k$ | Independent stages multiply | A tree with $3 \times 4 = 12$ leaf paths, re-cast as a grid so the product is literally the area of a rectangle. | Sizing any search space before you try to enumerate it: keyspaces, configuration counts, the branching factor of a lattice. The first question to ask of "can I just list them all?" |
-| 2 | `PermutationRule` | $P^n_r = \dfrac{n!}{(n-r)!}$ | Order matters | Slot-filling from a shrinking pool (5, 4, 3), then the factorial identity by cancelling the unwanted tail $2 \times 1$. | Ranking and scheduling — top-$r$ orderings, seatings, any arrangement where swapping two items gives a different answer. |
+| 2 | `PermutationRule` | $P^n_r = \dfrac{n!}{(n-r)!}$ | Order matters | Slot-filling from a shrinking pool (5, 4, 3), then the factorial identity by cancelling the unwanted tail $2 \times 1$. | Ranking and scheduling — top-$r$ orderings, seatings, any arrangement where swapping two items gives a different answer. The shrinking pool is also sampling *without replacement* — the move that breaks independence in [`probability/`](../probability/README.md). |
 | 3 | `CombinationRule` | $C^n_r = \dbinom{n}{r} = \dfrac{n!}{r!\,(n-r)!}$ | Order does not matter | The $3!$ orderings of $\{A,C,E\}$ collapse to one set — every combination was overcounted $r!$ times, so divide. | Sampling without replacement, and every binomial coefficient downstream of it: the binomial distribution, Pascal's triangle, $(x+y)^n$. |
-| 4 | `PartitionRule` | $N = \dfrac{n!}{n_1!\,n_2!\cdots n_k!}$ | Split into labelled groups | $6!$ row orderings chopped into blocks of 3/2/1, then divide out the within-block orderings that change nothing. | Multinomial coefficients: dividing into teams, arrangements of a word with repeated letters, and counting the alignments a sequence model can take — the counting step behind CTC. |
+| 4 | `PartitionRule` | $N = \dfrac{n!}{n_1!\,n_2!\cdots n_k!}$ | Split into labelled groups | $6!$ row orderings chopped into blocks of 3/2/1, then divide out the within-block orderings that change nothing. | Multinomial coefficients: dividing into teams, arrangements of a word with repeated letters. The related — differently constrained — alignment count behind [CTC](../deep_learning/README.md) builds on the same divide-out move. |
 | 5 | `WhenToUseIt` | — | Which rule a problem needs | Four problem shapes mapped to the rule each one calls for, then the observation that all four are the product rule with unwanted orderings divided out. | Reading an unfamiliar counting problem and knowing which tool it wants — the step between having the formulas and being able to use them. |
 
 Renders are numbered to match, so a directory listing plays in the same order:
@@ -53,11 +53,11 @@ See the [root README](../README.md) for the full flag list.
 
 ## References
 
-Unchecked means **unverified** — see
+Ticks are human-gated — see
 [reference verification](../README.md#reference-verification-is-human-gated).
-Every entry below was suggested rather than confirmed, so all of them start
-unchecked. Open one, confirm it covers what the entry claims, and tick it
-yourself; nothing automated will.
+Every entry below was suggested unverified and started unchecked; all
+were then opened, confirmed, and ticked by the maintainer. Future
+entries start unchecked until a human does the same.
 
 - [X] [Rule of product](https://en.wikipedia.org/wiki/Rule_of_product) — the
       multiplicative rule and its independence assumption.
@@ -80,3 +80,6 @@ Rough queue, in roughly the order they build on each other:
 - Stars and bars, for combinations *with* repetition.
 - Inclusion–exclusion on two and three overlapping sets.
 - The binomial theorem, as the multiplicative rule applied to $(x+y)^n$.
+- A fifth problem shape in `WhenToUseIt` — counting a sequence model's
+  alignments, now that `deep_learning/` delivers the payoff. Needs a
+  re-render, so batched for the next combinatorics change.

@@ -61,6 +61,13 @@ wrong is worse than no animation. The scene design in the plan states what it
 borrows and from where, and every source consulted lands in the topic README's
 References as `- [ ]`.
 
+The research pass runs as two repo agents, defined in `.claude/agents/`:
+`pedagogy-researcher` (how the material is best taught) and
+`source-verifier` (the exact facts and numbers, verified against primary
+sources and by computation). Their reports are pinned into the plan — the
+scene design is built from them, and every on-screen number traces to the
+verifier's report.
+
 The final phase is always a fully rendered PR. A plan that stops at "code
 works" is not finished.
 
@@ -72,7 +79,7 @@ A new topic looks like this:
 | 1 | Topic dir, README skeleton, first scene stub | `make check` |
 | 2 | Scenes, iterated at draft quality | Draft renders verified by eye |
 | 3 | Numbered concepts table, references as `- [ ]` | `make test` |
-| 4 | Local CodeRabbit pass, findings addressed | Review clean |
+| 4 | Local CodeRabbit pass + `connection-auditor` pass, findings addressed | Review clean |
 | 5 | PR, bot review, finalise | `clean-drafts` + 1080p render |
 
 ## Workflow: draft first, review before PR, finalise last
@@ -183,6 +190,23 @@ Source order is viewing order. Renders are numbered from it
 (`03_CombinationRule.mp4`), and the topic README's concepts table must list
 scenes in the same order with matching numbers. `tests/test_topic_contract.py`
 enforces this — reordering scenes means updating the README in the same change.
+
+## The connection graph
+
+[`docs/wiki/`](docs/wiki/README.md) is the repo's knowledge graph: nodes
+are concepts taught or promised, edges are the links between them, each
+marked delivered or promised with the place it is stated. Two rules:
+
+- **A series updates the graph in the change that lands it** — its node,
+  the promised edges it opens, the promised edges it closes. An edge
+  nobody can cite is a wish, not a connection.
+- **Run the `connection-auditor` agent before opening a series PR** and
+  when choosing what to build next. It reports promised-but-missing,
+  delivered-but-unrecorded, and possible-but-unmade connections; the
+  graph is only useful while it matches the content.
+
+The wiki stays repo-shaped: nodes are things the repo teaches or has
+promised to teach, nothing broader.
 
 ## Topic contract
 
