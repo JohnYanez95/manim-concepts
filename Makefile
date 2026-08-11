@@ -16,7 +16,7 @@ QUALITY ?= high
 SCENE   ?=
 
 help:  ## Show available targets
-	@grep -hE '^[a-z-]+:.*?## ' $(MAKEFILE_LIST) | awk 'BEGIN{FS=":.*?## "}{printf "  %-12s %s\n", $$1, $$2}'
+	@grep -hE '^[a-z-]+:[[:space:]]+## ' $(MAKEFILE_LIST) | awk 'BEGIN{FS=":[[:space:]]+## "}{printf "  %-12s %s\n", $$1, $$2}'
 
 venv:  ## Build the environment from the lockfile (matches a clean checkout)
 	uv sync --locked
@@ -42,7 +42,8 @@ check:  ## Everything the pre-commit gate runs, plus tests, without committing
 list:  ## List every concept module and the scenes it defines
 	@for f in $(CONCEPTS); do \
 		echo "$$f"; \
-		uv run python "$$f" --list | sed 's/^/    /'; \
+		out=$$(uv run python "$$f" --list) || exit 1; \
+		echo "$$out" | sed 's/^/    /'; \
 	done
 
 render:  ## Render one module: make render FILE=topic/x_manim.py [QUALITY=] [SCENE=]

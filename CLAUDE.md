@@ -61,8 +61,9 @@ both passed a naive existence check:
   `init_output_directories` prefers it over the scene name. Scope `tempconfig`
   **per scene**, never per batch. This is why `utils/render.py` looks the way
   it does; do not "simplify" it back.
-- Manim re-exports numpy, so `np` resolves under `from manim import *`. Import
-  it explicitly anyway.
+- Manim re-exports numpy, so `np` resolves under `from manim import *`. A
+  module that *uses* numpy imports it explicitly anyway. A module that does not
+  must not — an unused `import numpy as np` fails ruff F401.
 - Geometry magic numbers (coordinates, buffs, run_times) are normal here. Do
   not extract them into named constants.
 
