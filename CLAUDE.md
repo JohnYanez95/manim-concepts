@@ -145,13 +145,28 @@ This is what review caught, twice, so check it before writing a scene:
   even when it renders identically — and it does render identically, since
   those three *are* `PALETTE[0:3]`.
 
+## Motion discipline
+
+- **Replaced text leaves before its replacement arrives.** `FadeOut` the old
+  string, *then* `FadeIn` the new one — a simultaneous swap (or a `Transform`
+  between different strings) renders both on top of each other mid-crossfade.
+  Raised watching the alignment-problem caption swaps.
+- **Scene timings are written against manim's defaults.** `ConceptScene.play`
+  stretches every animation to the repo's native pace (`PLAYBACK_SPEED` in
+  `utils/scene.py`, 0.75× — the speed the videos were actually being watched
+  at; player-side slowdown judders 60 fps output). Never compensate for the
+  pace inside a scene, and never add a `wait` override to "complete" the
+  mechanism: waits route through `play` and would stretch twice — the first
+  draft shipped exactly that bug.
+
 ## Structure
 
 - Scenes subclass `ConceptScene`, never `Scene`. Never set
   `camera.background_color` by hand.
 - Reuse `utils.mobjects` (`token`, `chip`, `boxed`, `header`, `caption`) rather
   than rebuilding them inline.
-- Every scene needs a one-line docstring — it is what `--list` prints.
+- Every scene needs a docstring whose first line is a summary — that line is
+  what `--list` prints. More lines are welcome (ADR 004).
 - No `SCENES = [...]` list. `render_cli()` discovers scenes in source order.
 - No `sys.path` manipulation. The project installs itself as a package.
 - A new public name in `utils/` has to be **imported into**

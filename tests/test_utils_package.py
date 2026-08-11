@@ -15,12 +15,13 @@ import textwrap
 from pathlib import Path
 
 import pytest
-from manim import DOWN, FadeIn
+from manim import DOWN, FadeIn, LaggedStart, Scene, Square
 from manim.animation.animation import prepare_animation
 from manim.mobject.mobject import Mobject
 
 import utils
 from utils.mobjects import header
+from utils.scene import PLAYBACK_SPEED, ConceptScene
 
 REPO = Path(__file__).resolve().parents[1]
 INIT = REPO / "utils" / "__init__.py"
@@ -132,6 +133,66 @@ def test_documented_example_wraps_title_in_an_animation():
                 "the documented example passes self.title(...) straight into self.play(), "
                 "which raises TypeError — wrap it in an animation such as FadeIn"
             )
+
+
+class _Probe(ConceptScene):
+    """Instantiable stand-in; pacing is exercised without rendering."""
+
+    def construct(self):  # pragma: no cover - never rendered
+        pass
+
+
+def test_conceptscene_stretches_play_to_the_native_pace(monkeypatch):
+    """Every route into ``play`` must come out slowed by 1/PLAYBACK_SPEED.
+
+    The pace exists because the videos were being watched at 0.75x manually,
+    which judders a 60 fps file. All three call shapes are pinned: an explicit
+    ``run_time`` kwarg, an animation's own default, and a composite whose lag
+    structure has to stretch with it.
+    """
+    assert 0 < PLAYBACK_SPEED < 1, "a pace >= 1 would make this test vacuous"
+
+    captured = {}
+
+    def spy_play(self, *animations, **kwargs):
+        captured["animations"] = animations
+        captured["kwargs"] = kwargs
+
+    monkeypatch.setattr(Scene, "play", spy_play)
+    scene = _Probe()
+
+    scene.play(FadeIn(Square()), run_time=1.5)
+    assert captured["kwargs"]["run_time"] == pytest.approx(1.5 / PLAYBACK_SPEED)
+
+    scene.play(FadeIn(Square()))  # manim's default run_time is 1.0
+    assert captured["animations"][0].run_time == pytest.approx(1.0 / PLAYBACK_SPEED)
+
+    group = LaggedStart(FadeIn(Square()), FadeIn(Square()), lag_ratio=0.5)
+    original = group.run_time
+    scene.play(group)
+    assert captured["animations"][0].run_time == pytest.approx(original / PLAYBACK_SPEED)
+
+
+def test_conceptscene_stretches_wait_exactly_once(monkeypatch):
+    """A hold is part of the pacing — but scaled once, not twice.
+
+    ``Scene.wait`` funnels a ``Wait`` animation through ``play``, so the
+    override there already covers it; a separate ``wait`` override stretched
+    every hold by 1/PLAYBACK_SPEED**2, which is the bug this test pins. The
+    first draft of the pacing change shipped exactly that and a rendered
+    scene came out 1.8 s too long.
+    """
+    captured = {}
+
+    def spy_play(self, *animations, **kwargs):
+        captured["animations"] = animations
+
+    monkeypatch.setattr(Scene, "play", spy_play)
+    _Probe().wait(2.0)
+
+    (wait_animation,) = captured["animations"]
+    assert wait_animation.run_time == pytest.approx(2.0 / PLAYBACK_SPEED)
+    assert wait_animation.run_time != pytest.approx(2.0 / PLAYBACK_SPEED**2)
 
 
 def test_title_must_be_wrapped_in_an_animation():

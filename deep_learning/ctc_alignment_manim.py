@@ -153,10 +153,13 @@ class TheAlignmentProblem(ConceptScene):
         note = caption(labels[0]).next_to(question, UP, buff=0.35)
         self.play(FadeIn(spans), FadeIn(note))
         self.wait(0.6)
+        # The caption leaves while the spans morph, and its replacement only
+        # arrives once the spot is empty — two strings crossfading in place
+        # render on top of each other (see CLAUDE.md, motion discipline).
         for counts, text in zip(candidates[1:], labels[1:], strict=True):
-            new_spans = marks(counts)
-            new_note = caption(text).next_to(question, UP, buff=0.35)
-            self.play(Transform(spans, new_spans), Transform(note, new_note))
+            self.play(Transform(spans, marks(counts)), FadeOut(note), run_time=0.8)
+            note = caption(text).next_to(question, UP, buff=0.35)
+            self.play(FadeIn(note), run_time=0.4)
             self.wait(0.6)
 
         verdict = Text(
@@ -164,7 +167,8 @@ class TheAlignmentProblem(ConceptScene):
             font_size=BODY_SIZE,
             color=ACCENT,
         ).next_to(question, UP, buff=0.35)
-        self.play(FadeOut(note), FadeIn(verdict))
+        self.play(FadeOut(note), run_time=0.4)
+        self.play(FadeIn(verdict))
         self.wait(0.8)
 
         # --- the reframe -------------------------------------------------------
