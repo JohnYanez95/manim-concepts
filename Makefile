@@ -1,5 +1,10 @@
 .DEFAULT_GOAL := help
-.PHONY: help venv hooks lint fmt check list render render-all clean
+.PHONY: help venv hooks lint fmt test check list render render-all clean clean-drafts
+
+# Resolutions treated as throwaway by `clean-drafts` — everything below the
+# 1080p default. Kept as a list rather than inlined so adding a tier is a
+# one-word change.
+DRAFT_RES := 480p15 720p30
 
 # Every concept module in the repo. The `_manim.py` suffix is what makes this
 # glob unambiguous — topic directories also hold READMEs and, eventually,
@@ -25,9 +30,13 @@ lint:  ## Ruff check (PEP 8)
 fmt:  ## Ruff format
 	uv run ruff format .
 
-check:  ## Everything the pre-commit gate runs, without committing
+test:  ## Run the test suite
+	uv run pytest -q
+
+check:  ## Everything the pre-commit gate runs, plus tests, without committing
 	uv run ruff check .
 	uv run ruff format --check .
+	uv run pytest -q
 	uv run pre-commit run --all-files
 
 list:  ## List every concept module and the scenes it defines
@@ -51,5 +60,15 @@ render-all:  ## Render every concept module (QUALITY=draft for a fast sweep)
 		uv run python "$$f" --quality $(QUALITY) || exit 1; \
 	done
 
-clean:  ## Delete all rendered output
+clean-drafts:  ## Delete sub-1080p renders, keeping the final ones
+	@found=$$(find media -type d \( $(foreach r,$(DRAFT_RES),-name '$(r)' -o) -false \) 2>/dev/null); \
+	if [ -z "$$found" ]; then \
+		echo "no draft renders to clear"; \
+	else \
+		echo "$$found" | sed 's/^/  removing /'; \
+		echo "$$found" | xargs rm -rf; \
+	fi
+	@echo "drafts cleared; 1080p60 and 4K renders kept"
+
+clean:  ## Delete all rendered output, drafts and finals alike
 	rm -rf media/
