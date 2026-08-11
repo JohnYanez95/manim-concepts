@@ -23,7 +23,10 @@ the combinatorics topic predate it, so the record starts here.
 - [x] Phase 0a: technical verification report received
 - [x] Phase 0b: pedagogy report received, scene design finalized below
 - [x] Phase 1: rules + plan + skeleton, `make check` green
-- [ ] Phase 2: all scenes render at draft; verified per CLAUDE.md checklist
+- [x] Phase 2: all scenes render at draft; verified per CLAUDE.md checklist
+  (6 distinct numbered files, ffprobe durations 13–30 s, 23 extracted
+  frames reviewed; 4 layout collisions found and fixed, re-rendered,
+  re-extracted, clean)
 - [ ] Phase 3: topic README complete, `make test` green
 - [ ] Phase 4: local review clean
 - [ ] Phase 5: PR open, drafts cleaned, 1080p render verified
