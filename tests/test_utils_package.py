@@ -173,6 +173,29 @@ def test_conceptscene_stretches_play_to_the_native_pace(monkeypatch):
     assert captured["animations"][0].run_time == pytest.approx(original / PLAYBACK_SPEED)
 
 
+def test_conceptscene_play_accepts_iterables_of_animations(monkeypatch):
+    """``play([...])`` and generator arguments are manim API, not an accident.
+
+    ``Scene.compile_animations`` flattens its arguments before preparing
+    them; the pacing override sits in front of that and must do the same, or
+    a list that manim would happily play raises TypeError in the override.
+    """
+    captured = {}
+
+    def spy_play(self, *animations, **kwargs):
+        captured["animations"] = animations
+
+    monkeypatch.setattr(Scene, "play", spy_play)
+    scene = _Probe()
+
+    scene.play([FadeIn(Square()), FadeIn(Square())])
+    assert len(captured["animations"]) == 2
+    assert all(a.run_time == pytest.approx(1.0 / PLAYBACK_SPEED) for a in captured["animations"])
+
+    scene.play(FadeIn(Square()) for _ in range(3))  # a generator, same contract
+    assert len(captured["animations"]) == 3
+
+
 def test_conceptscene_stretches_wait_exactly_once(monkeypatch):
     """A hold is part of the pacing — but scaled once, not twice.
 

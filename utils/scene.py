@@ -2,6 +2,7 @@
 
 from manim import Scene, VGroup
 from manim.animation.animation import prepare_animation
+from manim.utils.parameter_parsing import flatten_iterable_parameters
 
 from utils.mobjects import header
 from utils.theme import BG
@@ -62,7 +63,11 @@ class ConceptScene(Scene):
         if kwargs.get("run_time") is not None:
             kwargs["run_time"] /= PLAYBACK_SPEED
             return super().play(*animations, **kwargs)
-        prepared = [prepare_animation(animation) for animation in animations]
+        # Flatten first, exactly as Scene.compile_animations does: play()
+        # accepts lists and generators of animations, and preparing a bare
+        # list would raise before manim ever saw it.
+        flattened = flatten_iterable_parameters(animations)
+        prepared = [prepare_animation(animation) for animation in flattened]
         for animation in prepared:
             animation.run_time /= PLAYBACK_SPEED
         return super().play(*prepared, **kwargs)

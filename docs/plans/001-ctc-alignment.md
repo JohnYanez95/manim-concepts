@@ -15,7 +15,7 @@ the combinatorics topic predate it, so the record starts here.
 | 2 | Scenes, iterated at `--quality draft`; renders verified (count, names, ffprobe, extracted frames) | Draft renders verified by eye |
 | 3 | Numbered concepts table with all three levels, references as `- [ ]`, links back to `combinatorics/`; root README topics row | `make test` |
 | 4 | Local CodeRabbit pass, findings addressed | Review clean |
-| 5 | PR (body names the material gaps → next branch), bot review, finalise | `make clean-drafts` + 1080p render |
+| 5 | PR (body names the material gaps → next branch), bot review, finalise | `make clean-drafts` + 1080p60 render |
 
 ## Checklist
 
@@ -24,14 +24,14 @@ the combinatorics topic predate it, so the record starts here.
 - [x] Phase 0b: pedagogy report received, scene design finalized below
 - [x] Phase 1: rules + plan + skeleton, `make check` green
 - [x] Phase 2: all scenes render at draft; verified per CLAUDE.md checklist
-  (6 distinct numbered files, ffprobe durations 13–30 s, 23 extracted
-  frames reviewed; 4 layout collisions found and fixed, re-rendered,
-  re-extracted, clean)
+  (6 distinct numbered files; ffprobe frame counts 197–455 and durations
+  13–30 s; 23 extracted frames reviewed; 4 layout collisions found and
+  fixed, re-rendered, re-extracted, clean)
 - [x] Phase 3: topic README complete, `make test` green (full `make
   check` run, exit 0; two references already human-verified)
 - [x] Phase 4: local review clean — one finding (reset the human-verified
   reference ticks), declined with reasoning in ADR 006
-- [x] Phase 5: PR open (#2), drafts cleaned, 1080p render verified
+- [x] Phase 5: PR open (#2), drafts cleaned, 1080p60 render verified
   (11 files across both modules; every duration exactly the scripted
   time ÷ 0.75 after the pacing change below)
 
@@ -53,8 +53,9 @@ paper and the Distill 2017 article, with counts checked by exact enumeration:
   Distill's headline: `T=100, U=50` gives ≈ `2 × 10⁴⁰` alignments.
 - Minimum length: `T ≥ U + (adjacent duplicate pairs)` — verified
   computationally; implicit rather than verbatim in the sources.
-- Assumptions: monotonic alignment, output ≤ input, per-frame conditional
-  independence. Rules out reordering tasks (translation → attention).
+- Assumptions: monotonic alignment, output ≤ input, and conditional
+  independence of the per-frame outputs given the full input sequence.
+  Rules out reordering tasks (translation → attention).
 
 ## Scene design (finalized from the two research reports)
 
@@ -64,9 +65,10 @@ tiny full enumeration → counting/explosion → trellis → properties. What
 each scene borrows is noted inline.
 
 1. `TheAlignmentProblem` — level 1. Frames of input vs. characters of
-   text; the dataset pairs them but nothing says which frames are which
-   letter, and there is no single true alignment. Problem-first ordering
-   is the consensus of every good source (Distill, CS224S, CMU).
+   text; the dataset pairs them but provides no frame-to-letter
+   alignment, and many candidate alignments are equally consistent with
+   the pair. Problem-first ordering is the consensus of every good
+   source (Distill, CS224S, CMU).
 2. `TheBlankToken` — levels 1–2. Naive per-frame emission + merge-repeats
    fails twice: doubled letters ("HELLO" → "HELO") and forced emission on
    held sounds. ε fixes both. Collapse rule is merge repeats **then**
@@ -91,7 +93,8 @@ each scene borrows is noted inline.
    sources gloss over, per the pitfalls list).
 6. `WhenToUseIt` — level 3. Where the tool applies: speech, OCR,
    handwriting — anything monotonic with unknown timing. The assumptions
-   (monotonic, output ≤ input, per-frame conditional independence) and
+   (monotonic, output ≤ input, per-frame outputs independent given the
+   input) and
    what they rule out: translation reorders → attention; spike timing is
    not segmentation; independence is why external language models help.
 

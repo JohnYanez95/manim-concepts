@@ -148,9 +148,9 @@ This is what review caught, twice, so check it before writing a scene:
 ## Motion discipline
 
 - **Replaced text leaves before its replacement arrives.** `FadeOut` the old
-  string, *then* `FadeIn` the new one — a simultaneous swap (or a `Transform`
-  between different strings) renders both on top of each other mid-crossfade.
-  Raised watching the alignment-problem caption swaps.
+  string, *then* `FadeIn` the new one — a simultaneous swap (or a
+  `FadeTransform` between different strings) renders both on top of each
+  other mid-crossfade. Raised watching the alignment-problem caption swaps.
 - **Scene timings are written against manim's defaults.** `ConceptScene.play`
   stretches every animation to the repo's native pace (`PLAYBACK_SPEED` in
   `utils/scene.py`, 0.75× — the speed the videos were actually being watched
