@@ -24,6 +24,7 @@ from utils import (
     FORMULA_SIZE,
     GOOD,
     LABEL_SIZE,
+    MUTED,
     RESULT_SIZE,
     SMALL_SIZE,
     WARM,
@@ -182,14 +183,14 @@ class PermutationRule(ConceptScene):
         slots = VGroup()
         for _ in range(3):
             slot = RoundedRectangle(
-                width=1.15, height=1.15, corner_radius=0.14, stroke_width=3, color=GREY_B
+                width=1.15, height=1.15, corner_radius=0.14, stroke_width=3, color=MUTED
             )
             slot.set_stroke(opacity=0.7)
             slots.add(slot)
         slots.arrange(RIGHT, buff=0.75).move_to(1.1 * DOWN)
         order_labels = VGroup(
             *[
-                Text(label, font_size=22, color=GREY_B).next_to(slots[i], DOWN, 0.22)
+                Text(label, font_size=22, color=MUTED).next_to(slots[i], DOWN, 0.22)
                 for i, label in enumerate(["1st", "2nd", "3rd"])
             ]
         )
@@ -278,7 +279,7 @@ class CombinationRule(ConceptScene):
             caption_tex.get_right() + 0.15 * RIGHT,
             caption_tex.get_right() + 2.1 * RIGHT,
             buff=0.1,
-            color=GREY_B,
+            color=MUTED,
         )
         one = MathTex(r"\{A, C, E\}", font_size=44, color=GOOD)
         one.next_to(arrow, RIGHT, buff=0.25)
@@ -326,7 +327,12 @@ class PartitionRule(ConceptScene):
         self.play(FadeIn(prompt))
 
         sizes = [3, 2, 1]
-        group_colors = [COOL, WARM, GOOD]
+        # The three blocks are categories with no ranking between them, which is
+        # exactly what PALETTE is for. They previously used COOL/WARM/GOOD, whose
+        # meanings (primary quantity / cancelled / confirmed) none of them carry.
+        # Pixel-identical either way — COOL, WARM and GOOD *are* PALETTE[0:3] —
+        # so this only changes what the code claims.
+        group_colors = [palette(i) for i in range(len(sizes))]
         objects = VGroup(*[token(str(i + 1), palette(i)) for i in range(6)])
         objects.arrange(RIGHT, buff=0.5).move_to(1.75 * UP)
         self.play(LaggedStart(*[FadeIn(o, scale=0.6) for o in objects], lag_ratio=0.1))
