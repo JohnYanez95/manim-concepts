@@ -198,3 +198,28 @@ reordered.
 - the repo is public, licensed Apache 2.0, and its front page explains
   itself (welcome gif + workflow diagram)
 - next: calculus/ (unlocks e and ln), or the log-odds inference scene
+
+## [2026-08-11] audit | plan-005 finalisation + box-leak fix
+
+- scope: diffed 726b19e..344f4f1 (PR #6 bot round, merge, post-merge
+  box-leak fix); changed files only, no full crawl
+- findings: 0 new promised (queue stands at 10 rows),
+  1 delivered-not-recorded, 3 possible-not-yet-made, 4 graph-health
+- correction: the plan-005 finalisation entry's render claim is stale
+  for one scene — scene 6's verified 1080p60 render predates the
+  box-leak fix (the log-sum-exp box never faded out). Decision: the fix
+  rides the next topic branch (`feat/calculus-e-ln`) as a pre-phase
+  commit, no separate fix PR; scene 6 re-renders at that branch's
+  finalise gate
+- ShrinkCounts' zero-prior beat recorded as a second delivered strand
+  of bayes -> logarithms (INDEX row updated)
+- noted for the next builds: bits/entropy silently depends on
+  expectation (random variables); the binomial pmf already sits in the
+  quartered square (group ChainsOfTrials' cells by head count); the
+  base-is-a-unit stride device is the natural opening for calculus/
+- open maintainer call: root README's likely-next names linear_algebra/,
+  which no graph row carries — promise it properly or drop it
+- next build: calculus/ (strongest open promise, on-screen ln debt,
+  anchors part-verified in plan 005) over random variables
+- stamp: unchanged at 726b19e; advance to plan 006's merge commit when
+  `feat/calculus-e-ln` lands
