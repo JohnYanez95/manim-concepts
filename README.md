@@ -2,6 +2,16 @@
 
 Intuitive [Manim](https://www.manim.community/) visualisations of core concepts.
 
+![The three-level climb this repo teaches by: chips reading "what is it
+saying?", "why is it true?", and "when is it useful?" appear in sequence
+under the motto "the formula is the last thing on screen", over the row
+of topics built so far](docs/assets/welcome.gif)
+
+*Rendered by the repo itself —
+[`docs/assets/welcome_scene.py`](docs/assets/welcome_scene.py), through
+the same shared layer every concept scene uses; regeneration commands in
+[`docs/assets/README.md`](docs/assets/README.md).*
+
 The bias of this repo is that a formula should be the *last* thing on screen,
 not the first. Every scene shows the object being reasoned about, does the
 reasoning visibly, and lets the expression fall out of what was just seen.
@@ -42,10 +52,11 @@ command, so none of them are committed.
 | [`combinatorics/`](combinatorics/README.md) | Multiplication rule, permutations, combinations, partitions |
 | [`deep_learning/`](deep_learning/README.md) | CTC alignment: the blank token, paths and their collapse, counting alignments, the forward trellis |
 | [`probability/`](probability/README.md) | Independence (probability as area, the product rule, chains of trials); conditional probability (the renormalized slice, total probability, the inversion); Bayes' rule (the odds form, the waterfall, the host's protocol) |
+| [`algebra/`](algebra/README.md) | Logarithms: the counting strip, the evidence ruler, the underflow cliff |
 
-Topics are added as they are written. Likely next: `calculus/`,
-`linear_algebra/`, or the deep-learning backlog (beam search, dynamic
-programming). The
+Topics are added as they are written. Likely next: `calculus/` (which
+unlocks e and the natural log), `linear_algebra/`, or the deep-learning
+backlog (beam search, dynamic programming). The
 layout is expected to drift — if a topic only ever holds one file, it can
 collapse into a flatter arrangement later without anything else changing.
 
@@ -143,6 +154,26 @@ re-renders what changed. Pass `--no-cache` if a stale partial is suspected.
 | `make check` | Ruff, tests and every hook, without committing |
 | `make clean-drafts` | Delete sub-1080p renders, keep the final ones |
 | `make clean` | Delete all rendered output |
+
+### How a series gets built
+
+Every series runs the same agentic workflow — research first, phase
+gates, two independent reviews, and a knowledge graph that keeps the
+topics honest about what they promise each other:
+
+![Sequence diagram of the series workflow: the maintainer starts a
+branch; the main agent runs pedagogy-researcher and source-verifier
+before any scene; phases 1-3 build against commit gates while the
+maintainer verifies references; phase 4 runs CodeRabbit and the
+connection-auditor; phase 5 ships the PR and the final
+render](docs/workflow.png)
+
+To use it: say "start the TOPIC branch" and the phases run — plans land
+in [`docs/plans/`](docs/plans/), the graph in
+[`docs/wiki/`](docs/wiki/README.md), declined findings in
+[`docs/adr/`](docs/adr/README.md). The diagram source is
+[`docs/workflow.mmd`](docs/workflow.mmd); re-render it with
+`npx @mermaid-js/mermaid-cli -i docs/workflow.mmd -o docs/workflow.png`.
 
 ### Working on a scene
 
@@ -269,6 +300,11 @@ being wrong. What is covered is the part that can be wrong silently:
   `*/*_manim.py` glob; `utils/` imports explicitly.
 - Renders, `.venv/`, caches and WSL `:Zone.Identifier` files are gitignored.
   `check-added-large-files` at 512 KB is the backstop if one slips past.
+
+## License
+
+[Apache 2.0](LICENSE). The repo is public research — use it, fork it,
+teach from it.
 
 ## Prerequisites
 

@@ -159,3 +159,42 @@ reordered.
 - transition-window rule's first live catch: the rate-label crossfade
 - next: logarithms — one series, two promises closed (bayes→log-odds
   and deep_learning's log-space bullet)
+
+## [2026-08-11] series | plan 005, logarithms (in progress)
+
+- node built: `logarithms` (algebra/logarithms_manim.py, six scenes;
+  new algebra/ topic)
+- the double-unlock closed: bayes-rule -> logarithms (the evidence
+  ruler, +2 per head exactly) and ctc-alignment -> logarithms (the
+  underflow cliff, log-sum-exp, Graves 2012 correctly attributed)
+- also on this branch: workflow sequence diagram + welcome gif on the
+  front page; Apache 2.0 license; repo made public
+- branch note: first cut sat on a stale main (PR #5 was still open);
+  pull-and-verify caught it, merge completed, branch re-cut
+
+## [2026-08-11] audit | incremental, plan 005 branch
+
+- scope: diffed 67713b8..726b19e (9 commits); changed files only
+- findings: 4 promised-not-delivered, 5 delivered-not-recorded,
+  3 possible-not-yet-made, 4 graph-health — all applied
+- the picture-is-a-claim rule caught on the flipped edge itself: three
+  documents promised a return-to-zero the ruler never walked; fixed in
+  the scene's favour (H, H, T, T — the marker comes home)
+- stale-at-delivery occurrences 4 and 5 (probability Scope, the
+  deep_learning log-space bullet) repaired; logarithms gains its three
+  out-promise rows; calculus/e is the new strongest open promise
+- devices recorded: the quartered square's fourth series; the odds
+  ladder into log space
+- structural fix: phase 3 now includes re-rendering the welcome gif
+  when a topic lands (the hand-listed topic row is a staleness surface)
+- stamp: advance to 726b19e
+
+## [2026-08-11] series | plan 005 finalised (PR #6)
+
+- final 1080p60 render verified: 6 files, native 0.75x pace; the
+  ruler's walk-home confirmed at full resolution
+- review round: 2 CodeRabbit findings (the a >= b convention, the gif
+  exception) + 16 audit findings, all applied
+- the repo is public, licensed Apache 2.0, and its front page explains
+  itself (welcome gif + workflow diagram)
+- next: calculus/ (unlocks e and ln), or the log-odds inference scene
