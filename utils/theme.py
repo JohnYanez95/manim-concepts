@@ -16,20 +16,48 @@ Semantic rule for the named colours
 PALETTE is different: it is a categorical cycle for "these are N distinct
 objects with no ranking between them", indexed by position. Do not reach into
 it for semantic meaning.
+
+Why the two sets do not share hexes
+-----------------------------------
+They used to. Four of the five semantic names were literally PALETTE entries
+(ACCENT was PALETTE[3], COOL/WARM/GOOD were [0]/[1]/[2]), which meant the
+distinction this module spends its docstring on was invisible in the rendered
+video — two review fixes about semantic misuse came out pixel-identical. The
+sets are now disjoint by at least dE 25, so "warm means this is about to be
+cancelled" is something a viewer can actually learn across topics.
+
+Colour-blind safety
+-------------------
+The semantic colours are separated under simulated deuteranopia and protanopia
+as well as normal vision, because they carry meaning by hue. WARM against GOOD
+used to collapse to dE 9.8 under deuteranopia — indistinguishable — and that
+pair *is* the argument in CombinationRule, where an overcount collapses into a
+confirmed set. The worst semantic pair is now dE 21.5 simulated. The numbers
+are pinned by ``tests/test_visual_contract.py``; changing a hex here without
+running that suite is how the property gets lost again.
+
+PALETTE is held to a lower bar on purpose: categorical items in this repo carry
+a text label (the A/B/C tokens, the chip captions), so hue is never their only
+signal. Which is the general rule — see CLAUDE.md.
 """
 
 # --- Canvas -----------------------------------------------------------------
 BG = "#0f1117"
 
 # --- Semantic colours -------------------------------------------------------
-ACCENT = "#f6c667"
-COOL = "#5ec8e5"
-WARM = "#ff7f6b"
-GOOD = "#7ee081"
-MUTED = "#9aa0ac"
+# Not hand-picked. Solved by tools/solve_palette.py, which minimises drift from
+# the original palette subject to the constraints in the module docstring. Re-run
+# `uv run python tools/solve_palette.py --verify` after touching any hex here.
+ACCENT = "#ffcc67"
+COOL = "#60cded"
+WARM = "#f87965"
+GOOD = "#91fcae"
+MUTED = "#93979e"
 
 # --- Categorical cycle ------------------------------------------------------
-PALETTE = ["#5ec8e5", "#ff7f6b", "#7ee081", "#f6c667", "#c792ea"]
+# Mutually >= dE 52 and >= dE 20 from every semantic colour above, so the
+# categorical cycle can never be mistaken for a semantic statement.
+PALETTE = ["#009ba9", "#ff7189", "#7bd26c", "#eab77b", "#c490e8"]
 
 
 def palette(index: int) -> str:

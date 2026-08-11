@@ -15,11 +15,15 @@ a concept module names its colours through the theme, never directly.
 
 import ast
 import re
+from itertools import combinations
 from pathlib import Path
 
 import manim
 import pytest
 from manim.utils.color import ManimColor
+
+from utils import theme
+from utils.colour import DEUTERANOPIA, PROTANOPIA, delta_e, simulate
 
 REPO = Path(__file__).resolve().parents[1]
 
@@ -83,3 +87,75 @@ def test_no_hex_colour_literals(module):
         }
     )
     assert not literals, f"{module.name} hardcodes colours {literals}; move them to utils/theme.py"
+
+
+# ---------------------------------------------------------------------------
+# The palette itself
+#
+# These pin properties that are invisible in code review: whether two hexes
+# stay distinguishable to a colour-blind viewer is not something anyone can
+# eyeball from a diff. WARM against GOOD once collapsed to dE 9.8 under
+# simulated deuteranopia while looking fine to me, and that pair carries the
+# whole argument in CombinationRule.
+# ---------------------------------------------------------------------------
+
+SEMANTIC = {
+    "ACCENT": theme.ACCENT,
+    "COOL": theme.COOL,
+    "WARM": theme.WARM,
+    "GOOD": theme.GOOD,
+    "MUTED": theme.MUTED,
+}
+WHITE = "#ffffff"
+
+
+@pytest.mark.parametrize("name,colour", SEMANTIC.items())
+def test_semantic_colour_is_legible_on_the_background(name, colour):
+    assert delta_e(colour, theme.BG) > 45, f"{name} is too close to the background"
+
+
+@pytest.mark.parametrize("name,colour", SEMANTIC.items())
+def test_semantic_colour_is_not_mistakable_for_body_text(name, colour):
+    assert delta_e(colour, WHITE) > 20, f"{name} reads as plain white text"
+
+
+@pytest.mark.parametrize("a,b", list(combinations(SEMANTIC, 2)))
+def test_semantic_colours_are_distinct(a, b):
+    assert delta_e(SEMANTIC[a], SEMANTIC[b]) > 28, f"{a} and {b} are too similar"
+
+
+@pytest.mark.parametrize(
+    "vision,matrix", [("deuteranopia", DEUTERANOPIA), ("protanopia", PROTANOPIA)]
+)
+@pytest.mark.parametrize("a,b", list(combinations(SEMANTIC, 2)))
+def test_semantic_colours_survive_colour_blindness(a, b, vision, matrix):
+    """Semantic colours carry meaning by hue, so they must survive losing hue.
+
+    The regression this exists for: WARM/GOOD at dE 9.8 under deuteranopia,
+    which made CombinationRule's central visual argument invisible to roughly
+    one man in sixteen.
+    """
+    separation = delta_e(simulate(SEMANTIC[a], matrix), simulate(SEMANTIC[b], matrix))
+    assert separation > 15, f"{a} and {b} collapse under {vision} (dE {separation:.1f})"
+
+
+@pytest.mark.parametrize("index", range(len(theme.PALETTE)))
+def test_categorical_colours_do_not_alias_the_semantic_ones(index):
+    """The two sets must stay disjoint, or the distinction is source-only.
+
+    They were not always: four of five semantic names were literally PALETTE
+    entries, so a scene using the wrong one rendered identically to a scene
+    using the right one.
+    """
+    nearest = min((delta_e(theme.PALETTE[index], c), n) for n, c in SEMANTIC.items())
+    assert nearest[0] > 20, f"PALETTE[{index}] is indistinguishable from {nearest[1]}"
+
+
+@pytest.mark.parametrize("i,j", list(combinations(range(5), 2)))
+def test_categorical_colours_are_distinct(i, j):
+    assert delta_e(theme.PALETTE[i], theme.PALETTE[j]) > 28
+
+
+def test_palette_helper_wraps():
+    assert theme.palette(0) == theme.PALETTE[0]
+    assert theme.palette(len(theme.PALETTE)) == theme.PALETTE[0]
