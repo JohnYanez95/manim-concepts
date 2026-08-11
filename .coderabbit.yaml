@@ -1,0 +1,127 @@
+# yaml-language-server: $schema=https://coderabbit.ai/integrations/schema.v2.json
+#
+# Review policy for the GitHub bot.
+#
+# The posture here is deliberately lax on code style and strict on structure.
+# Style is already fully settled by machines that run before the PR exists:
+# ruff decides formatting, line length, import order and PEP 8, and
+# markdownlint decides prose. A bot re-litigating any of that is pure noise,
+# and noise is what makes people stop reading review comments.
+#
+# What tooling cannot check is whether the repo still hangs together: whether a
+# new topic brought its README, whether a scene reuses the shared layer instead
+# of re-inventing it, whether a colour was used for its meaning. That is what
+# this configuration asks CodeRabbit to spend its attention on.
+language: "en-US"
+
+reviews:
+  # "chill" over "assertive" on purpose — see the note above. This is a
+  # personal research repo, not a production service; a wall of nitpicks on a
+  # visualisation costs more than it catches.
+  profile: "chill"
+  auto_review:
+    enabled: true
+    drafts: false
+  high_level_summary: true
+  poem: false
+
+  path_filters:
+    # Render output. Gitignored already; this is belt and braces so a forced
+    # add never turns into a review of binary video.
+    - "!media/**"
+    # Resolver output, not authored code.
+    - "!uv.lock"
+
+  path_instructions:
+    - path: "**/*_manim.py"
+      instructions: |
+        Concept modules — animation source. Ruff owns style here; do NOT flag
+        formatting, line length, import order, naming conventions, or the
+        `from manim import *` star import (that is the documented manim idiom
+        and is a deliberate, scoped lint exemption declared in pyproject.toml).
+        Magic numbers for geometry — coordinates, buffs, run_times — are how
+        Manim layout is written. Do not ask for them to be named constants.
+
+        DO flag structural drift away from the shared layer:
+        - A hardcoded hex colour instead of a name from `utils.theme`. The
+          palette is the repo's visual identity; a one-off hex is how it rots.
+        - A colour used against its meaning. ACCENT is the result being built
+          toward, WARM is what gets cancelled or overcounted, GOOD is a
+          confirmed object, MUTED is scaffolding. PALETTE is a categorical
+          cycle for "N distinct things with no ranking" and carries no meaning
+          — reaching into it for a semantic role is a finding.
+        - Re-implementing something `utils.mobjects` already provides
+          (`token`, `chip`, `boxed`, `header`, `caption`) inline.
+        - A Scene that subclasses `Scene` directly instead of `ConceptScene`,
+          or sets `camera.background_color` by hand.
+        - A scene class with no docstring. The first line is what `--list`
+          prints, so a missing one degrades the CLI, not just the source.
+        - A hand-maintained `SCENES = [...]` list. `render_cli()` discovers
+          scenes automatically; a manual list drifts silently.
+        - `sys.path` manipulation to reach `utils`. The project is installed as
+          a package precisely so this is never needed.
+
+    - path: "*/README.md"
+      instructions: |
+        Topic READMEs. The contract is defined under "The topic contract" in
+        the root README; check this file against it rather than against
+        general documentation taste.
+
+        DO flag:
+        - A missing Scope section, or a Scope that says only what IS covered.
+          The explicit "deliberately not covered" half is the part that keeps a
+          topic from becoming a junk drawer, and omitting it is a finding.
+        - A concept file in this directory with no row in the concepts table,
+          or a table row for a scene that no longer exists.
+        - A table row missing its visual-argument cell. That column is what
+          stops two scenes from re-explaining the same intuition.
+        - A missing References or "Ideas not yet built" section.
+
+        Reference verification is HUMAN-GATED. `- [ ]` means unverified and
+        `- [x]` means a person opened the link and vouched for it.
+        - Unverified entries are NOT a defect. Never ask for a `- [ ]` to be
+          resolved, justified, or removed before merge; they are a to-do list.
+        - DO flag any diff that flips `- [ ]` to `- [x]` without a human
+          plausibly having done so — in particular in a commit authored or
+          co-authored by a bot or an AI assistant, or in a change that ticks
+          several boxes at once alongside unrelated edits. An automated tick
+          defeats the only purpose the checkbox has.
+        - DO flag a new reference added as `- [x]`. Every entry starts
+          unchecked, without exception.
+
+    - path: "utils/**"
+      instructions: |
+        The shared layer. Held to a higher bar than concept modules, because
+        every topic inherits whatever lands here.
+
+        DO flag:
+        - Star imports. The `from manim import *` exemption is scoped to
+          `*/*_manim.py` and does not extend to this package.
+        - A new public name that is not re-exported in `utils/__init__.py`'s
+          `__all__`. Concept modules import from the package root only, so an
+          un-exported helper is invisible to them.
+        - A constructor in `mobjects.py` that animates or plays. This module
+          returns mobjects; composition and timing belong to the scene.
+        - Behaviour that depends on the current working directory. Render
+          output is pinned to `<repo>/media` via `media_root()` so that a
+          module renders identically from anywhere.
+        - Manim global-config state left mutated across a render. `tempconfig`
+          is scoped per scene deliberately: manim writes the finished output
+          path back into the global config, and a batch-wide scope makes every
+          scene overwrite the first scene's file.
+
+    - path: "pyproject.toml"
+      instructions: |
+        DO flag a new entry in `[tool.ruff.lint.per-file-ignores]` that has no
+        comment saying why the rule is being suppressed. The existing
+        F403/F405 exemption is commented; the list should stay short and
+        justified rather than growing into a way to silence findings.
+
+knowledge_base:
+  learnings:
+    scope: "local"
+  code_guidelines:
+    enabled: true
+
+chat:
+  auto_reply: true
