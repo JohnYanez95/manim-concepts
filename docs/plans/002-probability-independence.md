@@ -26,7 +26,11 @@ probability, which does not exist in the repo yet.
 - [x] Branch from updated main
 - [x] Phase 0: research reports received, scene design finalized below
 - [x] Phase 1: plan + skeleton, `make check` green
-- [ ] Phase 2: all scenes render at draft; verified per CLAUDE.md checklist
+- [x] Phase 2: all scenes render at draft; verified per CLAUDE.md checklist
+  (6 distinct numbered files; durations 17–39 s; 17 extracted frames
+  reviewed; 2 defects found and fixed — the HH overlap tint was
+  overwritten, the 6×6 side note center-aligned into the grid —
+  re-rendered, re-verified clean)
 - [ ] Phase 3: topic README complete, `make test` green
 - [ ] Phase 4: local review clean
 - [ ] Phase 5: PR open, drafts cleaned, 1080p60 render verified
