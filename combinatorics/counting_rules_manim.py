@@ -1,13 +1,15 @@
 """Counting rules — why each formula is the shape it is.
 
-Four scenes, each built the same way: show the thing being counted, count it by
+Four rules, each built the same way: show the thing being counted, count it by
 hand, then let the formula fall out of what was just seen rather than appearing
-first and being justified afterwards.
+first and being justified afterwards. A fifth scene closes the loop by saying
+when to reach for which.
 
     MultiplicativeRule   n_1 * n_2 * ... * n_k        a tree that becomes a grid
     PermutationRule      P(n,r) = n!/(n-r)!           slots filled from a shrinking pool
     CombinationRule      C(n,r) = n!/(r!(n-r)!)       r! orderings collapsing to one set
     PartitionRule        n!/(n_1! n_2! ... n_k!)      a row chopped into blocks
+    WhenToUseIt          which rule a problem needs   four problem shapes, mapped
 
 Render:
     uv run python combinatorics/counting_rules_manim.py
