@@ -159,3 +159,15 @@ reordered.
 - transition-window rule's first live catch: the rate-label crossfade
 - next: logarithms — one series, two promises closed (bayes→log-odds
   and deep_learning's log-space bullet)
+
+## [2026-08-11] series | plan 005, logarithms (in progress)
+
+- node built: `logarithms` (algebra/logarithms_manim.py, six scenes;
+  new algebra/ topic)
+- the double-unlock closed: bayes-rule -> logarithms (the evidence
+  ruler, +2 per head exactly) and ctc-alignment -> logarithms (the
+  underflow cliff, log-sum-exp, Graves 2012 correctly attributed)
+- also on this branch: workflow sequence diagram + welcome gif on the
+  front page; Apache 2.0 license; repo made public
+- branch note: first cut sat on a stale main (PR #5 was still open);
+  pull-and-verify caught it, merge completed, branch re-cut
