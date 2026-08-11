@@ -150,16 +150,19 @@ moment LRs first multiply.
    LRs multiply only for evidence conditionally independent given the
    hypothesis — `WhenToCondition`'s lesson. Zero-prior caption: a
    hypothesis at 0 stays at 0.
-6. `TheHostsProtocol` — Monty at last, as ordinary Bayes with three
-   streams (uniform prior over car positions) and the likelihood of
-   the host's *action* under his protocol: standard (1/2, 1, 0) →
-   switch 2/3; Monty Fall (1/2, 1/2, 0) → 1/2; Monty Crawl forced-high →
-   switch wins certainly. Same revealed fact, three different answers
+6. `TheHostsProtocol` — Monty at last, as ordinary Bayes: door chips
+   set the stage, then a proportionality table (uniform prior over car
+   positions, one row per protocol) carries the likelihood of the
+   host's *action*: standard (1/2, 1, 0) → switch 2/3; Monty Fall
+   (1/2, 1/2, 0) → 1/2; Monty Crawl forced-high → switch wins
+   certainly. Same revealed fact, three different answers
    — the two-children announcement lesson completed at series scale.
    Rosenthal's proportionality principle named as "Bayes with a
-   uniform prior". Closing when-useful mapping: diagnosis, spam,
-   forensics (the prosecutor's fallacy as a missing prior), and the
-   boxed takeaway: never state a posterior without its prior.
+   uniform prior". Closing beat is a caption trio (diagnosis, spam,
+   forensics) — the mapping-scene layout deliberately broken, since
+   the protocol table already did the mapping — and the rendered boxed
+   takeaway: "Condition on what happened, the way it happened — then
+   multiply."
    (Monty Small's 1/(1+p) only as a caption unless the Phase 2
    verification script enumerates it first — the verifier flagged it
    unenumerated.)
