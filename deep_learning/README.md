@@ -21,8 +21,10 @@ Deliberately **not** covered here:
 
 - Probability foundations. Per-frame softmax outputs, products of
   independent probabilities and log-likelihood are *used* here without
-  being taught; they belong in a `probability/` topic that does not exist
-  yet, which makes it the natural next series.
+  being taught. The unconditional product is now taught in
+  [`probability/`](../probability/README.md) (the independence series);
+  conditional independence, softmax as a distribution, and
+  log-likelihood remain queued there.
 - Decoding at depth. Greedy decoding's failure appears in scene 3, but
   beam search over collapsed prefixes and language-model fusion are queued
   in Ideas, not built.

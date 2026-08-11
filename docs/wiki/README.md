@@ -9,7 +9,12 @@ instead of in someone's head.
 
 - [`INDEX.md`](INDEX.md) is the graph: one row per node, one row per
   edge, each edge marked **delivered** or **promised** with the place it
-  is stated.
+  is stated. Its `Last audited:` stamp is the commit the graph was last
+  reconciled against — the auditor diffs from it.
+- [`log.md`](log.md) is the **append-only** record of graph operations —
+  series landing, audits applied, schema changes. Every graph operation
+  appends an entry at the bottom; existing entries are never edited or
+  reordered, and corrections get their own new entry.
 - Node pages (added as nodes accumulate detail) carry anything that does
   not fit an index row: design notes, device lineage, cross-references.
 
@@ -24,11 +29,9 @@ instead of in someone's head.
 - Edges cite where they are stated. An edge nobody can point to is a
   wish, not a connection.
 
-## External research
+## Scope boundary
 
-Broader research material — clippings, paper notes, explorations that
-are not repo-specific — lives in the maintainer's Obsidian vault at
-`~/Obsidian/project-research`. This wiki deliberately stays repo-shaped:
-its nodes are things the repo teaches or has promised to teach. When a
-wiki thread grows beyond the repo (background reading, discarded
-approaches), it belongs in the vault, with at most a pointer from here.
+This wiki deliberately stays repo-shaped: its nodes are things the repo
+teaches or has promised to teach. Background reading, clippings, and
+explorations that are not repo-specific do not belong here — when a wiki
+thread grows beyond the repo, it leaves the repo.

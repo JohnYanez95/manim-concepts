@@ -22,7 +22,8 @@ Deliberately **not** covered here:
   independence via P(A|B) = P(A), and Bayes' rule are the next series on
   their own branch — this one teaches the product form first precisely
   because it needs no conditioning (and survives zero-probability
-  events). One renormalization teaser is foreshadowed, not defined.
+  events). The renormalized-slice picture is deferred entirely to that
+  series.
 - Random variables, distributions, and expectation. Events only.
 - Measure-theoretic formality. "Probability is area" is used as a
   faithful picture, not developed as measure theory.
@@ -44,7 +45,7 @@ misread; the last is the decision rule for assuming it in the wild.
 | 3 | `OneDieTwoEvents` | $\tfrac12\cdot\tfrac23=\tfrac13$ | Independence can live inside a single experiment — and one pip decides it. | On one fair die, even and $\{1,2,3,4\}$ factor exactly; slide the boundary to $\{1,2,3\}$ and $\tfrac14\neq\tfrac16$. Same events under a biased die: broken again — it is a property of the measure. | Checking independence by arithmetic instead of intuition; "separate mechanisms" is neither necessary nor sufficient. |
 | 4 | `NotMutualExclusivity` | $0 \neq P(A)P(B)$ | Mutually exclusive events are not independent — they are maximally dependent. | Disjoint regions share no area, so the product test fails as loudly as possible; seeing one event tells you the other did not happen. The dependent square is the one whose cut steps. | The most-tested probability confusion; also why Venn-style pictures mislead here — disjoint circles *look* unrelated. |
 | 5 | `ChainsOfTrials` | $P(A_1\cap\cdots\cap A_n)=\prod_i P(A_i)$ | A sequence of independent trials multiplies, one factor per step. | Each flip subdivides the square; HHTH is a cell of volume $(1/2)^4$. The chain needs *mutual* independence — Bernstein's coins factor in every pair yet fail the triple — and asserting the product is a modeling choice: the product measure. | The step `deep_learning/`'s CTC loss performs per frame; likelihoods of i.i.d. data; every "multiply the per-step probabilities" argument. |
-| 6 | `WhenToUseIt` | — | When assuming independence is safe, and what breaks it. | Replacement installs it (aces: $\tfrac1{169}$), depletion breaks it ($\tfrac1{221}$), common causes break it with no causal link between the events, and the gambler's fallacy misreads swamping as compensation. | Reading a model's independence assumption and knowing what it costs — the question to ask before multiplying anything. |
+| 6 | `WhenToUseIt` | — | When assuming independence is safe, and what breaks it. | Replacement installs it (aces: $\tfrac1{169}$), depletion breaks it ($\tfrac1{221}$), common causes break it with no causal link between the events, and the gambler's fallacy misreads swamping as compensation. | Reading a model's independence assumption and knowing what it costs — the question to ask before multiplying anything. In [CTC](../deep_learning/README.md), the word is the common cause across frames — exactly why an external language model helps at decode time. |
 
 Renders are numbered to match, so a directory listing plays in the same
 order: `01_ProbabilityAsArea.mp4` … `06_WhenToUseIt.mp4`.
@@ -71,8 +72,8 @@ entry claims, and tick it yourself; nothing automated will.
 - [X] [TsviBT, Jaime Sevilla Mollina, "Two independent events: Square visualization"](https://www.lesswrong.com/w/4cl)
       — the aligned-square device the whole series leans on.
 - [X] [3blue1brown, Bayes' theorem lesson](https://www.3blue1brown.com/lessons/bayes-theorem)
-      — probability as area on a 1×1 square; the restriction teaser the
-      last scene foreshadows.
+      — probability as area on a 1×1 square; the restriction move the
+      conditional-probability series will inherit.
 - [X] [kevin_davisross, "Probability and Simulation", §3.5 Independence](https://bookdown.org/kevin_davisross/probsim-book/independence.html)
       — independence as a property of the measure; "overlap in just the
       right way".
@@ -98,6 +99,8 @@ Rough queue, in roughly the order they build on each other:
   P(A|B) as renormalized area, the multiplication rule
   P(A∩B) = P(B)·P(A|B), independence rederived as P(A|B) = P(A), trees.
 - Bayes' rule, once conditioning exists.
+- Per-frame softmax as a distribution, likelihood and log-likelihood —
+  the remaining half of the bridge promised to `deep_learning/`.
 - The law of large numbers properly: swamping quantified, absolute vs
   relative deviation.
 - Random variables and distributions — the die as a function, not a set.

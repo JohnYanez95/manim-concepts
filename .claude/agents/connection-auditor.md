@@ -14,8 +14,11 @@ in the teaching.
 
 **Start from the graph, not from the content.** Your first read is always
 `docs/wiki/INDEX.md`: it carries a `Last audited:` stamp (commit hash)
-recording the state the graph was last reconciled against. From there,
-work incrementally:
+recording the state the graph was last reconciled against. Read
+`docs/wiki/log.md` second — it is the append-only journal of graph
+operations (chronological, newest at the bottom, entries are never
+rewritten or reordered), and its recent entries tell you what the last
+audits already covered. From there, work incrementally:
 
 1. `git diff --name-only <stamp>..HEAD` (plus `git log --oneline
    <stamp>..HEAD`) tells you which content changed since the last audit.
@@ -56,7 +59,20 @@ Report four things, each as its own section:
    have drifted from the content they describe.
 
 Be specific: cite file and line/section for every claim. Do not edit any
-file — you report; the main agent decides and applies, and updates the
-`Last audited:` stamp when it has reconciled your findings into the
-graph. Rank findings within each section by how much teaching value the
-connection carries, not by ease of fixing.
+file — you report; the main agent decides and applies, updates the
+`Last audited:` stamp, and appends your log entry. Rank findings within
+each section by how much teaching value the connection carries, not by
+ease of fixing.
+
+**End every report with a ready-to-append log entry** in the log's exact
+format, so applying it is a paste, not a composition:
+
+    ## [YYYY-MM-DD] audit | <scope slug>
+
+    - scope: <what was diffed, from which stamp>
+    - findings: <counts per section, one line>
+    - <one bullet per finding worth remembering>
+    - stamp: advance to <commit>
+
+The log is append-only: entries go at the bottom, and existing entries
+are never edited — corrections get their own new entry.

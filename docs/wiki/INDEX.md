@@ -1,6 +1,6 @@
 # Graph index
 
-Last audited: *(pending first audit — plan 002 branch)*
+Last audited: `75e5cf9` (2026-08-11, seed audit — full crawl by design)
 
 The stamp is a commit hash: the state of the repo this graph was last
 reconciled against. The `connection-auditor` diffs from it instead of
@@ -13,7 +13,7 @@ crawling every page; whoever applies an audit's findings updates it.
 | `counting-rules` | `combinatorics/counting_rules_manim.py` | The four elementary counting rules; the grid as outer product of stages |
 | `ctc-alignment` | `deep_learning/ctc_alignment_manim.py` | CTC: collapse map, alignment counting, forward trellis |
 | `independence` | `probability/independence_manim.py` | The product rule as definition; the aligned unit square |
-| `conditional-probability` | *(not built — plan 003)* | Renormalized area, P(A∩B) = P(B)·P(A\|B), Bayes |
+| `conditional-probability` | *(not built — next series; promised in plan 002's gaps)* | Renormalized area, P(A∩B) = P(B)·P(A\|B), Bayes |
 
 ## Edges
 
@@ -24,9 +24,13 @@ Status: **delivered** (both ends exist and the content makes the link) or
 | --- | --- | --- | --- |
 | `counting-rules` | `ctc-alignment` | delivered | `PartitionRule` when-useful cell promised "the counting step behind CTC"; `CountingAlignments` delivers it (3⁴ raw paths, C(T+U, T−U)) |
 | `counting-rules` | `independence` | delivered | `probability/README.md` Scope: the multiplication grid reweighted from counts to areas; `ProbabilityAsArea` + `TheProductRule` |
-| `ctc-alignment` | `independence` | delivered | `deep_learning/README.md` named the gap; `ChainsOfTrials` teaches the per-frame product CTC purchases |
-| `independence` | `conditional-probability` | promised | `probability/README.md` Scope + Ideas; plan 002 gaps; the renormalization teaser foreshadowed in scene design |
+| `ctc-alignment` | `independence` | delivered (unconditional half) | `deep_learning/README.md` Scope names the split; `ChainsOfTrials` teaches the unconditional per-frame product |
+| `ctc-alignment` | `conditional-probability` | promised | the conditional half of PR #2's bridge: "frames independent *given the input*" is on screen in `WhenToUseIt` (deep_learning) but taught nowhere |
+| `independence` | `conditional-probability` | promised | `probability/README.md` Scope + Ideas; plan 002 gaps |
 | `ctc-alignment` | *(beam search / gradient / peaky dynamics)* | promised | `deep_learning/README.md` Ideas not yet built |
+| `ctc-alignment` | *(dynamic programming as its own concept)* | promised | `deep_learning/README.md` row 5 when-useful ("the same dynamic-programming move as the HMM forward algorithm"); plan 001 gaps |
+| `counting-rules` | *(binomial distribution — future random variables)* | promised | `combinatorics/README.md` row 3 when-useful names it; lands when `probability/` grows random variables |
+| `independence` | *(softmax, likelihood, log-likelihood)* | promised | `probability/README.md` Ideas — the remaining half of the CTC bridge |
 | `independence` | *(law of large numbers)* | promised | `probability/README.md` Ideas; `WhenToUseIt`'s swamping beat is the seed |
 | `independence` | *(random variables)* | promised | `probability/README.md` Ideas |
 | `counting-rules` | *(Pascal, stars & bars, inclusion–exclusion, binomial theorem)* | promised | `combinatorics/README.md` Ideas not yet built |
@@ -44,3 +48,11 @@ one topic should meet the same picture, upgraded, in the next:
   failed product tests (independence).
 - **The closing `WhenToUseIt` mapping scene**: same layout in all three
   series — problem shapes on the left, verdicts on the right.
+- **The chain product**: `PermutationRule`'s slot chain →
+  `ManyPathsOneWord`'s per-frame product annotation → `ChainsOfTrials`'
+  progressive square subdivision. One device, three series.
+- **The shrinking pool**: `PermutationRule`'s pool-that-depletes is
+  sampling without replacement — the same picture that breaks
+  independence in `WhenToUseIt` (probability, the aces row). The
+  dependent case has the same counting ancestry the independent case
+  does.

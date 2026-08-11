@@ -205,9 +205,8 @@ marked delivered or promised with the place it is stated. Two rules:
   delivered-but-unrecorded, and possible-but-unmade connections; the
   graph is only useful while it matches the content.
 
-Repo-external research (clippings, paper notes) lives in the maintainer's
-Obsidian vault (`~/Obsidian/project-research`), not here — the wiki stays
-repo-shaped.
+The wiki stays repo-shaped: nodes are things the repo teaches or has
+promised to teach, nothing broader.
 
 ## Topic contract
 
