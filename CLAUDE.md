@@ -10,6 +10,27 @@ stated in full in exactly one of them. Review findings that were considered and
 declined live in [`docs/decisions.md`](docs/decisions.md) — check it before
 re-opening an argument.
 
+## The narrative: three levels of understanding
+
+Every concept in this repo is built to climb the same three levels, in order:
+
+1. **What is it saying?** — state the claim plainly, in objects the viewer can
+   see and count.
+2. **Why is it true?** — the argument. Not a proof; the reason the shape of the
+   formula is forced. This is the part a scene should spend its time on.
+3. **When is it useful?** — where the result shows up once you leave the
+   example. Without this a scene teaches a fact instead of a tool.
+
+A concept that stops after level 2 is **incomplete**, and that is the default
+failure mode — level 2 is the satisfying part to build, so it is where scenes
+stop. The formula arriving last is not the end of the narrative; the formula is
+the top of level 2.
+
+The levels apply to a concept, not necessarily to one scene: a module of four
+scenes may reach level 3 only in its last. But the topic README's concepts
+table has a column for each level, and a blank one is a gap in the teaching,
+not a formatting problem.
+
 ## Step 0: plan before touching a file
 
 Any topic, any concept, anything non-trivial starts with a written plan broken

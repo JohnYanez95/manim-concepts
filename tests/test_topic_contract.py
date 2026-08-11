@@ -172,29 +172,34 @@ def test_readme_enumerates_scenes_in_source_order(module):
 
 
 @pytest.mark.parametrize("module", MODULES, ids=lambda p: p.name)
-def test_every_scene_row_has_a_visual_argument(module):
-    """The last column is load-bearing, so an empty cell is a contract breach.
+def test_every_scene_row_covers_all_three_levels(module):
+    """Each row must answer what it says, why it's true, and when it's useful.
 
-    It is what stops two scenes from re-explaining the same intuition: writing
-    it forces the author to say how *this* scene's argument differs. A row can
-    satisfy the numbering check while leaving it blank, so it is checked here.
+    The three levels of understanding are the repo's narrative spine, and the
+    third is the one that gets skipped — "why is it true" is the satisfying
+    part to build, so scenes stop there and teach a fact instead of a tool.
+    A row can satisfy the numbering check with those cells blank, so they are
+    checked separately here.
     """
     text = (module.parent / "README.md").read_text(encoding="utf-8")
     source_order = [scene.name for scene in scenes_in(module)]
+    # number | scene | formula | what it says | why it's true | when it's useful
+    levels = {3: "what it says", 4: "why it's true", 5: "when it's useful"}
 
-    missing = []
+    gaps = []
     for line in text.splitlines():
         match = NUMBERED_ROW.match(line)
         if not match or match.group(2) not in source_order:
             continue
         cells = [cell.strip() for cell in line.strip().strip("|").split("|")]
-        # number | scene | idea | formula | visual argument
-        if len(cells) < 5 or not cells[-1]:
-            missing.append(match.group(2))
+        if len(cells) < 6:
+            gaps.append(f"{match.group(2)} (only {len(cells)} columns, needs 6)")
+            continue
+        for index, label in levels.items():
+            if not cells[index]:
+                gaps.append(f"{match.group(2)} has no '{label}'")
 
-    assert not missing, (
-        f"{module.parent.name}/README.md rows with no visual-argument cell: {missing}"
-    )
+    assert not gaps, f"{module.parent.name}/README.md: {gaps}"
 
 
 @pytest.mark.parametrize("topic", TOPICS, ids=lambda p: p.name)

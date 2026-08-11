@@ -56,6 +56,12 @@ reviews:
         Magic numbers for geometry — coordinates, buffs, run_times — are how
         Manim layout is written. Do not ask for them to be named constants.
 
+        The narrative spine is three levels of understanding: what is it
+        saying, why is it true, when is it useful. A module is expected to
+        climb all three — not necessarily per scene, but across its sequence.
+        DO flag a module whose scenes never reach "when is it useful", since
+        that is the standing failure mode.
+
         DO flag structural drift away from the shared layer:
         - A hardcoded hex colour instead of a name from `utils.theme`. The
           palette is the repo's visual identity; a one-off hex is how it rots.
@@ -87,8 +93,12 @@ reviews:
           topic from becoming a junk drawer, and omitting it is a finding.
         - A concept file in this directory with no row in the concepts table,
           or a table row for a scene that no longer exists.
-        - A table row missing its visual-argument cell. That column is what
-          stops two scenes from re-explaining the same intuition.
+        - A table row that does not answer all three levels of understanding:
+          what it says, why it's true, when it's useful. The third is the one
+          that gets skipped — "why is it true" is the satisfying part to write,
+          so authors stop there and the topic teaches a fact instead of a tool.
+          A blank "when it's useful" is a gap in the teaching, not a formatting
+          nit, and should be flagged as such.
         - A missing References or "Ideas not yet built" section.
         - An unnumbered concepts table, or numbering that does not run 1..n in
           the order the scenes are defined in the module. Scenes in a module

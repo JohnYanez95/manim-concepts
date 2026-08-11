@@ -6,6 +6,11 @@ The bias of this repo is that a formula should be the *last* thing on screen,
 not the first. Every scene shows the object being reasoned about, does the
 reasoning visibly, and lets the expression fall out of what was just seen.
 
+Concepts climb three levels, in this order — **what is it saying**, **why is
+it true**, **when is it useful**. The third is the one that gets skipped, and
+a concept that stops before it has taught a fact rather than a tool. Every
+topic README carries a column for each.
+
 Concepts are grouped by topic. Each topic is a directory holding one or more
 **concept modules** — a single runnable `*_manim.py` file per concept, each
 defining the scenes for it — and every module renders itself:
@@ -50,10 +55,11 @@ watching it first. Each topic README has four parts, in this order:
 1. **Scope** — a short high-level explanation of what the topic covers *and
    what it deliberately does not*. The second half matters more: without it a
    topic quietly becomes a junk drawer.
-2. **A numbered concepts table** — one row per scene, listing its position,
-   the idea it carries, the formula it lands on, and the visual argument it
-   makes. The visual-argument column is what stops two scenes from
-   re-explaining the same intuition.
+2. **A numbered concepts table** — one row per scene, with a column for each
+   of the three levels of understanding below: what it says, why it's true,
+   when it's useful. The why column is what stops two scenes from
+   re-explaining the same intuition; the when column is what stops the topic
+   from teaching facts instead of tools.
 
    The numbering is not decoration. Scenes in a module build toward one idea,
    so **source order is viewing order**: renders are named from it

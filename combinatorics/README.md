@@ -30,12 +30,12 @@ overcount only starts at the third: `CombinationRule` removes the $r!$
 orderings of a chosen set, and `PartitionRule` applies that same move blockwise.
 So `PartitionRule` does not land without `CombinationRule` before it.
 
-| # | Scene | Idea | Formula | Visual argument |
-| --- | --- | --- | --- | --- |
-| 1 | `MultiplicativeRule` | Independent stages multiply | $N = n_1 n_2 \cdots n_k$ | A tree with $3 \times 4 = 12$ leaf paths, re-cast as a grid so the product is literally the area of a rectangle. |
-| 2 | `PermutationRule` | Order matters | $P^n_r = \dfrac{n!}{(n-r)!}$ | Slot-filling from a shrinking pool (5, 4, 3), then the factorial identity by cancelling the unwanted tail $2 \times 1$. |
-| 3 | `CombinationRule` | Order does not matter | $C^n_r = \dbinom{n}{r} = \dfrac{n!}{r!\,(n-r)!}$ | The $3!$ orderings of $\{A,C,E\}$ collapse to one set — every combination was overcounted $r!$ times, so divide. |
-| 4 | `PartitionRule` | Split into labelled groups | $N = \dfrac{n!}{n_1!\,n_2!\cdots n_k!}$ | $6!$ row orderings chopped into blocks of 3/2/1, then divide out the within-block orderings that change nothing. |
+| # | Scene | Formula | What it says | Why it's true | When it's useful |
+| --- | --- | --- | --- | --- | --- |
+| 1 | `MultiplicativeRule` | $N = n_1 n_2 \cdots n_k$ | Independent stages multiply | A tree with $3 \times 4 = 12$ leaf paths, re-cast as a grid so the product is literally the area of a rectangle. | Sizing any search space before you try to enumerate it: keyspaces, configuration counts, the branching factor of a lattice. The first question to ask of "can I just list them all?" |
+| 2 | `PermutationRule` | $P^n_r = \dfrac{n!}{(n-r)!}$ | Order matters | Slot-filling from a shrinking pool (5, 4, 3), then the factorial identity by cancelling the unwanted tail $2 \times 1$. | Ranking and scheduling — top-$r$ orderings, seatings, any arrangement where swapping two items gives a different answer. |
+| 3 | `CombinationRule` | $C^n_r = \dbinom{n}{r} = \dfrac{n!}{r!\,(n-r)!}$ | Order does not matter | The $3!$ orderings of $\{A,C,E\}$ collapse to one set — every combination was overcounted $r!$ times, so divide. | Sampling without replacement, and every binomial coefficient downstream of it: the binomial distribution, Pascal's triangle, $(x+y)^n$. |
+| 4 | `PartitionRule` | $N = \dfrac{n!}{n_1!\,n_2!\cdots n_k!}$ | Split into labelled groups | $6!$ row orderings chopped into blocks of 3/2/1, then divide out the within-block orderings that change nothing. | Multinomial coefficients: dividing into teams, arrangements of a word with repeated letters, and counting the alignments a sequence model can take — the counting step behind CTC. |
 
 Renders are numbered to match, so a directory listing plays in the same order:
 `01_MultiplicativeRule.mp4` … `04_PartitionRule.mp4`.
