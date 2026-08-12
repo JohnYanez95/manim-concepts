@@ -133,10 +133,10 @@ on his instruction.
 - [X] [arXiv:2504.10664, "A cute proof that makes e natural"](https://arxiv.org/abs/2504.10664)
       — a pre-calculus bridge between the limit and slope-equals-height
       (flagged: checked at abstract level only in the research pass).
-- [X] [O'Connor, Robertson, "The number e"](https://mathshistory.st-andrews.ac.uk/HistTopics/e/)
+- [X] [J J O'Connor and E F Robertson, "The number e" (MacTutor)](https://mathshistory.st-andrews.ac.uk/HistTopics/e/)
       — Bernoulli 1683 and the 2-to-3 bounds; Goldbach letter 1731;
       Introductio 1748 with 18 places.
-- [X] [O'Connor, Robertson, "John Napier"](https://mathshistory.st-andrews.ac.uk/Biographies/Napier/)
+- [X] [J J O'Connor and E F Robertson, "John Napier" (MacTutor)](https://mathshistory.st-andrews.ac.uk/Biographies/Napier/)
       — 1614 Descriptio; Napier's logs are "not really to any base" —
       the misattribution scene 6 stays away from.
 - [X] [OpenStax Calculus Vol. 1, §3.9](https://openstax.org/books/calculus-volume-1/pages/3-9-derivatives-of-exponential-and-logarithmic-functions)
