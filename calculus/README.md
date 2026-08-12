@@ -25,8 +25,9 @@ Deliberately **not** covered here:
 - **Complex exponentials and Euler's formula** — rotation is a
   different story.
 - **Softmax and likelihood.** Why e appears in every probability
-  machine is owned by `probability/`'s queued likelihood series — this
-  series only delivers the e that machinery will need.
+  machine is owned by `probability/`'s softmax/likelihood series —
+  delivered: its dial scene answers with this series' own ln
+  (every base above 1 is e at another temperature).
 
 ## Concepts
 

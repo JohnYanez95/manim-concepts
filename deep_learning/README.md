@@ -25,7 +25,9 @@ Deliberately **not** covered here:
   [`probability/`](../probability/README.md) (the independence series),
   and conditional independence — the form this topic actually assumes —
   in its conditional series (`WhenToCondition`). Softmax as a
-  distribution and log-likelihood remain queued there.
+  distribution and log-likelihood are now taught there too — the
+  softmax/likelihood series scores this topic's own per-frame matrix
+  and names the CTC loss in its closer.
 - Decoding at depth. Greedy decoding's failure appears in scene 3, but
   beam search over collapsed prefixes and language-model fusion are queued
   in Ideas, not built.
@@ -111,7 +113,10 @@ Rough queue, in roughly the order they build on each other:
   dominate.
 - The gradient identity — per-frame gradient is softmax output minus
   posterior occupancy, which is what makes the error-signal figure
-  legible.
+  legible. Its groundwork now exists: `probability/`'s
+  softmax/likelihood series delivers NLL as the LSE gap and
+  foreshadows the identity on screen; what remains is the derivative
+  toolkit and the identity itself.
 - ~~Log-space computation~~ — delivered by
   [`algebra/`](../algebra/README.md)'s `TheUnderflowCliff`: the
   0.1³²⁴ hard zero, the −324 log sum, and Graves' log-add identity

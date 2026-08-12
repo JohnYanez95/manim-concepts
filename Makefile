@@ -46,14 +46,14 @@ list:  ## List every concept module and the scenes it defines
 		echo "$$out" | sed 's/^/    /'; \
 	done
 
-render:  ## Render one module: make render FILE=topic/x_manim.py [QUALITY=] [SCENE=]
+render:  ## Render one module: make render FILE=topic/x_manim.py [QUALITY=] [SCENE=] [JOBS=N]
 	@[ -n "$(FILE)" ] || { \
 		echo "usage: make render FILE=<topic>/<concept>_manim.py [QUALITY=draft|medium|high|4k] [SCENE=Name]"; \
 		echo "available:"; \
 		for f in $(CONCEPTS); do echo "    $$f"; done; \
 		exit 2; \
 	}
-	uv run python $(FILE) --quality $(QUALITY) $(if $(SCENE),--scene $(SCENE))
+	uv run python $(FILE) --quality $(QUALITY) $(if $(SCENE),--scene $(SCENE)) $(if $(JOBS),--jobs "$(JOBS)")
 
 render-all:  ## Render every concept module (QUALITY=draft for a fast sweep)
 	@for f in $(CONCEPTS); do \

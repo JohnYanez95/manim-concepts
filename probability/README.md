@@ -3,7 +3,7 @@
 ## Scope
 
 Probability as proportion, built visually: the sample space as a unit
-square, events as regions, probability as area. Four series so far. The
+square, events as regions, probability as area. Five series so far. The
 first covers **independence** — the product rule P(A∩B) = P(A)·P(B) as
 the *primary* definition, why it is the probability-weighted upgrade of
 the counting grid, the confusions it attracts, and the product over a
@@ -20,7 +20,14 @@ function (not a set), the pmf born by sorting the quartered square,
 expectation as the balance point, linearity without independence, the
 binomial assembled from cell counts and cell areas, and the swamping
 intuition quantified — closing the oldest promise the counting series
-made.
+made. The fifth covers **softmax and likelihood** — likelihood as the
+row lens on the binomial table (data pinned, parameter sweeping),
+maximum likelihood as the row's peak, the log as the native scale of
+accumulating independent evidence, softmax as exp-then-normalize
+forced by shift invariance, temperature and the base-change answer to
+"why e", and negative log-likelihood as the visible gap on the
+log-sum-exp ruler — the remaining half of the bridge promised to
+`deep_learning/`, delivered.
 
 This topic exists because two earlier ones promised it: the
 [multiplicative rule](../combinatorics/README.md) counts pairs as
@@ -57,6 +64,21 @@ Deliberately **not** covered here:
   faithful picture, not developed as measure theory.
 - Counting itself — that is `combinatorics/`'s job; this topic starts
   where counting hands over to proportion.
+- The softmax gradient as a taught result. `TheLossThatTrains`
+  foreshadows "softmax output minus occupancy" in prose, but the repo
+  has no derivative toolkit yet — the identity waits for the CTC
+  gradient series.
+- Entropy, KL divergence, and soft-target cross-entropy. The one-hot
+  collapse is all the loss scene needs; the information-theoretic
+  story is queued behind the bits/entropy thread in `algebra/`.
+- Calibration methods beyond the one caveat beat. Temperature scaling
+  is *named* (Guo et al. 2017) to make the point that softmax outputs
+  are asserted, not measured — the methods themselves are out of
+  scope.
+- MLE beyond the discrete world: no Gaussian, no densities, no
+  regularity conditions — likelihood values here are always genuine
+  probabilities of the data, which is the simplification the whole
+  series leans on.
 
 ## Concepts
 
@@ -154,13 +176,36 @@ into exact numbers.
 | 3 | `TheBalancePoint` | $E[X] = \sum_x x \cdot P(X{=}x)$ | Expectation is the balance point of the weights — defined, not simulated. | The fulcrum under the die's flat bars balances at 3.5, which is not a face; summing stamps over cells (32/16) equals summing values times weights (2) — the sort was a regrouping; the biased die (double weight on 6) moves the balance to 27/7 — the balance point belongs to the measure. | Huygens (1657): the fair price of a ticket — the number you act on, with no long run in sight. |
 | 4 | `SameOutcomesAdd` | $E[X{+}Y] = E[X] + E[Y]$ | Expectations add — independence not required. | One sum over the same outcomes; addition distributes. The maximally dependent pair X and 4−X sums to 4 always; the owned 6×6 grid paints the two-dice sum as diagonals — (1,2,3,4,5,6,5,4,3,2,1)/36 — and E = 7 lands twice: by the diagonals and as 3.5 + 3.5. | Linearity is the workhorse: it prices any bundle from its parts, and it is what makes E = np honest with zero combinatorics. |
 | 5 | `TheBinomialColumns` | $P(X{=}k) = \binom{n}{k} p^k (1-p)^{n-k}$ | The sorted columns are the binomial distribution — the promise the counting series made, closed. | Cells per column are C(4,k), counted the way the combinations series counts H/T words; re-cut at p = 1/4 the cells go unequal but every k-head cell keeps the same area p^k q^(4−k) (a product ignores factor order), so column k weighs C(4,k)·p^k q^(4−k): coefficient = cell count, power = one cell's area, nothing smuggled. E = np by indicator stamps. | The count-of-successes model wherever trials repeat unchanged (fixed n, two outcomes, constant p, independent) — and no replacement means no binomial, as the aces taught; the binomial even touches e: zero successes in n trials of chance 1/n → 1/e ≈ 0.3679. |
-| 6 | `ProportionsConverge` | $P\!\left(\lvert\tfrac{S_n}{n} - \tfrac12\rvert \le 0.05\right) \to 1$ | Proportions converge while counts spread — the swamping intuition, quantified. | Exact binomial sums, no new machinery: within ±5% of half climbs 0.4966 → 0.7287 → 0.9986 (n = 20, 100, 1000) while within ±5 heads falls 0.7287 → 0.2720 → 0.0876 (n = 100, 1000, 10000) — and the two n = 100 rows are the same band, one number telling two stories. | The gambler's fallacy dies by two columns moving in opposite directions; the weak law of large numbers (Bernoulli, proved by ~1689, printed 1713) is named and promised with variance; average surprisal over the 16 cells is exactly 4 bits; and per-frame distributions are pmfs like these — likelihood is next. |
+| 6 | `ProportionsConverge` | $P\!\left(\lvert\tfrac{S_n}{n} - \tfrac12\rvert \le 0.05\right) \to 1$ | Proportions converge while counts spread — the swamping intuition, quantified. | Exact binomial sums, no new machinery: within ±5% of half climbs 0.4966 → 0.7287 → 0.9986 (n = 20, 100, 1000) while within ±5 heads falls 0.7287 → 0.2720 → 0.0876 (n = 100, 1000, 10000) — and the two n = 100 rows are the same band, one number telling two stories. | The gambler's fallacy dies by two columns moving in opposite directions; the weak law of large numbers (Bernoulli, proved by ~1689, printed 1713) is named and promised with variance; average surprisal over the 16 cells is exactly 4 bits; and per-frame distributions are pmfs like these — likelihood is next, the promise the softmax/likelihood series below now keeps. |
 
 Renders: `01_TheStampedSquare.mp4` … `06_ProportionsConverge.mp4`.
 
 ```bash
 uv run python probability/random_variables_manim.py
 uv run python probability/random_variables_manim.py --list
+```
+
+### softmax_likelihood_manim.py
+
+Watch after the random-variables series — its closer said "likelihood
+is next", and this series is that promise kept: the sorted-square
+columns re-read as a likelihood, then the machine that manufactures
+per-frame distributions, then the loss that trains it.
+
+| # | Scene | Formula | What it says | Why it's true | When it's useful |
+| --- | --- | --- | --- | --- | --- |
+| 1 | `TheLikelihoodLens` | $L(p) = P(\text{data} \mid p)$ | Likelihood is not a new number — it is the old table read along the other axis, data pinned, parameter sweeping. | Three binomial columns (p = 1/4, 1/2, 3/4) each sum to 1; pin the observed k = 3 and the row across them (3/64, 1/4, 27/64) sums to 23/32 — a pmf one way, not one the other. | The question every fitted model answers — "given the data, which parameter?" — begins as this flipped reading; Fisher named it in 1921. |
+| 2 | `TheBestExplanation` | $\hat{p} = \arg\max_p L(p)$ | The row's peak names the parameter that explains the data best — maximum likelihood. | Rolls 6, 6, 3: the owned double-weight die out-explains the fair one 4/343 vs 1/216, ratio 2.52 — a posterior-ladder rung, an update factor, not a verdict; the coin's whole curve 4p³(1−p) peaks at p̂ = 3/4 = k/n, the observed proportion; the area under it is 1/5 ≠ 1, so likelihood is no distribution over p — a prior and renormalization would make one. | Fitting anything is this move: pick the parameter that makes the data most probable; the ratio beat is why the same numbers feed Bayes when a prior exists. |
+| 3 | `AddToSurvive` | $\ln \prod_i p_i = \sum_i \ln p_i$ | Log the likelihood: the answer is untouched, the arithmetic becomes additive. | Log is monotone, so both curves peak at 3/4 (HHTH's exact-sequence curve sits ln 4 lower — same shape, same peak); five frames multiply to 0.27216 while their counters add to −1.3014; and the cliff: 0.1⁴⁶ stores as exactly 0.0 in float32 where the sum walks to −105.9189 unharmed. | The losses of likelihood-trained models are log-likelihoods: hundreds of per-frame factors underflow any float, sums never do — the logarithms series' cliff, met again as the reason training lives in log space. |
+| 4 | `TheProbabilityMachine` | $\mathrm{softmax}(z)_i = \frac{e^{z_i}}{\sum_j e^{z_j}}$ | Exp then normalize turns arbitrary scores into a distribution. | Dividing by the sum fails twice — shifts change the shares, negatives make negative "probabilities" — while exp lifts every score positive and normalizing totals 1; for smooth per-score recipes, shift invariance forces the exponential (e^c cancels), and the same invariance is the stability trick: (1000, 1001, 1002) overflows to NaN naively, subtract the max and the answer returns. | Softmax is the standard output layer for multi-class classifiers; Bridle named it in 1989 — a differentiable winner-take-all. |
+| 5 | `TurningTheDial` | $\mathrm{softmax}(z / T)$ | Softmax is a soft argmax with a sharpness dial — and the dial is a caveat about what the outputs mean. | On z = (2, 1, 0): T = 0.5 sharpens to (0.8668, 0.1173, 0.0159), T = 2 flattens to (0.5065, 0.3072, 0.1863), and the winner never changes — monotone at every T > 0, with one-hot and uniform as limits; base 2 gives exactly (4/7, 2/7, 1/7) and b^z = e^(z ln b), so every base above 1 is a temperature — nothing forces e except that ln is the natural counter. | Sampling temperature in every LLM playground; and calibration: one fitted T recalibrates an overconfident net without changing a prediction (Guo et al. 2017) — softmax outputs are asserted, not measured. |
+| 6 | `TheLossThatTrains` | $-\ln \mathrm{softmax}(z)_c = \mathrm{LSE}(z) - z_c$ | Score the machine by the log-likelihood it assigns the truth; over independent frames, losses add. | With one correct class, cross-entropy collapses to −ln p(correct), and for softmax scores that is a visible gap: the smooth-max ruler LSE(z) = 2.4076 minus the correct score — 0.4076, 1.4076, 2.4076 as the truth's rank falls; the per-frame matrix multiplies to 0.294 only because frames are independent given the input, and its logs add to −1.2242. | The loss behind classifier training; the trellis sums the collapsing paths' products into P(transcript given input), and the CTC loss is its negative log (29-way per frame in Deep Speech, 50,257-way in GPT-2) — and its gradient, softmax minus occupancy, is the next series. |
+
+Renders: `01_TheLikelihoodLens.mp4` … `06_TheLossThatTrains.mp4`.
+
+```bash
+uv run python probability/softmax_likelihood_manim.py
+uv run python probability/softmax_likelihood_manim.py --list
 ```
 
 ## References
@@ -302,15 +347,88 @@ recorded. Future entries start unchecked until a human does the same.
 - [X] [Wikipedia, Binomial distribution](https://en.wikipedia.org/wiki/Binomial_distribution)
       — pmf, mean np, the conditions cross-check.
 
+From the plan-008 research pass
+([`docs/plans/008-probability-softmax-likelihood.md`](../docs/plans/008-probability-softmax-likelihood.md)),
+for the softmax/likelihood series:
+
+- [X] [Josh Starmer, "In Statistics, Probability is not Likelihood" (StatQuest)](https://www.youtube.com/watch?v=pYxNSUDSFH4)
+      — the fixed-distribution/varying-data vs fixed-data/varying-
+      distribution split; the evidence that the distinction wants its
+      own lesson before MLE.
+- [X] [Josh Starmer, "Maximum Likelihood, clearly explained!!!" (StatQuest)](https://www.youtube.com/watch?v=XepXtl9YKwc)
+      — candidate distributions sliding under pinned data; MLE as the
+      peak.
+- [X] [Alexander Etz, "Introduction to the Concept of Likelihood and Its Applications"](https://journals.sagepub.com/doi/10.1177/2515245917744314)
+      — likelihood as proportional to the probability of data, not a
+      distribution over parameters; ratios as evidence; the Bayes
+      connection scene 2 points at.
+- [X] [John Aldrich, "R. A. Fisher and the Making of Maximum Likelihood 1912–1922"](https://jhanley.biostat.mcgill.ca/bios601/Likelihood/Fisher%20and%20history%20of%20mle.pdf)
+      — the verbatim Fisher 1921/1922 quotes behind scene 1's naming
+      beat (Metron 1; Phil. Trans. Roy. Soc. A 222).
+- [X] [Kristoffer Magnusson, "Understanding Maximum Likelihood" (interactive)](https://rpsychologist.com/likelihood/)
+      — the slider-driven likelihood-curve device, and the survey of
+      what this series deliberately defers.
+- [X] [Ian Goodfellow, Yoshua Bengio and Aaron Courville, Deep Learning, ch. 6](https://www.deeplearningbook.org/contents/mlp.html)
+      — §6.2.2.3: log-likelihood "undoes the exp",
+      log softmax = z − LSE(z), the subtract-max trick, soft argmax.
+- [X] [John S. Bridle, "Training Stochastic Model Recognition…" (NIPS 1989)](https://proceedings.neurips.cc/paper/1989/file/0336dcbab05b9d5ad24f4333c7658a0e-Paper.pdf)
+      — the coinage ("we like to refer to it as soft max") and the
+      gradient-identity prose the closer foreshadows.
+- [X] [John S. Bridle, "Probabilistic Interpretation…" (Springer, 1990)](https://link.springer.com/chapter/10.1007/978-3-642-76153-9_28)
+      — the conventional "Bridle 1990" citation; normalized
+      exponentials as conditional probabilities.
+- [X] [Guo, Pleiss, Sun and Weinberger, "On Calibration of Modern Neural Networks"](https://arxiv.org/abs/1706.04599)
+      — overconfidence and temperature scaling; the caveat beat's
+      source.
+- [X] [jdhao, "Softmax Temperature"](https://jdhao.github.io/2022/02/27/temperature_in_softmax/)
+      — the (1, 5, 7, 10) temperature sweep with near-one-hot and
+      near-uniform endpoints.
+- [X] [Joseph Salmon and François-David Collin, "Softmax or soft(arg)max?"](https://josephsalmon.eu/blog/softmax/)
+      — soft-argmax naming, log-sum-exp as the smooth max, the
+      temperature limits.
+- [X] [Gao Hongnan, "Why softmax preserves order…"](https://www.gaohongnan.com/playbook/why_softmax_preserves_order_translation_invariant_not_invariant_scaling.html)
+      — shift invariance yes, scale invariance no — the correction the
+      dial scene keeps straight.
+- [X] [Remy Lau, "Cross-entropy, negative log-likelihood, and all that jazz"](https://towardsdatascience.com/cross-entropy-negative-log-likelihood-and-all-that-jazz-47a95bd2e81/)
+      — NLL and cross-entropy as the same masking operation; the
+      PyTorch naming confusion.
+- [X] [James D. McCaffrey, "PyTorch CrossEntropyLoss vs NLLLoss"](https://jamesmccaffreyblog.com/2020/06/11/pytorch-crossentropyloss-vs-nllloss-cross-entropy-loss-vs-negative-log-likelihood-loss/)
+      — CrossEntropyLoss = LogSoftmax + NLLLoss, the alias beat's
+      practical anchor.
+- [X] [Penn State STAT 415, lesson 1.2: Maximum Likelihood Estimation](https://online.stat.psu.edu/stat415/lesson/1/1.2)
+      — the standard binomial L(p) = p^k(1−p)^(n−k) lesson with MLE at
+      k/n.
+- [X] [Kilian Q. Weinberger, CS4780: "Estimating Probabilities from Data"](https://www.cs.cornell.edu/courses/cs4780/2022fa/lectures/lecturenote04.html)
+      — coin-flip MLE with the peak at the empirical proportion; the
+      MLE→MAP progression behind the not-a-posterior guard.
+- [X] [Grant Sanderson, "But what is a GPT?" (3blue1brown)](https://www.3blue1brown.com/lessons/gpt)
+      — the logit-bars → exp → normalize morph and temperature as the
+      practitioner meets them.
+- [X] [Enes Zvornicanin, "What Is and Why Use Temperature in Softmax?"](https://www.baeldung.com/cs/softmax-temperature)
+      — the confidence-dial framing: low sharpens, high flattens,
+      winner unchanged.
+- [X] [Wikipedia, Softmax function](https://en.wikipedia.org/wiki/Softmax_function)
+      — properties reference: Bridle attribution, shift invariance,
+      base/temperature equivalence.
+- [X] [Awni Hannun et al., "Deep Speech: Scaling up end-to-end speech recognition"](https://arxiv.org/abs/1412.5567)
+      — the 29-class character softmax ({a…z, space, apostrophe,
+      blank}) named in the closer.
+- [X] ["Language Models are Unsupervised Multitask Learners" (GPT-2)](https://cdn.openai.com/better-language-models/language_models_are_unsupervised_multitask_learners.pdf)
+      — Alec Radford, Jeff Wu, Rewon Child, David Luan, Dario Amodei
+      and Ilya Sutskever; "the vocabulary is expanded to 50,257", the
+      closer's other anchor.
+- [X] [J. Willard Gibbs, Elementary Principles in Statistical Mechanics (1902)](https://archive.org/details/elementaryprinci00gibbrich)
+      — the canonical-distribution form softmax(−E/kT) descends from;
+      cited for the form, not a specific 1868 claim.
+
 ## Ideas not yet built
 
 Rough queue, in roughly the order they build on each other:
 
-- Per-frame softmax as a distribution, likelihood and log-likelihood —
-  the remaining half of the bridge promised to `deep_learning/`. Both
-  gates are now delivered (e via [`calculus/`](../calculus/README.md),
-  distributions via this topic's random-variables series) — it is the
-  roadmap's next stop.
+- ~~Per-frame softmax as a distribution, likelihood and
+  log-likelihood~~ — delivered by this topic's softmax/likelihood
+  series; the bridge to `deep_learning/` now waits only on the
+  gradient story.
 - Explaining away — the verified-but-unbuilt half of the conditional
   independence story (independence ⇏ CI: two fair flips given "exactly
   one head", 0 ≠ 1/4; plan 003's anchors).

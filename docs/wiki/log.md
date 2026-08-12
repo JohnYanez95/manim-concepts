@@ -348,3 +348,71 @@ reordered.
   noted on its row
 - linear_algebra/ maintainer call still open
 - stamp: advance to 74c4fe2
+
+## [2026-08-11] series | softmax-likelihood lands (plan 008, phase 3)
+
+- node `softmax-likelihood` added: six scenes in
+  `probability/softmax_likelihood_manim.py`
+- flipped: independence → softmax-likelihood (the CTC bridge's
+  remaining half — "likelihood is next" answered, the conditional
+  license quoted on screen in the join)
+- new delivered edges: random-variables → (two-lens table on the
+  sorted-square pmfs; the owned die; ProportionsConverge read
+  backwards), logarithms → (the strip carries likelihood; the
+  evidence ruler named a log-likelihood-ratio ruler; the cliff rerun;
+  the LSE ruler as smooth max), e-and-ln → (calculus/'s "why e in
+  every probability machine" debt paid via base-2 = (4/7, 2/7, 1/7)),
+  bayes-rule → (the ratio as a posterior-ladder rung; the guard
+  pointing at the prior-and-renormalize move)
+- new promised edge: softmax-likelihood → the CTC gradient identity
+  (the closer's on-screen foreshadow); the ctc-alignment gradient row
+  narrowed accordingly — only the derivative toolkit and the identity
+  remain ungated
+- device: sort-the-square lineage extended to TheLikelihoodLens (pmf
+  columns become the two-lens table)
+- mid-phase interlude recorded in plan 008: two maintainer-reported
+  collisions in shipped random-variables scenes fixed and re-rendered;
+  layout linter + placement guards added repo-wide
+
+## [2026-08-11] audit | incremental, plan 008 branch
+
+- scope: diffed 74c4fe2..e517c09 (13 commits — plan-007 finalisation +
+  PR #8 merge, full plan-008 branch, layout interlude, --jobs); changed
+  files plus cited far ends, no full crawl
+- findings: 3 promised-not-delivered, 4 delivered-not-recorded,
+  4 possible-not-yet-made, 7 graph-health — applied alongside the
+  local CodeRabbit round in the phase-4 commit
+- all five new/flipped edge citations verified verbatim against scene
+  code (the workhorse softmax, the 4/343 vs 1/216 ratio, the 23/32 row
+  sum, the 0.294/−1.2242 join, the (4/7, 2/7, 1/7) base-2 reading)
+- new delivered edges recorded: conditional-probability →
+  softmax-likelihood (the license quoted on screen had been filed
+  under the independence row, now re-grounded on its own delivery) and
+  ctc-alignment → softmax-likelihood (the CTC loss named on the
+  per-frame matrix — the delivered strand beside the promised
+  gradient)
+- the CTC gradient identity is the strongest open promise (on screen +
+  two documents), and the derivative toolkit is now the single gate
+  behind three rows — anchor M already carries its verified numbers
+- stale-at-delivery occurrences 8 and 9 fixed: deep_learning Scope no
+  longer queues softmax/log-likelihood; calculus Scope calls the
+  likelihood series delivered; also trued: root README's topic row and
+  likely-next, and ProportionsConverge's origin cell
+- row 49's "on-screen debt" corrected: calculus's promise was Scope
+  prose, not a rendered caption
+- devices grown a stop each, now recorded: chain product (fourth
+  stop), counting strip (fourth stop), evidence ruler (named its true
+  identity), quartered square (the HHTH lift re-read); new bullet:
+  factor out the max (three appearances)
+- possible, recorded on rows: cross-entropy alias as the entropy
+  series' hook (row grown); MLE→MAP riding the queued log-odds scene
+  (row grown); T = 1/ln b as the base-is-a-unit lesson noted in the
+  plan only
+- plan-008 design prose trued to the build (naive-normalizer example,
+  the summed log line, chips not bars)
+- CodeRabbit precision fixes folded in: the forcing claim scoped to
+  per-score recipes; base = temperature restricted to b > 1 (scene
+  captions, README cells, plan, and the row-49 quote all updated
+  together)
+- linear_algebra/ maintainer call still open (fifth entry)
+- stamp: advance to e517c09

@@ -118,6 +118,13 @@ def numbered_stem(scene: type[Scene], order: dict[str, int]) -> str:
     return f"{order[scene.__name__]:02d}_{scene.__name__}"
 
 
+def _positive_int(value: str) -> int:
+    parsed = int(value)
+    if parsed < 1:
+        raise argparse.ArgumentTypeError("must be at least 1")
+    return parsed
+
+
 def _build_parser(description: str, scenes: Sequence[type[Scene]]) -> argparse.ArgumentParser:
     names = ", ".join(scene.__name__ for scene in scenes) or "none found"
     parser = argparse.ArgumentParser(
@@ -161,6 +168,19 @@ def _build_parser(description: str, scenes: Sequence[type[Scene]]) -> argparse.A
         help="print the scenes in this module and exit",
     )
     parser.add_argument(
+        "-j",
+        "--jobs",
+        type=_positive_int,
+        default=1,
+        metavar="N",
+        help=(
+            "render scenes in N parallel processes — scene renders are "
+            "independent, so this can cut a module's wall-clock deeply "
+            "(cores permitting); run a draft pass first so the shared "
+            "LaTeX cache is warm"
+        ),
+    )
+    parser.add_argument(
         "--no-cache",
         action="store_true",
         help="ignore cached partial movies; use while iterating on a scene",
@@ -190,6 +210,55 @@ def _select(scenes: Sequence[type[Scene]], wanted: list[str] | None) -> list[typ
         )
     # Preserve the order the user asked for, and drop duplicates.
     return list(dict.fromkeys(by_name[name] for name in wanted))
+
+
+def _render_parallel(selected: Sequence[type[Scene]], args, namespace: dict[str, object]) -> int:
+    """Fan the selected scenes out over subprocesses, one scene each.
+
+    Subprocesses rather than threads or per-scene tempconfig: manim's
+    config is a process-global (see render_cli below), so true isolation
+    needs separate interpreters. Each child is this same CLI with one
+    ``-s``, which also keeps the ``02_`` numbering correct — the child
+    numbers over the whole module, not the subset.
+
+    Output is captured per scene and replayed only on failure, since six
+    interleaved progress bars are noise nobody can read.
+    """
+    import subprocess
+    from concurrent.futures import ThreadPoolExecutor
+
+    module_file = str(namespace.get("__file__", ""))
+
+    def run(scene: type[Scene]) -> tuple[str, subprocess.CompletedProcess]:
+        command = [sys.executable, module_file, "-s", scene.__name__]
+        command += ["-q", args.quality, "-f", args.format]
+        if args.no_cache:
+            command.append("--no-cache")
+        if args.transparent:
+            command.append("--transparent")
+        if args.preview:
+            command.append("--preview")
+        result = subprocess.run(command, capture_output=True, text=True)
+        return scene.__name__, result
+
+    jobs = min(args.jobs, len(selected))
+    print(f"Rendering {len(selected)} scenes across {jobs} processes ({args.quality})")
+    with ThreadPoolExecutor(max_workers=jobs) as pool:
+        results = list(pool.map(run, selected))
+
+    failed = False
+    for name, result in results:
+        if result.returncode == 0:
+            print(f"  {name}: ok")
+        else:
+            failed = True
+            print(f"  {name}: FAILED (exit {result.returncode})")
+            output = "\n".join(part for part in (result.stdout, result.stderr) if part)
+            tail = output[-2000:]
+            if tail:
+                print(tail)
+    print(f"\nOutput under {media_root()}")
+    return 1 if failed else 0
 
 
 def render_cli(
@@ -231,6 +300,9 @@ def render_cli(
     if not selected:
         print(f"No scenes found in {namespace.get('__file__', 'this module')}.", file=sys.stderr)
         return 1
+
+    if args.jobs > 1 and len(selected) > 1:
+        return _render_parallel(selected, args, namespace)
 
     root = media_root()
     order = scene_order(scenes)
