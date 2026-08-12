@@ -250,54 +250,56 @@ for the Bayes series:
 
 The entries below came out of the plan-007 research pass
 ([`docs/plans/007-probability-random-variables.md`](../docs/plans/007-probability-random-variables.md))
-and start unchecked until a human verifies them.
+and started unchecked; the maintainer corrected the author
+attributions, verified all sixteen, and directed the ticks be
+recorded. Future entries start unchecked until a human does the same.
 
-- [ ] [Grinstead & Snell, Introduction to Probability, §6.1 (LibreTexts)](https://stats.libretexts.org/Bookshelves/Probability_Theory/Introductory_Probability_(Grinstead_and_Snell)/06%3A_Expected_Value_and_Variance/6.01%3A_Expected_Value_of_Discrete_Random_Variables)
+- [X] [Grinstead & Snell, Introduction to Probability, §6.1 (LibreTexts)](https://stats.libretexts.org/Bookshelves/Probability_Theory/Introductory_Probability_(Grinstead_and_Snell)/06%3A_Expected_Value_and_Variance/6.01%3A_Expected_Value_of_Discrete_Random_Variables)
       — Definition 6.1 (expectation), Theorem 6.2 (linearity) and the
       verbatim no-independence remark behind `SameOutcomesAdd`.
-- [ ] [Grinstead & Snell, §6.2 Variance (LibreTexts)](https://stats.libretexts.org/Bookshelves/Probability_Theory/Introductory_Probability_(Grinstead_and_Snell)/06%3A_Expected_Value_and_Variance/6.02%3A_Variance_of_Discrete_Random_Variables)
+- [X] [Grinstead & Snell, §6.2 Variance (LibreTexts)](https://stats.libretexts.org/Bookshelves/Probability_Theory/Introductory_Probability_(Grinstead_and_Snell)/06%3A_Expected_Value_and_Variance/6.02%3A_Variance_of_Discrete_Random_Variables)
       — variance definition, the shortcut, npq, die 35/12 — the
       pre-verified anchors the future LLN series inherits.
-- [ ] [Grinstead & Snell, ch. 8 (source)](https://math.dartmouth.edu/~prob/prob/ch8.tex)
+- [X] [Grinstead & Snell, ch. 8 (source)](https://math.dartmouth.edu/~prob/prob/ch8.tex)
       — Theorem 8.2, the weak law `ProportionsConverge` names via
       Bernoulli; the 1713 attribution.
-- [ ] [Illowsky & Dean, OpenStax Introductory Statistics 2e, §4.3](https://openstax.org/books/introductory-statistics-2e/pages/4-3-binomial-distribution)
+- [X] [Illowsky & Dean, OpenStax Introductory Statistics 2e, §4.3](https://openstax.org/books/introductory-statistics-2e/pages/4-3-binomial-distribution)
       — the binomial experiment conditions named in
       `TheBinomialColumns`.
-- [ ] [Holmes, Illowsky & Dean, OpenStax Introductory Business Statistics 2e, §4.2](https://openstax.org/books/introductory-business-statistics-2e/pages/4-2-binomial-distribution)
+- [X] [Holmes, Illowsky & Dean, OpenStax Introductory Business Statistics 2e, §4.2](https://openstax.org/books/introductory-business-statistics-2e/pages/4-2-binomial-distribution)
       — the explicit pmf formula (the sibling volume headlines what the
       statistics volume leaves to calculators).
-- [ ] [Orloff & Bloom, MIT 18.05, class 4b: expectation](https://ocw.mit.edu/courses/18-05-introduction-to-probability-and-statistics-spring-2022/mit18_05_s22_class04-prep-b.pdf)
+- [X] [Orloff & Bloom, MIT 18.05, class 4b: expectation](https://ocw.mit.edu/courses/18-05-introduction-to-probability-and-statistics-spring-2022/mit18_05_s22_class04-prep-b.pdf)
       — the balance-point picture, "need not be a possible value", the
       outcome-table linearity proof, E = np by indicators.
-- [ ] [Joe Blitzstein, Stat 110](https://stat110.hsites.harvard.edu/)
+- [X] [Joe Blitzstein, Stat 110](https://stat110.hsites.harvard.edu/)
       — RV-as-function ordering; "sympathetic magic" (variable vs
       distribution), the error `SortTheSquare`'s twin beat refutes.
-- [ ] [Grant Sanderson (3blue1brown), "Binomial distributions"](https://www.3blue1brown.com/lessons/binomial-distributions/)
+- [X] [Grant Sanderson (3blue1brown), "Binomial distributions"](https://www.3blue1brown.com/lessons/binomial-distributions/)
       — the sequence-grouping route to C(n,k)p^k(1-p)^(n-k); its
       likelihood pivot marks the next series' door, not this one's.
-- [ ] [Kunin et al., Seeing Theory, ch. 1 & 3](https://seeing-theory.brown.edu/basic-probability/index.html)
+- [X] [Kunin et al., Seeing Theory, ch. 1 & 3](https://seeing-theory.brown.edu/basic-probability/index.html)
       — the distribution-first branch this series deliberately does not
       take (long-run simulation as meaning), for contrast.
-- [ ] [Gauvrit & Morsanyi, "The Equiprobability Bias…" (PMC)](https://pmc.ncbi.nlm.nih.gov/articles/PMC4310748/)
+- [X] [Gauvrit & Morsanyi, "The Equiprobability Bias…" (PMC)](https://pmc.ncbi.nlm.nih.gov/articles/PMC4310748/)
       — full title "The Equiprobability Bias from a Mathematical and
       Psychological Perspective"; Lecoutre 1992's randomness-read-as-
       uniformity, surviving instruction — why `SortTheSquare` refutes
       by mechanism.
-- [ ] [Eric-Jan Wagenmakers (Bayesian Spectacles), a Galton board vs its model](https://www.bayesianspectacles.org/a-galton-board-demonstration-of-why-all-statistical-models-are-misspecified/)
+- [X] [Eric-Jan Wagenmakers (Bayesian Spectacles), a Galton board vs its model](https://www.bayesianspectacles.org/a-galton-board-demonstration-of-why-all-statistical-models-are-misspecified/)
       — why the physical board is not a binomial machine; the Scope
       exclusion's evidence.
-- [ ] [J J O'Connor and E F Robertson, "Blaise Pascal" (MacTutor)](https://mathshistory.st-andrews.ac.uk/Biographies/Pascal/)
+- [X] [J J O'Connor and E F Robertson, "Blaise Pascal" (MacTutor)](https://mathshistory.st-andrews.ac.uk/Biographies/Pascal/)
       — the five-letter 1654 correspondence and the problem of points.
-- [ ] [J J O'Connor and E F Robertson, "Christiaan Huygens" (MacTutor)](https://mathshistory.st-andrews.ac.uk/Biographies/Huygens/)
+- [X] [J J O'Connor and E F Robertson, "Christiaan Huygens" (MacTutor)](https://mathshistory.st-andrews.ac.uk/Biographies/Huygens/)
       — De Ratiociniis in Ludo Aleae (1657), the first printed
       probability work: `TheBalancePoint`'s fair-price close.
-- [ ] [J J O'Connor and E F Robertson, "Jacob Bernoulli" (MacTutor)](https://mathshistory.st-andrews.ac.uk/Biographies/Bernoulli_Jacob/)
+- [X] [J J O'Connor and E F Robertson, "Jacob Bernoulli" (MacTutor)](https://mathshistory.st-andrews.ac.uk/Biographies/Bernoulli_Jacob/)
       — died 1705; Ars Conjectandi, Basel 1713 — the proved-by-~1689 vs
       printed-1713 split `ProportionsConverge` keeps distinct.
-- [ ] [Wikipedia, Ars Conjectandi](https://en.wikipedia.org/wiki/Ars_Conjectandi)
+- [X] [Wikipedia, Ars Conjectandi](https://en.wikipedia.org/wiki/Ars_Conjectandi)
       — the nephew-publisher detail and the 1684-1689 timeline.
-- [ ] [Wikipedia, Binomial distribution](https://en.wikipedia.org/wiki/Binomial_distribution)
+- [X] [Wikipedia, Binomial distribution](https://en.wikipedia.org/wiki/Binomial_distribution)
       — pmf, mean np, the conditions cross-check.
 
 ## Ideas not yet built
