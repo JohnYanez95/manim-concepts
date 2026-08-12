@@ -113,7 +113,16 @@ at 1080p60.
   the factor-out-the-max bullet, rows 55/56 grew the MLE→MAP and
   alias-hook seeds, plan prose trued to the build, log entry
   appended, stamp advanced to e517c09
-- [ ] Phase 5: PR, drafts cleaned, 1080p60 render verified
+- [x] Phase 5: PR #9 opened; bot review returned five minors, all
+  applied (JOBS quoted in the Makefile, the moved random-variables
+  labels guarded with on_frame, the two universal claims scoped, the
+  uniqueness claim gains "smooth", clear_of rejects z-component
+  directions with a regression test — 196 tests green); drafts
+  cleared; finals rendered with `--jobs 8`: six distinct 1080p60
+  files, 31–54 s, frame spot-checked (the two-lens row beat and the
+  corrected LSE ruler), plus the three repaired random-variables
+  scenes re-rendered so the finals match the guarded source. John
+  merges.
 
 ## Research questions the reports must settle
 
