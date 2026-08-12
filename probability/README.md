@@ -66,9 +66,9 @@ Deliberately **not** covered here:
   where counting hands over to proportion.
 - The softmax gradient as a taught result. `TheLossThatTrains`
   foreshadows "softmax output minus occupancy" in prose; the
-  single-frame half (p − one-hot) is now taught by `calculus/`'s
-  derivative-toolkit series — the occupancy generalization waits for
-  the CTC gradient series.
+  single-frame half (p − one-hot) is taught by `calculus/`'s
+  derivative-toolkit series, and the occupancy generalization by
+  `deep_learning/`'s gradient series (`SoftmaxMinusOccupancy`).
 - Entropy, KL divergence, and soft-target cross-entropy. The one-hot
   collapse is all the loss scene needs; the information-theoretic
   story is queued behind the bits/entropy thread in `algebra/`.
@@ -200,7 +200,7 @@ per-frame distributions, then the loss that trains it.
 | 3 | `AddToSurvive` | $\ln \prod_i p_i = \sum_i \ln p_i$ | Log the likelihood: the answer is untouched, the arithmetic becomes additive. | Log is monotone, so both curves peak at 3/4 (HHTH's exact-sequence curve sits ln 4 lower — same shape, same peak); five frames multiply to 0.27216 while their counters add to −1.3014; and the cliff: 0.1⁴⁶ stores as exactly 0.0 in float32 where the sum walks to −105.9189 unharmed. | The losses of likelihood-trained models are log-likelihoods: hundreds of per-frame factors underflow any float, sums never do — the logarithms series' cliff, met again as the reason training lives in log space. |
 | 4 | `TheProbabilityMachine` | $\mathrm{softmax}(z)_i = \frac{e^{z_i}}{\sum_j e^{z_j}}$ | Exp then normalize turns arbitrary scores into a distribution. | Dividing by the sum fails twice — shifts change the shares, negatives make negative "probabilities" — while exp lifts every score positive and normalizing totals 1; for smooth per-score recipes, shift invariance forces the exponential (e^c cancels), and the same invariance is the stability trick: (1000, 1001, 1002) overflows to NaN naively, subtract the max and the answer returns. | Softmax is the standard output layer for multi-class classifiers; Bridle named it in 1989 — a differentiable winner-take-all. |
 | 5 | `TurningTheDial` | $\mathrm{softmax}(z / T)$ | Softmax is a soft argmax with a sharpness dial — and the dial is a caveat about what the outputs mean. | On z = (2, 1, 0): T = 0.5 sharpens to (0.8668, 0.1173, 0.0159), T = 2 flattens to (0.5065, 0.3072, 0.1863), and the winner never changes — monotone at every T > 0, with one-hot and uniform as limits; base 2 gives exactly (4/7, 2/7, 1/7) and b^z = e^(z ln b), so every base above 1 is a temperature — nothing forces e except that ln is the natural counter. | Sampling temperature in every LLM playground; and calibration: one fitted T recalibrates an overconfident net without changing a prediction (Guo et al. 2017) — softmax outputs are asserted, not measured. |
-| 6 | `TheLossThatTrains` | $-\ln \mathrm{softmax}(z)_c = \mathrm{LSE}(z) - z_c$ | Score the machine by the log-likelihood it assigns the truth; over independent frames, losses add. | With one correct class, cross-entropy collapses to −ln p(correct), and for softmax scores that is a visible gap: the smooth-max ruler LSE(z) = 2.4076 minus the correct score — 0.4076, 1.4076, 2.4076 as the truth's rank falls; the per-frame matrix multiplies to 0.294 only because frames are independent given the input, and its logs add to −1.2242. | The loss behind classifier training; the trellis sums the collapsing paths' products into P(transcript given input), and the CTC loss is its negative log (29-way per frame in Deep Speech, 50,257-way in GPT-2) — and its gradient, softmax minus occupancy, is the next series. |
+| 6 | `TheLossThatTrains` | $-\ln \mathrm{softmax}(z)_c = \mathrm{LSE}(z) - z_c$ | Score the machine by the log-likelihood it assigns the truth; over independent frames, losses add. | With one correct class, cross-entropy collapses to −ln p(correct), and for softmax scores that is a visible gap: the smooth-max ruler LSE(z) = 2.4076 minus the correct score — 0.4076, 1.4076, 2.4076 as the truth's rank falls; the per-frame matrix multiplies to 0.294 only because frames are independent given the input, and its logs add to −1.2242. | The loss behind classifier training; the trellis sums the collapsing paths' products into P(transcript given input), and the CTC loss is its negative log (29-way per frame in Deep Speech, 50,257-way in GPT-2) — and its gradient, softmax minus occupancy, is delivered by `deep_learning/`'s `SoftmaxMinusOccupancy`, exactly as this closer promised. |
 
 Renders: `01_TheLikelihoodLens.mp4` … `06_TheLossThatTrains.mp4`.
 
@@ -428,8 +428,8 @@ Rough queue, in roughly the order they build on each other:
 
 - ~~Per-frame softmax as a distribution, likelihood and
   log-likelihood~~ — delivered by this topic's softmax/likelihood
-  series; the bridge to `deep_learning/` now waits only on the
-  gradient story.
+  series; the bridge to `deep_learning/` is closed — its gradient
+  series received it.
 - Explaining away — the verified-but-unbuilt half of the conditional
   independence story (independence ⇏ CI: two fair flips given "exactly
   one head", 0 ≠ 1/4; plan 003's anchors).
