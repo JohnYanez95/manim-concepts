@@ -351,73 +351,73 @@ From the plan-008 research pass
 ([`docs/plans/008-probability-softmax-likelihood.md`](../docs/plans/008-probability-softmax-likelihood.md)),
 for the softmax/likelihood series:
 
-- [ ] [Josh Starmer, "In Statistics, Probability is not Likelihood" (StatQuest)](https://www.youtube.com/watch?v=pYxNSUDSFH4)
+- [X] [Josh Starmer, "In Statistics, Probability is not Likelihood" (StatQuest)](https://www.youtube.com/watch?v=pYxNSUDSFH4)
       — the fixed-distribution/varying-data vs fixed-data/varying-
       distribution split; the evidence that the distinction wants its
       own lesson before MLE.
-- [ ] [Josh Starmer, "Maximum Likelihood, clearly explained!!!" (StatQuest)](https://www.youtube.com/watch?v=XepXtl9YKwc)
+- [X] [Josh Starmer, "Maximum Likelihood, clearly explained!!!" (StatQuest)](https://www.youtube.com/watch?v=XepXtl9YKwc)
       — candidate distributions sliding under pinned data; MLE as the
       peak.
-- [ ] [Alexander Etz, "Introduction to the Concept of Likelihood and Its Applications"](https://journals.sagepub.com/doi/10.1177/2515245917744314)
+- [X] [Alexander Etz, "Introduction to the Concept of Likelihood and Its Applications"](https://journals.sagepub.com/doi/10.1177/2515245917744314)
       — likelihood as proportional to the probability of data, not a
       distribution over parameters; ratios as evidence; the Bayes
       connection scene 2 points at.
-- [ ] [John Aldrich, "R. A. Fisher and the Making of Maximum Likelihood 1912–1922"](https://jhanley.biostat.mcgill.ca/bios601/Likelihood/Fisher%20and%20history%20of%20mle.pdf)
+- [X] [John Aldrich, "R. A. Fisher and the Making of Maximum Likelihood 1912–1922"](https://jhanley.biostat.mcgill.ca/bios601/Likelihood/Fisher%20and%20history%20of%20mle.pdf)
       — the verbatim Fisher 1921/1922 quotes behind scene 1's naming
       beat (Metron 1; Phil. Trans. Roy. Soc. A 222).
-- [ ] [Kristoffer Magnusson, "Understanding Maximum Likelihood" (interactive)](https://rpsychologist.com/likelihood/)
+- [X] [Kristoffer Magnusson, "Understanding Maximum Likelihood" (interactive)](https://rpsychologist.com/likelihood/)
       — the slider-driven likelihood-curve device, and the survey of
       what this series deliberately defers.
-- [ ] [Ian Goodfellow, Yoshua Bengio and Aaron Courville, Deep Learning, ch. 6](https://www.deeplearningbook.org/contents/mlp.html)
+- [X] [Ian Goodfellow, Yoshua Bengio and Aaron Courville, Deep Learning, ch. 6](https://www.deeplearningbook.org/contents/mlp.html)
       — §6.2.2.3: log-likelihood "undoes the exp",
       log softmax = z − LSE(z), the subtract-max trick, soft argmax.
-- [ ] [John S. Bridle, "Training Stochastic Model Recognition…" (NIPS 1989)](https://proceedings.neurips.cc/paper/1989/file/0336dcbab05b9d5ad24f4333c7658a0e-Paper.pdf)
+- [X] [John S. Bridle, "Training Stochastic Model Recognition…" (NIPS 1989)](https://proceedings.neurips.cc/paper/1989/file/0336dcbab05b9d5ad24f4333c7658a0e-Paper.pdf)
       — the coinage ("we like to refer to it as soft max") and the
       gradient-identity prose the closer foreshadows.
-- [ ] [John S. Bridle, "Probabilistic Interpretation…" (Springer, 1990)](https://link.springer.com/chapter/10.1007/978-3-642-76153-9_28)
+- [X] [John S. Bridle, "Probabilistic Interpretation…" (Springer, 1990)](https://link.springer.com/chapter/10.1007/978-3-642-76153-9_28)
       — the conventional "Bridle 1990" citation; normalized
       exponentials as conditional probabilities.
-- [ ] [Guo, Pleiss, Sun and Weinberger, "On Calibration of Modern Neural Networks"](https://arxiv.org/abs/1706.04599)
+- [X] [Guo, Pleiss, Sun and Weinberger, "On Calibration of Modern Neural Networks"](https://arxiv.org/abs/1706.04599)
       — overconfidence and temperature scaling; the caveat beat's
       source.
-- [ ] [jdhao, "Softmax Temperature"](https://jdhao.github.io/2022/02/27/temperature_in_softmax/)
+- [X] [jdhao, "Softmax Temperature"](https://jdhao.github.io/2022/02/27/temperature_in_softmax/)
       — the (1, 5, 7, 10) temperature sweep with near-one-hot and
       near-uniform endpoints.
-- [ ] [Joseph Salmon and François-David Collin, "Softmax or soft(arg)max?"](https://josephsalmon.eu/blog/softmax/)
+- [X] [Joseph Salmon and François-David Collin, "Softmax or soft(arg)max?"](https://josephsalmon.eu/blog/softmax/)
       — soft-argmax naming, log-sum-exp as the smooth max, the
       temperature limits.
-- [ ] [Gao Hongnan, "Why softmax preserves order…"](https://www.gaohongnan.com/playbook/why_softmax_preserves_order_translation_invariant_not_invariant_scaling.html)
+- [X] [Gao Hongnan, "Why softmax preserves order…"](https://www.gaohongnan.com/playbook/why_softmax_preserves_order_translation_invariant_not_invariant_scaling.html)
       — shift invariance yes, scale invariance no — the correction the
       dial scene keeps straight.
-- [ ] [Remy Lau, "Cross-entropy, negative log-likelihood, and all that jazz"](https://towardsdatascience.com/cross-entropy-negative-log-likelihood-and-all-that-jazz-47a95bd2e81/)
+- [X] [Remy Lau, "Cross-entropy, negative log-likelihood, and all that jazz"](https://towardsdatascience.com/cross-entropy-negative-log-likelihood-and-all-that-jazz-47a95bd2e81/)
       — NLL and cross-entropy as the same masking operation; the
       PyTorch naming confusion.
-- [ ] [James D. McCaffrey, "PyTorch CrossEntropyLoss vs NLLLoss"](https://jamesmccaffreyblog.com/2020/06/11/pytorch-crossentropyloss-vs-nllloss-cross-entropy-loss-vs-negative-log-likelihood-loss/)
+- [X] [James D. McCaffrey, "PyTorch CrossEntropyLoss vs NLLLoss"](https://jamesmccaffreyblog.com/2020/06/11/pytorch-crossentropyloss-vs-nllloss-cross-entropy-loss-vs-negative-log-likelihood-loss/)
       — CrossEntropyLoss = LogSoftmax + NLLLoss, the alias beat's
       practical anchor.
-- [ ] [Penn State STAT 415, lesson 1.2: Maximum Likelihood Estimation](https://online.stat.psu.edu/stat415/lesson/1/1.2)
+- [X] [Penn State STAT 415, lesson 1.2: Maximum Likelihood Estimation](https://online.stat.psu.edu/stat415/lesson/1/1.2)
       — the standard binomial L(p) = p^k(1−p)^(n−k) lesson with MLE at
       k/n.
-- [ ] [Kilian Q. Weinberger, CS4780: "Estimating Probabilities from Data"](https://www.cs.cornell.edu/courses/cs4780/2022fa/lectures/lecturenote04.html)
+- [X] [Kilian Q. Weinberger, CS4780: "Estimating Probabilities from Data"](https://www.cs.cornell.edu/courses/cs4780/2022fa/lectures/lecturenote04.html)
       — coin-flip MLE with the peak at the empirical proportion; the
       MLE→MAP progression behind the not-a-posterior guard.
-- [ ] [Grant Sanderson, "But what is a GPT?" (3blue1brown)](https://www.3blue1brown.com/lessons/gpt)
+- [X] [Grant Sanderson, "But what is a GPT?" (3blue1brown)](https://www.3blue1brown.com/lessons/gpt)
       — the logit-bars → exp → normalize morph and temperature as the
       practitioner meets them.
-- [ ] [Enes Zvornicanin, "What Is and Why Use Temperature in Softmax?"](https://www.baeldung.com/cs/softmax-temperature)
+- [X] [Enes Zvornicanin, "What Is and Why Use Temperature in Softmax?"](https://www.baeldung.com/cs/softmax-temperature)
       — the confidence-dial framing: low sharpens, high flattens,
       winner unchanged.
-- [ ] [Wikipedia, Softmax function](https://en.wikipedia.org/wiki/Softmax_function)
+- [X] [Wikipedia, Softmax function](https://en.wikipedia.org/wiki/Softmax_function)
       — properties reference: Bridle attribution, shift invariance,
       base/temperature equivalence.
-- [ ] [Awni Hannun et al., "Deep Speech: Scaling up end-to-end speech recognition"](https://arxiv.org/abs/1412.5567)
+- [X] [Awni Hannun et al., "Deep Speech: Scaling up end-to-end speech recognition"](https://arxiv.org/abs/1412.5567)
       — the 29-class character softmax ({a…z, space, apostrophe,
       blank}) named in the closer.
-- [ ] ["Language Models are Unsupervised Multitask Learners" (GPT-2)](https://cdn.openai.com/better-language-models/language_models_are_unsupervised_multitask_learners.pdf)
+- [X] ["Language Models are Unsupervised Multitask Learners" (GPT-2)](https://cdn.openai.com/better-language-models/language_models_are_unsupervised_multitask_learners.pdf)
       — Alec Radford, Jeff Wu, Rewon Child, David Luan, Dario Amodei
       and Ilya Sutskever; "the vocabulary is expanded to 50,257", the
       closer's other anchor.
-- [ ] [J. Willard Gibbs, Elementary Principles in Statistical Mechanics (1902)](https://archive.org/details/elementaryprinci00gibbrich)
+- [X] [J. Willard Gibbs, Elementary Principles in Statistical Mechanics (1902)](https://archive.org/details/elementaryprinci00gibbrich)
       — the canonical-distribution form softmax(−E/kT) descends from;
       cited for the form, not a specific 1868 claim.
 

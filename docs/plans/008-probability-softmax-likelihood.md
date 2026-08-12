@@ -83,8 +83,8 @@ at 1080p60.
   two labels corrected — the Baeldung entry is Enes Zvornicanin,
   "What Is and Why Use Temperature in Softmax?", and the GPT-2 entry
   carries its true title "Language Models are Unsupervised Multitask
-  Learners"; everything else confirmed right by the maintainer
-  (ticks are his to place)
+  Learners"; everything else confirmed right by the maintainer, who
+  then verified all twenty-two sources and had the ticks placed
 - [x] Phase 4: local CodeRabbit + connection-auditor clean, three
   rounds. CodeRabbit round 1 (9 findings): the `clear_of` escape
   distance rewritten edge-based with a through-the-obstacle
