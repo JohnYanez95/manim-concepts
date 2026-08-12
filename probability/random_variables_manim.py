@@ -170,7 +170,7 @@ class TheStampedSquare(ConceptScene):
 
         # A dart lands; the label is looked up, never generated.
         target = cells[6]
-        dart = Dot(color=ACCENT).move_to(target.get_center() + 0.18 * RIGHT + 0.12 * UP)
+        dart = Dot(color=ACCENT).move_to(target.get_center() + 0.24 * RIGHT + 0.17 * UP)
         readout = MathTex(r"X = 2", font_size=44, color=ACCENT)
         readout.move_to(2.4 * RIGHT + 0.15 * UP)
         looked_up = caption("the dart is the only random object on screen —")
@@ -259,11 +259,11 @@ class SortTheSquare(ConceptScene):
         # Old ink leaves before new ink arrives — never a simultaneous swap.
         self.play(LaggedStart(*[FadeOut(s) for s in stamps], lag_ratio=0.04))
         self.play(LaggedStart(*[FadeIn(y, scale=0.6) for y in y_stamps], lag_ratio=0.04))
-        same = MathTex(r"X + Y = 4\ \text{in every cell}", font_size=38)
-        same.move_to(2.35 * DOWN + 3.9 * LEFT)
+        same = MathTex(r"X + Y = 4\ \text{in every cell}", font_size=32)
+        same.move_to(2.6 * DOWN + 4.85 * LEFT)
         twin = caption("Y sorts into the SAME columns — one blueprint, two houses:")
         twin2 = caption("the distribution forgets which cell was which; the variable remembers")
-        twin.move_to(2.45 * DOWN + 1.2 * RIGHT)
+        twin.move_to(2.45 * DOWN + 1.9 * RIGHT)
         twin2.next_to(twin, DOWN, buff=0.15)
         self.play(Write(same))
         self.play(FadeIn(twin), FadeIn(twin2))
@@ -318,7 +318,7 @@ class TheBalancePoint(ConceptScene):
         self.play(FadeIn(fulcrum, shift=0.2 * UP), Write(balance))
         not_face = caption("3.5 is not a face — the fulcrum")
         not_face2 = caption("need not sit under a mass")
-        not_face.move_to(3.4 * RIGHT + 0.15 * UP)
+        not_face.move_to(4.15 * RIGHT + 0.55 * UP)
         not_face2.next_to(not_face, DOWN, buff=0.15)
         self.play(FadeIn(not_face), FadeIn(not_face2))
         self.wait(1.0)
@@ -344,7 +344,7 @@ class TheBalancePoint(ConceptScene):
             font_size=BODY_SIZE,
         ).move_to(2.2 * DOWN)
         new_balance = MathTex(r"E = \tfrac{27}{7} \approx 3.8571", font_size=40, color=ACCENT)
-        new_balance.move_to(3.4 * RIGHT + 0.15 * UP)
+        new_balance.move_to(4.0 * RIGHT + 0.3 * UP)
         moved = caption("the balance point belongs to the measure —")
         moved2 = caption("the same faces, reweighted, balance anew")
         moved.move_to(2.9 * RIGHT + 1.35 * DOWN)

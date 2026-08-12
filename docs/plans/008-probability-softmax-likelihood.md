@@ -37,6 +37,26 @@ Pre-phase commit folded onto this branch (per the standing process
 decision — light fixes ride the next topic branch): plan 007's Phase 5
 tick, recording the merged PR #8 and the verified 1080p60 finals.
 
+**Mid-phase-2 interlude (2026-08-11), maintainer reports.** Two
+collisions in the shipped random-variables finals — `SortTheSquare`'s
+X+Y=4 formula under the caption pair, and `TheBalancePoint`'s bar 6
+against the fulcrum caption — plus the instruction to make the
+criteria catch this class mechanically. Landed on this branch:
+`tools/check_layout.py` (dry-run layout linter: text–text overlap,
+frame clipping, shape-through-text at every hold; both shipped
+collisions reproduce under it, verified by reintroducing them),
+`utils.on_frame` / `utils.clear_of` placement guards with unit tests
+(verified by breaking `on_frame` and watching the test fail), a
+CLAUDE.md **Layout discipline** section (with the measured
+≈ 0.16 units/char caption budget) folded into a full compression pass
+on the file, and the phase-2 gate updated to "layout linter clean +
+drafts verified by eye". The linter's first run over the new module
+caught one further real finding per scene review round (edge-clipped
+caption stacks in scenes 3–5, a curve crossing a caption in scene 2,
+a persisting caption in scene 4) — all fixed; both modules now lint
+clean, and the three repaired random-variables scenes were re-rendered
+at 1080p60.
+
 ## Checklist
 
 - [x] Phase 0: research reports received (pedagogy + source-verifier
@@ -218,6 +238,16 @@ count version ∫₀¹ 4p³(1−p) dp = 1/5 = 0.2 exactly. Both ≠ 1 under
 either convention. Narration care: the *columns* of A2 do each sum to
 1 over outcomes; it is the sweep over p that has no reason to
 normalize.
+
+**A5. Naive-normalizer failure (micro-addendum).** z/Σz on
+(2, 1, 0) → (2/3, 1/3, 0) — and the score-0 class gets exactly zero
+where softmax gave it 0.0900. Shift +1: (3, 2, 1) → (1/2, 1/3, 1/6),
+the shares changed (only the middle share survives). Negatives:
+(2, −1, 0) → shares (2, −1, 0) — they still sum to 1, so a
+sum-only check misses the defect; positivity is what fails. And
+(1, −1, 0) has Σ = 0 — division by zero, the rule undefined.
+Cross-check softmax(2, −1, 0) = (0.8438, 0.0420, 0.1142), positive,
+exact sum 1 (here the 4-dp roundings do total 1.0000).
 
 **A4. CTC-flavored per-frame product.** Columns (0.7, 0.2, 0.1),
 (0.6, 0.1, 0.3), (0.2, 0.1, 0.7) over {A, B, blank} — each sums to
