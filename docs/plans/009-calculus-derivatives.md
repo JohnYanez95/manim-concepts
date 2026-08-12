@@ -61,7 +61,11 @@ gradient only in when-useful framing.
   e-and-ln toolkit promise flipped with its residual promises kept,
   two new delivered edges, both CTC-gradient rows narrowed to "only
   the identity remains", zoom lineage and the strip's fifth stop
-  recorded, log entry appended)
+  recorded, log entry appended). Maintainer source pass 2026-08-12:
+  one correction — the Jeff Miller symbols entry now carries
+  MacTutor's own credit (created and maintained by John O'Connor and
+  Edmund Robertson, University of St Andrews); the other nineteen
+  confirmed correct (ticks are his to place)
 - [ ] Phase 4: local CodeRabbit + connection-auditor clean
 - [ ] Phase 5: PR, drafts cleaned, 1080p60 render verified
 
