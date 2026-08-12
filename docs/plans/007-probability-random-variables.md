@@ -54,7 +54,15 @@ entry to its row is a design call made in Phase 3.
   restructured; plus two design-time catches — a simultaneous
   stamp swap sequenced per the motion rule, and a two-sums
   underbrace whose displayed fraction totalled 10/16, not 32/16)
-- [ ] Phase 3: README + wiki complete, `make test` green
+- [x] Phase 3: README + wiki complete, `make test` green (node
+  `random-variables` added; the graph's oldest promise flipped
+  delivered along with independence → random-variables; the
+  random-variables → e-and-ln possible-connection made; softmax row
+  fully ungated; LLN and bits/entropy rows narrowed; sort-the-square
+  device recorded; probability Scope now counts four series and its
+  stale exclusions updated; root README row and likely-next updated —
+  no welcome-gif re-render: the topic row is unchanged, only
+  probability/'s description grew)
 - [ ] Phase 4: local review + audit clean
 - [ ] Phase 5: PR, drafts cleaned, 1080p60 render verified
 

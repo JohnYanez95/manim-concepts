@@ -294,3 +294,27 @@ reordered.
   probability/ (binomial via the quartered square), then the
   softmax/likelihood bridge — the linear_algebra/ front-page call is
   still open
+
+## [2026-08-11] series | plan 007, random variables (in progress)
+
+- node built: `random-variables` (probability/random_variables_manim.py,
+  six scenes; probability/'s fourth series)
+- the graph's OLDEST promise closed: counting-rules -> random-variables
+  (TheBinomialColumns counts the sorted columns as C(4,k) and assembles
+  the pmf from cell count times cell area); independence ->
+  random-variables closed in the same landing (quartered square's
+  fifth series, the biased die's balance point, swamping quantified)
+- one possible-connection made: random-variables -> e-and-ln ((1-1/n)^n
+  -> 1/e in the binomial closer — a backward reference, per the new
+  narrative rule)
+- softmax row fully ungated: both halves of its double gate are now
+  delivered; ProportionsConverge's closer names it as next
+- LLN row narrowed: instances computed exactly on screen; the theorem
+  and variance stay promised together
+- bits/entropy row: the expectation half arrived ("average surprisal
+  = 4 bits" on screen) — entropy is one series away
+- device recorded: sort the square; the quartered square's lineage
+  extended to a fifth series
+- narrative rule in force from this plan on: levels 1-2 point backward
+  at owned devices; forward pointers live only in when-useful beats
+  and closers (this series' closer carries all of them)

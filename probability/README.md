@@ -3,7 +3,7 @@
 ## Scope
 
 Probability as proportion, built visually: the sample space as a unit
-square, events as regions, probability as area. Three series so far. The
+square, events as regions, probability as area. Four series so far. The
 first covers **independence** — the product rule P(A∩B) = P(A)·P(B) as
 the *primary* definition, why it is the probability-weighted upgrade of
 the counting grid, the confusions it attracts, and the product over a
@@ -15,7 +15,12 @@ the CTC series left open. The third covers **Bayes' rule** — the
 one-line division through the door the conditional series left open,
 the odds form and the waterfall, natural-frequency computation, iterated
 updating, and Monty Hall done honestly with the host's protocol as the
-likelihood.
+likelihood. The fourth covers **random variables** — the die as a
+function (not a set), the pmf born by sorting the quartered square,
+expectation as the balance point, linearity without independence, the
+binomial assembled from cell counts and cell areas, and the swamping
+intuition quantified — closing the oldest promise the counting series
+made.
 
 This topic exists because two earlier ones promised it: the
 [multiplicative rule](../combinatorics/README.md) counts pairs as
@@ -32,12 +37,15 @@ Deliberately **not** covered here:
   [`algebra/`](../algebra/README.md)'s `TheEvidenceRuler` walks this
   topic's own coins — but the inference treatment belongs here, and is
   queued, not built.
-- Composite-hypothesis Bayes factors and continuous priors — both need
-  machinery (integration, random variables) the repo does not teach.
+- Composite-hypothesis Bayes factors and continuous priors — still
+  waiting on integration: random variables now exist, densities do
+  not.
 - Conditioning on probability-zero events. The definition requires
   P(B) > 0; the continuous story (Borel–Kolmogorov) is genuinely
   treacherous, and honest silence beats false generality.
-- Random variables, distributions, and expectation. Events only.
+- Variance and the law of large numbers as theorems. The
+  random-variables series computes the weak law's instances and names
+  it; the proof and the spread machinery arrive together, later.
 - Measure-theoretic formality. "Probability is area" is used as a
   faithful picture, not developed as measure theory.
 - Counting itself — that is `combinatorics/`'s job; this topic starts
@@ -238,15 +246,19 @@ for the Bayes series:
 Rough queue, in roughly the order they build on each other:
 
 - Per-frame softmax as a distribution, likelihood and log-likelihood —
-  the remaining half of the bridge promised to `deep_learning/`. Its
-  e-half arrived with [`calculus/`](../calculus/README.md); what it
-  still waits on is random variables, below.
+  the remaining half of the bridge promised to `deep_learning/`. Both
+  gates are now delivered (e via [`calculus/`](../calculus/README.md),
+  distributions via this topic's random-variables series) — it is the
+  roadmap's next stop.
 - Explaining away — the verified-but-unbuilt half of the conditional
   independence story (independence ⇏ CI: two fair flips given "exactly
   one head", 0 ≠ 1/4; plan 003's anchors).
 - The log-odds inference scene — `algebra/`'s `TheEvidenceRuler`
   built the ruler on this topic's coins; the inference treatment (the
   residual of that delivered edge) belongs here.
-- The law of large numbers properly: swamping quantified, absolute vs
-  relative deviation.
-- Random variables and distributions — the die as a function, not a set.
+- The law of large numbers as a theorem — `ProportionsConverge`
+  computes its instances exactly; the proof wants variance, and the
+  two arrive together.
+- ~~Random variables and distributions~~ — delivered by this topic's
+  random-variables series; `TheStampedSquare` opens on exactly the
+  promised die-as-a-function.

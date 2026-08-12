@@ -17,6 +17,7 @@ crawling every page; whoever applies an audit's findings updates it.
 | `bayes-rule` | `probability/bayes_rule_manim.py` | The division named, whole-people counting, the odds form and waterfall, the factored prevalence pair, iterated updating, the host's protocol |
 | `logarithms` | `algebra/logarithms_manim.py` | The counting strip: multiplying is adding counters; the evidence ruler; the underflow cliff and log-sum-exp |
 | `e-and-ln` | `calculus/e_and_ln_manim.py` | e as the self-paced base: Bernoulli's ceiling, the mystery constants, ln as the natural counter row; the underflow identity re-read |
+| `random-variables` | `probability/random_variables_manim.py` | The die as a function; the pmf as sorted area; expectation as balance point; the binomial columns; swamping quantified |
 
 ## Edges
 
@@ -36,14 +37,15 @@ Status: **delivered** (both ends exist and the content makes the link) or
 | `ctc-alignment` | `logarithms` | delivered | `TheUnderflowCliff` delivers `deep_learning/`'s log-space bullet: the 0.1³²⁴ hard zero, the −324 log sum, and Graves' log-add identity for the trellis's additions (2012 book, correctly attributed) |
 | `ctc-alignment` | *(beam search / gradient / peaky dynamics)* | promised | `deep_learning/README.md` Ideas not yet built. The gradient story waits on softmax and a derivative toolkit — its e-half now exists (`e-and-ln`), per plan 006's roadmap claim |
 | `ctc-alignment` | *(dynamic programming as its own concept)* | promised | `deep_learning/README.md` row 5 when-useful; plan 001 gaps. A future build inherits log-space for free: `TheUnderflowCliff` already shows the recursion's additions need the log-add identity |
-| `counting-rules` | *(binomial distribution — future random variables)* | promised | `combinatorics/README.md` row 3 when-useful names it; lands when `probability/` grows random variables |
-| `independence` | *(softmax, likelihood, log-likelihood)* | promised | `probability/README.md` Ideas — the remaining half of the CTC bridge; the e-half of its gate is now delivered by `e-and-ln` (`calculus/README.md` Scope points here), leaving only random variables |
-| `independence` | *(law of large numbers)* | promised | `probability/README.md` Ideas; `WhenToUseIt`'s swamping beat is the seed |
-| `independence` | *(random variables)* | promised | `probability/README.md` Ideas |
+| `counting-rules` | `random-variables` | delivered | The graph's oldest promise (`combinatorics/README.md` row 3 when-useful), closed: `TheBinomialColumns` counts the sorted columns' cells as C(4,k) — "counted exactly the way the combinations series counts them" — and assembles C(n,k)p^k q^(n−k) from cell count times cell area |
+| `independence` | *(softmax, likelihood, log-likelihood)* | promised | `probability/README.md` Ideas — the remaining half of the CTC bridge. Both gates now delivered (e via `e-and-ln`, distributions via `random-variables`); `ProportionsConverge`'s closer names it as next |
+| `independence` | *(law of large numbers — the theorem, with variance)* | promised | `probability/README.md` Ideas and Scope exclusion; `ProportionsConverge` computes the weak law's instances exactly and names it (G&S Thm. 8.2 named, not proved) — what remains promised is the theorem and the variance machinery, together |
+| `independence` | `random-variables` | delivered | `TheStampedSquare` and `SortTheSquare` run on `ChainsOfTrials`' quartered square (fifth series); `TheBalancePoint` reuses the biased die (E moves to 27/7 — "the balance point belongs to the measure", echoing `OneDieTwoEvents`); `ProportionsConverge` quantifies `WhenToUseIt`'s swamping beat |
+| `random-variables` | `e-and-ln` | delivered | `TheBinomialColumns`' closer: zero successes in n trials of chance 1/n is (1−1/n)ⁿ → 1/e ≈ 0.3679 — "the split year, mirrored"; the plan-006 audit's possible-connection, made |
 | `counting-rules` | *(Pascal, stars & bars, inclusion–exclusion, binomial theorem)* | promised | `combinatorics/README.md` Ideas not yet built |
 | `logarithms` | `e-and-ln` | delivered | `TheSplitYear` replays `MultiplyIsAdd`'s deferral caption on screen ("the wait ends here"); `TheNaturalStride` names the mystery constants as ln and re-rules the strip in natural units; `TheDebtRepaid` re-reads `TheUnderflowCliff`'s identity symbol by symbol — the graph's only on-screen debt, closed |
 | `logarithms` | *(the log-odds inference scene in `probability/`)* | promised | `algebra/README.md` Ideas ("this series builds the ruler; that series owns the inference") — the residual of the delivered bayes→logarithms edge |
-| `logarithms` | *(information as log-counting — bits, entropy)* | promised | `algebra/README.md` Ideas; `ShrinkCounts`' −log₂ = 4 is the HHTH cell's surprisal, one caption short of "4 bits". Nats vs bits is now a pure unit change on `TheNaturalStride`'s "stretched unit" device |
+| `logarithms` | *(information as log-counting — bits, entropy)* | promised | `algebra/README.md` Ideas; `ShrinkCounts`' −log₂ = 4 is the HHTH cell's surprisal. Both halves now exist: `ProportionsConverge` says "average surprisal over the 16 equal cells is exactly 4 bits" on screen — entropy is one series away, with nats vs bits a unit change on `TheNaturalStride`'s device |
 | `e-and-ln` | *(derivative toolkit, ln as area under 1/t, Euler's formula, growth in the wild)* | promised | `calculus/README.md` Ideas not yet built; the first three are also Scope exclusions stated with their reasons |
 
 ## Shared visual devices
@@ -86,7 +88,13 @@ one topic should meet the same picture, upgraded, in the next:
   `CountingItOut`): whole-people counts carrying the prior in the
   numbers themselves — completed by the Bayes series' Diseasitis count
   (18/42 = 3/7).
-- **The quartered unit square** (`ChainsOfTrials` → `ShrinkCounts`):
+- **Sort the square** (`SortTheSquare` → `TheBinomialColumns`): the
+  stamped cells slide into columns grouped by value — the pmf born as
+  conserved, rearranged area; re-cut at p, the same columns weigh
+  C(n,k)·p^k q^(n−k). The device that makes "induced weights" a move
+  you watched instead of a definition.
+- **The quartered unit square** (`ChainsOfTrials` → `ShrinkCounts` →
+  `TheStampedSquare`/`SortTheSquare`):
   the (1/2)⁴ cell, first as a probability, then re-read as four
   halvings — negative logs fall out of a picture the viewer owns.
 - **The odds ladder** (`YesterdaysPosterior` → `TheEvidenceRuler`):
