@@ -338,7 +338,7 @@ class TheMultiplicationRule(ConceptScene):
         # product-rule 1/169); the factorization below is THIS scene's new
         # object — claim only what was shown.
         owed = Text(
-            "Independence priced the aces by counting alone — now factor it:",
+            "Independence priced the aces with no license shown — now factor it:",
             font_size=BODY_SIZE,
         ).move_to(0.45 * UP)
         debt = MathTex(

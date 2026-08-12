@@ -18,8 +18,9 @@ Deliberately **not** covered here:
   on screen — `MultiplyIsAdd`'s "that story waits", and the underflow
   scene's loan note on the ln-form log-add identity — and `calculus/`'s
   `TheSplitYear` opens by replaying the first while `TheDebtRepaid`
-  re-reads the second. All other content stays base-generic (change of
-  base is a constant rescale), built in bases 2, 3, and 10.
+  re-reads the identity behind the second. All other content stays
+  base-generic (change of base is a constant rescale), built in bases
+  2, 3, and 10.
 - The inverse-function graph as a *definition* — documented to misfire;
   it appears only as a payoff, never as the starting point: exactly the
   close `calculus/`'s `TheDebtRepaid` delivers.

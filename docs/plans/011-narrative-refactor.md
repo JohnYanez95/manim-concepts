@@ -52,7 +52,17 @@ on-screen text changes get re-rendered.
   touched scenes lint clean (four latent findings in untouched
   shipped scenes recorded as out of scope); both beats verified by
   frame at draft
-- [ ] Phase 3: reviews clean
+- [x] Phase 3: local CodeRabbit clean on the first pass (zero
+  findings, second time in repo history). Audit: 7 findings, all
+  applied — INDEX row 63 now records the promise side of the graph's
+  flagship edge (on screen at both ends, symmetric at last), the
+  calculus two-promises sentence trued, the algebra antecedent slip
+  fixed, and the "by counting alone" residual softened to "with no
+  license shown" in both the cell and the caption (the scene was
+  already in the re-render set, so full strictness was free); the
+  debt premise verified surviving (character-identical MathTex in
+  both modules); the TheDebtRepaid-quotes-the-loan-note replay
+  recorded as a future-touch candidate; stamp advanced to aeb25f6
 - [ ] Phase 4: PR, bot review, touched finals rendered
 
 ## Findings (pinned from the three audit agents)
