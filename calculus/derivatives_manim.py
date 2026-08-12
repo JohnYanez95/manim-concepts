@@ -3,8 +3,8 @@
 The series the CTC gradient waits on: the slope as a function (d/dx
 names the settling ratio `ZoomUntilStraight` built), nudge geometry
 for x², the sum and chain rules, e^x and ln in notation, the score
-function finding the likelihood peak the probability series found by
-grid, and the closer — the smooth max's sensitivities ARE the softmax
+function deriving the likelihood peak the probability series read off
+its plotted curve, and the closer — the smooth max's sensitivities ARE the softmax
 shares, leaving p − one-hot one subtraction away.
 
     TheSlopeIsAFunction     the slope at every point is a second curve
@@ -565,13 +565,13 @@ class TheCurveThatIsItsOwnSlope(ConceptScene):
 
 
 class ZeroSlopeFindsThePeak(ConceptScene):
-    """The score function finds the MLE peak the grid search circled."""
+    """The score function derives the peak the softmax series read by eye."""
 
     def construct(self):
         self.play(FadeIn(self.title("Zero Slope Finds the Peak"), shift=0.3 * DOWN))
 
         opening = Text(
-            "The softmax series found p̂ = 3/4 by grid. The slope knows better.",
+            "The softmax series read p̂ = 3/4 off the plotted curve.",
             font_size=BODY_SIZE,
         ).next_to(self.head, DOWN, buff=0.3)
         self.play(FadeIn(opening))
@@ -633,6 +633,35 @@ class ZeroSlopeFindsThePeak(ConceptScene):
         self.play(Write(solve))
         self.wait(1.2)
 
+        # The general line: the observed proportion, derived at last.
+        self.play(
+            FadeOut(
+                VGroup(
+                    score_def,
+                    strip_note,
+                    strip_note2,
+                    strip_note3,
+                    score,
+                    grid_vals,
+                    at_ps,
+                    at_ps2,
+                    solve,
+                )
+            )
+        )
+        general = MathTex(
+            r"\frac{k}{p} - \frac{n-k}{1-p} = 0 \;\Longrightarrow\; \hat{p} = \frac{k}{n}",
+            font_size=36,
+            color=ACCENT,
+        ).move_to(3.6 * RIGHT + 1.0 * UP)
+        derived = caption("the observed proportion — the claim")
+        derived2 = caption("ProportionsConverge made, now derived")
+        on_frame(derived.move_to(3.6 * RIGHT + 0.15 * UP))
+        on_frame(derived2.next_to(derived, DOWN, buff=0.13))
+        self.play(Write(general))
+        self.play(FadeIn(derived), FadeIn(derived2))
+        self.wait(1.0)
+
         # Honesty: the converse error, and where the score lives.
         self.play(
             FadeOut(
@@ -645,15 +674,9 @@ class ZeroSlopeFindsThePeak(ConceptScene):
                     drop,
                     signs,
                     ribbon,
-                    score_def,
-                    strip_note,
-                    strip_note2,
-                    strip_note3,
-                    score,
-                    grid_vals,
-                    at_ps,
-                    at_ps2,
-                    solve,
+                    general,
+                    derived,
+                    derived2,
                 )
             )
         )

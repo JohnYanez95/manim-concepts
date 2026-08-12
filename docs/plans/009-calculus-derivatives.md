@@ -66,7 +66,17 @@ gradient only in when-useful framing.
   MacTutor's own credit (created and maintained by John O'Connor and
   Edmund Robertson, University of St Andrews); the other nineteen
   confirmed correct (ticks are his to place)
-- [ ] Phase 4: local CodeRabbit + connection-auditor clean
+- [x] Phase 4: local CodeRabbit clean on the FIRST pass (zero
+  findings — a repo first; the linter, guards and precision habits
+  paying upstream). Audit: 18 findings, all applied — the top one a
+  picture-is-a-claim catch ("found by grid" was a beat no softmax
+  scene contains; reworded everywhere), the k/n general line built on
+  its recommendation, the new node's out-promise row added with its
+  two riders, stale-at-delivery occurrences 10-11 fixed, root README
+  and algebra symmetry trued, the welcome row rebuilt as two rows of
+  five with the gif re-rendered and its rule reworded to series
+  granularity, three device lineages recorded, and the design prose
+  trued to the build
 - [ ] Phase 5: PR, drafts cleaned, 1080p60 render verified
 
 ## Research questions the reports must settle
@@ -79,9 +89,9 @@ gradient only in when-useful framing.
   CTC gradient — does the product rule earn its place (the likelihood
   curve p³(1−p) wants it), or does the log-derivative route
   (d ln L = 3/p − 1/(1−p)) make the product rule skippable?
-- The MLE payoff: zero slope finds the peak the softmax series found
-  by grid — how is that staged so it lands as a payoff, not a
-  re-teach?
+- The MLE payoff: zero slope derives the peak the softmax series read
+  off its plotted curve — how is that staged so it lands as a payoff,
+  not a re-teach?
 - The closer: d/dz LSE(z) = softmax(z) — the smooth max's
   sensitivities ARE the softmax shares. How much of the p − one-hot
   gradient does this series show, and how much stays for the CTC
@@ -283,8 +293,8 @@ Run `ZoomUntilStraight`'s device at several points of one parabola —
 zoom, straighten, read the slope — and plot the read-offs beneath:
 the slope is a *function*, and d/dx names the settling ratio the
 e-and-ln series built (say so on screen — this scene generalizes an
-owned one). The dual graph kills Orton's ordinate confusion (a dot
-sliding on both curves, height and slope visibly different numbers).
+owned one). The dual graph kills Orton's ordinate confusion (height and slope
+read as visibly different numbers on the two curves).
 The table beat: forward quotients at x = 1 — 3, 2.1, 2.01, 2.001 → 2
 (anchor A), the entries literally 2 + h. Smoothness breath: |x| never
 straightens at 0 — the device needs smooth. Notation beat (anchor I):
@@ -297,14 +307,16 @@ The literal square: side x, grow by dx; two x·dx strips and a dx²
 corner that visibly dies faster than the strips as dx shrinks
 (Thompson's second-order smallness, shown not hand-waved). At x = 3:
 slope 6, finite check 6.01 → 6. Second view: the number-line stretch
-factor — spacing near x = 1 doubles, near x = 3 sextuples, collapses
-at 0 (`ZoomUntilStraight` in transformation clothing; a zoomed
+factor — spacing near x = 1 doubles, near x = 3 sextuples (the
+collapse-at-0 beat was cut at build; `ZoomUntilStraight` in
+transformation clothing — a zoomed
 straight line IS a linear stretch — the seed scene 3 harvests).
 
 **3. `NudgesAddNudgesCompose` — the toolkit's two load-bearing
 rules.**
-Sum rule briefly (stacked heights: one nudge, two independent height
-changes, the total is the stack). Then the chain rule as causality:
+Sum rule briefly (stated with its reason in captions — the stacked-
+heights visual was cut at build; the formula and the stacking reason
+carry it). Then the chain rule as causality:
 three number lines — dx causes du causes dy — with the stretch
 factors composing. Worked table (anchor F): (2x)² at x = 1 — inner
 rate 2, outer rate 4 *at u = 2*, product 8; quotients 8.4, 8.04,
@@ -326,11 +338,13 @@ the slope of ln is 1/e, the y = x reflection of e^x's slope e at
 height e (rise and run swap, so slopes reciprocate). On-screen
 anchor: "Euler named e in 1748; d(e^x) = e^x dx is his, 1755."
 
-**5. `ZeroSlopeFindsThePeak` — the grid search is over.**
+**5. `ZeroSlopeFindsThePeak` — the curve-sweep is over.**
 The owned likelihood curve L(p) = 4p³(1−p) with a slope ribbon under
 it (+ climbing, 0 at the top, − descending; the ribbon agrees with
 the curve at every frame — picture-is-a-claim). The score reader
-introduced as the counting strip differentiated: d ln f = f′/f
+introduced as the counting strip differentiated: d ln f = f′/f, and
+after the solve, the general line k/p − (n−k)/(1−p) = 0 ⟹ p̂ = k/n
+(built at phase 4 on the audit's recommendation)
 (Euler §181 — his own sentence quotable; §183 the sum of scores),
 products becoming sums of relative rates. Score = 3/p − 1/(1−p):
 +4 at 1/2, +0.9524 at 0.7, **0 at 3/4**, −1.25 at 0.8 (anchor E);

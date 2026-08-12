@@ -1,6 +1,6 @@
 # Graph index
 
-Last audited: `e517c09` (2026-08-11, incremental — plan-008 branch)
+Last audited: `5615507` (2026-08-12, incremental — plan-009 branch)
 
 The stamp is a commit hash: the state of the repo this graph was last
 reconciled against. The `connection-auditor` diffs from it instead of
@@ -51,8 +51,9 @@ Status: **delivered** (both ends exist and the content makes the link) or
 | `logarithms` | `softmax-likelihood` | delivered | `AddToSurvive` says "multiplying is adding counters — the strip carries likelihood now" and "the evidence ruler was a log-likelihood-ratio ruler all along", then re-runs the cliff (float32 dead at 0.1⁴⁶, 0.1³²⁴ = 0.0 exactly); `TheLossThatTrains` re-uses log-sum-exp as "the smooth max — the log-sum-exp ruler, again" |
 | `e-and-ln` | `softmax-likelihood` | delivered | `TurningTheDial` pays the debt `calculus/README.md`'s Scope stated ("why e appears in every probability machine" — Scope prose, not a rendered caption): base 2 is exactly (4/7, 2/7, 1/7), b^z = e^(z ln b), "no base above 1 is forced — each is e at another T; e is the convention because ln is the natural counter" |
 | `bayes-rule` | `softmax-likelihood` | delivered | `TheBestExplanation` names the dice ratio "a likelihood ratio — one rung of the posterior ladder: the update factor, not a verdict about the die", and points the not-a-density guard at the prior-and-renormalize move ("that is the Bayes move, and it is not this move") |
-| `softmax-likelihood` | `derivative-toolkit` | delivered | `ZeroSlopeFindsThePeak` finds `TheBestExplanation`'s grid peak analytically (the score 3/p − 1/(1−p) zeroes at p̂ = 3/4 — "the grid search is over"); `TheSmoothMaxsShares` differentiates the NLL gap into (−0.3348, 0.2447, 0.0900) = p − one-hot and makes "the gap grows roughly linearly" a theorem (slope → −1) |
+| `softmax-likelihood` | `derivative-toolkit` | delivered | `ZeroSlopeFindsThePeak` finds `TheBestExplanation`'s grid peak analytically (the score 3/p − 1/(1−p) zeroes at p̂ = 3/4, and the general line derives p̂ = k/n — "the observed proportion … now derived"); `TheSmoothMaxsShares` differentiates the NLL gap into (−0.3348, 0.2447, 0.0900) = p − one-hot and makes "the gap grows roughly linearly" a theorem (slope → −1) |
 | `logarithms` | `derivative-toolkit` | delivered | `ZeroSlopeFindsThePeak` names the score "the counting strip differentiated — under ln, products become sums of relative rates"; `TheSmoothMaxsShares` differentiates the log-sum-exp ruler itself, its sensitivities landing as the softmax shares |
+| `derivative-toolkit` | *(the CTC gradient identity)* | promised | `TheSmoothMaxsShares`' closer, on screen: "every frame of CTC hands this exact picture a different target — softmax minus where the truth actually was; the gradient series is next" — the promise's third on-screen strand. Two riders travel with it: the bare-product-rule decision belongs to the gradient series (calculus Scope), and "how often the truth used each cell" is an expectation — `TheBalancePoint` is the owned picture its plan grounds in |
 | `counting-rules` | *(Pascal, stars & bars, inclusion–exclusion, binomial theorem)* | promised | `combinatorics/README.md` Ideas not yet built |
 | `logarithms` | `e-and-ln` | delivered | `TheSplitYear` replays `MultiplyIsAdd`'s deferral caption on screen ("the wait ends here"); `TheNaturalStride` names the mystery constants as ln and re-rules the strip in natural units; `TheDebtRepaid` re-reads `TheUnderflowCliff`'s identity symbol by symbol — the graph's only on-screen debt, closed |
 | `logarithms` | *(the log-odds inference scene in `probability/`)* | promised | `algebra/README.md` Ideas ("this series builds the ruler; that series owns the inference") — the residual of the delivered bayes→logarithms edge. `TheBestExplanation` grew it a second passenger: the 864/343 rung stops exactly where a prior would enter, so MLE→MAP (the ratio through a 1:1 prior) rides the same future scene — its numbers already verified in plan 008 addendum A1 |
@@ -129,6 +130,18 @@ one topic should meet the same picture, upgraded, in the next:
   halvings — negative logs fall out of a picture the viewer owns;
   `AddToSurvive`'s lift beat re-reads the HHTH cell once more as the
   exact-sequence likelihood, ln 4 below the count curve.
+- **The softmax bars, reborn** (`TheProbabilityMachine` →
+  `TurningTheDial` → `TheLossThatTrains` → `TheSmoothMaxsShares`, where
+  the same bars — same values, order, colors — return as a *gradient*
+  read-out; the future gradient series hands them a different target
+  per frame).
+- **The sign-change ribbon** (`ZeroSlopeFindsThePeak`: + / 0 / − under
+  the likelihood curve, with the x³ cameo and the p = 0 valley floor
+  disposing of the converse error) — the habit the training-dynamics
+  scenes will inherit.
+- **The y = x flip** (`TheDebtRepaid` earns the inverse graph →
+  `TheCurveThatIsItsOwnSlope` differentiates it: rise and run swap, so
+  slopes reciprocate — 1/e at x = e).
 - **Factor out the max**: `TheUnderflowCliff`/`TheDebtRepaid`'s a ≥ b
   convention in the log-add identity → `TheProbabilityMachine`'s
   subtract-the-max rescue (the invariance, used) → `TheLossThatTrains`'

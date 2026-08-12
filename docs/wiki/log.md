@@ -434,3 +434,39 @@ reordered.
 - devices: zoom-until-straight lineage recorded (the derivative born
   as a function; the stretch view; the chain rule composing it);
   counting strip fifth stop (the score is the strip's derivative)
+
+## [2026-08-12] audit | incremental, plan 009 branch
+
+- scope: diffed e517c09..5615507 (12 commits — plan-008 finalisation
+  tail + PR #9 merge, LICENSE fill, full plan-009 branch, maintainer
+  source pass); changed files plus cited far ends, no full crawl
+- findings: 3 promised-not-delivered, 4 delivered-not-recorded,
+  4 possible-not-yet-made, 7 graph-health — applied in the phase-4
+  commit (the local CodeRabbit round returned zero findings, a repo
+  first)
+- top finding: the "grid search" claim was a beat no scene contains —
+  TheBestExplanation swept the whole curve; reworded in the scene,
+  README cell, INDEX quote and plan, caught before finals exist
+- built on the audit's recommendation: the general line
+  k/p − (n−k)/(1−p) = 0 ⟹ p̂ = k/n — ProportionsConverge's claim,
+  now derived on screen
+- the new node's out-promise recorded: derivative-toolkit → the CTC
+  gradient identity (the promise's third on-screen strand), carrying
+  two riders — the bare-product-rule decision and occupancy-as-
+  expectation (TheBalancePoint is the owned picture)
+- stale-at-delivery occurrences 10 and 11 fixed: probability Scope
+  and deep_learning's gradient bullet now say only the identity
+  remains
+- root README's likely-next and calculus topic row trued; algebra
+  README points at the strip's fifth stop (symmetry restored)
+- the welcome row was three series behind: now two rows of five,
+  gif re-rendered, and the re-render rule reworded to fire on series
+- devices recorded: the softmax bars reborn, the sign-change ribbon,
+  the y = x flip differentiated
+- possible, recorded: the product rule's owned picture
+  (TheProductRule's rectangle, noted in calculus Scope); the stretch
+  factor as the 1-D Jacobian feeds the still-open linear_algebra/
+  maintainer call (sixth entry)
+- plan-009 design prose trued: the sliding dot, collapse-at-0 and
+  stacked-heights beats marked cut-at-build
+- stamp: advance to 5615507

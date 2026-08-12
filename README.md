@@ -53,11 +53,11 @@ command, so none of them are committed.
 | [`deep_learning/`](deep_learning/README.md) | CTC alignment: the blank token, paths and their collapse, counting alignments, the forward trellis |
 | [`probability/`](probability/README.md) | Independence (probability as area, the product rule, chains of trials); conditional probability (the renormalized slice, total probability, the inversion); Bayes' rule (the odds form, the waterfall, the host's protocol); random variables (the stamped square, the balance point, the binomial columns); softmax and likelihood (the two-lens table, the probability machine, the loss that trains) |
 | [`algebra/`](algebra/README.md) | Logarithms: the counting strip, the evidence ruler, the underflow cliff |
-| [`calculus/`](calculus/README.md) | e and ln: the split year, the mystery constants, the natural stride, the debt repaid |
+| [`calculus/`](calculus/README.md) | e and ln (the split year, the mystery constants, the natural stride, the debt repaid); the derivative toolkit (the slope as a function, the score, the smooth max's shares) |
 
 Topics are added as they are written. Likely next: the CTC gradient
-identity and the derivative toolkit that gates it (the
-softmax/likelihood bridge is built), `linear_algebra/`, or the
+identity — every gate is now open (softmax, log-likelihood, and the
+derivative toolkit are all built) — then `linear_algebra/` or the
 deep-learning backlog (beam search, dynamic programming). The
 layout is expected to drift — if a topic only ever holds one file, it can
 collapse into a flatter arrangement later without anything else changing.

@@ -90,6 +90,12 @@ were verified by the maintainer, who directed the ticks be recorded.
 - [x] [LessWrong/Arbital, "Bayes' rule: log-odds form"](https://www.lesswrong.com/w/bayes-rule-log-odds-form)
       — evidence in bits; 0 and 1 as ±∞ on the evidence ruler.
 
+The strip's fifth stop lives in [`calculus/`](../calculus/README.md):
+the derivatives series differentiates it — the score d ln f = f′/f is
+the counting strip's own derivative ("under ln, products become sums
+of relative rates"), and the log-sum-exp ruler differentiates into
+the softmax shares.
+
 ## Ideas not yet built
 
 Rough queue, in roughly the order they build on each other:
