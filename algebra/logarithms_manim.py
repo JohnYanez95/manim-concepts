@@ -532,13 +532,14 @@ class TheUnderflowCliff(ConceptScene):
         attribution2 = caption('which calls rescaling "less robust" — credit where it is due')
         attribution.next_to(safe, DOWN, buff=0.28)
         attribution2.next_to(attribution, DOWN, buff=0.18)
-        self.play(Write(lse), Create(boxed(lse, buff=0.3)))
+        lse_box = boxed(lse, buff=0.3)
+        self.play(Write(lse), Create(lse_box))
         self.play(Write(exact_bit))
         self.play(FadeIn(safe))
         self.play(FadeIn(attribution), FadeIn(attribution2))
         self.wait(1.2)
 
-        self.play(FadeOut(VGroup(need, lse, exact_bit, safe, attribution, attribution2)))
+        self.play(FadeOut(VGroup(need, lse, exact_bit, safe, attribution, attribution2, lse_box)))
         wild = caption(
             "the same ruler everywhere the world multiplies: decibels, pH,\n"
             "earthquake magnitudes, semitones — and every per-frame product"

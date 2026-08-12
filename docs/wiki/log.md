@@ -198,3 +198,99 @@ reordered.
 - the repo is public, licensed Apache 2.0, and its front page explains
   itself (welcome gif + workflow diagram)
 - next: calculus/ (unlocks e and ln), or the log-odds inference scene
+
+## [2026-08-11] audit | plan-005 finalisation + box-leak fix
+
+- scope: diffed 726b19e..344f4f1 (PR #6 bot round, merge, post-merge
+  box-leak fix); changed files only, no full crawl
+- findings: 0 new promised (queue stands at 10 rows),
+  1 delivered-not-recorded, 3 possible-not-yet-made, 4 graph-health
+- correction: the plan-005 finalisation entry's render claim is stale
+  for one scene — scene 6's verified 1080p60 render predates the
+  box-leak fix (the log-sum-exp box never faded out). Decision: the fix
+  rides the next topic branch (`feat/calculus-e-ln`) as a pre-phase
+  commit, no separate fix PR; scene 6 re-renders at that branch's
+  finalise gate
+- ShrinkCounts' zero-prior beat recorded as a second delivered strand
+  of bayes -> logarithms (INDEX row updated)
+- noted for the next builds: bits/entropy silently depends on
+  expectation (random variables); the binomial pmf already sits in the
+  quartered square (group ChainsOfTrials' cells by head count); the
+  base-is-a-unit stride device is the natural opening for calculus/
+- open maintainer call: root README's likely-next names linear_algebra/,
+  which no graph row carries — promise it properly or drop it
+- next build: calculus/ (strongest open promise, on-screen ln debt,
+  anchors part-verified in plan 005) over random variables
+- stamp: unchanged at 726b19e; advance to plan 006's merge commit when
+  `feat/calculus-e-ln` lands
+
+## [2026-08-11] series | plan 006, e and ln (in progress)
+
+- node built: `e-and-ln` (calculus/e_and_ln_manim.py, six scenes; new
+  calculus/ topic)
+- the strongest open promise closed: logarithms -> e-and-ln.
+  TheSplitYear replays the deferral caption, TheNaturalStride names
+  the mystery constants as ln, and TheDebtRepaid re-reads the
+  underflow identity — the graph's only on-screen debt, repaid
+- independence -> softmax row updated: the e-half of its double gate
+  is delivered; the row now waits on random variables alone
+- calculus/ opens one batched out-promise row (derivative toolkit,
+  ln as area, Euler's formula, growth in the wild)
+- device recorded: the counting strip re-ruled — definition ->
+  base-as-unit -> natural units, across algebra/ and calculus/
+- root README likely-next updated: random variables leads (per the
+  CTC roadmap), linear_algebra/ still listed pending the maintainer
+  call the finalisation audit raised
+- riding this branch as pre-phase: the box-leak fix + audit
+  bookkeeping; algebra scene 6 re-renders at this branch's finalise
+
+## [2026-08-11] audit | incremental, plan 006 branch
+
+- scope: diffed 344f4f1..fef9ebb (5 commits — audit bookkeeping, full
+  plan-006 branch); 726b19e..344f4f1 already covered by the previous
+  entry; changed files plus cited algebra/probability content, no
+  full crawl
+- findings: 3 promised-not-delivered, 2 delivered-not-recorded,
+  4 possible-not-yet-made, 5 graph-health — applied alongside the
+  local CodeRabbit round (log1p attribution, the dropped a >= b) in
+  one phase-4 commit
+- the flipped logarithms -> e-and-ln edge verified against scene
+  content: the deferral replay is verbatim, the strip re-rules, the
+  debt is read; the re-read identity regained the (a >= b) the
+  original carries, with the max convention now named in its captions
+- picture-is-a-claim: scene 1's hops were prose-claimed "on the
+  strip" (no strip is drawn — README cell and plan design fixed to
+  the built scene); the plan's scene-3 bisection prose replaced by
+  the built settling-rows beat
+- stale-at-delivery occurrence 6: algebra/README's Scope, e/ln Ideas
+  bullet, and inverse-graph deferral all still called this branch's
+  content future — all three updated with pointers to calculus/
+- rows polished: ctc gradient row cross-referenced (e-half exists),
+  bits/entropy row notes nats-vs-bits as a stretched-unit change,
+  batched calculus row says "first three", softmax bullet states its
+  remaining random-variables gate
+- future connections recorded here for the next builds: Bernoulli's
+  table re-read as a binomial sum (counting-rules <-> e-and-ln);
+  half-life as ShrinkCounts in continuous time; doubling time
+  answering TheCountingStrip's halving-times promise
+- linear_algebra/ remains promised nowhere — maintainer call still
+  open
+- stamp: advance to fef9ebb
+
+## [2026-08-11] series | plan 006 finalised (PR #7)
+
+- final 1080p60 render verified: 7 files — the six e-and-ln scenes
+  (1841-2273 frames, native 0.75x pace) plus the re-rendered algebra
+  06_TheUnderflowCliff, whose final beat was spot-checked at full
+  resolution: the lingering log-sum-exp box is gone, the render claim
+  the finalisation-audit correction flagged is true again
+- bot round: 2 findings, both accepted — rounded decimals now display
+  with approx signs (the iff between two rounded computations removed)
+  and "every CTC implementation" softened to match algebra/'s own
+  attribution (2006 rescaled; log space is the 2012 book)
+- the calculus/ topic lands with all sixteen references
+  maintainer-verified and ticked
+- next per the roadmap: random variables & distributions in
+  probability/ (binomial via the quartered square), then the
+  softmax/likelihood bridge — the linear_algebra/ front-page call is
+  still open

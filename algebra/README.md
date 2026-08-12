@@ -13,12 +13,14 @@ log-sum-exp). Both payoffs are scenes here, on the repo's own numbers.
 Deliberately **not** covered here:
 
 - **e and the natural logarithm.** Every honest road to e — limits,
-  derivatives, areas — is calculus, which the repo does not teach yet.
-  One caption names the deferral; nothing pretends otherwise. All
-  content is base-generic (change of base is a constant rescale), built
-  in bases 2, 3, and 10.
+  derivatives, areas — is calculus, now taught in
+  [`calculus/`](../calculus/README.md). One caption names the deferral
+  on screen, and `calculus/`'s `TheSplitYear` opens by replaying it.
+  All content here stays base-generic (change of base is a constant
+  rescale), built in bases 2, 3, and 10.
 - The inverse-function graph as a *definition* — documented to misfire;
-  it may appear later as a payoff, never as the starting point.
+  it appears only as a payoff, never as the starting point: exactly the
+  close `calculus/`'s `TheDebtRepaid` delivers.
 - Exponential/logarithmic equations drill, complex logarithms, and
   Weber–Fechner beyond a motivation caption.
 
@@ -92,9 +94,10 @@ were verified by the maintainer, who directed the ticks be recorded.
 
 Rough queue, in roughly the order they build on each other:
 
-- e and the natural logarithm, done honestly — needs a `calculus/`
-  topic first; the compound-interest table can then become a scene
-  instead of a caption.
+- ~~e and the natural logarithm, done honestly~~ — delivered by
+  [`calculus/`](../calculus/README.md): the compound-interest table
+  became `TheSplitYear`, and the deferral caption is replayed on
+  screen before being answered.
 - The log-odds form of Bayes as a full scene in `probability/` (this
   series builds the ruler; that series owns the inference).
 - Log scales in the wild as their own visual essay — dB vs pH vs

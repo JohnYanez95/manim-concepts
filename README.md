@@ -53,9 +53,11 @@ command, so none of them are committed.
 | [`deep_learning/`](deep_learning/README.md) | CTC alignment: the blank token, paths and their collapse, counting alignments, the forward trellis |
 | [`probability/`](probability/README.md) | Independence (probability as area, the product rule, chains of trials); conditional probability (the renormalized slice, total probability, the inversion); Bayes' rule (the odds form, the waterfall, the host's protocol) |
 | [`algebra/`](algebra/README.md) | Logarithms: the counting strip, the evidence ruler, the underflow cliff |
+| [`calculus/`](calculus/README.md) | e and ln: the split year, the mystery constants, the natural stride, the debt repaid |
 
-Topics are added as they are written. Likely next: `calculus/` (which
-unlocks e and the natural log), `linear_algebra/`, or the deep-learning
+Topics are added as they are written. Likely next: random variables and
+distributions in `probability/` (closing the oldest open promise,
+counting-rules → binomial), `linear_algebra/`, or the deep-learning
 backlog (beam search, dynamic programming). The
 layout is expected to drift — if a topic only ever holds one file, it can
 collapse into a flatter arrangement later without anything else changing.
