@@ -46,7 +46,14 @@ gradient only in when-useful framing.
   product rule, and Newton's dates kept off screen (secondary-only)
 - [x] Phase 1: plan + module stub, `make check` green (204 tests;
   `--list` prints the stub)
-- [ ] Phase 2: scenes at draft; linter clean; frames verified by eye
+- [x] Phase 2: all six scenes at draft (6 files, distinct names,
+  31-40 s); the layout linter's first pass caught five real findings
+  before any render (a persisting sum-rule block colliding with the
+  chain lines, a takeaway box crossing a table, the likelihood curve
+  through two captions, an edge-clipped saturation line) plus one
+  restack on re-lint — all fixed, module clean; frame grids reviewed
+  by eye across every beat, one further catch (the closer's takeaway
+  box running near edge-to-edge, tightened)
 - [ ] Phase 3: README + wiki complete, `make test` green
 - [ ] Phase 4: local CodeRabbit + connection-auditor clean
 - [ ] Phase 5: PR, drafts cleaned, 1080p60 render verified
