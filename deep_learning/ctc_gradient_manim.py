@@ -66,7 +66,7 @@ Y_MATRIX = [
 
 # Unit-weight path counts, stored column-major (one list per frame, rows
 # s = 1..5 over ε A ε B ε). Forward counts are plan 001's; backward counts
-# are anchor S1 (the forward table read in a mirror).
+# are anchor P (the forward table read in a mirror).
 FWD_COUNTS = [[1, 1, 0, 0, 0], [1, 2, 1, 1, 0], [1, 3, 3, 4, 1], [1, 4, 6, 10, 5]]
 BWD_COUNTS = [[5, 10, 6, 4, 1], [1, 4, 3, 3, 1], [0, 1, 1, 2, 1], [0, 0, 0, 1, 1]]
 
@@ -527,7 +527,11 @@ class WhereTheTruthSpendsItsTime(ConceptScene):
         ones = VGroup()
         for t in range(4):
             column = VGroup(*[nodes[t][s] for s in range(5)])
-            one = Text("1.0000", font_size=18, color=GOOD).next_to(column, DOWN, buff=0.25)
+            # The cells are rounded to 4 dp; only the exact column sum is 1
+            # (the 4-dp digits add to 0.9999 at t=2 and 1.0001 at t=3 —
+            # FLAG 11's digit-exactness covers the OCC/GRAD rows, not these
+            # 5-state columns).
+            one = MathTex(r"= 1", font_size=24, color=GOOD).next_to(column, DOWN, buff=0.25)
             ones.add(one)
         self.play(LaggedStart(*[FadeIn(o) for o in ones], lag_ratio=0.15))
         named = caption("γ — each column a distribution: where the truth spends frame t")
@@ -866,10 +870,12 @@ class SoftmaxMinusOccupancy(ConceptScene):
         sums_note = caption("every row sums to 0.0000 — a nudge that")
         sums_note2 = caption("re-slices probability never adds any")
         sums_note.move_to(3.35 * LEFT + 2.95 * DOWN)
-        sums_note2.next_to(sums_note, DOWN, buff=0.15)
         on_frame(sums_note)
-        on_frame(sums_note2)
         clear_of(sums_note, table[3])
+        # next_to is a one-time placement — it must come after clear_of has
+        # settled sums_note, or the second line strands where the first was.
+        sums_note2.next_to(sums_note, DOWN, buff=0.15)
+        on_frame(sums_note2)
         self.play(FadeIn(header_row), FadeIn(table))
         self.play(FadeIn(sums_note), FadeIn(sums_note2))
 
@@ -1169,7 +1175,7 @@ class TheErrorSignalLearns(ConceptScene):
         tail_note = caption("iterations 0, 10, 50, 200, 5000 — plain gradient descent")
         tail_note.next_to(tail, DOWN, buff=0.2)
         gem = Text(
-            "frame 3 never picks a winner: it settles at (0.032, 0.218, 0.750)",
+            "frame 3 never goes one-hot: it settles at (0.032, 0.218, 0.750)",
             font_size=BODY_SIZE,
         ).move_to(0.1 * UP)
         gem_why = caption("with frames 1, 2, 4 saying A, A, B, all three frame-3 choices")
@@ -1259,7 +1265,7 @@ class WhyTheSpikesAppear(ConceptScene):
         ).next_to(self.head, DOWN, buff=0.3)
         self.play(FadeIn(shared_head))
         outcomes = [
-            ("T = 4", [0.4, 0.4, 0.2], "argmax A — honest", GOOD, -3.1),
+            ("T = 4", [0.4, 0.4, 0.2], "A and B tie at 0.4 —\nno blank takeover", GOOD, -3.1),
             (
                 "T = 12",
                 [0.0919, 0.0919, 0.8162],
