@@ -325,20 +325,19 @@ class TheBalancePoint(ConceptScene):
 
         # The two sums are one: grouping was all the sort did.
         two_sums = MathTex(
+            r"\text{the four-flip square:}\quad"
             r"\underbrace{\textstyle\sum_\omega X(\omega)\cdot\tfrac{1}{16}}_{32/16}"
             r" \;=\; \underbrace{\textstyle\sum_k k \cdot P(X{=}k)}_{2}",
             font_size=34,
-        ).move_to(2.55 * DOWN + 2.2 * LEFT)
-        grouping = caption("stamps over cells = values times weights;")
-        grouping2 = caption("the sort was a regrouping — one sum")
-        grouping.move_to(2.3 * DOWN + 3.2 * RIGHT)
-        grouping2.next_to(grouping, DOWN, buff=0.15)
+        ).move_to(2.5 * DOWN)
+        grouping = caption("stamps over cells = values times weights — the sort was a regrouping")
+        grouping.move_to(3.35 * DOWN)
         self.play(Write(two_sums))
-        self.play(FadeIn(grouping), FadeIn(grouping2))
+        self.play(FadeIn(grouping))
         self.wait(1.2)
 
         # The measure moves the balance point: the owned biased die.
-        self.play(FadeOut(VGroup(two_sums, grouping, grouping2, not_face, not_face2, weighted)))
+        self.play(FadeOut(VGroup(two_sums, grouping, not_face, not_face2, weighted)))
         biased_bars = VGroup(*[bar_at(v, 0.75) for v in range(1, 6)], bar_at(6, 1.5, WARM))
         shift_note = Text(
             "Double the weight on 6 — the die from the independence series:",
@@ -508,9 +507,9 @@ class TheBinomialColumns(ConceptScene):
             font_size=36,
             color=GOOD,
         ).move_to(2.9 * RIGHT + 0.35 * UP)
-        order = caption("four different shapes, one area — a product does not care")
-        order2 = caption("about the order of its factors; same count, same area")
-        order.next_to(area, DOWN, buff=0.3)
+        order = caption("four cells, two shapes, one area — a product")
+        order2 = caption("does not care about factor order; same count, same area")
+        order.move_to(2.7 * RIGHT + 0.3 * DOWN)
         order2.next_to(order, DOWN, buff=0.15)
         self.play(LaggedStart(*[Create(c) for c in one_head], lag_ratio=0.15))
         self.play(Write(area))
