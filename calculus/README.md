@@ -196,9 +196,10 @@ verified for the e-and-ln series, carry into this one):
       — the standard limits-first chain-rule treatment, for contrast.
 - [ ] [H. Jerome Keisler, Elementary Calculus: An Infinitesimal Approach](https://people.math.wisc.edu/~keisler/calc.html)
       — the rigorous modern form of the infinitesimals-first camp.
-- [ ] [Jeff Miller, Earliest Uses of Symbols of Calculus (MacTutor)](https://mathshistory.st-andrews.ac.uk/Miller/mathsym/calculus/)
-      — Leibniz's dx, dy, dy/dx in the manuscript of November 11,
-      1675.
+- [ ] [Jeff Miller, Earliest Uses of Symbols of Calculus](https://mathshistory.st-andrews.ac.uk/Miller/mathsym/calculus/)
+      — hosted on MacTutor, created and maintained by John O'Connor
+      and Edmund Robertson (University of St Andrews); Leibniz's dx,
+      dy, dy/dx in the manuscript of November 11, 1675.
 - [ ] [Wikipedia, Chain rule (history section)](https://en.wikipedia.org/wiki/Chain_rule)
       — Leibniz's 1676 memoir (with a sign error), l'Hôpital
       implicit, Lagrange 1797 — citing Hernandez Rodriguez and Lopez
