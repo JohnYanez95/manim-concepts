@@ -93,8 +93,12 @@ class TheSplitYear(ConceptScene):
         splits = VGroup(
             MathTex(r"1\ \text{hop}:\ (1+1)^{1} = 2", font_size=38),
             MathTex(r"2\ \text{hops}:\ \left(1+\tfrac{1}{2}\right)^{2} = 2.25", font_size=38),
-            MathTex(r"4\ \text{hops}:\ \left(1+\tfrac{1}{4}\right)^{4} = 2.4414", font_size=38),
-            MathTex(r"12\ \text{hops}:\ \left(1+\tfrac{1}{12}\right)^{12} = 2.6130", font_size=38),
+            MathTex(
+                r"4\ \text{hops}:\ \left(1+\tfrac{1}{4}\right)^{4} \approx 2.4414", font_size=38
+            ),
+            MathTex(
+                r"12\ \text{hops}:\ \left(1+\tfrac{1}{12}\right)^{12} \approx 2.6130", font_size=38
+            ),
         ).arrange(DOWN, buff=0.28, aligned_edge=LEFT)
         splits.move_to(2.6 * LEFT + 0.35 * DOWN)
         self.play(LaggedStart(*[Write(s) for s in splits], lag_ratio=0.35), run_time=3.0)
@@ -365,9 +369,9 @@ class TheNaturalStride(ConceptScene):
             FadeOut(VGroup(naming, naming_box, disclosed, disclosed2, strip, native, native2))
         )
         tiny = VGroup(
-            MathTex(r"\ln 1.1 = 0.0953", font_size=38),
-            MathTex(r"\ln 1.01 = 0.0099503", font_size=38),
-            MathTex(r"\ln 1.001 = 0.0009995", font_size=38),
+            MathTex(r"\ln 1.1 \approx 0.0953", font_size=38),
+            MathTex(r"\ln 1.01 \approx 0.0099503", font_size=38),
+            MathTex(r"\ln 1.001 \approx 0.0009995", font_size=38),
         ).arrange(DOWN, buff=0.26, aligned_edge=LEFT)
         tiny.move_to(3.3 * LEFT + 1.35 * UP)
         approx = MathTex(r"\ln(1+x) \approx x", font_size=44).move_to(2.9 * RIGHT + 1.35 * UP)
@@ -438,7 +442,7 @@ class RateTimesTime(ConceptScene):
 
         self.play(FadeOut(VGroup(merge, merge_note, double, at_five, rule_note, rule_note2)))
         grow = MathTex(
-            r"e^{3} = 20.0855 \quad\Longleftrightarrow\quad \ln 20.08 = 2.99972",
+            r"e^{3} \approx 20.0855 \qquad \ln 20.08 \approx 2.99972",
             font_size=40,
         ).move_to(0.55 * UP)
         grow_note = caption("ln answers: how long, in natural units, to grow that much?")
@@ -448,8 +452,8 @@ class RateTimesTime(ConceptScene):
         self.wait(0.8)
 
         ledger = MathTex(
-            r"\left(1+\tfrac{0.05}{365}\right)^{365} = 1.0512675"
-            r"\qquad e^{0.05} = 1.0512711",
+            r"\left(1+\tfrac{0.05}{365}\right)^{365} \approx 1.0512675"
+            r"\qquad e^{0.05} \approx 1.0512711",
             font_size=36,
         ).move_to(0.9 * DOWN)
         ledger_note = caption("Bernoulli's ledger, closed: a year of daily 5% is already")
@@ -516,7 +520,7 @@ class TheDebtRepaid(ConceptScene):
             color=WARM,
         ).move_to(0.1 * UP)
         survives = MathTex(
-            r"\text{log1p}(e^{-40}) = 4.248\times 10^{-18}\quad\checkmark",
+            r"\text{log1p}(e^{-40}) \approx 4.248\times 10^{-18}\quad\checkmark",
             font_size=36,
             color=GOOD,
         ).next_to(naive, DOWN, buff=0.35)

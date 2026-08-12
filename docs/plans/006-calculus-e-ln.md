@@ -193,8 +193,8 @@ route · [computed-float] float64 where the float behaviour IS the claim
   0.0099503, ln(1.001) = 0.0009995. ln(1+x) ≈ x is honest only for
   |x| ≤ 0.1 on screen (at x=0.5 the x²/2 error description is already
   24% off) — show the error column or keep x small.
-- **Payoff numbers**: e³ = 20.0855, ln(20.08) = 2.99972 [computed-mp];
-  doubling at 5%: 0.6931/0.05 = 13.86 yr (69.3 is the math, 72 the
+- **Payoff numbers**: e³ ≈ 20.0855, ln(20.08) ≈ 2.99972 [computed-mp];
+  doubling at 5%: 0.693/0.05 = 13.86 yr (69.3 is the math, 72 the
   divisibility convention); r=0.05 daily: (7301/7300)³⁶⁵ =
   1.051267496467 EXACT vs e^0.05 = 1.051271096376, gap 3.6e−6 matching
   r²e^r/(2n) [computed-exact/mp].
@@ -276,11 +276,12 @@ the anchors section.
    growth dial has two knobs that only multiply — 10 years of 3% ≡
    1 year of 30%. Doubling time = 0.693/r: at 5%, 13.86 years — 69.3
    is the mathematics, 72 the divisibility convention (both on
-   screen, honestly labelled). ln as time-to-grow: e³ = 20.09, so
-   reaching 20× takes 3 natural units (ln 20.08 = 2.99972).
-   Continuous compounding closes Bernoulli's ledger: daily at 5% =
-   1.0512675 exactly vs continuous e^0.05 = 1.0512711 — the gap
-   3.6e−6, the limit arrived.
+   screen, honestly labelled). ln as time-to-grow: e³ ≈ 20.09, so
+   reaching 20× takes ≈3 natural units (ln 20.08 ≈ 2.99972).
+   Continuous compounding closes Bernoulli's ledger: daily at 5% ≈
+   1.0512675 (the fraction (7301/7300)³⁶⁵ is exact; its decimal is
+   rounded) vs continuous e^0.05 ≈ 1.0512711 — the gap 3.6e−6, the
+   limit arrived.
 6. **`TheDebtRepaid`** — *when useful, part 2 + the promised payoffs.*
    The repo's oldest forward reference re-rendered with its convention:
    ln(a+b) = ln a + ln(1 + e^(ln b − ln a)), a ≥ b, from
