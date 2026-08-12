@@ -79,7 +79,12 @@ at 1080p60.
   the maintainer's pass, the Ideas softmax entry struck as delivered;
   wiki: node added, the independence promise flipped, four new
   delivered edges + the gradient promise, sort-the-square lineage
-  extended, log entry appended)
+  extended, log entry appended). Maintainer source pass 2026-08-11:
+  two labels corrected — the Baeldung entry is Enes Zvornicanin,
+  "What Is and Why Use Temperature in Softmax?", and the GPT-2 entry
+  carries its true title "Language Models are Unsupervised Multitask
+  Learners"; everything else confirmed right by the maintainer
+  (ticks are his to place)
 - [ ] Phase 4: local CodeRabbit + connection-auditor clean
 - [ ] Phase 5: PR, drafts cleaned, 1080p60 render verified
 

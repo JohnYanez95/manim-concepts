@@ -404,7 +404,7 @@ for the softmax/likelihood series:
 - [ ] [Grant Sanderson, "But what is a GPT?" (3blue1brown)](https://www.3blue1brown.com/lessons/gpt)
       — the logit-bars → exp → normalize morph and temperature as the
       practitioner meets them.
-- [ ] [Baeldung CS, "Softmax temperature"](https://www.baeldung.com/cs/softmax-temperature)
+- [ ] [Enes Zvornicanin, "What Is and Why Use Temperature in Softmax?"](https://www.baeldung.com/cs/softmax-temperature)
       — the confidence-dial framing: low sharpens, high flattens,
       winner unchanged.
 - [ ] [Wikipedia, Softmax function](https://en.wikipedia.org/wiki/Softmax_function)
@@ -413,9 +413,10 @@ for the softmax/likelihood series:
 - [ ] [Awni Hannun et al., "Deep Speech: Scaling up end-to-end speech recognition"](https://arxiv.org/abs/1412.5567)
       — the 29-class character softmax ({a…z, space, apostrophe,
       blank}) named in the closer.
-- [ ] [Radford, Wu, Child, Luan, Amodei and Sutskever, GPT-2 report](https://cdn.openai.com/better-language-models/language_models_are_unsupervised_multitask_learners.pdf)
-      — "the vocabulary is expanded to 50,257", the closer's other
-      anchor.
+- [ ] ["Language Models are Unsupervised Multitask Learners" (GPT-2)](https://cdn.openai.com/better-language-models/language_models_are_unsupervised_multitask_learners.pdf)
+      — Alec Radford, Jeff Wu, Rewon Child, David Luan, Dario Amodei
+      and Ilya Sutskever; "the vocabulary is expanded to 50,257", the
+      closer's other anchor.
 - [ ] [J. Willard Gibbs, Elementary Principles in Statistical Mechanics (1902)](https://archive.org/details/elementaryprinci00gibbrich)
       — the canonical-distribution form softmax(−E/kT) descends from;
       cited for the form, not a specific 1868 claim.
