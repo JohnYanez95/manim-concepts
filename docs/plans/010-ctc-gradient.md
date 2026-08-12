@@ -86,7 +86,17 @@ when-useful framing.
   with per-successor weights, the constant-column-is-LOTP anchor
   recorded on the DP row, entropy row's third hook and the
   label-prior-is-a-Bayes-move cross-ref added, INDEX stamp advanced
-- [ ] Phase 5: PR, bot review, `clean-drafts`, 1080p60 finals
+- [x] Phase 5: PR #11 opened; bot review returned six quick wins
+  (two majors: the γ-column "1.0000" labels contradicted their own
+  4-dp digits in two columns — now the exact "= 1"; the README's
+  unqualified β_T = 1 — now restricted to the two final states; four
+  minors: an anchor-letter miscite, a caption anchored before its
+  clear_of shift, "never picks a winner" vs ε's 0.750 argmax — now
+  "never goes one-hot", and "argmax A" claimed for the (0.4, 0.4,
+  0.2) tie — now "A and B tie"), all applied. `make clean-drafts`,
+  then 1080p60 finals: 7 files, distinct names, 32–57 s, both fixed
+  beats verified by frame at 1080p. The plan closes; the PR awaits
+  the maintainer's review
 
 ## Decisions (made at design time)
 
