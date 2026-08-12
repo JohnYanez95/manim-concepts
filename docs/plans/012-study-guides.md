@@ -129,10 +129,45 @@ conditional-probability → bayes-rule → logarithms → e-and-ln →
 random-variables → softmax-likelihood → derivative-toolkit →
 ctc-gradient (the objective, landed).
 
-All eleven primitives. The guide's frame story: the CTC scenes pose
-the problem early (sections 1–2), the middle sections build the
-blocks, and the closing sections spend them — the same shape the
-video road took, now walkable offline in one sitting.
+All eleven series primitives — **plus two guide-first primitives the
+video road never built**, both required for full comprehension of
+the *learning algorithm* (maintainer, 2026-08-12):
+
+- **`dynamic-programming.tex`** — the trellis scenes perform DP
+  without naming it. This is the wiki's standing promised row
+  (`ctc-alignment` → *(dynamic programming as its own concept)*),
+  which already carries two recorded anchors: the log-space
+  inheritance (`TheUnderflowCliff`) and the constant column as LOTP
+  over the frame partition (`PathsThroughACell`). The primitive
+  teaches the general move — overlapping subproblems, shared
+  prefixes, the exponential sum reorganised — with the CTC trellis
+  as its worked instance. Candidate slot: immediately after the
+  ctc-alignment section, while the trellis is fresh (exact slot a
+  phase-2 glue decision).
+- **`gradient-descent.tex`** — the training-dynamics scenes run
+  plain GD on screen ("plain gradient descent", named) without
+  teaching descent. A short primitive — walk downhill, the learning
+  rate, why the gradient's zero is the stopping story (the
+  sign-change ribbon's habit) — slotted after derivative-toolkit and
+  before ctc-gradient, so the error-signal trajectories land on
+  taught ground. Lends itself to the guide's descent figure
+  (the loss walk 0.7181 → … → 0.0003 as a downhill path).
+
+Guide-first primitives follow every rule series primitives do
+(anchored numbers, human-gated sources, backward grounding) but have
+no parent scenes — their prose cites the scenes that *use* the
+concept. Each doubles as phase-0 seed material for the eventual
+video series (the DP series is already the roadmap's ungated
+flexible insert), inverting the usual pipeline: the book drafts what
+the screen later animates. The wiki stays screen-shaped — the DP
+promise row stays promised until scenes exist; the plan records the
+print delivery here.
+
+The guide's frame story: the CTC sections pose
+the problem early, the middle sections build the
+blocks — now including the two the videos skipped — and the closing
+sections spend them: the same shape the video road took, now
+walkable offline in one sitting.
 
 ### The refinement loop
 
@@ -173,6 +208,12 @@ runs for the document's life, not just its first PR.
   plan-anchor numbers cite them; problems with fresh numbers get a
   per-batch source-verifier supplement (one agent pass per PR, not
   per problem).
+- **D-E — guide-first primitives** (dynamic-programming,
+  gradient-descent). Proposal: yes, both — they are what "full
+  comprehension of the learning algorithm" requires, and each seeds
+  its eventual video series. Both get the full research treatment
+  (pedagogy + verifier passes) since no plan anchors exist for them
+  yet.
 
 ## Phases
 
