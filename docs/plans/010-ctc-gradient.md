@@ -68,8 +68,24 @@ when-useful framing.
   Maintainer source pass 2026-08-12: all seven plan-010 references
   opened, confirmed and ticked (ticks are his to place), and the
   ratified matrix column 4 (decision 3 / FLAG 1) confirmed
-- [ ] Phase 4: local CodeRabbit + connection-auditor, findings
-  addressed
+- [x] Phase 4: local CodeRabbit returned ONE minor finding (the
+  scene-3 dwell prose attributing the uniform numbers to the real
+  matrix — the plan trued). Audit: 22 findings, all applied — the top
+  one a promised-visual catch (the γ-beside-one-hot juxtaposition was
+  claimed by the device bullet and the plan but existed in no scene;
+  **built**, scene 3's closer now stands γ at t=2 beside the
+  one-from-N trio), the strongest possible edge built as one caption
+  (γ's divide-by-P named "the renormalized slice again — this time
+  conditioned on the transcript" → conditional-probability edge
+  delivered), the welcome row's first series-triggered re-render done
+  (6 + 5, gif re-rendered; CLAUDE.md gate reworded topic → series),
+  five unrecorded strands recorded, four stale-at-delivery clusters
+  fixed (probability, calculus — rider resolution recorded — root
+  README, INDEX row 50), "three series promised on screen" trued to
+  two, the mirror caveat moved on screen, the β recurrence redrawn
+  with per-successor weights, the constant-column-is-LOTP anchor
+  recorded on the DP row, entropy row's third hook and the
+  label-prior-is-a-Bayes-move cross-ref added, INDEX stamp advanced
 - [ ] Phase 5: PR, bot review, `clean-drafts`, 1080p60 finals
 
 ## Decisions (made at design time)
@@ -183,13 +199,15 @@ and it becomes a distribution: occupancy.** γ_t(s) = α_t(s)β_t(s)/P.
 Columns sum to 1 because each path occupies exactly one cell per
 column (countable; and worth saying it's the topology that grants
 this). The states→class summation drawn once: blank's three rows fold
-into one bar, lab(z, k). Rows are NOT probabilities — A's row sums to
-1.4: rows are expected dwell times, the balance-point fulcrum slid
-under a row (`TheBalancePoint` re-grounded: occupancy is an
-expectation over the posterior path distribution); 1.4 + 1.4 + 1.2 =
-4 = T. Uniform-outputs beat: γ collapses to path counts/15 — scene 4
-of the alignment series reborn as a target distribution (anchor L's
-exact fractions: t=1 A 2/3, ε 1/3, B 0). A γ column pulled out of the
+into one bar, lab(z, k). Rows are NOT probabilities — A's real-matrix
+row sums to 1.7578: rows are expected dwell times, the balance-point
+fulcrum slid under a row (`TheBalancePoint` re-grounded: occupancy is
+an expectation over the posterior path distribution); the dwell sum
+is 1.7578 + 1.1220 + 1.1202 = 4 = T (anchor S). Uniform-outputs beat:
+γ collapses to
+path counts/15 — scene 4 of the alignment series reborn as a target
+distribution (anchor L's exact fractions: t=1 A 2/3, ε 1/3, B 0;
+dwell 1.4 + 1.4 + 1.2 = 4 belongs to this beat). A γ column pulled out of the
 grid and stood next to `TheSmoothMaxsShares`' one-hot bar: a *soft*
 target. Formula last: γ = αβ/P, named "how often the truth used each
 cell" — the promise's exact wording, now an object.
@@ -219,8 +237,10 @@ convention spoken once (decision 4). The gradient table on the real
 matrix (anchor K): t=1 (−0.2028, +0.2000, +0.0028) … t=4 (+0.1000,
 −0.2487, +0.1487); every row sums to 0, and the 4-dp displays sum to
 0.0000 digit-exact (FLAG 11 — safe to show the sum). Degeneration
-beat: fade 14 of the 15 paths and γ's columns snap to one-hot along
-the survivor — the identity IS p − one-hot, `TheSmoothMaxsShares`'
+beat (built verbal, not animated — as-built truing from the phase-4
+audit): "let one path carry everything — γ's columns snap to one-hot"
+lands as the headline plus the arrow formula y − γ → p − one-hot —
+the identity IS p − one-hot, `TheSmoothMaxsShares`'
 closing frame received: "every frame of CTC hands this exact picture
 a different target", the promise closed with Bridle's "one-from-N
 target" generalized to a soft one. Wrong-transcript beat: score BA
@@ -239,8 +259,9 @@ computable on the worked grid (the figure itself cited, no dataset
 named — FLAG 2; its caption quoted: (a) "the error is determined by
 the target sequence only", (b) "the error localises", (c) "virtually
 disappears"). Stage (a): uniform outputs → γ is exactly path
-counts/15, input-independent — the error bars are pure fractions
-(t=1: −1/3, +1/3, 0), diffuse and time-symmetric. Stage (b): the
+counts/15, input-independent — the push bars are pure fractions
+(t=1: +1/3, −1/3, 0 for A, B, ε — the push sign per decision 4, as
+built), diffuse and time-symmetric. Stage (b): the
 free-logit descent from the repo matrix (anchor M trajectory, float64,
 displayed 4 dp): loss 0.7181 → 0.1602 (10 iters) → 0.0356 (50); the
 error localises where y already leans. Stage (c): loss 0.0003 at

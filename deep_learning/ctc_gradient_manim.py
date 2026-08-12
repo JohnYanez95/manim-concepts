@@ -1,9 +1,9 @@
 """The CTC gradient — softmax output minus how often the truth used each cell.
 
 Seven scenes. The alignment series ended with the forward trellis computing
-P(Y|X); this one differentiates it, and the promise three series made on
-screen — "every frame of CTC hands this exact picture a different target" —
-is kept.
+P(Y|X); this one differentiates it, and the promise the softmax and
+derivative closers spoke on screen — "every frame of CTC hands this exact
+picture a different target" — is kept.
 
     TheOtherHalfOfTheTrellis   β: every cell also knows how to finish
     PathsThroughACell          α·β, and every column sums to the same P
@@ -270,7 +270,9 @@ class TheOtherHalfOfTheTrellis(ConceptScene):
         self.play(FadeOut(flash), FadeOut(arithmetic))
 
         # --- the mirror ---------------------------------------------------------
-        mirror = caption("the forward table read in a mirror — time reversed, A and B swapped")
+        mirror = caption(
+            "this palindrome's mirror — the forward table time-reversed, A and B swapped"
+        )
         mirror.to_edge(DOWN, buff=0.4)
         starts = VGroup(nodes[0][0], nodes[0][1])
         start_box = SurroundingRectangle(starts, color=ACCENT, buff=0.1, corner_radius=0.12)
@@ -349,8 +351,7 @@ class TheOtherHalfOfTheTrellis(ConceptScene):
             color=ACCENT,
         ).move_to(1.35 * UP)
         formula = MathTex(
-            r"\beta_t(s) = \bigl(\beta_{t+1}(s) + \beta_{t+1}(s{+}1)"
-            r" + \beta_{t+1}(s{+}2)\bigr)\big|_{\,y_{t+1}}",
+            r"\beta_t(s) = \sum_{i} \beta_{t+1}(s{+}i)\, y_{t+1}(z'_{s+i})",
             font_size=40,
             color=ACCENT,
         ).move_to(0.45 * UP)
@@ -538,12 +539,19 @@ class WhereTheTruthSpendsItsTime(ConceptScene):
         why.to_edge(DOWN, buff=0.4)
         self.play(FadeIn(why))
         self.wait(1.0)
+        # The conditional series' own move, named: dividing a slice by its
+        # own mass is renormalization, and the condition here is Y.
+        renorm = caption("the renormalized slice again — this time conditioned on the transcript")
+        self.play(FadeOut(why))
+        renorm.to_edge(DOWN, buff=0.4)
+        self.play(FadeIn(renorm))
+        self.wait(1.0)
 
         # --- fold states into classes, once -------------------------------------
         # lab(z, k): the blank owns three rows; a class's occupancy is a sum
         # over its states. Drawn exactly once, here, before any bars claim
         # to be γ.
-        self.play(FadeOut(opening), FadeOut(why), FadeOut(divide))
+        self.play(FadeOut(opening), FadeOut(renorm), FadeOut(divide))
         fold_note = Text(
             "blank owns three rows — a class's occupancy sums its states",
             font_size=SMALL_SIZE,
@@ -647,16 +655,58 @@ class WhereTheTruthSpendsItsTime(ConceptScene):
         )
         formula = MathTex(
             r"\gamma_t(s) \;=\; \frac{\alpha_t(s)\,\beta_t(s)}{P(Y \mid X)}",
-            font_size=48,
+            font_size=44,
             color=ACCENT,
-        ).move_to(1.0 * UP)
+        ).move_to(1.9 * UP)
+        self.play(Write(formula))
+
+        # The promised juxtaposition: a γ column stood beside the one-hot
+        # bar the calculus series left on screen — the target, gone soft.
+        trios = VGroup()
+        for x0, values, colors, labels, title_text in (
+            (
+                -3.7,
+                OCC[1],
+                CLASS_COLORS,
+                [f"{v:.4f}" for v in OCC[1]],
+                "γ at t=2 — gone soft",
+            ),
+            (1.6, [1, 0, 0], [COOL] * 3, ["1", "0", "0"], "the one-from-N you know"),
+        ):
+            trio = VGroup()
+            for i, (cls, color, value, label) in enumerate(
+                zip(CLASSES, colors, values, labels, strict=True)
+            ):
+                x = x0 + i * 1.05
+                height = max(value * 1.6, 0.02)
+                trio.add(
+                    Rectangle(
+                        width=0.55,
+                        height=height,
+                        stroke_width=2,
+                        color=color,
+                        fill_color=color,
+                        fill_opacity=0.35,
+                    ).move_to([x, -1.2 + height / 2, 0])
+                )
+                trio.add(Text(cls, font_size=SMALL_SIZE, color=MUTED).move_to([x, -1.55, 0]))
+                trio.add(
+                    Text(label, font_size=14, color=color).move_to([x, -1.2 + height + 0.2, 0])
+                )
+            trio.add(
+                Text(title_text, font_size=SMALL_SIZE, color=GOOD if x0 < 0 else COOL).move_to(
+                    [x0 + 1.05, 0.95, 0]
+                )
+            )
+            trios.add(trio)
+        self.play(FadeIn(trios[1]))
+        self.play(FadeIn(trios[0]))
         phrase = Text(
             '"how often the truth used each cell" — the promise, now an object',
             font_size=BODY_SIZE,
-        ).move_to(0.25 * DOWN)
+        ).move_to(2.45 * DOWN)
         lineage = caption("the soft alignment implementations compute — Baum–Welch's E-step object")
-        lineage.to_edge(DOWN, buff=0.4)
-        self.play(Write(formula))
+        lineage.to_edge(DOWN, buff=0.35)
         self.play(FadeIn(phrase))
         self.play(FadeIn(lineage))
         self.wait(1.6)

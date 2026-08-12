@@ -497,3 +497,45 @@ reordered.
   delivered, one opened (label-prior variant); seven references
   landed unchecked and were maintainer-verified and ticked the same
   day (column 4 of the worked matrix confirmed in the same pass)
+
+## [2026-08-12] audit | incremental, plan 010 branch
+
+- scope: diffed 5615507..9058d19 (plan-009 finalisation segment
+  through the ebcf856 merge, then the six plan-010 branch commits);
+  changed files plus cited far ends, no full crawl
+- findings: 3 promised-not-delivered, 5 delivered-not-recorded,
+  4 possible-not-yet-made, 10 graph-health — applied in the phase-4
+  commit (the local CodeRabbit round returned one minor plan-prose
+  finding, also applied)
+- top finding: the γ-column-beside-one-hot-bar beat was claimed by
+  the softmax-bars device bullet and the plan's scene-3 design, but
+  no scene contained a one-hot bar — BUILT: scene 3's closer now
+  stands γ at t=2 beside the one-from-N trio
+- built on the strongest possible edge: γ's divide-by-P named on
+  screen as "the renormalized slice again — this time conditioned on
+  the transcript" — ctc-gradient → conditional-probability delivered;
+  constant column = LOTP recorded as a second anchor on the promised
+  DP row
+- the welcome row missed its first series-triggered re-render: row
+  rebuilt as 6 + 5, gif re-rendered; CLAUDE.md's phase-3 gate reworded
+  from "topic" to "series" (the rule's second occurrence)
+- unrecorded strands recorded: scene 7 quotes WhenToUseIt's spike
+  rule, the uniform-γ beat is CountingAlignments reborn, dominance
+  counts are a second counting-rules strand, the score device's sixth
+  stop, "the matrix the softmax series scored"
+- correction to the series entry above: its "dwell rows 1.7578 +
+  1.1220 + 1.1202 = 4" overstates the screen — only 1.7578 is on
+  screen; the on-screen sum is the uniform beat's 1.4 + 1.4 + 1.2 = 4
+- stale-at-delivery occurrences 12–15 fixed: probability row 6 +
+  Scope + Ideas, calculus row 6 + product-rule rider (resolution
+  recorded), root README topic row and likely-next, INDEX row 50
+- "three series promised on screen" trued to two (module docstring +
+  README intro; the third strand was documents-only); "third series"
+  → "third on-screen return, second series"; the mirror caveat moved
+  on screen ("this palindrome's mirror"); the β recurrence formula
+  redrawn with per-successor weights
+- entropy row gains its third hook (the family portrait's
+  distillation line); the label-prior Ideas entry cross-referenced as
+  a Bayes move
+- linear_algebra/ maintainer call still open (seventh entry)
+- stamp: advance to 9058d19
