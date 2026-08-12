@@ -1,0 +1,264 @@
+% Primitive: e-and-ln — authored from calculus/e_and_ln_manim.py, its README
+% concepts table (six scenes) and plan 006's verified anchors. This chapter
+% repays the logarithms chapter's declared loan: the ln-form identity that
+% arrived with "names on loan from calculus" is re-read here symbol by
+% symbol, once every symbol means something. Problem answers are computed
+% by answers/e_and_ln.py (the solve-gate anchor).
+\chapter{e and the natural logarithm}
+
+\begin{narrative}
+The logarithms chapter ended in debt. Its closing identity was written
+with two symbols — $\ln$ and $e$ — whose names it admitted, on screen,
+were on loan from calculus. This chapter repays the loan. The counting
+strip's strides come in every size — base $2$, base $3$, base $10$,
+each a legitimate unit — and what follows finds the one stride that is
+nature's own, landing $\ln$ not as a new function but as the counter
+row every earlier strip was secretly ruled in.
+
+\section{The split year}
+
+Jacob Bernoulli,
+1683~\cite{calculus-plus-magazine-maths-in-a-minute-compound-interest-and-e}:
+one dollar, one year, $100\%$ interest. Paid once, it doubles: $2$.
+Paid in two half-year instalments, the midyear interest starts earning
+interest of its own: $(3/2)^2 = 9/4 = 2.25$. Each further split is
+more, smaller multiplicative hops — quarterly $(5/4)^4 = 625/256$,
+then monthly, weekly, hourly:
+\[
+  \left(1 + \tfrac{1}{n}\right)^{\!n}
+  \;=\; \anchor{006.table}, \ldots
+\]
+Two wrong intuitions die against this table. ``More compounding grows
+without bound'' — no: the table is strictly increasing yet never
+reaches $3$; Bernoulli proved the ceiling sits between $2$ and $3$,
+and never named it. ``$1 + \tfrac1n \to 1$, so the power collapses to
+$1$'' — no: the shrinking hop is taken a growing number of times, and
+the two effects balance at a ceiling. Only after the crowding is
+watched does the formula get to summarise it:
+\[
+  \lim_{n \to \infty} \left(1 + \tfrac{1}{n}\right)^{\!n} = e
+  \]
+— the first number in history defined as a limit: crowded from below,
+named only decades later.
+
+\section{Zoom until straight}
+
+To ask ``how fast does $2^x$ grow \emph{here}?'' the series builds
+exactly one piece of calculus, in three beats and no more. First:
+magnified enough, a smooth curve is indistinguishable from a straight
+line~\cite{calculus-david-tall-cognitive-roots}, so ``the slope
+here'' means something. Second: read the slope of $2^x$ at $0$ as
+rise over run with $dt$ a real number on screen — the ratio
+$(2^{dt} - 1)/dt$ reads $\anchor{006.settle2}$ at
+$dt = 1, 0.1, 0.01, 0.001$, and the readout \emph{settles}; the word
+``instantaneous'' is never needed, and never used. Third: one strip
+law carries the readout everywhere — $2^{x+dt} = 2^x \cdot 2^{dt}$, a
+hop is the same length wherever it starts — so the slope at any $x$
+is the height there times the slope at $0$:
+\[
+  \text{slope of } 2^x \text{ at } x
+  \;=\; 2^x \times \anchor{006.ln2}\ldots
+\]
+Growth rate proportional to amount: that is what \emph{exponential}
+means.
+
+\section{The mystery constants}
+
+Line up the settling constants for several
+bases~\cite{calculus-3blue1brown-what-s-so-special-about-euler-s-number-e}:
+base $2 \to \anchor{006.ln2}$, base $3 \to \anchor{006.ln3}$, base
+$8 \to \anchor{006.stride8}$. And $\anchor{006.stride8}$ is exactly
+three of $\anchor{006.ln2}$ — because $8 = 2^3$ is three base-$2$
+strides. The constants obey the counting strip's laws \emph{before
+anyone has named them}: they are stride lengths, measured in some
+undisclosed unit. Then the squeeze:
+$\anchor{006.ln2} < 1 < \anchor{006.ln3}$ — between base $2$ and base
+$3$ sits the base whose constant is exactly $1$, the base whose growth
+rate \emph{is} its height~\cite{calculus-openstax-calculus-vol-1-3-9}.
+Its settling rows read $\anchor{006.settlee} \to 1$, and its value,
+\[
+  e = \anchor{006.e}\ldots,
+\]
+is the split year's ceiling, back from a different question. Note what
+$e$ is not: big. $3^x$ outruns $e^x$ easily — $e$ is the
+\emph{self-paced} base, not the fast one.
+
+\section{The natural stride}
+
+Disclose the unit. The slope-at-$0$ constant of base $b$ is the length
+of one base-$b$ stride measured in $e$-strides — change of base, which
+the logarithms chapter already taught, applied once. So the constants
+are $\log_e b$, written $\ln b$, and the strip returns ruled in
+nature's units: values $1, 2, e, 4, 8$ under counters
+$\anchor{006.naturalstrip}$. $\ln$ is not a harder animal — it is the
+counter row in natural units, and every log ever met was $\ln$ in a
+stretched unit.
+
+Two small facts close the circle the popular treatments leave
+open~\cite{calculus-strang-introducing-e-x-mit}. A tiny hop costs its
+own size: multiplying by $1.01$ costs $\anchor{006.ln101}$ natural
+strides — $\ln(1+x) \approx x$ for small $x$. Therefore
+\[
+  n \ln\!\left(1 + \tfrac{1}{n}\right)
+  = \anchor{006.bridge} \;\to\; 1 :
+\]
+the compounding ceiling is the value whose natural counter is exactly
+$1$ — the limit-$e$ of the split year and the slope-$e$ of the mystery
+constants meet, shown on the strip. (That an increasing, bounded table
+has a limit at all is analysis — named here, not derived.)
+
+\section{Rate times time}
+
+Growth has one dial: $e^{rt}$, with $e$ as its unit. The knobs only
+multiply — ten years at $3\%$ is one year at $30\%$. Doubling means
+$rt = \ln 2$, so $t \approx \anchor{006.ln2short}/r$: at $5\%$,
+$\anchor{006.doubling5}$ years. ($100 \times \anchor{006.ln2short}$
+is the mathematics; the popular $72$ is a divisibility convention —
+friendlier to mental division, not truer.) And continuous compounding closes Bernoulli's
+ledger: daily compounding at $5\%$ lands within $\anchor{006.dailygap}$
+of $e^{0.05}$. The limit is not an abstraction; it is where the daily
+ledger already stands.
+
+\section{The debt repaid}
+
+Now the identity, symbol by symbol:
+\[
+  \ln(a+b) \;=\; \ln a + \ln\!\bigl(1 + e^{\ln b - \ln a}\bigr),
+  \qquad a \ge b .
+\]
+$\ln a$ is the natural counter of $a$. $e^{(\cdot)}$ is undo, never
+cancel — the logarithms chapter's own grammar. And $a \ge b$ factors
+the larger term out so the shifted term $e^{\ln b - \ln a}$ lives in
+$(0, 1]$: finite, tame. At the cliff's own scale the details are the
+whole game: in float64, $1 + e^{-40}$ is exactly $1.0$, so the naive
+route computes $\ln 1.0 = 0.0$ — the smaller term silently deleted —
+while $\mathrm{log1p}(e^{-40}) \approx \anchor{006.log1p40}$
+survives, because $\ln(1+x) \approx x$ means handing $x$ straight to
+the log keeps it. The identity the logarithms chapter used on credit
+now has all its parts.
+
+Then, last, the payoff the algebra series explicitly deferred: mark
+$\ln 2 = \anchor{006.ln2short}$ on the $e^x$ graph — the input that
+yields $2$ — one point at a time, and only then flip the whole curve
+across $y = x$:
+
+\begin{center}
+\begin{tikzpicture}[x=1.05cm, y=1.05cm]
+  % TheDebtRepaid's payoff: exp and ln as mirrors across y = x, with
+  % ln 2 marked both ways — the flip earned, never the definition.
+  \draw[Muted, dashed] (0, 0) -- (3.05, 3.05);
+  \node[color=Muted] at (3.45, 3.32) {\small $y = x$};
+  \draw[CoolInk, thick] plot[domain=-0.4:1.163, samples=80] (\x, {exp(\x)});
+  \draw[AccentInk, thick] plot[domain=0.67:3.2, samples=80] (\x, {ln(\x)});
+  \draw[Muted!70, dashed] (0.693, 2) -- (2, 0.693);
+  \fill[CoolInk] (0.693, 2) circle (0.055);
+  \fill[AccentInk] (2, 0.693) circle (0.055);
+  \node[color=CoolInk] at (0.25, 3.05) {\small $e^{x}$};
+  \node[color=CoolInk] at (-0.5, 2.55) {\small $(\ln 2,\ 2)$};
+  \node[color=AccentInk] at (3.0, 1.62) {\small $\ln x$};
+  \node[color=AccentInk] at (2.6, 0.12) {\small $(2,\ \ln 2)$};
+\end{tikzpicture}
+\end{center}
+
+The inverse graph arrives as something earned — never as the
+definition, a starting point documented to misfire. Euler gave the
+number its letter in a 1731 letter, put it in print in 1736, and the
+\emph{Introductio} of 1748 carries it to 18
+places~\cite{calculus-j-j-o-connor-and-e-f-robertson-the-number-e-mactutor}.
+The series' takeaway box says it in one line: \emph{$e$ is the base
+whose stride is $1$ — nature's unit for growth.}
+
+\paragraph{Where this goes.} The ceiling returns almost immediately,
+mirrored: the random-variables chapter finds zero successes in $n$
+trials of chance $1/n$ crowding $1/e$ from below. The softmax chapter
+answers ``why $e$'' in every probability machine with this chapter's
+base change — every base above $1$ is a temperature; $e$ is merely the
+one whose counter is natural. And the derivative toolkit turns the
+mystery constants into what they always were — derivatives — with
+$\tfrac{d}{dx} e^x = e^x$ as the kit's crown.
+\end{narrative}
+
+\section*{Practice problems}
+
+\begin{problem}
+Compute the split-year table's first two refinements exactly, as
+fractions: $(1 + \tfrac12)^2$ and $(1 + \tfrac14)^4$. Verify that the
+second exceeds the first and that both sit below $3$.
+\begin{hint}
+Powers of small fractions; nothing here needs a decimal until the
+final comparison.
+\end{hint}
+\begin{solution}
+$(3/2)^2 = 9/4 = 2.25$ and $(5/4)^4 = 625/256 \approx 2.4414$. Since
+$625/256 > 9/4$ (cross-multiply: $625 \cdot 4 = 2500 > 9 \cdot 256 =
+2304$) and $625/256 < 3$ ($625 < 768$), the table climbs while
+staying under the ceiling — the two wrong intuitions already in
+trouble by $n = 4$.
+\end{solution}
+\end{problem}
+
+\begin{problem}
+Read the slope of $2^x$ at $0$ the series' way: compute
+$(2^{dt} - 1)/dt$ at $dt = 0.1$, $0.01$ and $0.001$. What is the
+ratio settling toward?
+\begin{hint}
+Rise over run with $dt$ a real number — no limit notation required.
+\end{hint}
+\begin{solution}
+The one-sided ratios are $0.7177$, $0.6956$ and $0.69339$ — each
+closer to $\ln 2 = 0.6931\ldots$ than the last. The readout settles;
+the settling value is base $2$'s stride length in natural units,
+though at this point in the story it is still a mystery constant.
+\end{solution}
+\end{problem}
+
+\begin{problem}
+Base $8$'s mystery constant is exactly three of base $2$'s, because
+$8 = 2^3$. Without any new measurement, what is base $32$'s
+constant?
+\begin{hint}
+$32 = 2^5$: five strides.
+\end{hint}
+\begin{solution}
+$32 = 2^5$ is five base-$2$ strides, so its constant is
+$5 \times \ln 2 \approx 5 \times 0.6931 \approx 3.4657$ — and indeed
+$\ln 32 = 3.4657\ldots$ The constants obeyed the strip's laws before
+they were named; naming them $\ln b$ changed nothing they do.
+\end{solution}
+\end{problem}
+
+\begin{problem}
+An account grows continuously at $2\%$ per year. How long until it
+doubles? What would the popular rule of $72$ say, and which answer is
+the mathematics?
+\begin{hint}
+Doubling means $rt = \ln 2$.
+\end{hint}
+\begin{solution}
+$t = \ln 2 / r = 0.6931\ldots/0.02 \approx 34.66$ years. The rule of
+$72$ says $72/2 = 36$ years. The mathematics is $\ln 2$; $72$ is a
+divisibility convention — easier to split by $2, 3, 4, 6, 8$ — that
+trades accuracy for mental arithmetic.
+\end{solution}
+\end{problem}
+
+\begin{problem}[stretch]
+Compute $\ln(e^{-1000} + e^{-1001})$. What happens on the naive
+route through value space, and what does the repaid identity give?
+\begin{hint}
+$e^{-1000}$ does not exist in float64. Factor out the larger term.
+\end{hint}
+\begin{solution}
+Naively, $e^{-1000}$ underflows to exactly $0.0$ in float64, so the
+route through value space asks for $\ln 0$ — the cliff. The identity
+never leaves log space: with $\ln a = -1000$ and $\ln b = -1001$,
+\[
+  \ln(a+b) = -1000 + \ln\!\bigl(1 + e^{-1}\bigr)
+  = -1000 + \mathrm{log1p}(e^{-1}) \approx -999.6867 .
+\]
+Cross-check by factoring the \emph{smaller} term instead:
+$-1001 + \ln(1 + e)$ — the same number, as it must be. This is the
+logarithms chapter's cliff walked in the repaid notation: every
+symbol now earns its keep.
+\end{solution}
+\end{problem}

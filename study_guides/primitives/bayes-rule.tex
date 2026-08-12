@@ -1,0 +1,299 @@
+% Primitive: bayes-rule — authored from probability/bayes_rule_manim.py and
+% its README concepts table (six scenes), plus plan 004's verified anchors.
+% Backward-grounded: the conditional chapter supplies the front-door
+% identity, the cohort counts and the CI license; forward pointers live in
+% "Where this goes" only. Problem answers are computed by
+% answers/bayes_rule.py (the solve-gate anchor); new anchor keys ride
+% primitives/anchors-proposals-probability.yaml until merged.
+\chapter{Bayes' rule}
+
+\begin{narrative}
+The conditional chapter ended one visible step short of something: the
+shared-numerator identity $P(A)\,P(B \mid A) = P(B)\,P(A \mid B)$,
+standing on the page with nothing yet asked of it. This chapter asks.
+One division turns the identity into the law of updating beliefs — and
+then the real work begins, because the formula is the least useful form
+of the law. Counts compute it, odds compress it, and a game-show host
+stress-tests what it actually takes as input.
+
+\section{Through the front door}
+
+Divide the standing identity by $P(B)$ — positivity inherited from the
+conditional chapter's definitions — and Bayes' rule is already on the
+page:
+\[
+  P(A \mid B) \;=\; \frac{P(B \mid A)\,P(A)}{P(B)} .
+\]
+Nothing new was proved; the division is the two-slices picture re-read,
+and the denominator is the conditional chapter's law of total
+probability run over the hypothesis columns. What is new is the
+\emph{reading}, and the three names that come with it: $P(A)$ is the
+\emph{prior} (what the hypothesis was worth before the news),
+$P(B \mid A)$ is the \emph{likelihood} (how well the hypothesis
+explains the news), $P(A \mid B)$ is the \emph{posterior} (what it is
+worth after). The claim of the whole chapter, in one line: evidence
+does not \emph{determine} beliefs, it \emph{updates} them —
+posterior $\propto$ prior $\times$ likelihood, normalize last.
+
+\section{Counting it out}
+
+The first real computation needs no formula at all. Diseasitis, in
+whole students: a $100$-student cohort, $20$ sick and $80$ healthy.
+The test flags $\anchor{004.diseasitis.sickpos}$ of the sick and
+$\anchor{004.diseasitis.healthypos}$ of the healthy. A student tests
+positive; the probability they are sick is the share of positives who
+are sick:
+\[
+  \frac{18}{18 + 24} \;=\; \anchor{004.diseasitis.posterior} .
+\]
+That is Bayes' rule, computed by counting — the prior never appeared
+because it travelled \emph{inside} the counts ($20$ sick students out
+of $100$ is the prior, already multiplied in). This is why natural
+frequencies cure base-rate neglect where the probability format
+fails~\cite{probability-gigerenzer-hoffrage-1995-how-to-improve-bayesian-reasoning-w}:
+posed in probabilities, the problem is solved by
+$\anchor{004.natfreq.lay}$ of laypeople — and reformatting alone moves
+physicians from $\anchor{004.natfreq.gyn}$. When you must
+\emph{communicate} a posterior, hand over the counts.
+
+\section{The odds form}
+
+Now compress. Keep only the \emph{ratio} between the two hypotheses
+and watch what the evidence does to it — the waterfall:
+
+\begin{center}
+\begin{tikzpicture}[scale=0.9]
+  % Scene 3's device: stream widths are the prior odds, the surviving
+  % fraction of each stream is the likelihood, the pool is the
+  % posterior odds. Sick Cool, healthy Muted, blocked water Warm,
+  % the pool (the result) outlined Accent.
+  \fill[Cool!40] (0,4.4) rectangle (1,5.2);
+  \fill[Muted!30] (1.5,4.4) rectangle (5.5,5.2);
+  \node[above, color=CoolInk] at (0.5,5.55) {sick $1$};
+  \node[above, color=Muted] at (3.5,5.55) {healthy $4$};
+  \fill[Cool!40] (0,2.6) rectangle (0.9,4.4);
+  \fill[Warm!30] (0.9,4.1) rectangle (1,4.4);
+  \fill[Muted!30] (1.5,2.6) rectangle (2.7,4.4);
+  \fill[Warm!30] (2.7,4.1) rectangle (5.5,4.4);
+  \node[right, color=Muted] at (3.15,3.3) {pass-through $3{:}1$};
+  \draw[->, Muted] (0.45,2.35) -- (1.75,1.85);
+  \draw[->, Muted] (2.1,2.35) -- (2.85,1.85);
+  \fill[Cool!40] (1.6,0.6) rectangle (2.5,1.6);
+  \fill[Muted!30] (2.5,0.6) rectangle (3.7,1.6);
+  \draw[AccentInk, thick] (1.6,0.6) rectangle (3.7,1.6);
+  \node[right, color=AccentInk] at (4.1,1.1)
+    {$\anchor{004.diseasitis.postodds} \;\to\;
+      \anchor{004.diseasitis.posterior}$};
+\end{tikzpicture}
+\end{center}
+
+Two streams pour down at the prior widths, $1$ sick to $4$ healthy.
+The test lets $9$ in $10$ of the sick stream through and $3$ in $10$
+of the healthy stream — pass-through in ratio $3{:}1$ — and the pool
+at the bottom collects
+$\anchor{004.diseasitis.sickpos}{:}\anchor{004.diseasitis.healthypos}$,
+which is $\anchor{004.diseasitis.postodds}$: the same
+$\anchor{004.diseasitis.posterior}$ as the counted cohort. The
+waterfall is the cohort chips, and the tree, and the two slices, drawn
+as one object with renormalization deferred to the very end — and its
+law is a single
+multiplication~\cite{probability-yudkowsky-so8res-smith-et-al-bayes-rule-odds-form}:
+\[
+  \text{posterior odds} \;=\; \text{prior odds} \times
+  \text{likelihood ratio} .
+\]
+Only ratios matter: scale either stream's width or both pass-through
+fractions by any common factor and the pool's ratio never moves. One
+discipline comes with the compression — odds and probabilities answer
+different questions, so keep $\anchor{004.diseasitis.postodds}$ and
+$\anchor{004.diseasitis.posterior}$ visibly distinct.
+
+\section{One test, two patients}
+
+The odds form factors the conditional chapter's prevalence pair into
+its parts. That test — $9$ in $10$ sensitive, $1$ in $10$ false
+positives — has \emph{one} number of its own: the likelihood ratio
+$\anchor{004.LR}$~\cite{probability-3blue1brown-the-medical-test-paradox}.
+The posterior belongs to the patient:
+\[
+  1{:}9 \times 9 = 1{:}1 \;\to\; \tfrac12,
+  \qquad
+  1{:}99 \times 9 = \anchor{004.lowprev.odds} \;\to\;
+  \anchor{003.prevalence.low} .
+\]
+The counted $\anchor{003.prevalence.highcounts}$ and
+$\anchor{003.prevalence.lowcounts}$ of the conditional chapter fall
+out as derivations instead of tallies — same answers, one
+multiplication each. And the marketing phrase ``$90\%$ accurate''
+stands revealed as one word hiding two numbers (sensitivity and false
+positive rate), being silently read as a third (the posterior). A
+posterior can never be stated without its prior; a test's quality can
+never be stated as one number that \emph{is} a posterior.
+
+\section{Yesterday's posterior}
+
+Evidence arrives in sequences, and the odds form makes iteration
+effortless: yesterday's posterior is today's prior. On the conditional
+chapter's own trick coins — heads $9$ in $10$ versus $1$ in $10$, so
+each head carries likelihood ratio $\anchor{004.LR}$ — start at
+$1{:}1$: one head moves the odds to $9{:}1$, a second to
+$\anchor{004.coins.HH}$; a head \emph{then a tail} lands back at
+exactly $1{:}1$~\cite{probability-mit-18-05-class-11-bayesian-updating}.
+That exact cancellation is the point: if evidence \emph{replaced}
+belief, the order and mix of observations could not wash out; because
+evidence \emph{reweights} belief, a tail's ratio $\tfrac19$ undoes a
+head's $9$ automatically. Two captions guard the habit. Likelihood
+ratios multiply only when the observations are conditionally
+independent \emph{given the hypothesis} — the conditional chapter's
+closing lesson, cashed at the exact moment it is needed (it is the
+disease being common cause of both test results that makes the second
+test still informative, yet lets its ratio simply multiply on). And a
+prior of zero stays zero under any evidence of nonzero probability —
+no finite likelihood ratio rescues a hypothesis that was never in the
+running.
+
+\section{The host's protocol}
+
+Monty Hall, at last — deferred by the conditional chapter until the
+tools could handle it honestly. You pick door 1; the host, who knows
+where the car is, opens door 3 on a goat; switch to door 2? The trap
+is conditioning on the revealed \emph{fact} (``door 3 has a goat'')
+instead of the host's \emph{action} under his protocol — the
+two-children lesson at series scale. Put a uniform prior on the car's
+position and let the likelihood be the probability of the action
+\emph{the host actually took}, one row per
+protocol~\cite{probability-rosenthal-monty-hall-monty-fall-monty-crawl}:
+the standard host (never the car, coin-flip when free) assigns the
+opening likelihoods $(\tfrac12, 1, 0)$ across the three car positions,
+and switching wins with probability $\anchor{004.monty.standard}$;
+Monty Fall, who slipped and opened a random door that merely
+\emph{happened} to hide a goat, assigns
+$(\tfrac12, \tfrac12, 0)$ — and switching wins only
+$\anchor{004.monty.fall}$; Monty Crawl, who opens the lowest-numbered
+door he can, was \emph{forced} high in opening door 3 — and switching
+wins with certainty. Same door, same goat, three answers: the
+information is not in what was revealed but in what the protocol made
+that revelation \emph{cost}. Rosenthal's proportionality principle —
+posterior $\propto$ prior $\times$ likelihood of what was observed —
+is just Bayes with the uniform prior left implicit, and it is the
+series' closing rule: \emph{condition on what happened, the way it
+happened — then multiply}.
+
+\paragraph{Where this goes.} The multiplications of this chapter are
+about to become additions: the logarithm chapters build a ruler on
+which a likelihood ratio is a fixed \emph{distance}, and iterated
+updating is walking — with a zero prior sitting infinitely far down
+the scale, which is why no finite evidence reaches it. The likelihood,
+named here on the front door, returns as the lens the softmax chapter
+reads per-frame distributions through. And at the road's end, the
+decoding chapter cashes the independence chapter's common-cause
+warning the Bayesian way: an external language model is a prior,
+multiplied onto per-frame likelihoods — condition on the way the
+audio happened, then multiply.
+\end{narrative}
+
+\section*{Practice problems}
+
+\begin{problem}
+In the Diseasitis cohort — $100$ students, $20$ sick of whom the test
+flags $9$ in $10$, $80$ healthy of whom it falsely flags $3$ in $10$ —
+a student tests positive. Compute the probability they are sick using
+whole-person counts only.
+\begin{hint}
+How many sick positives; how many positives in all?
+\end{hint}
+\begin{solution}
+Sick positives: $\tfrac{9}{10} \cdot 20 =
+\anchor{004.diseasitis.sickpos}$. Healthy positives:
+$\tfrac{3}{10} \cdot 80 = \anchor{004.diseasitis.healthypos}$. The
+positives total $42$, and the share of them that are sick is
+$18/42 = \anchor{004.diseasitis.posterior}$. No formula was used — the
+prior ($20$ sick in $100$) rode inside the counts.
+\end{solution}
+\end{problem}
+
+\begin{problem}
+Recompute the Diseasitis posterior in the odds form, and check it
+against the counts.
+\begin{hint}
+Prior odds from $20{:}80$; the likelihood ratio from the two flag
+rates.
+\end{hint}
+\begin{solution}
+Prior odds: $20{:}80 = 1{:}4$. Likelihood ratio:
+$\tfrac{9/10}{3/10} = 3$. Posterior odds:
+$1{:}4 \times 3 = \anchor{004.diseasitis.postodds}$ — literally the
+$18{:}24$ of the counted cohort — and converting odds to probability,
+$\tfrac{3}{3+4} = \anchor{004.diseasitis.posterior}$. Two routes, one
+answer; the waterfall is the cohort with renormalization deferred.
+\end{solution}
+\end{problem}
+
+\begin{problem}
+A test has sensitivity $\tfrac{9}{10}$ and false positive rate
+$\tfrac{1}{10}$. Using the odds form, find $P(\text{sick} \mid +)$ for
+a patient from a population at $10\%$ prevalence, and for one at
+$1\%$.
+\begin{hint}
+The test contributes one number; only the prior odds change.
+\end{hint}
+\begin{solution}
+The likelihood ratio is $\tfrac{9/10}{1/10} = \anchor{004.LR}$. At
+$10\%$ prevalence the prior odds are $1{:}9$, so posterior odds
+$1{:}9 \times 9 = 1{:}1$, i.e.\ $\tfrac12$. At $1\%$ the prior odds
+are $1{:}99$, so $1{:}99 \times 9 = 9{:}99 =
+\anchor{004.lowprev.odds}$, i.e.\ $\anchor{003.prevalence.low}$.
+These reproduce the conditional chapter's counted
+$\anchor{003.prevalence.highcounts}$ and
+$\anchor{003.prevalence.lowcounts}$ exactly — the test supplied one
+number, and each patient supplied their own prior.
+\end{solution}
+\end{problem}
+
+\begin{problem}
+One of two coins (heads $\tfrac{9}{10}$ versus $\tfrac{1}{10}$) is
+chosen by a fair flip. Track the odds that you hold the heads-heavy
+coin after observing H, after HH, and after HT — and give each as a
+probability.
+\begin{hint}
+One likelihood ratio per flip; multiply. What is a tail's ratio?
+\end{hint}
+\begin{solution}
+Each head multiplies the odds by $\tfrac{9/10}{1/10} = \anchor{004.LR}$;
+each tail by $\tfrac{1/10}{9/10} = \tfrac19$. From $1{:}1$: after H,
+$9{:}1$, probability $\tfrac{9}{10}$; after HH,
+$\anchor{004.coins.HH}$, probability $\tfrac{81}{82}$; after HT,
+$9 \times \tfrac19 = 1$, exactly $1{:}1$ — probability $\tfrac12$, as
+if nothing had been seen. Full conditioning over both coins and all
+flip sequences gives the same three posteriors, which is the licensed
+multiplication at work: the flips are conditionally independent given
+the coin.
+\end{solution}
+\end{problem}
+
+\begin{problem}[stretch]
+You pick door 1; the host opens door 3, showing a goat. Compute the
+probability that switching to door 2 wins under each protocol:
+(a) the standard host — never opens your door or the car's, coin-flips
+when both goat doors are available; (b) Monty Fall — opened a random
+door of the other two and happened to reveal a goat; (c) Monty Crawl —
+always opens the lowest-numbered door he legally can.
+\begin{hint}
+Uniform prior over the car's position; the likelihood is the
+probability of \emph{this host} opening door 3, given each car
+position.
+\end{hint}
+\begin{solution}
+Prior $\tfrac13$ each. The likelihood of ``opens door 3'' per car
+position $(1, 2, 3)$: (a) standard — $(\tfrac12, 1, 0)$, so the
+posterior on door 2 is
+$\tfrac{1}{1 + 1/2} = \anchor{004.monty.standard}$; (b) Fall —
+$(\tfrac12, \tfrac12, 0)$, posterior
+$\anchor{004.monty.fall}$: the accidental reveal carries less
+information because it was equally cheap either way; (c) Crawl — he
+opens door 2 whenever it is legal, so opening door 3 forces the car
+onto door 2: switching wins with certainty. Same revealed fact, three
+answers — the likelihood belongs to the \emph{action under the
+protocol}, not to the fact.
+\end{solution}
+\end{problem}

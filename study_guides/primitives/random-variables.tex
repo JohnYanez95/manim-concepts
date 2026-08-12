@@ -1,0 +1,271 @@
+% Primitive: random-variables — authored from
+% probability/random_variables_manim.py, its README concepts table (six
+% scenes) and plan 007's verified anchors (main report + addendum). Closes
+% the road's oldest promise: the counting chapter's C(n,k) returns as a
+% count of sorted-square columns. Problem answers are computed by
+% answers/random_variables.py (the solve-gate anchor); every exact value
+% there is Fraction arithmetic, floats only where a decimal display is the
+% claim.
+\chapter{Random variables}
+
+\begin{narrative}
+So far the road weighs \emph{events}: regions of a square, shares of
+area. But the questions it is heading toward are about \emph{numbers}
+read off outcomes — how many heads, which symbol, how large a score. A
+random variable attaches a number to every outcome; this chapter builds
+the attachment, watches it sort into a distribution, and finds the one
+number to act on.
+
+\section{The stamped square}
+
+A die is usually introduced as a set of six outcomes. This series
+opens differently: the die as a \emph{function} — $X(\text{face}) =$
+the number shown — ink stamped on the sample space before anything is
+rolled~\cite{probability-joe-blitzstein-stat-110}. Then the square the
+independence chapter quartered twice returns for its third appearance:
+sixteen equal cells, one per four-flip sequence, each stamped with its
+head count, $0$ through $4$. The stamp is fixed; the only random
+object is where the dart lands; the label is \emph{looked up}, never
+generated. Only then, the formula:
+\[
+  X : \Omega \to \mathbb{R} .
+\]
+Every measurement attached to a random process is this — a fixed rule
+reading a random outcome.
+
+\section{Sort the square}
+
+Slide the stamped cells into columns grouped by their stamp. Area is
+conserved — nothing is created, nothing weighed twice — and the bars
+that form are the distribution: five \emph{unequal} bars born from
+sixteen \emph{equally likely} cells,
+\[
+  P(X = k) \;=\; \frac{\#\{\omega : X(\omega) = k\}}{16}
+  \;=\; \anchor{007.pmf16} .
+\]
+The unequal weights are visible counts of equal cells — which is the
+working refutation of the equiprobability bias, the documented habit
+of reading randomness as uniformity that survives instruction
+unless the mechanism is
+shown~\cite{probability-gauvrit-morsanyi-the-equiprobability-bias-pmc}.
+
+Then the blueprint-versus-house beat: stamp the \emph{same} square
+with $Y =$ tails. The sorted columns are identical — same pmf — yet
+$X \neq Y$, and $X + Y = 4$ in every single cell. The distribution
+forgets which cell was which; the variable remembers. Mistaking one
+for the other is the canonical error this scene exists to prevent.
+
+\section{The balance point}
+
+Expectation is defined, not simulated. Hang the die's six equal bars
+on a beam and ask where the fulcrum goes: it balances at
+$\anchor{007.dieE}$ — which is not a face. ``The point at which the
+distribution would balance'' is the picture; a weighted average need
+not be attainable~\cite{probability-orloff-bloom-mit-18-05-class-4b-expectation}.
+
+\begin{center}
+\begin{tikzpicture}[x=1.15cm, y=0.5cm]
+  % SortTheSquare's columns — sixteen equal cells grouped by stamp —
+  % with TheBalancePoint's fulcrum under the axis at E[X] = np = 2.
+  \foreach [count=\k from 0] \c in {1,4,6,4,1} {
+    \foreach \i in {1,...,\c}
+      \draw[Muted, fill=CoolInk!25]
+        (\k-0.42, \i-0.92) rectangle (\k+0.42, \i-0.08);
+    \foreach \i in {1,...,\c}
+      \node[color=CoolInk!30!black] at (\k, \i-0.5) {\scriptsize $\k$};
+    \node[above, color=CoolInk] at (\k, \c+0.25) {\small $\c/16$};
+  }
+  \draw[Muted] (-0.7, -0.55) -- (4.7, -0.55);
+  \fill[AccentInk] (2, -0.75) -- (1.72, -1.9) -- (2.28, -1.9) -- cycle;
+  \node[right, color=AccentInk] at (2.62, -1.35) {\small $E[X] = 2$};
+\end{tikzpicture}
+\end{center}
+
+For the flips, the two ways of summing are shown equal once, and the
+sort is the proof: summing stamps over cells gives $32/16 = 2$, and
+summing values times column weights gives $2$ — the sort was a
+\emph{regrouping}, which is why
+\[
+  E[X] \;=\; \sum_x x \cdot P(X = x)
+\]
+may be computed cell by cell or column by column. And the balance
+point belongs to the \emph{measure}, exactly as independence did: put
+the independence chapter's biased die on the beam — double weight on
+the six — and
+the fulcrum moves to $\anchor{007.biasedE}$, again not a face. The
+level-three reading is Huygens, 1657, the first printed probability
+work: expectation is the fair price of the ticket — the number you
+act on, with no long run in
+sight~\cite{probability-j-j-o-connor-and-e-f-robertson-christiaan-huygens-mactutor}.
+
+\section{Same outcomes add}
+
+$E[X+Y]$ is one sum over the \emph{same} outcomes, and addition
+distributes — so
+\[
+  E[X + Y] \;=\; E[X] + E[Y]
+\]
+with independence nowhere in the hypothesis: as Grinstead and Snell
+put it, mutual independence of the summands was not
+needed~\cite{probability-grinstead-snell-introduction-to-probability-6-1-libretexts}.
+The demonstration runs at the dependent extreme: $X$ and $4 - X$ are
+as dependent as two variables can be, and their sum is $4$, always.
+Then the independence chapter's $6 \times 6$ grid is re-read: the
+two-dice sum paints diagonals, distribution
+$\anchor{007.twodice}$, and $E = 7$ arrives twice — once by the
+diagonals' weighted sum, once as
+$\anchor{007.dieE} + \anchor{007.dieE}$. Linearity is the workhorse:
+it prices any bundle from its parts.
+
+\section{The binomial columns}
+
+Now the road's oldest promise closes. Count cells per column — the
+numerators of $\anchor{007.pmf16}$ — and notice that counting
+four-letter H/T words with $k$ heads is exactly the counting
+chapter's $\binom{4}{k}$. The coefficient is a \emph{cell count},
+never a memorized factor.
+
+Re-cut the square with the cuts at $p = 1/4$. The cuts stay straight
+— straight cuts are the square's grammar for independence, and
+independence is unchanged; only the cut positions move. The cells go
+unequal, but every $k$-head cell keeps the \emph{same} area
+$p^k q^{4-k}$, because a product does not care about factor order. So
+column $k$ weighs (cell count) $\times$ (one cell's area), and the
+pmf assembles with nothing smuggled:
+\[
+  P(X = k) \;=\; \binom{n}{k}\, p^k (1-p)^{n-k} ,
+\]
+at $p = 1/4$ concretely $\anchor{007.pmf256}$, each one-head cell
+exactly $\anchor{007.onecell}$ with $\binom{4}{1} = 4$ such cells.
+Expectation costs no combinatorics at all: stamp each trial's
+indicator and add four expectations of $p$ — $E = np$, here $1$. The
+model's conditions are named, not assumed~\cite{probability-illowsky-dean-openstax-introductory-statistics-2e-4-3}:
+fixed $n$, two outcomes, constant $p$, independent trials — and the
+independence chapter's aces already marked the boundary: no
+replacement means no binomial. One more door opens here: zero
+successes in $n$ trials of chance $1/n$ crowds
+$1/e \approx \anchor{007.oneovere}$ from below — the previous
+chapter's ceiling, mirrored in a shrinking power.
+
+\section{Proportions converge}
+
+The closer turns the swamping intuition into exact numbers — exact
+binomial sums, no new machinery. Within $\pm 5\%$ of half the flips:
+the probability \emph{climbs}, $\anchor{007.propband}$ at
+$n = 20, 100, 1000$. Within $\pm 5$ \emph{heads} of half: it
+\emph{falls}, $\anchor{007.countband}$ at $n = 100, 1000, 10000$. The
+two $n = 100$ entries are the same band of outcomes, $45$ to $55$ —
+one number telling two stories. Proportions converge while counts
+spread: the gambler's fallacy dies by two columns moving in opposite
+directions. Chance \emph{swamps}; it does not compensate.
+
+The theorem these tables compute instances of is the weak law of
+large numbers — Bernoulli had it proved by about 1689; it reached
+print in 1713~\cite{probability-grinstead-snell-ch-8-source,
+probability-j-j-o-connor-and-e-f-robertson-jacob-bernoulli-mactutor}
+— named here, and promised for the day variance arrives. One small
+closing count: average the logarithms chapter's surprisal over the
+sixteen equal cells and it comes to exactly $4$ bits — a number
+waiting for the information-theory road.
+
+\paragraph{Where this goes.} The next move pins the data and sweeps
+the parameter: the likelihood lens that opens the softmax chapter
+reads a binomial table along the other axis, and this chapter's
+columns are that table. The per-frame distributions the trellis
+multiplies are pmfs exactly like these — the gradient chapter
+differentiates straight through them. And the weak law returns as a
+theorem when spread gets its own machinery: variance and the proof
+arrive together.
+\end{narrative}
+
+\section*{Practice problems}
+
+\begin{problem}
+Three fair flips, $X =$ number of heads. Stamp the eight cells and
+sort: what is the pmf of $X$?
+\begin{hint}
+Eight equal cells; group by stamp and count.
+\end{hint}
+\begin{solution}
+The eight sequences stamp as one $0$, three $1$'s, three $2$'s and
+one $3$, so the pmf is $(1, 3, 3, 1)/8$ — and the counts are
+$\binom{3}{k}$, the counting chapter's H/T words one flip early.
+Four unequal bars from eight equal cells: the equiprobability bias
+refuted at $n = 3$.
+\end{solution}
+\end{problem}
+
+\begin{problem}
+Where does the fulcrum balance for a fair die? And for the biased
+die with double weight on the six (weights $1,1,1,1,1,2$ over $7$)?
+\begin{hint}
+$E[X] = \sum x \cdot P(X = x)$, exact fractions throughout.
+\end{hint}
+\begin{solution}
+Fair: $E = (1 + \cdots + 6)/6 = 21/6 = 7/2 = 3.5$ — not a face. Biased:
+$E = (1 + 2 + 3 + 4 + 5 + 2 \cdot 6)/7 = 27/7 \approx 3.857$ — also
+not a face, and \emph{moved}: the balance point belongs to the
+measure, not to the faces.
+\end{solution}
+\end{problem}
+
+\begin{problem}
+Two fair dice, $S$ = their sum. Compute $E[S]$ twice: once from the
+distribution of $S$, once with no distribution at all.
+\begin{hint}
+The $6 \times 6$ grid's diagonals carry the counts
+$(1,2,3,4,5,6,5,4,3,2,1)$; linearity needs neither them nor
+independence.
+\end{hint}
+\begin{solution}
+By the distribution: the diagonal counts over $36$ give
+$E[S] = \sum_{s=2}^{12} s \cdot P(S = s) = 252/36 = 7$. By linearity:
+$E[S] = E[X_1] + E[X_2] = 3.5 + 3.5 = 7$, using only that both dice
+are fair — the second route never asks whether the dice are
+independent, because it does not need to know.
+\end{solution}
+\end{problem}
+
+\begin{problem}
+Assemble the binomial pmf for $n = 4$, $p = 1/4$ the sorted-square
+way: cell counts times one cell's area. Then check $E = np$ by the
+definition sum.
+\begin{hint}
+The counts are $1, 4, 6, 4, 1$; a $k$-head cell has area
+$(1/4)^k (3/4)^{4-k}$.
+\end{hint}
+\begin{solution}
+Column $k$ weighs $\binom{4}{k} (1/4)^k (3/4)^{4-k}$:
+\[
+  \frac{81}{256},\ \frac{108}{256},\ \frac{54}{256},\
+  \frac{12}{256},\ \frac{1}{256},
+\]
+summing to $256/256 = 1$. Each one-head cell is
+$(1/4)(3/4)^3 = 27/256$, and there are $\binom{4}{1} = 4$ of them —
+coefficient as cell count, power as one cell's area. The definition
+sum gives
+$E = (0 \cdot 81 + 1 \cdot 108 + 2 \cdot 54 + 3 \cdot 12 + 4 \cdot 1)/256
+= 256/256 = 1$; indicators agree instantly: $np = 4 \times 1/4 = 1$.
+\end{solution}
+\end{problem}
+
+\begin{problem}[stretch]
+Zero successes in $n$ trials of chance $1/n$: compute
+$(1 - 1/10)^{10}$ exactly and $(1 - 1/100)^{100}$ to six places, and
+compare both with $1/e$. From which side, and in what order, do they
+approach it?
+\begin{hint}
+$(9/10)^{10}$ terminates as a decimal; the last chapter named the
+limit.
+\end{hint}
+\begin{solution}
+$(9/10)^{10} = 3486784401/10^{10} = 0.3486784401$ exactly, and
+$(99/100)^{100} \approx 0.366032$, against
+$1/e \approx 0.367879$. Both sit \emph{below} $1/e$ and climb toward
+it — $0.348678 < 0.366032 < 0.367879$ — the split-year ceiling
+mirrored: $(1 + 1/n)^n$ crowds $e$ from below, and
+$(1 - 1/n)^n$ crowds $1/e$ the same way. Rare events at rate one-per-
+trial-count leave you empty-handed about $37\%$ of the time, almost
+regardless of $n$.
+\end{solution}
+\end{problem}

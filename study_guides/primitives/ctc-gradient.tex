@@ -1,0 +1,468 @@
+% Primitive: ctc-gradient — authored from deep_learning/ctc_gradient_manim.py
+% (seven scenes), its README concepts table and plan 010's verification
+% pass (exact rational arithmetic, two independent routes; anchors A-T).
+% This is the guide's destination: it spends every earlier chapter's
+% blocks and points forward only to decoding. Conventions inherited from
+% the plan's decisions: the 2012 (exclusive) beta, the log-sensitivity
+% derivation (no product rule), the loss-gradient sign with the push
+% named where it appears, blank dominance conditioned on T. Problem
+% answers are computed by answers/ctc_gradient.py (the solve-gate anchor).
+\chapter{The CTC gradient: softmax minus occupancy}
+
+\begin{narrative}
+This is what the road was for. The alignment chapter left a loss —
+the negative log of a sum over every path that spells the
+transcript — and every chapter since has been quietly forging a tool
+to differentiate it. The worked example returns one last time:
+transcript $Y = \mathrm{AB}$, alphabet $\{A, B, \varepsilon\}$,
+$T = 4$ frames, the wrapped states $(\varepsilon, A, \varepsilon, B,
+\varepsilon)$, the $\anchor{001.paths15}$ paths — and now a concrete
+per-frame matrix (rows $A/B/\varepsilon$, one column per frame):
+$\anchor{010.K.matrix}$. On it, exact arithmetic gives
+$P(\mathrm{AB} \mid X) = \anchor{010.K.P}$ and loss
+$-\ln P = \anchor{010.K.NLL}$. By the chapter's end, the gradient of
+that loss at every one of the twelve score cells will be a
+subtraction you can read off a picture.
+
+\section{The other half of the trellis}
+
+The forward variable $\alpha_t(s)$ answered ``how did we get
+here?''. Its mirror $\beta_t(s)$ answers ``how do we finish?'' — the
+weight of every legal way to complete the transcript from state $s$
+after frame $t$. Same grid, same edges, swept against the arrows.
+
+One bookkeeping decision matters more than it looks: each frame's
+emission is a coin exactly one of the two variables may pocket.
+This book adopts the convention of Graves's 2012
+treatment~\cite{deep_learning-alex-graves-supervised-sequence-labelling-with-rnns-2012}:
+$\alpha$'s column pockets frame $t$'s emission, and $\beta$ starts
+its product at $t + 1$ — so at the last frame, $\beta_T = 1$ at the
+two accepting states and $0$ elsewhere, and no emission is ever
+counted twice. At unit weights the backward sweep is pure counting:
+its first column reads $(5, 10, 6, 4, 1)$ down the five states, and
+the two \emph{initial} states give $5 + 10 = \anchor{001.paths15}$ —
+the flagship count, found now from the far end. (On this example the
+backward columns mirror the forward ones — a symmetry of this
+palindromic transcript, not a theorem.) Formula last, the mirror
+recurrence:
+\[
+  \beta_t(s) \;=\; \sum_{i} \beta_{t+1}(s{+}i)\; y_{t+1}(z'_{s+i}),
+\]
+the sum over stay, advance, and the skip where the grid allows it.
+This is the backward half of forward--backward — the HMM lineage
+every CTC implementation
+inherits~\cite{deep_learning-lawrence-r-rabiner-the-hmm-tutorial-proc-ieee-1989}.
+
+\section{Paths through a cell}
+
+Multiply the two halves at any cell and something new appears:
+$\alpha_t(s)\,\beta_t(s)$ is the total weight of every path that
+passes \emph{through} that cell — ways in, times ways out, the
+counting grid's product rule reborn carrying probability. At unit
+weights, cell $(t{=}2, A)$ has $2$ prefixes and $4$ suffixes:
+$2 \times 4 = 8$ of the $15$ paths cross it.
+
+\begin{center}
+\begin{tikzpicture}[x=1.55cm, y=0.95cm]
+  % alpha*beta path counts through each cell at unit weights — forward
+  % counts (plan 001) times backward counts (plan 010 anchor P). The
+  % t=2 column is highlighted: every column sums to the same 15.
+  \fill[Accent!18] (1.62, -6.25) rectangle (2.38, -0.45);
+  \foreach [count=\t from 1] \col in
+    {{5,10,0,0,0},{1,8,3,3,0},{0,3,3,8,1},{0,0,0,10,5}} {
+    \foreach [count=\s from 1] \v in \col {
+      \ifnum\v>0
+        \node[circle, draw=Muted, minimum size=6.4mm, inner sep=0pt]
+          (n\t\s) at (\t, -\s) {\small $\v$};
+      \else
+        \node[circle, draw=Muted!45, minimum size=6.4mm, inner sep=0pt]
+          (n\t\s) at (\t, -\s) {};
+      \fi
+    }
+    \node[above, color=CoolInk] at (\t, -0.42) {\small $t=\t$};
+    \node[color=AccentInk] at (\t, -5.95) {\small $15$};
+  }
+  \foreach [count=\s from 1] \lab/\col in
+    {$\varepsilon$/Muted, $A$/PaletteA, $\varepsilon$/Muted, $B$/PaletteB, $\varepsilon$/Muted}
+    \node[left, color=\col] at (0.6, -\s) {\lab};
+  \foreach \t/\u in {1/2, 2/3, 3/4} {
+    \foreach \s/\r in {1/1,1/2, 2/2,2/3,2/4, 3/3,3/4, 4/4,4/5, 5/5}
+      \draw[Muted!60] (n\t\s) -- (n\u\r);
+  }
+  \node[right, color=AccentInk] at (4.45, -5.95)
+    {\small every column: $\anchor{001.paths15}$};
+\end{tikzpicture}
+\end{center}
+
+Sweep a column across the grid and the series' strongest device
+appears — Eisner's constant
+column~\cite{deep_learning-jason-eisner-the-forward-backward-spreadsheet-acl-02}:
+at unit weights \emph{every} column of products sums to $15$, and on
+the real matrix every column sums to the same
+$P(\mathrm{AB} \mid X) = \anchor{010.K.P}$ — four columns, one
+answer, which also equals $\alpha$'s two-final-state sum and
+$\beta$'s two-initial-state sum. The reason is a sentence: every
+path crosses every column exactly once. Formula last:
+\[
+  P(Y \mid X) \;=\; \sum_s \alpha_t(s)\,\beta_t(s)
+  \qquad \text{for any } t .
+\]
+The column is also the bookkeeping self-check: pocket an emission
+twice and its column's sum scales visibly out of line.
+
+\section{Where the truth spends its time}
+
+Divide each column by its own sum and it becomes a distribution:
+\[
+  \gamma_t(s) \;=\; \frac{\alpha_t(s)\,\beta_t(s)}{P(Y \mid X)} ,
+\]
+the share of the truth's probability passing through each cell —
+\emph{where the truth spends frame $t$}. The divide-by-$P$ is the
+conditional chapter's renormalized slice, conditioned this time on
+the transcript; columns sum to $1$ because each path occupies
+exactly one cell per frame — the topology grants it. Folding blank's
+three grid rows into one class (a summation drawn exactly once — the
+grid has five rows, the bars three) gives the per-class occupancy on
+the real matrix:
+
+\begin{center}
+\begin{tabular}{c|cccc}
+ & $t=1$ & $t=2$ & $t=3$ & $t=4$ \\
+\hline
+$A$ & $0.9028$ & $0.7086$ & $0.1464$ & $0$ \\
+$B$ & $0$ & $0.0330$ & $0.1403$ & $0.9487$ \\
+$\varepsilon$ & $0.0972$ & $0.2584$ & $0.7133$ & $0.0513$ \\
+\end{tabular}
+\end{center}
+
+Columns are distributions; \emph{rows are not}. A's row sums to
+$\anchor{010.S.dwellA}$ — an expected \emph{dwell time}: of the four
+frames, the truth spends nearly two of them emitting $A$, and the
+three dwells $\anchor{010.S.dwellA} + \anchor{010.S.dwellB} +
+\anchor{010.S.dwellblank}$ sum to exactly $4 = T$. The balance point
+from the random-variables chapter has returned: occupancy is an
+expectation over the posterior path distribution. One degenerate
+setting shows what the object is made of: under \emph{uniform}
+outputs ($y = 1/3$ everywhere), $P = \anchor{010.L.uniformP}$ and
+$\gamma$ collapses to pure path counts over $15$ — the alignment
+chapter's counting scene reborn as a distribution. Stand a $\gamma$
+column beside the derivative chapter's one-hot target and the
+chapter's destination is already visible: this is a target
+\emph{gone soft}.
+
+\section{The sensitivity of the sum}
+
+Now differentiate the monster — and find there is no monster. First,
+a linearity observation: each path uses frame $t$ exactly once, so
+any single cell's score $y_t(k)$ appears in each path's product to
+power $0$ or $1$ — $P$ is \emph{linear} in that one cell, and its
+slope is the cell's coefficient, which the waist picture already
+named: $\alpha \beta$ summed over the cell's states.
+
+The load-bearing step is the log-sensitivity reading, and it is the
+derivative chapter's closing move at path scale. Nudge one cell
+multiplicatively — scale $y_t(k)$ by $(1 + h)$ — and every path
+through the cell scales by the same factor while every other path
+stands still. So the \emph{relative} change of $P$ is the share of
+$P$ passing through the cell:
+\[
+  \frac{\partial \ln P}{\partial \ln y_t(k)} \;=\; \gamma_t(k) ,
+\]
+with the score function $d \ln f = f'/f$ doing the bookkeeping, as
+it has since the toolkit chapter. In $\mathrm{LSE}$'s gradient each
+term owned its own score; here many paths share one cell, so their
+shares \emph{add} into occupancy — the sensitivity of a smooth max
+is a share, and the sensitivity of a path-sum is a pooled share.
+Since the loss is $L = -\ln P$, the formula lands last:
+\[
+  \frac{\partial L}{\partial \ln y_t(k)} \;=\; -\gamma_t(k) .
+\]
+Nudge one cell's log-probability, and the loss moves by exactly that
+cell's occupancy.
+
+\section{Softmax minus occupancy}
+
+The per-frame $y$ is a softmax, so one owned step remains. The
+log-softmax derivative — one line from
+$\partial_i \mathrm{LSE} = \mathrm{softmax}_i$ — is
+$\partial \ln y_j / \partial u_k = \delta_{jk} - y_k$, where $u$ are
+the frame's logits. Chain it against $-\gamma$:
+\[
+  \frac{\partial L}{\partial u_t(k)}
+  \;=\; -\sum_j \gamma_t(j)\,\bigl(\delta_{jk} - y_t(k)\bigr)
+  \;=\; -\gamma_t(k) + y_t(k) \sum_j \gamma_t(j) ,
+\]
+and the checksum $\sum_j \gamma_t(j) = 1$ — the constant column,
+paying its second time, now load-bearing in the algebra — collapses
+the whole thing:
+\[
+  \boxed{\;\frac{\partial L}{\partial u_t(k)}
+    \;=\; y_t(k) - \gamma_t(k)\;}
+\]
+(Graves 2012, eq.\ 7.34~\cite{deep_learning-alex-graves-supervised-sequence-labelling-with-rnns-2012}).
+The per-frame gradient of the CTC loss is the softmax output minus
+the truth's occupancy. On the worked matrix:
+
+\begin{center}
+\begin{tabular}{c|cccc}
+$y - \gamma$ & $t=1$ & $t=2$ & $t=3$ & $t=4$ \\
+\hline
+$A$ & $-0.2028$ & $-0.1086$ & $+0.0536$ & $+0.1000$ \\
+$B$ & $+0.2000$ & $+0.0670$ & $-0.0403$ & $-0.2487$ \\
+$\varepsilon$ & $+0.0028$ & $+0.0416$ & $-0.0133$ & $+0.1487$ \\
+\end{tabular}
+\end{center}
+
+Every column sums to $0$ — mass pushed off the truth's cells lands
+somewhere — and on this example even the printed four-decimal digits
+sum to $0.0000$ exactly. Two cells are worth reading. At $t = 1$,
+$B$'s entry is \emph{exactly} $+0.2000 = y$: the state is
+unreachable, its occupancy is $0$, and the gradient is the output
+itself — pure push-down. And scoring the \emph{wrong} transcript BA
+against the same matrix flips $t{=}1$, $A$ to exactly $+0.7000$ for
+the same reason: an alignment the transcript cannot use gets no
+protection.
+
+The degeneration closes the derivative chapter's promise: let one
+path carry everything and $\gamma$'s columns snap one-hot —
+$y - \gamma$ becomes $p - \text{one-hot}$, the
+$\anchor{009.G.nllgradient}$ of the toolkit's closer, received as
+the special case. Bridle's ``output minus a one-from-N
+target''~\cite{probability-john-s-bridle-training-stochastic-model-recognition-nips-198},
+with the one-from-N gone soft. And one implementation trap, because
+the identity is what CTC backward passes hard-code: the clean form
+lives at the \emph{logits}. Hand the loss anything but a true
+log-softmax and the forward loss stays right while the gradient goes
+silently
+wrong~\cite{deep_learning-pytorch-issue-122243-non-normalized-ctc-inputs}.
+(The $y$-space form $-\gamma/y$ is all-negative — it only pushes up —
+which is why the $u$-form is the teachable one.)
+
+\section{The error signal learns}
+
+Watch the identity during training. Graves's original figure traced
+the error signal through three
+stages~\cite{deep_learning-graves-et-al-2006-connectionist-temporal-classification};
+here the arc is rebuilt countable, by plain gradient descent — the
+previous chapter's walker, learning rate $1.0$ — on free per-frame
+logits. (One sign note where plots enter: error panels traditionally
+plot the \emph{push} $\gamma - y$, the negative of the gradient —
+above the axis means ``raise this output''. Columns balance to zero
+in either sign.)
+
+\emph{Diffuse.} Start uninformative: uniform outputs. Then $\gamma$
+is exactly path counts over $15$ — the input never consulted — and
+the gradient is pure fractions: at $t = 1$,
+$y - \gamma = \anchor{010.L.gradt1}$ across $(A, B, \varepsilon)$.
+The error is determined by the target sequence alone, spread wide
+and time-symmetric.
+
+\emph{Localised.} Descend from the worked matrix: the loss walks
+$\anchor{010.K.NLL} \to \anchor{010.M.loss10}$ after ten steps
+$\to \anchor{010.M.loss50}$ after fifty. The error concentrates
+where the outputs already lean — the pushes sharpen around the
+emerging alignment $A, A, \varepsilon, B$.
+
+\emph{Gone.} By five thousand steps the loss reads
+$\anchor{010.M.loss5000}$ and the bars sink into the axis. The
+teaching gem hides at frame $3$, which converges not to a spike but
+to the \emph{mixed} output $\anchor{010.M.frame3}$ with gradient
+$\to 0$: once frames $1, 2, 4$ say $A, A, B$, all three of frame
+$3$'s choices collapse to AB, so the loss goes indifferent — $y$
+matches $\gamma$ out of indifference, not certainty. A vanished
+gradient does not mean one-hot outputs; it means the outputs agree
+with the occupancy, which is a weaker and more interesting thing.
+
+\section{Why the spikes appear}
+
+Trained CTC models emit sharp single-frame spikes separated by long
+runs of blank, and the alignment chapter warned: never read the
+spikes as segment boundaries. Here, finally, is the mechanism — and
+it is topology plus weight sharing, not acoustics.
+
+First, topology. Count label occurrences over all AB-paths, with the
+input nowhere in the computation. At $T = 4$ the counts across
+$(A, B, \varepsilon)$ are $\anchor{010.N.countsT4}$ — blank is
+\emph{not} dominant; the boundary case is honest. At $T = 5$ (now
+$\anchor{010.N.t5paths}$ paths — the count the alignment chapter's
+problem set met) they are $\anchor{010.N.countsT5}$, and blank is
+ahead for good: its share grows with $T$, toward $2/3$ in the
+one-letter limit under uniform outputs. Under uniform initialization
+the occupancy \emph{is} these counts — so the earliest training
+signal already tilts blankward for every $T$ past the boundary.
+
+Second, weight sharing. Free per-frame outputs never spike — the
+worked example converged to an honest alignment above. But force one
+shared softmax to serve every frame (a bias-only model) and descent
+tells a different story: at $T = 4$ it settles at the honest
+$\anchor{010.N.biasT4}$; at $T = 12$ it converges to
+$\anchor{010.N.biasT12}$ — argmax blank at every frame, an
+\emph{empty} decode, $100\%$ error — and this is a \emph{local}
+optimum: the global optimum has zero error. That trap is proved, for
+a feed-forward network from uniform initialization, by Zeyer,
+Schl\"uter and Ney (arXiv
+preprint)~\cite{deep_learning-zeyer-et-al-2021-why-does-ctc-result-in-peaky-behavior},
+who also name the repair: a label prior folded into the loss —
+peakiness is a steerable training artifact, never a timestamp.
+
+The closing map: the identity is a family. One-hot cross-entropy
+($\gamma$ one-hot — the degenerate case), distillation (a teacher's
+soft targets), CTC ($\gamma$ the occupancy) — all one gradient
+shape, output minus target, with only the target changing. And
+$\gamma$ itself is the soft alignment real systems compute — the
+E-step object of the HMM tradition, met here as the thing the
+gradient reads off the trellis.
+
+\paragraph{Where this goes.} Training is solved; reading the trained
+model's output stream is not. Greedy decoding has been suspect since
+the alignment chapter, spikes are not segmentations, and the honest
+decoder — beam search over \emph{collapsed prefixes}, each prefix
+carrying two probabilities — is the road's last construction: the
+next chapter closes the loop from training to deployment.
+\end{narrative}
+
+\section*{Practice problems}
+
+\begin{problem}
+At unit weights, run the backward recurrence on the AB trellis
+($T = 4$, states $\varepsilon, A, \varepsilon, B, \varepsilon$):
+$\beta_4 = 1$ at the two accepting states, $0$ elsewhere. Compute
+the $t = 1$ column of suffix counts, and check its two initial
+states against the flagship path count.
+\begin{hint}
+Work right to left; a state's count is the sum of its successors'
+counts (stay, advance, and the skip only over a blank between
+different letters).
+\end{hint}
+\begin{solution}
+From $\beta_4 = (0, 0, 0, 1, 1)$: the $t = 3$ column is
+$(0, 1, 1, 2, 1)$ — e.g.\ state $B$ has stay $1$ + advance $1$; the
+$A$ state's skip to $B$ is legal since $A \neq B$. Then $t = 2$
+gives $(1, 4, 3, 3, 1)$ — $\beta_2(A) = \text{stay } 1 +
+\text{advance } 1 + \text{skip } 2 = 4$ — and $t = 1$ gives
+$(5, 10, 6, 4, 1)$. The two initial states (leading blank and first
+letter): $5 + 10 = 15$, the same count the forward sweep found from
+the other end.
+\end{solution}
+\end{problem}
+
+\begin{problem}
+Using the forward counts $(1,1,0,0,0)$, $(1,2,1,1,0)$,
+$(1,3,3,4,1)$, $(1,4,6,10,5)$ and your backward counts, form the
+per-cell products $\alpha \beta$ at every cell and sum each column.
+What do the four sums say, and why must they agree?
+\begin{hint}
+Backward columns: $t{=}1$ $(5,10,6,4,1)$, $t{=}2$ $(1,4,3,3,1)$,
+$t{=}3$ $(0,1,1,2,1)$, $t{=}4$ $(0,0,0,1,1)$.
+\end{hint}
+\begin{solution}
+The product columns are $(5, 10, 0, 0, 0)$, $(1, 8, 3, 3, 0)$,
+$(0, 3, 3, 8, 1)$ and $(0, 0, 0, 10, 5)$ — each summing to $15$.
+$\alpha_t(s) \beta_t(s)$ counts the paths \emph{through} cell
+$(t, s)$ — ways in times ways out — and since every one of the $15$
+paths occupies exactly one state at every frame, summing over a
+column counts every path exactly once, whichever column you pick.
+(The $8$ at $(t{=}2, A)$ is the waist: $2$ prefixes $\times$ $4$
+suffixes.) On the real matrix the same sweep returns
+$P(\mathrm{AB} \mid X) = 0.4877$ four times — the constant column,
+with probabilities riding the counts.
+\end{solution}
+\end{problem}
+
+\begin{problem}
+Under uniform outputs ($y_t(k) = 1/3$ for all $t, k$): compute
+$P(\mathrm{AB} \mid X)$, the occupancy column at $t = 1$, and the
+gradient $y - \gamma$ there. What is remarkable about what the
+computation never used?
+\begin{hint}
+Every path has the same weight, so $\gamma$ is a ratio of counts.
+\end{hint}
+\begin{solution}
+Each of the $15$ paths weighs $(1/3)^4 = 1/81$, so
+$P = 15/81 = 5/27$. With all weights equal, occupancy is path
+counts over $15$: at $t = 1$, ten paths start in $A$ and five in the
+leading blank, so $\gamma_1 = (2/3, 0, 1/3)$ across
+$(A, B, \varepsilon)$. The gradient is
+$y - \gamma = (1/3 - 2/3,\ 1/3 - 0,\ 1/3 - 1/3) =
+(-1/3,\ +1/3,\ 0)$. The input never entered: at an uninformative
+start, the error signal is determined by the target sequence's
+topology alone — which is exactly the diffuse first stage of
+training, and the seed of blank's topological head start at larger
+$T$.
+\end{solution}
+\end{problem}
+
+\begin{problem}
+On the worked matrix, frame $1$ has $y_1 = (0.7, 0.2, 0.1)$ and
+occupancy $\gamma_1 = (0.9028, 0, 0.0972)$. Write the gradient
+column, verify it sums to zero, and explain why $B$'s entry equals
+its softmax output exactly — no rounding involved.
+\begin{hint}
+Which trellis states can a path for AB occupy at frame $1$?
+\end{hint}
+\begin{solution}
+$y - \gamma = (0.7 - 0.9028,\ 0.2 - 0,\ 0.1 - 0.0972) =
+\anchor{010.K.gradt1}$, summing to $0$: both $y$ and
+$\gamma$ sum to $1$ over the classes, so their difference sums to
+zero — mass pushed off the truth's cells must land on the others. At
+frame $1$ a path for AB can occupy only the leading blank or the
+first $A$; the $B$ state is unreachable, so its occupancy is exactly
+$0$ and its gradient is exactly $y = +0.2000$ — the loss pushes a
+provably useless activation straight down. (The same mechanism, run
+against the wrong transcript BA, flips frame $1$'s $A$ to exactly
+$+0.7000$.)
+\end{solution}
+\end{problem}
+
+\begin{problem}
+Derive the identity. Starting from
+$\partial L / \partial \ln y_t(k) = -\gamma_t(k)$ and the
+log-softmax derivative
+$\partial \ln y_j / \partial u_k = \delta_{jk} - y_k$, show
+$\partial L / \partial u_t(k) = y_t(k) - \gamma_t(k)$, naming the
+step where the constant column does the work.
+\begin{hint}
+Chain over $j$, then split the sum into its $\delta$ term and its
+$y_k$ term.
+\end{hint}
+\begin{solution}
+Chaining,
+\[
+  \frac{\partial L}{\partial u_t(k)}
+  = \sum_j \frac{\partial L}{\partial \ln y_t(j)}
+    \frac{\partial \ln y_t(j)}{\partial u_t(k)}
+  = -\sum_j \gamma_t(j) \bigl(\delta_{jk} - y_t(k)\bigr) .
+\]
+The $\delta$ term picks out $-\gamma_t(k)$; the second term is
+$+\,y_t(k) \sum_j \gamma_t(j)$, and the sum is $1$ — the column
+checksum, the same constant column that verified the bookkeeping,
+now killing the Jacobian's second term. What remains is
+$y_t(k) - \gamma_t(k)$: softmax output minus occupancy. With a
+single surviving path, $\gamma$ is one-hot and the identity is the
+derivative chapter's $p - \text{one-hot}$ — the general case
+received the special one.
+\end{solution}
+\end{problem}
+
+\begin{problem}[stretch]
+Count label cells over all AB-paths — with no input anywhere — at
+$T = 4$ and $T = 5$: how many of the path-cells carry $A$, $B$, and
+blank? At which $T$ does blank take the lead, and what does that say
+about the first gradient step from an uninformative start?
+\begin{hint}
+$15$ paths of $4$ cells, then $35$ paths of $5$ cells; enumerate or
+use the unit-weight $\gamma$ columns, which are exactly these counts
+over the path total.
+\end{hint}
+\begin{solution}
+At $T = 4$: $60$ path-cells split $(A, B, \varepsilon) =
+(21, 21, 18)$ — the labels lead, and blank is \emph{not} dominant;
+any unconditioned ``blank always dominates'' claim dies on this
+case. At $T = 5$: $175$ path-cells split $(56, 56, 63)$ — blank
+ahead, and it stays ahead for every larger $T$, with its share
+growing toward $2/3$ in the one-letter limit under uniform outputs.
+Since uniform-init occupancy equals these count shares, the very
+first descent step already pushes blankward once $T \geq 5$ — the
+topological half of peakiness, before weight sharing adds the trap.
+\end{solution}
+\end{problem}

@@ -47,3 +47,421 @@
   description: "gradient of the NLL at z = (2, 1, 0), correct class first"
   source: "docs/plans/009-calculus-derivatives.md, anchor G"
   method: "60-digit computation, finite differences agree to 4.6e-11"
+
+# --- probability trio (merged from batch proposals) ---
+"002.hhth":
+  value: "1/16"
+  description: "P(HHTH) over four independent fair flips, (1/2)^4"
+  source: "docs/plans/002-probability-independence.md, verified anchors (independent trials)"
+  method: "exact enumeration, no floats (plan 002 research pass)"
+"002.aces.depleted":
+  value: "1/221"
+  description: "P(both aces), two cards without replacement, (4/52)(3/51)"
+  source: "docs/plans/002-probability-independence.md, verified anchors (without replacement); probability/README.md independence row 6"
+  method: "exact enumeration, no floats (plan 002 research pass)"
+"002.aces.replaced":
+  value: "1/169"
+  description: "P(both aces) with replacement, (1/13)^2"
+  source: "docs/plans/002-probability-independence.md, verified anchors (without replacement); probability/README.md independence row 6"
+  method: "exact enumeration, no floats (plan 002 research pass)"
+"003.reversal":
+  value: "12/51"
+  description: "P(S1|S2) = P(S2|S1) — the time-reversal beat"
+  source: "docs/plans/003-probability-conditional.md, scene 3 design; probability/README.md conditional row 3"
+  method: "exact enumeration (plan 003 research pass)"
+"003.prevalence.highcounts":
+  value: "9/18"
+  description: "sick positives over all positives at prevalence 1/10 (whole-person counts)"
+  source: "docs/plans/003-probability-conditional.md, scene 5 design; docs/plans/004-probability-bayes.md, verified anchors (prevalence pair)"
+  method: "exact whole-person counts, two routes agree (plans 003/004)"
+"003.prevalence.lowcounts":
+  value: "9/108"
+  description: "sick positives over all positives at prevalence 1/100 (whole-person counts)"
+  source: "docs/plans/003-probability-conditional.md, scene 5 design; docs/plans/004-probability-bayes.md, verified anchors (prevalence pair)"
+  method: "exact whole-person counts, two routes agree (plans 003/004)"
+"003.prevalence.low":
+  value: "1/12"
+  description: "P(sick|+) at prevalence 1/100 for the 9/10-sensitive, 1/10-false-positive test"
+  source: "probability/README.md conditional row 5; docs/plans/004-probability-bayes.md, verified anchors (prevalence pair)"
+  method: "exact whole-person counts, two routes agree (plans 003/004)"
+"003.twocoins.joint":
+  value: "41/100"
+  description: "P(both heads) for the mixed pair of coins (9/10 vs 1/10 heads) — marginal dependence, vs 1/4"
+  source: "probability/README.md conditional row 6; docs/plans/003-probability-conditional.md, scene 6 design"
+  method: "exact enumeration over coin choice and flips (plan 003 research pass)"
+"004.LR":
+  value: "9"
+  description: "likelihood ratio of the prevalence-pair test (sens/FPR) and of the repo's two-coin pair, per head"
+  source: "docs/plans/004-probability-bayes.md, verified anchors (prevalence pair; iterated-update candidates)"
+  method: "exact fractions, two routes agree (plan 004 research pass)"
+"004.diseasitis.sickpos":
+  value: "18"
+  description: "Diseasitis: sick students testing positive (of 20 sick in the 100-student cohort)"
+  source: "docs/plans/004-probability-bayes.md, verified anchors (Diseasitis, Arbital verbatim)"
+  method: "both routes agree (plan 004 research pass)"
+"004.diseasitis.healthypos":
+  value: "24"
+  description: "Diseasitis: healthy students testing positive (of 80 healthy in the 100-student cohort)"
+  source: "docs/plans/004-probability-bayes.md, verified anchors (Diseasitis, Arbital verbatim)"
+  method: "both routes agree (plan 004 research pass)"
+"004.diseasitis.postodds":
+  value: "3:4"
+  description: "Diseasitis posterior odds, (1:4) x (3:1) — literally the 18:24"
+  source: "docs/plans/004-probability-bayes.md, verified anchors (Diseasitis)"
+  method: "both routes agree (plan 004 research pass)"
+"004.diseasitis.posterior":
+  value: "3/7"
+  description: "Diseasitis posterior probability, 18/42"
+  source: "docs/plans/004-probability-bayes.md, verified anchors (Diseasitis)"
+  method: "both routes agree (plan 004 research pass)"
+"004.lowprev.odds":
+  value: "1:11"
+  description: "posterior odds at prevalence 1/100: 1:99 x 9 = 9:99"
+  source: "docs/plans/004-probability-bayes.md, verified anchors (prevalence pair completed)"
+  method: "exact fractions, two routes agree (plan 004 research pass)"
+"004.coins.HH":
+  value: "81:1"
+  description: "posterior odds after two heads on the two-coin pair, 1:1 -> 9:1 -> 81:1"
+  source: "probability/README.md bayes row 5; docs/plans/004-probability-bayes.md, verified anchors (iterated-update candidates)"
+  method: "exact fractions, two routes agree (plan 004 research pass)"
+"004.monty.standard":
+  value: "2/3"
+  description: "P(switch wins), standard Monty protocol (host coin-flips when free)"
+  source: "docs/plans/004-probability-bayes.md, verified anchors (Monty, Rosenthal verbatim)"
+  method: "both routes agree (plan 004 research pass)"
+"004.monty.fall":
+  value: "1/2"
+  description: "P(switch wins), Monty Fall protocol (host opened a goat door by luck)"
+  source: "docs/plans/004-probability-bayes.md, verified anchors (Monty, Rosenthal verbatim)"
+  method: "both routes agree (plan 004 research pass)"
+"004.natfreq.lay":
+  value: "4\\% \\to 24\\%"
+  description: "share of laypeople solving Bayesian problems, probability format vs natural frequencies"
+  source: "probability/README.md bayes row 2 (plan 004 research pass; Weber, Binder & Krauss 2018 meta-analysis)"
+  method: "quoted from the human-verified reference"
+"004.natfreq.gyn":
+  value: "21\\% \\to 87\\%"
+  description: "gynecologists solving the test-result question, probability format vs natural frequencies"
+  source: "probability/README.md bayes row 2 (plan 004 research pass; Gigerenzer's obstetrics study)"
+  method: "quoted from the human-verified reference"
+
+# --- closing arc (merged from batch proposals) ---
+"008.A.workhorse":
+  value: "(0.6652,\\ 0.2447,\\ 0.0900)"
+  description: "softmax(2, 1, 0) at 4 dp; the three roundings sum to 0.9999, never display them totalling 1.0000"
+  source: "docs/plans/008-probability-softmax-likelihood.md, anchor A"
+  method: "exact rationals / 60-digit Decimal; re-verified in plan 009 anchor G"
+"008.D.sharpened":
+  value: "(0.8668,\\ 0.1173,\\ 0.0159)"
+  description: "softmax(z / T) on z = (2, 1, 0) at T = 0.5"
+  source: "docs/plans/008-probability-softmax-likelihood.md, anchor D"
+  method: "60-digit Decimal, numeric limits checked"
+"008.D.flattened":
+  value: "(0.5065,\\ 0.3072,\\ 0.1863)"
+  description: "softmax(z / T) on z = (2, 1, 0) at T = 2"
+  source: "docs/plans/008-probability-softmax-likelihood.md, anchor D"
+  method: "60-digit Decimal, numeric limits checked"
+"008.E.base2":
+  value: "(4/7,\\ 2/7,\\ 1/7)"
+  description: "base-2 softmax on (2, 1, 0), exact — a rational softmax"
+  source: "docs/plans/008-probability-softmax-likelihood.md, anchor E"
+  method: "exact Fraction arithmetic"
+"008.L.LSE":
+  value: "2.4076"
+  description: "LSE(2, 1, 0), displayed at 4 dp (2.407605964)"
+  source: "docs/plans/008-probability-softmax-likelihood.md, anchor L; plan 009 anchor G"
+  method: "60-digit Decimal, two plans agree"
+"008.A2.likelihoodrow":
+  value: "(3/64,\\ 1/4,\\ 27/64)"
+  description: "the pinned likelihood row k = 3 across p = 1/4, 1/2, 3/4 (count lens)"
+  source: "docs/plans/008-probability-softmax-likelihood.md, addendum anchor A2"
+  method: "exact Fraction arithmetic, denominator 256 throughout"
+"008.A2.rowsum":
+  value: "23/32"
+  description: "exact sum of the k = 3 likelihood row — visibly not 1"
+  source: "docs/plans/008-probability-softmax-likelihood.md, addendum anchor A2"
+  method: "exact Fraction arithmetic"
+"008.I.product":
+  value: "0.27216"
+  description: "product of the five per-frame probabilities (0.9, 0.8, 0.7, 0.9, 0.6), exact (1701/6250)"
+  source: "docs/plans/008-probability-softmax-likelihood.md, anchor I"
+  method: "exact Fraction arithmetic; exp(sum of lns) round-trips"
+"008.I.logsum":
+  value: "-1.3014"
+  description: "sum of the five per-frame lns, displayed at 4 dp (-1.3013651503)"
+  source: "docs/plans/008-probability-softmax-likelihood.md, anchor I"
+  method: "60-digit Decimal"
+"008.A4.frameproduct":
+  value: "0.294"
+  description: "path A, A, blank on the three-frame matrix — product 147/500, exact"
+  source: "docs/plans/008-probability-softmax-likelihood.md, addendum anchor A4"
+  method: "exact Fraction arithmetic"
+"008.A4.framelogsum":
+  value: "-1.2242"
+  description: "sum of the path's three lns, displayed at 4 dp (-1.2241755116)"
+  source: "docs/plans/008-probability-softmax-likelihood.md, addendum anchor A4"
+  method: "Decimal and float64 routes identical"
+"008.J.logwalk":
+  value: "-105.9189"
+  description: "46 ln(0.1) — the log route past float32's 46-factor cliff"
+  source: "docs/plans/008-probability-softmax-likelihood.md, anchor J"
+  method: "numpy float32/float64 demonstration, log route exact to display"
+"009.G.LSEnudge":
+  value: "0.00666"
+  description: "LSE(2, 1, 0) moves by 0.00666 when z_1 = 2 is nudged to 2.01"
+  source: "docs/plans/009-calculus-derivatives.md, anchor G"
+  method: "60-digit computation; symmetric FD agrees to ~1e-14"
+"009.H.saturation":
+  value: "-0.9100,\\ -0.9868,\\ -0.9993"
+  description: "NLL slope p_c - 1 at t = 0, -2, -5 on z = (2, 1, t) — never display the walk's endpoint as -1.0000"
+  source: "docs/plans/009-calculus-derivatives.md, anchor H"
+  method: "60-digit computation"
+"010.K.matrix":
+  value: "0.7/0.2/0.1 \\cdot 0.6/0.1/0.3 \\cdot 0.2/0.1/0.7 \\cdot 0.1/0.7/0.2"
+  description: "the worked per-frame matrix (rows A/B/blank; cols t = 1..4); cols 1-3 verbatim plan-008 A4, col 4 ratified (decision 3)"
+  source: "docs/plans/010-ctc-gradient.md, anchor K"
+  method: "exact Fraction arithmetic; brute-force and recurrence agree"
+"010.K.gradt1":
+  value: "(-0.2028,\\ +0.2000,\\ +0.0028)"
+  description: "gradient row y - occupancy at t = 1 (A, B, blank); B exactly +0.2000 since its occupancy is 0"
+  source: "docs/plans/010-ctc-gradient.md, anchor K"
+  method: "exact Fraction arithmetic; rows sum exactly to 0"
+"010.L.gradt1":
+  value: "(-1/3,\\ +1/3,\\ 0)"
+  description: "gradient y - occupancy at t = 1 under uniform outputs (A, B, blank), exact"
+  source: "docs/plans/010-ctc-gradient.md, anchor L"
+  method: "exact"
+"010.S.dwellA":
+  value: "1.7578"
+  description: "A's expected dwell, exact 8573/4877 frames of the 4"
+  source: "docs/plans/010-ctc-gradient.md, supplement anchor S"
+  method: "exact Fraction arithmetic; dwell sum exactly 4 = T"
+"010.S.dwellB":
+  value: "1.1220"
+  description: "B's expected dwell, exact 5472/4877"
+  source: "docs/plans/010-ctc-gradient.md, supplement anchor S"
+  method: "exact Fraction arithmetic; dwell sum exactly 4 = T"
+"010.S.dwellblank":
+  value: "1.1202"
+  description: "blank's expected dwell, exact 5463/4877"
+  source: "docs/plans/010-ctc-gradient.md, supplement anchor S"
+  method: "exact Fraction arithmetic; dwell sum exactly 4 = T"
+"010.M.loss10":
+  value: "0.1602"
+  description: "loss after 10 GD iterations from the repo matrix (lr 1.0)"
+  source: "docs/plans/010-ctc-gradient.md, anchor M"
+  method: "float64 training run, displayed 4 dp (FLAG 8: no exactness claims)"
+"010.M.loss50":
+  value: "0.0356"
+  description: "loss after 50 GD iterations from the repo matrix"
+  source: "docs/plans/010-ctc-gradient.md, anchor M"
+  method: "float64 training run, displayed 4 dp (FLAG 8: no exactness claims)"
+"010.M.loss5000":
+  value: "0.0003"
+  description: "loss after 5000 GD iterations from the repo matrix"
+  source: "docs/plans/010-ctc-gradient.md, anchor M"
+  method: "float64 training run, displayed 4 dp (FLAG 8: no exactness claims)"
+"010.M.frame3":
+  value: "(0.032,\\ 0.218,\\ 0.750)"
+  description: "frame 3's converged mixed output (A, B, blank) — gradient -> 0 out of indifference, not certainty"
+  source: "docs/plans/010-ctc-gradient.md, anchor M"
+  method: "float64 training run"
+"010.N.countsT4":
+  value: "(21,\\ 21,\\ 18)"
+  description: "label-occurrence counts (A, B, blank) over all 15 AB-paths at T = 4 — blank NOT dominant"
+  source: "docs/plans/010-ctc-gradient.md, anchor N"
+  method: "exact enumeration"
+"010.N.countsT5":
+  value: "(56,\\ 56,\\ 63)"
+  description: "label-occurrence counts (A, B, blank) over all 35 AB-paths at T = 5 — dominance starts here"
+  source: "docs/plans/010-ctc-gradient.md, anchor N"
+  method: "exact enumeration"
+"010.N.biasT4":
+  value: "(0.4,\\ 0.4,\\ 0.2)"
+  description: "the shared-softmax bias model's honest T = 4 convergence (A, B, blank)"
+  source: "docs/plans/010-ctc-gradient.md, anchor N"
+  method: "float64 GD on the bias model (Zeyer Def. 4.5), uniform init, lr 0.05"
+"010.N.biasT12":
+  value: "(0.0919,\\ 0.0919,\\ 0.8162)"
+  description: "the bias model's T = 12 convergence — argmax blank everywhere, empty decode, 100% error"
+  source: "docs/plans/010-ctc-gradient.md, anchor N"
+  method: "float64 GD on the bias model (Zeyer Def. 4.5), uniform init, lr 0.05"
+
+# --- logarithms / e-and-ln / random-variables (merged from batch proposals) ---
+"005.logtrap":
+  value: "1.301"
+  description: "log10(10+10), the log-of-a-sum trap refuted in base 10"
+  source: "algebra/README.md row 2 (plan 005 research pass)"
+  method: "computed-float, displayed at 3 dp with the approx sign"
+"005.log10two":
+  value: "0.301"
+  description: "log10(2), the doublings-to-digits conversion (irrational; approx only)"
+  source: "docs/plans/005-algebra-logarithms.md, slide-rule anchor; algebra/README.md row 3"
+  method: "computed; irrationality by parity argument [reasoned], screen shows approx"
+"005.underflow.floor":
+  value: "2^{-1074}"
+  description: "float64's minimum subnormal, the value row's floor"
+  source: "docs/plans/005-algebra-logarithms.md, underflow anchor; algebra/README.md row 6"
+  method: "computed-float (the float behaviour IS the claim)"
+"005.underflow.lastpower":
+  value: "323"
+  description: "largest n with 0.1^n surviving float64 (as a subnormal)"
+  source: "docs/plans/005-algebra-logarithms.md, underflow anchor: 0.1^323 survives (subnormal)"
+  method: "computed-float, both evaluation routes"
+"005.underflow.deadpower":
+  value: "324"
+  description: "smallest n with 0.1^n == 0.0 exactly in float64"
+  source: "docs/plans/005-algebra-logarithms.md, underflow anchor: 0.1^324 == 0.0 exactly, both routes"
+  method: "computed-float, both evaluation routes"
+"005.underflow.logsum":
+  value: "-324"
+  description: "the log10 sum of the same 324 factors, exact while the product dies"
+  source: "docs/plans/005-algebra-logarithms.md, underflow anchor; algebra/README.md row 6"
+  method: "exact (324 integer steps of -1)"
+"005.float32frames":
+  value: "46"
+  description: "frames of probability 0.1 at which the product hits exactly 0.0 in float32"
+  source: "docs/plans/005-algebra-logarithms.md, phase-2 checklist (float32-dies-at-46-frames, on screen); probability/README.md softmax row 3 (0.1^46 stores as exactly 0.0 in float32)"
+  method: "computed-float, numpy dtype check"
+"006.table":
+  value: "2.25,\\ 2.4414,\\ 2.6130,\\ 2.7146,\\ 2.7181"
+  description: "(1+1/n)^n at n = 2, 4, 12, 365, 8760 as displayed on screen"
+  source: "calculus/README.md e-and-ln row 1 (plan 006 anchors: the table)"
+  method: "computed-exact through n=1e5, computed-mp beyond; rounded for display"
+"006.e":
+  value: "2.718281828459"
+  description: "e as displayed on screen"
+  source: "docs/plans/006-calculus-e-ln.md, anchor: e = 2.718281828459 on screen"
+  method: "exact interval pins 19 decimal places; agrees with DLMF 4.2.11"
+"006.ln2":
+  value: "0.6931"
+  description: "base 2's slope-at-0 constant (ln 2) at 4 dp"
+  source: "docs/plans/006-calculus-e-ln.md, slopes-at-0 anchor; calculus/README.md rows 2-3"
+  method: "three routes agree (exact atanh-series interval, mpmath, libm)"
+"006.ln3":
+  value: "1.0986"
+  description: "base 3's slope-at-0 constant (ln 3) at 4 dp"
+  source: "docs/plans/006-calculus-e-ln.md, slopes-at-0 anchor; calculus/README.md row 3"
+  method: "three routes agree (exact atanh-series interval, mpmath, libm)"
+"006.stride8":
+  value: "2.0794"
+  description: "base 8's slope-at-0 constant, exactly 3 ln 2"
+  source: "docs/plans/006-calculus-e-ln.md, slopes-at-0 anchor: base 8's constant 2.0794 = 3 ln 2 exactly"
+  method: "computed-mp; identity 3 ln 2 exact"
+"006.settle2":
+  value: "1.0,\\ 0.7177,\\ 0.6956,\\ 0.69339"
+  description: "one-sided ratio (2^dt - 1)/dt at dt = 1, 0.1, 0.01, 0.001"
+  source: "docs/plans/006-calculus-e-ln.md, slopes-at-0 anchor; calculus/README.md row 2"
+  method: "computed-float (one-sided, never the symmetric quotient)"
+"006.settlee":
+  value: "1.0517,\\ 1.0050,\\ 1.0005"
+  description: "one-sided ratio (e^dt - 1)/dt at dt = 0.1, 0.01, 0.001"
+  source: "docs/plans/006-calculus-e-ln.md, slopes-at-0 anchor: base e: 1.0517, 1.0050, 1.0005 -> 1"
+  method: "computed-float"
+"006.naturalstrip":
+  value: "0,\\ 0.693,\\ 1,\\ 1.386,\\ 2.079"
+  description: "the natural strip's counter row over values 1, 2, e, 4, 8"
+  source: "calculus/README.md row 4 (plan 006 scene design, TheNaturalStride)"
+  method: "computed-mp, truncated for display"
+"006.ln101":
+  value: "0.0099503"
+  description: "ln(1.01): a tiny hop costs its own size in natural strides"
+  source: "docs/plans/006-calculus-e-ln.md, bridge anchor: ln(1.01) = 0.0099503"
+  method: "computed-mp"
+"006.bridge":
+  value: "0.9531,\\ 0.99503,\\ 0.99950"
+  description: "n ln(1+1/n) at n = 10, 100, 1000, the bridge to 1"
+  source: "docs/plans/006-calculus-e-ln.md, bridge anchor"
+  method: "computed-mp"
+"006.ln2short":
+  value: "0.693"
+  description: "ln 2 at 3 dp, the doubling-time numerator"
+  source: "calculus/README.md rows 5-6 (plan 006 payoff anchor: 0.693/0.05)"
+  method: "computed-mp, truncated for display"
+"006.doubling5":
+  value: "13.86"
+  description: "doubling time in years at 5% continuous growth (0.693/0.05)"
+  source: "docs/plans/006-calculus-e-ln.md, payoff anchor: doubling at 5%: 0.693/0.05 = 13.86 yr"
+  method: "computed-exact from the displayed ln 2"
+"006.dailygap":
+  value: "3.6 \\times 10^{-6}"
+  description: "gap between daily 5% compounding and e^0.05"
+  source: "calculus/README.md row 5; docs/plans/006-calculus-e-ln.md, payoff anchor (gap 3.6e-6)"
+  method: "computed-exact/mp ((7301/7300)^365 exact vs e^0.05)"
+"006.log1p40":
+  value: "4.248 \\times 10^{-18}"
+  description: "log1p(e^-40), surviving where naive log(1 + e^-40) returns 0.0"
+  source: "calculus/README.md row 6 (plan 006 debt-beat anchor: d=-40 -> 4.2484e-18)"
+  method: "computed-float (the float behaviour IS the claim)"
+"007.pmf16":
+  value: "(1, 4, 6, 4, 1)/16"
+  description: "pmf of heads in four fair flips, born by sorting the 16-cell square"
+  source: "probability/README.md random-variables row 2 (plan 007 anchor: four fair flips)"
+  method: "computed-exact, two routes (enumeration and C(4,k))"
+"007.dieE":
+  value: "3.5"
+  description: "fair die expectation, the fulcrum's balance point (not a face)"
+  source: "probability/README.md row 3 (plan 007 anchor: E = 7/2 = 3.5 exactly)"
+  method: "computed-exact (Fraction)"
+"007.biasedE":
+  value: "27/7"
+  description: "biased die (double weight on 6) expectation"
+  source: "probability/README.md row 3 (plan 007 addendum: E = 27/7, two routes)"
+  method: "computed-exact, two routes"
+"007.twodice":
+  value: "(1,2,3,4,5,6,5,4,3,2,1)/36"
+  description: "distribution of the two-dice sum, the 6x6 grid's diagonals"
+  source: "probability/README.md row 4 (plan 007 anchor: two fair dice)"
+  method: "computed-exact, both routes (enumeration and linearity for E)"
+"007.pmf256":
+  value: "(81, 108, 54, 12, 1)/256"
+  description: "binomial(4, 1/4) pmf, the re-cut square's column weights"
+  source: "docs/plans/007-probability-random-variables.md, addendum: Binomial(4, 1/4)"
+  method: "computed-exact, formula + weighted enumeration"
+"007.onecell":
+  value: "27/256"
+  description: "area of one one-head cell at p = 1/4, with exactly C(4,1) = 4 such cells"
+  source: "docs/plans/007-probability-random-variables.md, addendum: one-head cell = 27/256"
+  method: "computed-exact"
+"007.propband":
+  value: "0.4966 \\to 0.7287 \\to 0.9986"
+  description: "P(within 5% of half) climbing at n = 20, 100, 1000"
+  source: "probability/README.md row 6 (plan 007 addendum: swamping tables)"
+  method: "computed-exact binomial band sums; symmetry fold agrees"
+"007.countband":
+  value: "0.7287 \\to 0.2720 \\to 0.0876"
+  description: "P(within 5 heads of half) falling at n = 100, 1000, 10000"
+  source: "probability/README.md row 6 (plan 007 addendum: swamping tables)"
+  method: "computed-exact binomial band sums; symmetry fold agrees"
+"007.oneovere":
+  value: "0.3679"
+  description: "1/e, the limit of zero successes in n trials of chance 1/n"
+  source: "probability/README.md row 5 (plan 007 addendum foreshadow: 1/e = 0.367879)"
+  method: "exact-interval and mpmath, agrees with plan 006's anchors"
+
+# --- guide-first chapters (reconstructed from the batch report) ---
+"010.M.loss200":
+  value: "0.0088"
+  description: "loss after 200 GD iterations, repo-matrix run"
+  source: "docs/plans/010-ctc-gradient.md, anchor M"
+  method: "float64 GD, reproduced by answers/gradient_descent.py"
+"012.dec.greedymass":
+  value: "0.36"
+  description: "greedy decode's transcript mass in the T=2 construction (empty string)"
+  source: "study_guides/primitives/answers/ctc_decoding.py"
+  method: "computed by committed script"
+"012.dec.summass":
+  value: "0.64"
+  description: "the sum-decoding winner's mass ('A') in the T=2 construction"
+  source: "study_guides/primitives/answers/ctc_decoding.py"
+  method: "computed by committed script"
+"012.dec.beamblank":
+  value: "0.24"
+  description: "ending-in-blank ledger for prefix 'A' after frame 2 in the beam run"
+  source: "study_guides/primitives/answers/ctc_decoding.py"
+  method: "computed by committed script"
+"012.dec.beamletter":
+  value: "0.40"
+  description: "not-ending-in-blank ledger for prefix 'A' after frame 2 in the beam run"
+  source: "study_guides/primitives/answers/ctc_decoding.py"
+  method: "computed by committed script"

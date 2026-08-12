@@ -1,0 +1,372 @@
+% Primitive: softmax-likelihood — authored from
+% probability/softmax_likelihood_manim.py (six scenes) and its README
+% concepts table; every number traces to plan 008's verified anchors
+% (main report + addendum). Backward-grounded: the binomial columns,
+% the counting strip, the underflow cliff and ln's natural stride are
+% all owned by earlier chapters. Problem answers are computed by
+% answers/softmax_likelihood.py (the solve-gate anchor).
+\chapter{Softmax and likelihood}
+
+\begin{narrative}
+The alignment chapter borrowed one thing on credit: each frame carries
+``the model's per-frame probability'' for each symbol. The chapters
+since have built distributions honestly — regions of a square, sorted
+columns, balance points — and the random-variables chapter closed with
+a promise: \emph{likelihood is next}. This chapter keeps that promise
+and pays the alignment chapter's debt in the same breath. It has two
+arcs and a join: first the \emph{likelihood} arc — no new number,
+just an owned table read along its other axis — then the
+\emph{softmax} arc — the machine that manufactures per-frame
+distributions from raw scores — and finally the loss that scores the
+machine, which is the exact quantity the road's last chapters
+differentiate.
+
+\section{One table, two questions}
+
+Take the binomial table the random-variables chapter sorted out of the
+square: $n = 4$ coin flips, the count of heads $k$ down the rows, and
+now three candidate coins across the columns — $p = 1/4$, $1/2$,
+$3/4$. Every entry is one number, $P(k \mid p)$, written over the
+common denominator $256$:
+
+\begin{center}
+\begin{tabular}{c|ccc}
+ & $p = 1/4$ & $p = 1/2$ & $p = 3/4$ \\
+\hline
+$k=0$ & $81/256$ & $16/256$ & $1/256$ \\
+$k=1$ & $108/256$ & $64/256$ & $12/256$ \\
+$k=2$ & $54/256$ & $96/256$ & $54/256$ \\
+$k=3$ & \textcolor{AccentInk}{$12/256$} &
+  \textcolor{AccentInk}{$64/256$} &
+  \textcolor{AccentInk}{$108/256$} \\
+$k=4$ & $1/256$ & $16/256$ & $81/256$ \\
+\end{tabular}
+\end{center}
+
+Read a \emph{column}: pin the coin, sweep the data. Each column is a
+pmf — the sorted-square bars — and sums to exactly $1$. Now read a
+\emph{row}: pin the \emph{observed} data — say the flips came up
+$k = 3$ heads — and sweep the coin. The highlighted row, in the count
+convention $L(p) = \binom{4}{3} p^3 (1-p)$, is
+$\anchor{008.A2.likelihoodrow}$ across the three columns, and it sums
+to $\anchor{008.A2.rowsum}$ — visibly not $1$. A pmf one way, not one
+the other. The row is a new \emph{function of the parameter}, and it
+has a name: the likelihood. Fisher named it in 1921 and defined it in
+general in 1922~\cite{probability-john-aldrich-r-a-fisher-and-the-making-of-maximum-likelihood}.
+Same table, two questions — ``given the coin, what data?'' runs down;
+``given the data, which coin?'' runs across. The formula, last:
+\[
+  L(p) \;=\; P(\text{data} \mid p),
+  \qquad \text{data pinned, } p \text{ sweeping}.
+\]
+
+\section{The best explanation}
+
+The row's peak names the parameter that explains the data best.
+Discrete first: three die rolls come up $(6, 6, 3)$, and two candidate
+dice compete. The fair die assigns the sequence
+$(1/6)^3 = 1/216 \approx 0.0046$; the biased die the
+random-variables chapter built — double weight on six, $P(6) = 2/7$,
+the rest $1/7$ each — assigns $(2/7)^2 (1/7) = 4/343 \approx 0.0117$.
+The biased die out-explains the fair one by the ratio
+$864/343 = 2.52$. That ratio is an \emph{update factor} — a rung of
+the Bayes chapter's ladder, the number a prior would multiply — not a
+verdict; maximum likelihood is what remains of Bayes when the prior
+is flat.
+
+Then the continuous sweep. For the coin data $k = 3$ in $n = 4$, trace
+$L(p) = 4p^3(1-p)$ over the whole interval: $3/64 \approx 0.0469$ at
+$p = 1/4$, exactly $1/4$ at $p = 1/2$, and the peak
+$27/64 \approx 0.4219$ at
+\[
+  \hat{p} \;=\; \tfrac{3}{4} \;=\; \tfrac{k}{n},
+\]
+the observed proportion. This is the random-variables closer read
+backwards: the proportion converges to $p$, so the proportion is the
+best guess at $p$. One guard before moving on: the area under this
+curve is exactly $1/5$, not $1$ — a likelihood is never a
+distribution over the parameter. Making it one takes a prior and a
+renormalization — the Bayes chapter's move, pointed at, not
+performed.
+
+\section{Log the likelihood: add to survive}
+
+Three reasons to take the log, in rising order of necessity. First,
+it changes nothing that matters: $\ln$ is monotone, so $L$ and
+$\ln L$ peak at the same $\hat{p} = 3/4$. (The exact sequence HHTH,
+without the $\binom{4}{3}$ count, has likelihood $p^3(1-p)$ — its log
+curve sits exactly $\ln 4 = 1.3863$ lower, same shape, same peak; the
+constant lift moves nothing, said once.)
+
+Second, the log is the \emph{native scale} of accumulating
+independent evidence. Five per-frame probabilities
+$(0.9,\ 0.8,\ 0.7,\ 0.9,\ 0.6)$ multiply to
+$\anchor{008.I.product}$; their logs add to
+$\anchor{008.I.logsum}$, and exponentiating the sum recovers the
+product exactly. This is the counting strip from the logarithms
+chapter carrying likelihood now — multiply-is-add, with probability
+riding the strip — and it is why the evidence ruler was a
+log-likelihood ruler all along.
+
+Third, survival. The logarithms chapter walked off the underflow
+cliff on purpose: forty-six factors of $0.1$ store as exactly $0.0$
+in float32, and $0.1^{324}$ is exactly $0.0$ even in float64. A
+trained model multiplies \emph{hundreds} of per-frame factors — the
+product is dead on arrival. The sum of logs walks to
+$\anchor{008.J.logwalk}$ and $-324$ unharmed. The losses of
+likelihood-trained models are log-likelihoods because the answer is
+untouched, the arithmetic becomes additive, and the additive form is
+the only one that survives the hardware.
+
+\section{The probability machine}
+
+Now the other arc. A model hands each frame raw scores — say
+$z = (2, 1, 0)$ — and the road needs a genuine distribution: positive
+shares, total $1$. The naive repair, divide by the sum, fails twice
+on screen. On $z$ itself it gives $(2/3,\ 1/3,\ 0)$ — the score-$0$
+class erased outright; shift every score up by one, $(3, 2, 1)$, and
+the shares move to $(1/2,\ 1/3,\ 1/6)$ — but a uniform shift changed
+nothing about which score beats which; and a negative score would
+make a negative ``probability''. The repair that works does two
+things in order: \emph{exponentiate} — every score lands positive —
+then \emph{normalize}:
+\[
+  \mathrm{softmax}(z)_i \;=\; \frac{e^{z_i}}{\sum_j e^{z_j}},
+  \qquad
+  \mathrm{softmax}(2, 1, 0) = \anchor{008.A.workhorse}.
+\]
+(The three printed values sum to $0.9999$ — the exact shares sum to
+$1$; four decimal places are a display, not the object.)
+
+The exponential is not one choice among many. Demand of any smooth
+per-score recipe that a common shift $z + c$ leave the shares alone,
+and the exponential is forced: $e^{z_i + c} = e^c\, e^{z_i}$, and the
+common factor $e^c$ cancels against the normalizer — exactly the same
+distribution. The demand pays immediately as a stability trick:
+since $\mathrm{softmax}(z) = \mathrm{softmax}(z - \max z)$, the
+overflowing scores $(1000, 1001, 1002)$ — naively
+$\infty/\infty$, a row of NaNs — are rescued as
+$\mathrm{softmax}(-2, -1, 0)$, which is the workhorse's three shares
+in reverse order. Subtracting the max is a corollary of the
+invariance, not a hack. The name is
+Bridle's~\cite{probability-john-s-bridle-training-stochastic-model-recognition-nips-198,probability-john-s-bridle-probabilistic-interpretation-springer-1990}:
+a differentiable winner-take-all — ``we like to refer to it as soft
+max''.
+
+\section{Turning the dial}
+
+Softmax has a sharpness dial: divide the scores by a temperature $T$
+before the exponential.
+
+\begin{center}
+\begin{tikzpicture}[x=1.1cm, y=1cm]
+  % Temperature triptych on z = (2, 1, 0) — plan 008 anchors D and A.
+  % Bars: PaletteA/B/C are the categorical classes; heights = 3 * p.
+  \foreach [count=\panel from 0] \pa/\pb/\pc/\tlab in
+    {0.8668/0.1173/0.0159/{$T = 0.5$},
+     0.6652/0.2447/0.0900/{$T = 1$},
+     0.5065/0.3072/0.1863/{$T = 2$}} {
+    \begin{scope}[shift={(\panel*4.1, 0)}]
+      \draw[Muted] (-0.55, 0) -- (2.55, 0);
+      \fill[PaletteA!60] (-0.3, 0) rectangle (0.3, 3*\pa);
+      \fill[PaletteB!60] (0.7, 0) rectangle (1.3, 3*\pb);
+      \fill[PaletteC!60] (1.7, 0) rectangle (2.3, 3*\pc);
+      \node[above] at (0, 3*\pa) {\footnotesize \pa};
+      \node[above] at (1, 3*\pb) {\footnotesize \pb};
+      \node[above] at (2, 3*\pc) {\footnotesize \pc};
+      \node[below] at (0, -0.1) {\footnotesize $z{=}2$};
+      \node[below] at (1, -0.1) {\footnotesize $z{=}1$};
+      \node[below] at (2, -0.1) {\footnotesize $z{=}0$};
+      \node[below, color=CoolInk] at (1, -0.7) {\small \tlab};
+    \end{scope}
+  }
+\end{tikzpicture}
+\end{center}
+
+On the workhorse scores, $T = 0.5$ sharpens the shares to
+$\anchor{008.D.sharpened}$ and $T = 2$ flattens them to
+$\anchor{008.D.flattened}$ — and the winner never changes, at any
+$T > 0$, because exponentiation and positive scaling are monotone.
+The endpoints are limits, not settings: $T \to 0$ approaches one-hot
+(a clamped dial — the winner takes all), $T \to \infty$ approaches
+uniform.
+
+The dial also answers a question the e-and-ln chapter left standing:
+why $e$? Run the same recipe in base $2$ and the shares come out
+exactly $\anchor{008.E.base2}$ — a \emph{rational} softmax. But
+$b^z = e^{z \ln b}$: every base above $1$ is base $e$ at another
+temperature, $T = 1/\ln b$. Nothing forces $e$ in the family; $e$ is
+the unit in which the dial reads $1$, because $\ln$ is the natural
+counter. And one caveat the dial itself proves: modern networks are
+overconfident, and fitting a single shared $T$ recalibrates one
+\emph{without changing any
+prediction}~\cite{probability-guo-pleiss-sun-and-weinberger-on-calibration-of-modern-neura}.
+Numbers that can be rescaled wholesale were asserted, not measured.
+
+\section{The loss that trains}
+
+Join the arcs: score the machine by the log-likelihood it assigns the
+truth. With a single correct class $c$, the ``cross-entropy loss''
+collapses to $-\ln \mathrm{softmax}(z)_c$ — negative log-likelihood,
+the alias acknowledged once. For softmax scores the loss is a visible
+gap on an owned ruler:
+\[
+  -\ln \mathrm{softmax}(z)_c \;=\; \mathrm{LSE}(z) - z_c ,
+\]
+the smooth max from the logarithms chapter minus the correct class's
+score~\cite{probability-ian-goodfellow-yoshua-bengio-and-aaron-courville-deep-learni}.
+On the workhorse, $\mathrm{LSE}(2,1,0) = \anchor{008.L.LSE}$, so the
+loss is $0.4076$ if the truth scored $2$, $1.4076$ if it scored $1$,
+$2.4076$ if it scored $0$ — one unit per rank the truth falls, the
+gap growing steadily as confidence points the wrong way.
+
+Across frames, losses add — by the second section's logic, and under
+one license. Take a three-frame matrix of per-frame distributions
+over $\{A, B, \varepsilon\}$ (each column a softmax output, each
+summing to exactly $1$):
+\[
+  \begin{pmatrix} 0.7 & 0.6 & 0.2 \\ 0.2 & 0.1 & 0.1 \\
+                  0.1 & 0.3 & 0.7 \end{pmatrix}
+\]
+The path $A, A, \varepsilon$ multiplies one entry per column:
+$0.7 \times 0.6 \times 0.7 = \anchor{008.A4.frameproduct}$ exactly —
+and the multiplication is legal only because the frames are
+\emph{independent given the input}, the conditional chapter's exact
+lesson. Its logs add to $\anchor{008.A4.framelogsum}$. This is one
+path's worth of the alignment chapter's sum: the trellis adds such
+products over every path that collapses to the transcript, and the
+CTC loss is that sum's negative log. The scale in the wild: Deep
+Speech runs this machine $29$ ways per
+frame~\cite{probability-awni-hannun-et-al-deep-speech-scaling-up-end-to-end-speech-r};
+GPT-2 runs it $50{,}257$
+ways~\cite{probability-language-models-are-unsupervised-multitask-learners-gpt-2}.
+The per-frame scores the alignment chapter borrowed are now paid for:
+$y_t(k)$ is a softmax share, and the loss is a sum of gaps.
+
+\paragraph{Where this goes.} The next chapter differentiates
+everything this one built: the smooth max's sensitivities turn out to
+be the softmax shares themselves, and the gap loss's gradient is
+softmax output minus a one-hot target. Further down the road, CTC
+hands that same gradient a \emph{soft} target — softmax output minus
+how often the truth used each cell — which is the identity the
+guide's closing chapters exist to reach.
+\end{narrative}
+
+\section*{Practice problems}
+
+\begin{problem}
+Compute $\mathrm{softmax}(2, 1, 0)$ by hand to four decimal places
+($e^2 \approx 7.3891$, $e^1 \approx 2.7183$). Why do your three
+printed values not sum to $1.0000$ — and is that a defect?
+\begin{hint}
+Exponentiate, total, divide. Then think about what rounding three
+numbers separately does to their sum.
+\end{hint}
+\begin{solution}
+The denominator is $e^2 + e^1 + e^0 \approx 7.3891 + 2.7183 + 1
+= 11.1073$, giving
+$(7.3891,\ 2.7183,\ 1)/11.1073 = (0.6652,\ 0.2447,\ 0.0900)$. The
+printed values sum to $0.9999$: each was rounded down by a little
+under half a unit in the last place, and the three roundings happen
+to accumulate. The exact shares sum to $1$ — the display is honest
+about being a display, and a scene (or a homework answer) must never
+show the rounded values totalling $1.0000$ digit by digit.
+\end{solution}
+\end{problem}
+
+\begin{problem}
+The naive normalizer $z / \sum_j z_j$ also produces numbers summing
+to $1$. Evaluate it on $z = (2, 1, 0)$ and on the shifted
+$z' = (3, 2, 1)$, and name both failures. Then show in one line why
+softmax gives \emph{exactly} the same distribution on $z$ and $z'$.
+\begin{hint}
+A uniform shift adds no information — what should it do to the
+shares? For softmax, factor the shift out of every exponential.
+\end{hint}
+\begin{solution}
+Naively, $z = (2, 1, 0)$ gives $(2/3,\ 1/3,\ 0)$ — the score-$0$
+class is erased, where softmax kept $0.0900$ for it — and
+$z' = (3, 2, 1)$ gives $(1/2,\ 1/3,\ 1/6)$: the shares moved under a
+shift that changed nothing about the scores' order or gaps. (With a
+negative score the recipe can even go negative.) For softmax,
+$e^{z_i + c} = e^c e^{z_i}$, so
+\[
+  \frac{e^{z_i + c}}{\sum_j e^{z_j + c}}
+  = \frac{e^c\, e^{z_i}}{e^c \sum_j e^{z_j}}
+  = \frac{e^{z_i}}{\sum_j e^{z_j}} :
+\]
+the common factor cancels against the normalizer — shift invariance,
+the property that forced the exponential in the first place.
+\end{solution}
+\end{problem}
+
+\begin{problem}
+Run the softmax recipe in base $2$ on $z = (2, 1, 0)$: compute
+$2^{z_i} / \sum_j 2^{z_j}$ exactly. At what temperature $T$ does
+ordinary (base-$e$) softmax reproduce your answer, and does the
+winner change at any base $b > 1$?
+\begin{hint}
+The powers of $2$ are small integers. For the temperature, write
+$b^z = e^{z \ln b}$.
+\end{hint}
+\begin{solution}
+$2^2 + 2^1 + 2^0 = 7$, so the shares are exactly
+$(4/7,\ 2/7,\ 1/7)$ — a rational softmax, against the irrational
+base-$e$ values. Since $b^z = e^{z \ln b}$, base $b$ is base $e$ at
+temperature $T = 1/\ln b$; here $T = 1/\ln 2 \approx 1.4427$ — base
+$2$ is just a warmer dial. The winner never changes for any $b > 1$
+(or any $T > 0$): exponentiation in any base above $1$ is monotone,
+so the largest score keeps the largest share.
+\end{solution}
+\end{problem}
+
+\begin{problem}
+For the coin data $k = 3$ heads in $n = 4$ flips (count lens,
+$L(p) = 4p^3(1-p)$): evaluate $L$ at $p = 1/4$, $1/2$, and $3/4$;
+verify that the peak sits at $\hat{p} = k/n$; and compute the exact
+area under $L$ over $[0, 1]$. What does that area prove?
+\begin{hint}
+The area is a polynomial integral — expand $4p^3(1-p)$ first.
+\end{hint}
+\begin{solution}
+$L(1/4) = 4 \cdot \tfrac{1}{64} \cdot \tfrac{3}{4} = \tfrac{3}{64}
+\approx 0.0469$;
+$L(1/2) = 4 \cdot \tfrac{1}{8} \cdot \tfrac{1}{2} = \tfrac{1}{4}$;
+$L(3/4) = 4 \cdot \tfrac{27}{64} \cdot \tfrac{1}{4} = \tfrac{27}{64}
+\approx 0.4219$ — the largest of the three, and a sweep (or the next
+chapter's derivative) confirms the maximum is exactly at
+$\hat{p} = 3/4 = k/n$, the observed proportion. The area:
+$\int_0^1 (4p^3 - 4p^4)\, dp = 1 - \tfrac{4}{5} = \tfrac{1}{5} \neq 1$.
+So the likelihood, swept over $p$, is not a probability distribution
+over the parameter — each \emph{column} of the two-lens table
+normalizes over outcomes, but nothing ever normalized the row. A
+prior and a renormalization would turn it into one; that is the Bayes
+chapter's move, not this one's.
+\end{solution}
+\end{problem}
+
+\begin{problem}[stretch]
+On the three-frame matrix of the closing section, compute the exact
+probability of the path $A, A, \varepsilon$ and the sum of its logs.
+Then the survival argument: how many frames of per-frame probability
+$0.1$ does it take to kill a float32 product outright, and what does
+the sum of logs read at that point?
+\begin{hint}
+The product is three one-decimal factors. For the cliff, recall the
+logarithms chapter: float32's subnormal floor is
+$\approx 1.4 \times 10^{-45}$.
+\end{hint}
+\begin{solution}
+$0.7 \times 0.6 \times 0.7 = 147/500 = 0.294$ exactly; the logs
+$\ln 0.7 + \ln 0.6 + \ln 0.7 \approx -0.3567 - 0.5108 - 0.3567
+= -1.2242$, and $e^{-1.2242} \approx 0.294$ round-trips. At three
+frames both routes are fine — the contrast lives further out:
+$0.1^{45}$ still stores as float32's smallest subnormal, and the
+forty-sixth factor lands \emph{exactly} $0.0$ — the product is gone,
+and no later factor can bring it back. The sum of logs reads
+$46 \ln 0.1 = -105.9189$, an unremarkable number an accumulator
+carries without complaint. A real utterance has hundreds of frames;
+this is why the loss lives in log space, not merely why it is
+convenient there.
+\end{solution}
+\end{problem}

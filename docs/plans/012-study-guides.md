@@ -316,8 +316,14 @@ plan's history. What changes the design:
 | 3 | Local CodeRabbit + connection-auditor (prose-vs-scene, edge-vs-transition), findings addressed | Review clean |
 | 4 | PR, bot review, finalise | Merge; refinement loop opens |
 
-Then batches: the remaining twelve primitives (nine series-backed,
-three guide-first) land in 2–3 further PRs
+~~Then batches: the remaining twelve primitives (nine series-backed,
+three guide-first) land in 2–3 further PRs~~ **Batching overridden by
+the maintainer (2026-08-12, on running `make study` and finding two
+chapters): v1 ships COMPLETE — all twelve remaining primitives and
+their glue land on this branch, in PR #13.** Drafting fans out in
+parallel (the calibration chapters are the template; every draft
+passes the same gates: anchors spliced, answer scripts committed,
+independent solve gate, figure linter, voice pass by the main agent)
 (probability trio · logs/e-ln/random-variables · softmax/derivatives/
 gradient + final glue), each with the same gates, each extending the
 solutions manual, until guide 1 assembles complete.
@@ -405,6 +411,17 @@ solutions manual, until guide 1 assembles complete.
   undefined-citation structure test that runs in `make check`
   without LaTeX; the problem/solution test upgraded from cardinality
   to exact one-per-problem; PyYAML declared directly; the linter's
-  raster failures now fail the gate; four doc drifts trued. The PR
-  awaits the maintainer's merge, which opens the refinement loop and
-  the remaining twelve-primitive batches
+  raster failures now fail the gate; four doc drifts trued
+- [x] **v1 COMPLETE (batching override executed)**: all fourteen
+  chapters authored — nine series-backed drafted in parallel from
+  their plans, three guide-first (each seeding its future series) —
+  plus twelve new glue transitions and the full manifest; 90 anchors
+  (every batch's proposals merged with values verified against their
+  plan sources; one clash caught and proven identical); 58 problems
+  with committed enumeration scripts; **independent solve gate
+  58/58** (two fresh-context solvers, statements only — the gradient
+  chapter's entire pinned table reproduced from scratch); all
+  fourteen figures linter-clean; guide 92 pp + solutions manual with
+  per-document bibliography (a %-in-URL bbl corruption found and
+  fixed in the sync script; a stale-bbl latexmk state cleaned). The
+  PR awaits the maintainer's merge, which opens the refinement loop

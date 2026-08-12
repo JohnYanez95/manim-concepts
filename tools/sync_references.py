@@ -76,7 +76,7 @@ def render(entries: dict[str, dict]) -> str:
         blocks.append(
             f"@misc{{{key},\n"
             f"  title = {{{{{title}}}}},\n"
-            f"  howpublished = {{\\url{{{meta['url']}}}}},\n"
+            f"  howpublished = {{\\url{{{meta['url'].replace('%', chr(92) + '%')}}}}},\n"
             f"  note = {{via {meta['topic'].replace('_', chr(92) + '_')}/README.md}},\n"
             f"  verified = {{{meta['verified']}}},\n"
             f"}}"
