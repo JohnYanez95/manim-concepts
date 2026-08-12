@@ -361,7 +361,8 @@ Nudge z₁ = 2 by 0.01: LSE moves 0.00666 = e²'s share of the total
 e^(zᵢ)/Σe^(zⱼ) = softmax(z)ᵢ — the bars the probability series just
 built, reborn as a *gradient read-out* (same bars, same order, same
 colors, or the picture claims a different object). Then
-NLL = LSE(z) − z_c differentiates in one line: gradient =
+NLL = LSE(z) − z_a (the correct class scoring 2) differentiates in
+one line: gradient =
 (−0.3348, 0.2447, 0.0900) = p − one-hot, landing on the repo's
 pre-verified numbers; sign convention spoken once (this is the
 gradient of the NLL — descending loss is ascending likelihood). The

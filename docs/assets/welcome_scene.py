@@ -87,7 +87,10 @@ class Welcome(ConceptScene):
         ).arrange(RIGHT, buff=0.55)
         topics = VGroup(row_one, row_two).arrange(DOWN, buff=0.28).move_to(0.95 * DOWN)
         self.play(
-            LaggedStart(*[FadeIn(t, shift=0.15 * UP) for t in topics], lag_ratio=0.12), run_time=1.1
+            LaggedStart(
+                *[FadeIn(t, shift=0.15 * UP) for row in topics for t in row], lag_ratio=0.12
+            ),
+            run_time=1.1,
         )
 
         claim = Text(

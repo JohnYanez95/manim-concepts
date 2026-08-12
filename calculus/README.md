@@ -38,10 +38,11 @@ Deliberately **not** covered here:
   taken; accumulation waits for its own series.
 - **Complex exponentials and Euler's formula** — rotation is a
   different story.
-- **Softmax and likelihood.** Why e appears in every probability
-  machine is owned by `probability/`'s softmax/likelihood series —
-  delivered: its dial scene answers with this series' own ln
-  (every base above 1 is e at another temperature).
+- **Softmax and likelihood as content.** The concepts live in
+  `probability/`'s softmax/likelihood series (its dial scene answers
+  "why e" with this topic's own ln); the derivatives series here only
+  *differentiates* those owned objects — the score of a likelihood,
+  the sensitivities of the smooth max — and teaches neither afresh.
 
 ## Concepts
 
@@ -87,7 +88,7 @@ the chain rule, and two owned derivatives are the whole kit.
 | 3 | `NudgesAddNudgesCompose` | $\frac{dy}{dx} = \frac{dy}{du}\cdot\frac{du}{dx}$ | The toolkit's two load-bearing rules: changes add across a sum, rates multiply along a chain. | Heights stack, so their changes stack; a nudge propagates through three number lines (dx causes du causes dy) with stretch factors composing — (2x)² at x = 1: inner rate 2, outer rate 4 at u = 2, product 8, and the quotient table 8.4, 8.04, 8.004 refutes the classic mistake (outer rate at x = 1 predicts 4); the du cancellation is Leibniz's notation keeping its promise. | Every use downstream is "ln of something" or "exp of something" — the chain rule is the single most load-bearing tool in the kit. |
 | 4 | `TheCurveThatIsItsOwnSlope` | $\frac{d}{dx}e^x = e^x,\ \ \frac{d}{dx}\ln x = \frac{1}{x}$ | The mystery constants were derivatives all along, and e is the base whose constant is 1. | The slope of b^x is ln b · b^x (the owned 0.6931/1.0986/2.3026 lineup); (e^dt − 1)/dt settles through 1.7183, 1.0517, 1.0050, 1.0005 to 1 — by definition and measurement, nothing proved twice; ln′ = 1/x falls out of differentiating the undo e^(ln x) = x, and the y = x mirror swaps rise and run (slope 1/e at x = e). | The two derivatives the whole CTC road needs; Euler named e in 1748 (Introductio §122) and wrote d(e^x) = e^x dx in 1755 (Institutiones §188). |
 | 5 | `ZeroSlopeFindsThePeak` | $\frac{d \ln L}{dp} = \frac{3}{p} - \frac{1}{1-p} = 0 \Rightarrow \hat{p} = \tfrac34$ | The curve-sweep is over: set the score to zero and the likelihood peak falls out of a linear equation. | The score d ln f = f′/f is the counting strip differentiated — under ln, products become sums of relative rates (Euler §181); on the owned curve the score runs +4, +0.9524, 0, −1.25 at p = 1/2, 0.7, 3/4, 0.8, flipping sign exactly at the peak, and the general line k/p − (n−k)/(1−p) = 0 derives p̂ = k/n — the claim `ProportionsConverge` made, now a theorem; the direct route 4p²(3 − 4p) has a second root at p = 0 that is a valley floor, and x³'s slope touches zero with no peak at all — zero slope is necessary, not sufficient; the score needs f > 0. | Maximum likelihood done honestly wherever a model is fitted — and the sign-change check is the habit that survives every optimizer. |
-| 6 | `TheSmoothMaxsShares` | $\frac{\partial}{\partial z_i}\mathrm{LSE}(z) = \mathrm{softmax}(z)_i$ | The sensitivities of the smooth max are the softmax shares — and the loss gradient is softmax minus one-hot. | Nudge z₁ = 2 by 0.01 and LSE moves 0.00666 = e²'s share of the total; one chain rule and one sum rule derive ∂ᵢLSE = softmaxᵢ, the owned bars reborn as a gradient read-out summing to 1; NLL = LSE − z_c differentiates to (−0.3348, 0.2447, 0.0900) = p − one-hot, and as the correct score falls behind the slope walks −0.9100, −0.9868, −0.9993 → −1 — the softmax series' "roughly linear gap", now a theorem. | The gradient inside every classifier's training step; each frame of CTC hands this picture a different target — the gradient series is next. |
+| 6 | `TheSmoothMaxsShares` | $\frac{\partial}{\partial z_i}\mathrm{LSE}(z) = \mathrm{softmax}(z)_i$ | The sensitivities of the smooth max are the softmax shares — and the loss gradient is softmax minus one-hot. | Nudge z₁ = 2 by 0.01 and LSE moves 0.00666 = e²'s share of the total; one chain rule and one sum rule derive ∂ᵢLSE = softmaxᵢ, the owned bars reborn as a gradient read-out summing to 1; NLL = LSE − z_a (the correct class scoring 2) differentiates to (−0.3348, 0.2447, 0.0900) = p − one-hot, and as the correct score falls behind the slope walks −0.9100, −0.9868, −0.9993 → −1 — the softmax series' "roughly linear gap", now a theorem. | The gradient inside every classifier's training step; each frame of CTC hands this picture a different target — the gradient series is next. |
 
 Renders: `01_TheSlopeIsAFunction.mp4` … `06_TheSmoothMaxsShares.mp4`.
 
@@ -100,11 +101,12 @@ uv run python calculus/derivatives_manim.py --list
 
 Ticks are human-gated — see
 [reference verification](../README.md#reference-verification-is-human-gated).
-Every entry below came out of the plan-006 research pass
+The first block below came out of the plan-006 research pass
 ([`docs/plans/006-calculus-e-ln.md`](../docs/plans/006-calculus-e-ln.md))
-and started unchecked; the maintainer reviewed the list (dropping two),
-verified all sixteen that remain, and directed the ticks be recorded.
-Future entries start unchecked until a human does the same.
+and started unchecked; the maintainer reviewed that list (dropping
+two), verified all sixteen that remain, and directed the ticks be
+recorded. The plan-009 block that follows it starts unchecked until a
+human does the same.
 
 - [X] [3blue1brown, "What's so special about Euler's number e?"](https://www.3blue1brown.com/lessons/eulers-number)
       — slope of $b^x$ proportional to itself; the measured constants
