@@ -494,5 +494,6 @@ reordered.
   out-the-max differentiated as promised; the outer-product grid
   gains the waist as its fifth stop
 - deep_learning Scope grown to two series; Ideas: two entries struck
-  delivered, one opened (label-prior variant); eight references
-  landed unchecked for the maintainer's pass
+  delivered, one opened (label-prior variant); seven references
+  landed unchecked and were maintainer-verified and ticked the same
+  day (column 4 of the worked matrix confirmed in the same pass)

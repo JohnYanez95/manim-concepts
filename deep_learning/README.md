@@ -116,12 +116,13 @@ uv run python deep_learning/ctc_gradient_manim.py -s SoftmaxMinusOccupancy -q dr
 
 Ticks are human-gated — see
 [reference verification](../README.md#reference-verification-is-human-gated).
-The ticked entries came out of the plan-001 research pass
+Every entry below came out of a research pass — the alignment series'
 ([`docs/plans/001-ctc-alignment.md`](../docs/plans/001-ctc-alignment.md))
-and were opened, confirmed, and ticked by the maintainer. The unchecked
-entries are the plan-010 gradient-series pass
-([`docs/plans/010-ctc-gradient.md`](../docs/plans/010-ctc-gradient.md)),
-awaiting the same.
+or the gradient series'
+([`docs/plans/010-ctc-gradient.md`](../docs/plans/010-ctc-gradient.md)) —
+started unchecked, and was then opened, confirmed, and ticked by the
+maintainer (plan-010 pass: 2026-08-12). Future entries start unchecked
+until a human does the same.
 
 - [X] [Graves et al., 2006 — Connectionist Temporal Classification](https://www.cs.toronto.edu/~graves/icml_2006.pdf)
       — the original ICML paper; source of the collapse map, the forward
@@ -148,29 +149,29 @@ awaiting the same.
       posterior = alignment counts, blank's topological dominance, the
       feed-forward 100%-error theorem, the label-prior fix). arXiv
       preprint, cited as such on screen.
-- [ ] [Alex Graves, *Supervised Sequence Labelling with RNNs* (2012)](https://www.cs.toronto.edu/~graves/preprint.pdf)
+- [X] [Alex Graves, *Supervised Sequence Labelling with RNNs* (2012)](https://www.cs.toronto.edu/~graves/preprint.pdf)
       — Springer 2012, author's preprint. Chapter 7: the emission-free
       β convention the gradient series adopts (eqs. 7.12–7.13), the
       division-free p = Σαβ (7.26), the identity ∂L/∂a = y − occupancy
       (7.34), and the log-scale-over-rescaling advice (§7.3.1).
-- [ ] [Jason Eisner, the forward–backward spreadsheet (ACL-02)](https://www.cs.jhu.edu/~jason/papers/eisner.tnlp02.pdf)
+- [X] [Jason Eisner, the forward–backward spreadsheet (ACL-02)](https://www.cs.jhu.edu/~jason/papers/eisner.tnlp02.pdf)
       — "An Interactive Spreadsheet for Teaching the Forward-Backward
       Algorithm": the classroom-proven constant-column checksum scene 2
       is built around, and posterior-as-reconstruction pedagogy.
-- [ ] [Lawrence R. Rabiner, the HMM tutorial (Proc. IEEE, 1989)](https://www.cs.sjsu.edu/~stamp/RUA/Rabiner.pdf)
+- [X] [Lawrence R. Rabiner, the HMM tutorial (Proc. IEEE, 1989)](https://www.cs.sjsu.edu/~stamp/RUA/Rabiner.pdf)
       — Proc. IEEE 77(2):257–286: γ = αβ/P as expected state occupancy,
       the HMM forward–backward lineage scene 1 name-drops (cited as
       printed in Graves 2006; no direct quotes on screen).
-- [ ] [Peter Bell, Edinburgh ASR lecture 13: CTC (2024-25)](https://www.inf.ed.ac.uk/teaching/courses/asr/2024-25/asr13-ctc.pdf)
+- [X] [Peter Bell, Edinburgh ASR lecture 13: CTC (2024-25)](https://www.inf.ed.ac.uk/teaching/courses/asr/2024-25/asr13-ctc.pdf)
       — "End-to-end systems 1: CTC"; a modern course treatment
       consulted in the pedagogy pass — evidence the gradient story is
       the untaught half (stops at the forward algorithm).
-- [ ] [Mark Hasegawa-Johnson, UIUC ECE 537 lecture 20: CTC (2022)](https://courses.grainger.illinois.edu/ece537/fa2022/slides/lec20.pdf)
+- [X] [Mark Hasegawa-Johnson, UIUC ECE 537 lecture 20: CTC (2022)](https://courses.grainger.illinois.edu/ece537/fa2022/slides/lec20.pdf)
       — second course data point from the pedagogy pass, same finding.
-- [ ] [PyTorch Forums, "Question about CTC gradient"](https://discuss.pytorch.org/t/question-about-ctc-gradient/65624)
+- [X] [PyTorch Forums, "Question about CTC gradient"](https://discuss.pytorch.org/t/question-about-ctc-gradient/65624)
       — answered by Thomas Viehmann; the real logits-vs-log-probs
       confusion scene 5's when-useful beat addresses.
-- [ ] [PyTorch issue #122243, non-normalized CTC inputs](https://github.com/pytorch/pytorch/issues/122243)
+- [X] [PyTorch issue #122243, non-normalized CTC inputs](https://github.com/pytorch/pytorch/issues/122243)
       — forward loss right, backward silently wrong unless the input is
       a true log-softmax; scene 5's implementation trap.
 

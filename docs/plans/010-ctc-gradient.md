@@ -57,7 +57,7 @@ when-useful framing.
 - [x] Phase 3: README + wiki complete, `make test` green (212 tests).
   deep_learning Scope grown to two series (training realism named as
   the new deliberate exclusion); concepts table numbered 1–7 with all
-  three levels per row; eight references landed unchecked for the
+  three levels per row; seven references landed unchecked for the
   maintainer's pass; Ideas: two entries struck delivered, the
   label-prior variant opened. Wiki: node added, all three converging
   promise rows flipped delivered (softmax-likelihood's closer,
@@ -65,9 +65,9 @@ when-useful framing.
   alignment bundle narrowed to beam search), three backward edges
   delivered, the constant column recorded as a new device, three
   promised device inheritances marked delivered, log entry appended.
-  **Awaiting John's source-validation checkpoint** — items for his
-  pass: the eight unchecked references; the ratified matrix column 4
-  (decision 3 / FLAG 1)
+  Maintainer source pass 2026-08-12: all seven plan-010 references
+  opened, confirmed and ticked (ticks are his to place), and the
+  ratified matrix column 4 (decision 3 / FLAG 1) confirmed
 - [ ] Phase 4: local CodeRabbit + connection-auditor, findings
   addressed
 - [ ] Phase 5: PR, bot review, `clean-drafts`, 1080p60 finals
