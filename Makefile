@@ -53,7 +53,7 @@ render:  ## Render one module: make render FILE=topic/x_manim.py [QUALITY=] [SCE
 		for f in $(CONCEPTS); do echo "    $$f"; done; \
 		exit 2; \
 	}
-	uv run python $(FILE) --quality $(QUALITY) $(if $(SCENE),--scene $(SCENE)) $(if $(JOBS),--jobs $(JOBS))
+	uv run python $(FILE) --quality $(QUALITY) $(if $(SCENE),--scene $(SCENE)) $(if $(JOBS),--jobs "$(JOBS)")
 
 render-all:  ## Render every concept module (QUALITY=draft for a fast sweep)
 	@for f in $(CONCEPTS); do \

@@ -59,3 +59,10 @@ def test_clear_of_moving_through_an_obstacle_exits_the_far_side():
 def test_clear_of_rejects_diagonal_directions():
     with pytest.raises(ValueError):
         clear_of(Square(), Square(), direction=[1, 1, 0])
+
+
+def test_clear_of_rejects_directions_with_a_z_component():
+    # A z component would dilute the in-plane shift below the computed
+    # escape distance and leave the boxes overlapping.
+    with pytest.raises(ValueError):
+        clear_of(Square(), Square(), direction=[1, 0, 1])

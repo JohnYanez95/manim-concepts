@@ -468,7 +468,7 @@ exponential repair: e^z lifts everything positive, normalize —
 p = (0.6652, 0.2447, 0.0900) (anchor A; never show the rounded
 values totalling 1.0000). The forcing argument (level 2): requiring
 "+c on every score changes nothing" *forces* an exponential (among
-per-score recipes — normalize a function applied score by score) — e^c
+smooth per-score recipes — normalize a function applied score by score) — e^c
 factors out of every term and cancels (anchor B, "exactly the same
 distribution"). Corollary, not hack: softmax(z) = softmax(z − max z),
 so the overflow case (1000, 1001, 1002) → NaN naively is rescued to

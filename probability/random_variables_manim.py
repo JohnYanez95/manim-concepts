@@ -38,6 +38,7 @@ from utils import (
     ConceptScene,
     boxed,
     caption,
+    on_frame,
     render_cli,
 )
 
@@ -260,7 +261,7 @@ class SortTheSquare(ConceptScene):
         self.play(LaggedStart(*[FadeOut(s) for s in stamps], lag_ratio=0.04))
         self.play(LaggedStart(*[FadeIn(y, scale=0.6) for y in y_stamps], lag_ratio=0.04))
         same = MathTex(r"X + Y = 4\ \text{in every cell}", font_size=32)
-        same.move_to(2.6 * DOWN + 4.85 * LEFT)
+        on_frame(same.move_to(2.6 * DOWN + 4.85 * LEFT))
         twin = caption("Y sorts into the SAME columns — one blueprint, two houses:")
         twin2 = caption("the distribution forgets which cell was which; the variable remembers")
         twin.move_to(2.45 * DOWN + 1.9 * RIGHT)
@@ -318,7 +319,7 @@ class TheBalancePoint(ConceptScene):
         self.play(FadeIn(fulcrum, shift=0.2 * UP), Write(balance))
         not_face = caption("3.5 is not a face — the fulcrum")
         not_face2 = caption("need not sit under a mass")
-        not_face.move_to(4.15 * RIGHT + 0.55 * UP)
+        on_frame(not_face.move_to(4.15 * RIGHT + 0.55 * UP))
         not_face2.next_to(not_face, DOWN, buff=0.15)
         self.play(FadeIn(not_face), FadeIn(not_face2))
         self.wait(1.0)
@@ -344,7 +345,7 @@ class TheBalancePoint(ConceptScene):
             font_size=BODY_SIZE,
         ).move_to(2.2 * DOWN)
         new_balance = MathTex(r"E = \tfrac{27}{7} \approx 3.8571", font_size=40, color=ACCENT)
-        new_balance.move_to(4.0 * RIGHT + 0.3 * UP)
+        on_frame(new_balance.move_to(4.0 * RIGHT + 0.3 * UP))
         moved = caption("the balance point belongs to the measure —")
         moved2 = caption("the same faces, reweighted, balance anew")
         moved.move_to(2.9 * RIGHT + 1.35 * DOWN)

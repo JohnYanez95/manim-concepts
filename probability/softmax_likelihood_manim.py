@@ -578,7 +578,7 @@ class TheProbabilityMachine(ConceptScene):
             font_size=32,
         ).move_to(2.4 * RIGHT + 1.35 * DOWN)
         forcing = caption("add c to every score: e^c cancels — exactly the same")
-        forcing2 = caption("distribution; among per-score recipes, only an")
+        forcing2 = caption("distribution; among smooth per-score recipes, only an")
         forcing3 = caption("exponential turns a shift into a factor that cancels")
         forcing.move_to(2.4 * RIGHT + 2.1 * DOWN)
         forcing2.next_to(forcing, DOWN, buff=0.15)

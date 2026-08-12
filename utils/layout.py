@@ -63,7 +63,7 @@ def clear_of(mobject: Mobject, *others: Mobject, direction=None, buff: float = 0
     not overlap are left untouched.
     """
     axis = np.array([0.0, -1.0, 0.0]) if direction is None else np.asarray(direction, dtype=float)
-    if (axis[0] != 0) == (axis[1] != 0):
+    if (axis[0] != 0) == (axis[1] != 0) or (len(axis) > 2 and axis[2] != 0):
         raise ValueError("direction must be a cardinal axis: UP, DOWN, LEFT or RIGHT")
     needed = 0.0
     for other in others:
