@@ -31,33 +31,53 @@ section bodies ground backward in earlier sections; forward pointers
 live in each section's closing "where this goes" notes — which is
 exactly what makes the glue transitions and the horizon view work.
 
-### Directory and build
+### Directory and build (maintainer-specified, 2026-08-12)
+
+One `study_guides/` directory; **one subdirectory per objective —
+the subdirectory's name IS the objective**; each objective
+subdirectory holds the outcome pair: the stitched guide PDF
+(reading material + end-of-section practice problems) and the
+solutions manual as the secondary PDF beside it.
 
 ```text
-study/
+study_guides/
   theme.sty              -- palette + type mirroring utils/theme.py
   primitives/            -- one .tex per series, self-contained
     counting-rules.tex
     ctc-alignment.tex
     ...
-  guides/
-    ctc/                 -- guide 1: the CTC algorithm, in full
-      guide.tex          -- roadmap + stitched primitives + glue
-      solutions.tex      -- the separate solutions manual
-  assets/                -- generated: TikZ standalone builds, and
-                         -- (optional) frames extracted from finals
+  ctc-algorithm/         -- objective subdirectory (guide 1)
+    guide.tex            -- declares its primitive retrievals, in
+                         -- order, via \primitive{...}; the build
+                         -- constructs the glue document from them
+    glue.tex             -- roadmap figure + transition pages
+    problems.tex         -- per-section problem sets (input by guide)
+    solutions.tex        -- the solutions manual source
+    REFINEMENTS.md       -- the reader-feedback loop
+    ctc-algorithm.pdf            -- outcome, primary
+    ctc-algorithm-solutions.pdf  -- outcome, secondary
 ```
 
-- `make study` builds every guide's two PDFs (guide + solutions
-  manual). LaTeX stays OUT of `make check` (toolchain weight); a
-  lightweight pytest module (`tests/test_study_contract.py`) checks
-  structure only: every primitive has the required blocks, every
-  guide manifest references existing primitives, every problem has
-  exactly one solution in the manual, references start `- [ ]`.
-- **PDFs are build artifacts, not committed** — same policy as the
-  mp4 finals: sources in git, one command to build. (Decision point
-  D-A below if the maintainer wants committed PDFs for offline
-  grab-and-go.)
+- **Retrieval model**: primitives are hosted once in
+  `primitives/*.tex`; a guide *retrieves* them — `guide.tex`'s
+  ordered `\primitive{counting-rules}` … calls are the manifest, and
+  the build resolves each to its hosted file, interleaving the glue.
+  One primitive, many guides; edits propagate to every guide that
+  retrieves it.
+- `make study` builds every objective subdirectory's two PDFs into
+  that subdirectory. LaTeX stays OUT of `make check` (toolchain
+  weight); a lightweight pytest module
+  (`tests/test_study_contract.py`) checks structure only: every
+  primitive has the required blocks, every `\primitive{}` retrieval
+  resolves to a hosted file, every problem has exactly one solution
+  in the manual, references start `- [ ]`.
+- The outcome PDFs live in the objective subdirectory per the
+  maintainer's spec. Whether they are also *committed* is the one
+  open sliver of D-A: the large-file hook caps additions at 512 KB
+  and a full guide will exceed it, so committing means a hook
+  exemption for `study_guides/**/*.pdf`. Proposal: commit them —
+  the offline grab-and-go is the point of the track — with the
+  exemption commented in the hook config.
 
 ### Anatomy of a primitive (one series → one textbook section)
 
@@ -98,7 +118,7 @@ now stands on the roadmap (the figure repeats, progress marked).
 The transitions are authored from the wiki edge citations — an edge
 nobody can cite still doesn't get written.
 
-### Guide 1: the CTC algorithm, in full
+### Guide 1: `study_guides/ctc-algorithm/`
 
 Objective: **full comprehension of CTC** — the alignment machinery,
 the loss, and the gradient. Stitching order = the build order, which
@@ -136,9 +156,10 @@ runs for the document's life, not just its first PR.
 
 ## Decision points for the maintainer
 
-- **D-A — committed PDFs?** Proposal: no (build artifacts, like the
-  mp4s). Say the word if offline grab-and-go from the repo matters
-  more than binary hygiene.
+- **D-A — RESOLVED in structure** (outcome PDFs live in the
+  objective subdirectory; maintainer-specified). Open sliver:
+  commit them too? Proposal: yes, with a large-file-hook exemption
+  for `study_guides/**/*.pdf`.
 - **D-B — TikZ redraws vs extracted video frames.** Proposal: TikZ
   first (crisp in print, theme-consistent, no binaries); frames as
   optional garnish behind the build step. Reverse if fidelity to
