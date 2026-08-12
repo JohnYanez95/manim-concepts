@@ -6,6 +6,40 @@
 \usepackage[hidelinks]{hyperref}
 \input{\StudyRoot/anchors}
 
+% The roadmap — guide-owned assembly state (plan 012 R4). \roadmap{n}
+% draws the objective's fourteen stations with the first n filled: the
+% horizon view, repeated at every transition with progress marked.
+\newcommand{\roadmapstations}{%
+  counting, alignment, dyn.~prog., independence, conditional, Bayes,
+  logarithms, {$e$ \& $\ln$}, random~vars, softmax, derivatives,
+  descent, gradient, decoding}
+\newcommand{\roadmap}[1]{%
+  \begin{center}
+  \begin{tikzpicture}[x=1.9cm, y=1.15cm,
+      station/.style={rounded rectangle, draw=Muted, font=\tiny,
+        inner sep=3pt, minimum height=4.5mm},
+      done/.style={station, fill=GoodInk!25, draw=GoodInk},
+      hop/.style={Muted, ->, shorten >=2pt, shorten <=2pt}]
+    \foreach [count=\i] \name in \roadmapstations {
+      \pgfmathtruncatemacro{\row}{(\i - 1) / 7}
+      \pgfmathtruncatemacro{\col}{mod(\i - 1, 7)}
+      \ifnum\i>#1
+        \node[station] (s\i) at (\col, -\row) {\name};
+      \else
+        \node[done] (s\i) at (\col, -\row) {\name};
+      \fi
+      \ifnum\i>1
+        \pgfmathtruncatemacro{\prev}{\i - 1}
+        \ifnum\col=0
+          \draw[hop] (s\prev.south) to[out=-60, in=120] (s\i.north);
+        \else
+          \draw[hop] (s\prev.east) -- (s\i.west);
+        \fi
+      \fi
+    }
+  \end{tikzpicture}
+  \end{center}}
+
 \title{The CTC Algorithm\\[0.4em]
   \large A study guide, stitched from the manim-concepts road}
 \author{manim-concepts}
@@ -17,14 +51,20 @@
 
 \chapter*{How to read this guide}
 \addcontentsline{toc}{chapter}{How to read this guide}
-[Phase-2 placeholder: the roadmap figure — the connection graph for this
-objective drawn as a road, repeated at every transition with progress
-marked — and the remix map: objective, retrieved sections, and the graph
-edges justifying their order.] Practice problems close every chapter;
-worked solutions live in the separate solutions manual, keyed by the same
-problem numbers. Worked numbers are spliced from the repo's verification
-anchors — for instance, the guide's central worked probability
-$P(\mathrm{AB} \mid X) = \anchor{010.K.P}$ — never retyped.
+The objective is full comprehension of the CTC algorithm — the alignment
+machinery, the loss, the gradient, the training dynamics, and decoding.
+The road runs through fourteen stations; each is a chapter, and between
+chapters a short transition marks where you stand:
+
+\roadmap{0}
+
+\noindent The order is the dependency order: the CTC chapters pose the
+problem early, the middle chapters build the blocks it needs, and the
+closing chapters spend them. Practice problems close every chapter;
+worked solutions live in the separate solutions manual, keyed by the
+same problem numbers. Worked numbers are spliced from the repo's
+verification anchors — for instance, the guide's central worked
+probability $P(\mathrm{AB} \mid X) = \anchor{010.K.P}$ — never retyped.
 
 \input{manifest}
 

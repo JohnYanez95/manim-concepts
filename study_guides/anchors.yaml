@@ -22,6 +22,26 @@
   description: "P(AB|X) under uniform outputs, 15 * (1/3)^4"
   source: "docs/plans/010-ctc-gradient.md, anchor L"
   method: "exact"
+"001.raw81":
+  value: "81"
+  description: "raw path count, 3 symbols over 4 frames (3^4)"
+  source: "docs/plans/001-ctc-alignment.md; deep_learning/README.md row 4"
+  method: "enumeration; product rule"
+"001.paths15":
+  value: "15"
+  description: "paths collapsing to AB at T=4 (= C(6,2))"
+  source: "docs/plans/001-ctc-alignment.md; verified two ways (enumeration + trellis)"
+  method: "machine-verified two independent routes"
+"001.astronomical":
+  value: "2 \\times 10^{40}"
+  description: "order of C(T+U, T-U) at T=100, U=50"
+  source: "deep_learning/README.md row 4 (plan 001 research pass)"
+  method: "computed order of magnitude"
+"010.N.t5paths":
+  value: "35"
+  description: "paths for a 2-letter transcript at T=5 (C(7,3))"
+  source: "docs/plans/010-ctc-gradient.md, anchor N"
+  method: "exact enumeration"
 "009.G.nllgradient":
   value: "(-0.3348,\\ 0.2447,\\ 0.0900)"
   description: "gradient of the NLL at z = (2, 1, 0), correct class first"

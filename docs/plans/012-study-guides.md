@@ -340,6 +340,23 @@ solutions manual, until guide 1 assembles complete.
   solution, manual shows solution not hint or narrative; numbering
   identical by shared manifest; the anchor splice renders
   P(AB|X) = 0.4877 from the yaml, never typed in prose)
-- [ ] Phase 2: calibration content, maintainer format read
+- [x] Phase 2 (build side): the two calibration primitives authored
+  in full — counting-rules (five-scene narrative, the TikZ
+  outer-product grid, five problems) and ctc-alignment (six-scene
+  narrative with the declared per-frame-score debt stated in prose,
+  the TikZ unit-weight trellis landing 10 + 5 = 15 on plan 001's
+  columns, five problems including the greedy-fails construction);
+  glue-01 (the counting → alignment transition authored from the
+  wiki edge) and the fourteen-station roadmap figure with progress
+  marking; four new anchors (001.raw81, 001.paths15,
+  001.astronomical, 010.N.t5paths) spliced via \anchor{}; answer
+  scripts committed with enumeration asserted against every formula
+  (plan 012 R3); **the independent solve gate passed 10/10** — a
+  fresh-context agent given statements only reproduced every answer,
+  including the 0.36-vs-0.64 greedy construction. `make check` and
+  `make study` green; guide 12 pp + solutions manual verified by
+  page (numbering shared, narrative and hints suppressed in the
+  manual, zero solution leakage into the guide).
+  **Gate remaining: the maintainer's format read**
 - [ ] Phase 3: reviews clean
 - [ ] Phase 4: PR, merge, refinement loop open

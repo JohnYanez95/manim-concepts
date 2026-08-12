@@ -7,7 +7,12 @@ primitives land.
 
 | Primitive | File | Parent series / status | Anchor keys | Bib key prefix |
 | --- | --- | --- | --- | --- |
-| counting-rules | `primitives/counting-rules.tex` | combinatorics (skeleton — phase 2) | — | `combinatorics-` |
+| counting-rules | `primitives/counting-rules.tex` | combinatorics (authored, phase 2) | `001.raw81` | `combinatorics-` |
+| ctc-alignment | `primitives/ctc-alignment.tex` | deep_learning alignment series (authored, phase 2) | `001.raw81`, `001.paths15`, `001.astronomical`, `010.N.t5paths` | `deep_learning-` |
+
+Problem answer scripts (the solve-gate anchors, plan 012 R3) live in
+`primitives/answers/<primitive>.py` — every answer computed, enumeration
+asserted against the formula it teaches.
 
 Guide-first primitives (no parent scenes; full research treatment before
 authoring): `dynamic-programming`, `gradient-descent`, `ctc-decoding`.

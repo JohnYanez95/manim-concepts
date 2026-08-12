@@ -2,6 +2,12 @@
 % Each macro splices a verified value; the cited plan anchor is the
 % argument of record.
 
+% 001.astronomical: order of C(T+U, T-U) at T=100, U=50 [deep_learning/README.md row 4 (plan 001 research pass)]
+\expandafter\newcommand\csname anchor@001.astronomical\endcsname{2 \times 10^{40}}
+% 001.paths15: paths collapsing to AB at T=4 (= C(6,2)) [docs/plans/001-ctc-alignment.md; verified two ways (enumeration + trellis)]
+\expandafter\newcommand\csname anchor@001.paths15\endcsname{15}
+% 001.raw81: raw path count, 3 symbols over 4 frames (3^4) [docs/plans/001-ctc-alignment.md; deep_learning/README.md row 4]
+\expandafter\newcommand\csname anchor@001.raw81\endcsname{81}
 % 009.G.nllgradient: gradient of the NLL at z = (2, 1, 0), correct class first [docs/plans/009-calculus-derivatives.md, anchor G]
 \expandafter\newcommand\csname anchor@009.G.nllgradient\endcsname{(-0.3348,\ 0.2447,\ 0.0900)}
 % 010.K.NLL: -ln P(AB|X), displayed at 4 dp [docs/plans/010-ctc-gradient.md, anchor K]
@@ -10,3 +16,5 @@
 \expandafter\newcommand\csname anchor@010.K.P\endcsname{0.4877}
 % 010.L.uniformP: P(AB|X) under uniform outputs, 15 * (1/3)^4 [docs/plans/010-ctc-gradient.md, anchor L]
 \expandafter\newcommand\csname anchor@010.L.uniformP\endcsname{5/27}
+% 010.N.t5paths: paths for a 2-letter transcript at T=5 (C(7,3)) [docs/plans/010-ctc-gradient.md, anchor N]
+\expandafter\newcommand\csname anchor@010.N.t5paths\endcsname{35}
