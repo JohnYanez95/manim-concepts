@@ -105,8 +105,9 @@ The first block below came out of the plan-006 research pass
 ([`docs/plans/006-calculus-e-ln.md`](../docs/plans/006-calculus-e-ln.md))
 and started unchecked; the maintainer reviewed that list (dropping
 two), verified all sixteen that remain, and directed the ticks be
-recorded. The plan-009 block that follows it starts unchecked until a
-human does the same.
+recorded. The plan-009 block that follows was likewise verified by
+the maintainer (one MacTutor credit corrected in his pass) and ticked
+on his instruction.
 
 - [X] [3blue1brown, "What's so special about Euler's number e?"](https://www.3blue1brown.com/lessons/eulers-number)
       — slope of $b^x$ proportional to itself; the measured constants
@@ -158,63 +159,63 @@ From the plan-009 research pass
 for the derivatives series (the two 3blue1brown lessons above, already
 verified for the e-and-ln series, carry into this one):
 
-- [ ] [Grant Sanderson, "The Essence of Calculus" (series)](https://www.3blue1brown.com/lessons/essence-of-calculus/)
+- [X] [Grant Sanderson, "The Essence of Calculus" (series)](https://www.3blue1brown.com/lessons/essence-of-calculus/)
       — the visual-first sequence this series' ordering follows:
       intuition before limits, limits arriving last.
-- [ ] [Grant Sanderson, "Power Rule through geometry"](https://www.3blue1brown.com/lessons/derivatives-power-rule/)
+- [X] [Grant Sanderson, "Power Rule through geometry"](https://www.3blue1brown.com/lessons/derivatives-power-rule/)
       — the x² square nudge: two strips of 2x·dx and a discardable
       dx² corner.
-- [ ] [Grant Sanderson, "Visualizing the chain rule and product rule"](https://www.3blue1brown.com/lessons/chain-rule-and-product-rule/)
+- [X] [Grant Sanderson, "Visualizing the chain rule and product rule"](https://www.3blue1brown.com/lessons/chain-rule-and-product-rule/)
       — stacked heights for the sum rule; the propagating nudge
       through three number lines.
-- [ ] [Grant Sanderson, "The other way to visualize derivatives"](https://www.3blue1brown.com/lessons/derivatives-and-transforms)
+- [X] [Grant Sanderson, "The other way to visualize derivatives"](https://www.3blue1brown.com/lessons/derivatives-and-transforms)
       — the derivative as a local stretch factor; composed maps
       compose their factors.
-- [ ] [Silvanus P. Thompson, Calculus Made Easy (1910)](https://www.gutenberg.org/files/33283/33283-pdf.pdf)
+- [X] [Silvanus P. Thompson, Calculus Made Easy (1910)](https://www.gutenberg.org/files/33283/33283-pdf.pdf)
       — dx as "a little bit of x"; second-order smallness as the
       visible reason the corner dies.
-- [ ] [Gilbert Strang, "Big Picture of Calculus" (MIT OCW)](https://ocw.mit.edu/courses/res-18-005-highlights-of-calculus-spring-2010/resources/big-picture-of-calculus/)
+- [X] [Gilbert Strang, "Big Picture of Calculus" (MIT OCW)](https://ocw.mit.edu/courses/res-18-005-highlights-of-calculus-spring-2010/resources/big-picture-of-calculus/)
       — calculus as pairs of functions: one tells how the other
       changes — the dual-graph device.
-- [ ] [Gilbert Strang, "Big Picture: Derivatives" (MIT OCW)](https://ocw.mit.edu/courses/res-18-005-highlights-of-calculus-spring-2010/resources/big-picture-derivatives/)
+- [X] [Gilbert Strang, "Big Picture: Derivatives" (MIT OCW)](https://ocw.mit.edu/courses/res-18-005-highlights-of-calculus-spring-2010/resources/big-picture-derivatives/)
       — slope read from function pairs before any formula.
-- [ ] [David Tall, "Cognitive Roots"](https://homepages.warwick.ac.uk/staff/David.Tall/themes/cognitive-roots.html)
+- [X] [David Tall, "Cognitive Roots"](https://homepages.warwick.ac.uk/staff/David.Tall/themes/cognitive-roots.html)
       — local straightness ("looks straight when magnified") as the
       cognitive root; the research backing the zoom device.
-- [ ] [A. Orton, "Students' understanding of differentiation" (1983)](https://link.springer.com/article/10.1007/BF00410540)
+- [X] [A. Orton, "Students' understanding of differentiation" (1983)](https://link.springer.com/article/10.1007/BF00410540)
       — 110 clinical interviews: the ordinate confusion, dx conflated
       with finite increments, "rules without reasons".
-- [ ] [Leonhard Euler, Institutiones calculi differentialis I.VI (Bruce)](http://www.17centurymaths.com/contents/euler/diffcal/part1ch6.pdf)
+- [X] [Leonhard Euler, Institutiones calculi differentialis I.VI (Bruce)](http://www.17centurymaths.com/contents/euler/diffcal/part1ch6.pdf)
       — §180 d(ln x) = dx/x; §181 the score rule in Euler's words;
       §183 the sum of scores; §186 d(a^x); §188 d(e^x) = e^x dx.
-- [ ] [Leonhard Euler, Introductio in analysin infinitorum I.VII (Bruce)](https://www.17centurymaths.com/contents/euler/introductiontoanalysisvolone/ch7vol1.pdf)
+- [X] [Leonhard Euler, Introductio in analysin infinitorum I.VII (Bruce)](https://www.17centurymaths.com/contents/euler/introductiontoanalysisvolone/ch7vol1.pdf)
       — §122 the letter e and its 23 decimals; §125 the series and
       (1 + z/i)^i.
-- [ ] [Lawrence Murray, "Gradients of Softmax and Logsumexp"](https://indii.org/blog/gradients-of-softmax-and-logsumexp/)
+- [X] [Lawrence Murray, "Gradients of Softmax and Logsumexp"](https://indii.org/blog/gradients-of-softmax-and-logsumexp/)
       — the explicit ∇LSE = softmax derivation via the log-derivative
       rule.
-- [ ] [Nick Higham, "What Is the Log-Sum-Exp Function?"](https://nhigham.com/2021/01/05/what-is-the-log-sum-exp-function/)
+- [X] [Nick Higham, "What Is the Log-Sum-Exp Function?"](https://nhigham.com/2021/01/05/what-is-the-log-sum-exp-function/)
       — LSE properties and the stable shifted form (the gradient
       itself lives in Murray's post).
-- [ ] [Gilbert Strang and Edwin Herman, OpenStax Calculus vol. 1, §3.6](https://openstax.org/books/calculus-volume-1/pages/3-6-the-chain-rule)
+- [X] [Gilbert Strang and Edwin Herman, OpenStax Calculus vol. 1, §3.6](https://openstax.org/books/calculus-volume-1/pages/3-6-the-chain-rule)
       — the standard limits-first chain-rule treatment, for contrast.
-- [ ] [H. Jerome Keisler, Elementary Calculus: An Infinitesimal Approach](https://people.math.wisc.edu/~keisler/calc.html)
+- [X] [H. Jerome Keisler, Elementary Calculus: An Infinitesimal Approach](https://people.math.wisc.edu/~keisler/calc.html)
       — the rigorous modern form of the infinitesimals-first camp.
-- [ ] [Jeff Miller, Earliest Uses of Symbols of Calculus](https://mathshistory.st-andrews.ac.uk/Miller/mathsym/calculus/)
+- [X] [Jeff Miller, Earliest Uses of Symbols of Calculus](https://mathshistory.st-andrews.ac.uk/Miller/mathsym/calculus/)
       — hosted on MacTutor, created and maintained by John O'Connor
       and Edmund Robertson (University of St Andrews); Leibniz's dx,
       dy, dy/dx in the manuscript of November 11, 1675.
-- [ ] [Wikipedia, Chain rule (history section)](https://en.wikipedia.org/wiki/Chain_rule)
+- [X] [Wikipedia, Chain rule (history section)](https://en.wikipedia.org/wiki/Chain_rule)
       — Leibniz's 1676 memoir (with a sign error), l'Hôpital
       implicit, Lagrange 1797 — citing Hernandez Rodriguez and Lopez
       Fernandez (2010).
-- [ ] [Hernandez Rodriguez and Lopez Fernandez, on the chain rule's history](https://scholarworks.umt.edu/tme/vol7/iss2/10/)
+- [X] [Hernandez Rodriguez and Lopez Fernandez, on the chain rule's history](https://scholarworks.umt.edu/tme/vol7/iss2/10/)
       — the underlying scholarship for the chain-rule history claims
       (landing page; text paywalled at verification time).
-- [ ] [Wikipedia, Nova Methodus pro Maximis et Minimis](https://en.wikipedia.org/wiki/Nova_Methodus_pro_Maximis_et_Minimis)
+- [X] [Wikipedia, Nova Methodus pro Maximis et Minimis](https://en.wikipedia.org/wiki/Nova_Methodus_pro_Maximis_et_Minimis)
       — Leibniz's 1684 Acta Eruditorum paper, the first publication
       of the differential calculus.
-- [ ] [Yu. V. Sidorov, "Exponential function" (Encyclopedia of Mathematics)](https://encyclopediaofmath.org/wiki/Exponential_function)
+- [X] [Yu. V. Sidorov, "Exponential function" (Encyclopedia of Mathematics)](https://encyclopediaofmath.org/wiki/Exponential_function)
       — (e^x)' = e^x as a modern reference statement.
 
 ## Ideas not yet built
