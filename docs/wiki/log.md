@@ -587,7 +587,8 @@ reordered.
   re-verified by computation — zero numeric findings
 - top gap BUILT: per-document sourcing (the maintainer's directive) —
   biblatex, \cite in both primitives, the guide's bibliography,
-  checkcites in make study
+  an undefined-citation structure test (checkcites was tried and
+  rejected in the bot round — its bcf parsing fails relative paths)
 - prose-vs-scene: the counting primitive attributed to WhenToUseIt
   the phrasing its code comment rejects — trued in the primitive AND
   the combinatorics README cell that seeded it

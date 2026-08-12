@@ -89,7 +89,5 @@ study:  ## Build every objective's guide + solutions-manual PDFs in place
 			-jobname=$$name guide.tex >/dev/null) || exit 1; \
 		(cd $$d && TEXINPUTS=..: latexmk -pdf -interaction=nonstopmode \
 			-jobname=$$name-solutions solutions.tex >/dev/null) || exit 1; \
-		(cd $$d && checkcites --backend biber $$name 2>/dev/null \
-			| grep -v "^I " || true); \
 		echo "   $$d$$name.pdf + $$d$$name-solutions.pdf"; \
 	done

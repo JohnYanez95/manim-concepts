@@ -105,6 +105,7 @@ def word_boxes(pdf: Path) -> list[tuple[str, float, float, float, float]]:
         text=True,
         env=ENV,
         timeout=SUBPROCESS_TIMEOUT,
+        check=True,
     ).stdout
     boxes = []
     # pdftotext -bbox emits XHTML with <word xMin=.. yMin=.. xMax=.. yMax=..>
@@ -147,9 +148,12 @@ def check_figure(name: str, pdf: Path, workdir: Path) -> list[str]:
         capture_output=True,
         env=ENV,
         timeout=SUBPROCESS_TIMEOUT,
+        check=True,
     )
     pages = sorted(workdir.glob("fig*.png"))
     if not pages:
+        # A raster that produced nothing is a failed gate, not a clean one.
+        findings.append("rasterization produced no pages — halo check did not run")
         return findings
     img = Image.open(pages[0]).convert("L")
     px = img.load()

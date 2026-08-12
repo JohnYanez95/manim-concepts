@@ -85,13 +85,32 @@ def test_generated_files_in_sync():
 
 
 def test_every_problem_has_a_solution():
-    """Single-sourcing means a problem without a solution env is a hole the
-    manual build would ship silently."""
+    """Single-sourcing means EXACTLY one solution inside each problem —
+    cardinality alone would pass a doubled solution next to a missing one."""
     for tex in PRIMITIVES.glob("*.tex"):
         body = tex.read_text(encoding="utf-8")
-        problems = len(re.findall(r"\\begin\{problem\}", body))
-        solutions = len(re.findall(r"\\begin\{solution\}", body))
-        assert problems == solutions, f"{tex.name}: {problems} problems but {solutions} solutions"
+        starts = [m.start() for m in re.finditer(r"\\begin\{problem\}", body)]
+        for i, start in enumerate(starts):
+            end = starts[i + 1] if i + 1 < len(starts) else len(body)
+            inside = len(re.findall(r"\\begin\{solution\}", body[start:end]))
+            assert inside == 1, f"{tex.name}: problem {i + 1} contains {inside} solution env(s)"
+
+
+def test_every_citation_resolves():
+    """Every \\cite key in the study sources exists in references.bib.
+
+    This replaces checkcites in the build gate: its bcf parsing rejects
+    the relative bib path, and this check is stronger anyway — it runs
+    without LaTeX, inside `make check`. (Unused entries are fine by
+    design: the bib carries every README reference; documents print only
+    what they cite.)
+    """
+    bib = (STUDY / "references.bib").read_text(encoding="utf-8")
+    known = set(re.findall(r"@misc\{([^,]+),", bib))
+    for tex in tex_sources():
+        for keys in re.findall(r"\\cite\{([^}]+)\}", tex.read_text(encoding="utf-8")):
+            for key in keys.split(","):
+                assert key.strip() in known, f"{tex.name} cites unknown key {key.strip()!r}"
 
 
 def test_ticks_untouched_by_sync():

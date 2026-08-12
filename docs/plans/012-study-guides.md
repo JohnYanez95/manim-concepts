@@ -140,8 +140,8 @@ conditional-probability → bayes-rule → logarithms → e-and-ln →
 random-variables → softmax-likelihood → derivative-toolkit →
 ctc-gradient (the objective, landed).
 
-All eleven series primitives — **plus two guide-first primitives the
-video road never built**, both required for full comprehension of
+All eleven series primitives — **plus three guide-first primitives the
+video road never built**, all required for full comprehension of
 the *learning algorithm* (maintainer, 2026-08-12):
 
 - **`dynamic-programming.tex`** — the trellis scenes perform DP
@@ -258,9 +258,11 @@ plan's history. What changes the design:
   markdown reference lists remain the source of truth (the
   never-tick rule untouched); a repo script syncs them into one
   `references.bib` carrying a `verified` field; biblatex prints
-  per-document bibliographies from citations alone; `checkcites`
-  joins the checks; the sync script refuses a build citing an
-  unverified entry that isn't marked as such.
+  per-document bibliographies from citations alone; an
+  undefined-citation structure test joins the checks (as built —
+  checkcites was tried and rejected, see phase 3); the sync script
+  refuses a build citing an unverified entry that isn't marked as
+  such.
 - **R6 — remix map formalized (adopted, cheap).** Each guide opens
   (in source) with the objective → primitives → justifying-wiki-edge
   table; ambiguous orderings are flagged to the maintainer, not
@@ -309,12 +311,13 @@ plan's history. What changes the design:
 | Phase | Work | Commit gate |
 | --- | --- | --- |
 | 0 | This design; decision points resolved | **Maintainer approves the design** |
-| 1 | Scaffold: `study/` tree, `theme.sty`, `make study`, structure tests, skeleton primitive | `make check` + both PDFs build |
+| 1 | Scaffold: `study_guides/` tree, `theme.sty`, `make study`, structure tests, skeleton primitive | `make check` + both PDFs build |
 | 2 | Calibration content (per D-C): two primitives, problems, solutions manual, roadmap | `make study` green + maintainer format read |
 | 3 | Local CodeRabbit + connection-auditor (prose-vs-scene, edge-vs-transition), findings addressed | Review clean |
 | 4 | PR, bot review, finalise | Merge; refinement loop opens |
 
-Then batches: the remaining nine primitives land in 2–3 further PRs
+Then batches: the remaining twelve primitives (nine series-backed,
+three guide-first) land in 2–3 further PRs
 (probability trio · logs/e-ln/random-variables · softmax/derivatives/
 gradient + final glue), each with the same gates, each extending the
 solutions manual, until guide 1 assembles complete.
@@ -379,7 +382,10 @@ solutions manual, until guide 1 assembles complete.
   exemption narrowed to objective subdirectories). Audit: 13 findings
   applied — the top one built out **per-document sourcing** (biblatex
   in theme.sty, \cite calls in both primitives, \printbibliography in
-  the guide, checkcites in `make study`) — plus the §5
+  the guide; undefined-citation checking lives in the structure
+  tests — checkcites's bcf parsing rejects relative bib paths, and
+  the test is stronger: no LaTeX needed, runs in `make check`) —
+  plus the §5
   prose-vs-scene fix (the primitive attributed to `WhenToUseIt` the
   exact phrasing its code comment rejects; trued in the primitive AND
   the combinatorics README cell that seeded it), the root README's

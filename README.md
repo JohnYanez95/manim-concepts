@@ -27,8 +27,8 @@ defining the scenes for it — and every module renders itself. Beside the
 topics sits [`study_guides/`](study_guides/INDEX.md): the print track —
 per-series textbook sections stitched into objective-named guides
 (reading, end-of-chapter problems, and a separate solutions manual as
-committed PDFs), every number spliced from the same verification anchors
-the scenes use (`make study` rebuilds them):
+committed PDFs), their worked numbers spliced from the same verification
+anchors the scenes use (`make study` rebuilds them):
 
 ```bash
 uv run python combinatorics/counting_rules_manim.py
