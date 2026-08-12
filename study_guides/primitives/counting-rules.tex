@@ -24,14 +24,16 @@ total is literally the area of a $3 \times 4$ rectangle.
 \begin{center}
 \begin{tikzpicture}[scale=0.55]
   % The grid as outer product — the video series' owned picture.
-  \foreach \x in {0,...,3} \draw[Muted] (\x,0) -- (\x,3);
+  % Five vertical and four horizontal rules close the 4x3 frame; the
+  % product label stands clear of the grid (REFINEMENTS.md, 2026-08-12).
+  \foreach \x in {0,...,4} \draw[Muted] (\x,0) -- (\x,3);
   \foreach \y in {0,...,3} \draw[Muted] (0,\y) -- (4,\y);
   \foreach \x in {0,...,3} \foreach \y in {0,...,2}
     \fill[CoolInk!30] (\x+0.12,\y+0.12) rectangle (\x+0.88,\y+0.88);
-  \node[below, color=CoolInk] at (2,-0.25) {$4$ options at stage two};
-  \node[left, color=AccentInk] at (-0.25,1.5)
+  \node[below, color=CoolInk] at (2,-0.35) {$4$ options at stage two};
+  \node[left, color=AccentInk] at (-0.45,1.5)
     {\rotatebox{90}{$3$ at stage one}};
-  \node[right, color=AccentInk] at (4.3,1.5) {$3 \times 4 = 12$};
+  \node[right, color=AccentInk] at (4.6,1.5) {$3 \times 4 = 12$};
 \end{tikzpicture}
 \end{center}
 

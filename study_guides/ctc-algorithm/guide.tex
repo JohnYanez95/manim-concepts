@@ -6,39 +6,7 @@
 \usepackage[hidelinks]{hyperref}
 \input{\StudyRoot/anchors}
 
-% The roadmap — guide-owned assembly state (plan 012 R4). \roadmap{n}
-% draws the objective's fourteen stations with the first n filled: the
-% horizon view, repeated at every transition with progress marked.
-\newcommand{\roadmapstations}{%
-  counting, alignment, dyn.~prog., independence, conditional, Bayes,
-  logarithms, {$e$ \& $\ln$}, random~vars, softmax, derivatives,
-  descent, gradient, decoding}
-\newcommand{\roadmap}[1]{%
-  \begin{center}
-  \begin{tikzpicture}[x=1.9cm, y=1.15cm,
-      station/.style={rounded rectangle, draw=Muted, font=\tiny,
-        inner sep=3pt, minimum height=4.5mm},
-      done/.style={station, fill=GoodInk!25, draw=GoodInk},
-      hop/.style={Muted, ->, shorten >=2pt, shorten <=2pt}]
-    \foreach [count=\i] \name in \roadmapstations {
-      \pgfmathtruncatemacro{\row}{(\i - 1) / 7}
-      \pgfmathtruncatemacro{\col}{mod(\i - 1, 7)}
-      \ifnum\i>#1
-        \node[station] (s\i) at (\col, -\row) {\name};
-      \else
-        \node[done] (s\i) at (\col, -\row) {\name};
-      \fi
-      \ifnum\i>1
-        \pgfmathtruncatemacro{\prev}{\i - 1}
-        \ifnum\col=0
-          \draw[hop] (s\prev.south) to[out=-60, in=120] (s\i.north);
-        \else
-          \draw[hop] (s\prev.east) -- (s\i.west);
-        \fi
-      \fi
-    }
-  \end{tikzpicture}
-  \end{center}}
+\input{macros}
 
 \title{The CTC Algorithm\\[0.4em]
   \large A study guide, stitched from the manim-concepts road}

@@ -81,6 +81,7 @@ clean:  ## Delete all rendered output, drafts and finals alike
 study:  ## Build every objective's guide + solutions-manual PDFs in place
 	uv run python tools/build_anchors.py
 	uv run python tools/sync_references.py
+	uv run python tools/check_study_layout.py
 	@for d in $(GUIDE_DIRS); do \
 		name=$$(basename $$d); \
 		echo "== $$name"; \
