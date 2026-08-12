@@ -123,6 +123,24 @@ uv run python probability/bayes_rule_manim.py --list
 
 See the [root README](../README.md) for the full flag list.
 
+### random_variables_manim.py
+
+Watch after the independence series — the stamped square is
+`ChainsOfTrials`' quartered square, third appearance. Under
+construction — scene 1 of six is stubbed; the full design lives in
+[`docs/plans/007-probability-random-variables.md`](../docs/plans/007-probability-random-variables.md).
+
+| # | Scene | Formula | What it says | Why it's true | When it's useful |
+| --- | --- | --- | --- | --- | --- |
+| 1 | `TheStampedSquare` | $X:\Omega\to\mathbb{R}$ | A random variable is a fixed rule reading a random outcome — the die as a function, not a set. | The function is ink stamped on the sample space before anything is rolled: six faces labeled, then every cell of the 16-cell square stamped with its head count. The only random object is where the dart lands; the label is looked up, never generated. | Every measurement attached to a random process is this — a fixed rule reading a random outcome. |
+
+Renders: `01_TheStampedSquare.mp4` (further scenes land in Phase 2).
+
+```bash
+uv run python probability/random_variables_manim.py
+uv run python probability/random_variables_manim.py --list
+```
+
 ## References
 
 Ticks are human-gated — see
