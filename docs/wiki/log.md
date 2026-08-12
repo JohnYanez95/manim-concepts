@@ -243,3 +243,36 @@ reordered.
   call the finalisation audit raised
 - riding this branch as pre-phase: the box-leak fix + audit
   bookkeeping; algebra scene 6 re-renders at this branch's finalise
+
+## [2026-08-11] audit | incremental, plan 006 branch
+
+- scope: diffed 344f4f1..fef9ebb (5 commits — audit bookkeeping, full
+  plan-006 branch); 726b19e..344f4f1 already covered by the previous
+  entry; changed files plus cited algebra/probability content, no
+  full crawl
+- findings: 3 promised-not-delivered, 2 delivered-not-recorded,
+  4 possible-not-yet-made, 5 graph-health — applied alongside the
+  local CodeRabbit round (log1p attribution, the dropped a >= b) in
+  one phase-4 commit
+- the flipped logarithms -> e-and-ln edge verified against scene
+  content: the deferral replay is verbatim, the strip re-rules, the
+  debt is read; the re-read identity regained the (a >= b) the
+  original carries, with the max convention now named in its captions
+- picture-is-a-claim: scene 1's hops were prose-claimed "on the
+  strip" (no strip is drawn — README cell and plan design fixed to
+  the built scene); the plan's scene-3 bisection prose replaced by
+  the built settling-rows beat
+- stale-at-delivery occurrence 6: algebra/README's Scope, e/ln Ideas
+  bullet, and inverse-graph deferral all still called this branch's
+  content future — all three updated with pointers to calculus/
+- rows polished: ctc gradient row cross-referenced (e-half exists),
+  bits/entropy row notes nats-vs-bits as a stretched-unit change,
+  batched calculus row says "first three", softmax bullet states its
+  remaining random-variables gate
+- future connections recorded here for the next builds: Bernoulli's
+  table re-read as a binomial sum (counting-rules <-> e-and-ln);
+  half-life as ShrinkCounts in continuous time; doubling time
+  answering TheCountingStrip's halving-times promise
+- linear_algebra/ remains promised nowhere — maintainer call still
+  open
+- stamp: advance to fef9ebb

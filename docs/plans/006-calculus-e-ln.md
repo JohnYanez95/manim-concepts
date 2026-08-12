@@ -57,7 +57,16 @@ close predates the fix.
   row — 366 KB, verified by frame; one prose-is-a-claim catch on this
   series' own Scope, the softmax "foreshadowed in the closer" line
   softened to match the built closer)
-- [ ] Phase 4: local review + audit clean
+- [x] Phase 4: local review + audit clean. CodeRabbit: 3 findings, all
+  one theme and accepted — survival at the cliff belongs to the max
+  convention plus log1p, not the identity alone; the scene now carries
+  (a ≥ b), names the factored max, and contrasts naive log against
+  log1p with ln(1+x) ≈ x as the reason. Audit: 14 findings applied —
+  scene 1's "on the strip" prose trued to the built scene, the scene-3
+  bisection prose replaced by the settling rows, algebra/README's
+  three stale passages (occurrence 6) updated with calculus/ pointers,
+  the digit-truncation ellipses added, and the row polish recorded in
+  the log entry. Scenes 3 and 6 re-rendered and re-verified by frame.
 - [ ] Phase 5: PR, drafts cleaned, 1080p60 render verified (this series
   plus the scene-6 re-render)
 
@@ -215,14 +224,13 @@ Six scenes. Names are the viewing order; every number above traces to
 the anchors section.
 
 1. **`TheSplitYear`** — *what is it saying.* Cold open on the standing
-   promise: the counting strip returns, with `MultiplyIsAdd`'s closing
-   caption replayed — "calculus later makes one base natural — that
-   story waits." The wait is over; but strides come in every size, so
-   which could be nature's own? Growth poses the question strides
+   promise: `MultiplyIsAdd`'s closing caption replayed verbatim —
+   "calculus later makes one base natural — that story waits" — and
+   answered: the wait ends here. Growth poses the question strides
    can't: Jacob Bernoulli, 1683 — $1 at 100% for one year. Split the
    year: 2 hops of ×1.5 → 2.25; 4 hops → 2.4414; 12 hops → 2.6130 —
-   each refinement drawn as more, smaller multiplicative hops on the
-   strip (interest earning interest, spatially). Race the two wrong
+   each refinement written as more, smaller multiplicative hops
+   (each split: the interest starts earning sooner). Race the two wrong
    intuitions in WARM: "more compounding → unbounded" vs "(1+1/n) → 1
    so the power → 1" — the table (n=52, 365, 8760) crowds a ceiling
    instead: 2.7146, 2.7181… Bernoulli proved the ceiling sits between
@@ -245,8 +253,10 @@ the anchors section.
    before anyone names them: they are stride lengths in some
    undisclosed unit. Then the squeeze: 0.6931 &lt; 1 &lt; 1.0986 — between
    base 2 and base 3 sits the base whose constant is exactly 1, the
-   base whose growth rate IS its height. Bisect toward it: 2.71828…
-   — the ceiling from scene 1, reappearing from a different question.
+   base whose growth rate IS its height. The settling rows name it —
+   (e^dt−1)/dt = 1.0517, 1.0050, 1.0005 → 1 exactly — and e =
+   2.718281828459… is the ceiling from scene 1, back from a different
+   question.
    e is not big (3ˣ outruns eˣ) — it is the self-paced base.
 4. **`TheNaturalStride`** — *why, part 2: ln lands.* The undisclosed
    unit disclosed: slope-of-bˣ-at-0 is the length of one base-b stride
@@ -272,13 +282,16 @@ the anchors section.
    1.0512675 exactly vs continuous e^0.05 = 1.0512711 — the gap
    3.6e−6, the limit arrived.
 6. **`TheDebtRepaid`** — *when useful, part 2 + the promised payoffs.*
-   The repo's oldest forward reference re-rendered:
-   ln(a+b) = ln a + ln(1 + e^(ln b − ln a)) from `TheUnderflowCliff` —
-   and for the first time every symbol means something; read it aloud
-   symbol by symbol. Its engine ln(1+e^d) at the cliff's own scale:
-   at d=−40 the naive float64 route returns exactly 0.0 (1+e⁻⁴⁰ == 1.0)
-   while the identity's value 4.25e−18 survives — the underflow story,
-   now with its machinery understood. Then the deferred payoff arrives
+   The repo's oldest forward reference re-rendered with its convention:
+   ln(a+b) = ln a + ln(1 + e^(ln b − ln a)), a ≥ b, from
+   `TheUnderflowCliff` — and for the first time every symbol means
+   something; read it aloud symbol by symbol, including the max
+   factored out (a ≥ b keeps the shifted term in (0, 1]). Its engine at
+   the cliff's own scale: at d=−40 the naive float64 route returns
+   exactly 0.0 (1+e⁻⁴⁰ == 1.0) while the stable evaluation
+   log1p(e⁻⁴⁰) = 4.248e−18 survives — ln(1+x) ≈ x from scene 4 is why
+   handing x straight to the log keeps it; the underflow story, now
+   with its machinery understood. Then the deferred payoff arrives
    last, as `algebra/README.md` promised: ln 2 = 0.693 marked on the
    eˣ graph one point at a time (the input that yields 2), then the
    full exp/ln inverse graph — the flip earned, never the definition.

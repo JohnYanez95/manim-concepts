@@ -213,7 +213,9 @@ for the Bayes series:
 Rough queue, in roughly the order they build on each other:
 
 - Per-frame softmax as a distribution, likelihood and log-likelihood —
-  the remaining half of the bridge promised to `deep_learning/`.
+  the remaining half of the bridge promised to `deep_learning/`. Its
+  e-half arrived with [`calculus/`](../calculus/README.md); what it
+  still waits on is random variables, below.
 - Explaining away — the verified-but-unbuilt half of the conditional
   independence story (independence ⇏ CI: two fair flips given "exactly
   one head", 0 ≠ 1/4; plan 003's anchors).

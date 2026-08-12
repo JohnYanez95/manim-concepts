@@ -271,7 +271,9 @@ class TheMysteryConstants(ConceptScene):
         self.play(LaggedStart(*[Write(row) for row in lineup], lag_ratio=0.3), run_time=2.6)
         self.wait(0.6)
 
-        spot = MathTex(r"2.0794 = 3 \times 0.6931", font_size=40).move_to(2.9 * RIGHT + 0.25 * UP)
+        spot = MathTex(r"2.0794\ldots = 3 \times 0.6931\ldots", font_size=40).move_to(
+            2.9 * RIGHT + 0.25 * UP
+        )
         spot2 = MathTex(r"8 = 2^{3}", font_size=40).next_to(spot, DOWN, buff=0.3)
         stride_note = caption("three doublings — three strides: the constants obey")
         stride_note2 = caption("the strip's own law before anyone has named them")
@@ -484,8 +486,8 @@ class TheDebtRepaid(ConceptScene):
         self.play(FadeIn(recall), FadeIn(recall2))
 
         identity = MathTex(
-            r"\ln(a + b) = \ln a + \ln\!\left(1 + e^{\ln b - \ln a}\right)",
-            font_size=44,
+            r"\ln(a + b) = \ln a + \ln\!\left(1 + e^{\ln b - \ln a}\right) \quad (a \ge b)",
+            font_size=42,
             color=ACCENT,
         ).move_to(1.15 * UP)
         identity_box = boxed(identity, buff=0.3)
@@ -493,7 +495,7 @@ class TheDebtRepaid(ConceptScene):
         reads = VGroup(
             caption("ln — the natural counter row, nature's stride"),
             caption("e to a counter — undo, never cancel: the same number, other corner"),
-            caption("1 + e^(ln b − ln a) — the small term, kept safe inside (0, 1]"),
+            caption("a ≥ b — the max factored out, so the small term stays in (0, 1]"),
         ).arrange(DOWN, buff=0.2)
         reads.move_to(0.55 * DOWN)
         self.play(LaggedStart(*[FadeIn(r) for r in reads], lag_ratio=0.4), run_time=2.2)
@@ -504,7 +506,8 @@ class TheDebtRepaid(ConceptScene):
         self.play(FadeIn(earned))
         self.wait(1.2)
 
-        # The cliff's own scale: the naive route dies, the identity survives.
+        # The cliff's own scale: adding 1 first destroys the term; handing it
+        # straight to the log (log1p) keeps it — ln(1+x) ≈ x is why.
         self.play(FadeOut(VGroup(recall, recall2, reads, earned)))
         naive = MathTex(
             r"\text{float64: } 1 + e^{-40} = 1.0\ \text{exactly}"
@@ -513,19 +516,21 @@ class TheDebtRepaid(ConceptScene):
             color=WARM,
         ).move_to(0.1 * UP)
         survives = MathTex(
-            r"\ln\!\left(1+e^{-40}\right) = 4.248\times 10^{-18}\quad\checkmark",
+            r"\text{log1p}(e^{-40}) = 4.248\times 10^{-18}\quad\checkmark",
             font_size=36,
             color=GOOD,
         ).next_to(naive, DOWN, buff=0.35)
-        cliff_note = caption("the underflow cliff again — the identity is how the value survives")
+        cliff_note = caption("never form 1 + x — hand x straight to the log:")
+        cliff_note2 = caption("ln(1+x) ≈ x at this scale, so the value is x itself, kept")
         cliff_note.next_to(survives, DOWN, buff=0.3)
+        cliff_note2.next_to(cliff_note, DOWN, buff=0.15)
         self.play(Write(naive))
         self.play(Write(survives))
-        self.play(FadeIn(cliff_note))
+        self.play(FadeIn(cliff_note), FadeIn(cliff_note2))
         self.wait(1.2)
 
         # The promised payoff, last: the inverse graph, earned.
-        self.play(FadeOut(VGroup(identity, identity_box, naive, survives, cliff_note)))
+        self.play(FadeOut(VGroup(identity, identity_box, naive, survives, cliff_note, cliff_note2)))
         axes = Axes(
             x_range=[-1.5, 4.2, 1],
             y_range=[-1.5, 4.2, 1],
