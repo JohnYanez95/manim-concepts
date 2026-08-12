@@ -66,8 +66,13 @@ at 1080p60.
   and the owned biased die over a numerically-prettier new one
 - [x] Phase 1: plan + module stub, `make check` green (187 tests;
   `--list` prints the stub)
-- [ ] Phase 2: all scenes render at draft; verified per CLAUDE.md
-  checklist
+- [x] Phase 2: all six scenes render at draft (6 files, distinct
+  names, 31–54 s); layout linter clean on the module (after one round
+  of real findings — see the interlude note); frame grids reviewed by
+  eye across every beat, two rounds — round one caught the header
+  collision in scene 1, edge-clipped caption stacks in scenes 3–5,
+  the persisting defect caption in scene 4, and the join-beat pileup
+  in scene 6, all fixed and re-verified in round two
 - [ ] Phase 3: README + wiki complete, `make test` green
 - [ ] Phase 4: local CodeRabbit + connection-auditor clean
 - [ ] Phase 5: PR, drafts cleaned, 1080p60 render verified
