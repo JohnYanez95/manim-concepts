@@ -35,7 +35,12 @@ Return a structured plain-text report (read by another agent):
 - numbered sections matching the claims you were given, each with the
   verified statement, exact values, and its source
 - a FLAGS section for everything uncertain, implicit, or unverifiable
-- a SOURCES list (URLs + one-line description) for the topic README
+- a SOURCES list (URLs + one-line description) for the topic README,
+  each entry naming its AUTHOR as the page credits them — check
+  author/cite/written-by fields and bylines; personally authored pages
+  carry their author (MacTutor is J J O'Connor and E F Robertson),
+  never a guessed one; institutional pages without a credited author
+  may stand under the site name
 
 Never present a plausible value as verified. The difference between
 "computed exactly by enumeration" and "stated by a reputable source" and

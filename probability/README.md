@@ -3,7 +3,7 @@
 ## Scope
 
 Probability as proportion, built visually: the sample space as a unit
-square, events as regions, probability as area. Three series so far. The
+square, events as regions, probability as area. Four series so far. The
 first covers **independence** — the product rule P(A∩B) = P(A)·P(B) as
 the *primary* definition, why it is the probability-weighted upgrade of
 the counting grid, the confusions it attracts, and the product over a
@@ -15,7 +15,12 @@ the CTC series left open. The third covers **Bayes' rule** — the
 one-line division through the door the conditional series left open,
 the odds form and the waterfall, natural-frequency computation, iterated
 updating, and Monty Hall done honestly with the host's protocol as the
-likelihood.
+likelihood. The fourth covers **random variables** — the die as a
+function (not a set), the pmf born by sorting the quartered square,
+expectation as the balance point, linearity without independence, the
+binomial assembled from cell counts and cell areas, and the swamping
+intuition quantified — closing the oldest promise the counting series
+made.
 
 This topic exists because two earlier ones promised it: the
 [multiplicative rule](../combinatorics/README.md) counts pairs as
@@ -32,12 +37,22 @@ Deliberately **not** covered here:
   [`algebra/`](../algebra/README.md)'s `TheEvidenceRuler` walks this
   topic's own coins — but the inference treatment belongs here, and is
   queued, not built.
-- Composite-hypothesis Bayes factors and continuous priors — both need
-  machinery (integration, random variables) the repo does not teach.
+- Composite-hypothesis Bayes factors and continuous priors — still
+  waiting on integration: random variables now exist, densities do
+  not.
 - Conditioning on probability-zero events. The definition requires
   P(B) > 0; the continuous story (Borel–Kolmogorov) is genuinely
   treacherous, and honest silence beats false generality.
-- Random variables, distributions, and expectation. Events only.
+- Variance and the law of large numbers as theorems. The
+  random-variables series computes the weak law's instances and names
+  it; the proof and the spread machinery arrive together, later.
+- The Galton board. Verification found physical boards are chaotic
+  deterministic systems, not binomial machines — skipped by evidence,
+  not oversight; the sorted square does its honest job.
+- Continuous distributions and densities — the road not taken until
+  integration exists.
+- The binomial theorem and Pascal's triangle — `combinatorics/` owns
+  them; the (1, 4, 6, 4, 1) row may nod, never depend.
 - Measure-theoretic formality. "Probability is area" is used as a
   faithful picture, not developed as measure theory.
 - Counting itself — that is `combinatorics/`'s job; this topic starts
@@ -122,6 +137,31 @@ uv run python probability/bayes_rule_manim.py --list
 ```
 
 See the [root README](../README.md) for the full flag list.
+
+### random_variables_manim.py
+
+Watch after the independence series — the stamped square is
+`ChainsOfTrials`' quartered square, third appearance. The first two
+scenes build the variable and its distribution as one visible move,
+the middle two define and weaponize expectation, the fifth closes the
+repo's oldest promise, and the closer turns the swamping intuition
+into exact numbers.
+
+| # | Scene | Formula | What it says | Why it's true | When it's useful |
+| --- | --- | --- | --- | --- | --- |
+| 1 | `TheStampedSquare` | $X:\Omega\to\mathbb{R}$ | A random variable is a fixed rule reading a random outcome — the die as a function, not a set. | The function is ink stamped on the sample space before anything is rolled: six faces labeled, then every cell of the 16-cell square stamped with its head count. The only random object is where the dart lands; the label is looked up, never generated. | Every measurement attached to a random process is this — a fixed rule reading a random outcome. |
+| 2 | `SortTheSquare` | $P(X{=}k) = \tfrac{\#\{\omega : X(\omega) = k\}}{16}$ | The pmf is the square's own area, sorted by value. | The 16 stamped cells slide into columns grouped by value: (1, 4, 6, 4, 1)/16, conserved area, bars visibly summing to 1 — five unequal bars from sixteen equal cells. Y = tails sorts into the same columns while X + Y = 4 in every cell: one blueprint, two houses. | The distribution forgets which cell was which; the variable remembers — the distinction every "the distribution IS the variable" error trips over. |
+| 3 | `TheBalancePoint` | $E[X] = \sum_x x \cdot P(X{=}x)$ | Expectation is the balance point of the weights — defined, not simulated. | The fulcrum under the die's flat bars balances at 3.5, which is not a face; summing stamps over cells (32/16) equals summing values times weights (2) — the sort was a regrouping; the biased die (double weight on 6) moves the balance to 27/7 — the balance point belongs to the measure. | Huygens (1657): the fair price of a ticket — the number you act on, with no long run in sight. |
+| 4 | `SameOutcomesAdd` | $E[X{+}Y] = E[X] + E[Y]$ | Expectations add — independence not required. | One sum over the same outcomes; addition distributes. The maximally dependent pair X and 4−X sums to 4 always; the owned 6×6 grid paints the two-dice sum as diagonals — (1,2,3,4,5,6,5,4,3,2,1)/36 — and E = 7 lands twice: by the diagonals and as 3.5 + 3.5. | Linearity is the workhorse: it prices any bundle from its parts, and it is what makes E = np honest with zero combinatorics. |
+| 5 | `TheBinomialColumns` | $P(X{=}k) = \binom{n}{k} p^k (1-p)^{n-k}$ | The sorted columns are the binomial distribution — the promise the counting series made, closed. | Cells per column are C(4,k), counted the way the combinations series counts H/T words; re-cut at p = 1/4 the cells go unequal but every k-head cell keeps the same area p^k q^(4−k) (a product ignores factor order), so column k weighs C(4,k)·p^k q^(4−k): coefficient = cell count, power = one cell's area, nothing smuggled. E = np by indicator stamps. | The count-of-successes model wherever trials repeat unchanged (fixed n, two outcomes, constant p, independent) — and no replacement means no binomial, as the aces taught; the binomial even touches e: zero successes in n trials of chance 1/n → 1/e ≈ 0.3679. |
+| 6 | `ProportionsConverge` | $P\!\left(\lvert\tfrac{S_n}{n} - \tfrac12\rvert \le 0.05\right) \to 1$ | Proportions converge while counts spread — the swamping intuition, quantified. | Exact binomial sums, no new machinery: within ±5% of half climbs 0.4966 → 0.7287 → 0.9986 (n = 20, 100, 1000) while within ±5 heads falls 0.7287 → 0.2720 → 0.0876 (n = 100, 1000, 10000) — and the two n = 100 rows are the same band, one number telling two stories. | The gambler's fallacy dies by two columns moving in opposite directions; the weak law of large numbers (Bernoulli, proved by ~1689, printed 1713) is named and promised with variance; average surprisal over the 16 cells is exactly 4 bits; and per-frame distributions are pmfs like these — likelihood is next. |
+
+Renders: `01_TheStampedSquare.mp4` … `06_ProportionsConverge.mp4`.
+
+```bash
+uv run python probability/random_variables_manim.py
+uv run python probability/random_variables_manim.py --list
+```
 
 ## References
 
@@ -208,20 +248,78 @@ for the Bayes series:
       — Gardner's retraction and the protocol-dependence the
       two-children beat draws.
 
+The entries below came out of the plan-007 research pass
+([`docs/plans/007-probability-random-variables.md`](../docs/plans/007-probability-random-variables.md))
+and started unchecked; the maintainer corrected the author
+attributions, verified all sixteen, and directed the ticks be
+recorded. Future entries start unchecked until a human does the same.
+
+- [X] [Grinstead & Snell, Introduction to Probability, §6.1 (LibreTexts)](https://stats.libretexts.org/Bookshelves/Probability_Theory/Introductory_Probability_(Grinstead_and_Snell)/06%3A_Expected_Value_and_Variance/6.01%3A_Expected_Value_of_Discrete_Random_Variables)
+      — Definition 6.1 (expectation), Theorem 6.2 (linearity) and the
+      verbatim no-independence remark behind `SameOutcomesAdd`.
+- [X] [Grinstead & Snell, §6.2 Variance (LibreTexts)](https://stats.libretexts.org/Bookshelves/Probability_Theory/Introductory_Probability_(Grinstead_and_Snell)/06%3A_Expected_Value_and_Variance/6.02%3A_Variance_of_Discrete_Random_Variables)
+      — variance definition, the shortcut, npq, die 35/12 — the
+      pre-verified anchors the future LLN series inherits.
+- [X] [Grinstead & Snell, ch. 8 (source)](https://math.dartmouth.edu/~prob/prob/ch8.tex)
+      — Theorem 8.2, the weak law `ProportionsConverge` names via
+      Bernoulli; the 1713 attribution.
+- [X] [Illowsky & Dean, OpenStax Introductory Statistics 2e, §4.3](https://openstax.org/books/introductory-statistics-2e/pages/4-3-binomial-distribution)
+      — the binomial experiment conditions named in
+      `TheBinomialColumns`.
+- [X] [Holmes, Illowsky & Dean, OpenStax Introductory Business Statistics 2e, §4.2](https://openstax.org/books/introductory-business-statistics-2e/pages/4-2-binomial-distribution)
+      — the explicit pmf formula (the sibling volume headlines what the
+      statistics volume leaves to calculators).
+- [X] [Orloff & Bloom, MIT 18.05, class 4b: expectation](https://ocw.mit.edu/courses/18-05-introduction-to-probability-and-statistics-spring-2022/mit18_05_s22_class04-prep-b.pdf)
+      — the balance-point picture, "need not be a possible value", the
+      outcome-table linearity proof, E = np by indicators.
+- [X] [Joe Blitzstein, Stat 110](https://stat110.hsites.harvard.edu/)
+      — RV-as-function ordering; "sympathetic magic" (variable vs
+      distribution), the error `SortTheSquare`'s twin beat refutes.
+- [X] [Grant Sanderson (3blue1brown), "Binomial distributions"](https://www.3blue1brown.com/lessons/binomial-distributions/)
+      — the sequence-grouping route to C(n,k)p^k(1-p)^(n-k); its
+      likelihood pivot marks the next series' door, not this one's.
+- [X] [Kunin et al., Seeing Theory, ch. 1 & 3](https://seeing-theory.brown.edu/basic-probability/index.html)
+      — the distribution-first branch this series deliberately does not
+      take (long-run simulation as meaning), for contrast.
+- [X] [Gauvrit & Morsanyi, "The Equiprobability Bias…" (PMC)](https://pmc.ncbi.nlm.nih.gov/articles/PMC4310748/)
+      — full title "The Equiprobability Bias from a Mathematical and
+      Psychological Perspective"; Lecoutre 1992's randomness-read-as-
+      uniformity, surviving instruction — why `SortTheSquare` refutes
+      by mechanism.
+- [X] [Eric-Jan Wagenmakers (Bayesian Spectacles), a Galton board vs its model](https://www.bayesianspectacles.org/a-galton-board-demonstration-of-why-all-statistical-models-are-misspecified/)
+      — why the physical board is not a binomial machine; the Scope
+      exclusion's evidence.
+- [X] [J J O'Connor and E F Robertson, "Blaise Pascal" (MacTutor)](https://mathshistory.st-andrews.ac.uk/Biographies/Pascal/)
+      — the five-letter 1654 correspondence and the problem of points.
+- [X] [J J O'Connor and E F Robertson, "Christiaan Huygens" (MacTutor)](https://mathshistory.st-andrews.ac.uk/Biographies/Huygens/)
+      — De Ratiociniis in Ludo Aleae (1657), the first printed
+      probability work: `TheBalancePoint`'s fair-price close.
+- [X] [J J O'Connor and E F Robertson, "Jacob Bernoulli" (MacTutor)](https://mathshistory.st-andrews.ac.uk/Biographies/Bernoulli_Jacob/)
+      — died 1705; Ars Conjectandi, Basel 1713 — the proved-by-~1689 vs
+      printed-1713 split `ProportionsConverge` keeps distinct.
+- [X] [Wikipedia, Ars Conjectandi](https://en.wikipedia.org/wiki/Ars_Conjectandi)
+      — the nephew-publisher detail and the 1684-1689 timeline.
+- [X] [Wikipedia, Binomial distribution](https://en.wikipedia.org/wiki/Binomial_distribution)
+      — pmf, mean np, the conditions cross-check.
+
 ## Ideas not yet built
 
 Rough queue, in roughly the order they build on each other:
 
 - Per-frame softmax as a distribution, likelihood and log-likelihood —
-  the remaining half of the bridge promised to `deep_learning/`. Its
-  e-half arrived with [`calculus/`](../calculus/README.md); what it
-  still waits on is random variables, below.
+  the remaining half of the bridge promised to `deep_learning/`. Both
+  gates are now delivered (e via [`calculus/`](../calculus/README.md),
+  distributions via this topic's random-variables series) — it is the
+  roadmap's next stop.
 - Explaining away — the verified-but-unbuilt half of the conditional
   independence story (independence ⇏ CI: two fair flips given "exactly
   one head", 0 ≠ 1/4; plan 003's anchors).
 - The log-odds inference scene — `algebra/`'s `TheEvidenceRuler`
   built the ruler on this topic's coins; the inference treatment (the
   residual of that delivered edge) belongs here.
-- The law of large numbers properly: swamping quantified, absolute vs
-  relative deviation.
-- Random variables and distributions — the die as a function, not a set.
+- The law of large numbers as a theorem — `ProportionsConverge`
+  computes its instances exactly; the proof wants variance, and the
+  two arrive together.
+- ~~Random variables and distributions~~ — delivered by this topic's
+  random-variables series; `TheStampedSquare` opens on exactly the
+  promised die-as-a-function.
