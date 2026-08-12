@@ -74,7 +74,12 @@ entry to its row is a design call made in Phase 3.
   softened, the graph rows corrected to quote what is actually on
   screen, and both far ends of the new edges now point back.
   Scenes 2 and 3 re-rendered and re-verified by frame.
-- [ ] Phase 5: PR, drafts cleaned, 1080p60 render verified
+- [x] Phase 5: PR #8 opened, bot-reviewed (CodeRabbit re-run applied:
+  two shapes, sums labeled), references opened and ticked by the
+  maintainer (sixteen), merged 2026-08-11 as `5cb1ff9`. Finals
+  rendered post-merge on the plan-008 branch (the render was the one
+  outstanding gate item): six 1080p60 files, distinct names, 26-36 s,
+  frame-checked; drafts cleared
 
 ## Research questions the reports must settle
 
