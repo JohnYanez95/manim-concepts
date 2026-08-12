@@ -18,6 +18,7 @@ crawling every page; whoever applies an audit's findings updates it.
 | `logarithms` | `algebra/logarithms_manim.py` | The counting strip: multiplying is adding counters; the evidence ruler; the underflow cliff and log-sum-exp |
 | `e-and-ln` | `calculus/e_and_ln_manim.py` | e as the self-paced base: Bernoulli's ceiling, the mystery constants, ln as the natural counter row; the underflow identity re-read |
 | `random-variables` | `probability/random_variables_manim.py` | The die as a function; the pmf as sorted area; expectation as balance point; the binomial columns; swamping quantified |
+| `derivative-toolkit` | `calculus/derivatives_manim.py` | The slope as a function; nudge geometry; sum + chain rules; e^x and ln differentiated; the score finds the MLE peak; dLSE = softmax |
 | `softmax-likelihood` | `probability/softmax_likelihood_manim.py` | Likelihood as the row lens on the binomial table; MLE as the peak; log as evidence's native scale; softmax forced by shift invariance; temperature and why-e; NLL as the LSE gap |
 
 ## Edges
@@ -36,8 +37,8 @@ Status: **delivered** (both ends exist and the content makes the link) or
 | `conditional-probability` | `bayes-rule` | delivered | `ThroughTheFrontDoor` divides the exact identity `TwoSlicesOneSquare` left on screen; `OneTestTwoPatients` factors the counted prevalence pair; `YesterdaysPosterior` repeats the CI license verbatim; `TheHostsProtocol` closes the Monty deferral with Rosenthal's variants |
 | `bayes-rule` | `logarithms` | delivered | `TheEvidenceRuler` re-plots `YesterdaysPosterior`'s ladder in base 3 — each head adds exactly +2, and two tails walk the marker back to exactly 0; evidence as distance, decibans named. Second strand: `ShrinkCounts`' zero-prior beat (log 0 = −∞, infinitely far away), read back from `probability/README.md`'s zero-prior sentence |
 | `ctc-alignment` | `logarithms` | delivered | `TheUnderflowCliff` delivers `deep_learning/`'s log-space bullet: the 0.1³²⁴ hard zero, the −324 log sum, and Graves' log-add identity for the trellis's additions (2012 book, correctly attributed) |
-| `ctc-alignment` | *(beam search / gradient / peaky dynamics)* | promised | `deep_learning/README.md` Ideas not yet built. The gradient story's e-half (`e-and-ln`) and softmax/NLL half (`softmax-likelihood`) both now exist; what remains is the derivative toolkit and the identity itself |
-| `softmax-likelihood` | *(the CTC gradient identity)* | promised | `TheLossThatTrains`' closer, on screen: "its gradient — softmax output minus how often the truth used each cell — is the next series"; the same identity waits in `deep_learning/README.md` Ideas, with Bridle 1989's "output minus a one-from-N target" pinned in plan 008 anchor M |
+| `ctc-alignment` | *(beam search / gradient / peaky dynamics)* | promised | `deep_learning/README.md` Ideas not yet built. The gradient story's e-half (`e-and-ln`), softmax/NLL half (`softmax-likelihood`) and derivative toolkit (`derivative-toolkit`) all now exist — every gate is open; what remains is the identity itself and the training-dynamics scenes |
+| `softmax-likelihood` | *(the CTC gradient identity)* | promised | `TheLossThatTrains`' closer, on screen: "its gradient — softmax output minus how often the truth used each cell — is the next series"; the same identity waits in `deep_learning/README.md` Ideas, with Bridle 1989's "output minus a one-from-N target" pinned in plan 008 anchor M; `TheSmoothMaxsShares` now leaves p − one-hot itself on screen — only the per-path occupancy generalization remains |
 | `ctc-alignment` | *(dynamic programming as its own concept)* | promised | `deep_learning/README.md` row 5 when-useful; plan 001 gaps. A future build inherits log-space for free: `TheUnderflowCliff` already shows the recursion's additions need the log-add identity |
 | `counting-rules` | `random-variables` | delivered | The graph's oldest promise (`combinatorics/README.md` row 3 when-useful), closed: `TheBinomialColumns` counts the sorted columns' cells as C(4,k) — "counted exactly the way the combinations series counts them" — and assembles C(n,k)p^k q^(n−k) from cell count times cell area |
 | `independence` | `softmax-likelihood` | delivered | The CTC bridge's remaining half, closed: the product-becomes-sum arithmetic is independence's own delivery — `AddToSurvive` multiplies five per-frame factors to 0.27216 and `TheLossThatTrains` says "independent frames: losses add" on screen (takeaway included); the promise itself was spoken by `ProportionsConverge` ("likelihood is next") and answered by `TheLikelihoodLens` |
@@ -50,24 +51,34 @@ Status: **delivered** (both ends exist and the content makes the link) or
 | `logarithms` | `softmax-likelihood` | delivered | `AddToSurvive` says "multiplying is adding counters — the strip carries likelihood now" and "the evidence ruler was a log-likelihood-ratio ruler all along", then re-runs the cliff (float32 dead at 0.1⁴⁶, 0.1³²⁴ = 0.0 exactly); `TheLossThatTrains` re-uses log-sum-exp as "the smooth max — the log-sum-exp ruler, again" |
 | `e-and-ln` | `softmax-likelihood` | delivered | `TurningTheDial` pays the debt `calculus/README.md`'s Scope stated ("why e appears in every probability machine" — Scope prose, not a rendered caption): base 2 is exactly (4/7, 2/7, 1/7), b^z = e^(z ln b), "no base above 1 is forced — each is e at another T; e is the convention because ln is the natural counter" |
 | `bayes-rule` | `softmax-likelihood` | delivered | `TheBestExplanation` names the dice ratio "a likelihood ratio — one rung of the posterior ladder: the update factor, not a verdict about the die", and points the not-a-density guard at the prior-and-renormalize move ("that is the Bayes move, and it is not this move") |
+| `softmax-likelihood` | `derivative-toolkit` | delivered | `ZeroSlopeFindsThePeak` finds `TheBestExplanation`'s grid peak analytically (the score 3/p − 1/(1−p) zeroes at p̂ = 3/4 — "the grid search is over"); `TheSmoothMaxsShares` differentiates the NLL gap into (−0.3348, 0.2447, 0.0900) = p − one-hot and makes "the gap grows roughly linearly" a theorem (slope → −1) |
+| `logarithms` | `derivative-toolkit` | delivered | `ZeroSlopeFindsThePeak` names the score "the counting strip differentiated — under ln, products become sums of relative rates"; `TheSmoothMaxsShares` differentiates the log-sum-exp ruler itself, its sensitivities landing as the softmax shares |
 | `counting-rules` | *(Pascal, stars & bars, inclusion–exclusion, binomial theorem)* | promised | `combinatorics/README.md` Ideas not yet built |
 | `logarithms` | `e-and-ln` | delivered | `TheSplitYear` replays `MultiplyIsAdd`'s deferral caption on screen ("the wait ends here"); `TheNaturalStride` names the mystery constants as ln and re-rules the strip in natural units; `TheDebtRepaid` re-reads `TheUnderflowCliff`'s identity symbol by symbol — the graph's only on-screen debt, closed |
 | `logarithms` | *(the log-odds inference scene in `probability/`)* | promised | `algebra/README.md` Ideas ("this series builds the ruler; that series owns the inference") — the residual of the delivered bayes→logarithms edge. `TheBestExplanation` grew it a second passenger: the 864/343 rung stops exactly where a prior would enter, so MLE→MAP (the ratio through a 1:1 prior) rides the same future scene — its numbers already verified in plan 008 addendum A1 |
 | `logarithms` | *(information as log-counting — bits, entropy)* | promised | `algebra/README.md` Ideas; `ShrinkCounts`' −log₂ = 4 is the HHTH cell's surprisal. Both halves now exist: `ProportionsConverge` says "average surprisal over the 16 equal cells is exactly 4 bits" on screen — entropy is one series away — H = E[surprisal] is `TheBalancePoint`'s fulcrum under `ShrinkCounts`' stamps, averaged the sorted-square way — with nats vs bits a unit change on `TheNaturalStride`'s device. The freight grew on the plan-008 branch: `probability/README.md` Scope queues KL and soft-target cross-entropy behind this row, and `TheLossThatTrains` names the alias on screen ('the negative log-likelihood (its alias: "cross-entropy loss")') — the one-beat payoff waiting for entropy to exist |
-| `e-and-ln` | *(derivative toolkit, ln as area under 1/t, Euler's formula, growth in the wild)* | promised | `calculus/README.md` Ideas not yet built; the first three are also Scope exclusions stated with their reasons |
+| `e-and-ln` | `derivative-toolkit` | delivered | `TheSlopeIsAFunction` generalizes `ZoomUntilStraight` and says so on screen (d/dx names the settling ratio); `TheCurveThatIsItsOwnSlope` re-reads `TheMysteryConstants` in d/dx notation (Euler §186/§188 anchored) and differentiates `TheDebtRepaid`'s undo pair into ln′ = 1/x |
+| `e-and-ln` | *(ln as area under 1/t, Euler's formula, growth in the wild)* | promised | `calculus/README.md` Ideas not yet built; the derivative-toolkit entry was struck delivered by the derivatives series |
 
 ## Shared visual devices
 
 Device lineage matters for consistency — a viewer who learns a picture in
 one topic should meet the same picture, upgraded, in the next:
 
+- **Zoom until straight** (`ZoomUntilStraight` → `TheSlopeIsAFunction`,
+  which runs the device at many points and plots the read-offs as a
+  second curve — the derivative born as a function; the number-line
+  stretch view in `NudgeInNudgeOut` is the same zoom in transformation
+  clothing, and the chain rule composes it).
 - **The counting strip, re-ruled** (`TheCountingStrip` →
   `MultiplyIsAdd` → `TheNaturalStride`): the same two-row strip running
   through three scenes — first the definition, then base-as-unit, and
   finally the counter row disclosed as ln in nature's units; the
   mystery constants obey the strip's laws before they are named.
   Fourth stop: `AddToSurvive` — "multiplying is adding counters — the
-  strip carries likelihood now".
+  strip carries likelihood now". Fifth: `ZeroSlopeFindsThePeak`
+  differentiates it — the score d ln f = f′/f is the strip's own
+  derivative, products becoming sums of relative rates.
 - **The outer-product grid** (now also `SameOutcomesAdd`'s two-dice
   diagonals — level sets on the owned picture):
   `MultiplicativeRule` (counting) →

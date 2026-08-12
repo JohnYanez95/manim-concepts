@@ -416,3 +416,21 @@ reordered.
   together)
 - linear_algebra/ maintainer call still open (fifth entry)
 - stamp: advance to e517c09
+
+## [2026-08-12] series | derivative-toolkit lands (plan 009, phase 3)
+
+- node `derivative-toolkit` added: six scenes in
+  calculus/derivatives_manim.py
+- flipped: e-and-ln → derivative toolkit (the Ideas entry delivered;
+  the residual promises — ln as area, Euler's formula, growth in the
+  wild — keep their own promised row)
+- new delivered edges: softmax-likelihood → (the grid peak found
+  analytically; the NLL gap differentiated to p − one-hot, "roughly
+  linearly" made a theorem) and logarithms → (the score as the
+  counting strip differentiated; the LSE ruler differentiated into
+  the softmax shares)
+- the CTC gradient rows narrowed: every gate is now open — only the
+  identity itself and the training-dynamics scenes remain
+- devices: zoom-until-straight lineage recorded (the derivative born
+  as a function; the stretch view; the chain rule composing it);
+  counting strip fifth stop (the score is the strip's derivative)

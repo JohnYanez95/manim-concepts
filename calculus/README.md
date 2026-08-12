@@ -2,7 +2,8 @@
 
 ## Scope
 
-e and the natural logarithm, built on `algebra/`'s counting strip: the
+Two series so far. The first: e and the natural logarithm, built on
+`algebra/`'s counting strip: the
 strides of the strip come in every size, and this series finds the one
 that is nature's own. Compound interest poses the question (Bernoulli's
 ceiling between 2 and 3), a three-beat visual notion of local growth
@@ -12,14 +13,25 @@ unit every earlier strip was secretly ruled in. The series pays two
 standing promises: `MultiplyIsAdd`'s on-screen deferral ("calculus
 later makes one base natural") and `TheUnderflowCliff`'s rendered
 ln-identity, re-read symbol by symbol once every symbol means
-something.
+something. The second: **the derivative as a toolkit** — d/dx naming
+the settling ratio the zoom built, nudge geometry for x², the sum and
+chain rules, e^x and ln differentiated, the score function finding
+the likelihood peak by hand, and the smooth max's sensitivities
+revealed as the softmax shares — deliberately tiny, because under the
+log every product the CTC road carries becomes a sum.
 
 Deliberately **not** covered here:
 
-- **The derivative as a toolkit.** Only "slope at a point, read by
-  zooming until straight" is built — no rules, no d/dx notation, no
-  limit formalism ("increasing and bounded has a limit" is named as
-  analysis, never derived).
+- **Limit formalism.** The first series reads slopes by zooming until
+  straight; the second names that ratio d/dx and keeps dt a real
+  number throughout — ε–δ and "increasing and bounded has a limit"
+  stay named as analysis, never derived.
+- **The power, product and quotient rules as drill.** Only x² appears,
+  as geometry; the score function (d ln f = f′/f) replaces the product
+  rule wherever this repo differentiates — if the CTC gradient series
+  ever needs a bare product rule, that decision belongs to it.
+- **Second-derivative tests, Taylor series, implicit and trig
+  differentiation** — none of them gate the CTC gradient.
 - **Integrals.** ln as the area under 1/t is named as the road not
   taken; accumulation waits for its own series.
 - **Complex exponentials and Euler's formula** — rotation is a
@@ -137,12 +149,75 @@ Future entries start unchecked until a human does the same.
       so these backed the two computational routes until the
       maintainer's verification closed the gap.
 
+From the plan-009 research pass
+([`docs/plans/009-calculus-derivatives.md`](../docs/plans/009-calculus-derivatives.md)),
+for the derivatives series (the two 3blue1brown lessons above, already
+verified for the e-and-ln series, carry into this one):
+
+- [ ] [Grant Sanderson, "The Essence of Calculus" (series)](https://www.3blue1brown.com/lessons/essence-of-calculus/)
+      — the visual-first sequence this series' ordering follows:
+      intuition before limits, limits arriving last.
+- [ ] [Grant Sanderson, "Power Rule through geometry"](https://www.3blue1brown.com/lessons/derivatives-power-rule/)
+      — the x² square nudge: two strips of 2x·dx and a discardable
+      dx² corner.
+- [ ] [Grant Sanderson, "Visualizing the chain rule and product rule"](https://www.3blue1brown.com/lessons/chain-rule-and-product-rule/)
+      — stacked heights for the sum rule; the propagating nudge
+      through three number lines.
+- [ ] [Grant Sanderson, "The other way to visualize derivatives"](https://www.3blue1brown.com/lessons/derivatives-and-transforms)
+      — the derivative as a local stretch factor; composed maps
+      compose their factors.
+- [ ] [Silvanus P. Thompson, Calculus Made Easy (1910)](https://www.gutenberg.org/files/33283/33283-pdf.pdf)
+      — dx as "a little bit of x"; second-order smallness as the
+      visible reason the corner dies.
+- [ ] [Gilbert Strang, "Big Picture of Calculus" (MIT OCW)](https://ocw.mit.edu/courses/res-18-005-highlights-of-calculus-spring-2010/resources/big-picture-of-calculus/)
+      — calculus as pairs of functions: one tells how the other
+      changes — the dual-graph device.
+- [ ] [Gilbert Strang, "Big Picture: Derivatives" (MIT OCW)](https://ocw.mit.edu/courses/res-18-005-highlights-of-calculus-spring-2010/resources/big-picture-derivatives/)
+      — slope read from function pairs before any formula.
+- [ ] [David Tall, "Cognitive Roots"](https://homepages.warwick.ac.uk/staff/David.Tall/themes/cognitive-roots.html)
+      — local straightness ("looks straight when magnified") as the
+      cognitive root; the research backing the zoom device.
+- [ ] [A. Orton, "Students' understanding of differentiation" (1983)](https://link.springer.com/article/10.1007/BF00410540)
+      — 110 clinical interviews: the ordinate confusion, dx conflated
+      with finite increments, "rules without reasons".
+- [ ] [Leonhard Euler, Institutiones calculi differentialis I.VI (Bruce)](http://www.17centurymaths.com/contents/euler/diffcal/part1ch6.pdf)
+      — §180 d(ln x) = dx/x; §181 the score rule in Euler's words;
+      §183 the sum of scores; §186 d(a^x); §188 d(e^x) = e^x dx.
+- [ ] [Leonhard Euler, Introductio in analysin infinitorum I.VII (Bruce)](https://www.17centurymaths.com/contents/euler/introductiontoanalysisvolone/ch7vol1.pdf)
+      — §122 the letter e and its 23 decimals; §125 the series and
+      (1 + z/i)^i.
+- [ ] [Lawrence Murray, "Gradients of Softmax and Logsumexp"](https://indii.org/blog/gradients-of-softmax-and-logsumexp/)
+      — the explicit ∇LSE = softmax derivation via the log-derivative
+      rule.
+- [ ] [Nick Higham, "What Is the Log-Sum-Exp Function?"](https://nhigham.com/2021/01/05/what-is-the-log-sum-exp-function/)
+      — LSE properties and the stable shifted form (the gradient
+      itself lives in Murray's post).
+- [ ] [Gilbert Strang and Edwin Herman, OpenStax Calculus vol. 1, §3.6](https://openstax.org/books/calculus-volume-1/pages/3-6-the-chain-rule)
+      — the standard limits-first chain-rule treatment, for contrast.
+- [ ] [H. Jerome Keisler, Elementary Calculus: An Infinitesimal Approach](https://people.math.wisc.edu/~keisler/calc.html)
+      — the rigorous modern form of the infinitesimals-first camp.
+- [ ] [Jeff Miller, Earliest Uses of Symbols of Calculus (MacTutor)](https://mathshistory.st-andrews.ac.uk/Miller/mathsym/calculus/)
+      — Leibniz's dx, dy, dy/dx in the manuscript of November 11,
+      1675.
+- [ ] [Wikipedia, Chain rule (history section)](https://en.wikipedia.org/wiki/Chain_rule)
+      — Leibniz's 1676 memoir (with a sign error), l'Hôpital
+      implicit, Lagrange 1797 — citing Hernandez Rodriguez and Lopez
+      Fernandez (2010).
+- [ ] [Hernandez Rodriguez and Lopez Fernandez, on the chain rule's history](https://scholarworks.umt.edu/tme/vol7/iss2/10/)
+      — the underlying scholarship for the chain-rule history claims
+      (landing page; text paywalled at verification time).
+- [ ] [Wikipedia, Nova Methodus pro Maximis et Minimis](https://en.wikipedia.org/wiki/Nova_Methodus_pro_Maximis_et_Minimis)
+      — Leibniz's 1684 Acta Eruditorum paper, the first publication
+      of the differential calculus.
+- [ ] [Yu. V. Sidorov, "Exponential function" (Encyclopedia of Mathematics)](https://encyclopediaofmath.org/wiki/Exponential_function)
+      — (e^x)' = e^x as a modern reference statement.
+
 ## Ideas not yet built
 
 Rough queue, in roughly the order they build on each other:
 
-- The derivative as its own toolkit — power rule, chain rule, and the
-  notation this series deliberately went without.
+- ~~The derivative as its own toolkit~~ — delivered by this topic's
+  derivatives series; the chain rule and the score carry the kit.
 - ln as area under 1/t — the integral road not taken, and the honest
   start of accumulation.
 - Euler's formula and complex rotation — the other famous thing e does.

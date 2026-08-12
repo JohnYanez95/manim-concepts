@@ -54,7 +54,14 @@ gradient only in when-useful framing.
   restack on re-lint — all fixed, module clean; frame grids reviewed
   by eye across every beat, one further catch (the closer's takeaway
   box running near edge-to-edge, tightened)
-- [ ] Phase 3: README + wiki complete, `make test` green
+- [x] Phase 3: README + wiki complete, `make test` green (204
+  tests; calculus Scope grown to two series with the toolkit's
+  exclusions, the Ideas entry struck delivered, twenty references
+  landed unchecked for the maintainer's pass; wiki: node added, the
+  e-and-ln toolkit promise flipped with its residual promises kept,
+  two new delivered edges, both CTC-gradient rows narrowed to "only
+  the identity remains", zoom lineage and the strip's fifth stop
+  recorded, log entry appended)
 - [ ] Phase 4: local CodeRabbit + connection-auditor clean
 - [ ] Phase 5: PR, drafts cleaned, 1080p60 render verified
 
