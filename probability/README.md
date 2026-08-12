@@ -261,36 +261,38 @@ and start unchecked until a human verifies them.
 - [ ] [Grinstead & Snell, ch. 8 (source)](https://math.dartmouth.edu/~prob/prob/ch8.tex)
       — Theorem 8.2, the weak law `ProportionsConverge` names via
       Bernoulli; the 1713 attribution.
-- [ ] [OpenStax Introductory Statistics 2e, §4.3](https://openstax.org/books/introductory-statistics-2e/pages/4-3-binomial-distribution)
+- [ ] [Illowsky & Dean, OpenStax Introductory Statistics 2e, §4.3](https://openstax.org/books/introductory-statistics-2e/pages/4-3-binomial-distribution)
       — the binomial experiment conditions named in
       `TheBinomialColumns`.
-- [ ] [OpenStax Introductory Business Statistics 2e, §4.2](https://openstax.org/books/introductory-business-statistics-2e/pages/4-2-binomial-distribution)
+- [ ] [Holmes, Illowsky & Dean, OpenStax Introductory Business Statistics 2e, §4.2](https://openstax.org/books/introductory-business-statistics-2e/pages/4-2-binomial-distribution)
       — the explicit pmf formula (the sibling volume headlines what the
       statistics volume leaves to calculators).
-- [ ] [MIT 18.05, class 4b: expectation](https://ocw.mit.edu/courses/18-05-introduction-to-probability-and-statistics-spring-2022/mit18_05_s22_class04-prep-b.pdf)
+- [ ] [Orloff & Bloom, MIT 18.05, class 4b: expectation](https://ocw.mit.edu/courses/18-05-introduction-to-probability-and-statistics-spring-2022/mit18_05_s22_class04-prep-b.pdf)
       — the balance-point picture, "need not be a possible value", the
       outcome-table linearity proof, E = np by indicators.
-- [ ] [Blitzstein, Stat 110](https://stat110.hsites.harvard.edu/)
+- [ ] [Joe Blitzstein, Stat 110](https://stat110.hsites.harvard.edu/)
       — RV-as-function ordering; "sympathetic magic" (variable vs
       distribution), the error `SortTheSquare`'s twin beat refutes.
-- [ ] [3blue1brown, "Binomial distributions"](https://www.3blue1brown.com/lessons/binomial-distributions/)
+- [ ] [Grant Sanderson (3blue1brown), "Binomial distributions"](https://www.3blue1brown.com/lessons/binomial-distributions/)
       — the sequence-grouping route to C(n,k)p^k(1-p)^(n-k); its
       likelihood pivot marks the next series' door, not this one's.
-- [ ] [Seeing Theory, ch. 1 & 3](https://seeing-theory.brown.edu/basic-probability/index.html)
+- [ ] [Kunin et al., Seeing Theory, ch. 1 & 3](https://seeing-theory.brown.edu/basic-probability/index.html)
       — the distribution-first branch this series deliberately does not
       take (long-run simulation as meaning), for contrast.
-- [ ] [Chernoff & Russell, "The Equiprobability Bias" (PMC)](https://pmc.ncbi.nlm.nih.gov/articles/PMC4310748/)
-      — Lecoutre 1992: randomness read as uniformity, surviving
-      instruction — why `SortTheSquare` refutes by mechanism.
-- [ ] [Bayesian Spectacles, a Galton board vs its model](https://www.bayesianspectacles.org/a-galton-board-demonstration-of-why-all-statistical-models-are-misspecified/)
+- [ ] [Gauvrit & Morsanyi, "The Equiprobability Bias…" (PMC)](https://pmc.ncbi.nlm.nih.gov/articles/PMC4310748/)
+      — full title "The Equiprobability Bias from a Mathematical and
+      Psychological Perspective"; Lecoutre 1992's randomness-read-as-
+      uniformity, surviving instruction — why `SortTheSquare` refutes
+      by mechanism.
+- [ ] [Eric-Jan Wagenmakers (Bayesian Spectacles), a Galton board vs its model](https://www.bayesianspectacles.org/a-galton-board-demonstration-of-why-all-statistical-models-are-misspecified/)
       — why the physical board is not a binomial machine; the Scope
       exclusion's evidence.
-- [ ] [MacTutor, Blaise Pascal](https://mathshistory.st-andrews.ac.uk/Biographies/Pascal/)
+- [ ] [J J O'Connor and E F Robertson, "Blaise Pascal" (MacTutor)](https://mathshistory.st-andrews.ac.uk/Biographies/Pascal/)
       — the five-letter 1654 correspondence and the problem of points.
-- [ ] [MacTutor, Christiaan Huygens](https://mathshistory.st-andrews.ac.uk/Biographies/Huygens/)
+- [ ] [J J O'Connor and E F Robertson, "Christiaan Huygens" (MacTutor)](https://mathshistory.st-andrews.ac.uk/Biographies/Huygens/)
       — De Ratiociniis in Ludo Aleae (1657), the first printed
       probability work: `TheBalancePoint`'s fair-price close.
-- [ ] [MacTutor, Jacob Bernoulli](https://mathshistory.st-andrews.ac.uk/Biographies/Bernoulli_Jacob/)
+- [ ] [J J O'Connor and E F Robertson, "Jacob Bernoulli" (MacTutor)](https://mathshistory.st-andrews.ac.uk/Biographies/Bernoulli_Jacob/)
       — died 1705; Ars Conjectandi, Basel 1713 — the proved-by-~1689 vs
       printed-1713 split `ProportionsConverge` keeps distinct.
 - [ ] [Wikipedia, Ars Conjectandi](https://en.wikipedia.org/wiki/Ars_Conjectandi)

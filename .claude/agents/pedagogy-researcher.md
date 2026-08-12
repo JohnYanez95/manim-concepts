@@ -43,7 +43,14 @@ a human — with these sections:
 - MISCONCEPTIONS: each with the counter-explanation that works
 - SOURCES: URLs with one-line descriptions (these become unverified
   `- [ ]` references in a topic README — accuracy of the description
-  matters)
+  matters). Each entry names its AUTHOR as the page credits them: look
+  for author/cite/written-by fields, bylines, and "how to cite" boxes
+  before falling back to the site name. A personally authored page is
+  cited by its author (MacTutor pages are J J O'Connor and E F
+  Robertson; Bayesian Spectacles posts are Eric-Jan Wagenmakers; a PMC
+  paper is its listed authors) — never invent or guess an attribution;
+  institutional pages with no credited author (Wikipedia, OEIS) may
+  stand under the site name alone.
 - TECHNICAL PITFALLS: what explanations commonly get wrong or gloss over
 - KEY TAKEAWAY: one paragraph — the single strongest device/example for
   this series and how it connects to what the repo already teaches
