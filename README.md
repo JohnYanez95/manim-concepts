@@ -123,6 +123,7 @@ Every concept module takes the same flags.
 | `-q`, `--quality` | `draft` `medium` `high` `4k` | `high` | 480p15 / 720p30 / **1080p60** / 2160p60 |
 | `-s`, `--scene` | scene name, repeatable | all scenes | Errors out on an unknown name rather than rendering nothing |
 | `-f`, `--format` | `mp4` `gif` `png` `webm` `mov` | `mp4` | |
+| `-j`, `--jobs` | process count | `1` | Renders scenes in parallel processes — a module's wall-clock divides by N; warm the LaTeX cache with a draft pass first |
 | `-p`, `--preview` | flag | off | Opens each render when it finishes |
 | `-l`, `--list` | flag | — | Prints the scenes in the module and exits |
 | `--no-cache` | flag | off | Ignores cached partial movies; use while iterating |
