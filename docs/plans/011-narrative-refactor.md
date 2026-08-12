@@ -39,9 +39,19 @@ on-screen text changes get re-rendered.
 
 ## Checklist
 
-- [ ] Phase 0: audit findings pinned; dispositions approved
-- [ ] Phase 1: prose-only fixes, `make test` green
-- [ ] Phase 2: scene edits at draft, linter clean, verified by eye
+- [x] Phase 0: findings pinned; dispositions D1–D5 approved by the
+  maintainer as proposed, 2026-08-12
+- [x] Phase 1: the aces-license README cell reworded to claim only
+  what the independence scene shows; `make test` green (212)
+- [x] Phase 2: two scene edits — `TheUnderflowCliff` gains the ln/e
+  loan caption (and the FadeOut group carries it out; `on_frame`
+  imported), `TheMultiplicationRule`'s aces line now reads
+  "Independence priced the aces by counting alone — now factor it:";
+  algebra Scope's deferral bullet grown to name both on-screen
+  captions and scoped base-generic to "all other content". Both
+  touched scenes lint clean (four latent findings in untouched
+  shipped scenes recorded as out of scope); both beats verified by
+  frame at draft
 - [ ] Phase 3: reviews clean
 - [ ] Phase 4: PR, bot review, touched finals rendered
 

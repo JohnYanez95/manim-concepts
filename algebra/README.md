@@ -14,10 +14,12 @@ Deliberately **not** covered here:
 
 - **e and the natural logarithm.** Every honest road to e — limits,
   derivatives, areas — is calculus, now taught in
-  [`calculus/`](../calculus/README.md). One caption names the deferral
-  on screen, and `calculus/`'s `TheSplitYear` opens by replaying it.
-  All content here stays base-generic (change of base is a constant
-  rescale), built in bases 2, 3, and 10.
+  [`calculus/`](../calculus/README.md). Two captions name the deferral
+  on screen — `MultiplyIsAdd`'s "that story waits", and the underflow
+  scene's loan note on the ln-form log-add identity — and `calculus/`'s
+  `TheSplitYear` opens by replaying the first while `TheDebtRepaid`
+  re-reads the second. All other content stays base-generic (change of
+  base is a constant rescale), built in bases 2, 3, and 10.
 - The inverse-function graph as a *definition* — documented to misfire;
   it appears only as a payoff, never as the starting point: exactly the
   close `calculus/`'s `TheDebtRepaid` delivers.

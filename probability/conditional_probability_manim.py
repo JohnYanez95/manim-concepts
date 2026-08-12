@@ -334,8 +334,11 @@ class TheMultiplicationRule(ConceptScene):
 
         # --- the aces payoff ------------------------------------------------------
         self.play(FadeOut(rectangle_note), FadeOut(counting))
+        # The earlier scene priced the aces by counting alone (1/221 vs the
+        # product-rule 1/169); the factorization below is THIS scene's new
+        # object — claim only what was shown.
         owed = Text(
-            "The independence series showed this with no license:",
+            "Independence priced the aces by counting alone — now factor it:",
             font_size=BODY_SIZE,
         ).move_to(0.45 * UP)
         debt = MathTex(
