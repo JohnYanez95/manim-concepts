@@ -348,3 +348,28 @@ reordered.
   noted on its row
 - linear_algebra/ maintainer call still open
 - stamp: advance to 74c4fe2
+
+## [2026-08-11] series | softmax-likelihood lands (plan 008, phase 3)
+
+- node `softmax-likelihood` added: six scenes in
+  `probability/softmax_likelihood_manim.py`
+- flipped: independence → softmax-likelihood (the CTC bridge's
+  remaining half — "likelihood is next" answered, the conditional
+  license quoted on screen in the join)
+- new delivered edges: random-variables → (two-lens table on the
+  sorted-square pmfs; the owned die; ProportionsConverge read
+  backwards), logarithms → (the strip carries likelihood; the
+  evidence ruler named a log-likelihood-ratio ruler; the cliff rerun;
+  the LSE ruler as smooth max), e-and-ln → (calculus/'s "why e in
+  every probability machine" debt paid via base-2 = (4/7, 2/7, 1/7)),
+  bayes-rule → (the ratio as a posterior-ladder rung; the guard
+  pointing at the prior-and-renormalize move)
+- new promised edge: softmax-likelihood → the CTC gradient identity
+  (the closer's on-screen foreshadow); the ctc-alignment gradient row
+  narrowed accordingly — only the derivative toolkit and the identity
+  remain ungated
+- device: sort-the-square lineage extended to TheLikelihoodLens (pmf
+  columns become the two-lens table)
+- mid-phase interlude recorded in plan 008: two maintainer-reported
+  collisions in shipped random-variables scenes fixed and re-rendered;
+  layout linter + placement guards added repo-wide

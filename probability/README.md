@@ -3,7 +3,7 @@
 ## Scope
 
 Probability as proportion, built visually: the sample space as a unit
-square, events as regions, probability as area. Four series so far. The
+square, events as regions, probability as area. Five series so far. The
 first covers **independence** — the product rule P(A∩B) = P(A)·P(B) as
 the *primary* definition, why it is the probability-weighted upgrade of
 the counting grid, the confusions it attracts, and the product over a
@@ -20,7 +20,14 @@ function (not a set), the pmf born by sorting the quartered square,
 expectation as the balance point, linearity without independence, the
 binomial assembled from cell counts and cell areas, and the swamping
 intuition quantified — closing the oldest promise the counting series
-made.
+made. The fifth covers **softmax and likelihood** — likelihood as the
+row lens on the binomial table (data pinned, parameter sweeping),
+maximum likelihood as the row's peak, the log as the native scale of
+accumulating independent evidence, softmax as exp-then-normalize
+forced by shift invariance, temperature and the base-change answer to
+"why e", and negative log-likelihood as the visible gap on the
+log-sum-exp ruler — the remaining half of the bridge promised to
+`deep_learning/`, delivered.
 
 This topic exists because two earlier ones promised it: the
 [multiplicative rule](../combinatorics/README.md) counts pairs as
@@ -57,6 +64,21 @@ Deliberately **not** covered here:
   faithful picture, not developed as measure theory.
 - Counting itself — that is `combinatorics/`'s job; this topic starts
   where counting hands over to proportion.
+- The softmax gradient as a taught result. `TheLossThatTrains`
+  foreshadows "softmax output minus occupancy" in prose, but the repo
+  has no derivative toolkit yet — the identity waits for the CTC
+  gradient series.
+- Entropy, KL divergence, and soft-target cross-entropy. The one-hot
+  collapse is all the loss scene needs; the information-theoretic
+  story is queued behind the bits/entropy thread in `algebra/`.
+- Calibration methods beyond the one caveat beat. Temperature scaling
+  is *named* (Guo et al. 2017) to make the point that softmax outputs
+  are asserted, not measured — the methods themselves are out of
+  scope.
+- MLE beyond the discrete world: no Gaussian, no densities, no
+  regularity conditions — likelihood values here are always genuine
+  probabilities of the data, which is the simplification the whole
+  series leans on.
 
 ## Concepts
 
@@ -325,15 +347,87 @@ recorded. Future entries start unchecked until a human does the same.
 - [X] [Wikipedia, Binomial distribution](https://en.wikipedia.org/wiki/Binomial_distribution)
       — pmf, mean np, the conditions cross-check.
 
+From the plan-008 research pass
+([`docs/plans/008-probability-softmax-likelihood.md`](../docs/plans/008-probability-softmax-likelihood.md)),
+for the softmax/likelihood series:
+
+- [ ] [Josh Starmer, "In Statistics, Probability is not Likelihood" (StatQuest)](https://www.youtube.com/watch?v=pYxNSUDSFH4)
+      — the fixed-distribution/varying-data vs fixed-data/varying-
+      distribution split; the evidence that the distinction wants its
+      own lesson before MLE.
+- [ ] [Josh Starmer, "Maximum Likelihood, clearly explained!!!" (StatQuest)](https://www.youtube.com/watch?v=XepXtl9YKwc)
+      — candidate distributions sliding under pinned data; MLE as the
+      peak.
+- [ ] [Alexander Etz, "Introduction to the Concept of Likelihood and Its Applications"](https://journals.sagepub.com/doi/10.1177/2515245917744314)
+      — likelihood as proportional to the probability of data, not a
+      distribution over parameters; ratios as evidence; the Bayes
+      connection scene 2 points at.
+- [ ] [John Aldrich, "R. A. Fisher and the Making of Maximum Likelihood 1912–1922"](https://jhanley.biostat.mcgill.ca/bios601/Likelihood/Fisher%20and%20history%20of%20mle.pdf)
+      — the verbatim Fisher 1921/1922 quotes behind scene 1's naming
+      beat (Metron 1; Phil. Trans. Roy. Soc. A 222).
+- [ ] [Kristoffer Magnusson, "Understanding Maximum Likelihood" (interactive)](https://rpsychologist.com/likelihood/)
+      — the slider-driven likelihood-curve device, and the survey of
+      what this series deliberately defers.
+- [ ] [Ian Goodfellow, Yoshua Bengio and Aaron Courville, Deep Learning, ch. 6](https://www.deeplearningbook.org/contents/mlp.html)
+      — §6.2.2.3: log-likelihood "undoes the exp",
+      log softmax = z − LSE(z), the subtract-max trick, soft argmax.
+- [ ] [John S. Bridle, "Training Stochastic Model Recognition…" (NIPS 1989)](https://proceedings.neurips.cc/paper/1989/file/0336dcbab05b9d5ad24f4333c7658a0e-Paper.pdf)
+      — the coinage ("we like to refer to it as soft max") and the
+      gradient-identity prose the closer foreshadows.
+- [ ] [John S. Bridle, "Probabilistic Interpretation…" (Springer, 1990)](https://link.springer.com/chapter/10.1007/978-3-642-76153-9_28)
+      — the conventional "Bridle 1990" citation; normalized
+      exponentials as conditional probabilities.
+- [ ] [Guo, Pleiss, Sun and Weinberger, "On Calibration of Modern Neural Networks"](https://arxiv.org/abs/1706.04599)
+      — overconfidence and temperature scaling; the caveat beat's
+      source.
+- [ ] [jdhao, "Softmax Temperature"](https://jdhao.github.io/2022/02/27/temperature_in_softmax/)
+      — the (1, 5, 7, 10) temperature sweep with near-one-hot and
+      near-uniform endpoints.
+- [ ] [Joseph Salmon and François-David Collin, "Softmax or soft(arg)max?"](https://josephsalmon.eu/blog/softmax/)
+      — soft-argmax naming, log-sum-exp as the smooth max, the
+      temperature limits.
+- [ ] [Gao Hongnan, "Why softmax preserves order…"](https://www.gaohongnan.com/playbook/why_softmax_preserves_order_translation_invariant_not_invariant_scaling.html)
+      — shift invariance yes, scale invariance no — the correction the
+      dial scene keeps straight.
+- [ ] [Remy Lau, "Cross-entropy, negative log-likelihood, and all that jazz"](https://towardsdatascience.com/cross-entropy-negative-log-likelihood-and-all-that-jazz-47a95bd2e81/)
+      — NLL and cross-entropy as the same masking operation; the
+      PyTorch naming confusion.
+- [ ] [James D. McCaffrey, "PyTorch CrossEntropyLoss vs NLLLoss"](https://jamesmccaffreyblog.com/2020/06/11/pytorch-crossentropyloss-vs-nllloss-cross-entropy-loss-vs-negative-log-likelihood-loss/)
+      — CrossEntropyLoss = LogSoftmax + NLLLoss, the alias beat's
+      practical anchor.
+- [ ] [Penn State STAT 415, lesson 1.2: Maximum Likelihood Estimation](https://online.stat.psu.edu/stat415/lesson/1/1.2)
+      — the standard binomial L(p) = p^k(1−p)^(n−k) lesson with MLE at
+      k/n.
+- [ ] [Kilian Q. Weinberger, CS4780: "Estimating Probabilities from Data"](https://www.cs.cornell.edu/courses/cs4780/2022fa/lectures/lecturenote04.html)
+      — coin-flip MLE with the peak at the empirical proportion; the
+      MLE→MAP progression behind the not-a-posterior guard.
+- [ ] [Grant Sanderson, "But what is a GPT?" (3blue1brown)](https://www.3blue1brown.com/lessons/gpt)
+      — the logit-bars → exp → normalize morph and temperature as the
+      practitioner meets them.
+- [ ] [Baeldung CS, "Softmax temperature"](https://www.baeldung.com/cs/softmax-temperature)
+      — the confidence-dial framing: low sharpens, high flattens,
+      winner unchanged.
+- [ ] [Wikipedia, Softmax function](https://en.wikipedia.org/wiki/Softmax_function)
+      — properties reference: Bridle attribution, shift invariance,
+      base/temperature equivalence.
+- [ ] [Awni Hannun et al., "Deep Speech: Scaling up end-to-end speech recognition"](https://arxiv.org/abs/1412.5567)
+      — the 29-class character softmax ({a…z, space, apostrophe,
+      blank}) named in the closer.
+- [ ] [Radford, Wu, Child, Luan, Amodei and Sutskever, GPT-2 report](https://cdn.openai.com/better-language-models/language_models_are_unsupervised_multitask_learners.pdf)
+      — "the vocabulary is expanded to 50,257", the closer's other
+      anchor.
+- [ ] [J. Willard Gibbs, Elementary Principles in Statistical Mechanics (1902)](https://archive.org/details/elementaryprinci00gibbrich)
+      — the canonical-distribution form softmax(−E/kT) descends from;
+      cited for the form, not a specific 1868 claim.
+
 ## Ideas not yet built
 
 Rough queue, in roughly the order they build on each other:
 
-- Per-frame softmax as a distribution, likelihood and log-likelihood —
-  the remaining half of the bridge promised to `deep_learning/`. Both
-  gates are now delivered (e via [`calculus/`](../calculus/README.md),
-  distributions via this topic's random-variables series) — it is the
-  roadmap's next stop.
+- ~~Per-frame softmax as a distribution, likelihood and
+  log-likelihood~~ — delivered by this topic's softmax/likelihood
+  series; the bridge to `deep_learning/` now waits only on the
+  gradient story.
 - Explaining away — the verified-but-unbuilt half of the conditional
   independence story (independence ⇏ CI: two fair flips given "exactly
   one head", 0 ≠ 1/4; plan 003's anchors).

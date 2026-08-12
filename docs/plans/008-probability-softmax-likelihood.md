@@ -73,7 +73,13 @@ at 1080p60.
   collision in scene 1, edge-clipped caption stacks in scenes 3–5,
   the persisting defect caption in scene 4, and the join-beat pileup
   in scene 6, all fixed and re-verified in round two
-- [ ] Phase 3: README + wiki complete, `make test` green
+- [x] Phase 3: README + wiki complete, `make test` green (193 tests;
+  Scope grown to five series with four new exclusions, the concepts
+  table filled at phase 2, twenty-two references landed unchecked for
+  the maintainer's pass, the Ideas softmax entry struck as delivered;
+  wiki: node added, the independence promise flipped, four new
+  delivered edges + the gradient promise, sort-the-square lineage
+  extended, log entry appended)
 - [ ] Phase 4: local CodeRabbit + connection-auditor clean
 - [ ] Phase 5: PR, drafts cleaned, 1080p60 render verified
 
