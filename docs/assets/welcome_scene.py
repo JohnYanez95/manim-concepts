@@ -71,26 +71,26 @@ class Welcome(ConceptScene):
         self.play(GrowArrow(arrows[0]), FadeIn(levels[1], shift=0.2 * RIGHT), run_time=0.6)
         self.play(GrowArrow(arrows[1]), FadeIn(levels[2], shift=0.2 * RIGHT), run_time=0.6)
 
-        topics = (
-            VGroup(
-                *[
-                    Text(t, font_size=LABEL_SIZE, color=MUTED)
-                    for t in [
-                        "counting",
-                        "CTC",
-                        "independence",
-                        "conditioning",
-                        "Bayes",
-                        "logs",
-                        "e & ln",
-                    ]
-                ]
-            )
-            .arrange(RIGHT, buff=0.55)
-            .move_to(0.8 * DOWN)
-        )
+        # Ten series no longer fit one line; two rows of five keep every
+        # name readable without shrinking the type.
+        row_one = VGroup(
+            *[
+                Text(t, font_size=LABEL_SIZE, color=MUTED)
+                for t in ["counting", "CTC", "independence", "conditioning", "Bayes"]
+            ]
+        ).arrange(RIGHT, buff=0.55)
+        row_two = VGroup(
+            *[
+                Text(t, font_size=LABEL_SIZE, color=MUTED)
+                for t in ["logs", "e & ln", "random variables", "softmax", "derivatives"]
+            ]
+        ).arrange(RIGHT, buff=0.55)
+        topics = VGroup(row_one, row_two).arrange(DOWN, buff=0.28).move_to(0.95 * DOWN)
         self.play(
-            LaggedStart(*[FadeIn(t, shift=0.15 * UP) for t in topics], lag_ratio=0.12), run_time=1.1
+            LaggedStart(
+                *[FadeIn(t, shift=0.15 * UP) for row in topics for t in row], lag_ratio=0.12
+            ),
+            run_time=1.1,
         )
 
         claim = Text(

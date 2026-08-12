@@ -2,7 +2,8 @@
 
 `welcome.gif` is the one committed render — the front page's animation,
 produced by the repo itself. To regenerate after editing
-`welcome_scene.py` (or when a new topic joins its hand-listed row):
+`welcome_scene.py` (or when a new series joins its hand-listed row — the row lists
+series, not topics):
 
 ```bash
 uv run python docs/assets/welcome_scene.py -q draft

@@ -2,7 +2,8 @@
 
 ## Scope
 
-e and the natural logarithm, built on `algebra/`'s counting strip: the
+Two series so far. The first: e and the natural logarithm, built on
+`algebra/`'s counting strip: the
 strides of the strip come in every size, and this series finds the one
 that is nature's own. Compound interest poses the question (Bernoulli's
 ceiling between 2 and 3), a three-beat visual notion of local growth
@@ -12,22 +13,36 @@ unit every earlier strip was secretly ruled in. The series pays two
 standing promises: `MultiplyIsAdd`'s on-screen deferral ("calculus
 later makes one base natural") and `TheUnderflowCliff`'s rendered
 ln-identity, re-read symbol by symbol once every symbol means
-something.
+something. The second: **the derivative as a toolkit** — d/dx naming
+the settling ratio the zoom built, nudge geometry for x², the sum and
+chain rules, e^x and ln differentiated, the score function finding
+the likelihood peak by hand, and the smooth max's sensitivities
+revealed as the softmax shares — deliberately tiny, because under the
+log every product the CTC road carries becomes a sum.
 
 Deliberately **not** covered here:
 
-- **The derivative as a toolkit.** Only "slope at a point, read by
-  zooming until straight" is built — no rules, no d/dx notation, no
-  limit formalism ("increasing and bounded has a limit" is named as
-  analysis, never derived).
+- **Limit formalism.** The first series reads slopes by zooming until
+  straight; the second names that ratio d/dx and keeps dt a real
+  number throughout — ε–δ and "increasing and bounded has a limit"
+  stay named as analysis, never derived.
+- **The power, product and quotient rules as drill.** Only x² appears,
+  as geometry; the score function (d ln f = f′/f) replaces the product
+  rule wherever this repo differentiates — if the CTC gradient series
+  ever needs a bare product rule, that decision belongs to it (and its
+  picture is already owned: `TheProductRule`'s rectangle, grown at the
+  margin).
+- **Second-derivative tests, Taylor series, implicit and trig
+  differentiation** — none of them gate the CTC gradient.
 - **Integrals.** ln as the area under 1/t is named as the road not
   taken; accumulation waits for its own series.
 - **Complex exponentials and Euler's formula** — rotation is a
   different story.
-- **Softmax and likelihood.** Why e appears in every probability
-  machine is owned by `probability/`'s softmax/likelihood series —
-  delivered: its dial scene answers with this series' own ln
-  (every base above 1 is e at another temperature).
+- **Softmax and likelihood as content.** The concepts live in
+  `probability/`'s softmax/likelihood series (its dial scene answers
+  "why e" with this topic's own ln); the derivatives series here only
+  *differentiates* those owned objects — the score of a likelihood,
+  the sensitivities of the smooth max — and teaches neither afresh.
 
 ## Concepts
 
@@ -58,15 +73,41 @@ uv run python calculus/e_and_ln_manim.py --list
 
 See the [root README](../README.md) for the full flag list.
 
+### derivatives_manim.py
+
+Watch after the e-and-ln series — `ZoomUntilStraight` built the
+device this series names, and the mystery constants are about to
+become derivatives. The toolkit is deliberately tiny: under the log,
+every product the CTC road carries becomes a sum, so the sum rule,
+the chain rule, and two owned derivatives are the whole kit.
+
+| # | Scene | Formula | What it says | Why it's true | When it's useful |
+| --- | --- | --- | --- | --- | --- |
+| 1 | `TheSlopeIsAFunction` | $\frac{d}{dx}$ | Every smooth curve carries a second curve — its slope at each point — and d/dx names the settling ratio the zoom built. | Zoom until straight at several points of one parabola and plot the read-offs: the forward quotients at x = 1 run 3, 2.1, 2.01, 2.001 — literally 2 + h — settling to 2; the dual graph keeps height and slope visibly different numbers; \|x\| never straightens, so the device needs smooth. | The object every gradient is made of; Leibniz's dy/dx (1675 manuscript, 1684 print) is the notation this repo commits to, because it makes the chain rule look like cancelling fractions. |
+| 2 | `NudgeInNudgeOut` | $d(x^2) = 2x\,dx + dx^2$ | For x² the derivative is drawn, not computed — and the discarded term dies for a visible reason. | Grow the square's side by dx: two x·dx strips and a dx·dx corner; halve dx and the strips halve while the corner quarters — second-order small, discarded honestly; at x = 3 the slope is 6 (finite check 6.01); the number-line view shows the same fact as a local stretch factor (×2 near 1, ×6 near 3). | "Nudge in, response out" is the operational meaning of every derivative downstream — and the stretch factor is the seed the chain rule harvests. |
+| 3 | `NudgesAddNudgesCompose` | $\frac{dy}{dx} = \frac{dy}{du}\cdot\frac{du}{dx}$ | The toolkit's two load-bearing rules: changes add across a sum, rates multiply along a chain. | Heights stack, so their changes stack; a nudge propagates through three number lines (dx causes du causes dy) with stretch factors composing — (2x)² at x = 1: inner rate 2, outer rate 4 at u = 2, product 8, and the quotient table 8.4, 8.04, 8.004 refutes the classic mistake (outer rate at x = 1 predicts 4); the du cancellation is Leibniz's notation keeping its promise. | Every use downstream is "ln of something" or "exp of something" — the chain rule is the single most load-bearing tool in the kit. |
+| 4 | `TheCurveThatIsItsOwnSlope` | $\frac{d}{dx}e^x = e^x,\ \ \frac{d}{dx}\ln x = \frac{1}{x}$ | The mystery constants were derivatives all along, and e is the base whose constant is 1. | The slope of b^x is ln b · b^x (the owned 0.6931/1.0986/2.3026 lineup); (e^dt − 1)/dt settles through 1.7183, 1.0517, 1.0050, 1.0005 to 1 — by definition and measurement, nothing proved twice; ln′ = 1/x falls out of differentiating the undo e^(ln x) = x, and the y = x mirror swaps rise and run (slope 1/e at x = e). | The two derivatives the whole CTC road needs; Euler named e in 1748 (Introductio §122) and wrote d(e^x) = e^x dx in 1755 (Institutiones §188). |
+| 5 | `ZeroSlopeFindsThePeak` | $\frac{d \ln L}{dp} = \frac{3}{p} - \frac{1}{1-p} = 0 \Rightarrow \hat{p} = \tfrac34$ | The curve-sweep is over: set the score to zero and the likelihood peak falls out of a linear equation. | The score d ln f = f′/f is the counting strip differentiated — under ln, products become sums of relative rates (Euler §181); on the owned curve the score runs +4, +0.9524, 0, −1.25 at p = 1/2, 0.7, 3/4, 0.8, flipping sign exactly at the peak, and the general line k/p − (n−k)/(1−p) = 0 derives p̂ = k/n — the claim `ProportionsConverge` made, now a theorem; the direct route 4p²(3 − 4p) has a second root at p = 0 that is a valley floor, and x³'s slope touches zero with no peak at all — zero slope is necessary, not sufficient; the score needs f > 0. | Maximum likelihood done honestly wherever a model is fitted — and the sign-change check is the habit that survives every optimizer. |
+| 6 | `TheSmoothMaxsShares` | $\frac{\partial}{\partial z_i}\mathrm{LSE}(z) = \mathrm{softmax}(z)_i$ | The sensitivities of the smooth max are the softmax shares — and the loss gradient is softmax minus one-hot. | Nudge z₁ = 2 by 0.01 and LSE moves 0.00666 = e²'s share of the total; one chain rule and one sum rule derive ∂ᵢLSE = softmaxᵢ, the owned bars reborn as a gradient read-out summing to 1; NLL = LSE − z_a (the correct class scoring 2) differentiates to (−0.3348, 0.2447, 0.0900) = p − one-hot, and as the correct score falls behind the slope walks −0.9100, −0.9868, −0.9993 → −1 — the softmax series' "roughly linear gap", now a theorem. | The gradient inside every classifier's training step; each frame of CTC hands this picture a different target — the gradient series is next. |
+
+Renders: `01_TheSlopeIsAFunction.mp4` … `06_TheSmoothMaxsShares.mp4`.
+
+```bash
+uv run python calculus/derivatives_manim.py
+uv run python calculus/derivatives_manim.py --list
+```
+
 ## References
 
 Ticks are human-gated — see
 [reference verification](../README.md#reference-verification-is-human-gated).
-Every entry below came out of the plan-006 research pass
+The first block below came out of the plan-006 research pass
 ([`docs/plans/006-calculus-e-ln.md`](../docs/plans/006-calculus-e-ln.md))
-and started unchecked; the maintainer reviewed the list (dropping two),
-verified all sixteen that remain, and directed the ticks be recorded.
-Future entries start unchecked until a human does the same.
+and started unchecked; the maintainer reviewed that list (dropping
+two), verified all sixteen that remain, and directed the ticks be
+recorded. The plan-009 block that follows was likewise verified by
+the maintainer (one MacTutor credit corrected in his pass) and ticked
+on his instruction.
 
 - [X] [3blue1brown, "What's so special about Euler's number e?"](https://www.3blue1brown.com/lessons/eulers-number)
       — slope of $b^x$ proportional to itself; the measured constants
@@ -113,12 +154,76 @@ Future entries start unchecked until a human does the same.
       so these backed the two computational routes until the
       maintainer's verification closed the gap.
 
+From the plan-009 research pass
+([`docs/plans/009-calculus-derivatives.md`](../docs/plans/009-calculus-derivatives.md)),
+for the derivatives series (the two 3blue1brown lessons above, already
+verified for the e-and-ln series, carry into this one):
+
+- [X] [Grant Sanderson, "The Essence of Calculus" (series)](https://www.3blue1brown.com/lessons/essence-of-calculus/)
+      — the visual-first sequence this series' ordering follows:
+      intuition before limits, limits arriving last.
+- [X] [Grant Sanderson, "Power Rule through geometry"](https://www.3blue1brown.com/lessons/derivatives-power-rule/)
+      — the x² square nudge: two strips of 2x·dx and a discardable
+      dx² corner.
+- [X] [Grant Sanderson, "Visualizing the chain rule and product rule"](https://www.3blue1brown.com/lessons/chain-rule-and-product-rule/)
+      — stacked heights for the sum rule; the propagating nudge
+      through three number lines.
+- [X] [Grant Sanderson, "The other way to visualize derivatives"](https://www.3blue1brown.com/lessons/derivatives-and-transforms)
+      — the derivative as a local stretch factor; composed maps
+      compose their factors.
+- [X] [Silvanus P. Thompson, Calculus Made Easy (1910)](https://www.gutenberg.org/files/33283/33283-pdf.pdf)
+      — dx as "a little bit of x"; second-order smallness as the
+      visible reason the corner dies.
+- [X] [Gilbert Strang, "Big Picture of Calculus" (MIT OCW)](https://ocw.mit.edu/courses/res-18-005-highlights-of-calculus-spring-2010/resources/big-picture-of-calculus/)
+      — calculus as pairs of functions: one tells how the other
+      changes — the dual-graph device.
+- [X] [Gilbert Strang, "Big Picture: Derivatives" (MIT OCW)](https://ocw.mit.edu/courses/res-18-005-highlights-of-calculus-spring-2010/resources/big-picture-derivatives/)
+      — slope read from function pairs before any formula.
+- [X] [David Tall, "Cognitive Roots"](https://homepages.warwick.ac.uk/staff/David.Tall/themes/cognitive-roots.html)
+      — local straightness ("looks straight when magnified") as the
+      cognitive root; the research backing the zoom device.
+- [X] [A. Orton, "Students' understanding of differentiation" (1983)](https://link.springer.com/article/10.1007/BF00410540)
+      — 110 clinical interviews: the ordinate confusion, dx conflated
+      with finite increments, "rules without reasons".
+- [X] [Leonhard Euler, Institutiones calculi differentialis I.VI (Bruce)](http://www.17centurymaths.com/contents/euler/diffcal/part1ch6.pdf)
+      — §180 d(ln x) = dx/x; §181 the score rule in Euler's words;
+      §183 the sum of scores; §186 d(a^x); §188 d(e^x) = e^x dx.
+- [X] [Leonhard Euler, Introductio in analysin infinitorum I.VII (Bruce)](https://www.17centurymaths.com/contents/euler/introductiontoanalysisvolone/ch7vol1.pdf)
+      — §122 the letter e and its 23 decimals; §125 the series and
+      (1 + z/i)^i.
+- [X] [Lawrence Murray, "Gradients of Softmax and Logsumexp"](https://indii.org/blog/gradients-of-softmax-and-logsumexp/)
+      — the explicit ∇LSE = softmax derivation via the log-derivative
+      rule.
+- [X] [Nick Higham, "What Is the Log-Sum-Exp Function?"](https://nhigham.com/2021/01/05/what-is-the-log-sum-exp-function/)
+      — LSE properties and the stable shifted form (the gradient
+      itself lives in Murray's post).
+- [X] [Gilbert Strang and Edwin Herman, OpenStax Calculus vol. 1, §3.6](https://openstax.org/books/calculus-volume-1/pages/3-6-the-chain-rule)
+      — the standard limits-first chain-rule treatment, for contrast.
+- [X] [H. Jerome Keisler, Elementary Calculus: An Infinitesimal Approach](https://people.math.wisc.edu/~keisler/calc.html)
+      — the rigorous modern form of the infinitesimals-first camp.
+- [X] [Jeff Miller, Earliest Uses of Symbols of Calculus](https://mathshistory.st-andrews.ac.uk/Miller/mathsym/calculus/)
+      — hosted on MacTutor, created and maintained by John O'Connor
+      and Edmund Robertson (University of St Andrews); Leibniz's dx,
+      dy, dy/dx in the manuscript of November 11, 1675.
+- [X] [Wikipedia, Chain rule (history section)](https://en.wikipedia.org/wiki/Chain_rule)
+      — Leibniz's 1676 memoir (with a sign error), l'Hôpital
+      implicit, Lagrange 1797 — citing Hernandez Rodriguez and Lopez
+      Fernandez (2010).
+- [X] [Hernandez Rodriguez and Lopez Fernandez, on the chain rule's history](https://scholarworks.umt.edu/tme/vol7/iss2/10/)
+      — the underlying scholarship for the chain-rule history claims
+      (landing page; text paywalled at verification time).
+- [X] [Wikipedia, Nova Methodus pro Maximis et Minimis](https://en.wikipedia.org/wiki/Nova_Methodus_pro_Maximis_et_Minimis)
+      — Leibniz's 1684 Acta Eruditorum paper, the first publication
+      of the differential calculus.
+- [X] [Yu. V. Sidorov, "Exponential function" (Encyclopedia of Mathematics)](https://encyclopediaofmath.org/wiki/Exponential_function)
+      — (e^x)' = e^x as a modern reference statement.
+
 ## Ideas not yet built
 
 Rough queue, in roughly the order they build on each other:
 
-- The derivative as its own toolkit — power rule, chain rule, and the
-  notation this series deliberately went without.
+- ~~The derivative as its own toolkit~~ — delivered by this topic's
+  derivatives series; the chain rule and the score carry the kit.
 - ln as area under 1/t — the integral road not taken, and the honest
   start of accumulation.
 - Euler's formula and complex rotation — the other famous thing e does.

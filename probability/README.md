@@ -65,9 +65,10 @@ Deliberately **not** covered here:
 - Counting itself — that is `combinatorics/`'s job; this topic starts
   where counting hands over to proportion.
 - The softmax gradient as a taught result. `TheLossThatTrains`
-  foreshadows "softmax output minus occupancy" in prose, but the repo
-  has no derivative toolkit yet — the identity waits for the CTC
-  gradient series.
+  foreshadows "softmax output minus occupancy" in prose; the
+  single-frame half (p − one-hot) is now taught by `calculus/`'s
+  derivative-toolkit series — the occupancy generalization waits for
+  the CTC gradient series.
 - Entropy, KL divergence, and soft-target cross-entropy. The one-hot
   collapse is all the loss scene needs; the information-theoretic
   story is queued behind the bits/entropy thread in `algebra/`.

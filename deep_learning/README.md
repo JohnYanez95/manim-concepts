@@ -114,9 +114,10 @@ Rough queue, in roughly the order they build on each other:
 - The gradient identity — per-frame gradient is softmax output minus
   posterior occupancy, which is what makes the error-signal figure
   legible. Its groundwork now exists: `probability/`'s
-  softmax/likelihood series delivers NLL as the LSE gap and
-  foreshadows the identity on screen; what remains is the derivative
-  toolkit and the identity itself.
+  softmax/likelihood series delivers NLL as the LSE gap, and
+  `calculus/`'s derivative toolkit leaves p − one-hot itself on
+  screen (`TheSmoothMaxsShares`); what remains is the identity
+  itself.
 - ~~Log-space computation~~ — delivered by
   [`algebra/`](../algebra/README.md)'s `TheUnderflowCliff`: the
   0.1³²⁴ hard zero, the −324 log sum, and Graves' log-add identity
