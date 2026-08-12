@@ -126,15 +126,22 @@ See the [root README](../README.md) for the full flag list.
 ### random_variables_manim.py
 
 Watch after the independence series — the stamped square is
-`ChainsOfTrials`' quartered square, third appearance. Under
-construction — scene 1 of six is stubbed; the full design lives in
-[`docs/plans/007-probability-random-variables.md`](../docs/plans/007-probability-random-variables.md).
+`ChainsOfTrials`' quartered square, third appearance. The first two
+scenes build the variable and its distribution as one visible move,
+the middle two define and weaponize expectation, the fifth closes the
+repo's oldest promise, and the closer turns the swamping intuition
+into exact numbers.
 
 | # | Scene | Formula | What it says | Why it's true | When it's useful |
 | --- | --- | --- | --- | --- | --- |
 | 1 | `TheStampedSquare` | $X:\Omega\to\mathbb{R}$ | A random variable is a fixed rule reading a random outcome — the die as a function, not a set. | The function is ink stamped on the sample space before anything is rolled: six faces labeled, then every cell of the 16-cell square stamped with its head count. The only random object is where the dart lands; the label is looked up, never generated. | Every measurement attached to a random process is this — a fixed rule reading a random outcome. |
+| 2 | `SortTheSquare` | $P(X{=}k) = \tfrac{\#\{\omega : X(\omega) = k\}}{16}$ | The pmf is the square's own area, sorted by value. | The 16 stamped cells slide into columns grouped by value: (1, 4, 6, 4, 1)/16, conserved area, bars visibly summing to 1 — five unequal bars from sixteen equal cells. Y = tails sorts into the same columns while X + Y = 4 in every cell: one blueprint, two houses. | The distribution forgets which cell was which; the variable remembers — the distinction every "the distribution IS the variable" error trips over. |
+| 3 | `TheBalancePoint` | $E[X] = \sum_x x \cdot P(X{=}x)$ | Expectation is the balance point of the weights — defined, not simulated. | The fulcrum under the die's flat bars balances at 3.5, which is not a face; summing stamps over cells (32/16) equals summing values times weights (2) — the sort was a regrouping; the biased die (double weight on 6) moves the balance to 27/7 — the balance point belongs to the measure. | Huygens (1657): the fair price of a ticket — the number you act on, with no long run in sight. |
+| 4 | `SameOutcomesAdd` | $E[X{+}Y] = E[X] + E[Y]$ | Expectations add — independence not required. | One sum over the same outcomes; addition distributes. The maximally dependent pair X and 4−X sums to 4 always; the owned 6×6 grid paints the two-dice sum as diagonals — (1,2,3,4,5,6,5,4,3,2,1)/36 — and E = 7 lands twice: by the diagonals and as 3.5 + 3.5. | Linearity is the workhorse: it prices any bundle from its parts, and it is what makes E = np honest with zero combinatorics. |
+| 5 | `TheBinomialColumns` | $P(X{=}k) = \binom{n}{k} p^k (1-p)^{n-k}$ | The sorted columns are the binomial distribution — the promise the counting series made, closed. | Cells per column are C(4,k), counted the way the combinations series counts H/T words; re-cut at p = 1/4 the cells go unequal but every k-head cell keeps the same area p^k q^(4−k) (a product ignores factor order), so column k weighs C(4,k)·p^k q^(4−k): coefficient = cell count, power = one cell's area, nothing smuggled. E = np by indicator stamps. | The count-of-successes model wherever trials repeat unchanged (fixed n, two outcomes, constant p, independent) — and no replacement means no binomial, as the aces taught; the binomial even touches e: zero successes in n trials of chance 1/n → 1/e ≈ 0.3679. |
+| 6 | `ProportionsConverge` | $P\!\left(\lvert\tfrac{S_n}{n} - \tfrac12\rvert \le 0.05\right) \to 1$ | Proportions converge while counts spread — the swamping intuition, quantified. | Exact binomial sums, no new machinery: within ±5% of half climbs 0.4966 → 0.7287 → 0.9986 (n = 20, 100, 1000) while within ±5 heads falls 0.7287 → 0.2720 → 0.0876 (n = 100, 1000, 10000) — and the two n = 100 rows are the same band, one number telling two stories. | The gambler's fallacy dies by two columns moving in opposite directions; the weak law of large numbers (Bernoulli, proved by ~1689, printed 1713) is named and promised with variance; average surprisal over the 16 cells is exactly 4 bits; and per-frame distributions are pmfs like these — likelihood is next. |
 
-Renders: `01_TheStampedSquare.mp4` (further scenes land in Phase 2).
+Renders: `01_TheStampedSquare.mp4` … `06_ProportionsConverge.mp4`.
 
 ```bash
 uv run python probability/random_variables_manim.py

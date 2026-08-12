@@ -41,8 +41,19 @@ entry to its row is a design call made in Phase 3.
   finalized below; the addendum's A3 flag resolved by grep (the
   independence module's biased die is "double weight on 6" over 7 —
   matches 27/7)
-- [ ] Phase 1: plan + module stub, `make check` green
-- [ ] Phase 2: all scenes render at draft; verified per CLAUDE.md checklist
+- [x] Phase 1: plan + module stub, `make check` green (179 tests;
+  `--list` prints the stub)
+- [x] Phase 2: all scenes render at draft; verified per CLAUDE.md
+  checklist (6 files, distinct names, 26-36 s; 46 frames reviewed
+  across every beat plus transitions; nine layout defects caught by
+  eye and fixed — scene 1's overflowing takeaway, scene 3's clipped
+  and colliding caption cluster, scene 4's edge-clipped grid tags,
+  scene 5's stamps overflowing the unfair square's thin cells (the
+  unfair square now renders unstamped; highlights carry the beat),
+  and scene 6's edge-to-edge verdict and piled-up LLN beat, both
+  restructured; plus two design-time catches — a simultaneous
+  stamp swap sequenced per the motion rule, and a two-sums
+  underbrace whose displayed fraction totalled 10/16, not 32/16)
 - [ ] Phase 3: README + wiki complete, `make test` green
 - [ ] Phase 4: local review + audit clean
 - [ ] Phase 5: PR, drafts cleaned, 1080p60 render verified
