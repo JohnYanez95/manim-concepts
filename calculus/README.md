@@ -58,6 +58,25 @@ uv run python calculus/e_and_ln_manim.py --list
 
 See the [root README](../README.md) for the full flag list.
 
+### derivatives_manim.py
+
+Watch after the e-and-ln series — `ZoomUntilStraight` built the
+device this series names, and the mystery constants are about to
+become derivatives. The toolkit is deliberately tiny: under the log,
+every product the CTC road carries becomes a sum, so the sum rule,
+the chain rule, and two owned derivatives are the whole kit.
+
+| # | Scene | Formula | What it says | Why it's true | When it's useful |
+| --- | --- | --- | --- | --- | --- |
+| 1 | `TheSlopeIsAFunction` | $\frac{d}{dx}$ | Every smooth curve carries a second curve — its slope at each point — and d/dx names the settling ratio the zoom built. | Zoom until straight at several points of one parabola and plot the read-offs: the forward quotients at x = 1 run 3, 2.1, 2.01, 2.001 — literally 2 + h — settling to 2; the dual graph keeps height and slope visibly different numbers; \|x\| never straightens, so the device needs smooth. | The object every gradient is made of; Leibniz's dy/dx (1675 manuscript, 1684 print) is the notation this repo commits to, because it makes the chain rule look like cancelling fractions. |
+
+Renders: `01_TheSlopeIsAFunction.mp4`.
+
+```bash
+uv run python calculus/derivatives_manim.py
+uv run python calculus/derivatives_manim.py --list
+```
+
 ## References
 
 Ticks are human-gated — see

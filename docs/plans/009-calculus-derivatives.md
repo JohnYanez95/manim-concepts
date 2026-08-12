@@ -44,7 +44,8 @@ gradient only in when-useful framing.
   settling table (the symmetric quotient of a quadratic is exact and
   kills the narrative), the score-function route in place of the
   product rule, and Newton's dates kept off screen (secondary-only)
-- [ ] Phase 1: plan + module stub, `make check` green
+- [x] Phase 1: plan + module stub, `make check` green (204 tests;
+  `--list` prints the stub)
 - [ ] Phase 2: scenes at draft; linter clean; frames verified by eye
 - [ ] Phase 3: README + wiki complete, `make test` green
 - [ ] Phase 4: local CodeRabbit + connection-auditor clean
