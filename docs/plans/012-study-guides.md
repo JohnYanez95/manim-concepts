@@ -98,8 +98,14 @@ study_guides/
    traceable to a plan anchor by citation.
 4. **Practice problems** — at the end of the section, graded
    easy → stretch, numbered `<section>.<n>`. Problem *answers are
-   never in the guide*; every problem's full worked solution lives
-   in the solutions manual, keyed by the same number.
+   never in the guide*; every problem's full worked solution appears
+   in the solutions manual, keyed by the same, globally-complete
+   number. **Single-sourced** (research addendum, R2): statement,
+   hint, and solution live adjacent in ONE problem environment
+   inside the primitive; the guide build suppresses solutions, the
+   manual build emits them — there is no hand-maintained parallel
+   solutions file to rot. The separate solutions-manual *PDF* (the
+   maintainer's spec) is a build target, not a second source.
 5. **Sources** — a per-document bibliography; entries land
    unchecked (`- [ ]`) and are human-gated exactly like the topic
    READMEs. New numbers not covered by an existing plan anchor
@@ -189,6 +195,73 @@ runs for the document's life, not just its first PR.
   reasoning, not just the answer) — they follow the same three-level
   discipline: state, derive, situate.
 
+## Research addendum (two outside-perspective passes, 2026-08-12)
+
+Two agents surveyed (1) agentic course-material pipelines and (2)
+retrieval/single-sourcing architectures; full reports pinned in this
+plan's history. What changes the design:
+
+- **R1 — IDs, never retyped content (adopted; the retrieval
+  optimization the maintainer asked about).** The universal agent
+  contract becomes: emit stable IDs, let the build splice canonical
+  text — `\primitive{name}` for sections, **`\anchor{plan.letter}`
+  for every verified number**, `\cite{key}` for sources. Mechanism:
+  `study_guides/anchors.yaml` (plan → anchor letter → exact values
+  as strings + source + method, generated from the plan docs' pinned
+  reports) compiles to `anchors.tex` macros; a digit-literal lint
+  flags any number in guide prose that didn't come through an
+  `\anchor` — the transcription step, deleted. (Deterministic-
+  quoting pattern — Yeung; showyourwork's `\variable{}`; Quarto's
+  computed-inline-values guidance. Table-QA error analyses show LLM
+  numeric errors are dominated by grabbing the wrong nearby number,
+  so the disambiguated key is the load-bearing part.)
+- **R2 — statement+solution single-sourced, build-flag split
+  (adopted).** PreTeXt's architecture, expressed in ~30 lines of
+  LaTeX: one problem environment carries statement/hint/solution;
+  two build targets emit guide vs manual. Evidence for never
+  hand-maintaining a parallel solutions file: GSM-HARD's
+  statement/answer divergence (25 of 50 audited "model errors" were
+  label errors) and GSM8K's Platinum relabel.
+- **R3 — independent-solve gate on every problem (adopted;
+  upgrades D-D).** Each problem's answer is computed by a
+  SymPy/NumPy script committed beside the primitive — the script IS
+  the problem's anchor — and a fresh-context solver agent (never
+  shown the authoring transcript) must independently agree before
+  the problem ships. AutoCode measured the base rate this gate
+  exists for: ~1 in 7 unverified LLM reference solutions wrong;
+  dual verification lifted correctness 86% → 94%. Classic
+  textbook-standard problems get perturbed parameters (recomputed
+  anchors) to defeat solver memorization.
+- **R4 — primitives carry no assembly-owned state (adopted).**
+  Numbering, labels and cross-primitive references belong to the
+  guide; any cross-primitive pointer goes through a per-guide macro
+  layer (`\primref{node}`), never a hardcoded `\ref` inside a
+  primitive — DITA's keyref pattern, which is what keeps one
+  primitive serving many guides without `??`s.
+- **R5 — bibliography single-sourcing (adopted).** The human-ticked
+  markdown reference lists remain the source of truth (the
+  never-tick rule untouched); a repo script syncs them into one
+  `references.bib` carrying a `verified` field; biblatex prints
+  per-document bibliographies from citations alone; `checkcites`
+  joins the checks; the sync script refuses a build citing an
+  unverified entry that isn't marked as such.
+- **R6 — remix map formalized (adopted, cheap).** Each guide opens
+  (in source) with the objective → primitives → justifying-wiki-edge
+  table; ambiguous orderings are flagged to the maintainer, not
+  guessed — LibreTexts' remix-map practice, and the repo's own
+  "an edge nobody can cite is a wish" rule.
+- **R7 — curated agent index (adopted).** `study_guides/INDEX.md`
+  maps node → primitive file → its anchors → its bib keys, so
+  authoring agents resolve IDs without crawling.
+- **Avoided, deliberately**: toolchain migration to
+  PreTeXt/DITA/Quarto (their architectures are borrowed above; the
+  LaTeX+git+existing-agent stack keeps diffs and review native);
+  LLM-judge as a sole quality gate (that bar produced training
+  data, not reader-facing text); prose generated unanchored from
+  the verified series content (the Learn-Your-Way lesson: the
+  human-verified artifact is the invariant, generation is
+  constrained transformation).
+
 ## Decision points for the maintainer
 
 - **D-A — RESOLVED in structure** (outcome PDFs live in the
@@ -204,10 +277,10 @@ runs for the document's life, not just its first PR.
   solutions manual started, roadmap figure drafted — a calibration
   PR so the format gets maintainer eyes before nine more sections
   inherit it.
-- **D-D — problem verification depth.** Proposal: problems reusing
-  plan-anchor numbers cite them; problems with fresh numbers get a
-  per-batch source-verifier supplement (one agent pass per PR, not
-  per problem).
+- **D-D — problem verification depth.** Upgraded by R3: every
+  problem gets a committed answer script (the problem's anchor) plus
+  an independent fresh-context solve; per-batch source-verifier
+  supplements cover narrative numbers not already anchored.
 - **D-E — guide-first primitives** (dynamic-programming,
   gradient-descent). Proposal: yes, both — they are what "full
   comprehension of the learning algorithm" requires, and each seeds
