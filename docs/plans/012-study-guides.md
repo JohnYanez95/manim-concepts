@@ -399,4 +399,12 @@ solutions manual, until guide 1 assembles complete.
   (e.g. flag only ≥4-significant-digit literals, or only digits that
   match an anchored value) before "the transcription step, deleted"
   can be claimed; deferred to the next batch with John's pick
-- [ ] Phase 4: PR, merge, refinement loop open
+- [x] Phase 4 (build side): PR #13 opened; bot review returned eight
+  findings, all applied — the notable one replaced checkcites (its
+  bcf parsing rejects relative bib paths) with a stronger
+  undefined-citation structure test that runs in `make check`
+  without LaTeX; the problem/solution test upgraded from cardinality
+  to exact one-per-problem; PyYAML declared directly; the linter's
+  raster failures now fail the gate; four doc drifts trued. The PR
+  awaits the maintainer's merge, which opens the refinement loop and
+  the remaining twelve-primitive batches
