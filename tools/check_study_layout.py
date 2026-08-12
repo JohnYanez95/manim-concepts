@@ -20,6 +20,7 @@ fixed or explained, never ignored. Exit 1 on any finding.
 
 from __future__ import annotations
 
+import os
 import re
 import subprocess
 import tempfile
@@ -27,6 +28,11 @@ import xml.etree.ElementTree as ET
 from pathlib import Path
 
 from PIL import Image
+
+# Inherit the caller's environment (pdflatex needs HOME for its caches);
+# only TEXINPUTS gains the study root so \usepackage{theme} resolves.
+ENV = {**os.environ, "TEXINPUTS": f"{Path(__file__).resolve().parent.parent / 'study_guides'}:"}
+SUBPROCESS_TIMEOUT = 120
 
 ROOT = Path(__file__).resolve().parent.parent
 STUDY = ROOT / "study_guides"
@@ -81,7 +87,8 @@ def render(name: str, extra: str, tikz: str, workdir: Path) -> Path | None:
         cwd=workdir,
         capture_output=True,
         text=True,
-        env={"TEXINPUTS": f"{STUDY.resolve()}:", "PATH": "/usr/bin:/bin"},
+        env=ENV,
+        timeout=SUBPROCESS_TIMEOUT,
     )
     pdf = workdir / "fig.pdf"
     if not pdf.exists():
@@ -93,7 +100,11 @@ def render(name: str, extra: str, tikz: str, workdir: Path) -> Path | None:
 
 def word_boxes(pdf: Path) -> list[tuple[str, float, float, float, float]]:
     out = subprocess.run(
-        ["pdftotext", "-bbox", str(pdf), "-"], capture_output=True, text=True
+        ["pdftotext", "-bbox", str(pdf), "-"],
+        capture_output=True,
+        text=True,
+        env=ENV,
+        timeout=SUBPROCESS_TIMEOUT,
     ).stdout
     boxes = []
     # pdftotext -bbox emits XHTML with <word xMin=.. yMin=.. xMax=.. yMax=..>
@@ -134,6 +145,8 @@ def check_figure(name: str, pdf: Path, workdir: Path) -> list[str]:
     subprocess.run(
         ["pdftoppm", "-png", "-r", str(DPI), "-gray", str(pdf), str(workdir / "fig")],
         capture_output=True,
+        env=ENV,
+        timeout=SUBPROCESS_TIMEOUT,
     )
     pages = sorted(workdir.glob("fig*.png"))
     if not pages:

@@ -11,8 +11,14 @@ primitives land.
 | ctc-alignment | `primitives/ctc-alignment.tex` | deep_learning alignment series (authored, phase 2) | `001.raw81`, `001.paths15`, `001.astronomical`, `010.N.t5paths` | `deep_learning-` |
 
 Problem answer scripts (the solve-gate anchors, plan 012 R3) live in
-`primitives/answers/<primitive>.py` — every answer computed, enumeration
-asserted against the formula it teaches.
+`primitives/answers/` with underscored module names
+(`counting_rules.py`, `ctc_alignment.py`) — every answer computed,
+enumeration asserted against the formula it teaches.
+
+Guide wrappers splice anchors too: `ctc-algorithm/guide.tex` uses
+`010.K.P`. Seed anchors defined but not yet cited — `010.K.NLL`,
+`010.L.uniformP`, `009.G.nllgradient` — are reserved for the gradient
+and softmax chapters; do not prune them.
 
 Guide-first primitives (no parent scenes; full research treatment before
 authoring): `dynamic-programming`, `gradient-descent`, `ctc-decoding`.

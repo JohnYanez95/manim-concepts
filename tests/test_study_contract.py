@@ -7,7 +7,6 @@ their single-sourced solutions, and generated files match their sources.
 """
 
 import re
-import subprocess
 import sys
 from pathlib import Path
 
@@ -108,13 +107,15 @@ def test_ticks_untouched_by_sync():
 
 
 def test_verified_state_survives():
-    """Spot-check: a maintainer-ticked entry lands verified={yes}."""
-    result = subprocess.run(
-        [sys.executable, str(ROOT / "tools" / "sync_references.py")],
-        capture_output=True,
-        text=True,
-        check=True,
-    )
-    assert "verified" in result.stdout
-    bib = (STUDY / "references.bib").read_text(encoding="utf-8")
+    """Spot-check: a maintainer-ticked entry lands verified={yes}.
+
+    Renders in memory — the test must never write references.bib itself.
+    """
+    sys.path.insert(0, str(ROOT / "tools"))
+    try:
+        import sync_references
+
+        bib = sync_references.render(sync_references.collect())
+    finally:
+        sys.path.pop(0)
     assert "verified = {yes}" in bib

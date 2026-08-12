@@ -34,4 +34,7 @@ instead of in someone's head.
 This wiki deliberately stays repo-shaped: its nodes are things the repo
 teaches or has promised to teach. Background reading, clippings, and
 explorations that are not repo-specific do not belong here — when a wiki
-thread grows beyond the repo, it leaves the repo.
+thread grows beyond the repo, it leaves the repo. The wiki is also
+**screen-shaped**: the study-guide track *reads* the graph (glue
+transitions are authored from edge citations) but never writes it —
+print deliveries are recorded in their plans, not here (plan 012).

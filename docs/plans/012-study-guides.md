@@ -33,6 +33,11 @@ exactly what makes the glue transitions and the horizon view work.
 
 ### Directory and build (maintainer-specified, 2026-08-12)
 
+*(Design sketch — the as-built structure differs in details the later
+checklists record: problems live inside primitives per R2, glue files
+are numbered `glue-NN.tex`, and guide-owned macros sit in `macros.tex`;
+build from the checklist, not this sketch.)*
+
 One `study_guides/` directory; **one subdirectory per objective —
 the subdirectory's name IS the objective**; each objective
 subdirectory holds the outcome pair: the stitched guide PDF
@@ -187,7 +192,8 @@ walkable offline in one sitting.
 
 ### The refinement loop
 
-The reader is the review of record. `study/guides/ctc/REFINEMENTS.md`
+The reader is the review of record.
+`study_guides/ctc-algorithm/REFINEMENTS.md`
 holds maintainer inputs — "section 4's transition lost me",
 "problem 7.3 assumes something unstated" — one dated bullet each;
 the agent applies them and ticks the bullet with what changed.
@@ -292,11 +298,11 @@ plan's history. What changes the design:
   an independent fresh-context solve; per-batch source-verifier
   supplements cover narrative numbers not already anchored.
 - **D-E — guide-first primitives** (dynamic-programming,
-  gradient-descent). Proposal: yes, both — they are what "full
-  comprehension of the learning algorithm" requires, and each seeds
-  its eventual video series. Both get the full research treatment
-  (pedagogy + verifier passes) since no plan anchors exist for them
-  yet.
+  gradient-descent, ctc-decoding). Proposal: yes, all three — they
+  are what "full comprehension of the learning algorithm" requires,
+  and each seeds its eventual video series. All three get the full
+  research treatment (pedagogy + verifier passes) since no plan
+  anchors exist for them yet.
 
 ## Phases
 
@@ -357,6 +363,34 @@ solutions manual, until guide 1 assembles complete.
   `make study` green; guide 12 pp + solutions manual verified by
   page (numbering shared, narrative and hints suppressed in the
   manual, zero solution leakage into the guide).
-  **Gate remaining: the maintainer's format read**
-- [ ] Phase 3: reviews clean
+  Format read APPROVED 2026-08-12, with two refinements through the
+  loop (both ticked in REFINEMENTS.md): the roadmap made serpentine,
+  and the 1.1 grid trued — the latter spawning
+  `tools/check_study_layout.py`, the print analogue of the scene
+  linter (standalone-renders every TikZ figure incl. macro-generated
+  states; text-overlap + ink-crowds-halo checks; gated in
+  `make study`; verified by planting the broken figure and watching
+  it flag)
+- [x] Phase 3: local CodeRabbit returned nine findings, all applied
+  (the glue's hardcoded 15/81 now anchor-spliced; the URL regex and
+  LaTeX-escaping in the reference sync hardened and the bib
+  regenerated; the linter now inherits the environment with timeouts;
+  the sync test renders in memory; three doc drifts trued; the hook
+  exemption narrowed to objective subdirectories). Audit: 13 findings
+  applied — the top one built out **per-document sourcing** (biblatex
+  in theme.sty, \cite calls in both primitives, \printbibliography in
+  the guide, checkcites in `make study`) — plus the §5
+  prose-vs-scene fix (the primitive attributed to `WhenToUseIt` the
+  exact phrasing its code comment rejects; trued in the primitive AND
+  the combinatorics README cell that seeded it), the root README's
+  study-track paragraph + `make study` row, the wiki README's
+  screen-shaped boundary line, the INDEX's reserved-anchor and
+  underscore notes, the walker's-lattice pre-draft recorded on the
+  combinatorics fifth-shape Ideas bullet, and the as-built note on
+  the design sketch. **Open maintainer call (audit PND-2): R1's
+  digit-literal lint needs scoping** — primitives legitimately carry
+  small pedagogical digits (3 × 4 = 12), so the lint needs a rule
+  (e.g. flag only ≥4-significant-digit literals, or only digits that
+  match an anchored value) before "the transcription step, deleted"
+  can be claimed; deferred to the next batch with John's pick
 - [ ] Phase 4: PR, merge, refinement loop open

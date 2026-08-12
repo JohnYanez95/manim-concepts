@@ -1,6 +1,6 @@
 # Graph index
 
-Last audited: `aeb25f6` (2026-08-12, incremental — plan-011 branch)
+Last audited: `d9eb601` (2026-08-12, incremental — plan-012 branch)
 
 The stamp is a commit hash: the state of the repo this graph was last
 reconciled against. The `connection-auditor` diffs from it instead of

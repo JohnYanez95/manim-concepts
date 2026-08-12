@@ -36,7 +36,7 @@ So `PartitionRule` does not land without `CombinationRule` before it.
 | 2 | `PermutationRule` | $P^n_r = \dfrac{n!}{(n-r)!}$ | Order matters | Slot-filling from a shrinking pool (5, 4, 3), then the factorial identity by cancelling the unwanted tail $2 \times 1$. | Ranking and scheduling — top-$r$ orderings, seatings, any arrangement where swapping two items gives a different answer. The shrinking pool is also sampling *without replacement* — the move that breaks independence in [`probability/`](../probability/README.md). |
 | 3 | `CombinationRule` | $C^n_r = \dbinom{n}{r} = \dfrac{n!}{r!\,(n-r)!}$ | Order does not matter | The $3!$ orderings of $\{A,C,E\}$ collapse to one set — every combination was overcounted $r!$ times, so divide. | Sampling without replacement, and every binomial coefficient downstream of it: the binomial distribution — now delivered by [`probability/`](../probability/README.md)'s random-variables series, whose `TheBinomialColumns` counts this scene's C(4,k) as sorted-column cells — plus Pascal's triangle and $(x+y)^n$, still queued. |
 | 4 | `PartitionRule` | $N = \dfrac{n!}{n_1!\,n_2!\cdots n_k!}$ | Split into labelled groups | $6!$ row orderings chopped into blocks of 3/2/1, then divide out the within-block orderings that change nothing. | Multinomial coefficients: dividing into teams, arrangements of a word with repeated letters. The related — differently constrained — alignment count behind [CTC](../deep_learning/README.md) builds on the same divide-out move. |
-| 5 | `WhenToUseIt` | — | Which rule a problem needs | Four problem shapes mapped to the rule each one calls for, then the observation that all four are the product rule with unwanted orderings divided out. | Reading an unfamiliar counting problem and knowing which tool it wants — the step between having the formulas and being able to use them. |
+| 5 | `WhenToUseIt` | — | Which rule a problem needs | Four problem shapes mapped to the rule each one calls for, then the closing observation, worded with care: multiply the choices — divide only when orderings mean the same outcome (the product rule itself divides nothing). | Reading an unfamiliar counting problem and knowing which tool it wants — the step between having the formulas and being able to use them. |
 
 Renders are numbered to match, so a directory listing plays in the same order:
 `01_MultiplicativeRule.mp4` … `05_WhenToUseIt.mp4`.
@@ -82,4 +82,7 @@ Rough queue, in roughly the order they build on each other:
 - The binomial theorem, as the multiplicative rule applied to $(x+y)^n$.
 - A fifth problem shape in `WhenToUseIt` — counting a sequence model's
   alignments, now that `deep_learning/` delivers the payoff. Needs a
-  re-render, so batched for the next combinatorics change.
+  re-render, so batched for the next combinatorics change. The study
+  guide has pre-drafted this shape's visual: the walker's-lattice
+  problem (guide problem 1.5, C(6,2) = 15 routes) and its glue
+  transition are the picture, ready to animate.

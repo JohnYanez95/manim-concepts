@@ -3,7 +3,7 @@
 % declared debt exactly as the video Scope does: per-frame probabilities are
 % USED here without being taught; the guide's middle chapters repay it.
 % Numbers trace to plan 001 (the 15/81 counts, the trellis columns) via
-% anchors; problem answers are computed by answers/ctc-alignment.py.
+% anchors; problem answers are computed by answers/ctc_alignment.py.
 \chapter{The alignment problem, and CTC's answer}
 
 \begin{narrative}
@@ -13,7 +13,9 @@ marking of which frames belong to which character. The transcript says
 \emph{what} was said, never \emph{when}. Any training signal that demands
 per-frame labels demands data nobody has.
 
-Connectionist Temporal Classification (CTC) is the standard answer, and
+Connectionist Temporal Classification
+(CTC)~\cite{deep_learning-graves-et-al-2006-connectionist-temporal-classification}
+is the standard answer, and
 this chapter builds its machinery — using, on credit, one notion the road
 has not yet earned: each frame $t$ carries a score $y_t(k)$ for each
 symbol $k$, which we will treat as ``the model's per-frame probability''.
@@ -103,7 +105,8 @@ skipping the blank between equal letters would merge them.
 \end{tikzpicture}
 \end{center}
 
-Paths sharing a prefix share their count — that is the reorganisation.
+Paths sharing a prefix share their count — that is the
+reorganisation~\cite{deep_learning-hannun-sequence-modeling-with-ctc-distill-2017}.
 Let $\alpha_t(s)$ carry the weight of every partial path reaching state
 $s$ at frame $t$; each column needs only the column before it,
 \[

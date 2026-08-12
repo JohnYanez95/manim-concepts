@@ -2,7 +2,7 @@
 % and its README concepts table (five scenes, watched in order). Backward-
 % grounded: this is the road's first section and cites nothing forward except
 % in "Where this goes". Numbers trace to the scenes' own counts; problem
-% answers are computed by answers/counting-rules.py (the solve-gate anchor).
+% answers are computed by answers/counting_rules.py (the solve-gate anchor).
 \chapter{Counting rules}
 
 \begin{narrative}
@@ -37,8 +37,9 @@ total is literally the area of a $3 \times 4$ rectangle.
 \end{tikzpicture}
 \end{center}
 
-The grid earns the rule its condition: the stages must be
-\emph{independent} in the counting sense — the \emph{number} of options at
+The grid earns the rule — the classical rule of
+product~\cite{combinatorics-rule-of-product} — its condition: the stages
+must be \emph{independent} in the counting sense — the \emph{number} of options at
 stage two cannot depend on what stage one chose (the options themselves
 may differ; their count may not). When that holds,
 \[
@@ -70,7 +71,8 @@ now it will be the exact thing that breaks independence.
 Choose $3$ letters from $5$ where the \emph{set} is the answer —
 $\{A,C,E\}$ chosen in any order is the same choice. The shrinking pool
 counted $60$ ordered selections, but every set of $3$ was counted once per
-ordering: $3! = 6$ times. The correction is a division,
+ordering: $3! = 6$ times. The correction is a
+division~\cite{combinatorics-combination},
 \[
   C^n_r \;=\; \binom{n}{r} \;=\; \frac{n!}{r!\,(n-r)!},
   \qquad
@@ -95,9 +97,11 @@ A combination is the special case with two blocks (chosen, not-chosen).
 
 \section{Which rule does a problem want?}
 
-The closing scene of the series maps problem shapes to rules, then makes
-the unifying observation: every one of the four is the product rule, with
-unwanted orderings divided out afterwards. Ask two questions of any
+The closing scene of the series maps problem shapes to rules, then closes
+on an observation worded with care: \emph{multiply the choices — divide
+only when orderings mean the same outcome}. Three of the four rules are
+the product rule with unwanted orderings divided out afterwards; the
+product rule itself divides nothing. Ask two questions of any
 counting problem — \emph{do the stages' option-counts depend on earlier
 choices?} (if yes, the pool is shrinking) and \emph{does swapping two
 items change the answer?} (if no, divide the orderings out) — and the

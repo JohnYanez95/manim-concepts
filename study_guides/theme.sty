@@ -18,6 +18,11 @@
 \RequirePackage{environ}
 \RequirePackage{tikz}
 \usetikzlibrary{shapes.misc}
+% Per-document sourcing (plan 012 R5): one synced references.bib; each
+% document prints only what it cites. The bib is generated from the
+% human-ticked README lists — see tools/sync_references.py.
+\RequirePackage[backend=biber, style=numeric, sorting=nyt]{biblatex}
+\addbibresource{\StudyRoot/references.bib}
 
 % --- Palette (mirrors utils/theme.py) --------------------------------------
 \definecolor{Accent}{HTML}{FFCC5F}

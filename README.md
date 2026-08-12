@@ -23,7 +23,12 @@ topic README carries a column for each.
 
 Concepts are grouped by topic. Each topic is a directory holding one or more
 **concept modules** — a single runnable `*_manim.py` file per concept, each
-defining the scenes for it — and every module renders itself:
+defining the scenes for it — and every module renders itself. Beside the
+topics sits [`study_guides/`](study_guides/INDEX.md): the print track —
+per-series textbook sections stitched into objective-named guides
+(reading, end-of-chapter problems, and a separate solutions manual as
+committed PDFs), every number spliced from the same verification anchors
+the scenes use (`make study` rebuilds them):
 
 ```bash
 uv run python combinatorics/counting_rules_manim.py
@@ -157,6 +162,7 @@ re-renders what changed. Pass `--no-cache` if a stale partial is suspected.
 | `make check` | Ruff, tests and every hook, without committing |
 | `make clean-drafts` | Delete sub-1080p renders, keep the final ones |
 | `make clean` | Delete all rendered output |
+| `make study` | Build every study guide's PDF pair (anchors, references and figure linting included) |
 
 ### How a series gets built
 
