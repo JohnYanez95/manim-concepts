@@ -67,8 +67,13 @@ close predates the fix.
   three stale passages (occurrence 6) updated with calculus/ pointers,
   the digit-truncation ellipses added, and the row polish recorded in
   the log entry. Scenes 3 and 6 re-rendered and re-verified by frame.
-- [ ] Phase 5: PR, drafts cleaned, 1080p60 render verified (this series
-  plus the scene-6 re-render)
+- [x] Phase 5: PR open (#7), bot round applied (2 findings accepted —
+  approx signs on rounded displays; the "every CTC implementation"
+  overclaim softened), drafts cleaned, 1080p60 render verified: 7
+  files at 1920×1080/60 with frame counts matching the native pace —
+  the six e-and-ln scenes plus the algebra scene-6 re-render, whose
+  final beat was spot-checked at full resolution (the pre-phase fix's
+  box leak confirmed gone in the final artifact)
 
 ## Research questions the reports must settle
 

@@ -276,3 +276,21 @@ reordered.
 - linear_algebra/ remains promised nowhere — maintainer call still
   open
 - stamp: advance to fef9ebb
+
+## [2026-08-11] series | plan 006 finalised (PR #7)
+
+- final 1080p60 render verified: 7 files — the six e-and-ln scenes
+  (1841-2273 frames, native 0.75x pace) plus the re-rendered algebra
+  06_TheUnderflowCliff, whose final beat was spot-checked at full
+  resolution: the lingering log-sum-exp box is gone, the render claim
+  the finalisation-audit correction flagged is true again
+- bot round: 2 findings, both accepted — rounded decimals now display
+  with approx signs (the iff between two rounded computations removed)
+  and "every CTC implementation" softened to match algebra/'s own
+  attribution (2006 rescaled; log space is the 2012 book)
+- the calculus/ topic lands with all sixteen references
+  maintainer-verified and ticked
+- next per the roadmap: random variables & distributions in
+  probability/ (binomial via the quartered square), then the
+  softmax/likelihood bridge — the linear_algebra/ front-page call is
+  still open
