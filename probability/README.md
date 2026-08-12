@@ -46,6 +46,13 @@ Deliberately **not** covered here:
 - Variance and the law of large numbers as theorems. The
   random-variables series computes the weak law's instances and names
   it; the proof and the spread machinery arrive together, later.
+- The Galton board. Verification found physical boards are chaotic
+  deterministic systems, not binomial machines — skipped by evidence,
+  not oversight; the sorted square does its honest job.
+- Continuous distributions and densities — the road not taken until
+  integration exists.
+- The binomial theorem and Pascal's triangle — `combinatorics/` owns
+  them; the (1, 4, 6, 4, 1) row may nod, never depend.
 - Measure-theoretic formality. "Probability is area" is used as a
   faithful picture, not developed as measure theory.
 - Counting itself — that is `combinatorics/`'s job; this topic starts
@@ -240,6 +247,56 @@ for the Bayes series:
 - [X] [Wikipedia, Boy or girl paradox](https://en.wikipedia.org/wiki/Boy_or_girl_paradox)
       — Gardner's retraction and the protocol-dependence the
       two-children beat draws.
+
+The entries below came out of the plan-007 research pass
+([`docs/plans/007-probability-random-variables.md`](../docs/plans/007-probability-random-variables.md))
+and start unchecked until a human verifies them.
+
+- [ ] [Grinstead & Snell, Introduction to Probability, §6.1 (LibreTexts)](https://stats.libretexts.org/Bookshelves/Probability_Theory/Introductory_Probability_(Grinstead_and_Snell)/06%3A_Expected_Value_and_Variance/6.01%3A_Expected_Value_of_Discrete_Random_Variables)
+      — Definition 6.1 (expectation), Theorem 6.2 (linearity) and the
+      verbatim no-independence remark behind `SameOutcomesAdd`.
+- [ ] [Grinstead & Snell, §6.2 Variance (LibreTexts)](https://stats.libretexts.org/Bookshelves/Probability_Theory/Introductory_Probability_(Grinstead_and_Snell)/06%3A_Expected_Value_and_Variance/6.02%3A_Variance_of_Discrete_Random_Variables)
+      — variance definition, the shortcut, npq, die 35/12 — the
+      pre-verified anchors the future LLN series inherits.
+- [ ] [Grinstead & Snell, ch. 8 (source)](https://math.dartmouth.edu/~prob/prob/ch8.tex)
+      — Theorem 8.2, the weak law `ProportionsConverge` names via
+      Bernoulli; the 1713 attribution.
+- [ ] [OpenStax Introductory Statistics 2e, §4.3](https://openstax.org/books/introductory-statistics-2e/pages/4-3-binomial-distribution)
+      — the binomial experiment conditions named in
+      `TheBinomialColumns`.
+- [ ] [OpenStax Introductory Business Statistics 2e, §4.2](https://openstax.org/books/introductory-business-statistics-2e/pages/4-2-binomial-distribution)
+      — the explicit pmf formula (the sibling volume headlines what the
+      statistics volume leaves to calculators).
+- [ ] [MIT 18.05, class 4b: expectation](https://ocw.mit.edu/courses/18-05-introduction-to-probability-and-statistics-spring-2022/mit18_05_s22_class04-prep-b.pdf)
+      — the balance-point picture, "need not be a possible value", the
+      outcome-table linearity proof, E = np by indicators.
+- [ ] [Blitzstein, Stat 110](https://stat110.hsites.harvard.edu/)
+      — RV-as-function ordering; "sympathetic magic" (variable vs
+      distribution), the error `SortTheSquare`'s twin beat refutes.
+- [ ] [3blue1brown, "Binomial distributions"](https://www.3blue1brown.com/lessons/binomial-distributions/)
+      — the sequence-grouping route to C(n,k)p^k(1-p)^(n-k); its
+      likelihood pivot marks the next series' door, not this one's.
+- [ ] [Seeing Theory, ch. 1 & 3](https://seeing-theory.brown.edu/basic-probability/index.html)
+      — the distribution-first branch this series deliberately does not
+      take (long-run simulation as meaning), for contrast.
+- [ ] [Chernoff & Russell, "The Equiprobability Bias" (PMC)](https://pmc.ncbi.nlm.nih.gov/articles/PMC4310748/)
+      — Lecoutre 1992: randomness read as uniformity, surviving
+      instruction — why `SortTheSquare` refutes by mechanism.
+- [ ] [Bayesian Spectacles, a Galton board vs its model](https://www.bayesianspectacles.org/a-galton-board-demonstration-of-why-all-statistical-models-are-misspecified/)
+      — why the physical board is not a binomial machine; the Scope
+      exclusion's evidence.
+- [ ] [MacTutor, Blaise Pascal](https://mathshistory.st-andrews.ac.uk/Biographies/Pascal/)
+      — the five-letter 1654 correspondence and the problem of points.
+- [ ] [MacTutor, Christiaan Huygens](https://mathshistory.st-andrews.ac.uk/Biographies/Huygens/)
+      — De Ratiociniis in Ludo Aleae (1657), the first printed
+      probability work: `TheBalancePoint`'s fair-price close.
+- [ ] [MacTutor, Jacob Bernoulli](https://mathshistory.st-andrews.ac.uk/Biographies/Bernoulli_Jacob/)
+      — died 1705; Ars Conjectandi, Basel 1713 — the proved-by-~1689 vs
+      printed-1713 split `ProportionsConverge` keeps distinct.
+- [ ] [Wikipedia, Ars Conjectandi](https://en.wikipedia.org/wiki/Ars_Conjectandi)
+      — the nephew-publisher detail and the 1684-1689 timeline.
+- [ ] [Wikipedia, Binomial distribution](https://en.wikipedia.org/wiki/Binomial_distribution)
+      — pmf, mean np, the conditions cross-check.
 
 ## Ideas not yet built
 

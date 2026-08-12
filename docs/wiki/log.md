@@ -318,3 +318,33 @@ reordered.
 - narrative rule in force from this plan on: levels 1-2 point backward
   at owned devices; forward pointers live only in when-useful beats
   and closers (this series' closer carries all of them)
+
+## [2026-08-11] audit | incremental, plan 007 branch
+
+- scope: diffed fef9ebb..74c4fe2 (plan-006 finalisation segment + 4
+  plan-007 commits); changed files plus cited far ends, no full crawl
+- findings: 6 promised-not-delivered, 3 delivered-not-recorded,
+  4 possible-not-yet-made, 6 graph-health — applied alongside the
+  local CodeRabbit round (the balance axis now underlines all six
+  bars) in one phase-4 commit
+- all four flipped-edge citations verified verbatim against scene
+  code (the C(4,k) count, the 27/7 balance, the swamping tables to
+  the addendum's digits, the 1/e mirror); narrative rule clean in
+  scenes and README cells
+- top finding: the plan-007 research pass had never landed in
+  probability/README's References — sixteen entries added unchecked;
+  the phase-3 claim was false until this commit
+- stale-at-delivery occurrence 7: combinatorics row 3 — the closed
+  oldest promise's own origin cell still read as future; now points
+  at TheBinomialColumns
+- prose trued to build: fraction-axis bars, the G&S caption, the HHTH
+  callout, the LLN naming vehicle; "bars visibly summing to 1" built
+  instead (the 16/16 = 1 beat added to SortTheSquare)
+- README Scope gains the Galton-board / continuous / Pascal-ownership
+  exclusions the plan promised it
+- recorded: the 6x6 grid re-read as the edge's third strand; the aces
+  boundary as the shrinking pool's fourth stop; the calculus far end
+  now mirrors the 1/e connection; entropy's fully-assembled device
+  noted on its row
+- linear_algebra/ maintainer call still open
+- stamp: advance to 74c4fe2

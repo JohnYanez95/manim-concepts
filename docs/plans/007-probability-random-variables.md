@@ -63,7 +63,17 @@ entry to its row is a design call made in Phase 3.
   stale exclusions updated; root README row and likely-next updated —
   no welcome-gif re-render: the topic row is unchanged, only
   probability/'s description grew)
-- [ ] Phase 4: local review + audit clean
+- [x] Phase 4: local review + audit clean. CodeRabbit: 1 finding,
+  accepted (the balance axis stopped mid-bar-six; it now underlines
+  all six bars — the bot's own suggested span was a no-op, so the
+  fix uses explicit endpoints). Audit: 19 findings applied — the
+  research pass landed in References (the top finding: phase 3 had
+  over-claimed), Scope gained its three missing exclusions,
+  combinatorics' origin cell un-staled (occurrence 7), four design
+  prose drifts trued, the 16/16 = 1 beat built rather than
+  softened, the graph rows corrected to quote what is actually on
+  screen, and both far ends of the new edges now point back.
+  Scenes 2 and 3 re-rendered and re-verified by frame.
 - [ ] Phase 5: PR, drafts cleaned, 1080p60 render verified
 
 ## Research questions the reports must settle
@@ -251,7 +261,7 @@ marked [addendum] below; the Phase 0 gate closes when it lands).
    rolled; the only random object is the dart/roll. Then the owned
    16-cell square (`ChainsOfTrials`' quartered twice, third repo
    appearance): stamp every cell with its head count — 0 through 4,
-   with cell HHTH stamped 3. A dart lands: the label is looked up,
+   stamped 0 through 4. A dart lands: the label is looked up,
    never generated. When-useful: every measurement attached to a
    random process is this — a fixed rule reading a random outcome.
 2. **`SortTheSquare`** — *the pmf born as rearranged area.* The
@@ -275,8 +285,9 @@ marked [addendum] below; the Phase 0 gate closes when it lands).
    the number you act on.
 4. **`SameOutcomesAdd`** — *linearity, dependence welcome.* The
    outcome-table proof: E[X+Y] sums (x+y)·P over the SAME outcomes;
-   addition distributes — no independence anywhere (G&S's verbatim
-   remark as the caption). Demonstrated on the maximally dependent
+   addition distributes — no independence anywhere (G&S's remark
+   paraphrased in the caption; the verbatim quote lives in the
+   anchors). Demonstrated on the maximally dependent
    pair X and 4−X (sum 4, always). Then the owned 6×6 grid
    (`TheProductRule`'s) re-read: the two-dice sum paints diagonals —
    (1,2,3,4,5,6,5,4,3,2,1)/36, and E = 7 arrives twice: by the
@@ -297,14 +308,16 @@ marked [addendum] below; the Phase 0 gate closes when it lands).
    marks the boundary (no replacement → no binomial). When-useful:
    the count-of-successes model everywhere trials repeat unchanged.
 6. **`ProportionsConverge`** — *swamping, quantified; the promises
-   named.* Binomial bars on the FRACTION axis, n = 20 → 100 → 1000:
+   named.* Two exact tables (fraction band left, heads band right;
+   bars were dropped in build — they piled up), n = 20 → 100 → 1000:
    P(within ±5% of half) climbs 0.4966 → 0.7287 → 0.9986 [addendum]
    while, paired, P(within ±5 heads) falls 0.7287 → 0.2720 → 0.0876
    (n = 100, 1000, 10000) [addendum] — proportions converge, counts
    spread: the gambler's fallacy dies by two numbers moving in
    opposite directions ("swamps, not compensates", now numeric).
    Closer (the series' only forward pointers, as use-cases): the weak
-   LLN named via G&S Thm. 8.2 — the theorem this table computes
+   LLN named on screen via Bernoulli (proved ~1689, printed 1713;
+   G&S Thm. 8.2 is the anchors' source) — the theorem this table computes
    instances of — promised with variance; average surprisal over the
    16 equal cells = 4 bits, one caption (entropy's other half now
    exists); and the per-frame distributions CTC consumes are pmfs

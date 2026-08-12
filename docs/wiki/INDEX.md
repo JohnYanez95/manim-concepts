@@ -1,6 +1,6 @@
 # Graph index
 
-Last audited: `fef9ebb` (2026-08-11, incremental — plan-006 branch)
+Last audited: `74c4fe2` (2026-08-11, incremental — plan-007 branch)
 
 The stamp is a commit hash: the state of the repo this graph was last
 reconciled against. The `connection-auditor` diffs from it instead of
@@ -38,14 +38,14 @@ Status: **delivered** (both ends exist and the content makes the link) or
 | `ctc-alignment` | *(beam search / gradient / peaky dynamics)* | promised | `deep_learning/README.md` Ideas not yet built. The gradient story waits on softmax and a derivative toolkit — its e-half now exists (`e-and-ln`), per plan 006's roadmap claim |
 | `ctc-alignment` | *(dynamic programming as its own concept)* | promised | `deep_learning/README.md` row 5 when-useful; plan 001 gaps. A future build inherits log-space for free: `TheUnderflowCliff` already shows the recursion's additions need the log-add identity |
 | `counting-rules` | `random-variables` | delivered | The graph's oldest promise (`combinatorics/README.md` row 3 when-useful), closed: `TheBinomialColumns` counts the sorted columns' cells as C(4,k) — "counted exactly the way the combinations series counts them" — and assembles C(n,k)p^k q^(n−k) from cell count times cell area |
-| `independence` | *(softmax, likelihood, log-likelihood)* | promised | `probability/README.md` Ideas — the remaining half of the CTC bridge. Both gates now delivered (e via `e-and-ln`, distributions via `random-variables`); `ProportionsConverge`'s closer names it as next |
-| `independence` | *(law of large numbers — the theorem, with variance)* | promised | `probability/README.md` Ideas and Scope exclusion; `ProportionsConverge` computes the weak law's instances exactly and names it (G&S Thm. 8.2 named, not proved) — what remains promised is the theorem and the variance machinery, together |
-| `independence` | `random-variables` | delivered | `TheStampedSquare` and `SortTheSquare` run on `ChainsOfTrials`' quartered square (fifth series); `TheBalancePoint` reuses the biased die (E moves to 27/7 — "the balance point belongs to the measure", echoing `OneDieTwoEvents`); `ProportionsConverge` quantifies `WhenToUseIt`'s swamping beat |
+| `independence` | *(softmax, likelihood, log-likelihood)* | promised | `probability/README.md` Ideas — the remaining half of the CTC bridge. Both gates now delivered (e via `e-and-ln`, distributions via `random-variables`); `ProportionsConverge`'s closer names it on screen ("likelihood is next") |
+| `independence` | *(law of large numbers — the theorem, with variance)* | promised | `probability/README.md` Ideas and Scope exclusion; `ProportionsConverge` computes the weak law's instances exactly and names it on screen via Bernoulli, proved ~1689 / printed 1713 (G&S Thm. 8.2 is the anchors' source, not the screen citation) — what remains promised is the theorem and the variance machinery, together; plan 007's anchors already carry variance three routes (npq; die 35/12; two-dice 35/6) and the Chebyshev-vs-exact 1/4-vs-0.0569 comparison, so the future series starts with its numbers done |
+| `independence` | `random-variables` | delivered | `TheStampedSquare` and `SortTheSquare` run on `ChainsOfTrials`' quartered square (its third 16-cell appearance, after `ShrinkCounts`); `TheBalancePoint` reuses the biased die (E moves to 27/7 — "the balance point belongs to the measure", echoing `OneDieTwoEvents`); `SameOutcomesAdd` re-reads `TheProductRule`'s 6×6 grid ("the two-dice grid you already own"); `ProportionsConverge` quantifies `WhenToUseIt`'s swamping beat |
 | `random-variables` | `e-and-ln` | delivered | `TheBinomialColumns`' closer: zero successes in n trials of chance 1/n is (1−1/n)ⁿ → 1/e ≈ 0.3679 — "the split year, mirrored"; the plan-006 audit's possible-connection, made |
 | `counting-rules` | *(Pascal, stars & bars, inclusion–exclusion, binomial theorem)* | promised | `combinatorics/README.md` Ideas not yet built |
 | `logarithms` | `e-and-ln` | delivered | `TheSplitYear` replays `MultiplyIsAdd`'s deferral caption on screen ("the wait ends here"); `TheNaturalStride` names the mystery constants as ln and re-rules the strip in natural units; `TheDebtRepaid` re-reads `TheUnderflowCliff`'s identity symbol by symbol — the graph's only on-screen debt, closed |
 | `logarithms` | *(the log-odds inference scene in `probability/`)* | promised | `algebra/README.md` Ideas ("this series builds the ruler; that series owns the inference") — the residual of the delivered bayes→logarithms edge |
-| `logarithms` | *(information as log-counting — bits, entropy)* | promised | `algebra/README.md` Ideas; `ShrinkCounts`' −log₂ = 4 is the HHTH cell's surprisal. Both halves now exist: `ProportionsConverge` says "average surprisal over the 16 equal cells is exactly 4 bits" on screen — entropy is one series away, with nats vs bits a unit change on `TheNaturalStride`'s device |
+| `logarithms` | *(information as log-counting — bits, entropy)* | promised | `algebra/README.md` Ideas; `ShrinkCounts`' −log₂ = 4 is the HHTH cell's surprisal. Both halves now exist: `ProportionsConverge` says "average surprisal over the 16 equal cells is exactly 4 bits" on screen — entropy is one series away — H = E[surprisal] is `TheBalancePoint`'s fulcrum under `ShrinkCounts`' stamps, averaged the sorted-square way — with nats vs bits a unit change on `TheNaturalStride`'s device |
 | `e-and-ln` | *(derivative toolkit, ln as area under 1/t, Euler's formula, growth in the wild)* | promised | `calculus/README.md` Ideas not yet built; the first three are also Scope exclusions stated with their reasons |
 
 ## Shared visual devices
@@ -58,7 +58,9 @@ one topic should meet the same picture, upgraded, in the next:
   through three scenes — first the definition, then base-as-unit, and
   finally the counter row disclosed as ln in nature's units; the
   mystery constants obey the strip's laws before they are named.
-- **The outer-product grid**: `MultiplicativeRule` (counting) →
+- **The outer-product grid** (now also `SameOutcomesAdd`'s two-dice
+  diagonals — level sets on the owned picture):
+  `MultiplicativeRule` (counting) →
   `CountingAlignments` (raw path space) → `TheProductRule` (2×2 and 6×6,
   reweighted to probability) → the aligned unit square.
 - **"Divide out / drop what doesn't matter" in WARM**: cancelled
@@ -71,7 +73,8 @@ one topic should meet the same picture, upgraded, in the next:
 - **The chain product**: `PermutationRule`'s slot chain →
   `ManyPathsOneWord`'s per-frame product annotation → `ChainsOfTrials`'
   progressive square subdivision. One device, three series.
-- **The shrinking pool**: `PermutationRule`'s pool-that-depletes is
+- **The shrinking pool** (fourth stop: `TheBinomialColumns`' "no
+  replacement → no binomial" boundary): `PermutationRule`'s pool-that-depletes is
   sampling without replacement — the same picture that breaks
   independence in `WhenToUseIt` (probability, the aces row), and whose
   per-draw factors `TheMultiplicationRule` finally names as conditional
@@ -90,7 +93,8 @@ one topic should meet the same picture, upgraded, in the next:
   (18/42 = 3/7).
 - **Sort the square** (`SortTheSquare` → `TheBinomialColumns`): the
   stamped cells slide into columns grouped by value — the pmf born as
-  conserved, rearranged area; re-cut at p, the same columns weigh
+  conserved, rearranged area; re-cut at p, the same columns are argued
+  (highlight plus formula, not a second slide) to weigh
   C(n,k)·p^k q^(n−k). The device that makes "induced weights" a move
   you watched instead of a definition.
 - **The quartered unit square** (`ChainsOfTrials` → `ShrinkCounts` →

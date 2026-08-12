@@ -233,13 +233,18 @@ class SortTheSquare(ConceptScene):
         self.play(LaggedStart(*[FadeIn(w) for w in weights], lag_ratio=0.15))
         born = caption("five values, sixteen equally likely cells — unequal bars")
         born2 = caption("from equal cells; the area only moved, it never changed")
-        born.move_to(2.55 * DOWN)
+        born.move_to(2.45 * DOWN)
         born2.next_to(born, DOWN, buff=0.15)
+        total = MathTex(
+            r"\tfrac{1}{16}+\tfrac{4}{16}+\tfrac{6}{16}+\tfrac{4}{16}+\tfrac{1}{16} = 1",
+            font_size=30,
+        ).move_to(3.3 * DOWN)
         self.play(FadeIn(born), FadeIn(born2))
+        self.play(Write(total))
         self.wait(1.2)
 
         # Same blueprint, different houses: Y = tails sorts identically.
-        self.play(FadeOut(VGroup(born, born2, prompt)))
+        self.play(FadeOut(VGroup(born, born2, total, prompt)))
         y_prompt = Text(
             "Now stamp the SAME square with Y = number of tails.",
             font_size=BODY_SIZE,
@@ -289,8 +294,7 @@ class TheBalancePoint(ConceptScene):
         self.play(FadeIn(weighted))
 
         # The fair die: six equal bars, fulcrum at 3.5 — not a face.
-        axis = Line(3.9 * LEFT, 0.9 * RIGHT, color=MUTED, stroke_width=2)
-        axis.move_to(1.5 * LEFT + 0.55 * DOWN)
+        axis = Line([-4.3, -0.55, 0], [1.4, -0.55, 0], color=MUTED, stroke_width=2)
 
         def bar_at(x_val, height, color=MUTED):
             x = -3.9 + (x_val - 1) * 0.96 + 2.4
