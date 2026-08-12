@@ -39,6 +39,7 @@ from utils import (
     ConceptScene,
     boxed,
     caption,
+    on_frame,
     render_cli,
 )
 
@@ -532,14 +533,26 @@ class TheUnderflowCliff(ConceptScene):
         attribution2 = caption('which calls rescaling "less robust" — credit where it is due')
         attribution.next_to(safe, DOWN, buff=0.28)
         attribution2.next_to(attribution, DOWN, buff=0.18)
+        # The IOU, stated where the debt is incurred: ln and e belong to
+        # calculus, one series ahead — the identity is taken on credit here
+        # and TheDebtRepaid re-reads it once the names are earned.
+        iou = caption(
+            "ln and e are names on loan from calculus, the next stop —\n"
+            "it earns them, then re-reads this exact line"
+        )
+        iou.next_to(attribution2, DOWN, buff=0.28)
+        on_frame(iou)
         lse_box = boxed(lse, buff=0.3)
         self.play(Write(lse), Create(lse_box))
         self.play(Write(exact_bit))
         self.play(FadeIn(safe))
         self.play(FadeIn(attribution), FadeIn(attribution2))
+        self.play(FadeIn(iou))
         self.wait(1.2)
 
-        self.play(FadeOut(VGroup(need, lse, exact_bit, safe, attribution, attribution2, lse_box)))
+        self.play(
+            FadeOut(VGroup(need, lse, exact_bit, safe, attribution, attribution2, iou, lse_box))
+        )
         wild = caption(
             "the same ruler everywhere the world multiplies: decibels, pH,\n"
             "earthquake magnitudes, semitones — and every per-frame product"

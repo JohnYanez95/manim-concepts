@@ -539,3 +539,32 @@ reordered.
   a Bayes move
 - linear_algebra/ maintainer call still open (seventh entry)
 - stamp: advance to 9058d19
+
+## [2026-08-12] audit | incremental, plan 011 branch
+
+- scope: diffed f2cfec6..aeb25f6 (the three narrative-refactor
+  commits) from the 9058d19 stamp; changed files plus cited far ends
+  (TheDebtRepaid, the aces row, INDEX rows 37/63/114, the
+  shrinking-pool device), no full crawl
+- findings: 0 promised-not-delivered, 2 delivered-not-recorded,
+  1 possible-not-yet-made, 4 graph-health — applied in the phase-3
+  commit (local CodeRabbit: zero findings)
+- no stale quotes of the old lines anywhere; the debt premise
+  survives — the loan note's "re-reads this exact line" is
+  character-true (identical MathTex in both modules), and
+  TheDebtRepaid's "rendered before ln meant anything" stays valid in
+  the viewing-order reading (pre-ruled by plan 011; recorded so it
+  is not re-litigated)
+- applied: INDEX row 63 now records the promise side on screen (the
+  graph's flagship edge, symmetric at last); calculus Scope's
+  two-promises sentence trued (both are captions now); algebra
+  Scope's antecedent slip fixed ("the identity behind the second");
+  the "by counting alone" residual softened to "with no license
+  shown" in both the cell and the caption (the scene was already in
+  the re-render set, so strictness was free)
+- possible, recorded: TheDebtRepaid quoting the loan note back
+  verbatim (second instance of the replayed-deferral device) — out
+  of this plan's render scope, future touch
+- 9058d19..f2cfec6 (audit application + PR #11 bot fixes) never
+  formally re-diffed; absorbed by this stamp advance
+- stamp: advance to aeb25f6

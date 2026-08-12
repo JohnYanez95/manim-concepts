@@ -10,10 +10,11 @@ ceiling between 2 and 3), a three-beat visual notion of local growth
 rate answers it (the base whose slope is its own height), and ln lands
 not as a new function but as the counter row in natural units — the
 unit every earlier strip was secretly ruled in. The series pays two
-standing promises: `MultiplyIsAdd`'s on-screen deferral ("calculus
-later makes one base natural") and `TheUnderflowCliff`'s rendered
-ln-identity, re-read symbol by symbol once every symbol means
-something. The second: **the derivative as a toolkit** — d/dx naming
+standing promises, both on-screen captions since the plan-011
+refactor: `MultiplyIsAdd`'s deferral ("calculus later makes one base
+natural") and `TheUnderflowCliff`'s loan note on its ln-identity —
+re-read symbol by symbol once every symbol means something.
+The second: **the derivative as a toolkit** — d/dx naming
 the settling ratio the zoom built, nudge geometry for x², the sum and
 chain rules, e^x and ln differentiated, the score function finding
 the likelihood peak by hand, and the smooth max's sensitivities
