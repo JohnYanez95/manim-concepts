@@ -69,6 +69,16 @@ uv run python deep_learning/ctc_alignment_manim.py -s TheForwardTrellis -q draft
 
 See the [root README](../README.md) for the full flag list.
 
+### ctc_gradient_manim.py
+
+The gradient of the loss the alignment series built — being drafted under
+[plan 010](../docs/plans/010-ctc-gradient.md); the table grows as scenes
+land.
+
+| # | Scene | Formula | What it says | Why it's true | When it's useful |
+| --- | --- | --- | --- | --- | --- |
+| 1 | `TheOtherHalfOfTheTrellis` | $\beta_T(s)=1;\ \beta_t(s)=\sum_i \beta_{t+1}(s{+}i)\,y^{t+1}_{z'_{s+i}}$ | $\alpha$ answered "how did we get here?"; $\beta$ answers "how do we finish?" — the same grid, swept against the arrows. | Unit weights first: the backward counts mirror the forward counts (the AB example is symmetric under time-reversal plus A↔B), and the ledger cut — $\alpha$'s column pockets frame $t$'s emission, $\beta$ starts at $t{+}1$ — keeps every emission counted exactly once. | The backward half of forward–backward — the HMM lineage (Rabiner 1989) that every CTC implementation inherits. |
+
 ## References
 
 Ticks are human-gated — see
