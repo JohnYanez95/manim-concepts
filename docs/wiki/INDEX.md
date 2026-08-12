@@ -12,6 +12,7 @@ crawling every page; whoever applies an audit's findings updates it.
 | --- | --- | --- |
 | `counting-rules` | `combinatorics/counting_rules_manim.py` | The four elementary counting rules; the grid as outer product of stages |
 | `ctc-alignment` | `deep_learning/ctc_alignment_manim.py` | CTC: collapse map, alignment counting, forward trellis |
+| `ctc-gradient` | `deep_learning/ctc_gradient_manim.py` | The CTC gradient: the backward trellis, the constant column, occupancy as the truth's soft target, ∂L/∂u = y − γ, the error signal over training, peakiness as topology + weight sharing |
 | `independence` | `probability/independence_manim.py` | The product rule as definition; the aligned unit square |
 | `conditional-probability` | `probability/conditional_probability_manim.py` | Renormalized area, the multiplication rule, LOTP and trees, the inversion, conditional independence |
 | `bayes-rule` | `probability/bayes_rule_manim.py` | The division named, whole-people counting, the odds form and waterfall, the factored prevalence pair, iterated updating, the host's protocol |
@@ -37,8 +38,11 @@ Status: **delivered** (both ends exist and the content makes the link) or
 | `conditional-probability` | `bayes-rule` | delivered | `ThroughTheFrontDoor` divides the exact identity `TwoSlicesOneSquare` left on screen; `OneTestTwoPatients` factors the counted prevalence pair; `YesterdaysPosterior` repeats the CI license verbatim; `TheHostsProtocol` closes the Monty deferral with Rosenthal's variants |
 | `bayes-rule` | `logarithms` | delivered | `TheEvidenceRuler` re-plots `YesterdaysPosterior`'s ladder in base 3 — each head adds exactly +2, and two tails walk the marker back to exactly 0; evidence as distance, decibans named. Second strand: `ShrinkCounts`' zero-prior beat (log 0 = −∞, infinitely far away), read back from `probability/README.md`'s zero-prior sentence |
 | `ctc-alignment` | `logarithms` | delivered | `TheUnderflowCliff` delivers `deep_learning/`'s log-space bullet: the 0.1³²⁴ hard zero, the −324 log sum, and Graves' log-add identity for the trellis's additions (2012 book, correctly attributed) |
-| `ctc-alignment` | *(beam search / gradient / peaky dynamics)* | promised | `deep_learning/README.md` Ideas not yet built. The gradient story's e-half (`e-and-ln`), softmax/NLL half (`softmax-likelihood`) and derivative toolkit (`derivative-toolkit`) all now exist — every gate is open; what remains is the identity itself and the training-dynamics scenes |
-| `softmax-likelihood` | *(the CTC gradient identity)* | promised | `TheLossThatTrains`' closer, on screen: "its gradient — softmax output minus how often the truth used each cell — is the next series"; the same identity waits in `deep_learning/README.md` Ideas, with Bridle 1989's "output minus a one-from-N target" pinned in plan 008 anchor M; `TheSmoothMaxsShares` now leaves p − one-hot itself on screen — only the per-path occupancy generalization remains |
+| `ctc-alignment` | *(beam search)* | promised | `deep_learning/README.md` Ideas not yet built. This row's gradient and peaky-dynamics strands were delivered by `ctc-gradient` (2026-08-12); beam search over collapsed prefixes — and the new label-prior-variant idea the gradient series opened — are what remain |
+| `ctc-gradient` | `ctc-alignment` | delivered | The same 5×4 grid, skip rule and worked example return: `TheOtherHalfOfTheTrellis` mirrors `TheForwardTrellis`'s recurrence against the arrows, and `PathsThroughACell`'s constant column returns the trellis's 15 four times — the flagship number's third series |
+| `ctc-gradient` | `counting-rules` | delivered | `PathsThroughACell`'s waist: 2 prefixes × 4 suffixes = 8 of the 15 paths through cell (t=2, A) — the multiplicative rule "now carrying probability", said on screen |
+| `ctc-gradient` | `random-variables` | delivered | `WhereTheTruthSpendsItsTime` reads γ's rows as expected dwell times — `TheBalancePoint`'s expectation under new weights, with rows summing past 1 disposing of the rows-are-probabilities misreading |
+| `softmax-likelihood` | `ctc-gradient` | delivered | `TheLossThatTrains`' closer promised "softmax output minus how often the truth used each cell — is the next series"; `WhereTheTruthSpendsItsTime` names that exact phrase as γ on screen, and `SoftmaxMinusOccupancy` lands the identity with Bridle's "one-from-N target" gone soft |
 | `ctc-alignment` | *(dynamic programming as its own concept)* | promised | `deep_learning/README.md` row 5 when-useful; plan 001 gaps. A future build inherits log-space for free: `TheUnderflowCliff` already shows the recursion's additions need the log-add identity |
 | `counting-rules` | `random-variables` | delivered | The graph's oldest promise (`combinatorics/README.md` row 3 when-useful), closed: `TheBinomialColumns` counts the sorted columns' cells as C(4,k) — "counted exactly the way the combinations series counts them" — and assembles C(n,k)p^k q^(n−k) from cell count times cell area |
 | `independence` | `softmax-likelihood` | delivered | The CTC bridge's remaining half, closed: the product-becomes-sum arithmetic is independence's own delivery — `AddToSurvive` multiplies five per-frame factors to 0.27216 and `TheLossThatTrains` says "independent frames: losses add" on screen (takeaway included); the promise itself was spoken by `ProportionsConverge` ("likelihood is next") and answered by `TheLikelihoodLens` |
@@ -53,7 +57,7 @@ Status: **delivered** (both ends exist and the content makes the link) or
 | `bayes-rule` | `softmax-likelihood` | delivered | `TheBestExplanation` names the dice ratio "a likelihood ratio — one rung of the posterior ladder: the update factor, not a verdict about the die", and points the not-a-density guard at the prior-and-renormalize move ("that is the Bayes move, and it is not this move") |
 | `softmax-likelihood` | `derivative-toolkit` | delivered | `ZeroSlopeFindsThePeak` finds `TheBestExplanation`'s grid peak analytically (the score 3/p − 1/(1−p) zeroes at p̂ = 3/4, and the general line derives p̂ = k/n — "the observed proportion … now derived"); `TheSmoothMaxsShares` differentiates the NLL gap into (−0.3348, 0.2447, 0.0900) = p − one-hot and makes "the gap grows roughly linearly" a theorem (slope → −1) |
 | `logarithms` | `derivative-toolkit` | delivered | `ZeroSlopeFindsThePeak` names the score "the counting strip differentiated — under ln, products become sums of relative rates"; `TheSmoothMaxsShares` differentiates the log-sum-exp ruler itself, its sensitivities landing as the softmax shares |
-| `derivative-toolkit` | *(the CTC gradient identity)* | promised | `TheSmoothMaxsShares`' closer, on screen: "every frame of CTC hands this exact picture a different target — softmax minus where the truth actually was; the gradient series is next" — the promise's third on-screen strand. Two riders travel with it: the bare-product-rule decision belongs to the gradient series (calculus Scope), and "how often the truth used each cell" is an expectation — `TheBalancePoint` is the owned picture its plan grounds in |
+| `derivative-toolkit` | `ctc-gradient` | delivered | `TheSmoothMaxsShares`' on-screen closer answered: `TheSensitivityOfTheSum` generalizes the shares reading to path scale (many paths share one cell, so shares add into occupancy) and `SoftmaxMinusOccupancy`'s degeneration beat receives p − one-hot as the one-path special case. Both riders resolved: the bare product rule was **not needed** — the log-sensitivity route replaced it (plan 010 decision 2, the rectangle stays in the drawer) — and occupancy-as-expectation grounds in `TheBalancePoint` (dwell rows, 1.7578 + 1.1220 + 1.1202 = 4) |
 | `counting-rules` | *(Pascal, stars & bars, inclusion–exclusion, binomial theorem)* | promised | `combinatorics/README.md` Ideas not yet built |
 | `logarithms` | `e-and-ln` | delivered | `TheSplitYear` replays `MultiplyIsAdd`'s deferral caption on screen ("the wait ends here"); `TheNaturalStride` names the mystery constants as ln and re-rules the strip in natural units; `TheDebtRepaid` re-reads `TheUnderflowCliff`'s identity symbol by symbol — the graph's only on-screen debt, closed |
 | `logarithms` | *(the log-odds inference scene in `probability/`)* | promised | `algebra/README.md` Ideas ("this series builds the ruler; that series owns the inference") — the residual of the delivered bayes→logarithms edge. `TheBestExplanation` grew it a second passenger: the 864/343 rung stops exactly where a prior would enter, so MLE→MAP (the ratio through a 1:1 prior) rides the same future scene — its numbers already verified in plan 008 addendum A1 |
@@ -84,7 +88,9 @@ one topic should meet the same picture, upgraded, in the next:
   diagonals — level sets on the owned picture):
   `MultiplicativeRule` (counting) →
   `CountingAlignments` (raw path space) → `TheProductRule` (2×2 and 6×6,
-  reweighted to probability) → the aligned unit square.
+  reweighted to probability) → the aligned unit square →
+  `PathsThroughACell`'s prefix-bundle × suffix-bundle waist (ways in ×
+  ways out, on the trellis).
 - **"Divide out / drop what doesn't matter" in WARM**: cancelled
   orderings (combinatorics) → merged repeats and dropped blanks (CTC) →
   failed product tests (independence).
@@ -133,12 +139,17 @@ one topic should meet the same picture, upgraded, in the next:
 - **The softmax bars, reborn** (`TheProbabilityMachine` →
   `TurningTheDial` → `TheLossThatTrains` → `TheSmoothMaxsShares`, where
   the same bars — same values, order, colors — return as a *gradient*
-  read-out; the future gradient series hands them a different target
-  per frame).
+  read-out → the gradient series delivers the promised different
+  target: `WhereTheTruthSpendsItsTime` pulls a γ column out of the
+  grid and stands it beside the one-hot bar, and
+  `TheErrorSignalLearns`' output panels are the bars four frames
+  wide).
 - **The sign-change ribbon** (`ZeroSlopeFindsThePeak`: + / 0 / − under
   the likelihood curve, with the x³ cameo and the p = 0 valley floor
-  disposing of the converse error) — the habit the training-dynamics
-  scenes will inherit.
+  disposing of the converse error) — inherited as promised:
+  `TheErrorSignalLearns`' push bars balance about the axis (every
+  column sums to zero in both signs), the sign pinned on screen the
+  moment the first axis appears.
 - **The y = x flip** (`TheDebtRepaid` earns the inverse graph →
   `TheCurveThatIsItsOwnSlope` differentiates it: rise and run swap, so
   slopes reciprocate — 1/e at x = e).
@@ -146,7 +157,15 @@ one topic should meet the same picture, upgraded, in the next:
   convention in the log-add identity → `TheProbabilityMachine`'s
   subtract-the-max rescue (the invariance, used) → `TheLossThatTrains`'
   LSE gap. One move — pull the max out so the remainder is tame —
-  three appearances; the future gradient series differentiates it.
+  three appearances; differentiated as promised:
+  `SoftmaxMinusOccupancy` pushes the loss through the log-softmax
+  Jacobian, `TheSmoothMaxsShares`' ∂LSE = softmax doing the one line.
+- **The constant column** (`PathsThroughACell` →
+  `SoftmaxMinusOccupancy`; Eisner's classroom checksum, new in the
+  gradient series): sum α·β down any trellis column and get the same
+  P(Y|X) — proved by "every path crosses every column exactly once",
+  and load-bearing twice: the emission-ledger self-check, and
+  Σ_j γ_t(j) = 1 collapsing the softmax Jacobian into y − γ.
 - **The odds ladder** (`YesterdaysPosterior` → `TheEvidenceRuler` →
   `AddToSurvive`, which names the ruler's true identity on screen:
   "the evidence ruler was a log-likelihood-ratio ruler all along"):

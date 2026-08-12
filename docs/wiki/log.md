@@ -470,3 +470,29 @@ reordered.
 - plan-009 design prose trued: the sliding dot, collapse-at-0 and
   stacked-heights beats marked cut-at-build
 - stamp: advance to 5615507
+
+## [2026-08-12] series | ctc-gradient lands (plan 010, phase 3)
+
+- the roadmap's end target: the series plans 006–009 existed to gate,
+  now built — seven scenes in `deep_learning/ctc_gradient_manim.py`
+- node added; all three converging promise rows flipped delivered:
+  softmax-likelihood's on-screen closer ("how often the truth used
+  each cell" — now γ, named on screen), derivative-toolkit's closer
+  (p − one-hot received as the one-path degeneration), and the
+  alignment bundle's gradient + peaky strands (the row narrows to
+  beam search, plus the new label-prior-variant idea)
+- both derivative-toolkit riders resolved: the bare product rule was
+  not needed (log-sensitivity route, plan 010 decision 2);
+  occupancy-as-expectation grounds in TheBalancePoint (dwell rows)
+- three new backward edges delivered: the trellis returns
+  (ctc-alignment), the waist is the multiplicative rule
+  (counting-rules), dwell rows are the balance point
+  (random-variables)
+- devices: the constant column recorded as a new device (checksum,
+  load-bearing twice); the softmax bars' promised different target
+  delivered; the sign-change ribbon inherited as promised; factor-
+  out-the-max differentiated as promised; the outer-product grid
+  gains the waist as its fifth stop
+- deep_learning Scope grown to two series; Ideas: two entries struck
+  delivered, one opened (label-prior variant); eight references
+  landed unchecked for the maintainer's pass

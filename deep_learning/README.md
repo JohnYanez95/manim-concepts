@@ -17,6 +17,12 @@ The counting prerequisites live in
 path space here, and the partition scene's closing example — "counting the
 alignments a sequence model can take" — promised exactly this topic.
 
+A second series differentiates the loss the first one built: the backward
+half of the trellis, posterior occupancy as the truth's soft target, the
+identity — per-frame gradient is softmax output minus occupancy — and the
+training dynamics that identity makes legible, through to why trained CTC
+outputs go peaky and what a label prior changes.
+
 Deliberately **not** covered here:
 
 - Probability foundations. Per-frame softmax outputs, products of
@@ -27,12 +33,17 @@ Deliberately **not** covered here:
   in its conditional series (`WhenToCondition`). Softmax as a
   distribution and log-likelihood are now taught there too — the
   softmax/likelihood series scores this topic's own per-frame matrix
-  and names the CTC loss in its closer.
+  and names the CTC loss in its closer. The calculus the gradient
+  series leans on (chain and sum rules, the score function,
+  ∂LSE = softmax, p − one-hot) is taught in
+  [`calculus/`](../calculus/README.md)'s derivative toolkit.
 - Decoding at depth. Greedy decoding's failure appears in scene 3, but
   beam search over collapsed prefixes and language-model fusion are queued
   in Ideas, not built.
-- The gradient and training dynamics — the backward pass, the
-  softmax-minus-occupancy identity, and why trained outputs go peaky.
+- Training realism. The gradient series' dynamics scenes use plain
+  gradient descent on the worked example — no SGD noise, schedules or
+  architecture effects; and the label prior is named as the peakiness
+  fix, not built as its own loss variant.
 - The encoder itself. RNN and transformer acoustic models are out of
   scope: CTC begins at the per-frame probability matrix, and so does this
   topic.
@@ -71,9 +82,14 @@ See the [root README](../README.md) for the full flag list.
 
 ### ctc_gradient_manim.py
 
-The gradient of the loss the alignment series built — being drafted under
-[plan 010](../docs/plans/010-ctc-gradient.md); the table grows as scenes
-land.
+The gradient of the loss the alignment series built. Scenes 1–3 construct
+the object the derivative needs (the backward trellis, the constant
+column, occupancy); 4–5 differentiate, landing the identity three earlier
+series promised on screen; 6–7 watch the identity during training —
+Graves' error-signal arc made countable, then the peakiness mechanism.
+Every on-screen number traces to
+[plan 010](../docs/plans/010-ctc-gradient.md)'s verification pass (exact
+rational arithmetic, two independent routes).
 
 | # | Scene | Formula | What it says | Why it's true | When it's useful |
 | --- | --- | --- | --- | --- | --- |
@@ -85,15 +101,27 @@ land.
 | 6 | `TheErrorSignalLearns` | — | The training error signal starts diffuse, localises around predictions, then virtually disappears (Graves et al. 2006, figure 4 — rebuilt on countable frames). | With uninformative outputs the push $\gamma - y$ is the target's path counts in pure fractions; three snapshots of one gradient descent (loss 0.7181 → 0.1602 → 0.0356) on one shared scale localise and die; frame 3 settles mixed at (0.032, 0.218, 0.750) because all three of its choices collapse to AB — $y$ matches $\gamma$ out of indifference, not certainty. | Reading error-signal and training-curve plots: a vanished gradient does not mean one-hot outputs. |
 | 7 | `WhyTheSpikesAppear` | — | Peaky outputs are topology plus weight sharing, not acoustics. | Blank's head start is counted with the input never entering: A 21, B 21, ε 18 at T=4 (the fair boundary case), blank ahead for good from T=5, share → 2/3 in the one-letter limit; a single softmax forced to serve every frame descends to blank-everywhere at T=12 — (0.0919, 0.0919, 0.8162), an empty decode, 100% error at a local optimum — while free per-frame outputs never spike. | Why a label prior fixes peaky CTC; spikes are a steerable training artifact, never timestamps — and the identity's family (one-hot cross-entropy, distillation, CTC) is one gradient shape with different targets. |
 
+Renders are numbered to match: `01_TheOtherHalfOfTheTrellis.mp4` …
+`07_WhyTheSpikesAppear.mp4`.
+
+Render them:
+
+```bash
+uv run python deep_learning/ctc_gradient_manim.py            # all seven, 1080p60
+uv run python deep_learning/ctc_gradient_manim.py --list
+uv run python deep_learning/ctc_gradient_manim.py -s SoftmaxMinusOccupancy -q draft
+```
+
 ## References
 
 Ticks are human-gated — see
 [reference verification](../README.md#reference-verification-is-human-gated).
-Every entry below came out of the plan-001 research pass
+The ticked entries came out of the plan-001 research pass
 ([`docs/plans/001-ctc-alignment.md`](../docs/plans/001-ctc-alignment.md))
-and started unchecked; all were then opened, confirmed, and ticked by
-the maintainer. Future entries start unchecked until a human does the
-same.
+and were opened, confirmed, and ticked by the maintainer. The unchecked
+entries are the plan-010 gradient-series pass
+([`docs/plans/010-ctc-gradient.md`](../docs/plans/010-ctc-gradient.md)),
+awaiting the same.
 
 - [X] [Graves et al., 2006 — Connectionist Temporal Classification](https://www.cs.toronto.edu/~graves/icml_2006.pdf)
       — the original ICML paper; source of the collapse map, the forward
@@ -115,7 +143,36 @@ same.
       — practical anchors: real frame rates, and blank vs. word-space in
       real vocabularies.
 - [X] [Zeyer et al., 2021 — Why does CTC result in peaky behavior?](https://arxiv.org/abs/2105.14849)
-      — the analysis behind the spiky outputs mentioned in `WhenToUseIt`.
+      — the analysis behind the spiky outputs mentioned in `WhenToUseIt`;
+      the gradient series' scene 7 animates its mechanism (uniform-init
+      posterior = alignment counts, blank's topological dominance, the
+      feed-forward 100%-error theorem, the label-prior fix). arXiv
+      preprint, cited as such on screen.
+- [ ] [Alex Graves, *Supervised Sequence Labelling with RNNs* (2012)](https://www.cs.toronto.edu/~graves/preprint.pdf)
+      — Springer 2012, author's preprint. Chapter 7: the emission-free
+      β convention the gradient series adopts (eqs. 7.12–7.13), the
+      division-free p = Σαβ (7.26), the identity ∂L/∂a = y − occupancy
+      (7.34), and the log-scale-over-rescaling advice (§7.3.1).
+- [ ] [Jason Eisner, the forward–backward spreadsheet (ACL-02)](https://www.cs.jhu.edu/~jason/papers/eisner.tnlp02.pdf)
+      — "An Interactive Spreadsheet for Teaching the Forward-Backward
+      Algorithm": the classroom-proven constant-column checksum scene 2
+      is built around, and posterior-as-reconstruction pedagogy.
+- [ ] [Lawrence R. Rabiner, the HMM tutorial (Proc. IEEE, 1989)](https://www.cs.sjsu.edu/~stamp/RUA/Rabiner.pdf)
+      — Proc. IEEE 77(2):257–286: γ = αβ/P as expected state occupancy,
+      the HMM forward–backward lineage scene 1 name-drops (cited as
+      printed in Graves 2006; no direct quotes on screen).
+- [ ] [Peter Bell, Edinburgh ASR lecture 13: CTC (2024-25)](https://www.inf.ed.ac.uk/teaching/courses/asr/2024-25/asr13-ctc.pdf)
+      — "End-to-end systems 1: CTC"; a modern course treatment
+      consulted in the pedagogy pass — evidence the gradient story is
+      the untaught half (stops at the forward algorithm).
+- [ ] [Mark Hasegawa-Johnson, UIUC ECE 537 lecture 20: CTC (2022)](https://courses.grainger.illinois.edu/ece537/fa2022/slides/lec20.pdf)
+      — second course data point from the pedagogy pass, same finding.
+- [ ] [PyTorch Forums, "Question about CTC gradient"](https://discuss.pytorch.org/t/question-about-ctc-gradient/65624)
+      — answered by Thomas Viehmann; the real logits-vs-log-probs
+      confusion scene 5's when-useful beat addresses.
+- [ ] [PyTorch issue #122243, non-normalized CTC inputs](https://github.com/pytorch/pytorch/issues/122243)
+      — forward loss right, backward silently wrong unless the input is
+      a true log-softmax; scene 5's implementation trap.
 
 ## Ideas not yet built
 
@@ -124,16 +181,16 @@ Rough queue, in roughly the order they build on each other:
 - Beam search over collapsed prefixes — why a prefix needs two
   probabilities (ending-in-blank vs. not), and the merge step that makes
   CTC beam search different from vanilla beam search.
-- Training dynamics: the error signal starting diffuse, localising, then
-  collapsing into spikes (Graves 2006, fig. 4), and why blank comes to
-  dominate.
-- The gradient identity — per-frame gradient is softmax output minus
-  posterior occupancy, which is what makes the error-signal figure
-  legible. Its groundwork now exists: `probability/`'s
-  softmax/likelihood series delivers NLL as the LSE gap, and
-  `calculus/`'s derivative toolkit leaves p − one-hot itself on
-  screen (`TheSmoothMaxsShares`); what remains is the identity
-  itself.
+- ~~Training dynamics~~ — delivered by the gradient series:
+  `TheErrorSignalLearns` rebuilds Graves fig. 4's arc countable, and
+  `WhyTheSpikesAppear` delivers blank dominance and the peakiness
+  mechanism.
+- ~~The gradient identity~~ — delivered: `SoftmaxMinusOccupancy` lands
+  ∂L/∂u = y − γ, receiving `TheSmoothMaxsShares`' p − one-hot as the
+  one-path degeneration.
+- A label-prior CTC variant built as its own loss — scene 7 names it as
+  the peakiness fix (Zeyer et al.); constructing it, with the
+  prior-corrected trellis, is unbuilt.
 - ~~Log-space computation~~ — delivered by
   [`algebra/`](../algebra/README.md)'s `TheUnderflowCliff`: the
   0.1³²⁴ hard zero, the −324 log sum, and Graves' log-add identity

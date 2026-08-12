@@ -54,8 +54,20 @@ when-useful framing.
   catches (the real-β fill now sweeps right-to-left like the
   recurrence it teaches; the bias-model bar labels now display the
   pinned 4-dp forms)
-- [ ] Phase 3: README + wiki complete, `make test` green — **John's
-  source-validation checkpoint**
+- [x] Phase 3: README + wiki complete, `make test` green (212 tests).
+  deep_learning Scope grown to two series (training realism named as
+  the new deliberate exclusion); concepts table numbered 1–7 with all
+  three levels per row; eight references landed unchecked for the
+  maintainer's pass; Ideas: two entries struck delivered, the
+  label-prior variant opened. Wiki: node added, all three converging
+  promise rows flipped delivered (softmax-likelihood's closer,
+  derivative-toolkit's closer with both riders resolved, the
+  alignment bundle narrowed to beam search), three backward edges
+  delivered, the constant column recorded as a new device, three
+  promised device inheritances marked delivered, log entry appended.
+  **Awaiting John's source-validation checkpoint** — items for his
+  pass: the eight unchecked references; the ratified matrix column 4
+  (decision 3 / FLAG 1)
 - [ ] Phase 4: local CodeRabbit + connection-auditor, findings
   addressed
 - [ ] Phase 5: PR, bot review, `clean-drafts`, 1080p60 finals
