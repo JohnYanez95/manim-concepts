@@ -77,7 +77,13 @@ gradient only in when-useful framing.
   five with the gif re-rendered and its rule reworded to series
   granularity, three device lineages recorded, and the design prose
   trued to the build
-- [ ] Phase 5: PR, drafts cleaned, 1080p60 render verified
+- [x] Phase 5: PR #10 opened; bot review returned four minors, all
+  applied (the Scope boundary on likelihood/softmax stated, the NLL
+  target index trued to z_a everywhere the computed numbers are
+  z_a's, the reference preamble scoped to its block, the welcome
+  stagger restored topic-by-topic); drafts cleared; finals rendered
+  with `--jobs 8`: six distinct 1080p60 files, 31-43 s, frame
+  spot-checked on the k/n beat. John merges.
 
 ## Research questions the reports must settle
 
