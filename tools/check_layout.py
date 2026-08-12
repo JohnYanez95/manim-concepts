@@ -104,6 +104,18 @@ def _bbox(mobject, margin=0.0):
     return left - margin, right + margin, bottom - margin, top + margin
 
 
+def _outline_points(shape) -> np.ndarray:
+    """Sample a shape's outline densely enough that no text box slips through.
+
+    A fixed sample count lets a long path cross a small label between
+    two samples; scaling the count with arc length caps the spacing at
+    ~0.1 scene units, smaller than any readable text box.
+    """
+    length = shape.get_arc_length()
+    count = int(np.clip(length / 0.1, 16, 1024))
+    return np.array([shape.point_from_proportion(t) for t in np.linspace(0, 1, count)])
+
+
 def _label(mobject) -> str:
     raw = getattr(mobject, "text", None) or getattr(mobject, "tex_string", None) or ""
     raw = " ".join(str(raw).split())
@@ -147,7 +159,7 @@ def _check_beat(scene: Scene, beat: int, frame_w: float, frame_h: float) -> list
         ]
         if not near:
             continue
-        samples = np.array([shape.point_from_proportion(t) for t in np.linspace(0, 1, 32)])
+        samples = _outline_points(shape)
         for (bl, br, bb, bt), a in near:
             inside = (
                 (samples[:, 0] > bl)

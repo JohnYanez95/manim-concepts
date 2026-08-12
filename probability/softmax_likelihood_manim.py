@@ -23,6 +23,7 @@ Render:
     uv run python probability/softmax_likelihood_manim.py -s TheLikelihoodLens -q draft
 """
 
+import numpy as np
 from manim import *
 
 from utils import (
@@ -577,8 +578,8 @@ class TheProbabilityMachine(ConceptScene):
             font_size=32,
         ).move_to(2.4 * RIGHT + 1.35 * DOWN)
         forcing = caption("add c to every score: e^c cancels — exactly the same")
-        forcing2 = caption("distribution; only an exponential turns a shift into")
-        forcing3 = caption("a common factor the normalizer kills")
+        forcing2 = caption("distribution; among per-score recipes, only an")
+        forcing3 = caption("exponential turns a shift into a factor that cancels")
         forcing.move_to(2.4 * RIGHT + 2.1 * DOWN)
         forcing2.next_to(forcing, DOWN, buff=0.15)
         forcing3.next_to(forcing2, DOWN, buff=0.15)
@@ -716,10 +717,11 @@ class TurningTheDial(ConceptScene):
             font_size=32,
         ).move_to(2.55 * RIGHT + 1.35 * DOWN)
         base_temp = MathTex(
-            r"b^{z} = e^{z \ln b} \;\Rightarrow\; \text{base } b \equiv T = \tfrac{1}{\ln b}",
+            r"b^{z} = e^{z \ln b} \;\Rightarrow\;"
+            r" \text{base } b \equiv T = \tfrac{1}{\ln b}\ \ (b > 1)",
             font_size=32,
         ).move_to(2.55 * RIGHT + 2.15 * DOWN)
-        natural = caption("no base is forced — every base is e at another T;")
+        natural = caption("no base above 1 is forced — each is e at another T;")
         natural2 = caption("e is the convention because ln is the natural counter")
         on_frame(natural.move_to(2.55 * RIGHT + 2.85 * DOWN))
         on_frame(natural2.next_to(natural, DOWN, buff=0.15))
@@ -810,16 +812,24 @@ class TheLossThatTrains(ConceptScene):
         scores = _prob_bars(
             [2 / 3, 1 / 3, 0.02], ["a", "b", "c"], bar_width=0.6, gap=0.6, unit=2.7, color=COOL
         ).move_to(3.9 * LEFT + 1.5 * DOWN, aligned_edge=DOWN)
-        score_vals = VGroup(
-            *[
-                Text(v, font_size=LABEL_SIZE, color=COOL).next_to(bar[0], UP, buff=0.12)
-                for bar, v in zip(scores, ["2", "1", "0"], strict=True)
-            ]
-        )
-        lse_height = 2.7 * (2.4076 / 3)
+        # Tall bars carry their score inside the top — the LSE ruler runs
+        # just above the tallest bar, and a label above it would sit on
+        # the line; the sliver bar keeps its label above.
+        score_vals = VGroup()
+        for bar, v in zip(scores, ["2", "1", "0"], strict=True):
+            label = Text(v, font_size=LABEL_SIZE, color=COOL)
+            if bar[0].height > 0.6:
+                label.move_to(bar[0].get_top() + 0.24 * DOWN)
+            else:
+                label.next_to(bar[0], UP, buff=0.12)
+            score_vals.add(label)
+        # The ruler's height is a claim: LSE(z) >= max(z), so it must sit
+        # measurably above the tallest bar — derived from the bar itself,
+        # in the bars' own units (2.7 scene units per 3 score units).
+        lse_y = scores[0][0].get_bottom()[1] + 2.7 * (2.4076 / 3)
         ruler = DashedLine(
-            [-6.2, -1.5 + lse_height, 0],
-            [-1.6, -1.5 + lse_height, 0],
+            [-6.2, lse_y, 0],
+            [-1.6, lse_y, 0],
             color=ACCENT,
             stroke_width=2.5,
         )
@@ -931,16 +941,18 @@ class TheLossThatTrains(ConceptScene):
             )
         )
         ctc = caption("summed over every path that collapses to the transcript,")
-        ctc2 = caption("this is the CTC loss the forward trellis computes —")
-        ctc3 = caption("a 29-way softmax per frame in Deep Speech; 50,257-way in GPT-2")
+        ctc2 = caption("the path products give P(transcript | input) — the trellis's sum;")
+        ctc3 = caption("the CTC loss is its negative log — a 29-way softmax per frame")
+        ctc4 = caption("in Deep Speech; a 50,257-way softmax per token in GPT-2")
         grad = caption("and its gradient — softmax output minus how often the truth")
         grad2 = caption("used each cell — is the next series")
         ctc.move_to(1.1 * UP)
         ctc2.next_to(ctc, DOWN, buff=0.15)
         ctc3.next_to(ctc2, DOWN, buff=0.15)
-        grad.move_to(0.4 * DOWN)
+        ctc4.next_to(ctc3, DOWN, buff=0.15)
+        grad.move_to(0.75 * DOWN)
         grad2.next_to(grad, DOWN, buff=0.15)
-        self.play(FadeIn(ctc), FadeIn(ctc2), FadeIn(ctc3))
+        self.play(FadeIn(ctc), FadeIn(ctc2), FadeIn(ctc3), FadeIn(ctc4))
         self.play(FadeIn(grad), FadeIn(grad2))
         self.wait(1.0)
 

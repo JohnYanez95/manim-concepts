@@ -8,7 +8,7 @@ pass every render and reintroduce the whole failure class.
 
 import numpy as np
 import pytest
-from manim import LEFT, RIGHT, Square, config
+from manim import DOWN, LEFT, RIGHT, Square, config
 
 from utils import clear_of, on_frame
 
@@ -45,3 +45,17 @@ def test_clear_of_leaves_non_overlapping_boxes_alone():
     before = mover.get_center().copy()
     clear_of(mover, fixed, direction=LEFT)
     assert np.allclose(mover.get_center(), before)
+
+
+def test_clear_of_moving_through_an_obstacle_exits_the_far_side():
+    # A mover sitting ABOVE the obstacle, pushed DOWN, must come out
+    # below it — the overlap depth alone would leave it embedded.
+    fixed = Square(side_length=2.0)
+    mover = Square(side_length=2.0).move_to([0, 1.5, 0])
+    clear_of(mover, fixed, direction=DOWN, buff=0.1)
+    assert mover.get_top()[1] <= fixed.get_bottom()[1] - 0.1 + 1e-6
+
+
+def test_clear_of_rejects_diagonal_directions():
+    with pytest.raises(ValueError):
+        clear_of(Square(), Square(), direction=[1, 1, 0])

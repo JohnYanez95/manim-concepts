@@ -53,13 +53,18 @@ def on_frame(mobject: Mobject, margin: float = 0.2) -> Mobject:
 def clear_of(mobject: Mobject, *others: Mobject, direction=None, buff: float = 0.15) -> Mobject:
     """Nudge `mobject` along `direction` until its box clears every other.
 
-    ``direction`` defaults to DOWN-like ``[0, -1, 0]``; pass any unit-ish
-    axis vector (UP, DOWN, LEFT, RIGHT). The nudge is computed in one
-    step from the boxes — the smallest displacement along the axis that
-    ends every current overlap plus ``buff`` of daylight. Mobjects that
-    do not overlap are left untouched.
+    ``direction`` defaults to DOWN-like ``[0, -1, 0]``; it must be a
+    cardinal axis (UP, DOWN, LEFT, RIGHT — exactly one of x/y nonzero),
+    because a diagonal escape has no single well-defined exit distance.
+    The nudge is computed in one step from the boxes: the displacement
+    that puts the mobject's *trailing* edge past the other's far edge,
+    plus ``buff`` of daylight — overlap depth alone is not enough when
+    the movement direction points *into* the obstacle. Mobjects that do
+    not overlap are left untouched.
     """
     axis = np.array([0.0, -1.0, 0.0]) if direction is None else np.asarray(direction, dtype=float)
+    if (axis[0] != 0) == (axis[1] != 0):
+        raise ValueError("direction must be a cardinal axis: UP, DOWN, LEFT or RIGHT")
     needed = 0.0
     for other in others:
         dx = min(mobject.get_right()[0], other.get_right()[0]) - max(
@@ -70,10 +75,15 @@ def clear_of(mobject: Mobject, *others: Mobject, direction=None, buff: float = 0
         )
         if dx <= 0 or dy <= 0:
             continue
-        # Penetration along the movement axis: how far to travel so the
-        # boxes separate in that dimension (plus daylight).
-        escape = (abs(axis[0]) * dx + abs(axis[1]) * dy) + buff
-        needed = max(needed, escape)
+        if axis[0] > 0:
+            escape = other.get_right()[0] - mobject.get_left()[0]
+        elif axis[0] < 0:
+            escape = mobject.get_right()[0] - other.get_left()[0]
+        elif axis[1] > 0:
+            escape = other.get_top()[1] - mobject.get_bottom()[1]
+        else:
+            escape = mobject.get_top()[1] - other.get_bottom()[1]
+        needed = max(needed, escape + buff)
     if needed:
         mobject.shift(axis / np.linalg.norm(axis) * needed)
     return mobject

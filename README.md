@@ -51,14 +51,14 @@ command, so none of them are committed.
 | --- | --- |
 | [`combinatorics/`](combinatorics/README.md) | Multiplication rule, permutations, combinations, partitions |
 | [`deep_learning/`](deep_learning/README.md) | CTC alignment: the blank token, paths and their collapse, counting alignments, the forward trellis |
-| [`probability/`](probability/README.md) | Independence (probability as area, the product rule, chains of trials); conditional probability (the renormalized slice, total probability, the inversion); Bayes' rule (the odds form, the waterfall, the host's protocol); random variables (the stamped square, the balance point, the binomial columns) |
+| [`probability/`](probability/README.md) | Independence (probability as area, the product rule, chains of trials); conditional probability (the renormalized slice, total probability, the inversion); Bayes' rule (the odds form, the waterfall, the host's protocol); random variables (the stamped square, the balance point, the binomial columns); softmax and likelihood (the two-lens table, the probability machine, the loss that trains) |
 | [`algebra/`](algebra/README.md) | Logarithms: the counting strip, the evidence ruler, the underflow cliff |
 | [`calculus/`](calculus/README.md) | e and ln: the split year, the mystery constants, the natural stride, the debt repaid |
 
-Topics are added as they are written. Likely next: the
-softmax/likelihood bridge to `deep_learning/` (both its gates are now
-delivered), `linear_algebra/`, or the deep-learning
-backlog (beam search, dynamic programming). The
+Topics are added as they are written. Likely next: the CTC gradient
+identity and the derivative toolkit that gates it (the
+softmax/likelihood bridge is built), `linear_algebra/`, or the
+deep-learning backlog (beam search, dynamic programming). The
 layout is expected to drift — if a topic only ever holds one file, it can
 collapse into a flatter arrangement later without anything else changing.
 
@@ -123,7 +123,7 @@ Every concept module takes the same flags.
 | `-q`, `--quality` | `draft` `medium` `high` `4k` | `high` | 480p15 / 720p30 / **1080p60** / 2160p60 |
 | `-s`, `--scene` | scene name, repeatable | all scenes | Errors out on an unknown name rather than rendering nothing |
 | `-f`, `--format` | `mp4` `gif` `png` `webm` `mov` | `mp4` | |
-| `-j`, `--jobs` | process count | `1` | Renders scenes in parallel processes — a module's wall-clock divides by N; warm the LaTeX cache with a draft pass first |
+| `-j`, `--jobs` | process count | `1` | Renders scenes in parallel processes — cuts a module's wall-clock deeply when cores allow; warm the LaTeX cache with a draft pass first |
 | `-p`, `--preview` | flag | off | Opens each render when it finishes |
 | `-l`, `--list` | flag | — | Prints the scenes in the module and exits |
 | `--no-cache` | flag | off | Ignores cached partial movies; use while iterating |

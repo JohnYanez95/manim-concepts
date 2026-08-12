@@ -373,3 +373,46 @@ reordered.
 - mid-phase interlude recorded in plan 008: two maintainer-reported
   collisions in shipped random-variables scenes fixed and re-rendered;
   layout linter + placement guards added repo-wide
+
+## [2026-08-11] audit | incremental, plan 008 branch
+
+- scope: diffed 74c4fe2..e517c09 (13 commits — plan-007 finalisation +
+  PR #8 merge, full plan-008 branch, layout interlude, --jobs); changed
+  files plus cited far ends, no full crawl
+- findings: 3 promised-not-delivered, 4 delivered-not-recorded,
+  4 possible-not-yet-made, 7 graph-health — applied alongside the
+  local CodeRabbit round in the phase-4 commit
+- all five new/flipped edge citations verified verbatim against scene
+  code (the workhorse softmax, the 4/343 vs 1/216 ratio, the 23/32 row
+  sum, the 0.294/−1.2242 join, the (4/7, 2/7, 1/7) base-2 reading)
+- new delivered edges recorded: conditional-probability →
+  softmax-likelihood (the license quoted on screen had been filed
+  under the independence row, now re-grounded on its own delivery) and
+  ctc-alignment → softmax-likelihood (the CTC loss named on the
+  per-frame matrix — the delivered strand beside the promised
+  gradient)
+- the CTC gradient identity is the strongest open promise (on screen +
+  two documents), and the derivative toolkit is now the single gate
+  behind three rows — anchor M already carries its verified numbers
+- stale-at-delivery occurrences 8 and 9 fixed: deep_learning Scope no
+  longer queues softmax/log-likelihood; calculus Scope calls the
+  likelihood series delivered; also trued: root README's topic row and
+  likely-next, and ProportionsConverge's origin cell
+- row 49's "on-screen debt" corrected: calculus's promise was Scope
+  prose, not a rendered caption
+- devices grown a stop each, now recorded: chain product (fourth
+  stop), counting strip (fourth stop), evidence ruler (named its true
+  identity), quartered square (the HHTH lift re-read); new bullet:
+  factor out the max (three appearances)
+- possible, recorded on rows: cross-entropy alias as the entropy
+  series' hook (row grown); MLE→MAP riding the queued log-odds scene
+  (row grown); T = 1/ln b as the base-is-a-unit lesson noted in the
+  plan only
+- plan-008 design prose trued to the build (naive-normalizer example,
+  the summed log line, chips not bars)
+- CodeRabbit precision fixes folded in: the forcing claim scoped to
+  per-score recipes; base = temperature restricted to b > 1 (scene
+  captions, README cells, plan, and the row-49 quote all updated
+  together)
+- linear_algebra/ maintainer call still open (fifth entry)
+- stamp: advance to e517c09

@@ -118,6 +118,13 @@ def numbered_stem(scene: type[Scene], order: dict[str, int]) -> str:
     return f"{order[scene.__name__]:02d}_{scene.__name__}"
 
 
+def _positive_int(value: str) -> int:
+    parsed = int(value)
+    if parsed < 1:
+        raise argparse.ArgumentTypeError("must be at least 1")
+    return parsed
+
+
 def _build_parser(description: str, scenes: Sequence[type[Scene]]) -> argparse.ArgumentParser:
     names = ", ".join(scene.__name__ for scene in scenes) or "none found"
     parser = argparse.ArgumentParser(
@@ -163,13 +170,14 @@ def _build_parser(description: str, scenes: Sequence[type[Scene]]) -> argparse.A
     parser.add_argument(
         "-j",
         "--jobs",
-        type=int,
+        type=_positive_int,
         default=1,
         metavar="N",
         help=(
             "render scenes in N parallel processes — scene renders are "
-            "independent, so a module's wall-clock divides by N; run a draft "
-            "pass first so the shared LaTeX cache is warm"
+            "independent, so this can cut a module's wall-clock deeply "
+            "(cores permitting); run a draft pass first so the shared "
+            "LaTeX cache is warm"
         ),
     )
     parser.add_argument(
@@ -228,6 +236,8 @@ def _render_parallel(selected: Sequence[type[Scene]], args, namespace: dict[str,
             command.append("--no-cache")
         if args.transparent:
             command.append("--transparent")
+        if args.preview:
+            command.append("--preview")
         result = subprocess.run(command, capture_output=True, text=True)
         return scene.__name__, result
 
@@ -243,7 +253,8 @@ def _render_parallel(selected: Sequence[type[Scene]], args, namespace: dict[str,
         else:
             failed = True
             print(f"  {name}: FAILED (exit {result.returncode})")
-            tail = (result.stdout or "")[-2000:]
+            output = "\n".join(part for part in (result.stdout, result.stderr) if part)
+            tail = output[-2000:]
             if tail:
                 print(tail)
     print(f"\nOutput under {media_root()}")

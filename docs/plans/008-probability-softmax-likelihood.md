@@ -85,7 +85,34 @@ at 1080p60.
   carries its true title "Language Models are Unsupervised Multitask
   Learners"; everything else confirmed right by the maintainer
   (ticks are his to place)
-- [ ] Phase 4: local CodeRabbit + connection-auditor clean
+- [x] Phase 4: local CodeRabbit + connection-auditor clean, three
+  rounds. CodeRabbit round 1 (9 findings): the `clear_of` escape
+  distance rewritten edge-based with a through-the-obstacle
+  regression test (real bug); the layout linter's sampling made
+  length-proportional, spacing ≤ 0.1 (real miss case, verified by
+  computation); preview/stderr/jobs-validation minors applied; the
+  forcing claim scoped to per-score recipes and base = temperature
+  restricted to b > 1, everywhere they're stated; S603 noqa skipped
+  (no S rules selected); --jobs wording de-promised. Round 2
+  (4 findings): two phantom "stale block" criticals skipped (code
+  verified clean, 195 tests green); explicit numpy import added per
+  repo rule; the LSE ruler re-derived from the measured bar baseline —
+  a real picture-is-a-claim catch: the old ruler sat below the top
+  bar while LSE(z) ≥ max(z). Round 3 (3 findings): the closer's
+  "this is the CTC loss" trued to "the loss is the sum's negative
+  log" across scene, README cell, plan and wiki quote; the 0.02 bar
+  floor and the sampling-vs-segment findings skipped with reasons
+  (deliberate zero-score tick; 0.06 inflation × 0.1 spacing makes a
+  crossing chord ≥ 0.12, which cannot fall between samples). Audit:
+  all findings applied — two new delivered edges
+  (conditional-probability and ctc-alignment → softmax-likelihood),
+  row 43 re-grounded, row 49's "on-screen debt" corrected,
+  stale-at-delivery occurrences 8–9 fixed (deep_learning + calculus
+  Scope), root README row + likely-next trued, ProportionsConverge's
+  origin cell pointed at delivery, four device lineages extended +
+  the factor-out-the-max bullet, rows 55/56 grew the MLE→MAP and
+  alias-hook seeds, plan prose trued to the build, log entry
+  appended, stamp advanced to e517c09
 - [ ] Phase 5: PR, drafts cleaned, 1080p60 render verified
 
 ## Research questions the reports must settle
@@ -326,7 +353,7 @@ this series.
    ruler (owned) vs the correct class's bar. Calculus-free, and it is
    the exact quantity CTC's gradient differentiates later.
 9. *Per-frame product on the CTC matrix* — one highlighted entry per
-   column, product across frames, flip to summed log-bars; legal
+   column, product across frames, flip to the summed log line; legal
    *because* "independent given the input" was already taught.
 
 **Misconceptions to counter on screen:** likelihood vs probability
@@ -417,7 +444,7 @@ changes, everything about the arithmetic does.**
 Three beats, one per reason (misconception 4). (i) Monotone lens:
 L(p) above, ln L(p) below, one vertical line through both peaks at
 3/4 (anchors H, K) — the answer untouched. (ii) Native scale:
-per-observation bars multiply (anchor I: product 0.27216) while their
+per-observation chips multiply (anchor I: product 0.27216) while their
 log-counters stack additively (sum −1.3014, exp recovers it) — the
 counting strip carrying likelihood now; the evidence ruler was a
 log-likelihood-ratio ruler all along, said on screen. (iii) Survival,
@@ -435,11 +462,13 @@ become a distribution.**
 A model emits raw scores z = (2, 1, 0) — some model, any model; the
 repo's per-frame matrix is where they are headed. Defect bars: scores
 can be negative and don't total 1. Naive repair z/Σz fails on screen:
-shift (3, 2, 1) changes the shares, (1, −1, 0) goes negative. The
+shift (3, 2, 1) changes the shares, (2, −1, 0) makes a negative share
+(A5's (1, −1, 0) is Σ = 0 — undefined, kept off screen). The
 exponential repair: e^z lifts everything positive, normalize —
 p = (0.6652, 0.2447, 0.0900) (anchor A; never show the rounded
 values totalling 1.0000). The forcing argument (level 2): requiring
-"+c on every score changes nothing" *forces* an exponential — e^c
+"+c on every score changes nothing" *forces* an exponential (among
+per-score recipes — normalize a function applied score by score) — e^c
 factors out of every term and cancels (anchor B, "exactly the same
 distribution"). Corollary, not hack: softmax(z) = softmax(z − max z),
 so the overflow case (1000, 1001, 1002) → NaN naively is rescued to
@@ -456,8 +485,8 @@ Temperature sweep on the workhorse (anchor D): T = 0.5 sharpens to
 at any T > 0 — exp and scaling are monotone. Why e (the e-series'
 promise paid): base 2 on the same scores is exactly (4/7, 2/7, 1/7)
 (anchor E) — a *rational* softmax — and b^z = e^(z ln b): every base
-is e at another temperature, so nothing forces e except that ln is
-the natural counter (`TheNaturalStride` re-read). Caveat beat (Guo et
+above 1 is e at another temperature, so nothing forces e except that
+ln is the natural counter (`TheNaturalStride` re-read). Caveat beat (Guo et
 al. 2017): modern networks are overconfident, and fitting one shared
 T recalibrates them *without changing any prediction* — numbers that
 can be rescaled wholesale were asserted, not measured.
@@ -472,10 +501,11 @@ class's bar; confidently wrong pays proportionally (the gap grows
 roughly linearly — no slope claims). Then the join: a 3-frame
 per-frame matrix (addendum A4), one entry per column highlighted —
 the product license is exactly "independent given the input"
-(`WhenToCondition`, quoted) — product 0.294 flipped to summed
-log-bars. When-useful closer: this per-frame NLL summed over every
-collapsing path is the CTC loss the trellis computes (29-class and
-50,257-class softmaxes named, anchor N); and its gradient — softmax
+(`WhenToCondition`, quoted) — product 0.294 flipped to the summed
+log line. When-useful closer: the trellis sums the collapsing paths'
+products into P(transcript | input), and the CTC loss is that sum's
+negative log (29-class and 50,257-class softmaxes named, anchor N);
+and its gradient — softmax
 output minus how often the truth actually used each cell, Bridle's
 "output minus a one-from-N target" generalized (anchor M, foreshadow
 only) — is the next series.
