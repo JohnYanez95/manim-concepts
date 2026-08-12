@@ -163,6 +163,24 @@ uv run python probability/random_variables_manim.py
 uv run python probability/random_variables_manim.py --list
 ```
 
+### softmax_likelihood_manim.py
+
+Watch after the random-variables series — its closer said "likelihood
+is next", and this series is that promise kept: the sorted-square
+columns re-read as a likelihood, then the machine that manufactures
+per-frame distributions, then the loss that trains it.
+
+| # | Scene | Formula | What it says | Why it's true | When it's useful |
+| --- | --- | --- | --- | --- | --- |
+| 1 | `TheLikelihoodLens` | $L(p) = P(\text{data} \mid p)$ | Likelihood is not a new number — it is the old table read along the other axis, data pinned, parameter sweeping. | Three binomial columns (p = 1/4, 1/2, 3/4) each sum to 1; pin the observed k = 3 and the row across them (3/64, 1/4, 27/64) sums to 23/32 — a pmf one way, not one the other. | The question every fitted model answers — "given the data, which parameter?" — begins as this flipped reading; Fisher named it in 1921. |
+
+Renders: `01_TheLikelihoodLens.mp4`.
+
+```bash
+uv run python probability/softmax_likelihood_manim.py
+uv run python probability/softmax_likelihood_manim.py --list
+```
+
 ## References
 
 Ticks are human-gated — see

@@ -44,7 +44,8 @@ tick, recording the merged PR #8 and the verified 1080p60 finals.
   finalized; two conventions decided at design time — the count lens
   everywhere (table rows and curve agree; sequence ÷4 spoken once)
   and the owned biased die over a numerically-prettier new one
-- [ ] Phase 1: plan + module stub, `make check` green
+- [x] Phase 1: plan + module stub, `make check` green (187 tests;
+  `--list` prints the stub)
 - [ ] Phase 2: all scenes render at draft; verified per CLAUDE.md
   checklist
 - [ ] Phase 3: README + wiki complete, `make test` green
