@@ -35,9 +35,25 @@ when-useful framing.
 - [x] Phase 0: both research reports received and pinned below; scene
   design finalized (seven scenes); five conventions decided at design
   time (see Decisions)
-- [ ] Phase 1: plan + module stub, `make check` green
-- [ ] Phase 2: all seven scenes at draft; layout linter clean; frames
-  verified by eye
+- [x] Phase 1: plan + module stub, `make check` green (212 tests;
+  `--list` prints the stub)
+- [x] Phase 2: all seven scenes at draft (7 files, distinct names,
+  32–53 s). Linter first pass caught ten real findings before any
+  render (the α/β ledger tags on the column labels, the backward
+  readout colliding with the grid, sweep boxes grazing labels and
+  4-dp cell numbers, a caption running into the derivation block and
+  three more stacking overlaps in the identity scene, the row notes
+  crossing the push panels, the dwell formula through the grid) —
+  all fixed, plus one restack of the ledger sentences on re-lint.
+  The **453 remaining findings are one explained class**: edge lines
+  and circles "through" the numbers that live inside the trellis
+  nodes — the node fill is opaque and sits above the edges, so
+  nothing visible crosses; the shipped `TheForwardTrellis` lints
+  with 85 findings of exactly this class. Frames verified by eye
+  across every scene including transition windows; two further
+  catches (the real-β fill now sweeps right-to-left like the
+  recurrence it teaches; the bias-model bar labels now display the
+  pinned 4-dp forms)
 - [ ] Phase 3: README + wiki complete, `make test` green — **John's
   source-validation checkpoint**
 - [ ] Phase 4: local CodeRabbit + connection-auditor, findings
@@ -533,6 +549,72 @@ gradient 4-dp row sums are digit-exact (1.0000/0.0000) on this
 example — checked, safe to show summing on screen (luck of these
 numbers; plan 008's workhorse summed to 0.9999).
 
+### Supplement (anchors P–T, requested for scenes 1–3, 6, 7)
+
+**P. Backward COUNT table at unit weights [computed, two routes:
+recurrence + suffix-path enumeration, all 20 cells agree].**
+t=1 [5, 10, 6, 4, 1]; t=2 [1, 4, 3, 3, 1]; t=3 [0, 1, 1, 2, 1];
+t=4 [0, 0, 0, 1, 1]. Mirror property confirmed for all t: backward
+column t reversed = forward column 5−t (forward columns recomputed,
+match plan 001). **Caveat: the mirror is THIS palindromic example's
+symmetry (ε A ε B ε reversed is the same shape), not a CTC theorem —
+phrase as "this example's symmetry".** Opened node: β_2(A) = stay 1 +
+advance 1 + skip 2 = 4 (skip legal because A ≠ B). Both ends give 15:
+α_4(4)+α_4(5) = 10+5, β_1(1)+β_1(2) = 5+10.
+
+**Q. Per-cell α·β products, real matrix, 2012 β [computed, exact].**
+All values exact terminating decimals; every column sums to
+4877/10000 exactly, and the 4-dp cells sum to 0.4877 digit-by-digit
+in every column (checked):
+s1 0.0474/0.0042/0/0 · s2 0.4403/0.3456/0.0714/0 ·
+s3 0/0.1218/0.3381/0 · s4 0/0.0161/0.0684/0.4627 ·
+s5 0/0/0.0098/0.0250. The t=4 column is α itself (β = 1 on the
+accepting states); the t=1 column is the R readout — bookends.
+
+**R. Backward-side termination readout [computed, exact].**
+0.1 × 0.474 = 0.0474 (s1, ε); 0.7 × 0.629 = 0.4403 (s2, A); sum
+0.4877 = P exactly (Fraction equality). No rounding in the displayed
+digits.
+
+**S. Mid-training snapshots (float64) and dwell times (exact).**
+Repo-matrix free-logit run, lr 1.0; push ≜ γ − y = −∂L/∂u.
+iter 0, loss 0.7181: push = the negative of the anchor-K gradient
+table (float64 vs exact agree to 3.6e−16).
+iter 10, loss 0.1602: y = (0.9120, 0.0404, 0.0476) / (0.8192,
+0.0379, 0.1429) / (0.1378, 0.1170, 0.7452) / (0.0241, 0.9371,
+0.0388); push = (+0.0439, −0.0404, −0.0035) / (+0.0497, −0.0321,
+−0.0176) / (−0.0176, +0.0105, +0.0072) / (−0.0241, +0.0566,
+−0.0326).
+iter 50, loss 0.0356: y = (0.9689, 0.0094, 0.0217) / (0.9457,
+0.0092, 0.0452) / (0.0927, 0.1309, 0.7764) / (0.0059, 0.9858,
+0.0083); push = (+0.0100, −0.0094, −0.0006) / (+0.0124, −0.0079,
+−0.0045) / (−0.0039, +0.0025, +0.0014) / (−0.0059, +0.0130,
+−0.0071). Losses match the anchor-M walk (same run). Rounded-row-sum
+exactness lives ONLY at iter 0 — no scene beat on 4-dp row sums for
+iters 10/50.
+Dwell times (row sums of per-class occupancy), exact: A = 8573/4877
+= 1.7578, B = 5472/4877 = 1.1220, ε = 5463/4877 = 1.1202; exact sum
+4 = T, and the 4-dp displays sum to 4.0000 digit-by-digit.
+
+**T. Single-label companion: target "A", topology ε A ε [computed,
+exact + primary-source match].** T=4: 10 paths (= T(T+1)/2);
+per-frame A counts [4, 6, 6, 4], blank the complement [6, 4, 4, 6] —
+matches Zeyer Lemma 3.11's C = t·(T−t+1) exactly. **Label totals TIE
+at T=4: A 20 vs blank 20** — dominance starts at T ≥ 5 (Zeyer
+verbatim: "the dominant label is s̊ = B for T ≥ 5"); show T=4 as the
+boundary case. Expected label frames per path = (T+2)/3, verified
+two ways at T=4 (→ 2) and T=100 (→ 34 exactly; 5050 paths); blank
+share = 1 − (T+2)/(3T): T=4 → 1/2, T=100 → 33/50 = 0.6600, limit
+2/3 — matches Zeyer Corollary 3.12's 2(T−1)/(3T). Attribution: Zeyer
+states the per-frame complement view; the two are algebraically
+identical.
+
+Supplement flags: (i) anchor P's mirror is example-specific, not a
+theorem; (ii) anchor S's iter-10/50 tables are float64 — exactness
+claims live only at iter 0; (iii) anchor T's shares are
+uniform-output statements — a trained model's dwell differs;
+condition "blank share → 2/3" on uniform outputs and growing T.
+
 Sources: Graves et al. 2006 ICML (icml_2006.pdf); Graves 2012,
 *Supervised Sequence Labelling with Recurrent Neural Networks*
 (Springer SCI 385; author's preprint, cs.toronto.edu/~graves/
@@ -540,4 +622,4 @@ preprint.pdf) — NEW reference for the topic README; Zeyer, Schlüter
 & Ney, arXiv:2105.14849; Rabiner 1989 (as printed in Graves'
 bibliography); plans 008 (A4, F, M) and 009 (G, H). Verification
 scripts in the session scratchpad: `ctc_verify.py`, `ctc_train.py`,
-`ctc_bias.py`.
+`ctc_bias.py`, `ctc_supplement.py`.
