@@ -63,7 +63,12 @@ on-screen text changes get re-rendered.
   debt premise verified surviving (character-identical MathTex in
   both modules); the TheDebtRepaid-quotes-the-loan-note replay
   recorded as a future-touch candidate; stamp advanced to aeb25f6
-- [ ] Phase 4: PR, bot review, touched finals rendered
+- [x] Phase 4: PR #12 opened; bot review returned ZERO actionable
+  comments (the branch's second clean review round). `clean-drafts`,
+  then 1080p60 finals for the two touched scenes only
+  (`06_TheUnderflowCliff` 37.6 s, `03_TheMultiplicationRule`
+  41.7 s), the IOU beat spot-verified by frame at 1080p. The plan
+  closes; the PR awaits the maintainer's review
 
 ## Findings (pinned from the three audit agents)
 
