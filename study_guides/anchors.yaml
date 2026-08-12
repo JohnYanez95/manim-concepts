@@ -1,0 +1,29 @@
+# Verified numbers, keyed for retrieval — the machine-readable face of the
+# plan docs' pinned verification reports (plan 012 R1). Every entry copies
+# its value EXACTLY from the cited plan anchor; the prose reports remain the
+# argument of record. tools/build_anchors.py compiles this to anchors.tex;
+# documents write \anchor{key} and never retype digits.
+#
+# Key convention: <plan>.<anchor-letter>.<slug>. Values are strings, spliced
+# verbatim into math mode.
+
+"010.K.P":
+  value: "0.4877"
+  description: "P(AB|X) on the worked matrix, exact (4877/10000)"
+  source: "docs/plans/010-ctc-gradient.md, anchor K"
+  method: "exact Fraction arithmetic; brute-force and recurrence agree"
+"010.K.NLL":
+  value: "0.7181"
+  description: "-ln P(AB|X), displayed at 4 dp"
+  source: "docs/plans/010-ctc-gradient.md, anchor K"
+  method: "exact Fraction arithmetic; brute-force and recurrence agree"
+"010.L.uniformP":
+  value: "5/27"
+  description: "P(AB|X) under uniform outputs, 15 * (1/3)^4"
+  source: "docs/plans/010-ctc-gradient.md, anchor L"
+  method: "exact"
+"009.G.nllgradient":
+  value: "(-0.3348,\\ 0.2447,\\ 0.0900)"
+  description: "gradient of the NLL at z = (2, 1, 0), correct class first"
+  source: "docs/plans/009-calculus-derivatives.md, anchor G"
+  method: "60-digit computation, finite differences agree to 4.6e-11"

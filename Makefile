@@ -1,5 +1,9 @@
 .DEFAULT_GOAL := help
-.PHONY: help venv hooks lint fmt test check list render render-all clean clean-drafts
+.PHONY: help venv hooks lint fmt test check list render render-all clean clean-drafts study
+
+# Objective subdirectories of the study-guide track — everything under
+# study_guides/ except the shared primitives/ pool.
+GUIDE_DIRS := $(filter-out study_guides/primitives/,$(wildcard study_guides/*/))
 
 # Resolutions treated as throwaway by `clean-drafts` — everything below the
 # 1080p default. Kept as a list rather than inlined so adding a tier is a
@@ -73,3 +77,16 @@ clean-drafts:  ## Delete sub-1080p renders, keeping the final ones
 
 clean:  ## Delete all rendered output, drafts and finals alike
 	rm -rf media/
+
+study:  ## Build every objective's guide + solutions-manual PDFs in place
+	uv run python tools/build_anchors.py
+	uv run python tools/sync_references.py
+	@for d in $(GUIDE_DIRS); do \
+		name=$$(basename $$d); \
+		echo "== $$name"; \
+		(cd $$d && TEXINPUTS=..: latexmk -pdf -interaction=nonstopmode \
+			-jobname=$$name guide.tex >/dev/null) || exit 1; \
+		(cd $$d && TEXINPUTS=..: latexmk -pdf -interaction=nonstopmode \
+			-jobname=$$name-solutions solutions.tex >/dev/null) || exit 1; \
+		echo "   $$d$$name.pdf + $$d$$name-solutions.pdf"; \
+	done

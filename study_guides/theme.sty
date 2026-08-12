@@ -1,0 +1,78 @@
+% Study-guide theme — the print half of the repo's shared visual language.
+%
+% The palette mirrors utils/theme.py exactly; those hexes are solved under
+% colour-blind-safety constraints (tools/solve_palette.py), so change them
+% THERE first and copy here — never invent a print-only colour.
+%
+% This package also carries the three retrieval contracts of plan 012:
+%   \primitive{name}   -- splice a hosted section (primitives/name.tex)
+%   \anchor{plan.key}  -- splice a verified number (never retype digits)
+%   problem/hint/solution -- single-sourced; the build flag picks the output
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{theme}[2026/08/12 manim-concepts study guides]
+
+\RequirePackage[T1]{fontenc}
+\RequirePackage{lmodern}
+\RequirePackage{amsmath,amssymb}
+\RequirePackage{xcolor}
+\RequirePackage{environ}
+\RequirePackage{tikz}
+
+% --- Palette (mirrors utils/theme.py) --------------------------------------
+\definecolor{Accent}{HTML}{FFCC5F}
+\definecolor{Cool}{HTML}{66D9FF}
+\definecolor{Warm}{HTML}{EA6C58}
+\definecolor{Good}{HTML}{93FFB2}
+\definecolor{Muted}{HTML}{91959C}
+\definecolor{PaletteA}{HTML}{009BA9}
+\definecolor{PaletteB}{HTML}{FF7189}
+\definecolor{PaletteC}{HTML}{7CD26C}
+\definecolor{PaletteD}{HTML}{EAB77B}
+\definecolor{PaletteE}{HTML}{D1A0FF}
+% Print bodies are dark-on-light; the semantic colours above are tuned for
+% the dark canvas, so figures deepen them for paper.
+\colorlet{AccentInk}{Accent!60!black}
+\colorlet{CoolInk}{Cool!55!black}
+\colorlet{WarmInk}{Warm!75!black}
+\colorlet{GoodInk}{Good!45!black}
+
+% --- Build modes ------------------------------------------------------------
+\newif\ifsolutionsmanual
+\solutionsmanualfalse
+
+% --- Retrieval: IDs, never retyped content ----------------------------------
+% \StudyRoot points at study_guides/ from the objective subdirectory; a
+% guide may override it before loading this package.
+\providecommand{\StudyRoot}{..}
+\newcommand{\primitive}[1]{\input{\StudyRoot/primitives/#1}}
+% Anchors are generated from anchors.yaml by tools/build_anchors.py; an
+% unknown key is a build error, not a silent blank.
+\newcommand{\anchor}[1]{%
+  \ifcsname anchor@#1\endcsname
+    \csname anchor@#1\endcsname
+  \else
+    \PackageError{theme}{Unknown anchor key '#1' (regenerate anchors.tex?)}{}%
+  \fi}
+% Cross-primitive pointers go through the guide's own macro layer, never a
+% hardcoded \ref inside a primitive (plan 012 R4). Guides \renewcommand this.
+\providecommand{\primref}[1]{\textit{#1}}
+
+% --- Primitive structure -----------------------------------------------------
+% Narrative prose is suppressed in the solutions manual; chapter headings and
+% problem statements survive in both builds so numbering stays aligned.
+\NewEnviron{narrative}{\ifsolutionsmanual\else\BODY\fi}
+
+% --- Problems: single-sourced statement / hint / solution --------------------
+\newcounter{problem}[chapter]
+\newenvironment{problem}
+  {\refstepcounter{problem}\par\medskip\noindent
+   \textbf{Problem \thechapter.\arabic{problem}.}\ }
+  {\par}
+\NewEnviron{hint}{%
+  \ifsolutionsmanual\else
+    \par\noindent{\small\color{Muted}\textit{Hint:} \BODY}%
+  \fi}
+\NewEnviron{solution}{%
+  \ifsolutionsmanual
+    \par\medskip\noindent{\small\textbf{\color{GoodInk}Solution.}} \BODY
+  \fi}

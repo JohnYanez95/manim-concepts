@@ -25,6 +25,10 @@ repos:
       # source file here and far below any render.
       - id: check-added-large-files
         args: [--maxkb=512]
+        # The study-guide outcome PDFs are committed deliverables (plan 012
+        # D-A) and a full guide will exceed the cap; everything else stays
+        # under it.
+        exclude: ^study_guides/.*\.pdf$
 
   # Python only, by construction — ruff does not read .md or .yaml.
   - repo: https://github.com/astral-sh/ruff-pre-commit

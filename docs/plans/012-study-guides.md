@@ -159,6 +159,16 @@ the *learning algorithm* (maintainer, 2026-08-12):
   taught ground. Lends itself to the guide's descent figure
   (the loss walk 0.7181 → … → 0.0003 as a downhill path).
 
+- **`ctc-decoding.tex`** — the road uses decoding everywhere without
+  teaching it (`ManyPathsOneWord` proves greedy fails; scene 6 reads
+  an argmax path; scene 7's bias model decodes to the empty string).
+  A modest primitive slotted after ctc-gradient, closing the loop
+  (train → decode → deploy): best-path decoding, the sum-vs-max
+  mismatch as a *decoding* problem, the collapsed-prefix beam sketch
+  with its two-probabilities insight, spikes-not-timestamps
+  inherited. Depth stays with the future beam-search series — this
+  primitive seeds it.
+
 Guide-first primitives follow every rule series primitives do
 (anchored numbers, human-gated sources, backward grounding) but have
 no parent scenes — their prose cites the scenes that *use* the
@@ -305,8 +315,31 @@ solutions manual, until guide 1 assembles complete.
 
 ## Checklist
 
-- [ ] Phase 0: design approved; D-A..D-D resolved
-- [ ] Phase 1: scaffold, `make check` + PDFs build
+- [x] Phase 0: design approved as proposed, 2026-08-12 — D-A
+  (outcome PDFs in the objective subdirectory AND committed, with a
+  large-file-hook exemption), D-B (TikZ-first), D-C (calibration
+  PR), D-D (as upgraded by R3), D-E (all THREE guide-first
+  primitives: dynamic-programming, gradient-descent, ctc-decoding),
+  plus research amendments R1–R7. Standing process note from the
+  maintainer: once v1 of the guide ships, codify the stitching
+  practice as an **ADR** — every new series carries its primitive
+  forward as part of its plan, and past topics are retroactively
+  fitted (guide 1's full sweep is that retrofit)
+- [x] Phase 1: scaffold complete — `study_guides/` tree (`theme.sty`
+  with the palette mirrored from `utils/theme.py`, the three
+  retrieval contracts, and the single-sourced problem environments),
+  `anchors.yaml` → `anchors.tex` (4 seed anchors from plans 009/010)
+  and the README-synced `references.bib` (128 entries, 128 verified)
+  with their generator scripts, the `ctc-algorithm/` objective
+  subdirectory (guide + solutions wrappers sharing one
+  `manifest.tex`, REFINEMENTS.md), the agent index, a skeleton
+  counting-rules primitive with one calibration-placeholder problem,
+  `make study`, eight structure tests, hook exemption for the
+  committed outcome PDFs. Gate green: `make check` passes and both
+  PDFs build; filtering verified both ways (guide shows hint not
+  solution, manual shows solution not hint or narrative; numbering
+  identical by shared manifest; the anchor splice renders
+  P(AB|X) = 0.4877 from the yaml, never typed in prose)
 - [ ] Phase 2: calibration content, maintainer format read
 - [ ] Phase 3: reviews clean
 - [ ] Phase 4: PR, merge, refinement loop open

@@ -29,6 +29,15 @@ __pycache__/
 *.fls
 *.fdb_latexmk
 *.synctex.gz
+# Study-guide intermediates; the outcome PDFs in the objective
+# subdirectories ARE committed (plan 012 D-A) — only the scratch is not.
+study_guides/**/*.log
+study_guides/**/*.out
+study_guides/**/*.toc
+study_guides/**/*.bbl
+study_guides/**/*.bcf
+study_guides/**/*.blg
+study_guides/**/*.run.xml
 
 # --- Editor / OS ---------------------------------------------------------------
 # WSL writes a :Zone.Identifier alternate-data-stream file next to anything
