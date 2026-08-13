@@ -39,7 +39,7 @@ recorded anchors the closer spends: log-space inheritance
   inside background-filled circles). Frames verified by eye across
   all six. As-built truing: scene 2's tree→DAG merge animation
   simplified at build to the fold + the naming (the chain-DAG lives
-  in prose and scene 5's shape table carries the in-degree verdict)
+  in prose and scene 5's shape table carries the tree-vs-DAG verdict)
 - [x] Phase 3: README complete (six rows, all three levels; scope
   with four deliberate exclusions; seventeen references unchecked
   for the maintainer's pass); wiki — node added, **the graph's
@@ -123,9 +123,10 @@ last: calls(n) = 2·F(n+1) − 1.
 **2. `WriteTheAnswersDown`** *(as built: the fold and the naming;
 the same-label merge animation was cut — the DAG appears in scene
 5's shape table)* — store each answer once and the tree
-folds into eleven boxes. The Erickson fold: first computations write
-down into a memo row (GOOD), later copies grey WARM and read up;
-same-label nodes merge into the chain DAG. The move NAMED (dynamic
+folds into six memo boxes (eleven at n = 10, by ticker). The
+Erickson fold: first computations write down into a memo row (GOOD),
+later copies grey WARM into lookups — the tree stays drawn; the fold
+is the greying. The move NAMED (dynamic
 programming — solve every small version once, store it, let the big
 version assemble itself), the Bellman aside in one hedged line, memo
 functions credited (Michie 1968). The two conditions stated: the

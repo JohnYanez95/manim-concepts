@@ -187,10 +187,9 @@ class TheQuestionAskedTwice(ConceptScene):
         on_frame(compound2)
         self.play(FadeIn(compound), FadeIn(compound2))
         self.wait(1.0)
-        rows = VGroup()
 
         # Formula last.
-        self.play(FadeOut(VGroup(tree, ticker_head, rows, compound, compound2)))
+        self.play(FadeOut(VGroup(tree, ticker_head, compound, compound2)))
         formula = MathTex(
             r"\text{calls}(n) \;=\; 2\,F(n{+}1) - 1",
             font_size=48,

@@ -623,3 +623,31 @@ reordered.
   as Bellman's story (the verifier pinned the contradicting
   chronology); "memo functions (Michie 1968)", never "memoization"
 - seventeen references landed unchecked for the maintainer's pass
+
+## [2026-08-12] audit | incremental, plan 013 branch
+
+- scope: diffed bb2abce (plan-012 merge, PR #14)..61d1f6e; the
+  d9eb601..bb2abce segment (plan-012 audit application + ADR
+  stitching) absorbed per direction, not re-diffed; branch files
+  read in full plus cited far ends, no full crawl
+- findings: 2 promised-not-delivered (both now recorded as promised
+  rows: divide & conquer, edit distance worked), 6
+  delivered-not-recorded, 1 possible-not-yet-made, 8 graph-health —
+  applied in the phase-4 commit alongside local CodeRabbit's three
+  (all residuals of the cut merge animation)
+- prose-vs-scene: the flipped row's claims all verified against the
+  built scenes; C(150,50), the call tables and the mini trellis
+  re-verified by computation — zero numeric findings
+- top gap applied: the promise's home cell (deep_learning row 5)
+  now points at algorithms/; the closer's backward-sweep horizon
+  recorded as row 48's third strand; the WARM lineage's fourth
+  removal and the waist ring's rename recorded; the Pascal-queue
+  row gains its screen precedent; beam search gains its second
+  anchor
+- stale trio fixed: root README (algorithms/ row added; likely-next
+  trimmed; the gif alt text now says rows), study-guides INDEX
+  graduated dynamic-programming to series-backed
+- "in-degree" softened to what the screen shows ("shared children");
+  Scope's "shortest routes" corrected to "routes on grids"; row 48
+  now says "oldest standing promise" (row 50 keeps the elder title)
+- stamp: advance to 61d1f6e

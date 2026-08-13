@@ -4,8 +4,8 @@ Intuitive [Manim](https://www.manim.community/) visualisations of core concepts.
 
 ![The three-level climb this repo teaches by: chips reading "what is it
 saying?", "why is it true?", and "when is it useful?" appear in sequence
-under the motto "the formula is the last thing on screen", over the row
-of topics built so far](docs/assets/welcome.gif)
+under the motto "the formula is the last thing on screen", over the rows
+of series built so far](docs/assets/welcome.gif)
 
 *Rendered by the repo itself —
 [`docs/assets/welcome_scene.py`](docs/assets/welcome_scene.py), through
@@ -58,12 +58,13 @@ command, so none of them are committed.
 | [`deep_learning/`](deep_learning/README.md) | CTC alignment (the blank token, paths and their collapse, counting alignments, the forward trellis); the CTC gradient (the backward trellis, the constant column, occupancy as the truth's soft target, softmax minus occupancy, the error signal and peakiness) |
 | [`probability/`](probability/README.md) | Independence (probability as area, the product rule, chains of trials); conditional probability (the renormalized slice, total probability, the inversion); Bayes' rule (the odds form, the waterfall, the host's protocol); random variables (the stamped square, the balance point, the binomial columns); softmax and likelihood (the two-lens table, the probability machine, the loss that trains) |
 | [`algebra/`](algebra/README.md) | Logarithms: the counting strip, the evidence ruler, the underflow cliff |
+| [`algorithms/`](algorithms/README.md) | Dynamic programming: the recursion tree folded, the lattice by Pascal's sum, the trellis re-read as a stored answer, the state's price |
 | [`calculus/`](calculus/README.md) | e and ln (the split year, the mystery constants, the natural stride, the debt repaid); the derivative toolkit (the slope as a function, the score, the smooth max's shares) |
 
 Topics are added as they are written. The CTC gradient — the road's
 long-standing target — is now built; likely next: `linear_algebra/`
-or the deep-learning backlog (beam search, the label-prior variant,
-dynamic programming). The
+or the deep-learning backlog (beam search, the label-prior
+variant). The
 layout is expected to drift — if a topic only ever holds one file, it can
 collapse into a flatter arrangement later without anything else changing.
 
