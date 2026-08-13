@@ -30,7 +30,23 @@ the CTC road's own 12-knob walk as the capstone.
 - [x] Phase 1: module stub (`TheSlopeBecomesAStep` placeholder) +
   README third-series Scope paragraph, subsection and row 1;
   `make check` green
-- [ ] Phase 2
+- [x] Phase 2: six scenes at draft (6 files, distinct names,
+  31–40 s). Linter: 41 initial findings across five categories all
+  fixed — chip boxes sized under their text (seven chips widened),
+  the scene-5 well plotted past its y-range into the title (x-range
+  cut to ±2.0), the scene-6 caption stack pushed off-frame by
+  on_frame into its neighbour (factors and quarters made side by
+  side), compass/bottom-tag clear_of push-off past the frame bottom
+  (restacked under the axes), curve tags pulled off the curves —
+  linter clean on all six. By-eye pass caught four more the linter
+  could not: the w² tag sitting ON the y-axis line, CurvedArrow
+  heads drowning the small hops (rows and ping-pong arcs switched
+  to plain ArcBetweenPoints), the scene-3 fee caption landing on
+  the safe-rates line (thresholds moved to the empty mid-right),
+  and the scene-6 linear chart collapsing all five samples onto
+  the y-axis (left panel re-scoped to the first fifty steps — the
+  cliff; the full 5000 kept on the log panel). Frames verified by
+  eye across all six after re-render
 - [ ] Phase 3
 - [ ] Phase 4
 - [ ] Phase 5
