@@ -59,7 +59,7 @@ command, so none of them are committed.
 | [`probability/`](probability/README.md) | Independence (probability as area, the product rule, chains of trials); conditional probability (the renormalized slice, total probability, the inversion); Bayes' rule (the odds form, the waterfall, the host's protocol); random variables (the stamped square, the balance point, the binomial columns); softmax and likelihood (the two-lens table, the probability machine, the loss that trains) |
 | [`algebra/`](algebra/README.md) | Logarithms: the counting strip, the evidence ruler, the underflow cliff |
 | [`algorithms/`](algorithms/README.md) | Dynamic programming: the recursion tree folded, the lattice by Pascal's sum, the trellis re-read as a stored answer, the state's price |
-| [`calculus/`](calculus/README.md) | e and ln (the split year, the mystery constants, the natural stride, the debt repaid); the derivative toolkit (the slope as a function, the score, the smooth max's shares) |
+| [`calculus/`](calculus/README.md) | e and ln (the split year, the mystery constants, the natural stride, the debt repaid); the derivative toolkit (the slope as a function, the score, the smooth max's shares); gradient descent (the slope becomes a step, the learning rate's bet, the corner's fee, the walk is not a ball, the road's own walk) |
 
 Topics are added as they are written. The CTC gradient — the road's
 long-standing target — is now built; likely next: `linear_algebra/`

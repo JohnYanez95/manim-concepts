@@ -1,6 +1,6 @@
 # Graph index
 
-Last audited: `61d1f6e` (2026-08-12, incremental — plan-013 branch)
+Last audited: `9226fdf` (2026-08-12, incremental — plan-014 branch)
 
 The stamp is a commit hash: the state of the repo this graph was last
 reconciled against. The `connection-auditor` diffs from it instead of
@@ -22,7 +22,7 @@ crawling every page; whoever applies an audit's findings updates it.
 | `random-variables` | `probability/random_variables_manim.py` | The die as a function; the pmf as sorted area; expectation as balance point; the binomial columns; swamping quantified |
 | `derivative-toolkit` | `calculus/derivatives_manim.py` | The slope as a function; nudge geometry; sum + chain rules; e^x and ln differentiated; the score finds the MLE peak; dLSE = softmax |
 | `softmax-likelihood` | `probability/softmax_likelihood_manim.py` | Likelihood as the row lens on the binomial table; MLE as the peak; log as evidence's native scale; softmax forced by shift invariance; temperature and why-e; NLL as the LSE gap |
-| `gradient-descent` | `calculus/gradient_descent_manim.py` | The slope becomes an update: the bowl walk and its automatic brake, the 1−2η factor's four fates, the nudge square's corner as curvature's fee, sign-change stamps on stopping places, the basin hop no ball could make, the road's 12-knob walk read off one chart |
+| `gradient-descent` | `calculus/gradient_descent_manim.py` | The slope becomes an update: the bowl walk and its automatic brake, the 1−2η factor's four fates, the nudge square's corner as curvature's fee, sign-change stamps on stopping places, the basin hop no ball could make, the road's 12-knob walk read off one readout |
 
 ## Edges
 
@@ -52,6 +52,8 @@ Status: **delivered** (both ends exist and the content makes the link) or
 | `dynamic-programming` | *(edit distance worked in full)* | promised | `algorithms/README.md` Ideas; the closer names the Wagner–Fischer table, and the KITTEN→SITTING 7×8 grid is already pinned in plan 013 (anchors K/L, distance 3) — the cheapest promise on the board |
 | `derivative-toolkit` | `gradient-descent` | delivered | The derivatives series' row-5 when-useful cell promised "the sign-change check is the habit that survives every optimizer" — `WhereTheWalkStops` runs that check on every stopping place (valley, hilltop, shelf) with the optimizer inheriting the toolkit's blindness; and the update itself is rebuilt from owned objects on screen: `TheSlopeBecomesAStep` derives w ← w − ηL′ from the toolkit's nudge algebra (ΔL ≈ L′·Δw), `TheCornerChargesTheFee` re-runs `NudgeInNudgeOut`'s square with a finite step |
 | `gradient-descent` | `ctc-gradient` | delivered | The gradient series' `TheErrorSignalLearns` ran "plain gradient descent" on screen (loss 0.7181 → 0.1602 → 0.0356, README row 6) with the rule itself untaught; `TheRoadsOwnWalk` teaches the mechanism and re-reads the same pinned anchor-M trajectory (0.7181 → 0.0003, ×0.86 vs ×0.9993 per step), restating frame 3's mixed (0.032, 0.218, 0.750) convergence — y matches γ out of indifference — with the walk that produced it now explained |
+| `gradient-descent` | `ctc-alignment` | delivered | `TheRoadsOwnWalk` opens on "the alignment table — twelve knobs": the alignment series' worked score table, made trainable (the guide chapter says it outright — "make the alignment chapter's four-frame score table trainable"), and the walk that follows is priced on that object. Rider: in print the knobs are free logits through softmax (guide ch.); naming that on screen in any future re-render would open a `softmax-likelihood` strand |
+| `logarithms` | `gradient-descent` | delivered | `TheRoadsOwnWalk`'s log panel says it on screen: "× per step: a straight march on the log ruler" — a constant multiplicative shrink (0.86 early, 0.9993 late) becoming constant additive descent is `MultiplyIsAdd`'s counting strip carrying a training curve; the CS231n replot advice, now an owned picture |
 | `counting-rules` | `random-variables` | delivered | The graph's oldest promise (`combinatorics/README.md` row 3 when-useful), closed: `TheBinomialColumns` counts the sorted columns' cells as C(4,k) — "counted exactly the way the combinations series counts them" — and assembles C(n,k)p^k q^(n−k) from cell count times cell area |
 | `independence` | `softmax-likelihood` | delivered | The CTC bridge's remaining half, closed: the product-becomes-sum arithmetic is independence's own delivery — `AddToSurvive` multiplies five per-frame factors to 0.27216 and `TheLossThatTrains` says "independent frames: losses add" on screen (takeaway included); the promise itself was spoken by `ProportionsConverge` ("likelihood is next") and answered by `TheLikelihoodLens` |
 | `conditional-probability` | `softmax-likelihood` | delivered | `TheLossThatTrains` quotes the license verbatim on screen: "multiplying is licensed: the frames are independent given the input — the conditioning series said when" — `WhenToCondition`'s exact lesson, used where it was always headed |
@@ -168,13 +170,26 @@ one topic should meet the same picture, upgraded, in the next:
   target: `WhereTheTruthSpendsItsTime` pulls a γ column out of the
   grid and stands it beside the one-hot bar, and
   `TheErrorSignalLearns`' output panels are the bars four frames
-  wide).
+  wide; `TheRoadsOwnWalk`'s frame-3 trio (0.032 / 0.218 / 0.750) is
+  the converged read-out, the gem restated with its walk).
 - **The sign-change ribbon** (`ZeroSlopeFindsThePeak`: + / 0 / − under
   the likelihood curve, with the x³ cameo and the p = 0 valley floor
   disposing of the converse error) — inherited as promised:
   `TheErrorSignalLearns`' push bars balance about the axis (every
   column sums to zero in both signs), the sign pinned on screen the
-  moment the first axis appears.
+  moment the first axis appears; third stop `WhereTheWalkStops` —
+  every stopping place stamped (− to + valley, + to − hilltop,
+  no-crossing shelf), the optimizer inheriting the habit.
+- **The nudge square, finite-stepped** (`NudgeInNudgeOut`'s strips
+  and dying corner → `TheCornerChargesTheFee`: the same square with
+  Δw no longer tiny — the strips pay 2wΔw, the corner charges Δw²,
+  and the ledger 4ηw²(η−1) prices the learning-rate cliff; the
+  stretch-factor sibling iterates in `TheLearningRateIsABet`, one
+  scaling per bet).
+- **The loss-vs-step readout** (`TheErrorSignalLearns`' loss line →
+  `TheRoadsOwnWalk`'s two panels, first-fifty and log-axis — the
+  only readout many knobs leave; scene 2 carries its seed as the
+  identical-losses beat, spoken in captions).
 - **The y = x flip** (`TheDebtRepaid` earns the inverse graph →
   `TheCurveThatIsItsOwnSlope` differentiates it: rise and run swap, so
   slopes reciprocate — 1/e at x = e).

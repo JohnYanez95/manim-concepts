@@ -102,7 +102,7 @@ class TheSlopeBecomesAStep(ConceptScene):
         ).arrange(DOWN, buff=0.32, aligned_edge=LEFT)
         derive.move_to(3.6 * RIGHT + 1.2 * UP)
         on_frame(derive)
-        forced = caption("whatever the slope, the loss cannot rise")
+        forced = caption("for a small step, the change is downhill")
         forced.next_to(derive, DOWN, buff=0.3)
         on_frame(forced)
         for line in derive:
@@ -141,7 +141,7 @@ class TheSlopeBecomesAStep(ConceptScene):
         on_frame(brake)
         on_frame(brake2)
         self.play(FadeIn(brake), FadeIn(brake2))
-        ticker = caption("step 9:  w = 4/512 = 0.0078 < 0.01", color=COOL)
+        ticker = caption("step 9:  w = 4/512 = 0.0078125 < 0.01", color=COOL)
         ticker.next_to(brake2, DOWN, buff=0.35)
         on_frame(ticker)
         self.play(FadeIn(ticker))
@@ -701,16 +701,20 @@ class TheRoadsOwnWalk(ConceptScene):
         still.next_to(log, DOWN, buff=0.25)
         on_frame(still)
         self.play(FadeIn(still))
+        ruler = caption("× per step: a straight march on the log ruler")
+        ruler.next_to(still, DOWN, buff=0.15)
+        on_frame(ruler)
+        self.play(FadeIn(ruler))
         self.wait(0.8)
 
         # The physiology, priced: front-loaded early, the brake at scale late.
-        self.play(FadeOut(sampled), FadeOut(still))
+        self.play(FadeOut(sampled), FadeOut(still), FadeOut(ruler))
         factors = VGroup(
             chip("0 → 10:  × 0.86 per step", COOL, width=4.5),
             chip("200 → 5000:  × 0.9993 per step", MUTED, width=5.7),
         ).arrange(DOWN, buff=0.22)
         factors.move_to(3.6 * LEFT + 3.15 * DOWN)
-        quarters = caption("three quarters gone in the first ten steps;")
+        quarters = caption("over three-quarters gone in ten steps;")
         quarters2 = caption("the flat tail is scene 1's brake at scale")
         quarters.move_to(3.2 * RIGHT + 3.0 * DOWN)
         quarters2.next_to(quarters, DOWN, buff=0.15)

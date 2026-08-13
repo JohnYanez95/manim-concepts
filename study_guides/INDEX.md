@@ -18,7 +18,7 @@ primitives land.
 | random-variables | `primitives/random-variables.tex` | probability random-variables series (authored) | `007.*` | `probability-` |
 | softmax-likelihood | `primitives/softmax-likelihood.tex` | probability softmax series (authored) | `008.*` | `probability-` |
 | derivative-toolkit | `primitives/derivative-toolkit.tex` | calculus derivatives series (authored) | `009.*` | `calculus-` |
-| gradient-descent | `primitives/gradient-descent.tex` | calculus gradient-descent series (series-backed since plan 014; formerly guide-first — the second seed to sprout) | `010.M.*`, `001.paths15` | `calculus-` |
+| gradient-descent | `primitives/gradient-descent.tex` | calculus gradient-descent series (series-backed since plan 014; formerly guide-first — the second seed to sprout) | `010.M.*`, `010.K.NLL`, `001.paths15` | `calculus-` |
 | ctc-gradient | `primitives/ctc-gradient.tex` | deep_learning gradient series (authored) | `010.*`, `009.G.nllgradient` | `deep_learning-` |
 | ctc-decoding | `primitives/ctc-decoding.tex` | GUIDE-FIRST (seeds the future beam-search series) | `012.dec.*` | `deep_learning-` |
 
@@ -28,9 +28,9 @@ Problem answer scripts (the solve-gate anchors, plan 012 R3) live in
 enumeration asserted against the formula it teaches.
 
 Guide wrappers splice anchors too: `ctc-algorithm/guide.tex` uses
-`010.K.P`. Seed anchors defined but not yet cited — `010.K.NLL`,
-`010.L.uniformP`, `009.G.nllgradient` — are reserved for the gradient
-and softmax chapters; do not prune them.
+`010.K.P`. The once-reserved seed anchors are all spent now:
+`010.K.NLL` in the gradient-descent chapter, `010.L.uniformP` and
+`009.G.nllgradient` in the ctc-gradient chapter.
 
 Guide-first primitives (no parent scenes; full research treatment before
 authoring): `ctc-decoding` only (dynamic-programming graduated to

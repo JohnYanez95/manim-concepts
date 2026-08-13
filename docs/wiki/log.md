@@ -670,3 +670,43 @@ reordered.
 - note: the verifier's F3 (double-well basin boundary √11 at
   η = 0.1) promoted to scene 5's payoff; the guide chapter's
   overclaiming sentence trued in the same change
+
+## [2026-08-12] audit | plan-014 branch
+
+- scope: diffed 61d1f6e..9226fdf — the plan-013 finalisation segment
+  (phase-4 application verified as logged, PR #15 bot round, merge)
+  absorbed; the four plan-014 commits read in full plus cited far
+  ends (ctc-gradient scene 6, deep_learning README, anchors.yaml,
+  root README); no full crawl
+- findings: 0 promised-not-delivered, 3 delivered-not-recorded,
+  3 possible-not-yet-made, 5 prose-vs-scene, 5 graph-health;
+  numerics all pass (factor table, ledger, √11, anchor-M
+  byte-checked)
+- both new edges verified against scene code; no new promises
+  opened, as the plan claimed
+- top drift: the plan's "loss-vs-step inset trained on the bowl" and
+  "WhenToUseIt mapping close (sixth series)" claim beats no scene
+  contains — scene 2 carries the identical-losses beat as captions,
+  scene 6 closes on a caption stack
+- unrecorded strand: TheRoadsOwnWalk opens on "the alignment table —
+  twelve knobs" (ctc-alignment's object, on screen)
+- none of the five device lineages the plan says the series extends
+  reached INDEX's device section (ribbon third stop, nudge square,
+  stretch factor, bars, loss-vs-step readout)
+- stale-at-delivery occurrence 16: root README's calculus row missed
+  the descent series; derivatives row 5's origin cell unstruck;
+  deep_learning never pointed back
+- study INDEX's seed-anchor note was stale (all three cited) and the
+  gradient-descent row omitted 010.K.NLL; √11 in print carried no
+  anchor macro or answer-script assertion
+- possible: the log-axis replot is MultiplyIsAdd unnamed; the bowl
+  walk pre-draws half-life; softmax parameterisation named in print
+  only
+- applied (same change): all sixteen findings — new edges
+  gradient-descent → ctc-alignment (with the softmax rider) and,
+  via one added caption ("× per step: a straight march on the log
+  ruler"), logarithms → gradient-descent DELIVERED, promoting the
+  audit's own top possible; the plan trued to as-built; the √11
+  boundary anchored (014.basin.sqrt11) and asserted in the answer
+  script; the three stale far ends fixed
+- stamp: advance to 9226fdf

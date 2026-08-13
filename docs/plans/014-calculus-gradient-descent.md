@@ -64,7 +64,33 @@ the CTC road's own 12-knob walk as the capstone.
   (162 entries, 145 verified); both guide PDFs rebuilt green;
   welcome re-rendered at thirteen series (rows 7+6, 402 KB, frame
   verified). `make test` green (243)
-- [ ] Phase 4
+- [x] Phase 4: local CodeRabbit returned four findings — three
+  applied (the two first-order overclaims softened on screen and in
+  README row 1: "the loss cannot rise" → "for a small step, the
+  change is downhill"; the study-INDEX anchor row gained
+  010.K.NLL), one declined with reason recorded here: the
+  remove-the-chord-arrows suggestion contradicts the guide
+  chapter's own committed TikZ drawing and the pedagogy digest's
+  blessed chord-hop device — the geometry the research warns
+  against is tangent-line travel, which the scene avoids, and the
+  w-axis tick trail is present. Audit: 16 findings applied, zero
+  numeric — two NEW delivered edges (gradient-descent →
+  ctc-alignment, the twelve-knob table strand with its softmax
+  rider; logarithms → gradient-descent, made deliverable by adding
+  one caption — "× per step: a straight march on the log ruler" —
+  promoting the audit's top possible), five device-lineage entries
+  landed in the wiki (ribbon third stop, nudge square
+  finite-stepped, bars' new appearance, loss-vs-step readout), the
+  plan trued to as-built (no inset, no mapping close, no η = 3/8
+  row; ticker now exact 0.0078125; screen says "over
+  three-quarters"), the three stale far ends fixed (root README
+  calculus row, derivatives row-5 origin cell struck delivered,
+  deep_learning Scope + row 6 pointing back), study INDEX
+  seed-anchor note retired, and the √11 boundary anchored
+  (014.basin.sqrt11) + asserted in answers/gradient_descent.py
+  (script rerun, exit 0). PDFs rebuilt; linter clean; changed
+  scenes re-rendered and frame-verified; `make check` + `make
+  test` (243) green
 - [ ] Phase 5
 
 ## Decisions (made at design time)
@@ -142,14 +168,15 @@ small — no schedule imposed), step ticker to k = 9, w₉ = 4/512 <
 **2. `TheLearningRateIsABet`** — one dial, four fates, on one
 bowl. The update collapses to w ← (1−2η)w: the walk is repeated
 scaling on the w-axis (NudgeInNudgeOut's stretch factor, now
-iterated). Four-regime panel with shared loss-vs-step inset:
-η = ¼ glides (×½); η = ¾ overshoots every step and converges
-(×−½) — and its loss curve is pixel-identical to the glide's (the
-inset can't see the zigzag; convergence is |factor| < 1, not
-monotonicity); η = 1 ping-pongs 4, −4, 4 forever (×−1); η = 5/4
-diverges 4, −6, 9, −27/2 (×−3/2). Coda: η = 1/40 also arrives —
-in 117 steps against 9 (too small never lies; it bills you). The
-claim pinned to the picture: for THIS bowl, 0 < η < 1.
+iterated). Four number-line rows *(as built: the identical-losses
+beat is carried in captions, not an inset — the losses 16, 4, 1, ¼
+spoken exactly)*: η = ¼ glides (×½); η = ¾ overshoots every step
+and converges (×−½) — and its losses are identical to the glide's,
+step for step (the losses can't betray the zigzag; convergence is
+|factor| < 1, not monotonicity); η = 1 ping-pongs 4, −4, 4 forever
+(×−1); η = 5/4 diverges 4, −6, 9 (×−3/2). Coda: η = 1/40 also
+arrives — in 117 steps against 9 (too small never lies; it bills
+you). The claim pinned to the picture: for THIS bowl, 0 < η < 1.
 
 **3. `TheCornerChargesTheFee`** — why the cliff sits at η = 1:
 the repo's nudge square with the step no longer infinitesimal.
@@ -159,7 +186,9 @@ charges Δw² back. With Δw = −2ηw the ledger reads exactly
 at η = 1 (checks at w = 4: η = ¼ → −12, η = 1 → 0, η = 5/4 →
 +20). Then the bet's other side: the a = 4 bowl (corner four
 times fatter). The SAME η = ¼ that glided now ping-pongs
-(factor −1); η = 3/8 diverges (−2); safe rates end at ¼, not 1.
+(factor −1) *(as built: the ping-pong arc and the thresholds line
+carry the beat; the η = 3/8 divergence row was not drawn)*; safe
+rates end at ¼, not 1.
 The learning rate is a bet about curvature — geometric only: how
 sharply the bowl bends across the step, η·L″ < 2 shown as the
 strips-vs-corner tie, never as a second-derivative formalism.
@@ -199,7 +228,7 @@ gradient collects every knob's slope; the update steps against it
 CTC gradient series put on screen). The 12-knob loss from the
 alignment table walks 0.7181 → 0.1602 (10) → 0.0356 (50) →
 0.0088 (200) → 0.0003 (5000) on a loss-vs-step readout — the only
-readout there is, and after scene 2, a sufficient one. Shrink
+readout there is, readable after scene 2's spoken losses. Shrink
 factors: 14% of the loss per step early, under 0.1% late (0.86 vs
 0.9993); over three quarters gone in ten steps; the same curve
 replotted on a log axis still visibly descends. The long flat
@@ -218,8 +247,13 @@ by Lemaréchal), with convergence theory arriving a century later
 2w·dw + dw², now with a finite step and a priced corner), the
 stretch factor (NudgeInNudgeOut's local scaling, iterated into
 fates), the sign-change ribbon (stamping the stopping places),
-the loss-vs-step inset (trained on the bowl, spent on the road),
-the WhenToUseIt mapping close (sixth series).
+the loss-vs-step readout (scene 6's two panels; scene 2 carries
+its seed as captions). *(As-built truing, phase 4: the planned
+"shared loss-vs-step inset" and "WhenToUseIt mapping close" were
+not built — scene 2 speaks the identical losses in captions and
+scene 6 closes on a caption stack; the lineage list above is the
+as-built set, and all of it is now recorded in the wiki's device
+section.)*
 
 Scene-length target: 30–45 s each at the repo's pace, formula
 last in every case.
