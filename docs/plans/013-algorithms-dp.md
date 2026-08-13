@@ -67,7 +67,14 @@ recorded anchors the closer spends: log-space inheritance
   "in-degree" softened to the on-screen claim, and "oldest promise"
   disambiguated to "oldest standing" (plan 007's row keeps the
   elder title)
-- [ ] Phase 5: PR, bot review, finals
+- [x] Phase 5: PR #15 opened; bot review returned three findings,
+  all applied (the duplicate-count tags now leave with the tree — a
+  real lingering-mobject bug; the lattice's arrow claim trued to the
+  build; the retrieval row's missing 001.raw81 added).
+  `clean-drafts`, then 1080p60 finals: 6 files, distinct names,
+  16–37 s, scene 1's fixed close verified by frame. The plan
+  closes; the PR awaits the maintainer's merge — and with it, the
+  graph's oldest standing promise is paid on screen
 
 ## Decisions (made at design time)
 
