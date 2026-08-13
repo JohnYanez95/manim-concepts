@@ -1,0 +1,267 @@
+% Primitive: logarithms — authored from algebra/logarithms_manim.py, its
+% README concepts table (six scenes, watched in order) and plan 005's
+% verified anchors. Base-generic throughout (bases 2, 3 and 10), exactly as
+% the series is; the one ln appearance carries the video's own loan caption
+% ("names on loan from calculus"), and the e-and-ln chapter ahead repays it.
+% Problem answers are computed by answers/logarithms.py (the solve-gate
+% anchor); integer logs there come from counted exponents, never a float
+% log call (plan 005's recorded hazard).
+\chapter{Logarithms}
+
+\begin{narrative}
+Everything on this road multiplies. The independence chapter multiplied
+one probability per trial; the conditional chapter multiplied a width by
+a height; the Bayes chapter multiplied prior odds by a likelihood
+ratio; and the trellis multiplies a per-frame score for every frame of
+every path. This chapter is the tool that turns all of that multiplying
+into adding — not by a trick, but by a reading: a logarithm
+\emph{counts multiplicative steps}.
+
+\section{The counting strip}
+
+Write two rows. The bottom row starts at $1$ and doubles:
+$1, 2, 4, 8, \dots, 256$. The top row just counts the doublings:
+$0, 1, 2, \dots, 8$. That strip is the whole chapter's spine. ``$2$ to
+the what is $64$?'' is answered by reading the counter above $64$ —
+six. A logarithm inverts the \emph{question}, not the graph of some
+function; no curve is needed to say what it is.
+
+\begin{center}
+\begin{tikzpicture}[x=1.15cm, y=0.9cm]
+  % The two-row counting strip (TheCountingStrip), carrying
+  % MultiplyIsAdd's hop arcs: 8 x 16 = hop 3 + hop 4 = hop 7 = 128.
+  \draw[Muted] (-0.5, -0.5) -- (8.5, -0.5);
+  \foreach \x in {0,...,8} \draw[Muted] (\x, -0.36) -- (\x, -0.64);
+  \foreach [count=\i from 0] \v in {1,2,4,8,16,32,64,128,256} {
+    \node[color=CoolInk] at (\i, 0) {\small $\i$};
+    \node at (\i, -1.05) {\small $\v$};
+  }
+  \node[left, color=CoolInk] at (-0.85, 0) {\small counter};
+  \node[left] at (-0.85, -1.05) {\small value};
+  \draw[->, AccentInk] (0, 0.5) to[bend left=25] (3, 0.5);
+  \draw[->, AccentInk] (3, 0.5) to[bend left=25] (7, 0.5);
+  \node[color=AccentInk] at (1.5, 1.3) {\small hop $3$};
+  \node[color=AccentInk] at (5, 1.45) {\small hop $4$};
+  \node[below, color=AccentInk] at (7, -1.5) {\small $8 \times 16 = 128$};
+\end{tikzpicture}
+\end{center}
+
+The base is the stride of one step, and the strip hands over the
+definition's conditions for
+free~\cite{algebra-openstax-college-algebra-2e-6-3-logarithmic-functions}:
+base $1$ never moves ($1$'s ladder reads $1, 1, 1, \dots$ — no counter
+is the answer, or every counter is), and a positive base never leaves
+the positives, so only $x > 0$ has a counter at all. Only then, the
+formula:
+\[
+  \log_b x = y \;\iff\; b^y = x,
+  \qquad b > 0,\ b \neq 1,\ x > 0 .
+\]
+
+\section{One fact, three notations}
+
+$2^6 = 64$, $\log_2 64 = 6$ and $\sqrt[6]{64} = 2$ are not three facts.
+They are one fact about the triple $(2, 6, 64)$, asked from three
+corners~\cite{algebra-3blue1brown-triangle-of-power}: cover the value
+and a power asks for it; cover the exponent and a logarithm asks for
+it; cover the base and a root asks for it. In particular
+$b^{\log_b x} = x$ is the same number occupying two corners at once —
+an \emph{undo}, never a ``cancellation''. Students taught that logs
+``just disappear'' reliably extend the disappearing act to places it
+does not go~\cite{algebra-kenney-kastberg-links-in-learning-logarithms}.
+
+The best-documented place it does not go is addition. In base $10$,
+$\log_{10}(10 + 10) = \log_{10} 20 \approx \anchor{005.logtrap}$ — not
+$1 + 1 = 2$. There is no law for the log of a sum. The trap earns an
+extra sentence because the base-$2$ instance is coincidentally
+\emph{true}: $\log_2(2+2) = 2$ exactly, but only because $2 + 2$
+happens to equal $2 \times 2$ — one lucky check away from a wrong
+rule.
+
+\section{Multiplying is adding}
+
+Multiply $8 \times 16$ on the strip. $8$ sits at counter $3$ and $16$
+at counter $4$, so their product is reached by hopping $3$ then $4$
+more — counter $7$, value $128$, as the figure's arcs walk it.
+Multiplying values \emph{is} adding counters:
+\[
+  \log_b(xy) = \log_b x + \log_b y .
+\]
+The law was once hardware: two logarithmic scales sliding against each
+other (Gunter's single scale, 1620; Oughtred's pair, c.~1622) add
+lengths so that their readings multiply~\cite{algebra-wikipedia-slide-rule}.
+
+Change of base is a change of \emph{stride}. Count $64$ in strides of
+$4$ instead of $2$: each $4$-stride is two $2$-strides, so
+$\log_4 64 = 6/2 = 3$ — the base is a unit of measurement, nothing
+more. Unit conversion also explains a number worth keeping: ten
+doublings give $1024 \approx 1000$, about three tenfoldings, so one
+doubling is worth about three tenths of a digit —
+$\log_{10} 2 \approx \anchor{005.log10two}$.
+
+\section{Shrink counts}
+
+The independence chapter halved a unit square four times and found the
+cell $HHTH$ with area $(1/2)^4 = 1/16$. Read on the strip, that cell
+sits four steps \emph{below} $1$: $-\log_2 \tfrac{1}{16} = 4$.
+Probabilities in $(0,1)$ have negative logs for exactly this reason —
+they are counts of \emph{shrinkings}, and the sign only records which
+direction the strip was walked. pH is the everyday instance: acidity
+$7$ is a concentration tenfolded down seven times.
+
+Two boundary readings matter later. First, $\log 0 = -\infty$: the
+Bayes chapter's zero prior sits infinitely far down the strip — the
+log-space form of ``no finite evidence rescues it''. Second, slow is
+not bounded: name any $N$ and $2^N$ sits on the strip. Logarithms grow
+without limit, just very politely.
+
+\section{The evidence ruler}
+
+The Bayes chapter's coins multiplied: likelihood ratio $9$ per head,
+odds $1 \to 9 \to 81$. Re-plot that ladder on a base-$3$ ruler. Since
+$9 = 3^2$, each head adds exactly $2$: the marker steps
+$0 \to 2 \to 4$. Each tail subtracts the same length, so
+$H, H, T, T$ walks it back to exactly $0$. ``Each head multiplies by
+$9$'' and ``each head adds the same length'' are the same data — the
+multiplicative waterfall and the additive ruler are one object. This
+is evidence as \emph{weight}: Turing scaled such a ruler in base
+$10^{1/10}$ and called its unit the deciban, roughly the smallest
+weight of evidence a human can feel~\cite{algebra-good-weight-of-evidence-a-brief-survey}.
+
+\section{The underflow cliff}
+
+Now the payoff the alignment chapters have been waiting for. A machine
+multiplying many small probabilities is walking down the strip, and
+the floor is closer than it looks: float64 bottoms out at
+$\anchor{005.underflow.floor}$, so
+$0.1^{\anchor{005.underflow.lastpower}}$ still survives — barely, as a
+subnormal — while $0.1^{\anchor{005.underflow.deadpower}}$ is exactly
+$0.0$; not small, \emph{gone}~\cite{algebra-wikipedia-double-precision-floating-point-format}.
+Meanwhile the counter row walks on unharmed: the $\log_{10}$ sum of
+the same factors is exactly $\anchor{005.underflow.logsum}$. In
+float32, the type networks actually train in, the same death arrives
+after only $\anchor{005.float32frames}$ frames of probability $0.1$.
+Sums of logs survive what products of probabilities cannot.
+
+One thing breaks in the move. The trellis multiplies scores
+\emph{along} a path — under the log, products become sums, done — but
+it also \emph{adds} the $\alpha$'s of merging paths, and log space has
+no cheap addition. The repair is one identity, the log-sum-exp
+move~\cite{algebra-wikipedia-logsumexp}:
+\[
+  \ln(a+b) \;=\; \ln a + \ln\!\bigl(1 + e^{\ln b - \ln a}\bigr),
+  \qquad a \ge b .
+\]
+Factor out the larger term and the leftover $e^{\ln b - \ln a}$ lives
+in $(0, 1]$ — finite, tame, no cliff. This is the one place the
+series writes $\ln$ and $e$, and the video prints its debt on screen:
+\emph{names on loan from calculus}. This guide carries the same loan
+and repays it in the e-and-ln chapter ahead; until then, read $\ln$ as
+``the counter row in some fixed base'' — every law used here is
+base-generic. One credit note, kept straight: log-space CTC is the
+2012 book's move~\cite{algebra-graves-supervised-sequence-labelling-with-rnns-7-3-1};
+the 2006 paper rescaled instead.
+
+\paragraph{Where this goes.} The loan is repaid next: the e-and-ln
+chapter finds the base nature rules the strip in and re-reads this
+identity symbol by symbol. The shrink counts return averaged — the
+random-variables chapter finds the sixteen-cell square carries exactly
+$4$ bits of surprisal on average. And the ruler returns twice more:
+differentiated, when the derivative toolkit turns the log-sum-exp
+ruler's sensitivities into softmax's shares, and walked end to end,
+when the gradient chapter runs the whole trellis in log space.
+\end{narrative}
+
+\section*{Practice problems}
+
+\begin{problem}
+How many doublings take $1$ to $512$ — that is, what is
+$\log_2 512$?
+\begin{hint}
+Count hops on the strip; the ladder in the figure stops one doubling
+short.
+\end{hint}
+\begin{solution}
+$512 = 2^9$, so the counter above $512$ reads $9$: nine doublings.
+The answer is read off the exponent — no calculator, and no float
+log call, which is exactly how the series computes every integer log.
+\end{solution}
+\end{problem}
+
+\begin{problem}
+A student writes
+$\log_{10}(100 + 1000) = \log_{10} 100 + \log_{10} 1000 = 5$.
+What is the true value, roughly — and why is the base-$2$ near-miss
+$\log_2(2 + 2) = 2$ no excuse?
+\begin{hint}
+There is no law for the log of a sum; $1100$ sits between $10^3$
+and $10^4$.
+\end{hint}
+\begin{solution}
+$100 + 1000 = 1100$, and
+$\log_{10} 1100 = 3 + \log_{10} 1.1 \approx 3.0414$ — between $3$ and
+$4$, nowhere near $5$. The product law converts multiplication, not
+addition: $\log_{10}(100 \times 1000)$ \emph{is} $5$. The base-$2$
+check succeeds only because $2 + 2$ happens to equal $2 \times 2$ —
+a coincidence of the number $2$, not a law.
+\end{solution}
+\end{problem}
+
+\begin{problem}
+A fair coin comes up heads ten times running, probability
+$(1/2)^{10} = 1/1024$. What is $-\log_2$ of that probability? And
+what is the pH-style reading of a concentration of $10^{-7}$?
+\begin{hint}
+Count shrinkings — the strip walked downward.
+\end{hint}
+\begin{solution}
+$1/1024$ is ten halvings of $1$, so
+$-\log_2 \tfrac{1}{1024} = 10$. Likewise $10^{-7}$ is seven
+tenfoldings down: $-\log_{10} 10^{-7} = 7$ — a pH of $7$. Small
+probabilities are not scary in log space; they are just step counts
+with a minus sign.
+\end{solution}
+\end{problem}
+
+\begin{problem}
+A test has likelihood ratio $9$ per head (and $1/9$ per tail).
+Starting from even odds, the sequence $H, H, H, T$ arrives. Where
+does the marker sit on the base-$3$ evidence ruler, and what are the
+odds?
+\begin{hint}
+$9 = 3^2$: each head is $+2$ on the ruler, each tail $-2$.
+\end{hint}
+\begin{solution}
+On the ruler: $0 \to 2 \to 4 \to 6 \to 4$. Position $4$ in base $3$
+means odds $3^4 = 81{:}1$. Multiplicatively:
+$9 \times 9 \times 9 \times \tfrac19 = 81$ — the same answer, because
+the ruler and the waterfall are the same data. One tail undoes
+exactly one head, by construction.
+\end{solution}
+\end{problem}
+
+\begin{problem}[stretch]
+A model scores $324$ frames at probability $0.1$ each. In float64,
+what does the product return, and what does the counter row say?
+Then price a log-space \emph{addition}: two merging paths each carry
+weight $2^{-10}$ — what is $\log_2$ of their sum, by the chapter's
+closing identity?
+\begin{hint}
+The product falls off the cliff; the sum of logs does not. For the
+addition, $a = b$ makes the identity's shifted term exactly $1$.
+\end{hint}
+\begin{solution}
+The product is exactly $0.0$ — $0.1^{324}$ underflows float64's
+floor — while the counter row records
+$324 \times (-1) = -324$ without complaint: the very numbers the
+underflow scene puts on screen. For the addition, apply the identity
+in base $2$ with $a = b = 2^{-10}$:
+\[
+  \log_2(a + b) = -10 + \log_2\!\bigl(1 + 2^{\,-10 - (-10)}\bigr)
+  = -10 + \log_2 2 = -9 ,
+\]
+and indeed $2^{-10} + 2^{-10} = 2^{-9}$ exactly. A trellis
+$\alpha$-add costs one shifted log — no detour through value space,
+no cliff.
+\end{solution}
+\end{problem}

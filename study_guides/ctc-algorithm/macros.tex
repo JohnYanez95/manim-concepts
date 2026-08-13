@@ -1,0 +1,48 @@
+% Guide-owned assembly macros (plan 012 R4) — split from guide.tex so
+% tools/check_study_layout.py can render macro-generated figures
+% standalone.
+% The roadmap — guide-owned assembly state (plan 012 R4). \roadmap{n}
+% draws the objective's fourteen stations with the first n filled: the
+% horizon view, repeated at every transition with progress marked.
+\newcommand{\roadmapstations}{%
+  counting, alignment, dyn.~prog., independence, conditional, Bayes,
+  logarithms, {$e$ \& $\ln$}, random~vars, softmax, derivatives,
+  descent, gradient, decoding}
+\newcommand{\roadmap}[1]{%
+  \begin{center}
+  \begin{tikzpicture}[x=1.9cm, y=1.15cm,
+      station/.style={rounded rectangle, draw=Muted, font=\tiny,
+        inner sep=3pt, minimum height=4.5mm},
+      done/.style={station, fill=GoodInk!25, draw=GoodInk},
+      hop/.style={Muted, ->, shorten >=2pt, shorten <=2pt}]
+    % Serpentine: row two runs right-to-left, so the row break is a short
+    % vertical hop instead of an arrow crossing the whole second row
+    % (REFINEMENTS.md, 2026-08-12).
+    \foreach [count=\i] \name in \roadmapstations {
+      \pgfmathtruncatemacro{\row}{(\i - 1) / 7}
+      \pgfmathtruncatemacro{\rawcol}{mod(\i - 1, 7)}
+      \ifnum\row=0
+        \pgfmathtruncatemacro{\col}{\rawcol}
+      \else
+        \pgfmathtruncatemacro{\col}{6 - \rawcol}
+      \fi
+      \ifnum\i>#1
+        \node[station] (s\i) at (\col, -\row) {\name};
+      \else
+        \node[done] (s\i) at (\col, -\row) {\name};
+      \fi
+      \ifnum\i>1
+        \pgfmathtruncatemacro{\prev}{\i - 1}
+        \ifnum\rawcol=0
+          \draw[hop] (s\prev.south) -- (s\i.north);
+        \else
+          \ifnum\row=0
+            \draw[hop] (s\prev.east) -- (s\i.west);
+          \else
+            \draw[hop] (s\prev.west) -- (s\i.east);
+          \fi
+        \fi
+      \fi
+    }
+  \end{tikzpicture}
+  \end{center}}

@@ -1,0 +1,322 @@
+% Primitive: conditional-probability — authored from
+% probability/conditional_probability_manim.py and its README concepts
+% table (six scenes), plus plan 003's verified anchors. Backward-grounded:
+% counting, alignment, and the independence chapter; Bayes is named only in
+% "Where this goes". Problem answers are computed by
+% answers/conditional_probability.py (the solve-gate anchor); new anchor
+% keys ride primitives/anchors-proposals-probability.yaml until merged.
+\chapter{Conditional probability}
+
+\begin{narrative}
+Every probability so far was measured against the whole square. But most
+questions arrive mid-story: \emph{given that} the first coin came up
+heads, \emph{given that} the test came back positive, \emph{given that}
+the first card was an ace. This chapter builds the tool for
+``given that'' — and in doing so pays two debts at once: the
+independence chapter's stepped cut finally gets its name, and the aces'
+price tag finally gets its license.
+
+\section{Restriction, then renormalization}
+
+Flip three fair coins. Three heads is one outcome of eight:
+$\tfrac18$. Now learn that the first coin landed heads. Half the
+outcomes are ruled out; among the four that remain, three heads is one:
+$\tfrac14$. No formula was needed — throw away what the information
+rules out, recount inside what is left.
+
+On the square the same move is geometric. The event $B$ is a band; dim
+everything outside it — ruled out, discarded — and stretch the band
+back to a full unit square. The stretch multiplies every area inside
+the band by exactly $1/P(B)$, so every \emph{within-band} proportion is
+preserved: the slice is a genuine probability space in its own right.
+``Conditional probabilities are
+probabilities''~\cite{probability-blitzstein-hwang-introduction-to-probability-chs-1-2-excerpt}.
+
+\begin{center}
+\begin{tikzpicture}[scale=0.95]
+  % Scene 1's device: keep the B-band (Cool), discard the rest (Warm —
+  % the divide-out lineage), stretch the band into a fresh unit square;
+  % the surviving A-share (Accent) is the result being built toward.
+  \fill[Cool!20] (0,0) rectangle (1.5,3);
+  \fill[AccentInk!30] (0,0) rectangle (1.5,1.8);
+  \fill[Warm!15] (1.5,0) rectangle (3,3);
+  \fill[Warm!35] (1.5,0) rectangle (3,0.9);
+  \draw[Muted] (0,0) rectangle (3,3);
+  \draw[Muted] (1.5,0) -- (1.5,3);
+  \draw[Muted] (0,1.8) -- (1.5,1.8);
+  \draw[Muted] (1.5,0.9) -- (3,0.9);
+  \node[below, color=CoolInk] at (0.75,-0.4) {$B$};
+  \node[below, color=WarmInk] at (2.25,-0.4) {ruled out};
+  \node[left, color=AccentInk] at (-0.4,0.9) {$A\cap B$};
+  \draw[->, Muted] (3.5,1.5) -- (4.7,1.5);
+  \node[above, color=Muted] at (4.1,1.95) {$\times\;1/P(B)$};
+  \fill[Cool!12] (5.2,0) rectangle (8.2,3);
+  \fill[AccentInk!30] (5.2,0) rectangle (8.2,1.8);
+  \draw[Muted] (5.2,0) rectangle (8.2,3);
+  \draw[Muted] (5.2,1.8) -- (8.2,1.8);
+  \node[below, color=Muted] at (6.7,-0.4) {the band, area $1$ again};
+  \node[right, color=AccentInk] at (8.6,0.9) {$P(A\mid B)$};
+\end{tikzpicture}
+\end{center}
+
+The formula is the picture's bookkeeping, which is why it comes last:
+\[
+  P(A \mid B) \;=\; \frac{P(A \cap B)}{P(B)},
+  \qquad\text{defined only for } P(B) > 0 .
+\]
+Restrict to $B$ (the numerator keeps only the part of $A$ inside the
+band), renormalize (divide by the band's area). Nothing else happened.
+
+\section{The step was conditional probability all along}
+
+The independence chapter drew dependence as a cut that \emph{steps} at
+the band's edge and independence as the cut running straight — and left
+the step unnamed. Here is its name: the height of $A$ inside the
+$B$-band is exactly $P(A \mid B)$. The cut runs straight precisely when
+\[
+  P(A \mid B) \;=\; P(A)
+\]
+— conditioning on $B$ changes nothing about $A$. On $P(B) > 0$ this is
+an equivalent characterization of independence, and the whole previous
+chapter re-reads through it. The die jewel:
+$P(\text{even} \mid \{1,2,3,4\}) = \tfrac24 = \tfrac12 = P(\text{even})$
+— independent, the step flattens. One pip over:
+$P(\text{even} \mid \{1,2,3\}) = \tfrac13 \neq \tfrac12$ — the step is
+back. Mutually exclusive events re-read as $P(A \mid B) = 0$: maximal
+information, the strongest step there is.
+
+Two cautions keep the picture honest. The product form stays the
+\emph{definition} — it survives $P(B) = 0$ and treats $A$ and $B$
+symmetrically, which the conditional form does not. And conditioning
+never mutates the original measure: after the recount, $P(A)$ still
+answers every question about the old square. Both measures remain
+available; ``given $B$'' only says which one a question is asking.
+
+\section{The multiplication rule}
+
+Read the definition backwards and it becomes a way to \emph{build}
+joint probabilities:
+\[
+  P(A \cap B) \;=\; P(B)\,P(A \mid B).
+\]
+On the square this is one rectangle — a width times a conditional
+height — and it is the counting chapter's rule of product carrying
+probabilities: a ``souped up rule of
+product''~\cite{probability-mit-18-05-reading-3-conditional-probability}.
+It is also the license the independence chapter asserted without
+showing: the aces' $\anchor{002.aces.depleted}$ was
+$\tfrac{4}{52} \cdot \tfrac{3}{51}$ all along —
+$P(A_1)\,P(A_2 \mid A_1)$, a probability times a conditional
+probability. The shrinking pool was never lawless; it was conditional,
+and now the law is on the page. Chaining the same move expands any
+intersection — $P(A_1 \cap \cdots \cap A_n) = P(A_1)\,P(A_2 \mid A_1)
+\cdots P(A_n \mid A_1 \cap \cdots \cap A_{n-1})$ — and since every
+ordering of the events is a valid expansion, the chain rule is
+``$n!$ theorems in
+one''~\cite{probability-blitzstein-hwang-introduction-to-probability-chs-1-2-excerpt}.
+One more habit falls out: time reversal costs nothing. For two cards,
+$P(S_1 \mid S_2) = \anchor{003.reversal} = P(S_2 \mid S_1)$ —
+conditioning is \emph{re-measuring} a space of outcomes, not re-running
+the experiment, so ``the second card was a spade'' restricts the square
+as legally as the first.
+
+\section{Total probability, and trees}
+
+Slice the square into columns by a partition $B_1, \dots, B_n$ — every
+outcome in exactly one column. Inside column $i$, the event $A$ is a
+rectangle of width $P(B_i)$ and height $P(A \mid B_i)$; the rectangles
+tile $A$, so adding them up is the law of total probability:
+\[
+  P(A) \;=\; \sum_i P(B_i)\,P(A \mid B_i)
+\]
+— an unconditional probability is the weighted average of its
+conditional pieces. On the die, partition by the jewel's own band:
+$P(\text{even}) = \tfrac13 \cdot \tfrac12 + \tfrac23 \cdot \tfrac12 =
+\tfrac12$, the two columns' rectangles adding back to the whole. A tree
+diagram is this same square drawn as branches: edges carry conditional
+probabilities, leaves are intersections priced by the multiplication
+rule, and summing the circled leaves is the same addition — the tree is
+notation, not new mathematics. The alignment chapter's trellis has
+already run this law many times over: each forward column
+$\alpha_t(s)$ is total probability over the predecessor states — the
+partition is ``which state the path came from'', and the recurrence
+adds up the rectangles.
+
+\section{Two slices, one square}
+
+$P(A \mid B)$ and $P(B \mid A)$ share their numerator — the same
+overlap $P(A \cap B)$ — and share nothing else: one divides by the
+$B$-band, the other by the
+$A$-band~\cite{probability-3blue1brown-the-quick-proof-of-bayes-theorem}.
+Confusing them is the inversion fallacy, and an exact hit shows how
+far apart they can sit: over five coin flips,
+$P(\text{first is H} \mid \text{five heads}) = 1$ while
+$P(\text{five heads} \mid \text{first is H}) = \tfrac{1}{16}$.
+
+The centerpiece is a pair of diagnoses. One test — it catches $9$ in
+$10$ sick people, and falsely flags $1$ in $10$ healthy ones — read on
+two populations, in whole-person counts. At $10\%$ prevalence, a
+$100$-person cohort yields $9$ sick positives and $9$ healthy ones:
+$P(\text{sick} \mid +) = \anchor{003.prevalence.highcounts} = \tfrac12$.
+At $1\%$ prevalence, a $1000$-person cohort yields $9$ sick positives
+and $99$ healthy ones:
+$P(\text{sick} \mid +) = \anchor{003.prevalence.lowcounts} =
+\anchor{003.prevalence.low}$. Same test, same overlap read the same
+way — but the prior travels inside the counts, and the counts keep the
+two slices from blurring
+together~\cite{probability-b-cherer-linder-eichler-2017-frontiers-open-access}.
+The series leaves on the doorstep of something bigger: multiply out the
+two definitions and the shared numerator gives the identity
+$P(A)\,P(B \mid A) = P(B)\,P(A \mid B)$ — one visible step from turning
+a known $P(B \mid A)$ into a wanted $P(A \mid B)$.
+
+\section{What exactly you condition on}
+
+The tool's last lesson is about its input. A family has two children;
+you learn there is \emph{at least one girl}. Among the four equally
+likely family chips (BB, BG, GB, GG), three have a girl and one of
+those is two girls: $\tfrac13$. But suppose what actually happened is
+that one child ran through the room and it was a girl. Families with
+two girls were twice as likely to produce that sighting as mixed
+families — draw the announcement rule as weights and the answer moves
+to $\tfrac12$~\cite{probability-wikipedia-boy-or-girl-paradox}. Both
+computations are correct conditionings — on \emph{different} events.
+The conditioning event includes \emph{how you learned what you
+learned}.
+
+And independence itself splits in two under conditioning. Take the two
+trick coins — one lands heads $9$ times in $10$, the other $1$ time in
+$10$ — pick one at random and flip it twice. Marginally the flips are
+dependent: $P(\text{both heads}) = \anchor{003.twocoins.joint} \neq
+\tfrac14$ — the first head is evidence about which coin you hold, so it
+raises the odds of a second. Yet \emph{given the coin}, the flips
+factor exactly~\cite{probability-wikipedia-conditional-independence}.
+Conditional independence is a third thing — neither implied by
+independence nor implying it — and it is the independence chapter's
+common-cause beat made quantitative: the coin is the common cause, and
+conditioning on it switches the dependence off. This is also the
+alignment chapter's assumption, finally stated in full: CTC's frames
+are not asserted independent outright, but independent \emph{given the
+input} — condition on the audio, and the per-frame product becomes
+exactly the licensed chain.
+
+\paragraph{Where this goes.} The identity this chapter left on the
+doorstep — $P(A)\,P(B \mid A) = P(B)\,P(A \mid B)$ — is Bayes' front
+door, and the next chapter walks through it: one division, and the
+inversion fallacy's two slices become a lawful update rule. The
+two-children lesson scales up there too — Monty Hall, deferred here on
+purpose, is ordinary conditioning once the host's \emph{protocol} is
+part of what you condition on. And several chapters on, when products
+of many conditional factors start underflowing, logarithms will turn
+this chapter's multiplications into additions.
+\end{narrative}
+
+\section*{Practice problems}
+
+\begin{problem}
+Three fair coins are flipped. What is the probability all three landed
+heads — before any news, and then given that the first coin landed
+heads?
+\begin{hint}
+Recount: how many outcomes survive the news, and how many of those are
+all-heads?
+\end{hint}
+\begin{solution}
+Eight equally likely outcomes; HHH is one: $\tfrac18$. Given the first
+is heads, four outcomes survive (HHH, HHT, HTH, HTT) and HHH is one of
+them: $\tfrac14$. The definition agrees:
+$P(\mathrm{HHH} \mid \text{first H}) = \tfrac{1/8}{1/2} = \tfrac14$ —
+restriction then renormalization, in numbers.
+\end{solution}
+\end{problem}
+
+\begin{problem}
+Two cards are drawn without replacement. Use the multiplication rule to
+price $P(\text{both aces})$, identifying each factor as a probability
+or a conditional probability.
+\begin{hint}
+$P(A_1 \cap A_2) = P(A_1)\,P(A_2 \mid A_1)$; what deck does the second
+draw face?
+\end{hint}
+\begin{solution}
+$P(A_1) = \tfrac{4}{52}$. Given the first card was an ace, the second
+draw faces $51$ cards of which $3$ are aces:
+$P(A_2 \mid A_1) = \tfrac{3}{51}$. So
+\[
+  P(A_1 \cap A_2) = \tfrac{4}{52} \cdot \tfrac{3}{51}
+  = \anchor{002.aces.depleted}.
+\]
+The independence chapter asserted this number with no license shown;
+the license is the multiplication rule — the shrinking pool is a
+conditional probability.
+\end{solution}
+\end{problem}
+
+\begin{problem}
+An urn holds $5$ red and $2$ blue balls; two are drawn without
+replacement. Compute $P(\text{second is red})$ by total probability
+over the first draw, and compare it with $P(\text{first is red})$.
+\begin{hint}
+Partition on the first draw's colour; two rectangles.
+\end{hint}
+\begin{solution}
+\[
+  P(R_2) = P(R_1)\,P(R_2 \mid R_1) + P(B_1)\,P(R_2 \mid B_1)
+  = \tfrac57 \cdot \tfrac46 + \tfrac27 \cdot \tfrac56
+  = \tfrac{20+10}{42} = \tfrac57 .
+\]
+Exactly $P(R_1)$. Before anyone looks at the first ball, the second
+draw is just a uniformly random ball — the same margin-preserving
+symmetry the aces showed. Dependence lives in the joint behaviour;
+total probability averages it back out.
+\end{solution}
+\end{problem}
+
+\begin{problem}
+A test catches $9$ in $10$ sick people and falsely flags $1$ in $10$
+healthy people. Compute $P(\text{sick} \mid +)$ in whole-person counts
+for a $100$-person cohort at $10\%$ prevalence, and for a
+$1000$-person cohort at $1\%$ prevalence.
+\begin{hint}
+Count the sick positives and the healthy positives separately, then
+take the share.
+\end{hint}
+\begin{solution}
+At $10\%$: $10$ sick yield $9$ positives; $90$ healthy yield $9$ —
+$P(\text{sick} \mid +) = \anchor{003.prevalence.highcounts} =
+\tfrac12$. At $1\%$: $10$ sick yield $9$ positives; $990$ healthy
+yield $99$ — $P(\text{sick} \mid +) =
+\anchor{003.prevalence.lowcounts} = \anchor{003.prevalence.low}$. The
+test never changed; the prior did, and it rode inside the counts. The
+definition route ($P(\text{sick})P(+ \mid \text{sick})/P(+)$, with the
+denominator by total probability) lands on the same two fractions.
+\end{solution}
+\end{problem}
+
+\begin{problem}[stretch]
+One of two coins is chosen by a fair flip: one lands heads with
+probability $\tfrac{9}{10}$, the other $\tfrac{1}{10}$. The chosen
+coin is flipped twice. Show the flips are dependent, but conditionally
+independent given the coin.
+\begin{hint}
+Compute $P(H_1 \cap H_2)$ by total probability over the coin; compare
+with $P(H_1)P(H_2)$; then redo the check inside each coin's world.
+\end{hint}
+\begin{solution}
+Each flip's margin is $P(H) = \tfrac12(\tfrac{9}{10} + \tfrac{1}{10})
+= \tfrac12$. Jointly,
+\[
+  P(H_1 \cap H_2)
+  = \tfrac12\left(\tfrac{9}{10}\right)^2
+  + \tfrac12\left(\tfrac{1}{10}\right)^2
+  = \anchor{003.twocoins.joint}
+  \;\neq\; \tfrac14 = P(H_1)P(H_2)
+\]
+— dependent: a first head is evidence you hold the heads-heavy coin.
+But given the coin, the flips factor exactly:
+$P(H_1 \cap H_2 \mid \text{coin}) = p^2$ with $p = \tfrac{9}{10}$ or
+$\tfrac{1}{10}$. The coin is the common cause; conditioning on it
+switches the dependence off — which is the exact shape of CTC's
+``independent given the input''.
+\end{solution}
+\end{problem}

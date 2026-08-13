@@ -1,0 +1,42 @@
+% Guide 1 — objective: the CTC algorithm, in full (plan 012).
+% Build: make study   ->  ctc-algorithm.pdf (this) + the solutions manual.
+\providecommand{\StudyRoot}{..}
+\documentclass[11pt]{report}
+\usepackage{theme}
+\usepackage[hidelinks]{hyperref}
+\input{\StudyRoot/anchors}
+
+\input{macros}
+
+\title{The CTC Algorithm\\[0.4em]
+  \large A study guide, stitched from the manim-concepts road}
+\author{manim-concepts}
+\date{}
+
+\begin{document}
+\maketitle
+\tableofcontents
+
+\chapter*{How to read this guide}
+\addcontentsline{toc}{chapter}{How to read this guide}
+The objective is full comprehension of the CTC algorithm — the alignment
+machinery, the loss, the gradient, the training dynamics, and decoding.
+The road runs through fourteen stations; each is a chapter, and between
+chapters a short transition marks where you stand — the roadmap returns
+there with your progress filled in:
+
+\roadmap{0}
+
+\noindent The order is the dependency order: the CTC chapters pose the
+problem early, the middle chapters build the blocks it needs, and the
+closing chapters spend them. Practice problems close every chapter;
+worked solutions live in the separate solutions manual, keyed by the
+same problem numbers. Worked numbers are spliced from the repo's
+verification anchors — for instance, the guide's central worked
+probability $P(\mathrm{AB} \mid X) = \anchor{010.K.P}$ — never retyped.
+
+\input{manifest}
+
+\printbibliography[heading=bibintoc]
+
+\end{document}

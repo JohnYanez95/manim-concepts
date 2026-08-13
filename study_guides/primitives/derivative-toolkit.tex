@@ -1,0 +1,318 @@
+% Primitive: derivative-toolkit — authored from calculus/derivatives_manim.py
+% (six scenes) and its README concepts table; every number traces to plan
+% 009's verified anchors (forward quotients throughout — the symmetric
+% quotient of a quadratic is exact and kills the settling narrative).
+% Backward-grounded: the zoom device, the mystery constants and the undo
+% trick are owned by the e-and-ln chapter; the likelihood curve and the
+% LSE ruler by the softmax chapter. The score function replaces the
+% product rule everywhere (plan 009's keystone decision). Problem answers
+% are computed by answers/derivative_toolkit.py (the solve-gate anchor).
+\chapter{The derivative toolkit}
+
+\begin{narrative}
+The e-and-ln chapter built a device and never named its output: zoom
+in on a smooth curve until it is straight, read the slope, and watch
+the ratio settle as the step shrinks. This chapter names that ratio
+$\frac{d}{dx}$ and packs the smallest toolkit the road needs — the sum
+rule, the chain rule, two derivatives, and one reader called the
+score. The kit is deliberately tiny for a reason the logarithms
+chapter already gave: under the log, every product this road carries
+becomes a sum, so almost nothing else is required.
+
+\section{The slope is a function}
+
+Run the zoom at several points of one parabola $f(x) = x^2$ and plot
+the read-offs beneath it: every smooth curve carries a \emph{second}
+curve, its slope at each point. At $x = 1$ the forward quotients
+$\bigl((1+h)^2 - 1\bigr)/h$ for $h = 1, \tfrac{1}{10}, \tfrac{1}{100},
+\tfrac{1}{1000}$ read
+\[
+  3, \quad 2.1, \quad 2.01, \quad 2.001 \;\longrightarrow\; 2,
+\]
+and no rounding is hiding anywhere: the quotient is exactly $2x + h$,
+so the entries are literally $2 + h$, and ``settling'' means the $h$
+fading out of the answer. The dual graph keeps two numbers visibly
+different — at $x = 1$ the \emph{height} is $1$ while the
+\emph{slope} is $2$ — the confusion a derivative most often drowns
+in. One honest boundary: the device needs smooth. $|x|$ never
+straightens at $0$, no matter the zoom. The notation is
+Leibniz's~\cite{calculus-jeff-miller-earliest-uses-of-symbols-of-calculus} —
+$dy/dx$ in a manuscript of November 1675, in print by
+1684~\cite{calculus-wikipedia-nova-methodus-pro-maximis-et-minimis} —
+and this book commits to it because it makes the chain rule look like
+cancelling fractions, a promise examined two sections from now.
+
+\section{Nudge in, nudge out}
+
+For $x^2$ the derivative is drawn, not
+computed~\cite{calculus-grant-sanderson-power-rule-through-geometry}.
+Draw the square of side $x$ and grow the side by a nudge $dx$: the new
+area is the old square, plus two strips of size $x \cdot dx$, plus a
+corner of size $dx \cdot dx$. Halve the nudge and the strips halve —
+but the corner \emph{quarters}: it is second-order small, and
+discarding it is honest bookkeeping, not a
+trick~\cite{calculus-silvanus-p-thompson-calculus-made-easy-1910}. At
+$x = 3$ the strips say the slope is $6$; the finite check
+$\bigl(3.01^2 - 9\bigr)/0.01 = 6.01$ agrees to the corner. The same
+fact wears a second costume: near $x = 1$ the map $x \mapsto x^2$
+stretches the number line by $\times 2$, near $x = 3$ by $\times 6$ —
+a derivative is a \emph{local stretch factor}, the seed the chain
+rule is about to harvest. Formula last:
+\[
+  d(x^2) \;=\; 2x\,dx + dx^2 ,
+\]
+with the $dx^2$ dying for a visible reason.
+
+\section{Nudges add, nudges compose}
+
+Two rules carry the whole kit. \emph{Changes add across a sum}:
+heights stack, so their changes stack —
+$d(f + g) = df + dg$, and constants ride along. And \emph{rates
+multiply along a chain}: a nudge $dx$ causes a nudge $du$, which
+causes a nudge $dy$, and the stretch factors compose,
+\[
+  \frac{dy}{dx} \;=\; \frac{dy}{du} \cdot \frac{du}{dx} .
+\]
+Worked honestly on $y = (2x)^2$ at $x = 1$: the inner map doubles
+(rate $2$), the outer map squares — at the inner \emph{output}
+$u = 2$, rate $2u = 4$ — so the chain predicts $2 \times 4 = 8$. The
+forward quotients read $8.4$, $8.04$, $8.004 \to 8$. The table also
+refutes the classic mistake on contact: evaluating the outer rate at
+the input $x = 1$ instead of at $u = 2$ predicts $4$, and $4$ is not
+where the quotients are headed. The $du$ cancellation is Leibniz's
+notation keeping its promise — but the number lines are the
+mechanism; the cancelling fraction is the mnemonic.
+
+\section{The curve that is its own slope}
+
+The e-and-ln chapter measured its mystery constants: $2^x$ grows at
+$0.6931$ times its own height, $10^x$ at $2.3026$ times, and the
+constants were the strides $\ln b$. In the new notation those
+measurements were derivatives all along:
+$\frac{d}{dx} b^x = \ln b \cdot b^x$, and $e$ is the base whose
+constant is exactly $1$ — by definition and by measurement, nothing
+proved twice. The ratio table $\bigl(e^{dt} - 1\bigr)/dt$ settles
+through $1.7183$, $1.0517$, $1.0050$, $1.0005 \to 1$, so
+\[
+  \frac{d}{dx} e^x = e^x,
+  \qquad
+  \frac{d}{dx} \ln x = \frac{1}{x} .
+\]
+The second is one chain-rule line through the undo trick: differentiate
+$e^{\ln x} = x$ to get $e^{\ln x} \cdot (\ln x)' = 1$, so
+$(\ln x)' = 1/x$ — the debt-repaid flip, differentiated. The mirror
+tells the same story in pictures: reflecting across $y = x$ swaps
+rise and run, so slopes reciprocate — at $x = e$ the slope of
+$\ln$ is $1/e$, mirroring $e^x$'s slope $e$ at height $e$. The
+attribution is quotable: Euler named $e$ in 1748 (\emph{Introductio}
+\S122)~\cite{calculus-leonhard-euler-introductio-in-analysin-infinitorum-i-vii-bru}
+and wrote $d(e^x) = e^x\,dx$ in 1755 (\emph{Institutiones}
+\S188)~\cite{calculus-leonhard-euler-institutiones-calculi-differentialis-i-vi-bru}.
+
+\section{Zero slope finds the peak}
+
+The softmax chapter found $\hat{p} = 3/4$ by sweeping a curve. The
+sweep is over. The tool is the \emph{score function} — the counting
+strip differentiated: under $\ln$, products become sums, so the
+derivative of a product becomes a sum of \emph{relative rates},
+\[
+  \frac{d}{dx} \ln f \;=\; \frac{f'}{f} ,
+\]
+Euler's own sentence in
+\S181~\cite{calculus-leonhard-euler-institutiones-calculi-differentialis-i-vi-bru}.
+On the owned likelihood $L(p) = 4p^3(1-p)$:
+$\ln L = \ln 4 + 3 \ln p + \ln(1-p)$ differentiates term by term —
+the sum rule, $\ln'$, and one chain-rule line for $\ln(1-p)$ — into
+the score
+\[
+  \frac{d \ln L}{dp} \;=\; \frac{3}{p} - \frac{1}{1-p} .
+\]
+The score runs $+4$ at $p = 1/2$, $+0.9524$ at $0.7$, $0$ at $3/4$,
+$-1.25$ at $0.8$ — flipping sign exactly at the peak — and setting
+it to zero is a \emph{linear} equation, $3(1-p) = p$, giving
+$\hat{p} = 3/4$. In general $k/p - (n-k)/(1-p) = 0$ solves to
+$\hat{p} = k/n$: the claim the random-variables chapter made about
+proportions is now a theorem.
+
+\begin{center}
+\begin{tikzpicture}[x=6.4cm, y=6.4cm]
+  % L(p) = 4 p^3 (1 - p) with the sign-change ribbon beneath — the
+  % owned likelihood curve; peak at p = 3/4, L = 27/64 (plan 009 E).
+  \draw[Muted] (0, 0) -- (1.04, 0);
+  \draw[Muted] (0, 0) -- (0, 0.5);
+  \draw[CoolInk, thick, smooth, domain=0:1, samples=60]
+    plot (\x, {4*\x*\x*\x*(1 - \x)});
+  \fill[AccentInk] (0.75, 0.421875) circle (0.55mm);
+  \node[above, color=AccentInk] at (0.75, 0.45)
+    {\small $\hat{p} = 3/4$};
+  \node[left, color=CoolInk] at (-0.03, 0.42) {\small $L(p)$};
+  % The ribbon: slope sign along the axis, zero exactly at 3/4.
+  \fill[GoodInk!25] (0, -0.135) rectangle (0.75, -0.065);
+  \fill[Warm!30] (0.75, -0.135) rectangle (1, -0.065);
+  \node at (0.36, -0.1) {\small $+$};
+  \node at (0.895, -0.1) {\small $-$};
+  \draw[AccentInk, thick] (0.75, -0.15) -- (0.75, -0.05);
+  \node[below, color=AccentInk] at (0.75, -0.17) {\small $0$};
+  \node[below] at (0.02, -0.17) {\small $p = 0$};
+  \node[below] at (0.98, -0.17) {\small $1$};
+\end{tikzpicture}
+\end{center}
+
+Two honesty beats close the scene. The direct route
+$dL/dp = 4p^2(3 - 4p)$ finds the same zero at $3/4$ — plus a second
+root at $p = 0$ that is a valley floor, not a peak; and $x^3$'s slope
+touches zero at the origin with no peak at all. Zero slope is
+necessary, never sufficient — the sign \emph{change} is the
+certificate, and checking it is the habit that survives every tool
+built on top of this one. And the score itself needs $f > 0$: true
+for likelihoods away from the endpoints, where the log is defined.
+
+\section{The smooth max's shares}
+
+The closer differentiates the softmax chapter's own objects. Nudge
+$z_1 = 2$ by $0.01$ and the smooth max $\mathrm{LSE}(2, 1, 0) =
+\anchor{008.L.LSE}$ moves by $\anchor{009.G.LSEnudge}$ — which is
+$0.6652 \times 0.01$: $e^2$'s share of the total. One chain rule and
+one sum rule prove the pattern
+general~\cite{calculus-lawrence-murray-gradients-of-softmax-and-logsumexp}:
+\[
+  \frac{\partial}{\partial z_i} \mathrm{LSE}(z)
+  \;=\; \frac{e^{z_i}}{\sum_j e^{z_j}}
+  \;=\; \mathrm{softmax}(z)_i .
+\]
+The sensitivities of the smooth max \emph{are} the softmax shares —
+the bars of the last chapter reborn as a gradient read-out, summing
+to $1$ because the shares always did. And the loss follows in one
+line: with the correct class $a$ scoring $2$,
+$\mathrm{NLL} = \mathrm{LSE}(z) - z_a$ differentiates to
+\[
+  \nabla\,\mathrm{NLL} \;=\; \anchor{009.G.nllgradient}
+  \;=\; p - \text{one-hot} :
+\]
+the softmax shares with exactly $1$ subtracted from the truth's
+entry. (Sign convention, spoken once: this is the gradient of the
+\emph{loss} — descending it is ascending the likelihood.) As the
+correct score falls behind, the slope $p_c - 1$ walks
+$\anchor{009.H.saturation}$, pressing toward $-1$ — the softmax
+chapter's ``roughly linear gap'', now a theorem: a badly wrong
+confident answer buys loss at essentially one unit per unit of score.
+
+\paragraph{Where this goes.} A slope is advice: it says which way is
+downhill, and the next chapter builds the rule that takes the advice
+step by step. Beyond it, the road's destination hands this closing
+picture to every frame of CTC — the same $p$ minus a target, but with
+the one-hot softened into how often the truth actually used each
+cell. The subtraction stays; only the target changes.
+\end{narrative}
+
+\section*{Practice problems}
+
+\begin{problem}
+Write the forward quotient of $f(x) = x^2$ at $x = 1$ for a step
+$h$, simplify it exactly, and evaluate it at $h = 1, \tfrac{1}{10},
+\tfrac{1}{100}$. What does the simplified form say ``settling''
+means?
+\begin{hint}
+Expand $(1+h)^2$ before dividing.
+\end{hint}
+\begin{solution}
+$\bigl((1+h)^2 - 1\bigr)/h = (2h + h^2)/h = 2 + h$ exactly — no
+limit machinery needed to see it. The values are $3$, $2.1$,
+$2.01$: each entry \emph{is} $2 + h$, so settling is nothing more
+than the step fading out of the answer, leaving the slope $2$. (A
+curiosity worth one aside: the symmetric quotient
+$\bigl(f(1+h) - f(1-h)\bigr)/2h$ equals exactly $2$ for every $h$ —
+a special property of quadratics, which is why the honest settling
+story is told with forward quotients.)
+\end{solution}
+\end{problem}
+
+\begin{problem}
+Differentiate $y = (2x)^2$ at $x = 1$ by the chain rule, naming both
+rates and where each is evaluated. A classmate answers $4$ —
+reconstruct their mistake, and refute it with the forward quotients
+at $h = \tfrac{1}{10}$ and $\tfrac{1}{100}$.
+\begin{hint}
+The outer rate is $2u$ — at which value of $u$?
+\end{hint}
+\begin{solution}
+Inner map $u = 2x$: rate $2$. Outer map $y = u^2$: rate $2u$
+evaluated at the inner \emph{output} $u = 2$, so $4$. The chain
+multiplies: $2 \times 4 = 8$. The classmate evaluated the outer rate
+at the input $x = 1$, getting $2 \times 2 = 4$. The quotients decide
+it: $y = 4x^2$, so
+$\bigl(4(1+h)^2 - 4\bigr)/h = 8 + 4h$, reading $8.4$ and $8.04$ —
+headed for $8$, not $4$.
+\end{solution}
+\end{problem}
+
+\begin{problem}
+Derive $\frac{d}{dx} \ln x = 1/x$ from $\frac{d}{dx} e^x = e^x$ using
+the undo identity $e^{\ln x} = x$, and check it numerically at
+$x = 2$ with the forward quotient at $h = \tfrac{1}{100}$.
+\begin{hint}
+Differentiate both sides of the identity; the chain rule does the
+rest.
+\end{hint}
+\begin{solution}
+Differentiating $e^{\ln x} = x$: the left side, by the chain rule,
+is $e^{\ln x} \cdot (\ln x)'$, and the right side is $1$. But
+$e^{\ln x} = x$, so $x \cdot (\ln x)' = 1$ and $(\ln x)' = 1/x$ —
+the undo-never-cancel flip carrying its own derivative. At $x = 2$:
+$\bigl(\ln 2.01 - \ln 2\bigr)/0.01 = 0.4988$, already close to $1/2$
+and settling as $h$ shrinks (the quotients run $0.4879$, $0.4988$,
+$0.4999 \to 0.5$ at $h = 10^{-1}, 10^{-2}, 10^{-3}$).
+\end{solution}
+\end{problem}
+
+\begin{problem}
+For the likelihood $L(p) = 4p^3(1-p)$: write $\ln L$, differentiate
+it term by term into the score, evaluate the score at $p = 1/2$,
+$0.7$, and $0.8$, and solve the zero. Then find the general
+$\hat{p}$ for $k$ heads in $n$ flips.
+\begin{hint}
+$\ln(1-p)$ needs one chain-rule line; the zero is a linear equation.
+\end{hint}
+\begin{solution}
+$\ln L = \ln 4 + 3 \ln p + \ln(1-p)$, so the score is
+$3/p - 1/(1-p)$ (the constant contributes nothing; $\ln(1-p)$
+differentiates to $-1/(1-p)$ by the chain rule). Values:
+$6 - 2 = +4$ at $p = 1/2$; $3/0.7 - 1/0.3 = 30/7 - 10/3 = 20/21
+\approx +0.9524$ at $0.7$; $15/4 - 5 = -5/4 = -1.25$ at $0.8$. The
+sign flips across $p = 3/4$, and the zero is linear:
+$3/p = 1/(1-p) \Rightarrow 3(1-p) = p \Rightarrow \hat{p} = 3/4$. In
+general the score is $k/p - (n-k)/(1-p)$, whose zero
+$k(1-p) = (n-k)p$ gives $\hat{p} = k/n$ — the observed proportion,
+for every $k$ and $n$ at once.
+\end{solution}
+\end{problem}
+
+\begin{problem}[stretch]
+With the correct class scoring $2$ in $z = (2, 1, 0)$: differentiate
+$\mathrm{NLL}(z) = \mathrm{LSE}(z) - z_a$ component by component,
+and evaluate the gradient to four decimal places. Then let the
+correct class's score fall: on $z = (2, 1, t)$ with the truth in the
+third slot, compute the slope $\partial\,\mathrm{NLL}/\partial t$ at
+$t = 0, -2, -5$. What is the slope pressing toward, and why can it
+never arrive?
+\begin{hint}
+$\partial_i \mathrm{LSE} = \mathrm{softmax}(z)_i$, and $z_a$
+contributes $-1$ to exactly one component. For the walk, the slope
+is $p_c - 1$.
+\end{hint}
+\begin{solution}
+Each component of $\nabla \mathrm{LSE}$ is a softmax share, and
+subtracting $z_a$ subtracts $1$ from the truth's component:
+$\nabla\,\mathrm{NLL} = p - \text{one-hot} =
+(0.6652 - 1,\ 0.2447,\ 0.0900) = (-0.3348,\ 0.2447,\ 0.0900)$,
+whose exact components sum to $0$ (the shares sum to $1$, and one
+$1$ was removed). On $z = (2, 1, t)$ the slope in $t$ is
+$p_c - 1$ where $p_c = \mathrm{softmax}(z)_3$: at $t = 0, -2, -5$ it
+reads $-0.9100$, $-0.9868$, $-0.9993$. The walk presses toward $-1$
+but never arrives: $p_c$ is a ratio of positive exponentials, so it
+is positive at every finite $t$ — the loss becomes as straight as
+you like, with slope $-1$ only as a limit. (At $t = -10$ the share
+is $\approx 4.5 \times 10^{-6}$; write it in scientific notation —
+rounding the slope to $-1.0000$ would claim the limit was reached.)
+\end{solution}
+\end{problem}

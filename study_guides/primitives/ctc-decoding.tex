@@ -1,0 +1,241 @@
+% Primitive: ctc-decoding — GUIDE-FIRST (plan 012 D-E): no parent
+% series. The video road decodes everywhere without teaching it (the
+% greedy-fails beat, an argmax path read on screen, the bias model's
+% empty decode); those scenes are users of the concept, not teachers,
+% and the road's last chapter closes the loop in print. The greedy-fails
+% numbers are the alignment chapter's construction; all beam numbers are
+% computed by answers/ctc_decoding.py (proposed anchors in
+% anchors-proposals-guide-first.yaml). The figure carries the same
+% arithmetic as small literal products so it compiles standalone.
+\chapter{Decoding: from scores to a transcript}
+
+\begin{narrative}
+Every chapter so far has served training: score a transcript, take the
+log, follow the gradient downhill. But nobody deploys a loss. A model
+ships, a clip arrives, and the user wants words — no reference
+transcript in sight. That inverse problem is \emph{decoding}: given the
+per-frame scores $y_t$, return the transcript the model believes,
+ideally $\operatorname*{argmax}_Y P(Y \mid X)$ with $P$ the alignment
+chapter's sum over paths. Training never had to search — the transcript
+was handed to it. Decoding is nothing but search, and this chapter
+closes the road's loop — train, decode, deploy — with the two searches
+that matter: the cheap one, and the honest one.
+
+\section{Best path: decode the way the frames vote}
+
+The obvious decoder takes each frame's favourite symbol and collapses
+the result through the map $\mathcal{B}$ from the alignment chapter —
+merge repeats, drop blanks. This is \emph{best-path} (greedy)
+decoding~\cite{deep_learning-graves-et-al-2006-connectionist-temporal-classification}:
+$T$ table lookups and a collapse, fast enough for anything.
+
+What it finds, though, is the most probable \emph{path} — and the road
+learned in the alignment chapter that transcripts and paths part
+company. The construction that justified training on the sum returns
+here, wearing its deployment costume. Two frames, $y_t(A) = 0.4$ and
+$y_t(\varepsilon) = 0.6$ at both: greedy takes the blank twice and
+announces the \emph{empty} transcript, whose single path carries mass
+$\anchor{012.dec.greedymass}$. The transcript A pools its three paths
+to $\anchor{012.dec.summass}$ — nearly two to one against greedy's
+answer. The model, read correctly, heard an A; read greedily, it heard
+nothing. The mismatch is sum-versus-max: greedy crowns the heaviest
+single path, while the truth belongs to the transcript whose \emph{team}
+of paths is heaviest.
+
+When does greedy get away with it? When one path hoards the mass — and
+the gradient chapter showed that trained CTC models end up exactly
+there: peaked, blank-heavy outputs where the argmax path towers over
+the field. That is why greedy is the production default and usually
+right. But the hedging inputs — accents, noise, the audio that actually
+needed a good model — are precisely where the mass spreads across
+paths and greedy starts lying.
+
+\section{Searching transcripts: the collapsed-prefix beam}
+
+Doing better means searching over transcripts, and the transcript
+space is exponential — enumeration died in the alignment chapter and
+stays dead. The standard compromise is a \emph{beam}: march through
+the frames keeping only the $k$ most massive candidates, extending
+each by one frame at a time. For CTC the candidates must be
+\emph{transcript prefixes}, not paths — and that single choice brings
+the whole road along with it. Many paths spell the same prefix, so as
+the beam extends, path masses pouring into the same prefix are
+\emph{merged} — the dynamic-programming move again, shared prefixes
+stored once, now running on a pruned tree of
+candidates~\cite{deep_learning-hannun-sequence-modeling-with-ctc-distill-2017}.
+
+One subtlety makes CTC's beam different from every textbook beam, and
+it is the collapse map's fault. A prefix must carry \emph{two} masses,
+not one:
+\begin{align*}
+  p_b(\text{prefix}) &= \text{the mass of its paths ending in blank},\\
+  p_{nb}(\text{prefix}) &= \text{the mass of those ending in its last
+  letter},
+\end{align*}
+because the two halves have different futures. Append the letter $c$
+to a path that already ends in $c$: the repeat merges and the
+transcript does not grow — \emph{unless} a blank intervened, in which
+case a genuine new $c$ begins. Only the $p_b$ share can open a double
+letter; only the $p_{nb}$ share merges silently. Collapse the two
+numbers into one and the beam can no longer tell which extensions are
+legal — it must overcount or undercount, and the problems below make
+it do both.
+
+Run the beam on the construction above, width $2$ (which here keeps
+every candidate, so the answer is exact):
+
+\begin{center}
+\begin{tikzpicture}[x=1.0cm, y=1.0cm,
+    box/.style={draw=Muted, rounded corners=2pt, inner sep=5pt,
+                align=center, font=\small}]
+  \node[box] (root) at (0, 0) {start\\$1.0$};
+  \node[box] (e1) at (3.2, 1.6) {`\,'\\$0.6$};
+  \node[box, draw=PaletteA] (a1) at (3.2, -1.6) {`A'\\$0.4$};
+  \node[box] (e2) at (7.4, 1.6) {`\,'\\[3pt]$0.36$};
+  \node[box, draw=PaletteA, thick] (a2) at (7.4, -1.6) {`A'\\[3pt]$0.64$};
+  % The two-ledger annotation: kept borderless and clear of every edge.
+  \node[right, color=AccentInk, align=left] at (8.5, -1.6)
+    {\small $p_b = 0.24$\\[5pt]\small $p_{nb} = 0.40$};
+  \draw[Muted, -stealth] (root) -- (e1);
+  \node[color=CoolInk] at (1.6, 1.35) {\small $\varepsilon$};
+  \draw[Muted, -stealth] (root) -- (a1);
+  \node[color=CoolInk] at (1.6, -1.35) {\small $A$};
+  \draw[Muted, -stealth] (e1) -- (e2);
+  \node[color=CoolInk] at (5.3, 2.0) {\small $\varepsilon$};
+  \draw[Muted, -stealth] (e1) -- (a2.north west);
+  \node[color=CoolInk] at (4.4, -0.55) {\small $A$: new letter};
+  \draw[Muted, -stealth] (a1) -- (a2.west);
+  \node[color=CoolInk] at (5.3, -1.25) {\small $\varepsilon$};
+  \draw[Muted, -stealth] (a1) to[bend right=20] (a2.south);
+  \node[color=CoolInk] at (5.3, -3.0) {\small $A$: merges};
+\end{tikzpicture}
+\end{center}
+
+Three streams meet in the prefix A at the second frame: a new letter
+opened from the empty prefix, a blank extension of A (which parks its
+mass in $p_b$, holding the door open for a future double letter), and
+the silent merge of A's repeat. The totals —
+$\anchor{012.dec.greedymass}$ against $\anchor{012.dec.beamblank} +
+\anchor{012.dec.beamletter} = \anchor{012.dec.summass}$ — are exactly
+the alignment chapter's sums: the beam with its two ledgers is the
+forward recurrence wearing a search harness, and pruning is the only
+approximation it makes.
+
+\section{The spikes are still not timestamps}
+
+One inherited caution, restated at the door of deployment. The
+gradient chapter explained why a trained model's letters fire as
+one-frame spikes fenced by blank~\cite{deep_learning-zeyer-et-al-2021-why-does-ctc-result-in-peaky-behavior}:
+the loss summed over every alignment and never paid for timing. The
+decoding consequence: the frame at which the decoder's A fires is not
+where the A was said — not its onset, not its centre, nothing
+calibrated at all. A decoder returns \emph{what} was said; if a
+product needs \emph{when}, that is forced alignment, a different tool
+answering a question this loss never asked.
+
+\section{The loop, closed}
+
+Train on the sum; decode greedily when the outputs are peaked, with a
+beam when hedges matter; deploy. The beam brings one more gift that
+production systems lean on daily: its per-extension scoring is a
+natural place to splice in an external language model, patching
+exactly the hole the alignment chapter declared — frames independent
+given the input, language left on the
+table~\cite{probability-awni-hannun-et-al-deep-speech-scaling-up-end-to-end-speech-r}.
+A transcript then wins by sounding right to the acoustic model
+\emph{and} reading right to the language model, and the blend is
+tuned, not derived.
+
+\paragraph{Where this goes.} Nowhere — and that is the point: this is
+the road's last chapter, and the loop from waveform to weights to
+words is closed. What is deliberately left folded is the beam itself:
+widths and pruning, the log-space ledgers, language-model fusion and
+its tuning knobs belong to a future beam-search video series, and
+this chapter's sketch is that series' seed.
+\end{narrative}
+
+\section*{Practice problems}
+
+\begin{problem}
+Best-path decode this three-frame model over $\{A, B, \varepsilon\}$:
+$y_1 = (0.5, 0.2, 0.3)$, $y_2 = (0.4, 0.3, 0.3)$,
+$y_3 = (0.2, 0.3, 0.5)$ (listed as $A, B, \varepsilon$). Then decide:
+does the full sum over paths crown the same transcript here?
+\begin{hint}
+Argmax each frame, collapse; for the second half, no enumeration is
+needed by hand — ask which transcripts could plausibly compete, or
+trust the committed script's brute force.
+\end{hint}
+\begin{solution}
+The frame favourites are $A, A, \varepsilon$, collapsing to A. The
+brute-force posterior (all $27$ paths, grouped by transcript) agrees:
+A leads with mass $0.3170$, ahead of the empty transcript and of
+every two-letter candidate. Greedy is not always wrong — with one
+frame-wise favourite chain clearly ahead, path mass concentrates and
+the max speaks for the sum. The failures live where frames hedge.
+\end{solution}
+\end{problem}
+
+\begin{problem}
+Generalise the chapter's construction: two frames, $y_t(\varepsilon)
+= q$, $y_t(A) = 1 - q$. For which $q$ does greedy decode the empty
+transcript while the sum prefers A? Locate the exact boundary.
+\begin{hint}
+Greedy follows the frame favourite; the two transcript masses are
+$q^2$ and $1 - q^2$.
+\end{hint}
+\begin{solution}
+Greedy takes the blank whenever $q > \tfrac12$. The empty transcript
+truly wins only when $q^2 > 1 - q^2$, i.e.\ $q > 1/\sqrt{2} \approx
+0.7071$. So on the whole band $\tfrac12 < q < 1/\sqrt{2}$ greedy is
+wrong — at $q = 0.6$ the chapter's $\anchor{012.dec.greedymass}$
+versus $\anchor{012.dec.summass}$, and even at $q = 0.7$ the sum
+still prefers A ($0.49$ versus $0.51$). The blank must win each frame
+by a $\sqrt{2}$ margin, not a majority, before ``nothing was said''
+is the honest answer.
+\end{solution}
+\end{problem}
+
+\begin{problem}
+Run the two-ledger beam by hand on the chapter's construction
+($y_t(A) = 0.4$, $y_t(\varepsilon) = 0.6$, $T = 2$, width $2$),
+tracking $(p_b, p_{nb})$ for every prefix at each frame. Confirm the
+final masses against the alignment chapter's sums.
+\begin{hint}
+Frame one leaves two prefixes. At frame two, the prefix A receives
+three contributions — route each into the correct ledger.
+\end{hint}
+\begin{solution}
+After frame one: `\,' $(0.6, 0)$ and A $(0, 0.4)$. Frame two: the
+empty prefix keeps $0.6 \times 0.6 = 0.36$ in $p_b$; A collects the
+new letter $0.6 \times 0.4 = 0.24$ and the silent merge
+$0.4 \times 0.4 = 0.16$ into $p_{nb} = \anchor{012.dec.beamletter}$,
+and its blank extension $0.4 \times 0.6 = \anchor{012.dec.beamblank}$
+in $p_b$. Totals: $\anchor{012.dec.greedymass}$ versus
+$\anchor{012.dec.summass}$ — identical to the brute-force sums, as
+the committed script asserts: at this size the beam prunes nothing
+and \emph{is} the forward recurrence.
+\end{solution}
+\end{problem}
+
+\begin{problem}[stretch]
+Uniform coin frames: $y_t(A) = y_t(\varepsilon) = 0.5$ over $T = 3$.
+Compute the true $P(\mathrm{AA})$, then show what a one-ledger beam —
+a single mass per prefix, so every letter extension is treated as a
+new letter — would report for AA, and diagnose the error.
+\begin{hint}
+Which length-$3$ paths collapse to AA? The double letter needs its
+separating blank.
+\end{hint}
+\begin{solution}
+Only $A\varepsilon A$ collapses to AA, so $P(\mathrm{AA}) =
+0.5^3 = 0.125$. The one-ledger beam, unable to tell merged repeats
+from blank-separated ones, extends the whole of prefix A's mass by
+$A$ into AA at every step and reports $0.375$ — a three-fold
+overcount, crediting AA with the mass of $AA\varepsilon$ and
+$\varepsilon AA$, both of which actually collapse to A. The two ledgers are not an
+optimisation; they are the collapse map's grammar carried into the
+search, and dropping either one changes the answers, not just the
+speed.
+\end{solution}
+\end{problem}

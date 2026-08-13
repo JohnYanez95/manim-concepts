@@ -1,0 +1,247 @@
+% Primitive: gradient-descent — GUIDE-FIRST (plan 012 D-E): no parent
+% series. The video road's training beats run "plain gradient descent"
+% on screen without teaching it; those scenes are cited only in "Where
+% this goes", as users of the concept. Slotted after derivative-toolkit:
+% everything here leans backward on slope-as-function and the sign-change
+% habit. The loss walk is plan 010's anchor-M trajectory (proposed
+% anchors in anchors-proposals-guide-first.yaml, copied exactly from the
+% plan and reproduced independently by answers/gradient_descent.py);
+% problem answers are computed by that script.
+\chapter{Gradient descent}
+
+\begin{narrative}
+Count the road's inventory. A model's belief in a transcript is a
+number the trellis can price; the logarithm turned that belief into a
+loss worth minimising; softmax made the per-frame scores honest; and
+the derivative toolkit reads, at any setting of any knob, which way the
+loss tilts. One piece is missing between ``here is a loss'' and ``the
+model trains'': how a slope becomes an \emph{update}. The answer is one
+move, almost embarrassingly small, applied over and over — and this
+chapter is about what the move does, what its single dial controls,
+and what its stopping place does and does not certify.
+
+\section{Walk downhill}
+
+Let a loss $L(w)$ depend on one knob $w$. The derivative chapter's
+central habit — the slope is itself a function $L'(w)$ — is the whole
+apparatus needed: at the current $w$, the sign of $L'(w)$ says which
+direction is uphill. So step the other way,
+\[
+  w \;\leftarrow\; w - \eta\, L'(w),
+\]
+where $\eta$, the \emph{learning rate}, converts a slope into a step
+length. That single line is gradient descent.
+
+Run it exactly once by hand, on the plainest bowl there is:
+$L(w) = w^2$, so $L'(w) = 2w$. Take $\eta = \tfrac14$ and start at
+$w_0 = 4$. The update is $w \leftarrow w - \tfrac12 w = \tfrac{w}{2}$:
+the walk is $4 \to 2 \to 1 \to \tfrac12 \to \cdots$, halving forever.
+
+\begin{center}
+\begin{tikzpicture}[x=0.9cm, y=0.9cm]
+  \draw[Muted, ->] (-3.0, 0) -- (5.4, 0) node[below] {\small $w$};
+  \draw[Muted, thick] plot[domain=-2.9:4.6, samples=80] (\x, {\x*\x/4});
+  \fill[GoodInk] (0, 0) circle (2.2pt);
+  \node[below, color=GoodInk] at (0, -0.25) {\small slope $0$};
+  % The walk 4 -> 2 -> 1 -> 1/2: chords of the bowl, halving.
+  \draw[CoolInk, thick, -stealth] (4, 4) -- (2, 1);
+  \draw[CoolInk, thick, -stealth] (2, 1) -- (1, 0.25);
+  \draw[CoolInk, thick, -stealth] (1, 0.25) -- (0.5, 0.0625);
+  \fill[AccentInk] (4, 4) circle (2.2pt);
+  \fill[AccentInk] (2, 1) circle (2.2pt);
+  \fill[AccentInk] (1, 0.25) circle (2.2pt);
+  \fill[AccentInk] (0.5, 0.0625) circle (2.2pt);
+  \node[below right, color=AccentInk] at (4.2, 3.8) {\small $w_0 = 4$};
+  \node[below right, color=AccentInk] at (2.2, 0.95) {\small $w_1 = 2$};
+  \node[above, color=AccentInk] at (0.75, 0.75) {\small $w_2, w_3, \dots$};
+\end{tikzpicture}
+\end{center}
+
+Watch what happened without being asked for. The direction was always
+downhill — the sign of the slope saw to that. And the steps shrank on
+their own: near the bottom the slope is small, so $\eta\,L'(w)$ is
+small. The rule brakes automatically, not because a schedule was
+imposed but because the landscape flattens where it matters. On this
+bowl, that is the entire story of convergence.
+
+\section{The learning rate is a bet}
+
+Keep the bowl, vary only $\eta$. The update is
+$w \leftarrow (1 - 2\eta)\,w$ — each step multiplies the distance to
+the bottom by a fixed factor:
+
+\begin{center}
+\begin{tabular}{lll}
+$\eta = \tfrac14$ & factor $\tfrac12$ & glides in\\[2pt]
+$\eta = \tfrac34$ & factor $-\tfrac12$ & overshoots the bottom each
+step, yet converges\\[2pt]
+$\eta = 1$ & factor $-1$ & ping-pongs between $4$ and $-4$ forever\\[2pt]
+$\eta = \tfrac54$ & factor $-\tfrac32$ & every ``descent'' step lands
+higher: diverges
+\end{tabular}
+\end{center}
+
+The dial has a cliff, not a dimmer. Too small merely wastes steps; too
+large converts descent into ascent, and nothing inside the rule warns
+you — the update only ever reads the slope \emph{where it stands},
+while the failure is a property of how sharply the landscape curves
+across the whole step. The learning rate is a bet about curvature,
+and the bowl collects on bad bets immediately.
+
+\section{Where the walk stops}
+
+The update is zero exactly where $L'(w) = 0$: gradient descent stops
+at flat ground, full stop. Whether flat ground is the \emph{bottom} is
+a separate question, and the derivative chapter already issued the
+right habit: look at the sign change. Slope crossing $-$ to $+$ is a
+valley; $+$ to $-$ is a hilltop; no crossing is a shelf. Descent
+stalls at every one of them. On the double well
+$L(w) = \tfrac{w^4}{4} - \tfrac{w^2}{2}$, whose slope $w^3 - w$
+vanishes at $-1$, $0$, $1$, a walk started anywhere to the right of
+$0$ settles into the valley at $1$ — but a walk started \emph{exactly}
+at $0$ never moves: it sits on the hilltop, gradient zero, perfectly
+stalled, certifying nothing. A zero gradient is where the walk ends;
+the sign change around it is what tells you what was found. (The
+knife-edge is fragile — nudge $w_0$ to $0.1$ and the walk falls into
+a valley — which is exactly why the failure is instructive rather
+than common.)
+
+\section{Many knobs, and the road's own loss}
+
+A real model has many knobs at once, and the generalisation costs one
+sentence: the \emph{gradient} is the vector collecting the loss's
+slope along every knob, and the update steps against it,
+$\mathbf{w} \leftarrow \mathbf{w} - \eta\,\nabla L(\mathbf{w})$. Each
+knob reads its own partial slope; all move together. That — nothing
+more — is \emph{plain gradient descent}, and it is the engine under
+essentially all of deep
+learning~\cite{probability-ian-goodfellow-yoshua-bengio-and-aaron-courville-deep-learni}.
+
+The road can afford to watch it run on its own worked example. Make
+the alignment chapter's four-frame score table trainable — each
+frame's three scores driven through softmax from free knobs — and let
+the loss be the negative log of the alignment sum, $-\ln P(\mathrm{AB}
+\mid X)$, which starts at $\anchor{010.K.NLL}$. Plain gradient
+descent at $\eta = 1$ walks it down to $\anchor{010.M.loss10}$ after
+ten steps, $\anchor{010.M.loss50}$ after fifty,
+$\anchor{010.M.loss200}$ after two hundred, and
+$\anchor{010.M.loss5000}$ after five thousand. Read the walk's shape,
+not just its endpoint: over three quarters of the loss vanished in the
+first ten steps, and the last leg spent nearly five thousand steps
+buying less than a hundredth. That is the parabola's lesson at scale
+— flattening loss means shrinking gradient means shrinking steps —
+and it is why a training curve's long, nearly level tail is normal
+physiology, not a stall.
+
+One honesty note, matching the video road's own scope: everything
+real training adds — minibatch stochasticity, momentum, adaptive
+per-knob steps, schedules — is refinement layered on this
+one rule, and none of it appears on this road. What runs here, and
+in every training curve this book shows, is the bare update, undoped.
+Plain gradient descent is enough to train the road's worked example
+to convergence; the refinements exist because ``many knobs'' in
+practice means billions, not twelve.
+
+\paragraph{Where this goes.} This chapter treated one object as given:
+the gradient of the alignment sum itself — a loss that is a sum over
+$\anchor{001.paths15}$ paths needs its slope organised as cleverly as
+its value was. The next chapter computes exactly that, and the
+training beats of its parent series (``plain gradient descent'',
+named on screen) run precisely the walk quoted above. Farther out,
+descent has earned its own future video series — learning-rate
+cliffs, valleys and hilltops, the walk watched live — and this
+chapter is that series' seed.
+\end{narrative}
+
+\section*{Practice problems}
+
+\begin{problem}
+On $L(w) = w^2$ with $\eta = \tfrac14$ and $w_0 = 4$, write out
+$w_1, w_2, w_3$ exactly. After how many steps does $|w_k|$ first drop
+below $0.01$?
+\begin{hint}
+Substitute $L'(w) = 2w$ into the update and simplify before
+iterating.
+\end{hint}
+\begin{solution}
+The update is $w \leftarrow w - \tfrac14 \cdot 2w = \tfrac{w}{2}$, so
+$w_1 = 2$, $w_2 = 1$, $w_3 = \tfrac12$, and in general
+$w_k = 4 \cdot 2^{-k}$. Requiring $4 \cdot 2^{-k} < 0.01$ means
+$2^k > 400$, first true at $k = 9$ (where $w_9 = 4/512 \approx
+0.0078$). Nine steps — and each one cost a single multiplication,
+because on this bowl the rule \emph{is} a fixed shrink factor.
+\end{solution}
+\end{problem}
+
+\begin{problem}
+Still on $L(w) = w^2$ from $w_0 = 4$: for
+$\eta \in \{\tfrac14, \tfrac34, 1, \tfrac54\}$, find the per-step
+factor and classify each walk (converges, oscillates and converges,
+oscillates forever, diverges). For which $\eta$ does the walk reach
+the bottom at all?
+\begin{hint}
+Write the update as $w \leftarrow (1 - 2\eta) w$ and ask when the
+factor's magnitude is below $1$.
+\end{hint}
+\begin{solution}
+The factors are $\tfrac12$, $-\tfrac12$, $-1$, $-\tfrac32$. With
+$|1 - 2\eta| < 1$ the distance to the bottom shrinks geometrically:
+$\eta = \tfrac14$ glides in, and $\eta = \tfrac34$ crosses the bottom
+every step but still converges, because overshooting is fine so long
+as each landing is \emph{closer}. At $\eta = 1$ the factor is $-1$:
+the walk ping-pongs $4, -4, 4, \dots$ forever. At $\eta = \tfrac54$
+each step lands one-and-a-half times farther out: divergence. The
+walk converges exactly for $0 < \eta < 1$ — on this bowl; the
+threshold is set by the bowl's curvature, which is why one landscape's
+safe rate is another's cliff.
+\end{solution}
+\end{problem}
+
+\begin{problem}
+On the double well $L(w) = \tfrac{w^4}{4} - \tfrac{w^2}{2}$ with
+$\eta = 0.1$: where does the walk settle from $w_0 = 0.5$, from
+$w_0 = -0.5$, and from $w_0 = 0$? Classify each stopping place with
+the sign-change test.
+\begin{hint}
+$L'(w) = w^3 - w$ vanishes at three points; check the slope's sign
+just left and right of each.
+\end{hint}
+\begin{solution}
+From $0.5$ the walk settles at $1$; by symmetry, from $-0.5$ it
+settles at $-1$. Around $w = 1$ the slope crosses $-$ to $+$: a
+valley, and likewise at $-1$. From $w_0 = 0$ the walk never moves —
+$L'(0) = 0$, so the update is exactly zero — yet around $0$ the
+slope crosses $+$ to $-$: a hilltop. All three are legitimate
+stopping places of the same rule. Descent stops at flat ground;
+only the sign change says which kind of flat ground it was.
+\end{solution}
+\end{problem}
+
+\begin{problem}[stretch]
+From the walk in the chapter — loss $\anchor{010.K.NLL}$ at the
+start, $\anchor{010.M.loss10}$ after $10$ steps,
+$\anchor{010.M.loss200}$ after $200$, $\anchor{010.M.loss5000}$
+after $5000$ — compute the average per-step shrink factor of the
+loss over the first ten steps, and over the last $4800$. What do the
+two factors say about where a training run spends its time?
+\begin{hint}
+If ten steps multiply the loss by $r^{10}$, the average factor is
+the tenth root of the ratio.
+\end{hint}
+\begin{solution}
+First leg: $(\anchor{010.M.loss10} / \anchor{010.K.NLL})^{1/10}
+\approx 0.86$ — the loss loses
+about $14\%$ of itself \emph{every step}. Last leg:
+$(\anchor{010.M.loss5000} / \anchor{010.M.loss200})^{1/4800}
+\approx 0.9993$ — under a tenth of a
+percent per step. The two factors differ by two orders of magnitude
+in effect, which is the front-loading of the chapter in one line:
+early on the gradient is large and each step earns; near the bottom
+the gradient (and so the step) has shrunk, and equal-looking spans
+of the loss cost geometrically more steps. Reading a training curve
+means reading its slope — the long flat tail is the rule working,
+not failing. (The answer script re-runs the full five-thousand-step
+descent from scratch and reproduces all four anchored losses to
+four decimal places.)
+\end{solution}
+\end{problem}

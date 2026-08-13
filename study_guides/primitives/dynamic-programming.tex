@@ -1,0 +1,242 @@
+% Primitive: dynamic-programming — GUIDE-FIRST (plan 012 D-E): no parent
+% series. This chapter partially delivers, in print, the wiki's standing
+% promised row `ctc-alignment -> (dynamic programming as its own
+% concept)`; the row stays promised until scenes exist. The video road's
+% trellis scenes PERFORM the move without naming it, and are cited here
+% only as users of the concept, never as teachers. Numbers trace to plan
+% 001 anchors and small enumerable examples; problem answers are computed
+% by answers/dynamic_programming.py.
+\chapter{Dynamic programming}
+
+\begin{narrative}
+The last chapter ended on a sleight of hand worth catching red-handed. A
+sum over more paths than anyone could list was priced exactly on a grid
+of twenty circles, and the move was introduced in a single clause —
+\emph{paths sharing a prefix share their count} — as if that were a
+small bookkeeping remark. It is not small. It is one sighting of a
+general method with its own name, its own conditions, and a habit of
+turning impossible counts into short columns of additions. This chapter
+takes the trellis back out and names what it did: \emph{dynamic
+programming} — solve every small version of the problem once, store the
+answers, and let the big version assemble itself from the store.
+
+\section{The same question, asked over and over}
+
+Start away from CTC, with the smallest example that misbehaves. The
+Fibonacci numbers obey $F_n = F_{n-1} + F_{n-2}$ with $F_0 = 0$,
+$F_1 = 1$. Computed exactly as written — each $F_n$ asking for its two
+predecessors, each of those asking again — the questions repeat:
+$F_{10}$ asks for $F_8$ twice (once itself, once through $F_9$), for
+$F_7$ three times, for $F_6$ five times; the repetition compounds at
+the same rate as the sequence itself. Answering $F_{10}$ this way takes
+$177$ function calls to settle $11$ distinct questions.
+
+The cure is almost insultingly simple: \emph{write the answers down}.
+Compute $F_2, F_3, \dots$ in order, each from two stored numbers —
+eleven entries, one addition each. The exponential call tree collapses
+because two things were true at once. First, the subproblems
+\emph{overlap}: the same question recurs, so a stored answer keeps
+getting reused. Second, the stored answer is \emph{all the future
+needs}: whoever asks for $F_8$ cares only about its value, never about
+how the additions inside it were arranged. When both hold, the tree of
+recomputation flattens into a table.
+
+\section{The lattice, in its third costume}
+
+The counting chapter closed on a walker crossing a lattice — $4$ rights
+and $2$ ups, $\binom{6}{2} = 15$ routes, counted there by choosing
+which steps go up. Count it again, the dynamic-programming way: label
+every node with \emph{the number of routes that reach it}. A node can
+only be entered from its left or lower neighbour, so its label is the
+sum of two earlier labels — Pascal's addition, marching across the
+grid. The corner lands on the same $15$, and no route was ever written
+out. Each label is a stored subproblem: all routes agreeing on where
+they currently stand are carried as one number from there on. The
+exponential object (the list of routes) was reorganised into a small
+table of counts — \emph{shared prefixes, counted once}.
+
+\section{The trellis, named}
+
+Now reread the last chapter with these words available. The mini
+trellis from its third problem — transcript A over $T = 3$ frames,
+states $(\varepsilon, A, \varepsilon)$ — enumerated $2^3 = 8$ raw paths
+and tested each against the collapse map. The recurrence answered the
+same question by filling nine cells:
+
+\begin{center}
+\begin{tikzpicture}[x=1.9cm, y=1.05cm]
+  \foreach [count=\t from 1] \col in {{1,1,0},{1,2,1},{1,3,3}} {
+    \foreach [count=\s from 1] \v in \col {
+      \ifnum\v>0
+        \node[circle, draw=Muted, minimum size=6.4mm, inner sep=0pt]
+          (n\t\s) at (\t, -\s) {\small $\v$};
+      \else
+        \node[circle, draw=Muted!45, minimum size=6.4mm, inner sep=0pt]
+          (n\t\s) at (\t, -\s) {};
+      \fi
+    }
+    \node[above, color=CoolInk] at (\t, -0.55) {\small $t=\t$};
+  }
+  \foreach [count=\s from 1] \lab/\col in
+    {$\varepsilon$/Muted, $A$/PaletteA, $\varepsilon$/Muted}
+    \node[left, color=\col] at (0.55, -\s) {\lab};
+  \foreach \t/\u in {1/2, 2/3} {
+    \foreach \s/\r in {1/1, 2/2, 2/3, 3/3}
+      \draw[Muted!60] (n\t\s) -- (n\u\r);
+  }
+  \draw[Muted!60] (n21) -- (n32);
+  % The shared-prefix bundle: two partial paths end in this cell; their
+  % count is stored once and every continuation reuses it.
+  \draw[CoolInk, very thick] (n11) -- (n22);
+  \draw[CoolInk, very thick] (n12) -- (n22);
+  \node[circle, draw=AccentInk, very thick, minimum size=6.4mm,
+    inner sep=0pt] at (2, -2) {};
+  \node[below, color=CoolInk, align=center] at (2, -3.55)
+    {\small two prefixes end here —\\[-2pt]\small stored once, reused after};
+  \node[right, color=AccentInk] at (3.45, -2.5) {\small $3 + 3 = 6$};
+\end{tikzpicture}
+\end{center}
+
+The highlighted cell is the whole method in one circle. Two partial
+paths — $\varepsilon A$ and $AA$ — arrive at state $A$ after two
+frames. From that cell onward their futures are identical: what a path
+may legally do next depends only on \emph{where it stands}, not on how
+it got there. So the two are stored as one number, and every
+continuation is counted once instead of twice. That is the memo table
+again: $\alpha_t(s)$ \emph{is} the stored answer to ``how much partial
+weight reaches state $s$ by frame $t$?'', and the recurrence builds
+each column from the stored one before it.
+
+The same accounting, scaled: the AB trellis handled
+$\anchor{001.raw81}$ raw paths, $\anchor{001.paths15}$ of them
+accepted, on twenty cells. At $T = 100$, $U = 50$, the path count is
+roughly $\anchor{001.astronomical}$ — and the trellis is
+$100 \times 101$ cells, about ten thousand entries of three additions
+and a multiplication each. The exponential object was never listed;
+it was reorganised. Both of dynamic programming's conditions did real
+work here: the subproblems overlap (astronomically many paths route
+through each cell), and the cell is all the future needs (the collapse
+map's legality — stay, advance, skip — reads only the current state).
+Had the continuation rules depended on more of the past, each cell
+would have had to remember more, and the grid would have grown states
+until they did.
+
+\section{Recognising a dynamic program in the wild}
+
+The signature has two parts, and both must be present. There is a
+brute-force count, sum, or best-choice over exponentially many
+arrangements; and there is a small \emph{state} — the walker's node,
+the trellis cell, the index $n$ — such that arrangements agreeing on
+the state have interchangeable futures. Edit distance between two
+strings (the state: a prefix of each), shortest routes through a road
+network (the state: the junction you stand at), and the forward
+algorithm this road met last chapter — the same reorganisation
+runs hidden-state models generally~\cite{deep_learning-lawrence-r-rabiner-the-hmm-tutorial-proc-ieee-1989}
+and is the standard route through
+CTC~\cite{deep_learning-hannun-sequence-modeling-with-ctc-distill-2017}.
+The boundary is just as useful to know: if subproblems never repeat,
+a memo stores answers nobody asks for again — splitting a list into
+disjoint halves is divide-and-conquer, not dynamic programming — and
+if no small state summarises the past, the table itself grows
+exponential and the method returns nothing.
+
+\paragraph{Where this goes.} The trellis is not finished with this
+road. When the gradient chapter differentiates the alignment sum, the
+same grid will be swept \emph{backward} — a second dynamic program,
+over suffixes — and the two sweeps together price every path through
+every cell. Later, the logarithms chapter will find the trellis's
+long products starving floating point, and the recurrence will move
+into log-space to survive. And this chapter itself is a seed: the
+video road performed dynamic programming without ever naming it, and
+a future series owes the concept its own screen time — these pages
+are its first draft.
+\end{narrative}
+
+\section*{Practice problems}
+
+\begin{problem}
+Computing $F_{10}$ by the bare recurrence $F_n = F_{n-1} + F_{n-2}$
+(with $F_0 = 0$, $F_1 = 1$ answered directly), how many function calls
+are made in total? How many \emph{distinct} questions were asked?
+\begin{hint}
+Count calls with their own recurrence: $c_n = 1 + c_{n-1} + c_{n-2}$,
+with $c_0 = c_1 = 1$.
+\end{hint}
+\begin{solution}
+The call count obeys $c_n = 1 + c_{n-1} + c_{n-2}$, which solves to
+$c_n = 2F_{n+1} - 1$: the tree grows at the sequence's own rate. For
+$n = 10$: $c_{10} = 2F_{11} - 1 = 2 \cdot 89 - 1 = 177$ calls — to
+answer the $11$ distinct questions $F_0$ through $F_{10}$. The memo
+table answers each distinct question once: eleven entries, one
+addition each.
+\end{solution}
+\end{problem}
+
+\begin{problem}
+Label every node of the $4$-right, $2$-up lattice with the number of
+routes reaching it, using only the addition rule. Confirm the far
+corner agrees with the counting chapter's $\binom{6}{2}$.
+\begin{hint}
+Start with $1$ at the origin; every other node is the sum of its left
+and lower neighbours (a missing neighbour contributes nothing).
+\end{hint}
+\begin{solution}
+Filling row by row (bottom row first):
+\[
+\begin{matrix}
+1 & 3 & 6 & 10 & 15\\
+1 & 2 & 3 & 4 & 5\\
+1 & 1 & 1 & 1 & 1
+\end{matrix}
+\]
+The corner holds $15 = \binom{6}{2}$, matching the choose-the-ups
+count — and matching $\anchor{001.paths15}$, the AB path count, a
+third meeting with the same number: the trellis \emph{is} a lattice
+walk with different legal steps.
+\end{solution}
+\end{problem}
+
+\begin{problem}
+Extend the mini trellis one more frame: for transcript A over $T = 4$
+frames, compute the fourth column from $(1, 3, 3)$ and read off the
+accepted count. Then confirm the count by a direct argument about
+which raw paths collapse to A.
+\begin{hint}
+Stay and advance only — no skip exists on $(\varepsilon, A,
+\varepsilon)$. For the direct argument: a path collapsing to A shows
+one contiguous block of A's.
+\end{hint}
+\begin{solution}
+Each cell adds its own state's previous count and the one above:
+$(1,\ 3{+}1,\ 3{+}3) = (1, 4, 6)$, and the two accepting states give
+$4 + 6 = 10$. Directly: a path collapsing to A is exactly one
+contiguous block of A-frames inside $4$ frames — intervals of length
+$1, 2, 3, 4$ number $4 + 3 + 2 + 1 = 10$. Two routes, one answer,
+and the recurrence wrote three cells to the enumeration's sixteen
+paths.
+\end{solution}
+\end{problem}
+
+\begin{problem}[stretch]
+At $T = 100$ frames and $U = 50$ letters, compare the work the two
+routes perform: how many cells does the trellis fill, and how does
+that stand against the raw repeat-free path count? What would happen
+to the table if a path's legal continuations depended on its last
+\emph{two} states instead of one?
+\begin{hint}
+The wrapped transcript has $2U + 1$ states. For the second part: what
+must a cell now remember?
+\end{hint}
+\begin{solution}
+The trellis fills $T (2U + 1) = 100 \times 101 = 10{,}100$ cells, a
+handful of operations each, against roughly $\anchor{001.astronomical}$
+paths — about $36$ orders of magnitude apart. If legality read the
+last two states, ``where the path stands'' would no longer determine
+its future: cells would need to be \emph{pairs} of states, squaring
+the state count to order $10^4$ and the table to order $10^6$ —
+still polynomial, but the lesson generalises: dynamic programming
+pays exactly for how much past the future needs. When no small
+summary exists, the table, not the path list, becomes the
+exponential object.
+\end{solution}
+\end{problem}

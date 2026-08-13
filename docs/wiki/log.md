@@ -568,3 +568,36 @@ reordered.
 - 9058d19..f2cfec6 (audit application + PR #11 bot fixes) never
   formally re-diffed; absorbed by this stamp advance
 - stamp: advance to aeb25f6
+
+## [2026-08-12] audit | incremental, plan 012 branch
+
+- scope: diffed aeb25f6..d9eb601; the head segment is the plan-011
+  audit's own application (verified as logged, absorbed); the
+  study-guides branch read in full plus cited far ends (both scene
+  modules, both topic READMEs, plans 001/009/010, wiki rows 32/47),
+  no full crawl
+- findings: 4 promised-not-delivered, 2 sub-graph nits, 4
+  possible-not-yet-made, 5 graph-health — applied in the phase-3
+  commit alongside local CodeRabbit's nine
+- the wiki is untouched by the branch — plan 012's screen-shaped rule
+  respected and now stated in the wiki README's scope boundary; row
+  47's DP promise stays promised, print delivery recorded in the plan
+- all 8 anchors byte-exact vs their plan sources; trellis columns,
+  both answer scripts, C(150,50) and the 0.36/0.64 construction
+  re-verified by computation — zero numeric findings
+- top gap BUILT: per-document sourcing (the maintainer's directive) —
+  biblatex, \cite in both primitives, the guide's bibliography,
+  an undefined-citation structure test (checkcites was tried and
+  rejected in the bot round — its bcf parsing fails relative paths)
+- prose-vs-scene: the counting primitive attributed to WhenToUseIt
+  the phrasing its code comment rejects — trued in the primitive AND
+  the combinatorics README cell that seeded it
+- root README now names the print track and make study
+- possible, recorded: the walker's-lattice beat pre-drafts the queued
+  fifth WhenToUseIt shape (noted on that Ideas bullet); the T=3
+  mini-trellis seeds the DP series; the greedy construction seeds
+  ctc-decoding
+- open maintainer call: the digit-literal lint's scoping (R1) —
+  deferred to the next batch
+- stamp: advance to d9eb601 (the audited HEAD; findings applied in
+  the commit after it)

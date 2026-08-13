@@ -1,0 +1,191 @@
+% Primitive: counting-rules — authored from combinatorics/counting_rules_manim.py
+% and its README concepts table (five scenes, watched in order). Backward-
+% grounded: this is the road's first section and cites nothing forward except
+% in "Where this goes". Numbers trace to the scenes' own counts; problem
+% answers are computed by answers/counting_rules.py (the solve-gate anchor).
+\chapter{Counting rules}
+
+\begin{narrative}
+Every question this book asks eventually reduces to \emph{how many ways can
+this happen, and how heavy is each way?} The second half of that question
+is probability's business, and it comes later. This chapter is the first
+half alone: four counting rules, each built by counting real objects before
+any formula appears — and a closing observation that the four are secretly
+one rule wearing different amounts of correction.
+
+\section{Independent stages multiply}
+
+Suppose a choice happens in stages: first one of $3$ options, then —
+whatever was chosen first — one of $4$ options. Drawn as a tree, the first
+choice opens $3$ branches and each branch opens $4$ more: $12$ leaves.
+Drawn better, the same count is a \emph{grid}: stages become axes, and the
+total is literally the area of a $3 \times 4$ rectangle.
+
+\begin{center}
+\begin{tikzpicture}[scale=0.55]
+  % The grid as outer product — the video series' owned picture.
+  % Five vertical and four horizontal rules close the 4x3 frame; the
+  % product label stands clear of the grid (REFINEMENTS.md, 2026-08-12).
+  \foreach \x in {0,...,4} \draw[Muted] (\x,0) -- (\x,3);
+  \foreach \y in {0,...,3} \draw[Muted] (0,\y) -- (4,\y);
+  \foreach \x in {0,...,3} \foreach \y in {0,...,2}
+    \fill[CoolInk!30] (\x+0.12,\y+0.12) rectangle (\x+0.88,\y+0.88);
+  \node[below, color=CoolInk] at (2,-0.35) {$4$ options at stage two};
+  \node[left, color=AccentInk] at (-0.45,1.5)
+    {\rotatebox{90}{$3$ at stage one}};
+  \node[right, color=AccentInk] at (4.6,1.5) {$3 \times 4 = 12$};
+\end{tikzpicture}
+\end{center}
+
+The grid earns the rule — the classical rule of
+product~\cite{combinatorics-rule-of-product} — its condition: the stages
+must be \emph{independent} in the counting sense — the \emph{number} of options at
+stage two cannot depend on what stage one chose (the options themselves
+may differ; their count may not). When that holds,
+\[
+  N \;=\; n_1\, n_2 \cdots n_k .
+\]
+The formula is the last thing on screen in the video, and the last thing
+in this section: first the leaves were counted, then the rectangle, and
+only then the product that summarises what just happened.
+
+\section{Order matters: the shrinking pool}
+
+Fill $r$ slots from a pool of $n$ distinct items, where filling a slot
+\emph{removes} the item. Three podium places from five runners: the first
+slot has $5$ choices, the second $4$, the third $3$ — a product again, but
+of a pool that shrinks:
+$5 \times 4 \times 3 = 60$. The factorial form is bookkeeping for exactly
+this: write $5!$ and cancel the tail you never used,
+\[
+  P^n_r \;=\; \frac{n!}{(n-r)!},
+  \qquad
+  P^5_3 = \frac{5!}{2!} = 60 .
+\]
+Hold on to the shrinking pool itself — not just the formula. It is the
+picture of \emph{sampling without replacement}, and several sections from
+now it will be the exact thing that breaks independence.
+
+\section{Order does not matter: divide out the overcount}
+
+Choose $3$ letters from $5$ where the \emph{set} is the answer —
+$\{A,C,E\}$ chosen in any order is the same choice. The shrinking pool
+counted $60$ ordered selections, but every set of $3$ was counted once per
+ordering: $3! = 6$ times. The correction is a
+division~\cite{combinatorics-combination},
+\[
+  C^n_r \;=\; \binom{n}{r} \;=\; \frac{n!}{r!\,(n-r)!},
+  \qquad
+  \binom{5}{3} = \frac{60}{6} = 10 .
+\]
+This is the chapter's load-bearing move — \emph{count with too much order,
+then divide out the order that changes nothing} — and it is the move the
+rest of the road keeps reusing.
+
+\section{Partitions: the same move, blockwise}
+
+Split $6$ distinct items into labelled groups of sizes $3$, $2$, $1$.
+Order all $6$ ($6!$ ways), chop the ordering into blocks — and notice that
+reordering \emph{within} a block changes nothing. Divide out each block's
+internal orderings:
+\[
+  N \;=\; \frac{n!}{n_1!\, n_2! \cdots n_k!},
+  \qquad
+  \frac{6!}{3!\,2!\,1!} = 60 .
+\]
+A combination is the special case with two blocks (chosen, not-chosen).
+
+\section{Which rule does a problem want?}
+
+The closing scene of the series maps problem shapes to rules, then closes
+on an observation worded with care: \emph{multiply the choices — divide
+only when orderings mean the same outcome}. Three of the four rules are
+the product rule with unwanted orderings divided out afterwards; the
+product rule itself divides nothing. Ask two questions of any
+counting problem — \emph{do the stages' option-counts depend on earlier
+choices?} (if yes, the pool is shrinking) and \emph{does swapping two
+items change the answer?} (if no, divide the orderings out) — and the
+right rule falls out.
+
+\paragraph{Where this goes.} The grid returns weighted (areas instead of
+counts) when probability arrives; the shrinking pool returns as the thing
+that breaks independence; the binomial coefficient returns as a count of
+\emph{sorted columns}; and the very next chapter opens a search space of
+size $3^4 = \anchor{001.raw81}$ raw sequences — the product rule sizing a
+problem that will take half this book to finish solving.
+\end{narrative}
+
+\section*{Practice problems}
+
+\begin{problem}
+A per-frame labeller writes one of $3$ symbols at each of $4$ frames,
+independently. How many distinct label sequences can it write?
+\begin{hint}
+One stage per frame; the option count never changes.
+\end{hint}
+\begin{solution}
+Four independent stages of $3$ options each:
+$3 \times 3 \times 3 \times 3 = 3^4 = 81$. (This is the raw path space
+the next chapter's model writes over — the number returns almost
+immediately.)
+\end{solution}
+\end{problem}
+
+\begin{problem}
+Eight runners; how many distinct podiums (gold, silver, bronze) are
+possible?
+\begin{hint}
+Slots that empty a shrinking pool — and the medals make order matter.
+\end{hint}
+\begin{solution}
+$P^8_3 = 8 \times 7 \times 6 = 336$. In factorial form,
+$8!/5! = 336$: write the full ordering count and cancel the five
+unused slots' tail.
+\end{solution}
+\end{problem}
+
+\begin{problem}
+From the same eight runners, how many three-person relay \emph{teams}
+(no roles) can be formed? Check your answer against the previous
+problem using the overcount argument.
+\begin{hint}
+Every team was counted once per internal ordering.
+\end{hint}
+\begin{solution}
+Each unordered team of $3$ appears $3! = 6$ times among the $336$
+podiums, so
+$\binom{8}{3} = 336 / 6 = 56$. Equivalently
+$8!/(3!\,5!) = 56$. The check is the definition: $C = P / r!$.
+\end{solution}
+\end{problem}
+
+\begin{problem}
+How many distinct arrangements does the word SEEDED have?
+\begin{hint}
+Six letters, but reordering equal letters changes nothing — divide
+blockwise.
+\end{hint}
+\begin{solution}
+Six letters with repeats $E \times 3$, $D \times 2$, $S \times 1$:
+\[
+  \frac{6!}{3!\,2!\,1!} = \frac{720}{12} = 60 .
+\]
+The partition rule — the divide-out move applied per block of equal
+letters.
+\end{solution}
+\end{problem}
+
+\begin{problem}[stretch]
+A walker on a grid moves from the bottom-left corner to the top-right
+corner of a $2$-row-by-$4$-column lattice of steps, moving only right or
+up — $4$ rights and $2$ ups in some order. How many routes are there?
+\begin{hint}
+A route is a word in $\{R, U\}$ with repeated letters.
+\end{hint}
+\begin{solution}
+A route is an arrangement of the multiset $\{R,R,R,R,U,U\}$:
+$\binom{6}{2} = \frac{6!}{4!\,2!} = 15$ routes — choosing which $2$ of
+the $6$ steps go up. Keep this number; a lattice with exactly this count
+is about to appear wearing a completely different costume.
+\end{solution}
+\end{problem}

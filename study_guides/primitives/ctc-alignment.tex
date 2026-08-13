@@ -1,0 +1,234 @@
+% Primitive: ctc-alignment — authored from deep_learning/ctc_alignment_manim.py,
+% its README concepts table (six scenes) and plan 001. Carries the topic's
+% declared debt exactly as the video Scope does: per-frame probabilities are
+% USED here without being taught; the guide's middle chapters repay it.
+% Numbers trace to plan 001 (the 15/81 counts, the trellis columns) via
+% anchors; problem answers are computed by answers/ctc_alignment.py.
+\chapter{The alignment problem, and CTC's answer}
+
+\begin{narrative}
+Here is the problem the whole road exists to solve. A speech clip is
+$T$ audio frames; its transcript is $U$ characters, with $U < T$ and no
+marking of which frames belong to which character. The transcript says
+\emph{what} was said, never \emph{when}. Any training signal that demands
+per-frame labels demands data nobody has.
+
+Connectionist Temporal Classification
+(CTC)~\cite{deep_learning-graves-et-al-2006-connectionist-temporal-classification}
+is the standard answer, and
+this chapter builds its machinery — using, on credit, one notion the road
+has not yet earned: each frame $t$ carries a score $y_t(k)$ for each
+symbol $k$, which we will treat as ``the model's per-frame probability''.
+What those scores are and why they behave like probabilities is exactly
+what the middle chapters of this guide construct; here they are simply
+weights the model hands us. (The video series carries the same declared
+debt in its Scope.)
+
+\section{The blank token, and the collapse map}
+
+Let the model emit one symbol per frame from the alphabet plus one
+invented symbol: the \emph{blank} $\varepsilon$, ``nothing new to emit''.
+A raw emission sequence — a \emph{path} — becomes a transcript by the
+collapse map $\mathcal{B}$: \textbf{merge} adjacent repeats, \textbf{then
+drop} blanks. The order is load-bearing: merging first lets a blank
+protect a genuine double letter ($\mathrm{HE}\,\mathrm{L}\varepsilon
+\mathrm{L}\,\mathrm{O}$ survives as HELLO), while dropping first would
+weld the two L's into one. Without the blank, a per-frame emitter with
+repeat-merging can never write a double letter at all.
+
+\section{A transcript's probability is a sum over paths}
+
+Fix the worked example the whole road shares: alphabet $\{A, B,
+\varepsilon\}$, transcript $Y = \mathrm{AB}$, and $T = 4$ frames. Many
+paths collapse to AB — $\mathrm{A}\mathrm{A}\varepsilon\mathrm{B}$,
+$\varepsilon\mathrm{A}\mathrm{B}\mathrm{B}$,
+$\mathrm{A}\mathrm{B}\mathrm{B}\varepsilon$, \dots — and the data cannot
+prefer one of them, so the model must not be forced to. CTC's defining
+move: score the transcript by \emph{every} path that spells it,
+\[
+  P(Y \mid X) \;=\; \sum_{\pi \in \mathcal{B}^{-1}(Y)}
+    \;\prod_{t=1}^{T} y_t(\pi_t) .
+\]
+Each path's weight is a product of per-frame scores (the frames are
+treated as independent given the input — a real assumption, examined at
+the chapter's end), and the transcript's probability is the sum of those
+products. Not the best path: the sum. Greedy decoding — take each
+frame's favourite symbol and collapse — can return a transcript that no
+single path dominates but the sum ranks first; the sum is the object
+CTC trains on.
+
+\section{How big is the sum?}
+
+The product rule from the last chapter sizes the raw space instantly:
+$3$ symbols over $4$ frames is $3^4 = \anchor{001.raw81}$ paths. Of
+those, exactly $\anchor{001.paths15}$ collapse to AB — countable by
+hand, and counted on screen in the video. In general the repeat-free
+count is $\binom{T+U}{T-U}$, and at a realistic $T = 100$, $U = 50$
+that is roughly $\anchor{001.astronomical}$ — enumeration is dead on
+arrival. A sum this size must be \emph{reorganised}, not listed.
+
+\section{The forward trellis}
+
+Wrap the transcript in blanks — $\mathrm{AB} \to (\varepsilon, A,
+\varepsilon, B, \varepsilon)$, giving $2U + 1 = 5$ states — and lay the
+states against the frames as a grid. A path is a walk down the grid's
+legal edges: \emph{stay} in a state, \emph{advance} to the next, or
+\emph{skip} over a blank — legal only between different letters, because
+skipping the blank between equal letters would merge them.
+
+\begin{center}
+\begin{tikzpicture}[x=1.55cm, y=0.95cm]
+  % The 5x4 trellis at unit weights — plan 001's verified count columns.
+  \foreach [count=\t from 1] \col in {{1,1,0,0,0},{1,2,1,1,0},{1,3,3,4,1},{1,4,6,10,5}} {
+    \foreach [count=\s from 1] \v in \col {
+      \ifnum\v>0
+        \node[circle, draw=Muted, minimum size=6.4mm, inner sep=0pt]
+          (n\t\s) at (\t, -\s) {\small $\v$};
+      \else
+        \node[circle, draw=Muted!45, minimum size=6.4mm, inner sep=0pt]
+          (n\t\s) at (\t, -\s) {};
+      \fi
+    }
+    \node[above, color=CoolInk] at (\t, -0.55) {\small $t=\t$};
+  }
+  \foreach [count=\s from 1] \lab/\col in
+    {$\varepsilon$/Muted, $A$/PaletteA, $\varepsilon$/Muted, $B$/PaletteB, $\varepsilon$/Muted}
+    \node[left, color=\col] at (0.6, -\s) {\lab};
+  % Edges: stay, advance, and the one legal skip class (A over blank to B).
+  \foreach \t/\u in {1/2, 2/3, 3/4} {
+    \foreach \s/\r in {1/1,1/2, 2/2,2/3,2/4, 3/3,3/4, 4/4,4/5, 5/5}
+      \draw[Muted!60] (n\t\s) -- (n\u\r);
+  }
+  % Termination: the two accepting states sum to the transcript's count.
+  \node[right, color=AccentInk] at (4.45, -4.5)
+    {\small $10 + 5 = \anchor{001.paths15}$};
+\end{tikzpicture}
+\end{center}
+
+Paths sharing a prefix share their count — that is the
+reorganisation~\cite{deep_learning-hannun-sequence-modeling-with-ctc-distill-2017}.
+Let $\alpha_t(s)$ carry the weight of every partial path reaching state
+$s$ at frame $t$; each column needs only the column before it,
+\[
+  \alpha_t(s) \;=\; \bigl(\alpha_{t-1}(s) + \alpha_{t-1}(s{-}1)
+    + \alpha_{t-1}(s{-}2)\bigr)\, y_t(z'_s),
+\]
+with the $s{-}2$ skip term present only where the grid allows it, and
+the transcript's total read off the two final states. At unit weights
+the recurrence is pure counting and lands on the same
+$\anchor{001.paths15}$ as the hand count — two routes, one answer.
+Swap the units for the per-frame scores and the same grid computes
+$P(Y \mid X)$ exactly: an astronomically wide sum, priced on twenty
+nodes.
+
+\section{Where CTC applies — and where it cannot}
+
+Three assumptions are the trellis's shape: alignment is
+\emph{monotonic} (audio does not reorder), the output is \emph{no longer}
+than the input, and frames are \emph{independent given the input}.
+Monotonic transduction — speech, handwriting, OCR — fits. Translation
+reorders, so it does not; that failure belongs to attention models.
+And the independence assumption leaves language on the table, which is
+why real systems add an external language model. One reading habit,
+now, before it can calcify: a trained CTC model's output spikes are
+\emph{not} segment boundaries — why they look the way they do is this
+guide's final chapter.
+
+\paragraph{Where this goes.} The per-frame scores are debt: the middle
+chapters build probability from the ground up until softmax and the
+likelihood lens make $y_t$ honest. The trellis returns twice more —
+once named for what it is (dynamic programming), and once swept
+backward, when the gradient chapter differentiates this very sum.
+\end{narrative}
+
+\section*{Practice problems}
+
+\begin{problem}
+Apply the collapse map: what are
+$\mathcal{B}(\mathrm{AA}\varepsilon\mathrm{B})$,
+$\mathcal{B}(\varepsilon\mathrm{ABB})$, and
+$\mathcal{B}(\mathrm{ABBA})$?
+\begin{hint}
+Merge adjacent repeats first, then drop blanks.
+\end{hint}
+\begin{solution}
+$\mathcal{B}(\mathrm{AA}\varepsilon\mathrm{B})$: merge the AA, drop the
+blank $\to$ AB. $\mathcal{B}(\varepsilon\mathrm{ABB})$: nothing adjacent
+merges except BB, drop the blank $\to$ AB.
+$\mathcal{B}(\mathrm{ABBA})$: merge BB $\to$ ABA — the trailing A is a
+\emph{new} A, separated by the B, so it survives: ABA, not AB.
+\end{solution}
+\end{problem}
+
+\begin{problem}
+Show by example that the collapse order matters: find a path that
+yields a double letter under merge-then-drop but loses it under
+drop-then-merge.
+\begin{hint}
+Put a blank between two equal letters.
+\end{hint}
+\begin{solution}
+Take $\mathrm{L}\varepsilon\mathrm{L}$. Merge-then-drop: no adjacent
+repeats to merge, drop the blank $\to$ LL — the double letter survives.
+Drop-then-merge: dropping the blank first gives LL adjacent, which then
+merges $\to$ L. Only merge-then-drop lets the blank protect a genuine
+double letter, which is why the map is defined in that order.
+\end{solution}
+\end{problem}
+
+\begin{problem}
+Over $T = 3$ frames with alphabet $\{A, \varepsilon\}$, how many raw
+paths are there, and how many collapse to the transcript ``A''?
+\begin{hint}
+The raw space is the product rule; for the collapse count, either
+enumerate the eight paths or run the unit-weight trellis on
+$(\varepsilon, A, \varepsilon)$.
+\end{hint}
+\begin{solution}
+Raw: $2^3 = 8$. Collapsing to A means the path shows one contiguous
+block of A's and blanks elsewhere: the block can occupy frames
+$\{1\},\{2\},\{3\},\{1,2\},\{2,3\},\{1,2,3\}$ — $6$ paths. The
+trellis agrees: unit-weight columns on the $3$ states
+$(\varepsilon, A, \varepsilon)$ run $(1,1,0) \to (1,2,1) \to (1,3,3)$,
+and the two accepting states give $3 + 3 = 6$.
+\end{solution}
+\end{problem}
+
+\begin{problem}
+Using the repeat-free count $\binom{T+U}{T-U}$, how many paths spell a
+$2$-letter transcript with no repeated letter at $T = 5$?
+\begin{hint}
+Substitute and compute; the answer also appears in the gradient
+chapter's dominance table.
+\end{hint}
+\begin{solution}
+$\binom{5+2}{5-2} = \binom{7}{3} = 35$ paths — the count
+$\anchor{010.N.t5paths}$ the road meets again when blank dominance is
+tallied at $T = 5$.
+\end{solution}
+\end{problem}
+
+\begin{problem}[stretch]
+The chapter claims greedy decoding can be wrong. Over the two-symbol
+alphabet $\{A, \varepsilon\}$ at $T = 2$, construct per-frame scores
+where the frame-wise argmax path collapses to a transcript that is NOT
+the highest-probability transcript.
+\begin{hint}
+Give the blank a narrow win at every frame, and let the letter's many
+paths pool their weight against the blank's single path.
+\end{hint}
+\begin{solution}
+Score both frames identically: $y_t(A) = 0.4$,
+$y_t(\varepsilon) = 0.6$. Greedy takes the blank at each frame —
+path $\varepsilon\varepsilon$ — and decodes the \emph{empty}
+transcript, whose only path has mass $0.6 \times 0.6 = 0.36$. The
+transcript ``A'' pools three paths:
+$\mathcal{B}^{-1}(\mathrm{A}) = \{\mathrm{AA},\
+\mathrm{A}\varepsilon,\ \varepsilon\mathrm{A}\}$ with mass
+$0.16 + 0.24 + 0.24 = 0.64$. (The two transcripts exhaust the
+outcomes: $0.36 + 0.64 = 1$.) Greedy answers ``nothing was said'';
+the sum answers ``A'', by nearly two to one — frame-wise favourites
+lose to a transcript that spreads its weight across many paths,
+which is exactly why the loss is built on the sum.
+\end{solution}
+\end{problem}

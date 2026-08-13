@@ -1,0 +1,259 @@
+% Primitive: independence — authored from probability/independence_manim.py
+% and its README concepts table (six scenes, watched in order), plus plan
+% 002's verified anchors. Backward-grounded: the counting and alignment
+% chapters only; the conditional lens belongs to the next chapter. Problem
+% answers are computed by answers/independence.py (the solve-gate anchor);
+% new anchor keys ride primitives/anchors-proposals-probability.yaml until
+% merged into anchors.yaml.
+\chapter{Independence}
+
+\begin{narrative}
+The counting chapter multiplied option counts and owed nothing for it.
+The alignment chapter multiplied per-frame scores into a path's weight —
+and flagged the move as an assumption it could not yet defend. This
+chapter is where multiplying becomes lawful for probabilities: what the
+product of two probabilities actually asserts, how to check it, the two
+confusions it attracts, and what assuming it costs.
+
+\section{Probability is area}
+
+Draw the sample space as a $1 \times 1$ square: an \emph{event} is a
+region, and its probability is its share of the
+area~\cite{probability-3blue1brown-bayes-theorem-lesson}. A fair die is
+six equal cells; the event ``even'' covers three of them, and
+$3/6$ — count over total — is the same number as the region's area.
+Nothing new was computed: proportion is what counting was already doing,
+divided through by the size of the whole. The math of probability is the
+math of proportions, and every argument in this chapter is an argument
+about regions of this square.
+
+\section{The product rule}
+
+Run two experiments — a coin and a die, two dice, two frames. The
+counting chapter's grid returns with its cells reweighted from counts to
+areas: an event about the \emph{first} experiment selects rows, an event
+about the \emph{second} selects columns, and their intersection is a
+rectangle. Rectangle area is width times height — that is the whole
+proof. On the unit square, both cuts run straight across, all the
+way~\cite{probability-tsvibt-jaime-sevilla-mollina-two-independent-events-square-v}.
+
+\begin{center}
+\begin{tikzpicture}[scale=0.9]
+  % The aligned unit square — both cuts straight across (scene 2's
+  % device, carrying scene 3's jewel numbers). B-band Cool, the
+  % intersection rectangle Accent: the result being built toward.
+  \fill[Cool!12] (0,0) rectangle (4,2);
+  \fill[Cool!22] (0,0) rectangle (8/3,4);
+  \fill[AccentInk!30] (0,0) rectangle (8/3,2);
+  \draw[Muted] (0,0) rectangle (4,4);
+  \draw[Muted] (8/3,0) -- (8/3,4);
+  \draw[Muted] (0,2) -- (4,2);
+  \node[below, color=CoolInk] at (4/3,-0.4) {$P(B)=\tfrac23$};
+  \node[left, color=CoolInk] at (-0.45,1) {\rotatebox{90}{$P(A)=\tfrac12$}};
+  \node[right, color=AccentInk] at (4.45,1)
+    {$P(A\cap B)=\tfrac12\cdot\tfrac23=\tfrac13$};
+\end{tikzpicture}
+\end{center}
+
+When the picture looks like this — each event a straight band, the
+overlap a rectangle — the joint probability factors, and that factoring
+is the \emph{definition} of
+independence~\cite{probability-wikipedia-independence-probability-theory}:
+\[
+  A \perp B
+  \quad\Longleftrightarrow\quad
+  P(A \cap B) \;=\; P(A)\,P(B).
+\]
+As in the counting chapter, the formula arrives last: first the grid,
+then the rectangle, then the equation that summarises what the picture
+already said. The definition is the product form itself — not a
+statement about causes, mechanisms, or time.
+
+\section{One die, two events}
+
+Independence does not need two experiments. On a single fair die, take
+$A = \{\text{even}\}$ and $B = \{1,2,3,4\}$. Then
+$A \cap B = \{2,4\}$, and
+\[
+  P(A \cap B) = \tfrac{2}{6} = \tfrac13
+  = \tfrac12 \cdot \tfrac23 = P(A)\,P(B)
+\]
+— independent, though both events are about the same roll. Now slide
+$B$'s boundary a single pip, to $\{1,2,3\}$: the intersection shrinks to
+$\{2\}$, and $\tfrac16 \neq \tfrac12 \cdot \tfrac12 = \tfrac14$.
+Dependent. One pip decided it. And the same two events that factored on
+the fair die fail to factor on a biased one: independence is a property
+of the \emph{measure} — of how the weight is spread — not of the events
+alone~\cite{probability-kevin-davisross-probability-and-simulation-3-5-independence}.
+``Separate mechanisms'' is neither necessary for independence nor
+sufficient; the arithmetic is the only test.
+
+\section{Mutually exclusive is not independent}
+
+The most-tested confusion in probability: surely events that cannot
+co-occur are ``unrelated''? The product test says the opposite, as
+loudly as it can. If $A$ and $B$ are disjoint with positive
+probability, then
+\[
+  P(A \cap B) \;=\; 0 \;\neq\; P(A)\,P(B) \;>\; 0 .
+\]
+Disjoint regions share no area, so the left side is zero while the
+right side is not — mutually exclusive events are \emph{maximally}
+dependent: seeing one tells you the other did not happen. On the die,
+$\{\text{even}\}$ and $\{1,3,5\}$ fail the test at $0$ versus
+$\tfrac14$. (One honest exception: an event of probability zero is
+trivially independent of everything.) This is also why Venn-style
+pictures mislead here — disjoint circles \emph{look} unrelated. The
+square tells the truth the circles hide: dependence is the cut through
+the band stepping; independence is the knife-edge case where it runs
+straight.
+
+\section{Chains of trials}
+
+One flip cuts the square in half. A second flip cuts each half in half
+again; after four flips the square holds sixteen cells, and the
+particular sequence HHTH is one cell of area
+$\anchor{002.hhth}$ — each independent trial multiplied one more factor
+on. In general, for independent events $A_1, \dots, A_n$,
+\[
+  P(A_1 \cap \cdots \cap A_n) \;=\; \prod_{i=1}^{n} P(A_i),
+\]
+a box with side lengths $p_1, \dots, p_n$. Two honest captions come
+with the chain. First, it needs \emph{mutual} independence, which is
+strictly more than every pair factoring: with two fair coins, take
+$A = \{\text{first is H}\}$, $B = \{\text{second is H}\}$,
+$C = \{\text{exactly one head}\}$ — all three pairs factor at
+$\tfrac14$ each, yet the triple intersection is empty, $0 \neq \tfrac18$
+(Bernstein's construction~\cite{probability-wikipedia-pairwise-independence}).
+Second, asserting the product over a real sequence of trials is a
+\emph{modeling choice} — the product
+measure~\cite{probability-mit-6-041-lecture-13-the-bernoulli-process} —
+not an observation. This is precisely the purchase the alignment
+chapter made on credit when it priced a path as a product of per-frame
+scores: one factor per frame is this formula, asserted about a model.
+
+\section{When to use it}
+
+The chapter's exit is a field guide. \emph{Replacement installs
+independence}: draw a card, put it back, shuffle — the second draw
+faces the same deck, and two aces cost
+$\anchor{002.aces.replaced}$. \emph{Depletion breaks it}: keep the
+first card out and the same two aces cost
+$\anchor{002.aces.depleted}$ — the counting chapter's shrinking pool,
+returned exactly as promised, as the thing that breaks independence.
+\emph{Common causes break it too}, with no causal link between the
+events themselves: two symptoms of one disease co-occur far more often
+than their product predicts. The alignment chapter already met this in
+the wild — within a word, the frames of speech share the word as a
+common cause, which is why real systems bolt an external language model
+onto a per-frame emitter at decode time. And the \emph{gambler's
+fallacy} is independence misread in reverse: a run of heads owes the
+future nothing; the long-run proportion settles by \emph{swamping} —
+ever more trials diluting any early excess — not by
+compensation~\cite{probability-libretexts-the-gambler-s-fallacy}.
+Independence is a property of the model's measure, and assuming it is a
+purchase. Know what you paid.
+
+\paragraph{Where this goes.} The next chapter buys back this chapter's
+shortcuts: the stepped cut gets a name — conditional probability — the
+aces' $\anchor{002.aces.depleted}$ finally gets its license as a
+product of a probability and a \emph{conditional} probability, and the
+assumption the alignment chapter actually needs is stated in full:
+frames independent \emph{given the input}. Further down the road, the
+sixteen-cell square built here is stamped and sorted into a
+distribution, and the per-frame scores become honest probabilities.
+\end{narrative}
+
+\section*{Practice problems}
+
+\begin{problem}
+Roll two fair dice. Let $A = \{\text{first die shows 5 or 6}\}$ and
+$B = \{\text{second die shows 3 or less}\}$. Compute $P(A \cap B)$ and
+check it against the product rule.
+\begin{hint}
+Draw the $6 \times 6$ grid; $A$ selects rows, $B$ selects columns.
+\end{hint}
+\begin{solution}
+The intersection is a rectangle of $2 \times 3 = 6$ cells out of $36$:
+$P(A \cap B) = \tfrac{6}{36} = \tfrac16$. The margins give
+$P(A) = \tfrac13$ and $P(B) = \tfrac12$, and
+$\tfrac13 \cdot \tfrac12 = \tfrac16$ — the product rule holds, because
+an event about the first die and an event about the second always cut
+the grid as perpendicular bands, and a rectangle's share of the grid is
+width times height.
+\end{solution}
+\end{problem}
+
+\begin{problem}
+On one fair die, test $A = \{\text{even}\}$ for independence against
+$B = \{1,2,3,4\}$ and against $B' = \{1,2,3\}$.
+\begin{hint}
+Three probabilities each time; the definition is the only test.
+\end{hint}
+\begin{solution}
+Against $B$: $A \cap B = \{2,4\}$, so
+$P(A \cap B) = \tfrac13 = \tfrac12 \cdot \tfrac23$ — independent,
+inside a single roll. Against $B'$: $A \cap B' = \{2\}$, so
+$P(A \cap B') = \tfrac16$ while
+$P(A)P(B') = \tfrac12 \cdot \tfrac12 = \tfrac14$ — dependent. Moving
+one pip from $B$ to $B'$ flipped the verdict: independence is
+arithmetic about the measure, not intuition about mechanisms.
+\end{solution}
+\end{problem}
+
+\begin{problem}
+Show that $A = \{\text{even}\}$ and $B = \{1,3,5\}$ on a fair die are
+not independent, and say how much information seeing $B$ carries about
+$A$.
+\begin{hint}
+What is the area of a disjoint overlap?
+\end{hint}
+\begin{solution}
+$A \cap B = \emptyset$, so $P(A \cap B) = 0$, while
+$P(A)P(B) = \tfrac12 \cdot \tfrac12 = \tfrac14$. The product test fails
+as loudly as it can: knowing $B$ occurred settles $A$ completely (it
+did not happen). Mutually exclusive events with positive probability
+are never independent — they are maximally dependent.
+\end{solution}
+\end{problem}
+
+\begin{problem}
+Flip two fair coins. Let $A = \{\text{first is H}\}$,
+$B = \{\text{second is H}\}$, $C = \{\text{exactly one head}\}$. Verify
+that every pair is independent, and that the three events are not
+mutually independent.
+\begin{hint}
+Four outcomes, each of probability $\tfrac14$; check the three pair
+products, then the triple.
+\end{hint}
+\begin{solution}
+$P(A) = P(B) = P(C) = \tfrac12$. Pairs: $A \cap B = \{\mathrm{HH}\}$,
+$A \cap C = \{\mathrm{HT}\}$, $B \cap C = \{\mathrm{TH}\}$ — each of
+probability $\tfrac14 = \tfrac12 \cdot \tfrac12$, so all three pairs
+factor. But $A \cap B \cap C$ demands two heads \emph{and} exactly one
+head: impossible, so its probability is $0 \neq \tfrac18$. Pairwise
+independence does not give mutual independence — which is why the chain
+formula's condition says \emph{mutual}.
+\end{solution}
+\end{problem}
+
+\begin{problem}[stretch]
+Draw two cards from a shuffled deck. Compute $P(\text{both aces})$ with
+replacement and without, and — without replacement — $P(\text{second
+card is an ace})$ before anyone looks at the first.
+\begin{hint}
+Replacement makes the draws independent trials; depletion is the
+shrinking pool. For the last part, enumerate — or argue by symmetry.
+\end{hint}
+\begin{solution}
+With replacement the draws are independent trials:
+$\left(\tfrac{1}{13}\right)^2 = \anchor{002.aces.replaced}$. Without,
+the pool shrinks: $\tfrac{4}{52} \cdot \tfrac{3}{51} =
+\anchor{002.aces.depleted}$ — smaller, because the first ace depletes
+the aces. Yet $P(\text{second is ace}) = \tfrac{1}{13}$ exactly
+($204/2652$ enumerated): as long as no one looks at the first card, the
+second is just a uniformly random card. Depletion changes the
+\emph{joint} behaviour, not the margin — which is exactly what
+``dependent'' means.
+\end{solution}
+\end{problem}
