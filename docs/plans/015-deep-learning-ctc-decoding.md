@@ -92,7 +92,24 @@ strand of row 42 stays promised (it is loss-side, not decoding).
   Changed scenes re-rendered and frame-verified (the α-column
   juxtaposition checked by eye); linter clean on all seven;
   `make check` + `make test` (243) + `make study` green
-- [ ] Phase 5
+- [x] Phase 5: PR #17 opened; **the maintainer merged PR #16 first
+  (as recommended) and the flagged reconciliation ran on this
+  branch**: main merged in, conflicts resolved (the guide-first
+  paragraph now says the set is EMPTY — all three seeds sprouted;
+  both branches' wiki nodes/edges/devices unioned, the log ordered
+  chronologically, the stamp noting both audits applied), welcome
+  re-rendered at fourteen series (rows 7+7, spacing tightened
+  after a clipped first pass, frame verified, 420 KB), bib
+  174/174 verified on the union, `make test` up to 251. Bot
+  review: rate-limited on the first attempt, re-requested; one
+  minor finding, applied (the primitive's header no longer claims
+  the answer script computes the flagship pruning table — it is
+  verifier-constructed, the script addition remains the
+  human-gated follow-up). `clean-drafts`, then 1080p60 finals:
+  7 files, distinct names, 28–38 s, the α-column juxtaposition
+  and the stream tree frame-verified. The plan closes; the PR
+  awaits the maintainer's merge — and with it, the road's loop
+  closes on screen and the guide-first set empties
 
 ## Decisions (made at design time)
 
