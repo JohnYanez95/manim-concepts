@@ -86,7 +86,15 @@ def p3_stall_is_not_a_certificate() -> str:
     assert abs(run(-0.5) + 1.0) < 1e-9
     # The stall at 0 sits where the slope changes + to - : a hilltop.
     assert slope(-0.01) > 0 > slope(0.01)
-    return "from 0.0 stays at 0.0 (hilltop); from +-0.5 reaches +-1"
+    # The chapter's basin boundary (anchor 014.basin.sqrt11): one step is
+    # 0.1*w*(11 - w^2), negative past sqrt(11) = 3.3166..., so a start at 4
+    # hops the hilltop (4 -> -2) and settles in the LEFT valley, while 3.3
+    # stays right. No ball could copy the crossing.
+    assert 4.0 - 0.1 * slope(4.0) == -2.0
+    assert abs(run(4.0) + 1.0) < 1e-9
+    assert abs(run(3.3) - 1.0) < 1e-9
+    assert 3.3 < 11**0.5 < 3.32
+    return "from 0.0 stays at 0.0 (hilltop); from +-0.5 reaches +-1; from 4 crosses to -1"
 
 
 def ctc_loss_and_gradient(logits: list[list[float]]) -> tuple[float, list[list[float]]]:
