@@ -29,8 +29,11 @@ Deliberately **not** covered here:
   asymptotics beyond cell counting.
 - **The control-theory branch of the name.** Bellman equations,
   MDPs, policy and value iteration, reinforcement learning.
-- **Beam search and approximate reorganisations** — queued in
-  [`deep_learning/`](../deep_learning/README.md) Ideas, not here.
+- **Beam search and approximate reorganisations** — built in
+  [`deep_learning/`](../deep_learning/README.md)'s decoding series
+  (`SearchTheTranscripts` cashes this topic's exact-DP prerequisite
+  on screen), not here; only beam internals at scale remain unbuilt
+  anywhere.
 
 ## Concepts
 
@@ -130,9 +133,11 @@ until a human does the same.
 
 ## Ideas not yet built
 
-- Beam search as approximate reorganisation — lives in
-  [`deep_learning/`](../deep_learning/README.md) Ideas; this topic
-  hosts the exact-DP prerequisite it leans on.
+- ~~Beam search as approximate reorganisation~~ — delivered by
+  [`deep_learning/`](../deep_learning/README.md)'s decoding series;
+  this topic hosted the exact-DP prerequisite it leans on, and
+  `SearchTheTranscripts` names the debt on screen ("the move
+  algorithms/ named: shared prefixes, stored once").
 - Divide and conquer as its own concept — the tree-shaped sibling
   scene 5 contrasts in one panel; a full treatment (merge sort's
   recurrence, the master theorem's pictures) would slot here.

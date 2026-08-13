@@ -55,16 +55,17 @@ command, so none of them are committed.
 | Topic | Concepts |
 | --- | --- |
 | [`combinatorics/`](combinatorics/README.md) | Multiplication rule, permutations, combinations, partitions |
-| [`deep_learning/`](deep_learning/README.md) | CTC alignment (the blank token, paths and their collapse, counting alignments, the forward trellis); the CTC gradient (the backward trellis, the constant column, occupancy as the truth's soft target, softmax minus occupancy, the error signal and peakiness) |
+| [`deep_learning/`](deep_learning/README.md) | CTC alignment (the blank token, paths and their collapse, counting alignments, the forward trellis); the CTC gradient (the backward trellis, the constant column, occupancy as the truth's soft target, softmax minus occupancy, the error signal and peakiness); CTC decoding (the inverse problem, the frame favourites, the model that heard nothing, the collapsed-prefix beam and its two ledgers, the price of pruning, the loop closed) |
 | [`probability/`](probability/README.md) | Independence (probability as area, the product rule, chains of trials); conditional probability (the renormalized slice, total probability, the inversion); Bayes' rule (the odds form, the waterfall, the host's protocol); random variables (the stamped square, the balance point, the binomial columns); softmax and likelihood (the two-lens table, the probability machine, the loss that trains) |
 | [`algebra/`](algebra/README.md) | Logarithms: the counting strip, the evidence ruler, the underflow cliff |
 | [`algorithms/`](algorithms/README.md) | Dynamic programming: the recursion tree folded, the lattice by Pascal's sum, the trellis re-read as a stored answer, the state's price |
 | [`calculus/`](calculus/README.md) | e and ln (the split year, the mystery constants, the natural stride, the debt repaid); the derivative toolkit (the slope as a function, the score, the smooth max's shares) |
 
 Topics are added as they are written. The CTC gradient — the road's
-long-standing target — is now built; likely next: `linear_algebra/`
-or the deep-learning backlog (beam search, the label-prior
-variant). The
+long-standing target — is now built, and the decoding series closes
+the road's loop; likely next: `linear_algebra/`
+or the deep-learning backlog (the label-prior
+variant, forced alignment). The
 layout is expected to drift — if a topic only ever holds one file, it can
 collapse into a flatter arrangement later without anything else changing.
 

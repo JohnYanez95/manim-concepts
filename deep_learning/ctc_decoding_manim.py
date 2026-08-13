@@ -184,7 +184,7 @@ class TheFrameFavourites(ConceptScene):
         self.wait(2.0)
 
         # The honest check: all 27 paths, grouped by transcript.
-        board_title = caption("all 27 paths, grouped by transcript:")
+        board_title = caption("top transcript masses from all 27 paths:")
         board_title.move_to(3.3 * RIGHT + 2.0 * UP)
         on_frame(board_title)
         entries = [
@@ -497,20 +497,42 @@ class TheTwoLedgers(ConceptScene):
         self.play(FadeIn(lie))
         self.play(FadeIn(wrongness))
 
-        # The repo-native close: the beam IS the forward recurrence.
+        # The repo-native close: the beam IS the forward recurrence — the
+        # recurrence's final column drawn beside the ledgers, same digits.
         table = VGroup(
             caption("the unpruned ledgers, frame 2:"),
             MathTex(r'\text{""}: 0.36 \qquad \text{A}: 0.24 + 0.40 = 0.64', font_size=30),
-            caption("digit for digit, the trellis's final column —"),
-            caption("the beam is the forward recurrence"),
-            caption("wearing a search harness"),
         ).arrange(DOWN, buff=0.2)
-        table.move_to(3.3 * RIGHT + 0.3 * UP)
+        table.move_to(3.3 * RIGHT + 1.5 * UP)
         on_frame(table)
         self.play(FadeIn(table))
+        alpha_col = VGroup(
+            chip("α₂(A) = 0.40", PNB, width=2.4),
+            chip("α₂(ε) = 0.24", PB, width=2.4),
+        ).arrange(DOWN, buff=0.18)
+        alpha_col.move_to(1.9 * RIGHT + 0.15 * DOWN)
+        on_frame(alpha_col)
+        alpha_cap = caption("the forward recurrence,")
+        alpha_cap2 = caption("run on these frames —")
+        alpha_cap3 = caption("digit for digit: the")
+        alpha_cap4 = caption("beam is that recurrence")
+        alpha_cap5 = caption("in a search harness")
+        alpha_cap.move_to(5.15 * RIGHT + 0.35 * UP)
+        for i, m in enumerate([alpha_cap2, alpha_cap3, alpha_cap4, alpha_cap5]):
+            m.move_to([5.15, 0.35 - 0.27 * (i + 1), 0])
+        for m in (alpha_cap, alpha_cap2, alpha_cap3, alpha_cap4, alpha_cap5):
+            on_frame(m)
+        self.play(FadeIn(alpha_col))
+        self.play(
+            FadeIn(alpha_cap),
+            FadeIn(alpha_cap2),
+            FadeIn(alpha_cap3),
+            FadeIn(alpha_cap4),
+            FadeIn(alpha_cap5),
+        )
         init = caption("init: p_b(∅) = 1 — before any frame,")
         init2 = caption("all mass ends in blank")
-        init.move_to(3.3 * RIGHT + 1.75 * DOWN)
+        init.move_to(3.3 * RIGHT + 1.9 * DOWN)
         init2.next_to(init, DOWN, buff=0.13)
         on_frame(init)
         on_frame(init2)
@@ -564,17 +586,20 @@ class ThePriceOfPruning(ConceptScene):
         self.play(FadeIn(exact_note), FadeIn(exact_note2))
         self.wait(2.2)
 
-        # The mechanism: frame 1's cut deletes a fifth of all mass.
+        # The mechanism: frame 1's cut deletes half of all mass; the A-bound
+        # fifth of the total is what flips the answer.
         cut = caption("width 1 at frame 1: keep A (0.5) — cut ∅ (0.4), B (0.1)")
         cut.move_to(1.4 * LEFT + 1.9 * DOWN)
-        struck = caption("the cut deleted a fifth of all mass — every drop bound for A", color=WARM)
+        struck = caption("half of all mass fell with them — including a fifth", color=WARM)
+        struck2 = caption("of everything, every drop of it bound for A", color=WARM)
         struck.next_to(cut, DOWN, buff=0.15)
+        struck2.next_to(struck, DOWN, buff=0.13)
         inside = caption("frame 3, inside the beam: AB 0.18 beats A 0.17 —", color=WARM)
         inside2 = caption("wrong, and wrong differently from greedy", color=WARM)
-        inside.next_to(struck, DOWN, buff=0.3)
+        inside.next_to(struck2, DOWN, buff=0.3)
         inside2.next_to(inside, DOWN, buff=0.13)
         self.play(FadeIn(cut))
-        self.play(FadeIn(struck))
+        self.play(FadeIn(struck), FadeIn(struck2))
         self.play(FadeIn(inside), FadeIn(inside2))
         self.wait(2.4)
 
@@ -633,14 +658,22 @@ class TheLoopClosed(ConceptScene):
         fusion_tag.next_to(fusion, DOWN, buff=0.2)
         self.play(Write(fusion), FadeIn(fusion_tag))
         logspace = caption("production ledgers run in log space — the merge is the")
-        logspace2 = caption("log-add the logarithms series taught, never a max")
+        logspace2 = caption("log-add the logarithms series taught — never a max,")
+        logspace3 = caption("which would quietly turn the beam back into path search")
         logspace.next_to(fusion_tag, DOWN, buff=0.3)
         logspace2.next_to(logspace, DOWN, buff=0.13)
-        self.play(FadeIn(logspace), FadeIn(logspace2))
+        logspace3.next_to(logspace2, DOWN, buff=0.13)
+        self.play(FadeIn(logspace), FadeIn(logspace2), FadeIn(logspace3))
         self.wait(2.4)
 
         # The inherited caution, restated at deployment's door.
-        self.play(FadeOut(fusion), FadeOut(fusion_tag), FadeOut(logspace), FadeOut(logspace2))
+        self.play(
+            FadeOut(fusion),
+            FadeOut(fusion_tag),
+            FadeOut(logspace),
+            FadeOut(logspace2),
+            FadeOut(logspace3),
+        )
         spikes = caption("the loss never paid for timing — spike positions are")
         spikes2 = caption("not calibrated segment boundaries: a decoder returns")
         spikes3 = caption("WHAT was said; WHEN is forced alignment, another tool")

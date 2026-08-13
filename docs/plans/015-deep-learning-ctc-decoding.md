@@ -63,9 +63,35 @@ strand of row 42 stays promised (it is loss-side, not decoding).
   verified; the 14-series render is one command at merge
   reconciliation). `make test` green (243). Branch note: cut from
   main at 9d0c86a while PR #16 was open — wiki INDEX/log, study
-  INDEX, welcome and root README edited against that state,
-  reconciling trivially on merge
-- [ ] Phase 4
+  INDEX and welcome edited against that state, reconciling
+  trivially on merge. (Correction, phase 4: this bullet originally
+  claimed the root README was edited too — it was not; the audit
+  caught the false claim and the root README was fixed in the
+  phase-4 commit)
+- [x] Phase 4: local CodeRabbit returned one finding, applied (the
+  leaderboard title bounded to "top transcript masses from all 27
+  paths" — a silent-cap fix). Audit: 18 findings, zero numeric —
+  the TOP one built rather than trued: scene 5 now DRAWS the
+  forward recurrence's final column (α₂(A) = 0.40 / α₂(ε) = 0.24
+  chips) beside the ledgers, the digest's flagship juxtaposition
+  the first draft carried as a caption; the audit also caught this
+  plan's phase-3 bullet falsely claiming the root README was edited
+  (corrected in place, both stale root-README lines fixed), the
+  label-prior residue moved to its own promised row from
+  ctc-gradient, forced alignment's on-screen promise got its graph
+  row, four device entries landed (the mapping close's sixth stop,
+  the per-frame matrix lineage, the pooled-bar sum-vs-max cited to
+  the guide chapter's construction, the WARM lineage's fifth stop),
+  row 72 gained the Q(c)-is-MAP passenger, algorithms/README's two
+  stale queue lines and the alignment rows 3/6 pointed at the
+  delivered series, the fifth-of-mass caption trued to
+  half-with-a-fifth-A-bound, the max-reverts clause added on
+  screen, and the beam-at-scale tail settled as a Scope exclusion,
+  not a queue. **The maintainer validated all eleven plan-015
+  sources same-day — ticks recorded, bib 156/156 verified.**
+  Changed scenes re-rendered and frame-verified (the α-column
+  juxtaposition checked by eye); linter clean on all seven;
+  `make check` + `make test` (243) + `make study` green
 - [ ] Phase 5
 
 ## Decisions (made at design time)
@@ -172,11 +198,14 @@ bookkeeping: the coin frames (y=1/2 each, T=3) — true P(AA) = 1/8
 (only AεA); a one-ledger beam reports 3/8, crediting AAε and εAA,
 both of which truly collapse to A — a 3× overcount; wrong answers,
 not slow ones. Then the repo-native close no external treatment can
-draw: the unpruned beam's ledger table lands digit for digit beside
-the forward trellis's final column — p_b + p_nb IS the trellis's
-two-final-nodes sum. The beam is the forward recurrence wearing a
-search harness. Init pinned: p_b(∅)=1 ("before any frame, all mass
-ends in blank").
+draw: the forward recurrence's final column — run on these frames,
+α₂(A) = 0.40, α₂(ε) = 0.24 — drawn beside the unpruned ledger
+table, digit for digit (built as chips in phase 4 after the audit
+caught the first draft carrying this as a caption only; the claim
+is against the recurrence on this input, never against
+`TheForwardTrellis`' rendered AB example). The beam is the forward
+recurrence wearing a search harness. Init pinned: p_b(∅)=1
+("before any frame, all mass ends in blank").
 
 **6. `ThePriceOfPruning`** — the flagship table (frames
 (A .5, B .1, ε .4) ×2, then (A .5, B .4, ε .1)): the exact posterior
@@ -206,7 +235,8 @@ never max). The loop closes: train on the sum, decode by the
 favourites or the ledgers, deploy — waveform to weights to words.
 
 **Device lineage:** the per-frame matrix (fifth series), the
-pooled-bar sum-vs-max (alignment scene 3, reborn), the trellis
+pooled-bar sum-vs-max (the lesson `ManyPathsOneWord` taught, on the
+guide chapter's construction — its screen debut), the trellis
 final column (the forward recurrence, third re-read), the
 WARM-overcount convention (the one-ledger counterexample), the
 WhenToUseIt mapping close (seventh series).
