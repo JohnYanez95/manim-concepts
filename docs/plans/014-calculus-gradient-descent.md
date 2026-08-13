@@ -61,7 +61,9 @@ the CTC road's own 12-knob walk as the capstone.
   double-well "anywhere right of 0" overclaim bounded at √11, the
   basin hop credited to the series); study INDEX row graduated,
   guide-first list down to ctc-decoding alone; references synced
-  (162 entries, 145 verified); both guide PDFs rebuilt green;
+  (161 bib entries at phase close, 145 verified — the bare Cauchy
+  and Curry entries were invisible to the sync parser until the
+  maintainer's pass; see phase 5); both guide PDFs rebuilt green;
   welcome re-rendered at thirteen series (rows 7+6, 402 KB, frame
   verified). `make test` green (243)
 - [x] Phase 4: local CodeRabbit returned four findings — three
@@ -91,7 +93,24 @@ the CTC road's own 12-knob walk as the capstone.
   (script rerun, exit 0). PDFs rebuilt; linter clean; changed
   scenes re-rendered and frame-verified; `make check` + `make
   test` (243) green
-- [ ] Phase 5
+- [x] Phase 5: PR #16 opened; **the maintainer validated all
+  eighteen plan-014 sources same-day** — ticks recorded, and he
+  supplied the two primary scans the research pass lacked (Cauchy's
+  1847 Comptes Rendus pages via the Pulskamp scan; Curry 1944 via
+  AMS) — both entries restructured to single-line links so the
+  sync parser sees them: references.bib now 163 entries, all 163
+  verified. Bot review returned four findings, all applied — the
+  substantive one was real: the basin map over-colored (the
+  crossing claim held only to ≈4.3214, float64-bisected this
+  round; 4.5 bounces back to +1, 5 diverges) — the drawn segment
+  now stops at 4.3, the caption bounds the interval, and the
+  guide sentence + anchor description were re-trued (the .tex
+  first-hop claim also tightened: only w₀ = 4 clears both
+  valleys); plus `raise SystemExit(render_cli())` per the topic
+  contract, the phase-3 reference totals corrected, and
+  `014.basin.sqrt11` added to the retrieval row. `clean-drafts`,
+  then 1080p60 finals: 6 files, distinct names, frame-verified.
+  The plan closes; the PR awaits the maintainer's merge
 
 ## Decisions (made at design time)
 
@@ -215,7 +234,9 @@ same); from w₀ = 4 the slope is 60, the first hop lands at −2,
 and the walk settles in the LEFT valley — impossible for a ball
 without momentum, routine for a rule that reads only the slope
 where it stands. The 1-D basin map: starts in (0, √11) land at
-+1; past √11 ≈ 3.317 they cross. Ball-physics contrasts stamped:
++1; in (√11, ≈4.32) they cross — the coloured claim stops there,
+because past ≈4.3214 (float64 bisection, PR #16 bot round) the map
+shatters: 4.5 bounces back to +1 and 5 diverges. Ball-physics contrasts stamped:
 a ball coasts (the rule has no memory), a ball released on the
 hilltop rolls off (the rule sits), a ball never teleports (the
 rule just did). Close: the metaphor to keep is a walker reading

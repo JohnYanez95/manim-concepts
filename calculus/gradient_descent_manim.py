@@ -597,14 +597,14 @@ class TheWalkIsNotABall(ConceptScene):
         self.play(FadeOut(hop_cap), FadeOut(settle_cap), FadeOut(wl_tag))
         basin_r = Line([0.05 * unit, line_y, 0], [3.31 * unit, line_y, 0], stroke_width=7)
         basin_r.set_color(palette(0))
-        basin_far = Line([3.33 * unit, line_y, 0], [5.0 * unit, line_y, 0], stroke_width=7)
+        basin_far = Line([3.33 * unit, line_y, 0], [4.3 * unit, line_y, 0], stroke_width=7)
         basin_far.set_color(palette(1))
         boundary = MathTex(r"\sqrt{11} \approx 3.317", font_size=26)
         boundary.next_to([3.32 * unit, line_y, 0], UP, buff=0.22)
         on_frame(boundary)
-        map_cap = caption("starts in (0, √11) land at +1; past it, they cross")
+        map_cap = caption("starts in (0, √11) land at +1; in (√11, ≈4.32) they cross")
         map_cap.next_to(wline, DOWN, buff=0.55)
-        mirror = caption("(mirrored on the left)")
+        mirror = caption("(mirrored on the left; farther out the map shatters)")
         mirror.next_to(map_cap, DOWN, buff=0.15)
         self.play(Create(basin_r), Create(basin_far), FadeIn(boundary), FadeIn(map_cap))
         self.play(FadeIn(mirror))
@@ -780,4 +780,4 @@ class TheRoadsOwnWalk(ConceptScene):
 
 
 if __name__ == "__main__":
-    render_cli()
+    raise SystemExit(render_cli())

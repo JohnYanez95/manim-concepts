@@ -18,7 +18,7 @@ primitives land.
 | random-variables | `primitives/random-variables.tex` | probability random-variables series (authored) | `007.*` | `probability-` |
 | softmax-likelihood | `primitives/softmax-likelihood.tex` | probability softmax series (authored) | `008.*` | `probability-` |
 | derivative-toolkit | `primitives/derivative-toolkit.tex` | calculus derivatives series (authored) | `009.*` | `calculus-` |
-| gradient-descent | `primitives/gradient-descent.tex` | calculus gradient-descent series (series-backed since plan 014; formerly guide-first — the second seed to sprout) | `010.M.*`, `010.K.NLL`, `001.paths15` | `calculus-` |
+| gradient-descent | `primitives/gradient-descent.tex` | calculus gradient-descent series (series-backed since plan 014; formerly guide-first — the second seed to sprout) | `010.M.*`, `010.K.NLL`, `001.paths15`, `014.basin.sqrt11` | `calculus-` |
 | ctc-gradient | `primitives/ctc-gradient.tex` | deep_learning gradient series (authored) | `010.*`, `009.G.nllgradient` | `deep_learning-` |
 | ctc-decoding | `primitives/ctc-decoding.tex` | GUIDE-FIRST (seeds the future beam-search series) | `012.dec.*` | `deep_learning-` |
 
