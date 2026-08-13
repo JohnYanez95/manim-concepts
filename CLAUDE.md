@@ -50,7 +50,7 @@ gate, updated as phases complete, never deleted.
 | 0 | Fresh branch from pulled `main`; research pass | Scene design written into the plan |
 | 1 | Topic dir, README skeleton, first scene stub | `make check` |
 | 2 | Scenes, iterated at draft quality | Layout linter clean + drafts verified by eye |
-| 3 | Numbered concepts table, references as `- [ ]`; new series → re-render `docs/assets/welcome.gif` (its series row is hand-listed) | `make test` |
+| 3 | Numbered concepts table, references as `- [ ]`; the series' study-guide primitive authored with solve-gated problems and plan-cited anchors, guide manifests + glue updated (ADR 008); new series → re-render `docs/assets/welcome.gif` (its series row is hand-listed) | `make test` |
 | 4 | Local CodeRabbit pass + `connection-auditor` pass, findings addressed | Review clean |
 | 5 | PR, bot review, finalise | `clean-drafts` + 1080p render |
 

@@ -22,3 +22,4 @@ part.
 | [005](005-no-pixel-or-frame-comparison-tests.md) | No pixel or frame-comparison tests of rendered output |
 | [006](006-human-ticked-references-stay-ticked.md) | Human-ticked reference checkboxes stay ticked |
 | [007](007-plans-pin-digests-not-transcripts.md) | Plans pin research digests, not full transcripts |
+| [008](008-every-series-carries-its-primitive-forward.md) | Every series carries its study-guide primitive forward |
