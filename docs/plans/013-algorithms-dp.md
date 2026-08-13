@@ -28,7 +28,8 @@ recorded anchors the closer spends: log-space inheritance
 
 - [x] Phase 0: both reports pinned below; design finalized (six
   scenes; decisions D1–D6)
-- [ ] Phase 1: topic dir + stub, `make check` green
+- [x] Phase 1: topic dir + stub, `make check` green (the ADR-008
+  bib-sync test caught the new references on the first run)
 - [x] Phase 2: six scenes at draft (6 files, distinct names,
   16–37 s). Linter: eight real findings fixed before render (the
   fib tree spilling into the right margin, ticker rows through the
@@ -39,8 +40,19 @@ recorded anchors the closer spends: log-space inheritance
   all six. As-built truing: scene 2's tree→DAG merge animation
   simplified at build to the fold + the naming (the chain-DAG lives
   in prose and scene 5's shape table carries the in-degree verdict)
-- [ ] Phase 3: README + wiki + primitive trued + welcome re-render,
-  `make test` green — John's checkpoint
+- [x] Phase 3: README complete (six rows, all three levels; scope
+  with four deliberate exclusions; seventeen references unchecked
+  for the maintainer's pass); wiki — node added, **the graph's
+  oldest promise flipped delivered** (ctc-alignment →
+  dynamic-programming, closed by `TheTrellisWasAMemo` with both
+  recorded anchors spent in the closer), new delivered edge to
+  counting-rules (the lattice checked against C(6,2) on screen),
+  the fold recorded as a new device, tree↔grid's fourth direction,
+  the mapping close's fifth series, log entry; **ADR-008 step**: the
+  guide's DP primitive trued to series-backed (header + the
+  seed-that-sprouted closing; both PDFs rebuilt, figures clean);
+  welcome re-rendered at twelve series (rows 6+6, 383 KB).
+  `make test` green (235). **At John's source checkpoint**
 - [ ] Phase 4: reviews clean
 - [ ] Phase 5: PR, bot review, finals
 

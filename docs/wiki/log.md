@@ -601,3 +601,25 @@ reordered.
   deferred to the next batch
 - stamp: advance to d9eb601 (the audited HEAD; findings applied in
   the commit after it)
+
+## [2026-08-12] series | dynamic-programming lands (plan 013, phase 3)
+
+- the graph's OLDEST promise closed: ctc-alignment → dynamic
+  programming (promised since plan 001), delivered by
+  TheTrellisWasAMemo ("α_t(s) was a stored answer all along") with
+  both recorded anchors spent in the closer's horizon (log-space
+  inheritance; the constant column as LOTP)
+- the first series built under ADR 008's inverted pipeline: the
+  guide-first DP chapter was the seed; the book drafted, the screen
+  animated
+- new topic `algorithms/` (scope: counting/sum DP only; no
+  optimization zoo, no "optimal substructure" vocabulary, no MDPs)
+- new delivered edge: dynamic-programming → counting-rules (the
+  lattice recounted, checked against C(6,2) on screen — the queued
+  fifth WhenToUseIt shape's screen precedent)
+- devices: the fold recorded as a new device; tree↔grid gains its
+  fourth direction; the WhenToUseIt mapping close reaches five series
+- naming history kept honest on screen: the Bellman/Wilson story told
+  as Bellman's story (the verifier pinned the contradicting
+  chronology); "memo functions (Michie 1968)", never "memoization"
+- seventeen references landed unchecked for the maintainer's pass
