@@ -150,6 +150,7 @@ class TheQuestionAskedTwice(ConceptScene):
             font_size=SMALL_SIZE,
         ).next_to(self.head, DOWN, buff=0.3)
         self.play(FadeIn(note))
+        tags = VGroup()
         for value, color in ((3, palette(0)), (2, palette(1)), (1, palette(2))):
             dupes = [circles[p] for p, (la, _, _) in lookup.items() if la == value]
             count = len(dupes)
@@ -159,6 +160,7 @@ class TheQuestionAskedTwice(ConceptScene):
             tag = Text(f"F{value} asked {count} times", font_size=SMALL_SIZE, color=color)
             tag.move_to([4.55, 1.4 - 0.55 * (3 - value), 0])
             on_frame(tag)
+            tags.add(tag)
             self.play(Create(flash), FadeIn(tag), run_time=0.8)
             self.play(FadeOut(flash), run_time=0.4)
         self.wait(0.5)
@@ -189,7 +191,7 @@ class TheQuestionAskedTwice(ConceptScene):
         self.wait(1.0)
 
         # Formula last.
-        self.play(FadeOut(VGroup(tree, ticker_head, compound, compound2)))
+        self.play(FadeOut(VGroup(tree, ticker_head, tags, compound, compound2)))
         formula = MathTex(
             r"\text{calls}(n) \;=\; 2\,F(n{+}1) - 1",
             font_size=48,

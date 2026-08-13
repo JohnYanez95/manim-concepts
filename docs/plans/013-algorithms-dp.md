@@ -146,8 +146,10 @@ functions credited (Michie 1968). The two conditions stated: the
 questions repeat, and the stored number is all the future needs.
 
 **3. `TheLatticeRecounted`** — shared prefixes, counted once. The
-walker's lattice by Pascal addition (arrows from left and below,
-fill order matching the drawn orientation — pitfall 7), two routes
+walker's lattice by Pascal addition (as built: undirected grid
+lines, the fill marching bottom-up, one demonstrated arrow pair
+from the left and from below — pitfall 7 satisfied by caption +
+demonstration, not per-edge arrowheads), two routes
 converging on a node bundled into one sum; corner 15 checked against
 the counting series' C(6,2) on screen. Caption bridge: "recounted,
 never listed". (This puts the guide's pre-drafted lattice visual on
