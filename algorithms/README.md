@@ -70,58 +70,62 @@ See the [root README](../README.md) for the full flag list.
 
 Ticks are human-gated — see
 [reference verification](../README.md#reference-verification-is-human-gated).
-Every entry below came out of the plan-013 research pass and starts
-unchecked; only a human moves a box to `- [x]`.
+Every entry below came out of the plan-013 research pass and started
+unchecked; all seventeen were then verified by the maintainer, who
+directed the ticks (2026-08-12) — including the two Secretary-of-Defense
+biographies, kept deliberately: they are the date evidence behind scene
+2's "his retelling, not history" hedge. Future entries start unchecked
+until a human does the same.
 
-- [ ] [Jeff Erickson, *Algorithms*, ch. 3 "Dynamic Programming"](https://jeffe.cs.illinois.edu/teaching/algorithms/book/03-dynprog.pdf)
+- [x] [Jeff Erickson, *Algorithms*, ch. 3 "Dynamic Programming"](https://jeffe.cs.illinois.edu/teaching/algorithms/book/03-dynprog.pdf)
       — the recursion-first sequence this series follows; the
       memo-trimmed tree figure; "not about filling in tables — smart
       recursion"; the 2F(n+1) − 1 call count derived independently.
-- [ ] [Erik Demaine, Jason Ku and Justin Solomon, MIT 6.006 S20 lecture 15](https://live.ocw.mit.edu/courses/6-006-introduction-to-algorithms-spring-2020/9eb3e9a51a7b5b60b0f67c2277f8b0ee_MIT6_006S20_lec15.pdf)
+- [x] [Erik Demaine, Jason Ku and Justin Solomon, MIT 6.006 S20 lecture 15](https://live.ocw.mit.edu/courses/6-006-introduction-to-algorithms-spring-2020/9eb3e9a51a7b5b60b0f67c2277f8b0ee_MIT6_006S20_lec15.pdf)
       — SRTBOT; the star/chain/tree/DAG recursion-shape table; DP as
       in-degree > 1; counting recurrences "almost trivially correct".
-- [ ] [MIT OpenCourseWare, 6.006 lecture 15 video page](https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-spring-2020/resources/lecture-15-dynamic-programming-part-1-srtbot-fib-dags-bowling/)
+- [x] [MIT OpenCourseWare, 6.006 lecture 15 video page](https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-spring-2020/resources/lecture-15-dynamic-programming-part-1-srtbot-fib-dags-bowling/)
       — the lecture the notes accompany.
-- [ ] [Stuart Dreyfus, "Richard Bellman on the Birth of Dynamic Programming" (2002)](https://pubsonline.informs.org/doi/10.1287/opre.50.1.48.17791)
+- [x] [Stuart Dreyfus, "Richard Bellman on the Birth of Dynamic Programming" (2002)](https://pubsonline.informs.org/doi/10.1287/opre.50.1.48.17791)
       — Operations Research 50(1):48–51; Bellman's naming story
       verbatim from *Eye of the Hurricane* (1984), p. 159 — told on
       screen only as Bellman's story (see the plan's chronology).
-- [ ] [Richard Bellman, "On the Theory of Dynamic Programming" (PNAS, 1952)](https://www.pnas.org/doi/10.1073/pnas.38.8.716)
+- [x] [Richard Bellman, "On the Theory of Dynamic Programming" (PNAS, 1952)](https://www.pnas.org/doi/10.1073/pnas.38.8.716)
       — PNAS 38(8):716–719, communicated by J. von Neumann, June 5,
       1952: the term in print before Wilson's tenure — the primary
       chronology that keeps the naming story hedged.
-- [ ] [Richard Bellman, *The Theory of Dynamic Programming* (RAND P-550, 1954)](https://www.rand.org/content/dam/rand/pubs/papers/2008/P550.pdf)
+- [x] [Richard Bellman, *The Theory of Dynamic Programming* (RAND P-550, 1954)](https://www.rand.org/content/dam/rand/pubs/papers/2008/P550.pdf)
       — the AMS Laramie address; the principle of optimality verbatim
       (p. 4, the plural wording this repo displays), and "a general
       prescription… in terms of the current state of the system".
-- [ ] [Historical Office, OSD — Charles E. Wilson](https://history.defense.gov/Multimedia/Biographies/Article-View/Article/571268/charles-e-wilson/)
+- [x] [Historical Office, OSD — Charles E. Wilson](https://history.defense.gov/Multimedia/Biographies/Article-View/Article/571268/charles-e-wilson/)
       — Secretary of Defense Jan 28, 1953 – Oct 8, 1957: the date
       that contradicts the anecdote.
-- [ ] [Miller Center — George C. Marshall as Secretary of Defense](https://millercenter.org/president/truman/essays/marshall-1950-secretary-of-defense)
+- [x] [Miller Center — George C. Marshall as Secretary of Defense](https://millercenter.org/president/truman/essays/marshall-1950-secretary-of-defense)
       — Fall 1950's actual Secretary of Defense.
-- [ ] [Donald Michie, "'Memo' Functions and Machine Learning" (Nature, 1968)](https://www.nature.com/articles/218019a0)
+- [x] [Donald Michie, "'Memo' Functions and Machine Learning" (Nature, 1968)](https://www.nature.com/articles/218019a0)
       — Nature 218:19–22; memo functions coined ("memoization" is
       not verbatim in the verified text and stays off screen).
-- [ ] [Robert A. Wagner and Michael J. Fischer (JACM, 1974)](https://dl.acm.org/doi/10.1145/321796.321811)
+- [x] [Robert A. Wagner and Michael J. Fischer (JACM, 1974)](https://dl.acm.org/doi/10.1145/321796.321811)
       — "The String-to-String Correction Problem": the standard
       edit-distance table the closer names (no "invented" claims; the
       metric is Levenshtein's).
-- [ ] [Michael Shindler et al., the DP-misconceptions replication (2022)](https://ics.uci.edu/~mikes/papers/Student_Misconceptions_Dynamic_Programming.pdf)
+- [x] [Michael Shindler et al., the DP-misconceptions replication (2022)](https://ics.uci.edu/~mikes/papers/Student_Misconceptions_Dynamic_Programming.pdf)
       — "Student Misconceptions of Dynamic Programming: A Replication
       Study": the M1–M12 codes this series designs against.
-- [ ] [Zehra, Ramanathan, Zhang and Zingaro (SIGCSE '18)](https://dl.acm.org/doi/abs/10.1145/3159450.3159528)
+- [x] [Zehra, Ramanathan, Zhang and Zingaro (SIGCSE '18)](https://dl.acm.org/doi/abs/10.1145/3159450.3159528)
       — "Student Misconceptions of Dynamic Programming": the original
       study the replication confirms.
-- [ ] [Avik Das, "A Graphical Introduction to Dynamic Programming"](https://avikdas.com/2019/04/15/a-graphical-introduction-to-dynamic-programming.html)
+- [x] [Avik Das, "A Graphical Introduction to Dynamic Programming"](https://avikdas.com/2019/04/15/a-graphical-introduction-to-dynamic-programming.html)
       — the call-tree → DAG → table progression.
-- [ ] [VisuAlgo — Recursion Tree and DAG (DP)](https://visualgo.net/en/recursion)
+- [x] [VisuAlgo — Recursion Tree and DAG (DP)](https://visualgo.net/en/recursion)
       — interactive side-by-side of the naive tree and merged DAG.
-- [ ] [Reducible, "5 Simple Steps for Solving Dynamic Programming Problems"](https://www.youtube.com/watch?v=aPQY__2H3tE)
+- [x] [Reducible, "5 Simple Steps for Solving Dynamic Programming Problems"](https://www.youtube.com/watch?v=aPQY__2H3tE)
       — the strongest animated DP treatment surveyed (steps
       paraphrased in the research pass, not quoted).
-- [ ] [Oscar Levin, *Discrete Mathematics*, §3.1 Pascal's triangle](https://math.oscarlevin.com/discrete-book/sec_counting-pascal.html)
+- [x] [Oscar Levin, *Discrete Mathematics*, §3.1 Pascal's triangle](https://math.oscarlevin.com/discrete-book/sec_counting-pascal.html)
       — the left-plus-below addition rule taught as counting.
-- [ ] [Wikipedia — Block walking](https://en.wikipedia.org/wiki/Block_walking)
+- [x] [Wikipedia — Block walking](https://en.wikipedia.org/wiki/Block_walking)
       — the lattice-route reading of Pascal's entries.
 
 ## Ideas not yet built
