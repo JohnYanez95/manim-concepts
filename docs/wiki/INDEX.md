@@ -1,6 +1,6 @@
 # Graph index
 
-Last audited: `d9eb601` (2026-08-12, incremental — plan-012 branch)
+Last audited: `61d1f6e` (2026-08-12, incremental — plan-013 branch)
 
 The stamp is a commit hash: the state of the repo this graph was last
 reconciled against. The `connection-auditor` diffs from it instead of
@@ -12,6 +12,7 @@ crawling every page; whoever applies an audit's findings updates it.
 | --- | --- | --- |
 | `counting-rules` | `combinatorics/counting_rules_manim.py` | The four elementary counting rules; the grid as outer product of stages |
 | `ctc-alignment` | `deep_learning/ctc_alignment_manim.py` | CTC: collapse map, alignment counting, forward trellis |
+| `dynamic-programming` | `algorithms/dynamic_programming_manim.py` | The recursion tree folded: 177 calls to 11 answers, the lattice by Pascal's sum, the trellis re-read as a stored answer, the state's price, the two-part signature |
 | `ctc-gradient` | `deep_learning/ctc_gradient_manim.py` | The CTC gradient: the backward trellis, the constant column, occupancy as the truth's soft target, ∂L/∂u = y − γ, the error signal over training, peakiness as topology + weight sharing |
 | `independence` | `probability/independence_manim.py` | The product rule as definition; the aligned unit square |
 | `conditional-probability` | `probability/conditional_probability_manim.py` | Renormalized area, the multiplication rule, LOTP and trees, the inversion, conditional independence |
@@ -38,13 +39,16 @@ Status: **delivered** (both ends exist and the content makes the link) or
 | `conditional-probability` | `bayes-rule` | delivered | `ThroughTheFrontDoor` divides the exact identity `TwoSlicesOneSquare` left on screen; `OneTestTwoPatients` factors the counted prevalence pair; `YesterdaysPosterior` repeats the CI license verbatim; `TheHostsProtocol` closes the Monty deferral with Rosenthal's variants |
 | `bayes-rule` | `logarithms` | delivered | `TheEvidenceRuler` re-plots `YesterdaysPosterior`'s ladder in base 3 — each head adds exactly +2, and two tails walk the marker back to exactly 0; evidence as distance, decibans named. Second strand: `ShrinkCounts`' zero-prior beat (log 0 = −∞, infinitely far away), read back from `probability/README.md`'s zero-prior sentence |
 | `ctc-alignment` | `logarithms` | delivered | `TheUnderflowCliff` delivers `deep_learning/`'s log-space bullet: the 0.1³²⁴ hard zero, the −324 log sum, and Graves' log-add identity for the trellis's additions (2012 book, correctly attributed) |
-| `ctc-alignment` | *(beam search)* | promised | `deep_learning/README.md` Ideas not yet built. This row's gradient and peaky-dynamics strands were delivered by `ctc-gradient` (2026-08-12); beam search over collapsed prefixes — and the new label-prior-variant idea the gradient series opened — are what remain |
+| `ctc-alignment` | *(beam search)* | promised | `deep_learning/README.md` Ideas not yet built. This row's gradient and peaky-dynamics strands were delivered by `ctc-gradient` (2026-08-12); beam search over collapsed prefixes — and the new label-prior-variant idea the gradient series opened — are what remain. Second anchor since plan 013: `algorithms/` hosts the exact-DP prerequisite beam search leans on (its Scope says so), and the guide's decoding chapter already leans on it in print |
 | `ctc-gradient` | `ctc-alignment` | delivered | Four strands: `TheOtherHalfOfTheTrellis` mirrors `TheForwardTrellis`'s recurrence against the arrows on the same 5×4 grid; `PathsThroughACell`'s constant column returns the trellis's 15 four times (the flagship number's third on-screen return, second series); `WhereTheTruthSpendsItsTime`'s uniform beat is "the alignment series' counting scene, reborn as a target", said on screen; and `WhyTheSpikesAppear` opens by quoting `WhenToUseIt`'s "never read spike timing as segmentation" and supplies the mechanism behind the rule |
 | `ctc-gradient` | `counting-rules` | delivered | Two strands: `PathsThroughACell`'s waist — 2 prefixes × 4 suffixes = 8 of the 15 paths through cell (t=2, A), the multiplicative rule "now carrying probability", said on screen — and `WhyTheSpikesAppear`'s dominance totals (A 21, B 21, ε 18 at T=4, "the input never entered this count"), pure counting delivering the peakiness mechanism |
 | `ctc-gradient` | `conditional-probability` | delivered | `WhereTheTruthSpendsItsTime` says it on screen: "the renormalized slice again — this time conditioned on the transcript" — γ_t is the conditional series' renormalization run on a trellis column, P(state at t given Y and X) |
 | `ctc-gradient` | `random-variables` | delivered | `WhereTheTruthSpendsItsTime` reads γ's rows as expected dwell times — `TheBalancePoint`'s expectation under new weights, with rows summing past 1 disposing of the rows-are-probabilities misreading |
 | `softmax-likelihood` | `ctc-gradient` | delivered | `TheLossThatTrains`' closer promised "softmax output minus how often the truth used each cell — is the next series"; `WhereTheTruthSpendsItsTime` names that exact phrase as γ on screen, and `SoftmaxMinusOccupancy` lands the identity with Bridle's "one-from-N target" gone soft; the reuse is also named on screen — scene 1's real weights arrive as "the matrix the softmax series scored" |
-| `ctc-alignment` | *(dynamic programming as its own concept)* | promised | `deep_learning/README.md` row 5 when-useful; plan 001 gaps. A future build inherits log-space for free: `TheUnderflowCliff` already shows the recursion's additions need the log-add identity. The gradient series added a second anchor: `PathsThroughACell`'s constant column Σ_s αβ = P is the law of total probability over the frame-t state partition — `TotalProbabilityAndTrees`' object, performed on the trellis |
+| `ctc-alignment` | `dynamic-programming` | delivered | The graph's oldest standing promise (plan 001 gaps; `deep_learning/README.md` row 5 when-useful), closed: `TheTrellisWasAMemo` re-reads the forward trellis on screen — "α_t(s) was a stored answer all along" — with the mini trellis landing 3 + 3 = 6 and the flagship 81/15/20 returning. Both recorded anchors spent in `TheSignatureInTheWild`'s horizon: the recurrence's additions inherit log-space (`TheUnderflowCliff`), and the constant column is the law of total probability over the frame's states (`TotalProbabilityAndTrees`, performed by `PathsThroughACell`); and the third pointer — the same grid swept backward, a second dynamic program over suffixes — names content already delivered (`TheOtherHalfOfTheTrellis`), use-case framing pointing at a built scene |
+| `dynamic-programming` | `counting-rules` | delivered | `TheLatticeRecounted` recounts the walker's 15 = C(6,2) by Pascal addition and checks it against the counting series' answer on screen — the queued fifth `WhenToUseIt` problem shape now has its screen precedent (that re-render stays batched in combinatorics' Ideas) |
+| `dynamic-programming` | *(divide and conquer as its own concept)* | promised | `algorithms/README.md` Ideas, and on screen: `WhatBreaksIt` names "divide and conquer is the tree-shaped sibling" — a merge-sort recurrence module would contrast scene 5's shape table from the tree side |
+| `dynamic-programming` | *(edit distance worked in full)* | promised | `algorithms/README.md` Ideas; the closer names the Wagner–Fischer table, and the KITTEN→SITTING 7×8 grid is already pinned in plan 013 (anchors K/L, distance 3) — the cheapest promise on the board |
 | `counting-rules` | `random-variables` | delivered | The graph's oldest promise (`combinatorics/README.md` row 3 when-useful), closed: `TheBinomialColumns` counts the sorted columns' cells as C(4,k) — "counted exactly the way the combinations series counts them" — and assembles C(n,k)p^k q^(n−k) from cell count times cell area |
 | `independence` | `softmax-likelihood` | delivered | The CTC bridge's remaining half, closed: the product-becomes-sum arithmetic is independence's own delivery — `AddToSurvive` multiplies five per-frame factors to 0.27216 and `TheLossThatTrains` says "independent frames: losses add" on screen (takeaway included); the promise itself was spoken by `ProportionsConverge` ("likelihood is next") and answered by `TheLikelihoodLens` |
 | `conditional-probability` | `softmax-likelihood` | delivered | `TheLossThatTrains` quotes the license verbatim on screen: "multiplying is licensed: the frames are independent given the input — the conditioning series said when" — `WhenToCondition`'s exact lesson, used where it was always headed |
@@ -59,7 +63,7 @@ Status: **delivered** (both ends exist and the content makes the link) or
 | `softmax-likelihood` | `derivative-toolkit` | delivered | `ZeroSlopeFindsThePeak` finds `TheBestExplanation`'s grid peak analytically (the score 3/p − 1/(1−p) zeroes at p̂ = 3/4, and the general line derives p̂ = k/n — "the observed proportion … now derived"); `TheSmoothMaxsShares` differentiates the NLL gap into (−0.3348, 0.2447, 0.0900) = p − one-hot and makes "the gap grows roughly linearly" a theorem (slope → −1) |
 | `logarithms` | `derivative-toolkit` | delivered | `ZeroSlopeFindsThePeak` names the score "the counting strip differentiated — under ln, products become sums of relative rates"; `TheSmoothMaxsShares` differentiates the log-sum-exp ruler itself, its sensitivities landing as the softmax shares |
 | `derivative-toolkit` | `ctc-gradient` | delivered | `TheSmoothMaxsShares`' on-screen closer answered: `TheSensitivityOfTheSum` generalizes the shares reading to path scale (many paths share one cell, so shares add into occupancy) and `SoftmaxMinusOccupancy`'s degeneration beat receives p − one-hot as the one-path special case. Both riders resolved: the bare product rule was **not needed** — the log-sensitivity route replaced it (plan 010 decision 2, the rectangle stays in the drawer) — and occupancy-as-expectation grounds in `TheBalancePoint` (A's dwell row, 1.7578 of 4 frames, on screen; the uniform beat's on-screen sum is 1.4 + 1.4 + 1.2 = 4 = T) |
-| `counting-rules` | *(Pascal, stars & bars, inclusion–exclusion, binomial theorem)* | promised | `combinatorics/README.md` Ideas not yet built |
+| `counting-rules` | *(Pascal, stars & bars, inclusion–exclusion, binomial theorem)* | promised | `combinatorics/README.md` Ideas not yet built. The Pascal strand now has a screen precedent: `TheLatticeRecounted`'s R(i,j) = R(i−1,j) + R(i,j−1) is Pascal's identity in block-walking form, and `TheSignatureInTheWild` restates the queue on screen ("queued back home in counting") |
 | `logarithms` | `e-and-ln` | delivered | `TheSplitYear` replays `MultiplyIsAdd`'s deferral caption on screen ("the wait ends here"); `TheNaturalStride` names the mystery constants as ln and re-rules the strip in natural units; `TheDebtRepaid` re-reads `TheUnderflowCliff`'s identity symbol by symbol — the graph's only on-screen debt, closed; and since the plan-011 refactor the promise side is on screen too: the underflow scene's loan note ("ln and e are names on loan from calculus … it earns them, then re-reads this exact line" — the MathTex is character-identical in both modules) |
 | `logarithms` | *(the log-odds inference scene in `probability/`)* | promised | `algebra/README.md` Ideas ("this series builds the ruler; that series owns the inference") — the residual of the delivered bayes→logarithms edge. `TheBestExplanation` grew it a second passenger: the 864/343 rung stops exactly where a prior would enter, so MLE→MAP (the ratio through a 1:1 prior) rides the same future scene — its numbers already verified in plan 008 addendum A1 |
 | `logarithms` | *(information as log-counting — bits, entropy)* | promised | `algebra/README.md` Ideas; `ShrinkCounts`' −log₂ = 4 is the HHTH cell's surprisal. Both halves now exist: `ProportionsConverge` says "average surprisal over the 16 equal cells is exactly 4 bits" on screen — entropy is one series away — H = E[surprisal] is `TheBalancePoint`'s fulcrum under `ShrinkCounts`' stamps, averaged the sorted-square way — with nats vs bits a unit change on `TheNaturalStride`'s device. The freight grew on the plan-008 branch: `probability/README.md` Scope queues KL and soft-target cross-entropy behind this row, and `TheLossThatTrains` names the alias on screen ('the negative log-likelihood (its alias: "cross-entropy loss")') — the one-beat payoff waiting for entropy to exist. Third hook, from the gradient series: `WhyTheSpikesAppear`'s family portrait puts "distillation — the teacher's soft outputs" on screen — soft-target cross-entropy, named before entropy exists |
@@ -93,14 +97,19 @@ one topic should meet the same picture, upgraded, in the next:
   `CountingAlignments` (raw path space) → `TheProductRule` (2×2 and 6×6,
   reweighted to probability) → the aligned unit square →
   `PathsThroughACell`'s prefix-bundle × suffix-bundle waist (ways in ×
-  ways out, on the trellis).
+  ways out, on the trellis) → `TheTrellisWasAMemo`'s waist ring, the
+  same picture renamed a stored answer.
 - **"Divide out / drop what doesn't matter" in WARM**: cancelled
   orderings (combinatorics) → merged repeats and dropped blanks (CTC) →
-  failed product tests (independence).
-- **The closing `WhenToUseIt` mapping scene**: same layout in four
-  series (including `WhenToCondition`) — problem shapes left, verdicts
-  right. `TheHostsProtocol` deliberately breaks the pattern: its close
-  is a caption trio, since the protocol table already did the mapping.
+  failed product tests (independence) → duplicate subtrees greyed into
+  lookups (`WriteTheAnswersDown`'s fold — the fourth thing WARM
+  removes: repeated work).
+- **The closing `WhenToUseIt` mapping scene**: same layout in five
+  series (including `WhenToCondition` and `algorithms/`'s
+  `TheSignatureInTheWild`, whose verdicts are the states) — problem
+  shapes left, verdicts right. `TheHostsProtocol` deliberately breaks
+  the pattern: its close is a caption trio, since the protocol table
+  already did the mapping.
 - **The chain product**: `PermutationRule`'s slot chain →
   `ManyPathsOneWord`'s per-frame product annotation → `ChainsOfTrials`'
   progressive square subdivision → `TheLossThatTrains`' column-highlighted
@@ -119,7 +128,17 @@ one topic should meet the same picture, upgraded, in the next:
 - **Tree ↔ grid, both directions**: `MultiplicativeRule` recasts a tree
   *as* a grid; `TotalProbabilityAndTrees` draws the square *as* a tree;
   `TheOddsForm`'s waterfall is that tree with the final division
-  deferred — three forms of one object, named on screen.
+  deferred — three forms of one object, named on screen. Fourth
+  stop, from `algorithms/`: `WriteTheAnswersDown` sets the call tree
+  over a six-cell memo row — first computations write down GOOD,
+  duplicate copies grey WARM into lookups (the tree stays drawn; the
+  fold is the greying, not a merge).
+- **The fold** (`WriteTheAnswersDown`, new in `algorithms/`): first
+  computations write GOOD into a memo row, every later copy greys
+  WARM into a lookup — 15 calls to 6 computations on screen, 177 to
+  11 by ticker. The device the whole DP series stands on, and the
+  counter to the documented "DP = filling tables" misconception (the
+  table is the residue of a correct recurrence).
 - **Natural-frequency cohort chips** (`TwoSlicesOneSquare` →
   `CountingItOut`): whole-people counts carrying the prior in the
   numbers themselves — completed by the Bayes series' Diseasitis count

@@ -83,6 +83,7 @@ Rough queue, in roughly the order they build on each other:
 - A fifth problem shape in `WhenToUseIt` — counting a sequence model's
   alignments, now that `deep_learning/` delivers the payoff. Needs a
   re-render, so batched for the next combinatorics change. The study
-  guide has pre-drafted this shape's visual: the walker's-lattice
-  problem (guide problem 1.5, C(6,2) = 15 routes) and its glue
-  transition are the picture, ready to animate.
+  guide pre-drafted this shape's visual (the walker's-lattice
+  problem, C(6,2) = 15 routes) — and `algorithms/`'s
+  `TheLatticeRecounted` has now animated exactly that picture, so
+  the re-render is a reuse, not a build.

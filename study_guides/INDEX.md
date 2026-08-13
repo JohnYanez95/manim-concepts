@@ -9,7 +9,7 @@ primitives land.
 | --- | --- | --- | --- | --- |
 | counting-rules | `primitives/counting-rules.tex` | combinatorics (authored) | `001.raw81` | `combinatorics-` |
 | ctc-alignment | `primitives/ctc-alignment.tex` | deep_learning alignment series (authored) | `001.raw81`, `001.paths15`, `001.astronomical`, `010.N.t5paths` | `deep_learning-` |
-| dynamic-programming | `primitives/dynamic-programming.tex` | GUIDE-FIRST (seeds the future DP series) | `001.paths15`, `001.astronomical` | `deep_learning-` |
+| dynamic-programming | `primitives/dynamic-programming.tex` | algorithms DP series (series-backed since plan 013; formerly guide-first — the seed that sprouted) | `001.raw81`, `001.paths15`, `001.astronomical` | `deep_learning-`, `algorithms-` |
 | independence | `primitives/independence.tex` | probability independence series (authored) | `002.*` | `probability-` |
 | conditional-probability | `primitives/conditional-probability.tex` | probability conditional series (authored) | `003.*` | `probability-` |
 | bayes-rule | `primitives/bayes-rule.tex` | probability Bayes series (authored) | `004.*` | `probability-` |
@@ -33,7 +33,8 @@ Guide wrappers splice anchors too: `ctc-algorithm/guide.tex` uses
 and softmax chapters; do not prune them.
 
 Guide-first primitives (no parent scenes; full research treatment before
-authoring): `dynamic-programming`, `gradient-descent`, `ctc-decoding`.
+authoring): `gradient-descent`, `ctc-decoding` (dynamic-programming
+graduated to series-backed — plan 013).
 
 Machinery:
 
