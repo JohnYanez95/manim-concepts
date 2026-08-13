@@ -71,7 +71,7 @@ class Welcome(ConceptScene):
         self.play(GrowArrow(arrows[0]), FadeIn(levels[1], shift=0.2 * RIGHT), run_time=0.6)
         self.play(GrowArrow(arrows[1]), FadeIn(levels[2], shift=0.2 * RIGHT), run_time=0.6)
 
-        # Thirteen series across two rows keep every name readable without
+        # Fourteen series across two rows keep every name readable without
         # shrinking the type.
         row_one = VGroup(
             *[
@@ -86,7 +86,7 @@ class Welcome(ConceptScene):
                     "e & ln",
                 ]
             ]
-        ).arrange(RIGHT, buff=0.5)
+        ).arrange(RIGHT, buff=0.32)
         row_two = VGroup(
             *[
                 Text(t, font_size=LABEL_SIZE, color=MUTED)
@@ -94,12 +94,13 @@ class Welcome(ConceptScene):
                     "random vars",
                     "softmax",
                     "derivatives",
+                    "descent",
                     "CTC gradient",
                     "dyn. prog.",
                     "decoding",
                 ]
             ]
-        ).arrange(RIGHT, buff=0.5)
+        ).arrange(RIGHT, buff=0.32)
         topics = VGroup(row_one, row_two).arrange(DOWN, buff=0.28).move_to(0.95 * DOWN)
         self.play(
             LaggedStart(

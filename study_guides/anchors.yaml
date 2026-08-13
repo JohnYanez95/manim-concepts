@@ -465,3 +465,8 @@
   description: "not-ending-in-blank ledger for prefix 'A' after frame 2 in the beam run"
   source: "study_guides/primitives/answers/ctc_decoding.py"
   method: "computed by committed script"
+"014.basin.sqrt11":
+  value: "3.32"
+  description: "double-well basin boundary at lr 0.1 — one step is 0.1w(11 − w²), negative past √11: the first hop crosses the hilltop; from 4 it clears both valleys (4 → −2 → −1). The crossing holds to ≈4.32; farther out the map shatters"
+  source: "docs/plans/014-calculus-gradient-descent.md, verifier §4 / F3"
+  method: "algebra (√11 exact) + float64 walks (4 → −2 → −1; 3.3 → +1), asserted by answers/gradient_descent.py"
