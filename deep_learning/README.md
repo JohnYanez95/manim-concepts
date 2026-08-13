@@ -23,6 +23,13 @@ identity — per-frame gradient is softmax output minus occupancy — and the
 training dynamics that identity makes legible, through to why trained CTC
 outputs go peaky and what a label prior changes.
 
+A third series closes the road's loop at deployment: decoding as the
+inverse problem, best-path reading of the frame favourites and the
+construction where it hears nothing, the collapsed-prefix beam with
+its two ledgers (the collapse map's grammar carried into the search),
+the price of pruning made exact on one table, and the splice point
+where an external language model multiplies in.
+
 Deliberately **not** covered here:
 
 - Probability foundations. Per-frame softmax outputs, products of
@@ -39,9 +46,13 @@ Deliberately **not** covered here:
   [`calculus/`](../calculus/README.md)'s derivative toolkit — and
   the update rule the training beats run is now taught there too,
   by its gradient-descent series.
-- Decoding at depth. Greedy decoding's failure appears in scene 3, but
-  beam search over collapsed prefixes and language-model fusion are queued
-  in Ideas, not built.
+- Beam-search internals at scale. The decoding series builds the
+  collapsed-prefix beam and prices pruning exactly on small tables;
+  width/pruning dynamics at production scale, log-space ledger
+  implementation and language-model fusion's tuning are named (one
+  formula, one caption) but not taught — and Graves 2006's exact
+  best-first "prefix search" is a different algorithm, deliberately
+  off screen.
 - Training realism. The gradient series' dynamics scenes use plain
   gradient descent on the worked example — no SGD noise, schedules or
   architecture effects; and the label prior is named as the peakiness
@@ -64,10 +75,10 @@ its assumptions forbid it.
 | --- | --- | --- | --- | --- | --- |
 | 1 | `TheAlignmentProblem` | — | A transcript says *what* was said, not *when*: $T$ frames, $U$ characters, no per-frame labels. | Several different frame-to-letter alignments of the same clip are all consistent with the pair — the data cannot prefer one, so training must not require one. | Any monotonic sequence task where per-frame labels are infeasible to collect: speech, handwriting, OCR, keyword spotting. |
 | 2 | `TheBlankToken` | $\mathcal{B}$: merge repeats, **then** drop $\varepsilon$ | CTC adds one output class $\varepsilon$ — "nothing new to emit". | Bare per-frame emission with repeat-merging can never write a double letter (HELLO → HELO) and forces held sounds to emit; $\varepsilon$ fixes both, and only the merge-then-drop order keeps it working. | Reading any CTC model's raw output stream; vocabulary design — blank and word-space are different tokens. |
-| 3 | `ManyPathsOneWord` | $P(Y\mid X)=\sum_{\pi\in\mathcal{B}^{-1}(Y)}\prod_{t=1}^{T} y^t_{\pi_t}$ | A transcript's probability is the **sum** over every path that collapses to it, not the best path's probability. | All 15 paths for AB at $T{=}4$, enumerated and collapsed on screen; each is one product of per-frame probabilities, and no single one is the answer. | The loss ASR/OCR models actually train on; why greedy decoding can return the wrong transcript. |
+| 3 | `ManyPathsOneWord` | $P(Y\mid X)=\sum_{\pi\in\mathcal{B}^{-1}(Y)}\prod_{t=1}^{T} y^t_{\pi_t}$ | A transcript's probability is the **sum** over every path that collapses to it, not the best path's probability. | All 15 paths for AB at $T{=}4$, enumerated and collapsed on screen; each is one product of per-frame probabilities, and no single one is the answer. | The loss ASR/OCR models actually train on; why greedy decoding can return the wrong transcript — the failure `TheModelHeardNothing` now runs in full at deployment. |
 | 4 | `CountingAlignments` | $\lvert\mathcal{B}^{-1}(Y)\rvert=\binom{T+U}{T-U}$ | How big the sum from scene 3 really is. | The multiplicative rule gives $3^4{=}81$ raw paths at $T{=}4$, of which 15 spell AB; the repeat-free count is $\binom{T+U}{T-U}$, and at $T{=}100$, $U{=}50$ that is $\approx 2\times10^{40}$ — enumeration is dead on arrival. | Recognising when a sum must be reorganised rather than enumerated — the counting step `combinatorics/` promised, and the cliffhanger the trellis resolves. |
 | 5 | `TheForwardTrellis` | $\alpha_t(s)=\bigl(\alpha_{t-1}(s)+\alpha_{t-1}(s{-}1)+\alpha_{t-1}(s{-}2)\bigr)\,y^t_{z'_s}$ | The exponential sum computed exactly on a $(2U{+}1)\times T$ grid. | Paths sharing a prefix share their $\alpha$; the grid's edges *are* the collapse semantics (the $s{-}2$ skip is legal only over a blank between different letters), and the two final nodes sum to the same 15 from scene 3. | The forward pass inside every CTC loss implementation; the same dynamic-programming move as the HMM forward algorithm — now named for what it is by [`algorithms/`](../algorithms/README.md)'s `TheTrellisWasAMemo` — run in log space in practice, since the raw product dies fast (float32: 46 frames at p = 0.1; see [`algebra/`](../algebra/README.md)). |
-| 6 | `WhenToUseIt` | — | Which problems CTC fits, and which its assumptions forbid. | Monotonic alignment, output no longer than input, and per-frame conditional independence are exactly the trellis's shape — break one and the grid no longer describes the task. | Choose CTC for monotonic transduction; reach for attention when outputs reorder (translation); add an external language model because independence leaves language on the table; never read spike timing as segmentation — the gradient series' `WhyTheSpikesAppear` now supplies the why. |
+| 6 | `WhenToUseIt` | — | Which problems CTC fits, and which its assumptions forbid. | Monotonic alignment, output no longer than input, and per-frame conditional independence are exactly the trellis's shape — break one and the grid no longer describes the task. | Choose CTC for monotonic transduction; reach for attention when outputs reorder (translation); add an external language model because independence leaves language on the table — `TheLoopClosed` now shows exactly where it splices in; never read spike timing as segmentation — the gradient series' `WhyTheSpikesAppear` now supplies the why. |
 
 Renders are numbered to match, so a directory listing plays in the same
 order: `01_TheAlignmentProblem.mp4` … `06_WhenToUseIt.mp4`.
@@ -113,6 +124,31 @@ Render them:
 uv run python deep_learning/ctc_gradient_manim.py            # all seven, 1080p60
 uv run python deep_learning/ctc_gradient_manim.py --list
 uv run python deep_learning/ctc_gradient_manim.py -s SoftmaxMinusOccupancy -q draft
+```
+
+### ctc_decoding_manim.py
+
+Watch after both CTC series — the alignment series built the sum this
+one searches, and the gradient series explains why trained outputs
+make the cheap decoder usually right. The road's loop closes here:
+train, decode, deploy.
+
+| # | Scene | Formula | What it says | Why it's true | When it's useful |
+| --- | --- | --- | --- | --- | --- |
+| 1 | `TheInverseProblem` | $Y^\* = \operatorname{argmax}_Y P(Y \mid X)$ | Nobody deploys a loss: a clip arrives with no reference transcript, and decoding — finding the transcript the model believes — is search, which training never had to do. | Training's loop had the transcript handed to it and only ever scored it; deployment inverts the arrow, and the honest target is the argmax over transcripts of the alignment series' sum over paths — a space that grows exponentially, so the series' two decoders are both approximations (Graves: "we do not know of a general, tractable decoding algorithm"). | Framing every decoding choice that follows: the cheap approximation (best-path) and the honest one (the beam) are answers to this search problem, not afterthoughts. |
+| 2 | `TheFrameFavourites` | $h(x) \approx \mathcal{B}(\text{argmax per frame})$ | Best-path (greedy) decoding: take each frame's favourite symbol, collapse through B — T lookups and one pass, "trivial to compute … not guaranteed to find the most probable labelling". | On y₁ = (.5, .2, .3), y₂ = (.4, .3, .3), y₃ = (.2, .3, .5) the favourites read A, A, ε → "A", and the 27-path leaderboard's top masses agree: A leads at 0.3170 with AB second at 0.2610 — with one favourite chain clearly ahead, mass concentrates and the max speaks for the sum (the per-frame matrix is the object the softmax series scored, its argmaxes now ringed). | The production decode: when a model is confident, greedy is fast and right — and knowing exactly why it can be trusted is what makes its failure mode legible. |
+| 3 | `TheModelHeardNothing` | $0.36 \text{ vs } 0.16 + 0.24 + 0.24 = 0.64$ | Sum-vs-max returns in its deployment costume: greedy crowns the heaviest single path while the truth belongs to the transcript whose team of paths is heaviest. | Two frames at y(A) = 0.4, y(ε) = 0.6: greedy takes the blank twice and announces the empty transcript (mass 0.36) while A pools three paths to 0.64 — read correctly the model heard an A, read greedily nothing; the dial y(ε) = q shows a whole band (½ < q < 1/√2) where greedy lies (at q = 0.7: 0.49 vs 0.51) — the blank must win by a √2 margin. | Trained CTC outputs are peaked and blank-heavy (the gradient series' delivered result), so greedy usually gets away with it — and the hedging inputs, accents and noise, are exactly where it stops. |
+| 4 | `SearchTheTranscripts` | — | Searching transcripts without enumeration: the beam's candidates must be collapsed prefixes, not paths, and path masses pouring into one prefix merge. | A beam over paths wastes its slots on duplicate spellings of one transcript and splits its mass — sum-vs-max sneaks back at beam scale; relabel the candidates to collapsed prefixes and three streams (new letter, blank extension, silent merge) converge on prefix A, pooling 0.64 against greedy's 0.36 — the dynamic-programming move `algorithms/` named, on a pruned frontier; width 2 keeps every candidate that carries mass here (AA sits at exactly zero), so the answer is exact. | The standard compromise for exponential output spaces — and the reason CTC beam search is the forward recurrence's sibling, not a generic tree search. |
+| 5 | `TheTwoLedgers` | $P(\text{prefix}) = p_b + p_{nb}$ | A prefix must carry two masses — paths ending in blank and paths ending in its last letter — because the collapse map gives the two halves different futures. | The repeat fork: proposing A onto prefix A routes only the p_b share into a genuine AA (a blank stood between); the p_nb share merges silently back — and collapsing the two numbers into one forces wrong answers, not slow ones: on coin frames (y = ½, T = 3) the true P(AA) = 1/8 but a one-ledger beam reports 3/8, crediting AAε and εAA, both of which truly collapse to A; the unpruned ledgers land digit for digit on the trellis's final column — the beam is the forward recurrence wearing a search harness, initialised at p_b(∅) = 1. | The correctness detail every real CTC decoder implements (Hannun et al. 2014's Algorithm 1) — and the reason production code that drops it silently overcounts double letters. |
+| 6 | `ThePriceOfPruning` | — | Pruning is the beam's only approximation, and its bill can be itemised exactly. | On frames (A .5, B .1, ε .4) ×2 then (A .5, B .4, ε .1): the exact posterior crowns A at 0.37, greedy agrees, width 2 agrees (kept total exactly 0.37 — no A-feeder was ever pruned); width 1 returns AB — cutting ∅ at frame 1 deleted half of all mass, including a fifth of everything that was bound for A, and inside the beam AB (0.18) overtakes A (0.17) — wrong, and wrong differently from greedy. | Reading beam output honestly: kept totals understate posteriors, wider beams pay off exactly where mass hedges, and a pruning failure is not a greedy failure. |
+| 7 | `TheLoopClosed` | $Q(c) = \log P(c \mid x) + \alpha \log P_{\mathrm{lm}}(c) + \beta\,\mathrm{word\_count}(c)$ | The decision rule mapped — greedy when peaked, the beam when hedging — and the beam's per-extension scoring is the natural splice for an external language model. | The blend is tuned, not derived (α, β by cross-validation; beams 1000–8000 in Deep Speech), patching exactly the hole the alignment series declared: frames independent given the input, language left on the table; production ledgers run in log space with the log-add the logarithms series taught (the merge is a log-add, never a max); and the loss never paid for timing, so spike positions are not calibrated segment boundaries — a decoder returns what, forced alignment answers when. | Deploying CTC systems: choose the decoder by the output's shape, splice the language model at the extension, and never read spikes as timestamps — the road's loop closes: train, decode, deploy. |
+
+Renders: `01_TheInverseProblem.mp4` …
+`07_TheLoopClosed.mp4`.
+
+```bash
+uv run python deep_learning/ctc_decoding_manim.py
+uv run python deep_learning/ctc_decoding_manim.py --list
 ```
 
 ## References
@@ -178,13 +214,61 @@ until a human does the same.
       — forward loss right, backward silently wrong unless the input is
       a true log-softmax; scene 5's implementation trap.
 
+From the plan-015 research pass
+([`docs/plans/015-deep-learning-ctc-decoding.md`](../docs/plans/015-deep-learning-ctc-decoding.md)),
+unverified until a human ticks them:
+
+- [X] [Hannun, Maas, Jurafsky and Ng, "First-Pass LVCSR" (2014)](https://arxiv.org/abs/1408.2873)
+      — Awni Y. Hannun, Andrew L. Maas, Daniel Jurafsky and Andrew
+      Y. Ng, "First-Pass Large Vocabulary Continuous Speech
+      Recognition using Bi-Directional Recurrent DNNs": Algorithm 1,
+      the origin
+      of the p_b/p_nb prefix beam; init p_b(∅) = 1; the beam-width
+      bound the complexity beat is read from.
+- [X] [Awni Hannun, "Example CTC Decoder in Python" (gist)](https://gist.github.com/awni/56369a90d03953e370f3964c826ed4b0)
+      — the reference implementation everyone copies; the merging
+      case commented; log-space ledgers with a stable logsumexp.
+- [X] [Awni Hannun et al., "Deep Speech: Scaling up end-to-end speech recognition"](https://arxiv.org/abs/1412.5567)
+      — §2.2's Q(c) language-model-fusion objective scene 7 quotes,
+      α, β set by cross-validation, beams 1000–8000.
+- [X] [Lasse Borgholt, "CTC Networks and Language Models: Prefix Beam Search Explained"](https://medium.com/corti-ai/ctc-networks-and-language-models-prefix-beam-search-explained-c11d1ee23306)
+      — the implementation-ordered walkthrough (the camp the series
+      deliberately does not follow) and pruned-prefix recovery.
+- [X] [Harald Scheidl, "Beam Search Decoding in CTC-trained Neural Networks"](https://harald-scheidl.medium.com/beam-search-decoding-in-ctc-trained-neural-networks-5a889a3d85a7)
+      — the smallest numeric greedy failure (0.48 vs 0.52) and the
+      Pb/Pnb update equations; its numbers deliberately not reused
+      (near-misses of the anchored construction).
+- [X] [Ameya Mahabaleshwarkar, CMU 11-785 F22 recitation 9: CTC decoding](https://deeplearning.cs.cmu.edu/F22/document/recitation/Recitation9/rec9_beamsearch.pdf)
+      — greedy → exhaustive → beam ordering; ships the one-ledger
+      tree (documented evidence the single-mass presentation ships
+      in respected courses; a suspected typo noted in the plan).
+- [X] [Zeyu Zhao, "CTC Prefix Beam Search Decoding Algorithm with Language Model"](https://zhaozeyu1995.github.io/CTC-Prefix-Beam-Search-Decoding-Algorithm-with-Language-Model/)
+      — code-first case enumeration in raw probability space; the
+      cautionary foil for the log-space caption.
+- [X] [Ryan Leary, TensorFlow PR #15586](https://github.com/tensorflow/tensorflow/pull/15586)
+      — "Remove invalid merge_repeated option from CTC beam
+      decoder": the path/prefix conflation fossilized in an API.
+- [X] [TensorFlow issue #21051](https://github.com/tensorflow/tensorflow/issues/21051)
+      — width-1 beam ≠ greedy (the beam still merges and keeps two
+      ledgers), correcting the API docs; no single credited author.
+- [X] [Philipp V. Rouast and Marc T. P. Adam, "Single-stage intake gesture detection…"](https://arxiv.org/abs/2008.02999)
+      — no improvement beyond beam width 3 on their task (seen via
+      search excerpt in the research pass, not verified on-page).
+- [X] [Andrei Andrusenko et al., "Fast Context-Biasing" (2024)](https://arxiv.org/abs/2406.07096)
+      — beam-without-LM tracks greedy on peaked outputs (seen via
+      search excerpt in the research pass, not verified on-page).
+
 ## Ideas not yet built
 
 Rough queue, in roughly the order they build on each other:
 
-- Beam search over collapsed prefixes — why a prefix needs two
-  probabilities (ending-in-blank vs. not), and the merge step that makes
-  CTC beam search different from vanilla beam search.
+- ~~Beam search over collapsed prefixes~~ — delivered by the decoding
+  series: `SearchTheTranscripts` relabels the candidates to collapsed
+  prefixes with the merge on screen, `TheTwoLedgers` forces the two
+  probabilities from the collapse map (and prices the one-ledger
+  overcount 3/8 vs 1/8), `ThePriceOfPruning` itemises the beam's one
+  approximation. What stays unbuilt at scale is a Scope exclusion
+  (the beam-internals bullet), not a queue entry.
 - ~~Training dynamics~~ — delivered by the gradient series:
   `TheErrorSignalLearns` rebuilds Graves fig. 4's arc countable, and
   `WhyTheSpikesAppear` delivers blank dominance and the peakiness

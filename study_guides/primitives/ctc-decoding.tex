@@ -1,11 +1,17 @@
-% Primitive: ctc-decoding — GUIDE-FIRST (plan 012 D-E): no parent
-% series. The video road decodes everywhere without teaching it (the
-% greedy-fails beat, an argmax path read on screen, the bias model's
-% empty decode); those scenes are users of the concept, not teachers,
-% and the road's last chapter closes the loop in print. The greedy-fails
-% numbers are the alignment chapter's construction; all beam numbers are
-% computed by answers/ctc_decoding.py (proposed anchors in
-% anchors-proposals-guide-first.yaml). The figure carries the same
+% Primitive: ctc-decoding — formerly GUIDE-FIRST (plan 012 D-E),
+% now series-backed: plan 015 built `deep_learning/ctc_decoding_manim.py`
+% FROM this chapter (ADR 008's pipeline, book-to-screen — the third
+% graduation, emptying the guide-first set), and the wiki's last
+% standing beam-search strand is delivered on screen. The scene arc
+% mirrors these pages: the inverse problem, the frame favourites,
+% greedy hearing nothing, the collapsed-prefix beam, the two ledgers,
+% pruning priced (the series' addition — a table where width 1 answers
+% wrong differently from greedy), and the loop closed. The greedy-fails
+% numbers are the alignment chapter's construction. The answer script
+% (answers/ctc_decoding.py) computes this chapter's beam examples; the
+% series' flagship pruning table is verifier-constructed (plan 015
+% pinned digest) and not yet in the script — a human-gated follow-up.
+% The figure carries the same
 % arithmetic as small literal products so it compiles standalone.
 \chapter{Decoding: from scores to a transcript}
 
@@ -148,10 +154,14 @@ tuned, not derived.
 
 \paragraph{Where this goes.} Nowhere — and that is the point: this is
 the road's last chapter, and the loop from waveform to weights to
-words is closed. What is deliberately left folded is the beam itself:
-widths and pruning, the log-space ledgers, language-model fusion and
-its tuning knobs belong to a future beam-search video series, and
-this chapter's sketch is that series' seed.
+words is closed. And the seed sprouted: the decoding series in
+`deep\_learning/' now animates this chapter beat for beat, and added
+one beat these pages point to rather than reproduce — a small table
+where a width-one beam answers wrong, and wrong \emph{differently}
+from greedy, pruning's bill itemised exactly. What stays folded at
+scale — width dynamics in production, the log-space ledgers'
+implementation, language-model fusion's tuning knobs — is named on
+screen in one formula and one caption, taught nowhere yet.
 \end{narrative}
 
 \section*{Practice problems}

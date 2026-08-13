@@ -710,3 +710,58 @@ reordered.
   boundary anchored (014.basin.sqrt11) and asserted in the answer
   script; the three stale far ends fixed
 - stamp: advance to 9226fdf
+
+## [2026-08-12] series | plan 015, CTC decoding
+
+- node added: `ctc-decoding` (seven scenes, deep_learning/ — third
+  series in the topic; third and final ADR-008 graduation: the
+  guide-first set empties)
+- edge delivered: `ctc-alignment` → `ctc-decoding` (row 42's
+  beam-search strand, the graph's oldest remaining promised strand —
+  sum-vs-max in deployment costume, the collapsed-prefix beam, the
+  two ledgers beside the trellis's final column). The label-prior
+  variant stays promised on the row
+- edges delivered: `dynamic-programming` → `ctc-decoding` (the
+  Scope-promised exact-DP prerequisite, named on screen);
+  `ctc-gradient` → `ctc-decoding` (peakiness excusing greedy;
+  spikes-not-timestamps restated at deployment);
+  `logarithms` → `ctc-decoding` (the log-add in the production
+  ledgers, named on screen — never max)
+- branch note: cut from main at 9d0c86a while PR #16 (plan 014) was
+  open; the plan-014 rows are absent from this branch's view of the
+  graph and reconcile on merge
+
+## [2026-08-12] audit | incremental, plan 015 branch
+
+- scope: diffed 61d1f6e..ca95076 (plan-013 finalisation tail absorbed
+  as the previous audit's application; the four plan-015 commits read
+  in full plus cited far ends — alignment scene 3, algorithms README,
+  root README); plan-014's absent rows excluded per branch context,
+  none reported
+- findings: 3 promised-not-delivered, 5 delivered-not-recorded,
+  2 possible-not-yet-made, 8 graph-health (3 stale, 5 prose-vs-scene);
+  zero numeric findings — every on-screen number re-derived in exact
+  fractions against the pinned digest
+- top finding: the digest's flagship side-by-side (ledgers beside the
+  trellis's final column) was built as a caption, not a juxtaposition
+  — and TheForwardTrellis' rendered column holds different numbers;
+  row 43, the plan design and this log's series entry all overstated
+- root README untouched despite the phase-3 claim: topics row and
+  likely-next both stale (beam search still "backlog")
+- forced alignment was promised on screen with no graph row; the
+  label-prior residue moved to its own promised row from ctc-gradient
+- devices recorded: the mapping close's sixth stop (TheLoopClosed),
+  the per-frame matrix lineage, the pooled-bar sum-vs-max (cited to
+  the guide chapter's construction, not alignment scene 3), the WARM
+  lineage's fifth stop (the one-ledger overcount chip)
+- row 72 gained a queued third passenger: Q(c) is the MAP move
+  deployed
+- applied (same change): all findings — the α-column juxtaposition
+  BUILT in scene 5 (chips α₂(A)=0.40 / α₂(ε)=0.24 beside the
+  ledgers); the max-reverts-to-path-search clause added on screen;
+  the fifth-of-mass caption trued to half-with-a-fifth-A-bound; the
+  leaderboard title bounded ("top transcript masses", CodeRabbit's
+  finding too); root README, algorithms README (both spots) and the
+  alignment rows 3/6 pointed at the delivered series; the plan's
+  false root-README claim corrected in place
+- stamp: advance to ca95076
