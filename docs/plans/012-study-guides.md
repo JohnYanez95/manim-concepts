@@ -339,7 +339,9 @@ solutions manual, until guide 1 assembles complete.
   maintainer: once v1 of the guide ships, codify the stitching
   practice as an **ADR** — every new series carries its primitive
   forward as part of its plan, and past topics are retroactively
-  fitted (guide 1's full sweep is that retrofit)
+  fitted (guide 1's full sweep is that retrofit). **Executed after
+  the v1 merge: ADR 008, the primitive nested into CLAUDE.md's
+  phase-3 row**
 - [x] Phase 1: scaffold complete — `study_guides/` tree (`theme.sty`
   with the palette mirrored from `utils/theme.py`, the three
   retrieval contracts, and the single-sourced problem environments),
@@ -424,4 +426,5 @@ solutions manual, until guide 1 assembles complete.
   fourteen figures linter-clean; guide 92 pp + solutions manual with
   per-document bibliography (a %-in-URL bbl corruption found and
   fixed in the sync script; a stale-bbl latexmk state cleaned). The
-  PR awaits the maintainer's merge, which opens the refinement loop
+  PR #13 was merged by the maintainer 2026-08-12 — v1 shipped, and
+  the refinement loop is live
