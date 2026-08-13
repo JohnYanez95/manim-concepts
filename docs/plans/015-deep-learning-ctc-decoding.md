@@ -28,7 +28,18 @@ strand of row 42 stays promised (it is loss-side, not decoding).
 - [x] Phase 1: module stub (`TheInverseProblem` placeholder) +
   README third-series Scope paragraph, subsection and row 1;
   `make check` green
-- [ ] Phase 2
+- [x] Phase 2: seven scenes at draft (7 files, distinct names,
+  28–35 s after a pacing pass that widened every hold — the first
+  render came in at 19–28 s). Linter: 34 initial findings — the
+  scene-4 tree crowded its side captions (stream captions moved to
+  a bottom-center stack, the tree shifted right, the wrong-design
+  column tightened), five chips widened under their text, the
+  scene-3 closer shortened and its second line moved below the
+  dial, the scene-1 formula's box cleared of the quote stack —
+  linter clean on all seven. One parallel-render race on the text
+  cache (a shared SVG unlinked twice) cost one scene one render;
+  re-rendered solo. Frames verified by eye across all seven; the
+  scene-length target trued to ≈28–40 s as built
 - [ ] Phase 3 (branch note: cut from main at 9d0c86a while PR #16
   was open — the shared files this phase touches (wiki INDEX/log,
   study INDEX, welcome, root README) are edited against that state;
@@ -179,7 +190,7 @@ final column (the forward recurrence, third re-read), the
 WARM-overcount convention (the one-ledger counterexample), the
 WhenToUseIt mapping close (seventh series).
 
-Scene-length target 30–45 s; formula last per scene.
+Scene-length target ≈28–40 s as built; formula last per scene.
 
 ---
 
