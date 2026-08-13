@@ -651,3 +651,22 @@ reordered.
   Scope's "shortest routes" corrected to "routes on grids"; row 48
   now says "oldest standing promise" (row 50 keeps the elder title)
 - stamp: advance to 61d1f6e
+
+## [2026-08-12] series | plan 014, gradient descent
+
+- node added: `gradient-descent` (six scenes, calculus/ — third
+  series in the topic; second ADR-008 graduation, book-to-screen
+  from the guide's formerly guide-first chapter)
+- edge delivered: `derivative-toolkit` → `gradient-descent` (the
+  row-5 "habit that survives every optimizer" promise, closed by
+  `WhereTheWalkStops`; the update derived from the toolkit's own
+  nudge algebra)
+- edge delivered: `gradient-descent` → `ctc-gradient` (the
+  training beats' "plain gradient descent", named on screen since
+  plan 010, now taught; the anchor-M walk re-read with its
+  mechanism)
+- no new promises opened: SGD/momentum/schedules, Newton, contours
+  and gradient flow are Scope exclusions, not queued ideas
+- note: the verifier's F3 (double-well basin boundary √11 at
+  η = 0.1) promoted to scene 5's payoff; the guide chapter's
+  overclaiming sentence trued in the same change

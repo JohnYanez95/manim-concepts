@@ -18,7 +18,7 @@ primitives land.
 | random-variables | `primitives/random-variables.tex` | probability random-variables series (authored) | `007.*` | `probability-` |
 | softmax-likelihood | `primitives/softmax-likelihood.tex` | probability softmax series (authored) | `008.*` | `probability-` |
 | derivative-toolkit | `primitives/derivative-toolkit.tex` | calculus derivatives series (authored) | `009.*` | `calculus-` |
-| gradient-descent | `primitives/gradient-descent.tex` | GUIDE-FIRST (seeds a future descent series) | `010.M.*`, `001.paths15` | `calculus-` |
+| gradient-descent | `primitives/gradient-descent.tex` | calculus gradient-descent series (series-backed since plan 014; formerly guide-first — the second seed to sprout) | `010.M.*`, `001.paths15` | `calculus-` |
 | ctc-gradient | `primitives/ctc-gradient.tex` | deep_learning gradient series (authored) | `010.*`, `009.G.nllgradient` | `deep_learning-` |
 | ctc-decoding | `primitives/ctc-decoding.tex` | GUIDE-FIRST (seeds the future beam-search series) | `012.dec.*` | `deep_learning-` |
 
@@ -33,8 +33,8 @@ Guide wrappers splice anchors too: `ctc-algorithm/guide.tex` uses
 and softmax chapters; do not prune them.
 
 Guide-first primitives (no parent scenes; full research treatment before
-authoring): `gradient-descent`, `ctc-decoding` (dynamic-programming
-graduated to series-backed — plan 013).
+authoring): `ctc-decoding` only (dynamic-programming graduated to
+series-backed — plan 013; gradient-descent likewise — plan 014).
 
 Machinery:
 

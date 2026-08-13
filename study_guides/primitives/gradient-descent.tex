@@ -1,12 +1,15 @@
-% Primitive: gradient-descent — GUIDE-FIRST (plan 012 D-E): no parent
-% series. The video road's training beats run "plain gradient descent"
-% on screen without teaching it; those scenes are cited only in "Where
-% this goes", as users of the concept. Slotted after derivative-toolkit:
-% everything here leans backward on slope-as-function and the sign-change
-% habit. The loss walk is plan 010's anchor-M trajectory (proposed
-% anchors in anchors-proposals-guide-first.yaml, copied exactly from the
-% plan and reproduced independently by answers/gradient_descent.py);
-% problem answers are computed by that script.
+% Primitive: gradient-descent — formerly GUIDE-FIRST (plan 012 D-E),
+% now series-backed: plan 014 built `calculus/gradient_descent_manim.py`
+% FROM this chapter (ADR 008's pipeline, book-to-screen). The scene arc
+% mirrors these pages: the update derived and walked, the factor's four
+% fates, the nudge-square ledger pricing the cliff, the stopping places
+% stamped, the anti-ball basin hop (the series' addition — see the
+% double-well truing below), and the road's walk read off one chart.
+% Slotted after derivative-toolkit: everything here leans backward on
+% slope-as-function and the sign-change habit. The loss walk is plan
+% 010's anchor-M trajectory, reproduced independently by
+% answers/gradient_descent.py; problem answers are computed by that
+% script.
 \chapter{Gradient descent}
 
 \begin{narrative}
@@ -97,10 +100,14 @@ right habit: look at the sign change. Slope crossing $-$ to $+$ is a
 valley; $+$ to $-$ is a hilltop; no crossing is a shelf. Descent
 stalls at every one of them. On the double well
 $L(w) = \tfrac{w^4}{4} - \tfrac{w^2}{2}$, whose slope $w^3 - w$
-vanishes at $-1$, $0$, $1$, a walk started anywhere to the right of
-$0$ settles into the valley at $1$ — but a walk started \emph{exactly}
-at $0$ never moves: it sits on the hilltop, gradient zero, perfectly
-stalled, certifying nothing. A zero gradient is where the walk ends;
+vanishes at $-1$, $0$, $1$, a walk started moderately to the right of
+$0$ settles into the valley at $1$ (not \emph{anywhere} to the right:
+at $\eta = 0.1$ a start beyond $w_0 = \sqrt{11} \approx 3.32$ meets a
+slope so steep that the first hop clears the hilltop and both valleys
+— a jump the parent series makes a beat of, because no rolling ball
+could copy it) — but a walk started \emph{exactly} at $0$ never
+moves: it sits on the hilltop, gradient zero, perfectly stalled,
+certifying nothing. A zero gradient is where the walk ends;
 the sign change around it is what tells you what was found. (The
 knife-edge is fragile — nudge $w_0$ to $0.1$ and the walk falls into
 a valley — which is exactly why the failure is instructive rather
@@ -147,10 +154,12 @@ the gradient of the alignment sum itself — a loss that is a sum over
 $\anchor{001.paths15}$ paths needs its slope organised as cleverly as
 its value was. The next chapter computes exactly that, and the
 training beats of its parent series (``plain gradient descent'',
-named on screen) run precisely the walk quoted above. Farther out,
-descent has earned its own future video series — learning-rate
-cliffs, valleys and hilltops, the walk watched live — and this
-chapter is that series' seed.
+named on screen) run precisely the walk quoted above. And the seed
+sprouted: descent now has its own video series — the gradient-descent
+series in `calculus/' animates this chapter beat for beat,
+learning-rate cliffs, valleys and hilltops, the walk watched live,
+plus one beat the screen added and these pages inherited: the
+basin-hopping start no ball could copy.
 \end{narrative}
 
 \section*{Practice problems}

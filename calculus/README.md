@@ -46,6 +46,19 @@ Deliberately **not** covered here:
   taken; accumulation waits for its own series.
 - **Complex exponentials and Euler's formula** — rotation is a
   different story.
+- **SGD, momentum, adaptive steps and schedules.** The descent series
+  names them once as refinements layered on the bare update and
+  teaches none of them — every training run this repo shows is plain
+  gradient descent, undoped.
+- **Newton's method and second-derivative machinery.** Curvature
+  stays geometric (the nudge square's corner); the one-step teleport
+  at the perfect rate appears as an unnamed aside at most.
+- **Contour plots and vector machinery.** Many knobs cost one
+  sentence and a loss-vs-step chart — 3blue1brown's own refusal to
+  draw 13,002 dimensions is the precedent, not a compromise.
+- **Continuous-time gradient flow.** The discrete hop is the object;
+  a dot sliding smoothly down the curve cannot overshoot, ping-pong
+  or diverge, and would silently falsify the learning-rate story.
 - **Softmax and likelihood as content.** The concepts live in
   `probability/`'s softmax/likelihood series (its dial scene answers
   "why e" with this topic's own ln); the derivatives series here only
@@ -249,6 +262,77 @@ verified for the e-and-ln series, carry into this one):
       of the differential calculus.
 - [X] [Yu. V. Sidorov, "Exponential function" (Encyclopedia of Mathematics)](https://encyclopediaofmath.org/wiki/Exponential_function)
       — (e^x)' = e^x as a modern reference statement.
+
+From the plan-014 research pass
+([`docs/plans/014-calculus-gradient-descent.md`](../docs/plans/014-calculus-gradient-descent.md)),
+unverified until a human ticks them:
+
+- [ ] [Grant Sanderson, "Gradient descent, how neural networks learn" (3blue1brown)](https://www.3blue1brown.com/lessons/gradient-descent/)
+      — the canonical intro: 1-D first, auto-shrinking steps, the
+      local-minimum caveat, and the explicit refusal to visualize
+      13,002 dimensions (the precedent for scene 6's one-sentence
+      generalisation).
+- [ ] [Michael Nielsen, *Neural Networks and Deep Learning*, ch. 1](http://neuralnetworksanddeeplearning.com/chap1.html)
+      — the derive-the-update route (choose the nudge so
+      ΔC ≈ −η‖∇C‖² < 0) scene 1 follows, and the ball metaphor
+      deployed with its own disclaimer.
+- [ ] [MIT 6.390 course notes, ch. 3, "Gradient descent"](https://introml.mit.edu/notes/gradient_descent.html)
+      — 1-D-first ordering, the worked (x−2)² example, stopping
+      criteria, and the oscillation/divergence pathologies.
+- [ ] [Gabriel Goh, "Why Momentum Really Works" (Distill)](https://distill.pub/2017/momentum/)
+      — used only for its plain-descent analysis: the per-component
+      factor 1 − αλ and the stability condition |1 − αλ| < 1.
+- [ ] [Jeremy Cohen and Alex Damian, "Part I: how does gradient descent work?"](https://centralflows.github.io/part1/)
+      — the quadratic stability threshold 2/curvature and the
+      flow-vs-discrete-steps contrast ("flow never oscillates") that
+      scene 2's hop grammar guards.
+- [ ] [Ben Frederickson, "An Interactive Tutorial on Numerical Optimization"](https://www.benfrederickson.com/numerical-optimization/)
+      — the learning-rate slider over animated iterate paths.
+- [ ] [Stanford CS231n course notes, "Neural Networks Part 3"](https://cs231n.github.io/neural-networks-3/)
+      — the loss-curve cartoon per learning rate and the log-scale
+      replot advice scene 6 uses.
+- [ ] [Jeremy Jordan, "Setting the learning rate of your neural network"](https://www.jeremyjordan.me/nn-learning-rate/)
+      — the Goldilocks step diagrams and per-rate loss trajectories.
+- [ ] [Google Machine Learning Crash Course, "Gradient descent"](https://developers.google.com/machine-learning/crash-course/linear-regression/gradient-descent)
+      — iteration-table pedagogy with exact numbers per step.
+- [ ] [Ian Goodfellow, Yoshua Bengio and Aaron Courville, *Deep Learning*, §4.3](https://www.deeplearningbook.org/contents/numerical.html)
+      — figure 4.1's sign-annotated bowl and figure 4.2's 1-D
+      critical-point triple (flagged: fetched truncated in the
+      research pass; figure annotations not re-verified).
+- [ ] [Mark Ainsworth and Yeonjong Shin, "Plateau Phenomenon" (arXiv)](https://arxiv.org/abs/2007.07213)
+      — "Plateau Phenomenon in Gradient Descent Training of ReLU
+      Networks": plateaus can end — apparent stagnation then renewed
+      descent, so a flat stretch certifies neither arrival nor
+      failure.
+- [ ] [Roger Grosse, CSC2541 lecture 9 slides](https://www.cs.toronto.edu/~rgrosse/courses/csc2541_2021/slides/lec09.pdf)
+      — plain descent as the extreme-viscosity limit of the ball
+      metaphor (flagged: confirmed via search excerpt, slides not
+      fetched in the research pass).
+- [ ] [Andrew Ng, CS229 lecture notes 1](https://see.stanford.edu/materials/aimlcs229/cs229-notes1.pdf)
+      — the classic posit-the-rule course sequence, with the
+      fixed-rate-still-converges observation.
+- [ ] [Claude Lemaréchal, "Cauchy and the Gradient Method"](https://ems.press/content/book-chapter-files/27368?nt=1)
+      — Documenta Mathematica (2012), the scholarly note scene 6's
+      history quotes ride on: Cauchy's 1847 Comptes Rendus note, its
+      astronomy motivation, and "convergence is just sloppily
+      mentioned".
+- [ ] Augustin-Louis Cauchy, "Méthode générale pour la résolution des
+      systèmes d'équations simultanées", C. R. Acad. Sci. Paris
+      25:536–538, 1847 — cited exactly per Lemaréchal's reference
+      list; the original pages were not fetched (all quotes carry
+      "as quoted by Lemaréchal").
+- [ ] Haskell B. Curry, "The method of steepest descent for
+      non-linear minimization problems", Quart. Appl. Math.
+      2(3):258–261, 1944 — the first convergence study of the
+      discrete method (bibliographic record confirmed via Semantic
+      Scholar; paper not fetched).
+- [ ] [Ioannis Mitliagkas, IFT 6085 lecture 5 notes](https://mitliagkas.github.io/ift6085-2019/ift-6085-lecture-5-notes.pdf)
+      — the scalar-quadratic rate ρ = |1 − αh| and the 2/h threshold
+      (flagged: the notes' own "ρ ≤ 1" slip at equality is wrong —
+      the repo's exact computation is the load-bearing check).
+- [ ] [Geoff Gordon and Ryan Tibshirani, CMU 10-725 lecture 5 notes](https://www.cs.cmu.edu/~ggordon/10725-F12/scribes/10725_Lecture5.pdf)
+      — the fixed-step t ≤ 1/L convergence rate (a sufficient
+      constant; the sharp quadratic threshold stays 2/L″).
 
 ## Ideas not yet built
 

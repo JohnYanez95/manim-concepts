@@ -47,7 +47,23 @@ the CTC road's own 12-knob walk as the capstone.
   the y-axis (left panel re-scoped to the first fifty steps — the
   cliff; the full 5000 kept on the log panel). Frames verified by
   eye across all six after re-render
-- [ ] Phase 3
+- [x] Phase 3: README complete (six rows, all three levels; four
+  descent-specific Scope exclusions; eighteen plan-014 references
+  unchecked for the maintainer's pass, flags carried into the
+  descriptions); wiki — `gradient-descent` node added, two edges
+  delivered (derivative-toolkit's row-5 "habit that survives every
+  optimizer" promise closed by `WhereTheWalkStops`; the gradient
+  series' on-screen "plain gradient descent" now taught, anchor-M
+  walk re-read), no new promises opened (all the near-misses are
+  Scope exclusions), log entry; **ADR-008 step**: the guide's
+  gradient-descent primitive trued to series-backed (header + the
+  seed-sprouted closing) **and the F3 erratum fixed in print** (the
+  double-well "anywhere right of 0" overclaim bounded at √11, the
+  basin hop credited to the series); study INDEX row graduated,
+  guide-first list down to ctc-decoding alone; references synced
+  (162 entries, 145 verified); both guide PDFs rebuilt green;
+  welcome re-rendered at thirteen series (rows 7+6, 402 KB, frame
+  verified). `make test` green (243)
 - [ ] Phase 4
 - [ ] Phase 5
 
