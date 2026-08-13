@@ -27,7 +27,9 @@ the CTC road's own 12-knob walk as the capstone.
   well's basin boundary at √11) promoted into the design as scene
   5's payoff; the primitive's overclaiming sentence queued for the
   phase-3 ADR-008 truing
-- [ ] Phase 1
+- [x] Phase 1: module stub (`TheSlopeBecomesAStep` placeholder) +
+  README third-series Scope paragraph, subsection and row 1;
+  `make check` green
 - [ ] Phase 2
 - [ ] Phase 3
 - [ ] Phase 4

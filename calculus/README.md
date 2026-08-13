@@ -2,7 +2,7 @@
 
 ## Scope
 
-Two series so far. The first: e and the natural logarithm, built on
+Three series so far. The first: e and the natural logarithm, built on
 `algebra/`'s counting strip: the
 strides of the strip come in every size, and this series finds the one
 that is nature's own. Compound interest poses the question (Bernoulli's
@@ -20,6 +20,13 @@ chain rules, e^x and ln differentiated, the score function finding
 the likelihood peak by hand, and the smooth max's sensitivities
 revealed as the softmax shares — deliberately tiny, because under the
 log every product the CTC road carries becomes a sum.
+The third: **gradient descent** — the toolkit's payoff. One line,
+w ← w − ηL′(w), turns a readable slope into a repeatable step; the
+series watches the walk succeed, prices exactly when the learning
+rate betrays it (the nudge square's corner is the curvature's fee),
+stamps every stopping place with the sign-change habit, retires the
+rolling-ball metaphor, and closes by reading the CTC road's own
+training walk off a loss-vs-step chart.
 
 Deliberately **not** covered here:
 
@@ -96,6 +103,25 @@ Renders: `01_TheSlopeIsAFunction.mp4` … `06_TheSmoothMaxsShares.mp4`.
 ```bash
 uv run python calculus/derivatives_manim.py
 uv run python calculus/derivatives_manim.py --list
+```
+
+### gradient_descent_manim.py
+
+Watch after the derivatives series — every beat leans on the slope
+being a function and on the sign-change habit. The rule is one line;
+the series is about what the line does, what its single dial
+controls, and what its stopping place does and does not certify.
+
+| # | Scene | Formula | What it says | Why it's true | When it's useful |
+| --- | --- | --- | --- | --- | --- |
+| 1 | `TheSlopeBecomesAStep` | $w \leftarrow w - \eta\,L'(w)$ | A slope is a reason to move: step against it, over and over, and the loss must fall. | The nudge algebra forces the rule's shape — ΔL ≈ L′·Δw, choose Δw = −ηL′ and ΔL ≈ −η(L′)² ≤ 0; on L = w² with η = ¼, w₀ = 4 the walk halves forever (4, 2, 1, ½ — under 0.01 by step 9), and the steps shrink on their own because the slope does: the brake is the landscape's, not a schedule's. | The update inside every training loop this repo shows; the walk's stopping condition is the toolkit's zero-slope, inherited blindness and all. |
+
+Renders: `01_TheSlopeBecomesAStep.mp4` (more scenes land with plan
+014 phase 2).
+
+```bash
+uv run python calculus/gradient_descent_manim.py
+uv run python calculus/gradient_descent_manim.py --list
 ```
 
 ## References
