@@ -53,7 +53,20 @@ recorded anchors the closer spends: log-space inheritance
   seed-that-sprouted closing; both PDFs rebuilt, figures clean);
   welcome re-rendered at twelve series (rows 6+6, 383 KB).
   `make test` green (235). **At John's source checkpoint**
-- [ ] Phase 4: reviews clean
+- [x] Phase 4: local CodeRabbit returned three minors — all
+  residuals of the cut merge animation (the plan's scene-2 body, the
+  wiki fold bullet now describing the actual visual, the README
+  when-useful cell gaining the use condition) — applied. Audit: 17
+  findings applied, zero numeric — two NEW promised rows recorded
+  (divide & conquer, spoken on screen; edit distance worked, its
+  table already pinned), the promise's home cell finally pointed at
+  algorithms/, the backward-sweep horizon recorded as row 48's third
+  strand, the WARM lineage's fourth removal and the waist ring's
+  rename, the Pascal-queue screen precedent, beam search's second
+  anchor, the stale root-README/study-INDEX trio fixed,
+  "in-degree" softened to the on-screen claim, and "oldest promise"
+  disambiguated to "oldest standing" (plan 007's row keeps the
+  elder title)
 - [ ] Phase 5: PR, bot review, finals
 
 ## Decisions (made at design time)
