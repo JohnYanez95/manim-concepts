@@ -84,16 +84,34 @@ def test_generated_files_in_sync():
         sys.path.pop(0)
 
 
+def solutions_per_problem(body: str) -> list[int]:
+    """Solution-env count inside each problem block, in order."""
+    starts = [m.start() for m in re.finditer(r"\\begin\{problem\}", body)]
+    counts = []
+    for i, start in enumerate(starts):
+        end = starts[i + 1] if i + 1 < len(starts) else len(body)
+        counts.append(len(re.findall(r"\\begin\{solution\}", body[start:end])))
+    return counts
+
+
 def test_every_problem_has_a_solution():
     """Single-sourcing means EXACTLY one solution inside each problem —
     cardinality alone would pass a doubled solution next to a missing one."""
     for tex in PRIMITIVES.glob("*.tex"):
-        body = tex.read_text(encoding="utf-8")
-        starts = [m.start() for m in re.finditer(r"\\begin\{problem\}", body)]
-        for i, start in enumerate(starts):
-            end = starts[i + 1] if i + 1 < len(starts) else len(body)
-            inside = len(re.findall(r"\\begin\{solution\}", body[start:end]))
-            assert inside == 1, f"{tex.name}: problem {i + 1} contains {inside} solution env(s)"
+        for i, count in enumerate(solutions_per_problem(tex.read_text(encoding="utf-8"))):
+            assert count == 1, f"{tex.name}: problem {i + 1} contains {count} solution env(s)"
+
+
+def test_solution_pairing_catches_the_swap():
+    """Regression: a missing solution beside a doubled one balances the
+    totals but must still fail per-block — the exact hole a count-only
+    check shipped with."""
+    bad = (
+        r"\begin{problem}A\begin{solution}s1\end{solution}"
+        r"\begin{solution}s2\end{solution}\end{problem}"
+        r"\begin{problem}B\end{problem}"
+    )
+    assert solutions_per_problem(bad) == [2, 0]
 
 
 def test_every_citation_resolves():
