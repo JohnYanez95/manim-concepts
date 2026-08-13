@@ -23,6 +23,13 @@ identity — per-frame gradient is softmax output minus occupancy — and the
 training dynamics that identity makes legible, through to why trained CTC
 outputs go peaky and what a label prior changes.
 
+A third series closes the road's loop at deployment: decoding as the
+inverse problem, best-path reading of the frame favourites and the
+construction where it hears nothing, the collapsed-prefix beam with
+its two ledgers (the collapse map's grammar carried into the search),
+the price of pruning made exact on one table, and the splice point
+where an external language model multiplies in.
+
 Deliberately **not** covered here:
 
 - Probability foundations. Per-frame softmax outputs, products of
@@ -111,6 +118,25 @@ Render them:
 uv run python deep_learning/ctc_gradient_manim.py            # all seven, 1080p60
 uv run python deep_learning/ctc_gradient_manim.py --list
 uv run python deep_learning/ctc_gradient_manim.py -s SoftmaxMinusOccupancy -q draft
+```
+
+### ctc_decoding_manim.py
+
+Watch after both CTC series — the alignment series built the sum this
+one searches, and the gradient series explains why trained outputs
+make the cheap decoder usually right. The road's loop closes here:
+train, decode, deploy.
+
+| # | Scene | Formula | What it says | Why it's true | When it's useful |
+| --- | --- | --- | --- | --- | --- |
+| 1 | `TheInverseProblem` | $Y^\* = \operatorname{argmax}_Y P(Y \mid X)$ | Nobody deploys a loss: a clip arrives with no reference transcript, and decoding — finding the transcript the model believes — is search, which training never had to do. | Training's loop had the transcript handed to it and only ever scored it; deployment inverts the arrow, and the honest target is the argmax over transcripts of the alignment series' sum over paths — a space that grows exponentially, so the chapter's two decoders are both approximations (Graves: "we do not know of a general, tractable decoding algorithm"). | Framing every decoding choice that follows: the cheap approximation (best-path) and the honest one (the beam) are answers to this search problem, not afterthoughts. |
+
+Renders: `01_TheInverseProblem.mp4` (more scenes land with plan 015
+phase 2).
+
+```bash
+uv run python deep_learning/ctc_decoding_manim.py
+uv run python deep_learning/ctc_decoding_manim.py --list
 ```
 
 ## References

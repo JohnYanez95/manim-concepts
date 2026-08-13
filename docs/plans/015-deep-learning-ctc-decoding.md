@@ -25,7 +25,9 @@ strand of row 42 stays promised (it is loss-side, not decoding).
   scenes; decisions D1–D9). Research ran in the plan-014 session
   (2026-08-12, parallel with the descent series' pass); digests
   pinned verbatim from that session's reports
-- [ ] Phase 1
+- [x] Phase 1: module stub (`TheInverseProblem` placeholder) +
+  README third-series Scope paragraph, subsection and row 1;
+  `make check` green
 - [ ] Phase 2
 - [ ] Phase 3 (branch note: cut from main at 9d0c86a while PR #16
   was open — the shared files this phase touches (wiki INDEX/log,
