@@ -29,7 +29,16 @@ recorded anchors the closer spends: log-space inheritance
 - [x] Phase 0: both reports pinned below; design finalized (six
   scenes; decisions D1–D6)
 - [ ] Phase 1: topic dir + stub, `make check` green
-- [ ] Phase 2: six scenes at draft, linter clean, verified by eye
+- [x] Phase 2: six scenes at draft (6 files, distinct names,
+  16–37 s). Linter: eight real findings fixed before render (the
+  fib tree spilling into the right margin, ticker rows through the
+  canopy — now one bottom-edge line, caption crowding in scenes 3/4,
+  the D&C chips' edges touching their labels — gaps widened);
+  remaining findings are the explained node-label class (labels
+  inside background-filled circles). Frames verified by eye across
+  all six. As-built truing: scene 2's tree→DAG merge animation
+  simplified at build to the fold + the naming (the chain-DAG lives
+  in prose and scene 5's shape table carries the in-degree verdict)
 - [ ] Phase 3: README + wiki + primitive trued + welcome re-render,
   `make test` green — John's checkpoint
 - [ ] Phase 4: reviews clean
@@ -99,7 +108,9 @@ calls for 11 questions at n=10, with repeat counts (F8 ×2, F7 ×3,
 F6 ×5 — asked at the sequence's own rate) beside the tree. Formula
 last: calls(n) = 2·F(n+1) − 1.
 
-**2. `WriteTheAnswersDown`** — store each answer once and the tree
+**2. `WriteTheAnswersDown`** *(as built: the fold and the naming;
+the same-label merge animation was cut — the DAG appears in scene
+5's shape table)* — store each answer once and the tree
 folds into eleven boxes. The Erickson fold: first computations write
 down into a memo row (GOOD), later copies grey WARM and read up;
 same-label nodes merge into the chain DAG. The move NAMED (dynamic
