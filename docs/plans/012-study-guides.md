@@ -426,4 +426,5 @@ solutions manual, until guide 1 assembles complete.
   fourteen figures linter-clean; guide 92 pp + solutions manual with
   per-document bibliography (a %-in-URL bbl corruption found and
   fixed in the sync script; a stale-bbl latexmk state cleaned). The
-  PR awaits the maintainer's merge, which opens the refinement loop
+  PR #13 was merged by the maintainer 2026-08-12 — v1 shipped, and
+  the refinement loop is live
