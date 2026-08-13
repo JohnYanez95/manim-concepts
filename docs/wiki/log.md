@@ -651,3 +651,23 @@ reordered.
   Scope's "shortest routes" corrected to "routes on grids"; row 48
   now says "oldest standing promise" (row 50 keeps the elder title)
 - stamp: advance to 61d1f6e
+
+## [2026-08-12] series | plan 015, CTC decoding
+
+- node added: `ctc-decoding` (seven scenes, deep_learning/ — third
+  series in the topic; third and final ADR-008 graduation: the
+  guide-first set empties)
+- edge delivered: `ctc-alignment` → `ctc-decoding` (row 42's
+  beam-search strand, the graph's oldest remaining promised strand —
+  sum-vs-max in deployment costume, the collapsed-prefix beam, the
+  two ledgers beside the trellis's final column). The label-prior
+  variant stays promised on the row
+- edges delivered: `dynamic-programming` → `ctc-decoding` (the
+  Scope-promised exact-DP prerequisite, named on screen);
+  `ctc-gradient` → `ctc-decoding` (peakiness excusing greedy;
+  spikes-not-timestamps restated at deployment);
+  `logarithms` → `ctc-decoding` (the log-add in the production
+  ledgers, named on screen — never max)
+- branch note: cut from main at 9d0c86a while PR #16 (plan 014) was
+  open; the plan-014 rows are absent from this branch's view of the
+  graph and reconcile on merge

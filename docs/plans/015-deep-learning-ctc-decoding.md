@@ -40,10 +40,31 @@ strand of row 42 stays promised (it is loss-side, not decoding).
   cache (a shared SVG unlinked twice) cost one scene one render;
   re-rendered solo. Frames verified by eye across all seven; the
   scene-length target trued to ≈28–40 s as built
-- [ ] Phase 3 (branch note: cut from main at 9d0c86a while PR #16
-  was open — the shared files this phase touches (wiki INDEX/log,
-  study INDEX, welcome, root README) are edited against that state;
-  reconcile with plan 014's rows on merge)
+- [x] Phase 3: README complete (seven rows, all three levels;
+  Scope's decoding bullet trued from "queued, not built" to the
+  beam-internals boundary; the Ideas beam-search bullet struck
+  delivered; eleven plan-015 references unchecked for the
+  maintainer's pass, excerpt-only flags carried); wiki —
+  `ctc-decoding` node added, **row 42's beam-search strand flipped
+  delivered** (the graph's oldest remaining promised strand;
+  label-prior variant stays promised on the row), three more
+  delivered edges (dynamic-programming's Scope promise cashed on
+  screen; ctc-gradient's peakiness excusing greedy; logarithms'
+  log-add in the production ledgers), log entry with the branch
+  note; **ADR-008 step**: the guide's ctc-decoding primitive trued
+  to series-backed (header + the seed-sprouted closing pointing at
+  the pruning-price beat the screen added); study INDEX row
+  graduated (guide-first set empties once PR #16 also lands); no
+  new anchors needed (every on-screen number traces to the 012.dec
+  anchors or the pinned verifier digest per ADR 007); references
+  synced (156 entries, 145 verified — the eleven new entries await
+  ticks); both guide PDFs rebuilt green; welcome re-rendered at
+  thirteen series on this branch (rows 7+6, 405 KB, frame
+  verified; the 14-series render is one command at merge
+  reconciliation). `make test` green (243). Branch note: cut from
+  main at 9d0c86a while PR #16 was open — wiki INDEX/log, study
+  INDEX, welcome and root README edited against that state,
+  reconciling trivially on merge
 - [ ] Phase 4
 - [ ] Phase 5
 

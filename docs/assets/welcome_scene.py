@@ -71,24 +71,32 @@ class Welcome(ConceptScene):
         self.play(GrowArrow(arrows[0]), FadeIn(levels[1], shift=0.2 * RIGHT), run_time=0.6)
         self.play(GrowArrow(arrows[1]), FadeIn(levels[2], shift=0.2 * RIGHT), run_time=0.6)
 
-        # Twelve series across two rows keep every name readable without
+        # Thirteen series across two rows keep every name readable without
         # shrinking the type.
         row_one = VGroup(
             *[
                 Text(t, font_size=LABEL_SIZE, color=MUTED)
-                for t in ["counting", "CTC", "independence", "conditioning", "Bayes", "logs"]
+                for t in [
+                    "counting",
+                    "CTC",
+                    "independence",
+                    "conditioning",
+                    "Bayes",
+                    "logs",
+                    "e & ln",
+                ]
             ]
         ).arrange(RIGHT, buff=0.5)
         row_two = VGroup(
             *[
                 Text(t, font_size=LABEL_SIZE, color=MUTED)
                 for t in [
-                    "e & ln",
                     "random vars",
                     "softmax",
                     "derivatives",
                     "CTC gradient",
                     "dyn. prog.",
+                    "decoding",
                 ]
             ]
         ).arrange(RIGHT, buff=0.5)

@@ -20,7 +20,7 @@ primitives land.
 | derivative-toolkit | `primitives/derivative-toolkit.tex` | calculus derivatives series (authored) | `009.*` | `calculus-` |
 | gradient-descent | `primitives/gradient-descent.tex` | GUIDE-FIRST (seeds a future descent series) | `010.M.*`, `001.paths15` | `calculus-` |
 | ctc-gradient | `primitives/ctc-gradient.tex` | deep_learning gradient series (authored) | `010.*`, `009.G.nllgradient` | `deep_learning-` |
-| ctc-decoding | `primitives/ctc-decoding.tex` | GUIDE-FIRST (seeds the future beam-search series) | `012.dec.*` | `deep_learning-` |
+| ctc-decoding | `primitives/ctc-decoding.tex` | deep_learning decoding series (series-backed since plan 015; formerly guide-first — the third seed to sprout) | `012.dec.*` | `deep_learning-` |
 
 Problem answer scripts (the solve-gate anchors, plan 012 R3) live in
 `primitives/answers/` with underscored module names
@@ -32,9 +32,12 @@ Guide wrappers splice anchors too: `ctc-algorithm/guide.tex` uses
 `010.L.uniformP`, `009.G.nllgradient` — are reserved for the gradient
 and softmax chapters; do not prune them.
 
-Guide-first primitives (no parent scenes; full research treatment before
-authoring): `gradient-descent`, `ctc-decoding` (dynamic-programming
-graduated to series-backed — plan 013).
+Guide-first primitives: dynamic-programming graduated to
+series-backed (plan 013) and ctc-decoding likewise (plan 015);
+gradient-descent's graduation rides plan 014 (PR #16). Once both
+land, the guide-first set is empty — the mode stays legitimate
+(ADR 008): a future guide may again draft chapters the screen later
+animates.
 
 Machinery:
 

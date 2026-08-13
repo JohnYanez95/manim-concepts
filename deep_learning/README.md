@@ -44,9 +44,13 @@ Deliberately **not** covered here:
   series leans on (chain and sum rules, the score function,
   ∂LSE = softmax, p − one-hot) is taught in
   [`calculus/`](../calculus/README.md)'s derivative toolkit.
-- Decoding at depth. Greedy decoding's failure appears in scene 3, but
-  beam search over collapsed prefixes and language-model fusion are queued
-  in Ideas, not built.
+- Beam-search internals at scale. The decoding series builds the
+  collapsed-prefix beam and prices pruning exactly on small tables;
+  width/pruning dynamics at production scale, log-space ledger
+  implementation and language-model fusion's tuning are named (one
+  formula, one caption) but not taught — and Graves 2006's exact
+  best-first "prefix search" is a different algorithm, deliberately
+  off screen.
 - Training realism. The gradient series' dynamics scenes use plain
   gradient descent on the worked example — no SGD noise, schedules or
   architecture effects; and the label prior is named as the peakiness
@@ -208,13 +212,61 @@ until a human does the same.
       — forward loss right, backward silently wrong unless the input is
       a true log-softmax; scene 5's implementation trap.
 
+From the plan-015 research pass
+([`docs/plans/015-deep-learning-ctc-decoding.md`](../docs/plans/015-deep-learning-ctc-decoding.md)),
+unverified until a human ticks them:
+
+- [ ] [Hannun, Maas, Jurafsky and Ng, "First-Pass LVCSR" (2014)](https://arxiv.org/abs/1408.2873)
+      — Awni Y. Hannun, Andrew L. Maas, Daniel Jurafsky and Andrew
+      Y. Ng, "First-Pass Large Vocabulary Continuous Speech
+      Recognition using Bi-Directional Recurrent DNNs": Algorithm 1,
+      the origin
+      of the p_b/p_nb prefix beam; init p_b(∅) = 1; the beam-width
+      bound the complexity beat is read from.
+- [ ] [Awni Hannun, "Example CTC Decoder in Python" (gist)](https://gist.github.com/awni/56369a90d03953e370f3964c826ed4b0)
+      — the reference implementation everyone copies; the merging
+      case commented; log-space ledgers with a stable logsumexp.
+- [ ] [Awni Hannun et al., "Deep Speech: Scaling up end-to-end speech recognition"](https://arxiv.org/abs/1412.5567)
+      — §2.2's Q(c) language-model-fusion objective scene 7 quotes,
+      α, β set by cross-validation, beams 1000–8000.
+- [ ] [Lasse Borgholt, "CTC Networks and Language Models: Prefix Beam Search Explained"](https://medium.com/corti-ai/ctc-networks-and-language-models-prefix-beam-search-explained-c11d1ee23306)
+      — the implementation-ordered walkthrough (the camp the series
+      deliberately does not follow) and pruned-prefix recovery.
+- [ ] [Harald Scheidl, "Beam Search Decoding in CTC-trained Neural Networks"](https://harald-scheidl.medium.com/beam-search-decoding-in-ctc-trained-neural-networks-5a889a3d85a7)
+      — the smallest numeric greedy failure (0.48 vs 0.52) and the
+      Pb/Pnb update equations; its numbers deliberately not reused
+      (near-misses of the anchored construction).
+- [ ] [Ameya Mahabaleshwarkar, CMU 11-785 F22 recitation 9: CTC decoding](https://deeplearning.cs.cmu.edu/F22/document/recitation/Recitation9/rec9_beamsearch.pdf)
+      — greedy → exhaustive → beam ordering; ships the one-ledger
+      tree (documented evidence the single-mass presentation ships
+      in respected courses; a suspected typo noted in the plan).
+- [ ] [Zeyu Zhao, "CTC Prefix Beam Search Decoding Algorithm with Language Model"](https://zhaozeyu1995.github.io/CTC-Prefix-Beam-Search-Decoding-Algorithm-with-Language-Model/)
+      — code-first case enumeration in raw probability space; the
+      cautionary foil for the log-space caption.
+- [ ] [Ryan Leary, TensorFlow PR #15586](https://github.com/tensorflow/tensorflow/pull/15586)
+      — "Remove invalid merge_repeated option from CTC beam
+      decoder": the path/prefix conflation fossilized in an API.
+- [ ] [TensorFlow issue #21051](https://github.com/tensorflow/tensorflow/issues/21051)
+      — width-1 beam ≠ greedy (the beam still merges and keeps two
+      ledgers), correcting the API docs; no single credited author.
+- [ ] [Philipp V. Rouast and Marc T. P. Adam, "Single-stage intake gesture detection…"](https://arxiv.org/abs/2008.02999)
+      — no improvement beyond beam width 3 on their task (seen via
+      search excerpt in the research pass, not verified on-page).
+- [ ] [Andrei Andrusenko et al., "Fast Context-Biasing" (2024)](https://arxiv.org/abs/2406.07096)
+      — beam-without-LM tracks greedy on peaked outputs (seen via
+      search excerpt in the research pass, not verified on-page).
+
 ## Ideas not yet built
 
 Rough queue, in roughly the order they build on each other:
 
-- Beam search over collapsed prefixes — why a prefix needs two
-  probabilities (ending-in-blank vs. not), and the merge step that makes
-  CTC beam search different from vanilla beam search.
+- ~~Beam search over collapsed prefixes~~ — delivered by the decoding
+  series: `SearchTheTranscripts` relabels the candidates to collapsed
+  prefixes with the merge on screen, `TheTwoLedgers` forces the two
+  probabilities from the collapse map (and prices the one-ledger
+  overcount 3/8 vs 1/8), `ThePriceOfPruning` itemises the beam's one
+  approximation. What stays queued at scale sits in Scope's
+  beam-internals bullet.
 - ~~Training dynamics~~ — delivered by the gradient series:
   `TheErrorSignalLearns` rebuilds Graves fig. 4's arc countable, and
   `WhyTheSpikesAppear` delivers blank dominance and the peakiness
