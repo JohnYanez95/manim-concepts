@@ -3,7 +3,7 @@
 ## Scope
 
 Probability as proportion, built visually: the sample space as a unit
-square, events as regions, probability as area. Five series so far. The
+square, events as regions, probability as area. Six series so far. The
 first covers **independence** — the product rule P(A∩B) = P(A)·P(B) as
 the *primary* definition, why it is the probability-weighted upgrade of
 the counting grid, the confusions it attracts, and the product over a
@@ -27,7 +27,14 @@ accumulating independent evidence, softmax as exp-then-normalize
 forced by shift invariance, temperature and the base-change answer to
 "why e", and negative log-likelihood as the visible gap on the
 log-sum-exp ruler — the remaining half of the bridge promised to
-`deep_learning/`, delivered.
+`deep_learning/`, delivered. The sixth covers **inclusion–exclusion** — the
+union rule from two sets to n: the overlap counted twice on the die
+strip and removed on the unit square, the per-cell ledger on the
+two-dice grid that forces the three-set signs, the picture that breaks
+at four sets and the two examples sharing one coefficient row, the
+n-set formula proved by pairing subsets, the matching problem climbing
+to 1 − 1/e, and the truncated sum as a bound — the counting form
+`combinatorics/` queued, delivered from the probability side.
 
 This topic exists because two earlier ones promised it: the
 [multiplicative rule](../combinatorics/README.md) counts pairs as
@@ -207,6 +214,24 @@ Renders: `01_TheLikelihoodLens.mp4` … `06_TheLossThatTrains.mp4`.
 ```bash
 uv run python probability/softmax_likelihood_manim.py
 uv run python probability/softmax_likelihood_manim.py --list
+```
+
+### inclusion_exclusion_manim.py
+
+Watch after the independence series — it reuses that series' die
+strip, two-dice grid and Bernstein coins, and its first beat is the
+counting rule `combinatorics/` queued: the overlap counted twice. The
+sum rule is the product rule's sibling on the same square.
+
+| # | Scene | Formula | What it says | Why it's true | When it's useful |
+| --- | --- | --- | --- | --- | --- |
+| 1 | `TwoSetsOneOverlap` | $P(A\cup B)=P(A)+P(B)-P(A\cap B)$ | Adding two events' probabilities counts their overlap twice; subtract it once. | On the die strip, even and at-most-4 share {2, 4}: 3 + 4 − 2 = 5 cells; as fractions the naive sum 1/2 + 2/3 = 7/6 exceeds 1, the alarm — and on the unit square the doubly covered rectangle is removed once. | Any "A or B" question; disjoint events are the case where the sum is exact, independent ones the case where the overlap is a product. |
+
+Renders: `01_TwoSetsOneOverlap.mp4` … (seven when built).
+
+```bash
+uv run python probability/inclusion_exclusion_manim.py
+uv run python probability/inclusion_exclusion_manim.py --list
 ```
 
 ## References

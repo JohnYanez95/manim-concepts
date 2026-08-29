@@ -30,7 +30,10 @@ Branch `feat/probability-inclusion-exclusion`, cut from `main` at
   repo-touchpoint maps consulted (file set, primitive shape, solve
   gate, wiki row shapes, welcome.gif recipe); design finalized
   (seven scenes; decisions D1–D10)
-- [ ] Phase 1
+- [x] Phase 1: module stub (`TwoSetsOneOverlap` skeleton, module
+  docstring listing all seven, `_die_strip`/`_tint` copied locally) +
+  README sixth-series Scope clause, subsection and row 1; `make check`
+  green (259 tests)
 - [ ] Phase 2
 - [ ] Phase 3
 - [ ] Phase 4
