@@ -34,7 +34,21 @@ Branch `feat/probability-inclusion-exclusion`, cut from `main` at
   docstring listing all seven, `_die_strip`/`_tint` copied locally) +
   README sixth-series Scope clause, subsection and row 1; `make check`
   green (259 tests)
-- [ ] Phase 2
+- [x] Phase 2: seven scenes at draft (7 files, distinct names; 54, 54,
+  56, 40, 32, 35, 23 s — the three spine scenes carry four beats each).
+  Four-circle census computed by sampling (14 regions, the missing two
+  are the opposite-pairs-only masks 0101/1010; region centroids are the
+  `_CIRCLE_REGIONS` table) and a genuine 16-region four-ellipse layout
+  found by search (a = 3.0, b = 1.3, offsets ±0.7/±1.4, drop −0.5,
+  ±35°). Linter: 23 initial findings — circle strokes through the five
+  small region digits (flower enlarged, digits 12 pt), the prompt
+  grazed by the flower and the ladder, an over-wide caption, the limit
+  line through a dot label, the exact-value line through bar labels
+  (labels moved under the baseline with their sign) — linter clean on
+  all seven. Frames verified by eye on 12-frame contact sheets plus
+  the ledger's transition window (22–34 s: (6,6) reads 0 in WARM, then
+  1 in GOOD) and the ellipse still; scene 7 re-laid (rows were touching
+  the title rule) and its holds widened from 16.5 s to 23 s
 - [ ] Phase 3
 - [ ] Phase 4
 - [ ] Phase 5
