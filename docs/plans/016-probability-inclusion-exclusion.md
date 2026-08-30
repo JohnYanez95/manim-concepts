@@ -142,8 +142,22 @@ Branch `feat/probability-inclusion-exclusion`, cut from `main` at
   ABCD; ellipses: all fifteen, AC and BD included), the tally caption
   states the ring rule, and scene 2's ledger lists the outcome tuples
   behind every term. Scenes 2 and 3 re-rendered at 1080p60, linter
-  clean, frames verified. The plan closes; the PR awaits the
-  maintainer's merge
+  clean, frames verified. Second round of maintainer feedback: a
+  1080p frame of scene 3's caption read `p_k = (1/6)^k` — `Text`
+  renders literally, only `MathTex` reads TeX. Resolved as a
+  constraint, not a patch: `tests/test_text_markup.py` (AST scan of
+  every `Text`/`caption`/`chip`/… literal for `^`, `\cmd`, `_` glued
+  to an index; watched fail on 17 literals in 5 modules before the
+  fixes, 276 tests after) plus a CLAUDE.md gotcha. The fixes: Unicode
+  super/subscripts where the exponent is one symbol (`(1/6)ᵏ`, `pₖ`,
+  `(1 − 1)ᵏ`, `Σ(−1)ᵏ/k!`, `eˣ`, `2ᴺ`, `eᶜ`, `e⁷⁰⁹`), words otherwise
+  (`e raised to ln x`; the decoding legend's `p_b`/`p_nb` became "the
+  blank ledger" / "the letter ledger"; the indicator pointer written
+  out). Seven scenes across the five modules re-rendered at 1080p60
+  and frame-verified. Pre-existing, not mine: the layout linter
+  reports one finding in `logarithms`' `TheCountingStrip` (an arrow
+  tip through a "6"), untouched by this change. The plan closes; the
+  PR awaits the maintainer's merge
 
 ## Decisions (made at design time)
 

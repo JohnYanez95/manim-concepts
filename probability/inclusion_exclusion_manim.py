@@ -719,8 +719,8 @@ class FourSetsNoPicture(ConceptScene):
             self.play(FadeIn(part))
         self.wait(1.0)
         which = caption(
-            "rolls: p_k = (1/6)^k, and 1 − (5/6)⁴ says the same in one line — independent only;\n"
-            "hats: p_k = (4 − k)!/4!, and no shortcut exists"
+            "rolls: pₖ = (1/6)ᵏ, and 1 − (5/6)⁴ says the same in one line — independent only;\n"
+            "hats: pₖ = (4 − k)!/4!, and no shortcut exists"
         ).move_to(2.6 * DOWN)
         self.play(FadeIn(which))
         self.wait(1.2)
@@ -735,7 +735,7 @@ class FourSetsNoPicture(ConceptScene):
             color=ACCENT,
         ).move_to(0.4 * UP)
         gloss = caption(
-            "when every k-fold intersection has the same probability p_k —\n"
+            "when every k-fold intersection has the same probability pₖ —\n"
             "the coefficients are Pascal's row, and n stops being frightening"
         ).next_to(rule, DOWN, buff=0.5)
         self.play(Write(rule), Create(boxed(rule, buff=0.35)))
@@ -864,12 +864,12 @@ class EveryPointCountedOnce(ConceptScene):
         self.play(FadeOut(four))
         pointers = VGroup(
             caption(
-                "(1 − 1)^k = 0 says the same thing — "
+                "(1 − 1)ᵏ = 0 says the same thing — "
                 "that is the binomial theorem, queued in combinatorics/"
             ),
             caption(
-                "indicators do it too: 1 − ∏(1 − 1_A) expanded, then linearity —\n"
-                "SameOutcomesAdd's, which needed no independence either"
+                "indicators do it too: expand ∏(1 − Iᵢ), Iᵢ the indicator of Aᵢ,\n"
+                "then linearity — SameOutcomesAdd's, which needed no independence either"
             ),
         ).arrange(DOWN, buff=0.3)
         pointers.move_to(1.6 * DOWN)
@@ -970,7 +970,7 @@ class TheMatchingLimit(ConceptScene):
         ).move_to(2.0 * UP)
         e_note = caption(
             "e is calculus/'s compound-interest ceiling; 1/e already appeared as the binomial's\n"
-            "zero-success limit — the series Σ(−1)^k/k! = 1/e is a fact this repo has not built"
+            "zero-success limit — the series Σ(−1)ᵏ/k! = 1/e is a fact this repo has not built"
         ).next_to(limit_line, DOWN, buff=0.35)
         roads = VGroup(
             Text(

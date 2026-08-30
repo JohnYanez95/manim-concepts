@@ -531,19 +531,19 @@ class TheCurveThatIsItsOwnSlope(ConceptScene):
             color=ACCENT,
         ).move_to(0.6 * UP)
         chain_note = caption("the chain rule through the undo-never-cancel pair —")
-        chain_note2 = caption("e^(ln x) is just x, so the whole left side is x · ln′(x)")
+        chain_note2 = caption("e raised to ln x is just x, so the whole left side is x · ln′(x)")
         chain_note.move_to(0.35 * DOWN)
         chain_note2.next_to(chain_note, DOWN, buff=0.15)
         self.play(Write(undo))
         self.play(Write(chain))
         self.play(FadeIn(chain_note), FadeIn(chain_note2))
         mirror = caption("the mirror check: at x = e, ln climbs at 1/e — the y = x")
-        mirror2 = caption("reflection of e^x climbing at e; rise and run swap")
+        mirror2 = caption("reflection of eˣ climbing at e; rise and run swap")
         mirror.move_to(1.45 * DOWN)
         mirror2.next_to(mirror, DOWN, buff=0.15)
         self.play(FadeIn(mirror), FadeIn(mirror2))
         euler = caption("Euler named e in 1748 (Introductio §122)")
-        euler2 = caption("and wrote d(e^x) = e^x dx in 1755 (Institutiones §188)")
+        euler2 = caption("and wrote d(eˣ) = eˣ dx in 1755 (Institutiones §188)")
         euler.move_to(2.4 * DOWN)
         euler2.next_to(euler, DOWN, buff=0.15)
         self.play(FadeIn(euler), FadeIn(euler2))
@@ -557,7 +557,7 @@ class TheCurveThatIsItsOwnSlope(ConceptScene):
             )
         )
         takeaway = Text(
-            "e^x is its own slope; ln pays it back as 1/x",
+            "eˣ is its own slope; ln pays it back as 1/x",
             font_size=26,
         ).move_to(2.95 * DOWN)
         self.play(FadeIn(takeaway, shift=0.2 * UP), Create(boxed(takeaway, buff=0.26)))

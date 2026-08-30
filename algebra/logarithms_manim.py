@@ -345,9 +345,7 @@ class ShrinkCounts(ConceptScene):
             Text(
                 "log 0 = −∞: a zero prior sits infinitely far down the ruler", font_size=BODY_SIZE
             ),
-            Text(
-                "and slow is not bounded — name any N, 2^N sits on the strip", font_size=BODY_SIZE
-            ),
+            Text("and slow is not bounded — name any N, 2ᴺ sits on the strip", font_size=BODY_SIZE),
         ).arrange(DOWN, buff=0.3)
         facts.move_to(1.5 * DOWN)
         self.play(LaggedStart(*[FadeIn(f) for f in facts], lag_ratio=0.3))
