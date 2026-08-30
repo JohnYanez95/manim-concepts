@@ -70,7 +70,9 @@ Deliberately **not** covered here:
 - Measure-theoretic formality. "Probability is area" is used as a
   faithful picture, not developed as measure theory.
 - Counting itself — that is `combinatorics/`'s job; this topic starts
-  where counting hands over to proportion.
+  where counting hands over to proportion. (The inclusion–exclusion series
+  counts cells on the die strip for one beat — the counting form
+  `combinatorics/` had queued — and then teaches the rule as area.)
 - The softmax gradient as a taught result. `TheLossThatTrains`
   foreshadows "softmax output minus occupancy" in prose; the
   single-frame half (p − one-hot) is taught by `calculus/`'s
@@ -225,9 +227,15 @@ sum rule is the product rule's sibling on the same square.
 
 | # | Scene | Formula | What it says | Why it's true | When it's useful |
 | --- | --- | --- | --- | --- | --- |
-| 1 | `TwoSetsOneOverlap` | $P(A\cup B)=P(A)+P(B)-P(A\cap B)$ | Adding two events' probabilities counts their overlap twice; subtract it once. | On the die strip, even and at-most-4 share {2, 4}: 3 + 4 − 2 = 5 cells; as fractions the naive sum 1/2 + 2/3 = 7/6 exceeds 1, the alarm — and on the unit square the doubly covered rectangle is removed once. | Any "A or B" question; disjoint events are the case where the sum is exact, independent ones the case where the overlap is a product. |
+| 1 | `TwoSetsOneOverlap` | $P(A\cup B)=P(A)+P(B)-P(A\cap B)$ | Adding two events' probabilities counts their overlap twice; subtract it once. | On the die strip, even and at-most-4 share {2, 4}: 3 + 4 − 2 = 5 cells; as fractions the naive sum 1/2 + 2/3 = 7/6 exceeds 1 — the alarm — and on the unit square the doubly covered rectangle is removed once, 1/2 + 2/3 − 1/3 = 5/6; on the two-dice grid one cell carries both sixes, 6/36 + 6/36 − 1/36 = 11/36. | Any "A or B" question; disjoint events are the case where the sum is exact ({1, 2} and {5, 6}: 2/6 + 2/6), independent ones the case where the overlap is a product (1/3 = 1/2 · 2/3), and "exactly one" subtracts the overlap twice (1/2, not 5/6). |
+| 2 | `ThreeSetsOneLedger` | $P(A\cup B\cup C)=\sum_i P(A_i)-\sum_{i<j}P(A_i\cap A_j)+P(A\cap B\cap C)$ | Three events: add the singles, subtract the pairs, add the triple back. | On the two-dice grid (first 6, second 6, sum ≥ 10) every cell is stamped as the terms arrive — +1 per set, −1 per pair, +1 for the triple; (6, 6) reads 3, then 0 (vanished from a union it belongs to), then 1; 6 + 6 + 6 − 1 − 3 − 3 + 1 = 12 of 36. Bernstein's coins give an empty centre: 3/2 − 3/4 + 0 = 3/4. | Any "at least one of three"; and the licence check — the complement shortcut 1 − (1/2)³ = 7/8 misses 3/4 by exactly the product the triple term is not, so "multiply the complements" needs mutual independence. |
+| 3 | `FourSetsNoPicture` | $\sum_{k=1}^{n}(-1)^{k+1}\binom{n}{k}\,p_k$ | Four circles cannot draw sixteen regions; the ledger does not care — and symmetric events collapse the sum to one Pascal row. | Four circles make 14 regions, not 16 (Venn, 1881 — four ellipses do it); four hats give 4·(1/4) − 6·(1/12) + 4·(1/24) − 1/24 = 15/24 with no product anywhere, de Méré's four rolls give 4·(1/6) − 6·(1/36) + 4·(1/216) − 1/1296 = 671/1296 with every term a product — the same 4, 6, 4, 1 — and any outcome in all four events is counted 4 − 6 + 4 − 1 = 1. | Symmetric events of any number: matching problems, "at least one of n identical trials", collisions — the complement 1 − (5/6)⁴ works only for the independent case. |
+| 4 | `EveryPointCountedOnce` | $P(\bigcup_i A_i)=\sum_{k}(-1)^{k+1}\sum_{\lvert S\rvert=k}P(\bigcap_{i\in S}A_i)$ | The n-set formula: one term per non-empty subset, its sign alternating with the subset's size. | A point in exactly k sets is counted C(k,1) − C(k,2) + ⋯ times; pair every subset with its toggle S △ {1} — sizes of opposite parity cancel — and only {1} survives, so the count is 1 for every k (3 − 3 + 1, 4 − 6 + 4 − 1) with no binomial theorem needed; the running count 4, −2, 2, 1 is a count, not a probability. | The general tool behind every sieve; the binomial identity (1 − 1)^k = 0 and the indicator expansion 1 − ∏(1 − 1_A) are the same bookkeeping, named as pointers. |
+| 5 | `TheMatchingLimit` | $1-\tfrac{1}{2!}+\tfrac{1}{3!}-\cdots\to 1-\tfrac{1}{e}$ | n hats returned at random: the chance that someone gets their own settles at 1 − 1/e ≈ 0.6321, never at 1. | C(n,k) equal terms of (n−k)!/n! collapse to 1/k!; the values 1/2, 2/3, 5/8, 19/30, … oscillate around the limit (above at n = 3, below at n = 4), each error smaller than the next term; beside it (1 − 1/n)ⁿ reaches the same 1/e by an independent road (0.3164 vs 0.375 at n = 4). | Montmort's Treize (1708) and de Moivre (1718): the archetype of dependent symmetric events — and the second place this repo meets 1/e, now with no independence in it. |
+| 6 | `BracketsAndBounds` | $P(\bigcup A_i)\le S_1,\ \ge S_1-S_2,\ \le S_1-S_2+S_3$ | Stop the sum early and you hold a bound: one term over, two under, three over. | The partial sums bracket the truth on both four-set examples (1, 1/2, 2/3, 5/8 and 2/3, 1/2, 14/27, 671/1296) because a truncated ledger over- or under-counts every point with the sign of its last term kept — Σ_{j≤m}(−1)^j C(k,j) = (−1)^m C(k−1,m). | Boole's inequality on rare events (four at 0.01: ≤ 0.04 against 0.0394 exact under independence) is nearly exact and needs no independence; on four hats it says ≤ 1 — honest and useless; Bonferroni (1936) named the ladder. |
+| 7 | `WhenToReachForIt` | — | Add, complement, sieve, or bound — which move an "A or B" question needs. | Disjoint → add (exact); independent "at least one" → complement; dependent but symmetric → inclusion–exclusion with C(n,k)·p_k; many rare events → the union bound; "exactly m of n" → the sieve, named not built; 1..30 by 2, 3, 5 → 15 + 10 + 6 − 5 − 3 − 2 + 1 = 22 covered, 8 survivors = φ(30). | Blitzstein & Hwang's verdict as the closing caption: try the other tools first — inclusion–exclusion is the last resort. |
 
-Renders: `01_TwoSetsOneOverlap.mp4` … (seven when built).
+Renders: `01_TwoSetsOneOverlap.mp4` … `07_WhenToReachForIt.mp4`.
 
 ```bash
 uv run python probability/inclusion_exclusion_manim.py
@@ -446,6 +454,121 @@ for the softmax/likelihood series:
 - [X] [J. Willard Gibbs, Elementary Principles in Statistical Mechanics (1902)](https://archive.org/details/elementaryprinci00gibbrich)
       — the canonical-distribution form softmax(−E/kT) descends from;
       cited for the form, not a specific 1868 claim.
+
+From the plan-016 research pass
+([`docs/plans/016-probability-inclusion-exclusion.md`](../docs/plans/016-probability-inclusion-exclusion.md)),
+for the inclusion–exclusion series, unverified until a human ticks them:
+
+- [ ] [Sheldon Ross, A First Course in Probability, 10th ed. (Pearson, 2019)](https://www.cs.utexas.edu/~abdonm/SDS%20321/a_first_course_in_probability.pdf)
+      — Ch. 2 §2.4 Prop. 4.3 (two events), Prop. 4.4 (the inclusion–exclusion
+      identity) with Remarks 1–3 — the counting argument, the compact form, the
+      Bonferroni ladder and Boole's inequality; Example 5m the matching problem,
+      e⁻¹ ≈ .3679.
+- [ ] [William Feller, An Introduction to Probability Theory, vol. 1 (1950)](https://archive.org/details/dli.ernet.5666)
+      — Wiley, 1950 first edition (read there). Ch. IV §1 Theorem (1.5) P₁ = S₁
+      − S₂ + ⋯ ± S_N; §4 the matching table; IV.6 problem (3) Bonferroni's
+      inequalities; V.3 Example (e) and the Bernstein credit. Read in the 1950
+      first edition.
+- [ ] [Grinstead and Snell, Introduction to Probability, ch. 3 source](https://math.dartmouth.edu/~prob/prob/ch3.tex)
+      — Theorem 3.10, Example 3.13 hat check, Table 3.7 (n = 3…10), Historical
+      Remarks on de Montmort's Treize.
+- [ ] [Miklós Bóna, A Walk Through Combinatorics, ch. 7 "The Sieve"](https://archive.org/stream/a-walk-through-combinatorics/a-walk-through-combinatorics_djvu.txt)
+      — the sieve formula with the (1−1)ⁿ proof; D(2) = 1, D(3) = 2, D(4) = 9.
+- [ ] [John Venn, Symbolic Logic (Macmillan, 1881)](https://archive.org/details/symboliclogic00venniala)
+      — ch. V pp. 105–107, verbatim on screen: "four circles cannot be so drawn
+      as to intersect one another in the way required"; the four-ellipse diagram
+      with 16 partitions.
+- [ ] [John Venn, "On the Diagrammatic and Mechanical Representation…" (1880)](https://www.tandfonline.com/doi/abs/10.1080/14786448008626877)
+      — "On the Diagrammatic and Mechanical Representation of Propositions and
+      Reasonings", Philosophical Magazine (5) 10(59), July 1880, 1–18 — the 1880
+      paper (paywalled; wording quoted via Cook and Wikipedia): "Beyond three
+      terms circles fail us".
+- [ ] [Deborah Bennett, "Origins of the Venn Diagram" (2015)](https://logic-teaching.github.io/pred/texts/Bennett%202015%20-%20Origins%20of%20the%20Venn%20Diagram.pdf)
+      — Venn 1880 quotes; four ellipses = 16 compartments; five terms unsolved
+      by Venn.
+- [ ] [Frank Ruskey and Mark Weston, "A Survey of Venn Diagrams" (EJC DS5)](https://www.combinatorics.org/files/Surveys/ds5/VennWhatEJC.html)
+      — "What is a Venn Diagram?" section of the dynamic survey — the formal
+      definition (all 2ⁿ regions nonempty), Euler vs Venn diagrams, "4 ellipses,
+      originally found by Venn himself".
+- [ ] [Satyadev Nandakumar, "Venn Diagrams and Circles" (IIT Kanpur)](https://www.cse.iitk.ac.in/users/satyadev/venn.html)
+      — the Euler-formula count V = 12, E = 24, F = 14 for four circles.
+- [ ] [John D. Cook, "Limitations on Venn diagrams"](https://www.johndcook.com/blog/2024/09/28/limitations-on-venn-diagrams/)
+      — quotes Venn 1880 on four circles; four curves as the practical
+      legibility limit.
+- [ ] [Branko Grünbaum, "Venn Diagrams and Independent Families of Sets"](https://www.tandfonline.com/doi/abs/10.1080/0025570X.1975.11976431)
+      — Mathematics Magazine 48(1) (1975) 12–23 — the five-ellipse Venn diagram
+      and the general theory (citation only — the four-ellipse diagram is Venn's
+      own).
+- [ ] [Abraham de Moivre, The Doctrine of Chances (London, 1718)](https://archive.org/details/bim_eighteenth-century_the-doctrine-of-chances_moivre-abraham-de_1718)
+      — Problem XXV, letters "taken promiscuously": the matching problem in the
+      first edition.
+- [ ] [O'Connor and Robertson, "Montmort's Problême du Treize" (MacTutor)](https://mathshistory.st-andrews.ac.uk/Extras/Montmort_Treize/)
+      — posed 1708, solved 1713, the Nicolaus Bernoulli correspondence.
+- [ ] [J J O'Connor and E F Robertson, Pierre Rémond de Montmort (MacTutor)](https://mathshistory.st-andrews.ac.uk/Biographies/Montmort/)
+      — the Essay d'analyse editions and the de Moivre quarrel.
+- [ ] [Lajos Takács, "The problem of coincidences" (1980)](https://link.springer.com/article/10.1007/BF00327875)
+      — Archive for History of Exact Sciences 21(3) (1980) 229–244 — the
+      standard history of the matching problem (citation only, paywalled).
+- [ ] [András Prékopa, "Inclusion-exclusion formula" (Encyclopedia of Math.)](https://encyclopediaofmath.org/wiki/Inclusion-exclusion_formula)
+      — "frequently attributed to H. Poincaré … already known to A. De Moivre".
+- [ ] [M. Hazewinkel, "Montmort matching problem" (Encyclopedia of Math.)](https://encyclopediaofmath.org/wiki/Montmort_matching_problem)
+      — jeu du treize / rencontre; 1 − e⁻¹.
+- [ ] [Ana Patrícia Martins and Teresa Sousa, BJHM 37(3) (2022) 212–229](https://www.tandfonline.com/doi/full/10.1080/26375451.2022.2082158)
+      — "Formulations of the inclusion–exclusion principle from Legendre to
+      Poincaré, with emphasis on Daniel Augusto da Silva" — the 19th-century
+      attributions — Da Silva 1854, Sylvester 1883, Poincaré 1896 (citation
+      only).
+- [ ] [Alexander Bogomolny, "Mutually (Jointly) Independent Events"](https://www.cut-the-knot.org/Probability/MutuallyIndependentEvents.shtml)
+      — Cut the Knot — both Bernstein 1946 examples (triple ∅ and triple 1/4),
+      with the Russian citation.
+- [ ] [Dennis White, "Math 4707: Inclusion-Exclusion and Derangements"](https://www-users.cse.umn.edu/~reiner/Classes/Derangements.pdf)
+      — the principle proved by a sign-reversing involution — the toggle pairing
+      `EveryPointCountedOnce` draws.
+- [ ] [Benjamin and Quinn, "An Alternate Approach to Alternating Sums"](https://math.hmc.edu/benjamin/wp-content/uploads/sites/5/2019/06/An-Alternate-Approach-to-Alternating-Sums.pdf)
+      — Arthur T. Benjamin and Jennifer J. Quinn, "… A Method to DIE for" — the
+      toggle-1 pairing with the n = 4 subset table; the partial-sum identity
+      Σ_{j≤m}(−1)^j C(k,j) = (−1)^m C(k−1,m) behind the brackets.
+- [ ] [Márton Balázs and Bálint Tóth, "Inclusion-exclusion principle" (2014)](https://people.maths.bris.ac.uk/~mb13434/incl_excl_n.pdf)
+      — University of Bristol lecture note — Prop. 1 two events by disjoint
+      pieces; Thm 2 by induction ("add them back once. But then we run into
+      trouble with four-intersections"); Corollary 3 the alternating bounds.
+- [ ] [Jeremy Orloff and Jonathan Bloom, MIT 18.05 class 2 reading](https://math.mit.edu/~dav/05.dir/class2-prep.pdf)
+      — "Probability: Terminology and Examples" — Rule 3 as "the
+      inclusion-exclusion principle", "the overlap gets counted twice", "Rule 2
+      is a special case of Rule 3".
+- [ ] [Stanford Math 61DM, "Handout: Inclusion-Exclusion Principle" (2016)](https://web.stanford.edu/~jacobfox/61DMfiles/inclusion-exclusion%20principle.pdf)
+      — no byline on the handout, hosted on Jacob Fox's course directory —
+      iteration to three sets, induction, then the per-element count Σ(−1)^{i+1}
+      C(k,i) = 1; derangements to n!/e.
+- [ ] [Physics 116C (UC Santa Cruz), "The Inclusion-Exclusion Principle"](https://scipp-legacy.pbsci.ucsc.edu/~haber/ph116C/InclusionExclusion.pdf)
+      — Fall 2012, no byline, hosted under Howard Haber's course page — the
+      per-point proof written out (eq. 7) and the derangement count term by
+      term.
+- [ ] [David Guichard, Introduction to Combinatorics and Graph Theory, §2.1](https://www.whitman.edu/mathematics/cgt_online/book/section02.01.html)
+      — "The Inclusion-Exclusion Formula" — the complement form, the per-element
+      count, worked sieve counts.
+- [ ] [Dan Ma, probability blog — posts tagged inclusion-exclusion](https://probabilityandstats.wordpress.com/tag/inclusion-exclusion-principle/)
+      — the matching table n = 2…8 and P(exactly k matches) ≈ e⁻¹/k!.
+- [ ] [Eric W. Weisstein, "de Méré's Problem" (MathWorld)](https://mathworld.wolfram.com/deMeresProblem.html)
+      — 1 − (5/6)⁴ ≈ 0.5177 vs 1 − (35/36)²⁴ ≈ 0.4914; de Méré and Pascal (no
+      year on the page — none on screen).
+- [ ] [Gaston Sanchez, "De Mere's Games" (Introduction to Computing with Data)](https://www.gastonsanchez.com/intro2cwd/demere.html)
+      — 1296 − 625 = 671 outcomes with at least one six.
+- [ ] [Hossein Pishro-Nik, Introduction to Probability, §6.2.1 Union Bound](https://www.probabilitycourse.com/chapter6/6_2_1_union_bound_and_exten.php)
+      — Introduction to Probability, Statistics, and Random Processes — the
+      union bound by induction, the alternating-terms bounds.
+- [ ] [Wikipedia, Inclusion–exclusion principle](https://en.wikipedia.org/wiki/Inclusion%E2%80%93exclusion_principle)
+      — the general formula, the counting and indicator proofs, the attribution
+      paragraph (de Moivre 1718, Da Silva 1854, Sylvester 1883), the derangement
+      limit.
+- [ ] [Wikipedia, Boole's inequality](https://en.wikipedia.org/wiki/Boole%27s_inequality)
+      — the Bonferroni inequalities in S_k notation; the Bonferroni 1936
+      citation.
+- [ ] [Wikipedia, Derangement](https://en.wikipedia.org/wiki/Derangement)
+      — D(n) = 1, 0, 1, 2, 9, 44, 265, 1854, 14833; Montmort 1708/1713.
+- [ ] [Wikipedia, Venn diagram](https://en.wikipedia.org/wiki/Venn_diagram)
+      — the 1880 citation (vol. 10 no. 59); "only 14 regions as opposed to 2⁴ =
+      16"; Venn's ellipses; Grünbaum's five.
 
 ## Ideas not yet built
 

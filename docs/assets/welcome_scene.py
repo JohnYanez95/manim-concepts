@@ -71,37 +71,20 @@ class Welcome(ConceptScene):
         self.play(GrowArrow(arrows[0]), FadeIn(levels[1], shift=0.2 * RIGHT), run_time=0.6)
         self.play(GrowArrow(arrows[1]), FadeIn(levels[2], shift=0.2 * RIGHT), run_time=0.6)
 
-        # Fourteen series across two rows keep every name readable without
-        # shrinking the type.
-        row_one = VGroup(
-            *[
-                Text(t, font_size=LABEL_SIZE, color=MUTED)
-                for t in [
-                    "counting",
-                    "CTC",
-                    "independence",
-                    "conditioning",
-                    "Bayes",
-                    "logs",
-                    "e & ln",
-                ]
-            ]
-        ).arrange(RIGHT, buff=0.32)
-        row_two = VGroup(
-            *[
-                Text(t, font_size=LABEL_SIZE, color=MUTED)
-                for t in [
-                    "random vars",
-                    "softmax",
-                    "derivatives",
-                    "descent",
-                    "CTC gradient",
-                    "dyn. prog.",
-                    "decoding",
-                ]
-            ]
-        ).arrange(RIGHT, buff=0.32)
-        topics = VGroup(row_one, row_two).arrange(DOWN, buff=0.28).move_to(0.95 * DOWN)
+        # Fifteen series across three rows keep every name readable without
+        # shrinking the type (two rows clipped at the frame edge at fifteen).
+        names = [
+            ["counting", "CTC", "independence", "conditioning", "Bayes"],
+            ["logs", "e & ln", "random vars", "softmax", "derivatives"],
+            ["descent", "CTC gradient", "dyn. prog.", "decoding", "incl.–excl."],
+        ]
+        rows = [
+            VGroup(*[Text(t, font_size=LABEL_SIZE, color=MUTED) for t in row]).arrange(
+                RIGHT, buff=0.36
+            )
+            for row in names
+        ]
+        topics = VGroup(*rows).arrange(DOWN, buff=0.2).move_to(0.75 * DOWN)
         self.play(
             LaggedStart(
                 *[FadeIn(t, shift=0.15 * UP) for row in topics for t in row], lag_ratio=0.12

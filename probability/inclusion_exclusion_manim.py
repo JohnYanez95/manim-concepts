@@ -13,7 +13,7 @@ truncated sum as a bound, and the decision rule for reaching for any of it.
     EveryPointCountedOnce   the n-set formula; the toggle pairing proves it
     TheMatchingLimit        1 − 1/2! + 1/3! − ⋯ → 1 − 1/e
     BracketsAndBounds       stop early and hold a bound — Boole, Bonferroni
-    WhenToUseIt             add, complement, sieve, or bound
+    WhenToReachForIt        add, complement, sieve, or bound
 
 Every number on screen is exact and machine-verified in plan 016.
 
@@ -1056,11 +1056,11 @@ class BracketsAndBounds(ConceptScene):
         )
 
 
-class WhenToUseIt(ConceptScene):
+class WhenToReachForIt(ConceptScene):
     """Add, complement, sieve, or bound — which move an 'A or B' question needs."""
 
     def construct(self):
-        self.play(FadeIn(self.title("When to Use It"), shift=0.3 * DOWN))
+        self.play(FadeIn(self.title("When to Reach for It"), shift=0.3 * DOWN))
 
         # Level three: six scenes build the union rule; this one is the field
         # guide for choosing it — or choosing something cheaper.

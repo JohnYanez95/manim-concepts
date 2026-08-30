@@ -21,6 +21,7 @@ primitives land.
 | gradient-descent | `primitives/gradient-descent.tex` | calculus gradient-descent series (series-backed since plan 014; formerly guide-first — the second seed to sprout) | `010.M.*`, `010.K.NLL`, `001.paths15`, `014.basin.sqrt11` | `calculus-` |
 | ctc-gradient | `primitives/ctc-gradient.tex` | deep_learning gradient series (authored) | `010.*`, `009.G.nllgradient` | `deep_learning-` |
 | ctc-decoding | `primitives/ctc-decoding.tex` | deep_learning decoding series (series-backed since plan 015; formerly guide-first — the third seed to sprout) | `012.dec.*` | `deep_learning-` |
+| inclusion-exclusion | `primitives/inclusion-exclusion.tex` | probability inclusion–exclusion series (authored — the first new primitive since v1; no guide retrieves it yet, it seeds a future counting-and-chance objective) | `016.*` | `probability-` |
 
 Problem answer scripts (the solve-gate anchors, plan 012 R3) live in
 `primitives/answers/` with underscored module names

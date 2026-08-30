@@ -1,0 +1,329 @@
+% Primitive: inclusion-exclusion — authored from
+% probability/inclusion_exclusion_manim.py, its README concepts table (seven
+% scenes) and plan 016's verified anchors (verifier report A–K plus the
+% addendum L–R). Delivers the counting queue's "two and three overlapping
+% sets" from the probability side and climbs to four sets and n. Problem
+% answers are computed by answers/inclusion_exclusion.py (the solve-gate
+% anchor, 8/8 on a fresh-context solve); every exact value there is
+% Fraction arithmetic, floats only where a decimal display is the claim.
+\chapter{Inclusion–exclusion}
+
+\begin{narrative}
+The product rule answers ``$A$ \emph{and} $B$''. This chapter is its
+sibling: ``$A$ \emph{or} $B$'', and then ``at least one of three, four,
+$n$''. The whole subject is one sentence — \emph{whatever you counted
+twice, subtract once} — and the chapter's work is to show that the
+sentence, applied honestly, forces the alternating signs, survives the
+picture breaking at four sets, and turns into a bound when you stop
+early.
+
+\section{Two sets, one overlap}
+
+Roll a die; let $A$ be even and $B$ be at most four — the pair the
+independence chapter already used. Tint $A$'s three cells, lay $B$'s
+four over them, and two cells carry both colours. Count the union and
+you get five cells, not seven: $|A \cup B| = 3 + 4 - 2$. The overlap
+was counted twice, so it is subtracted once. In fractions the mistake
+announces itself before any picture explains it: $P(A) + P(B) =
+\anchor{016.L.alarm}$, a number no probability can be. The same
+correction as area on the unit square — a band of width $1/2$, a band
+of height $2/3$, the doubly covered rectangle removed once — gives
+\[
+  P(A \cup B) \;=\; P(A) + P(B) - P(A \cap B) \;=\; \anchor{016.L.dieunion} ,
+\]
+Ross's Proposition~4.3, proved from additivity by cutting $A \cup B$
+into disjoint pieces~\cite{probability-sheldon-ross-a-first-course-in-probability-10th-ed-pearson-2}.
+Three readings of the overlap close the scene. Disjoint events are the
+case where the sum is \emph{exact} ($\{1,2\}$ and $\{5,6\}$: $2/6 +
+2/6$); independent events are the case where the overlap is a
+\emph{product} ($1/3 = 1/2 \cdot 2/3$, so the complement route $1 -
+\tfrac12\cdot\tfrac13$ agrees) — disjoint and independent are opposite
+ends of the overlap, never the same thing; and ``exactly one'' is the
+same sum with the overlap subtracted \emph{twice} ($1/2$, not $5/6$).
+On the two-dice grid one cell carries both sixes:
+$P(\text{a six somewhere}) = \anchor{016.B.twodice}$, and $12/36$ is
+the overcount, not an answer.
+
+\section{Three sets, one ledger}
+
+Three events on the same grid — first die six, second die six, sum at
+least ten. Count the union directly: twelve cells,
+$\anchor{016.M.threesets}$ (here $1/3$ \emph{is} the answer). Now
+watch the formula earn it. Stamp every cell with a running count as
+the terms arrive: $+1$ for each event it lies in, then $-1$ for each
+pair, then $+1$ for the triple. The cell $(6,6)$ sits in all three. It
+reads $3$ after the additions, $0$ after the three subtractions — it
+has vanished from a union it belongs to — and $1$ after the last term.
+Every cell in the union ends at $1$, every cell outside at $0$, and
+the sum of the stamps is the count: $6 + 6 + 6 - 1 - 3 - 3 + 1 = 12$.
+That is why the triple is \emph{added back}, not subtracted: the last
+term is the only one that knows about the centre. One region of the
+picture — in $A$ and $B$ but not $C$ — is empty; the formula does not
+mind, which is the first hint that the picture is not doing the work.
+
+Bernstein's coins from the independence chapter (first heads, second
+heads, exactly one head) make the point twice
+over~\cite{probability-alexander-bogomolny-mutually-jointly-independent-events}.
+Their triple intersection is empty, so $P(A \cup B \cup C) =
+\tfrac32 - \tfrac34 + 0 = \anchor{016.N.bernstein}$. And the shortcut
+``multiply the complements'' returns $1 - (1/2)^3 = 7/8$: every pair
+term was a correct product, the triple was not, and the error is
+exactly the product the true triple term is not. Pairwise independence
+licenses the pairs; only \emph{mutual} independence licenses the
+shortcut~\cite{probability-wikipedia-pairwise-independence}.
+
+\section{Four sets, no picture}
+
+Draw four overlapping circles and number the regions. You reach
+fourteen — thirteen inside plus the outside — against the sixteen a
+four-set Venn diagram needs; the two missing are the ``opposite pairs
+only'' regions. Venn knew: ``four circles cannot be so drawn as to
+intersect one another in the way required'', and supplied four
+ellipses that do all sixteen~\cite{probability-john-venn-symbolic-logic-macmillan-1881};
+the count $\anchor{016.F.circles}$ is Euler's formula with twelve
+crossing points and twenty-four
+arcs~\cite{probability-satyadev-nandakumar-venn-diagrams-and-circles-iit-kanpur}.
+The honest conclusion is not that ellipses save the picture but that
+the picture was never area-true — the grid was — and the ledger needs
+no picture at all.
+
+Two four-set examples, one coefficient row. Four hats handed back at
+random: the nine derangements of $1234$ are the permutations with no
+hat home, and $P(\text{at least one match}) = 4\cdot\tfrac14 -
+6\cdot\tfrac1{12} + 4\cdot\tfrac1{24} - \tfrac1{24} =
+\anchor{016.E.fourhats}$, with no product anywhere. De Méré's four
+rolls of a die: $P(\text{at least one six}) = 4\cdot\tfrac16 -
+6\cdot\tfrac1{36} + 4\cdot\tfrac1{216} - \tfrac1{1296} =
+\anchor{016.O.fourrolls}$, every term a
+product~\cite{probability-eric-w-weisstein-de-m-r-s-problem-mathworld}.
+The coefficients $4, 6, 4, 1$ are the same both times — the sorted
+square's column counts from the random-variables chapter — and any
+outcome lying in all four events is counted $\anchor{016.G.fourledger}$.
+When every $k$-fold intersection has the same probability $p_k$ the
+whole sum collapses to $\sum_k (-1)^{k+1}\binom{n}{k} p_k$; the
+complement $1 - (5/6)^4$ says the same thing in one line for the
+rolls, and for the hats no such line exists.
+
+\section{Every point counted once}
+
+For $n$ events the formula has one term per non-empty subset $S$,
+its sign alternating with $|S|$:
+\[
+  P\Big(\bigcup_{i=1}^{n} A_i\Big)
+  \;=\; \sum_{k=1}^{n} (-1)^{k+1} \sum_{|S| = k}
+        P\Big(\bigcap_{i \in S} A_i\Big) ,
+\]
+$2^n - 1$ terms in all~\cite{probability-william-feller-an-introduction-to-probability-theory-vol-1-1}.
+The reason it is right is the ledger, said once for all $n$: an
+outcome lying in exactly $k$ of the events is counted $\binom{k}{1} -
+\binom{k}{2} + \binom{k}{3} - \cdots$ times, and that alternating sum
+is $1$. The textbooks recall $(1-1)^k = 0$ for this — the binomial
+theorem, which this road has not built — so the chapter proves it by
+pairing instead~\cite{probability-dennis-white-math-4707-inclusion-exclusion-and-derangements,probability-benjamin-and-quinn-an-alternate-approach-to-alternating-sums}.
+List the non-empty subsets of $\{1, \dots, k\}$ and pair each $S$
+with $S \,\triangle\, \{1\}$ (toggle whether $1$ is a member). Every
+pair has sizes of opposite parity, so its two terms cancel; the only
+subset without a partner is $\{1\}$ itself, and its term is $+1$. So
+$3 - 3 + 1 = 1$, $4 - 6 + 4 - 1 = 1$, and so on for every $k$. The
+running partial sums ($4, -2, 2, 1$) are counts, not probabilities —
+a cell can be counted $-2$ times mid-ledger — and their sign pattern
+is the next-but-one section's tool.
+
+\section{The matching limit}
+
+Return $n$ hats at random. With $\binom{n}{k}$ equal $k$-fold terms
+each worth $(n-k)!/n!$, the coefficient cancels the count and
+\[
+  P(\text{at least one match}) \;=\;
+  1 - \frac{1}{2!} + \frac{1}{3!} - \cdots \pm \frac{1}{n!} ,
+\]
+the values $\tfrac12, \tfrac23, \tfrac58, \tfrac{19}{30}, \dots$
+oscillating — above the limit at $n = 3$, below at $n = 4$ — with
+each error smaller than the next term. The limit is
+$1 - 1/e \approx \anchor{016.J.limit}$: more hats never make a match
+certain~\cite{probability-wikipedia-derangement}. The road already
+met $1/e$ once, as the binomial's zero-success limit $(1 - 1/n)^n$;
+the two roads differ at every finite $n$ ($0.3164$ against $0.375$ at
+$n = 4$) and one of them has no independence in it. The identity
+$\sum (-1)^k / k! = e^{-1}$ is a series fact this road has not built;
+$e$ itself is the calculus chapter's compound-interest ceiling. The
+problem is Montmort's \emph{Treize}, posed in 1708 and solved in
+1713~\cite{probability-o-connor-and-robertson-montmort-s-probl-me-du-treize-mactuto};
+de Moivre's 1718 \emph{Doctrine of Chances} states the general
+case~\cite{probability-abraham-de-moivre-the-doctrine-of-chances-london-1718}.
+
+\section{Brackets and bounds}
+
+Stop the sum early and you hold a bound: one term is an upper bound
+(Boole's inequality), two terms a lower bound, three an upper bound,
+and so on — Ross's Remark~3~\cite{probability-sheldon-ross-a-first-course-in-probability-10th-ed-pearson-2}.
+On the four hats the partial sums run $\anchor{016.I.brackets}$; on
+the four rolls $\tfrac23, \tfrac12, \tfrac{14}{27}, \tfrac{671}{1296}$
+— over, under, over, and the last term lands exactly. The reason is
+again the ledger: a truncated sum over- or under-counts every outcome
+with the sign of its last kept term, since $\sum_{j \le m} (-1)^j
+\binom{k}{j} = (-1)^m \binom{k-1}{m}$~\cite{probability-benjamin-and-quinn-an-alternate-approach-to-alternating-sums}.
+The first rung is the whole tool when events are rare: four events
+at $0.01$ have union at most $0.04$, against $\anchor{016.R.rare}$
+exactly under independence — and the bound needed no independence at
+all. On four hats the same rung says ``at most $1$'': honest and
+useless, because the union bound bites only when $\sum P(A_i) < 1$.
+Bonferroni named the ladder in 1936~\cite{probability-wikipedia-boole-s-inequality}.
+
+\section{When to use it}
+
+Disjoint events: add, the sum is exact. Independent events, ``at
+least one'': the complement $1 - \prod (1 - p_i)$. Dependent but
+symmetric — hats, matches: inclusion–exclusion with
+$\binom{n}{k} p_k$. Many rare events, a guarantee: the union bound,
+first term only. ``Exactly $m$ of $n$'': the sieve, named here and
+not built. The same rule read as a count is a sieve: among $1$ to
+$30$, the integers divisible by $2$, $3$ or $5$ number $15 + 10 + 6 -
+5 - 3 - 2 + 1 = \anchor{016.C.sieve}$, leaving eight survivors —
+Euler's $\varphi(30)$. Blitzstein and Hwang's verdict closes the
+series: try the other tools first; inclusion–exclusion is the last
+resort~\cite{probability-blitzstein-hwang-introduction-to-probability-chs-1-2-excerpt}.
+\end{narrative}
+
+\section*{Practice problems}
+
+\begin{problem}
+A fair die is rolled once. Let $A$ be ``at most $3$'' and $B$ be ``a
+multiple of $3$''. Find $P(A \cup B)$ and the probability that exactly
+one of $A$, $B$ occurs.
+\begin{hint}
+Which face is in both? Count it once for the union, and not at all for
+``exactly one''.
+\end{hint}
+\begin{solution}
+$A = \{1,2,3\}$, $B = \{3,6\}$, $A \cap B = \{3\}$. The union is
+$\tfrac36 + \tfrac26 - \tfrac16 = \tfrac46 = \tfrac23$. Exactly one
+subtracts the overlap twice: $\tfrac36 + \tfrac26 - 2\cdot\tfrac16 =
+\tfrac12$ — the faces $\{1, 2, 6\}$.
+\end{solution}
+\end{problem}
+
+\begin{problem}
+Two fair dice. $A$: the first die shows $5$ or $6$; $B$: the second
+die shows $5$ or $6$; $C$: the faces sum to at least $11$. Give the
+seven counts $|A|, |B|, |C|, |A \cap B|, |A \cap C|, |B \cap C|,
+|A \cap B \cap C|$ and $P(A \cup B \cup C)$. Then run the ledger on
+the outcome $(6,6)$: how many times is it counted after the three
+``$+$'' terms, after the three ``$-$'' terms, and at the end?
+\begin{hint}
+$C$ has only three outcomes, and all of them lie in both $A$ and $B$.
+\end{hint}
+\begin{solution}
+$|A| = |B| = 12$, $|C| = 3$ (the cells $(5,6)$, $(6,5)$, $(6,6)$);
+$|A \cap B| = 4$; $A \cap C = B \cap C = A \cap B \cap C = C$, so those
+three counts are $3$. The union is $12 + 12 + 3 - 4 - 3 - 3 + 3 = 20$
+cells, $P = \tfrac{20}{36} = \tfrac59$. The outcome $(6,6)$ lies in all
+three events: it reads $3$ after the additions, $0$ after the three
+subtractions, and $1$ after the triple is added back.
+\end{solution}
+\end{problem}
+
+\begin{problem}
+Five hats are returned at random to their five owners. What is the
+probability that at least one owner receives their own hat? How many
+of the $120$ permutations have no fixed point?
+\begin{hint}
+Five equal terms at $k$: $\binom{5}{k}\,(5-k)!/5! = 1/k!$.
+\end{hint}
+\begin{solution}
+$1 - \tfrac1{2!} + \tfrac1{3!} - \tfrac1{4!} + \tfrac1{5!} =
+\tfrac{76}{120} = \tfrac{19}{30}$. The derangements number $120 - 76
+= 44$.
+\end{solution}
+\end{problem}
+
+\begin{problem}
+A fair die is rolled three times. Find the probability of at least
+one six by inclusion–exclusion (state the three terms) and by the
+complement. Then give the partial sums after one and after two terms,
+and order them against the exact value.
+\begin{hint}
+The events ``roll $i$ is a six'' are independent, so every
+intersection is a product — and the first partial sum is already
+$1/2$.
+\end{hint}
+\begin{solution}
+$3\cdot\tfrac16 - 3\cdot\tfrac1{36} + \tfrac1{216} = \tfrac{108 - 18 +
+1}{216} = \tfrac{91}{216}$; the complement $1 - (5/6)^3 = 1 -
+\tfrac{125}{216}$ agrees. The partial sums are $\tfrac12 =
+\tfrac{108}{216}$ and $\tfrac{90}{216} = \tfrac5{12}$, and
+$\tfrac5{12} \le \tfrac{91}{216} \le \tfrac12$: over, then under, then
+exact.
+\end{solution}
+\end{problem}
+
+\begin{problem}
+Let $\Omega = \{1, 2, 3, 4\}$ with equal probabilities, $A = \{1,2\}$,
+$B = \{1,3\}$, $C = \{1,4\}$. Check each pair for independence; give
+$P(A \cap B \cap C)$; compute $P(A \cup B \cup C)$ by
+inclusion–exclusion; compute $1 - P(A^c)P(B^c)P(C^c)$; and give the
+signed difference between that shortcut and the true union.
+\begin{hint}
+Every intersection — pairs and triple alike — is the single outcome
+$\{1\}$.
+\end{hint}
+\begin{solution}
+Each event has probability $\tfrac12$ and each pair meets in $\{1\}$
+with probability $\tfrac14 = \tfrac12\cdot\tfrac12$: pairwise
+independent. The triple is also $\{1\}$, $\tfrac14 \ne \tfrac18$: not
+mutually independent. The union is $\tfrac32 - \tfrac34 + \tfrac14 =
+1$ — every outcome is covered. The shortcut gives $1 - \tfrac18 =
+\tfrac78$, low by $\tfrac18$: the same error as the chapter's coins,
+with the opposite sign, because here the true triple term is
+$\tfrac14$ and the product $\tfrac18$ is too small.
+\end{solution}
+\end{problem}
+
+\begin{problem}
+Among the integers $1$ to $60$, how many are divisible by $2$, $3$ or
+$5$? How many by none of the three?
+\begin{hint}
+The same rule as a count: $\lfloor 60/2 \rfloor + \lfloor 60/3 \rfloor
++ \lfloor 60/5 \rfloor - \cdots$.
+\end{hint}
+\begin{solution}
+$30 + 20 + 12 - 10 - 6 - 4 + 2 = 44$ are divisible by at least one;
+$60 - 44 = 16$ by none — which is $60 \cdot \tfrac12 \cdot \tfrac23
+\cdot \tfrac45$, the sieve in product form.
+\end{solution}
+\end{problem}
+
+\begin{problem}
+Take the non-empty subsets of $\{1, 2, 3, 4, 5\}$ and the map $S
+\mapsto S \,\triangle\, \{1\}$. How many subsets are paired with a
+different non-empty subset, how many pairs is that, and which subset
+is left alone? Then evaluate $\binom51 - \binom52 + \binom53 -
+\binom54 + \binom55$, listing the running partial sums.
+\begin{hint}
+The map toggles $1$; only one non-empty subset toggles to the empty
+set.
+\end{hint}
+\begin{solution}
+Thirty subsets form fifteen pairs; $\{1\}$ is alone, since its partner
+would be $\varnothing$. Each pair holds one odd-sized and one
+even-sized set, so their contributions cancel and the sum is the
+survivor's $+1$: $5 - 10 + 10 - 5 + 1 = 1$, with partial sums $5, -5,
+5, 0, 1$.
+\end{solution}
+\end{problem}
+
+\begin{problem}[stretch]
+Five events each have probability $0.02$. What does Boole's
+inequality say about the probability of their union? If the events
+are independent, what is that probability exactly, to six decimal
+places?
+\begin{hint}
+The bound needs no independence; the exact value does.
+\end{hint}
+\begin{solution}
+The union bound gives $P(\bigcup A_i) \le 5 \times 0.02 = 0.10$.
+Under independence $P = 1 - 0.98^5 = 0.096079$ — the first rung is
+within four per cent of the truth, and it would still hold if the
+events were dependent in any way at all.
+\end{solution}
+\end{problem}

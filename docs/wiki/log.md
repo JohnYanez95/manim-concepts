@@ -765,3 +765,27 @@ reordered.
   alignment rows 3/6 pointed at the delivered series; the plan's
   false root-README claim corrected in place
 - stamp: advance to ca95076
+
+## [2026-08-29] series | plan 016, inclusion–exclusion
+
+- node added: `inclusion-exclusion` (seven scenes, probability/ — the
+  topic's sixth series; the first new authored study-guide primitive
+  since v1, solve gate 8/8)
+- edge delivered: `counting-rules` → `inclusion-exclusion` (row 79's
+  inclusion–exclusion strand — the "two and three overlapping sets"
+  bullet, re-homed from `combinatorics/README.md` Ideas with a pointer;
+  Pascal, stars & bars and the binomial theorem stay promised on the
+  row, the binomial theorem now restated on screen a second time)
+- edges delivered: `independence` → `inclusion-exclusion` (the
+  Bernstein coins' device reuse the seed audit recorded, acted on:
+  the empty centre and the mutual-independence licence);
+  `random-variables` → `inclusion-exclusion` (the 4, 6, 4, 1 row as
+  the sorted square's columns; D(n)/n! beside (1 − 1/n)ⁿ);
+  `e-and-ln` → `inclusion-exclusion` (e cited as the compound-interest
+  ceiling)
+- edges promised: `inclusion-exclusion` → the exponential series
+  (named unbuilt on screen; home calculus/), → the sieve for exactly
+  m of n (named not built on screen)
+- devices recorded: the per-cell ledger, the WARM overcount's sixth
+  stop, the mapping close's seventh stop
+- branch note: cut from main at 18d4cbb (clean, level with origin)

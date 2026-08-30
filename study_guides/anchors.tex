@@ -184,3 +184,29 @@
 \expandafter\newcommand\csname anchor@012.dec.summass\endcsname{0.64}
 % 014.basin.sqrt11: double-well basin boundary at lr 0.1 — one step is 0.1w(11 − w²), negative past √11: the first hop crosses the hilltop; from 4 it clears both valleys (4 → −2 → −1). The crossing holds to ≈4.32; farther out the map shatters [docs/plans/014-calculus-gradient-descent.md, verifier §4 / F3]
 \expandafter\newcommand\csname anchor@014.basin.sqrt11\endcsname{3.32}
+% 016.B.twodice: first die 6 or second die 6: 6/36 + 6/36 − 1/36; 12/36 is the overcount, never shown as a result [docs/plans/016-probability-inclusion-exclusion.md, verifier anchor B]
+\expandafter\newcommand\csname anchor@016.B.twodice\endcsname{11/36}
+% 016.C.sieve: of 1..30, the integers divisible by 2, 3 or 5: 15 + 10 + 6 − 5 − 3 − 2 + 1; eight survivors, φ(30) [docs/plans/016-probability-inclusion-exclusion.md, verifier anchor C]
+\expandafter\newcommand\csname anchor@016.C.sieve\endcsname{22}
+% 016.E.fourhats: four hats, at least one match: 4·(1/4) − 6·(1/12) + 4·(1/24) − 1/24; nine derangements of 24 [docs/plans/016-probability-inclusion-exclusion.md, verifier anchor E]
+\expandafter\newcommand\csname anchor@016.E.fourhats\endcsname{15/24}
+% 016.F.circles: the most regions four circles can make (k² − k + 2), against the 16 a four-set Venn diagram needs [docs/plans/016-probability-inclusion-exclusion.md, verifier anchor F]
+\expandafter\newcommand\csname anchor@016.F.circles\endcsname{14}
+% 016.G.fourledger: a point in exactly four sets, counted once; running partial sums 4, −2, 2, 1 (counts, not probabilities) [docs/plans/016-probability-inclusion-exclusion.md, verifier anchor G / addendum Q]
+\expandafter\newcommand\csname anchor@016.G.fourledger\endcsname{4 - 6 + 4 - 1 = 1}
+% 016.I.brackets: the four-hats partial sums 1, 1/2, 2/3, 15/24 bracket the truth — Bonferroni's ladder [docs/plans/016-probability-inclusion-exclusion.md, verifier anchor I]
+\expandafter\newcommand\csname anchor@016.I.brackets\endcsname{\tfrac{1}{2} \le \tfrac{15}{24} \le \tfrac{2}{3} \le 1}
+% 016.J.limit: 1 − 1/e to four places — the matching limit; 0.37 / 0.368 are roundings kept off screen [docs/plans/016-probability-inclusion-exclusion.md, verifier anchor J]
+\expandafter\newcommand\csname anchor@016.J.limit\endcsname{0.6321}
+% 016.L.alarm: the naive P(A) + P(B) = 1/2 + 2/3 on the die pair — a probability above 1, the alarm [docs/plans/016-probability-inclusion-exclusion.md, verifier addendum L]
+\expandafter\newcommand\csname anchor@016.L.alarm\endcsname{7/6}
+% 016.L.dieunion: one die, A = even, B = at most 4: 3/6 + 4/6 − 2/6; the naive sum 7/6 exceeds 1 [docs/plans/016-probability-inclusion-exclusion.md, verifier addendum L]
+\expandafter\newcommand\csname anchor@016.L.dieunion\endcsname{5/6}
+% 016.M.threesets: first 6, second 6, sum ≥ 10 on the two-dice grid: 18 − 7 + 1 cells; here 1/3 is the true value [docs/plans/016-probability-inclusion-exclusion.md, verifier addendum M]
+\expandafter\newcommand\csname anchor@016.M.threesets\endcsname{12/36}
+% 016.N.bernstein: the inset's Bernstein coins (first H, second H, exactly one head): 3/2 − 3/4 + 0; the complement shortcut gives 7/8, low by exactly 1/8 [docs/plans/016-probability-inclusion-exclusion.md, verifier addendum N]
+\expandafter\newcommand\csname anchor@016.N.bernstein\endcsname{3/4}
+% 016.O.fourrolls: de Méré's four rolls, at least one six: 864 − 216 + 24 − 1 over 1296; complement 1 − (5/6)⁴ agrees [docs/plans/016-probability-inclusion-exclusion.md, verifier addendum O]
+\expandafter\newcommand\csname anchor@016.O.fourrolls\endcsname{671/1296}
+% 016.R.rare: four independent events at 0.01: exact 1 − 0.99⁴ = 0.03940399 against the union bound 0.04 [docs/plans/016-probability-inclusion-exclusion.md, verifier addendum R]
+\expandafter\newcommand\csname anchor@016.R.rare\endcsname{0.0394}

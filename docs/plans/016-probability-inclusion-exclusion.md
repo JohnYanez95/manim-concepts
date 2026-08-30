@@ -49,7 +49,42 @@ Branch `feat/probability-inclusion-exclusion`, cut from `main` at
   the ledger's transition window (22–34 s: (6,6) reads 0 in WARM, then
   1 in GOOD) and the ellipse still; scene 7 re-laid (rows were touching
   the title rule) and its holds widened from 16.5 s to 23 s
-- [ ] Phase 3
+- [x] Phase 3: README complete (seven rows, all three levels; Scope's
+  "Counting itself" exclusion gained the hand-over clause; 34 plan-016
+  references unchecked for the maintainer's pass — a Blitzstein & Hwang
+  duplicate of an already-ticked entry dropped, the existing key
+  cited); combinatorics Ideas bullet struck with a pointer; wiki —
+  `inclusion-exclusion` node added, **row 79's inclusion–exclusion
+  strand flipped delivered** (Pascal, stars & bars, binomial theorem
+  stay promised on the row), three more delivered edges
+  (independence — the Bernstein device reuse acted on; random
+  variables — the 4, 6, 4, 1 row and the two roads to 1/e; e-and-ln —
+  e cited), two promised rows opened by the series itself (the
+  exponential series; the sieve for exactly m of n), three devices
+  recorded, log entry with the branch note; **ADR-008 step**: the
+  first NEW authored primitive since v1 —
+  `primitives/inclusion-exclusion.tex` (seven sections retold from the
+  scenes, eight problems), `answers/inclusion_exclusion.py` (every
+  taught formula asserted against enumeration: 6 faces, 36 cells, 120
+  permutations, 216 rolls, the k = 5 toggle pairing),
+  **the independent solve gate passed 8/8** (a fresh-context solver
+  given statements only reproduced every answer, including the (6,6)
+  ledger 3 → 0 → 1 and the −1/8 sign on Bernstein's other form),
+  thirteen `016.*` anchors added (104 total), study INDEX row added
+  (no guide retrieves the primitive yet — `ctc-algorithm/manifest.tex`
+  untouched, it seeds a future counting-and-chance objective); since
+  no guide compiles it, the primitive was compiled standalone in both
+  guide and solutions modes (7 + 2 pages, every anchor spliced, every
+  citation resolved); `sync_references` (208 entries, 174 verified)
+  and `build_anchors` committed in sync, both guide PDFs rebuilt;
+  welcome re-rendered at fifteen series — two rows clipped at the
+  frame edge, so the names now sit in three rows of five (418 KB,
+  frame verified). Scene 7 renamed `WhenToReachForIt`: the topic
+  README's source-order test pulls rows by scene name, and the
+  independence series already owns `WhenToUseIt` there (the
+  conditional series met the same collision and chose
+  `WhenToCondition`). `make test` green (259), `make check` green,
+  `make study` green
 - [ ] Phase 4
 - [ ] Phase 5
 
@@ -226,12 +261,12 @@ takeaway quartet closes every scene.
    bound 0.04 vs 0.0394 exact under independence (the union bound is
    nearly exact when events are rare); Boole's bound on four hats is
    exactly 1 (honest, useless); Bonferroni 1936 named.
-7. **`WhenToUseIt`** — the mapping close: disjoint → add; independent
-   → 1 − ∏(1 − pᵢ); dependent and symmetric → inclusion–exclusion
-   with C(n,k); many rare events → the union bound; "exactly m of n" →
-   Feller's sieve (pointer); 1..30 by 2, 3, 5 → 22 covered, 8
-   survivors = φ(30) (pointer); Blitzstein & Hwang's "last resort"
-   verdict as the closing caption.
+7. **`WhenToReachForIt`** — the mapping close (named apart from the independence
+   series' `WhenToUseIt`, which shares the README): disjoint → add; independent
+   → 1 − ∏(1 − pᵢ); dependent and symmetric → inclusion–exclusion with C(n,k);
+   many rare events → the union bound; "exactly m of n" → Feller's sieve
+   (pointer); 1..30 by 2, 3, 5 → 22 covered, 8 survivors = φ(30) (pointer);
+   Blitzstein & Hwang's "last resort" verdict as the closing caption.
 
 ## Pinned report: pedagogy researcher (digest — ADR 007)
 
