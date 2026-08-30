@@ -116,6 +116,9 @@ def p7_toggle_pairing() -> str:
         acc += (-1) ** (j + 1) * comb(k, j)
         partials.append(acc)
     assert partials == [5, -5, 5, 0, 1]
+    # the ledger form of Benjamin–Quinn's partial-sum identity — the one on screen
+    assert partials == [1 - (-1) ** m * comb(k - 1, m) for m in range(1, k + 1)]
+    assert [1 - (-1) ** m * comb(3, m) for m in range(1, 5)] == [4, -2, 2, 1]
     return "30 subsets in 15 pairs; {1} survives; partial sums 5, -5, 5, 0, 1"
 
 

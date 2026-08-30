@@ -161,8 +161,8 @@ On the four hats the partial sums run $\anchor{016.I.brackets}$; on
 the four rolls $\tfrac23, \tfrac12, \tfrac{14}{27}, \tfrac{671}{1296}$
 — over, under, over, and the last term lands exactly. The reason is
 again the ledger: a truncated sum over- or under-counts every outcome
-with the sign of its last kept term, since $\sum_{j \le m} (-1)^j
-\binom{k}{j} = (-1)^m \binom{k-1}{m}$~\cite{probability-benjamin-and-quinn-an-alternate-approach-to-alternating-sums}.
+with the sign of its last kept term, since $\sum_{j=1}^{m} (-1)^{j+1}
+\binom{k}{j} = 1 - (-1)^m \binom{k-1}{m}$ (for $k = 4$: $4, -2, 2, 1$)~\cite{probability-benjamin-and-quinn-an-alternate-approach-to-alternating-sums}.
 The first rung is the whole tool when events are rare: four events
 at $0.01$ have union at most $0.04$, against $\anchor{016.R.rare}$
 exactly under independence — and the bound needed no independence at

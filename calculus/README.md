@@ -346,8 +346,10 @@ Rough queue, in roughly the order they build on each other:
   start of accumulation.
 - The exponential series Σ xᵏ/k! = eˣ — named as unbuilt on screen by
   `probability/`'s `TheMatchingLimit` (its Σ(−1)ᵏ/k! = 1/e is the
-  matching limit, and (1 − 1/n)ⁿ is the same series truncated); the
-  natural next stop after `TheCurveThatIsItsOwnSlope`.
+  matching limit — the series truncated at n is the no-match
+  probability itself, while (1 − 1/n)ⁿ is a second road to the same
+  1/e, not the same terms); the natural next stop after
+  `TheCurveThatIsItsOwnSlope`.
 - Euler's formula and complex rotation — the other famous thing e does.
 - Growth in the wild: half-life and doubling time as the same picture
   (radioactive decay, population, interest — one dial, e^(rt)). The

@@ -1037,13 +1037,16 @@ class BracketsAndBounds(ConceptScene):
         self.play(FadeIn(bracket_note))
         self.wait(1.0)
         why = VGroup(
-            MathTex(r"\sum_{j=0}^{m} (-1)^j \binom{k}{j} = (-1)^m \binom{k-1}{m}", font_size=32),
+            MathTex(
+                r"\sum_{j=1}^{m} (-1)^{j+1} \binom{k}{j} = 1 - (-1)^m \binom{k-1}{m}",
+                font_size=32,
+            ),
             caption(
-                "a truncated ledger over- or under-counts every point "
-                "with the sign of its last term kept"
+                "a truncated ledger over- or under-counts every point with the sign\n"
+                "of its last term kept — at k = 4 this reads 4, −2, 2, 1"
             ),
         ).arrange(DOWN, buff=0.2)
-        why.move_to(2.3 * UP)
+        why.move_to(2.0 * UP)
         self.play(FadeOut(bracket_note), run_time=0.3)
         self.play(FadeIn(why))
         self.wait(1.2)

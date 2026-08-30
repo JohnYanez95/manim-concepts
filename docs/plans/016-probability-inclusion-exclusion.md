@@ -117,7 +117,24 @@ Branch `feat/probability-inclusion-exclusion`, cut from `main` at
   frame-verified (the overlap's fill-and-fade, the zeros, the new
   caption); linter clean on all seven; `make check` + `make test`
   (259) green; the primitive re-compiled standalone
-- [ ] Phase 5
+- [x] Phase 5: PR #18 opened. Bot review: two minor findings, both
+  valid and applied — `calculus/README.md`'s new queue entry had
+  called (1 − 1/n)ⁿ "the same series truncated" (it is a second road
+  to 1/e, not the same terms — the verifier's own flag 14, repeated
+  by me in prose); and the primitive quoted Benjamin–Quinn's
+  partial-sum identity in its j = 0 form while the ledger counts from
+  j = 1 — the verifier's flag Q-1 exactly. Fixed in one convention
+  everywhere: the primitive, README row 6 and scene 6's on-screen
+  MathTex now read Σ_{j=1}^{m}(−1)^{j+1}C(k,j) = 1 − (−1)^m C(k−1,m)
+  ("at k = 4 this reads 4, −2, 2, 1"), asserted in
+  `answers/inclusion_exclusion.py`; the formula block nudged clear of
+  the title rule. `clean-drafts`, then 1080p60 finals: 7 files,
+  distinct names, 1920×1080 at 60 fps, 57/54/56/40/32/35/23 s;
+  contact sheets of the reworked scenes 1, 2 and 6 frame-verified
+  (the two-ends caption, the overlap's fill-and-fade, the outside
+  zeros, the ledger-form identity). Linter clean on all seven;
+  `make check` + `make test` (259) green; the primitive re-compiled
+  standalone. The plan closes; the PR awaits the maintainer's merge
 
 ## Decisions (made at design time)
 
@@ -166,7 +183,10 @@ Branch `feat/probability-inclusion-exclusion`, cut from `main` at
    labels which, never a bare "1/3"; 0.37 / 0.368 are roundings (use
    0.3679 / 0.6321 or fractions); the toggle partial sums are shown in
    ONE convention (from j = 1: 4, −2, 2, 1 — never beside the j = 0
-   form 1, −3, 3, −1, 0 under one label); "Bonferroni's inequality"
+   form 1, −3, 3, −1, 0 under one label; the bot round caught scene 6,
+   README row 6 and the primitive quoting Benjamin–Quinn's j = 0 identity,
+   now all in the ledger form Σ_{j=1}^{m}(−1)^{j+1}C(k,j) = 1 − (−1)^m
+   C(k−1,m), asserted in the answer script); "Bonferroni's inequality"
    also names P(EF) ≥ P(E)+P(F)−1 — not mixed in; Boole's bound on
    four hats is exactly 1 (honest, useless — said so); "1654" stays
    off screen (MathWorld names de Méré and Pascal, no year).
