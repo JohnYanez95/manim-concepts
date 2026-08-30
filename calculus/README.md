@@ -344,6 +344,10 @@ Rough queue, in roughly the order they build on each other:
   derivatives series; the chain rule and the score carry the kit.
 - ln as area under 1/t — the integral road not taken, and the honest
   start of accumulation.
+- The exponential series Σ xᵏ/k! = eˣ — named as unbuilt on screen by
+  `probability/`'s `TheMatchingLimit` (its Σ(−1)ᵏ/k! = 1/e is the
+  matching limit, and (1 − 1/n)ⁿ is the same series truncated); the
+  natural next stop after `TheCurveThatIsItsOwnSlope`.
 - Euler's formula and complex rotation — the other famous thing e does.
 - Growth in the wild: half-life and doubling time as the same picture
   (radioactive decay, population, interest — one dial, e^(rt)). The

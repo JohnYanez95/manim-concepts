@@ -177,7 +177,12 @@ class TwoSetsOneOverlap(ConceptScene):
             width=side, height=side * 2 / 3, stroke_width=0, fill_color=B_COLOR, fill_opacity=0.3
         ).align_to(square, DL)
         overlap = Rectangle(
-            width=side * 0.5, height=side * 2 / 3, stroke_width=3, color=WARM, fill_opacity=0
+            width=side * 0.5,
+            height=side * 2 / 3,
+            stroke_width=3,
+            color=WARM,
+            fill_color=WARM,
+            fill_opacity=0.45,
         ).align_to(square, DL)
         a_lab = MathTex(r"P(A) = \tfrac{1}{2}", font_size=30, color=A_COLOR)
         a_lab.next_to(a_band, UP, buff=0.15)
@@ -198,12 +203,15 @@ class TwoSetsOneOverlap(ConceptScene):
         self.play(Create(square))
         self.play(FadeIn(a_band), FadeIn(a_lab), Write(formula[:3]))
         self.play(FadeIn(b_band), FadeIn(b_lab), Write(formula[3:5]))
-        self.play(Create(overlap), Write(formula[5:]), FadeIn(area_note))
+        self.play(FadeIn(overlap), Write(formula[5:]), FadeIn(area_note))
+        self.wait(0.5)
+        # "removed once" is a claim the picture must perform, not just caption.
+        self.play(FadeOut(overlap), run_time=0.7)
         self.play(Write(numbers))
         self.wait(1.0)
 
         # --- level 3: the three readings of the overlap --------------------------
-        stage = VGroup(square, a_band, b_band, overlap, a_lab, b_lab, formula, numbers, area_note)
+        stage = VGroup(square, a_band, b_band, a_lab, b_lab, formula, numbers, area_note)
         self.play(FadeOut(stage))
         rows = VGroup(
             VGroup(
@@ -234,10 +242,18 @@ class TwoSetsOneOverlap(ConceptScene):
         for row in rows:
             self.play(FadeIn(row, shift=0.2 * RIGHT), run_time=0.7)
             self.wait(0.5)
-        self.wait(0.6)
+        # The headline misconception, answered in one line: disjoint and
+        # independent are not the same thing — they are the two ends of the
+        # overlap (NotMutualExclusivity drew the same two ends as a step).
+        ends = caption(
+            "disjoint and independent are the two ends of the overlap —\n"
+            "zero, or a product; never the same thing"
+        ).move_to(2.75 * DOWN)
+        self.play(FadeIn(ends))
+        self.wait(1.0)
 
         # --- the two-dice closer: one cell carries both sixes --------------------
-        self.play(FadeOut(rows))
+        self.play(FadeOut(VGroup(rows, ends)))
         grid = _dice_grid(cell=0.42, center=(-3.4, -0.2))
         for c in grid[30:36]:
             c.set_fill(A_COLOR, opacity=0.35)
@@ -331,7 +347,14 @@ class ThreeSetsOneLedger(ConceptScene):
         terms[7].set_color(ACCENT)
         ledger_note = caption("every cell in the union must end at 1, every cell outside at 0")
         ledger_note.move_to(3.25 * DOWN)
-        self.play(FadeOut(answer_note), FadeIn(ledger_note))
+        zeros = VGroup(
+            *[
+                Text("0", font_size=18, color=MUTED).move_to(grid[c])
+                for c in range(36)
+                if c not in union
+            ]
+        )
+        self.play(FadeOut(answer_note), FadeIn(ledger_note), FadeIn(zeros))
         step_label = None
         for i, (tex, cells, delta) in enumerate(steps):
             new_label = MathTex(tex, font_size=34, color=WARM if delta < 0 else MUTED)
@@ -386,6 +409,7 @@ class ThreeSetsOneLedger(ConceptScene):
                     empty,
                     step_label,
                     back,
+                    zeros,
                     *stamps.values(),
                 )
             )
@@ -405,7 +429,7 @@ class ThreeSetsOneLedger(ConceptScene):
         a_coin_tag = Text("A: first H", font_size=LABEL_SIZE, color=A_COLOR)
         a_coin_tag.next_to(cells[0], LEFT, buff=0.4)
         b_coin_tag = Text("B: second H", font_size=LABEL_SIZE, color=B_COLOR)
-        b_coin_tag.next_to(VGroup(cells[0], cells[1]), UP, buff=0.25)
+        b_coin_tag.next_to(VGroup(cells[0], cells[2]), UP, buff=0.25)  # the left column IS B
         c_coin_tag = Text("C: exactly one head", font_size=LABEL_SIZE, color=C_COLOR)
         c_coin_tag.next_to(VGroup(cells[2], cells[3]), DOWN, buff=0.25)
         self.play(LaggedStart(*[FadeIn(c, scale=0.8) for c in cells], lag_ratio=0.1))
@@ -558,8 +582,9 @@ class FourSetsNoPicture(ConceptScene):
         fix = VGroup(
             Text("four ellipses: all 16 — Venn's own fix", font_size=BODY_SIZE),
             caption(
-                "legible at four, hopeless at five; and never\n"
-                "area-true — the grid was, so the ledger stays"
+                "Venn stopped at four; five took\n"
+                "Grünbaum (1975) — and never area-true:\n"
+                "the grid was, so the ledger stays"
             ),
         ).arrange(DOWN, buff=0.3)
         fix.move_to(3.3 * RIGHT + 0.9 * UP)
@@ -796,7 +821,10 @@ class EveryPointCountedOnce(ConceptScene):
                 "(1 − 1)^k = 0 says the same thing — "
                 "that is the binomial theorem, queued in combinatorics/"
             ),
-            caption("indicators do it too: 1 − ∏(1 − 1_A) expanded, then linearity of expectation"),
+            caption(
+                "indicators do it too: 1 − ∏(1 − 1_A) expanded, then linearity —\n"
+                "SameOutcomesAdd's, which needed no independence either"
+            ),
         ).arrange(DOWN, buff=0.3)
         pointers.move_to(1.6 * DOWN)
         rule = MathTex(
@@ -918,7 +946,7 @@ class TheMatchingLimit(ConceptScene):
         roads.move_to(0.7 * DOWN)
         history = caption(
             "Montmort posed it in 1708 (the game of Treize); "
-            "de Moivre solved the general case in 1718"
+            "de Moivre stated the general case in 1718"
         ).move_to(2.75 * DOWN)
         self.play(Write(limit_line), FadeIn(e_note))
         for part in roads:

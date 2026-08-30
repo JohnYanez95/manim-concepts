@@ -1,8 +1,8 @@
 # Graph index
 
-Last audited: `ca95076` (2026-08-12, incremental — plan-015 branch;
-the plan-014 branch was audited at `9226fdf` — both audits applied,
-their union merged here)
+Last audited: `d59000d` (2026-08-29, incremental — plan-016 branch;
+the previous stamp `ca95076` was the plan-015 branch, with the
+plan-014 audit at `9226fdf` merged into it)
 
 The stamp is a commit hash: the state of the repo this graph was last
 reconciled against. The `connection-auditor` diffs from it instead of
@@ -77,14 +77,15 @@ Status: **delivered** (both ends exist and the content makes the link) or
 | `softmax-likelihood` | `derivative-toolkit` | delivered | `ZeroSlopeFindsThePeak` finds `TheBestExplanation`'s grid peak analytically (the score 3/p − 1/(1−p) zeroes at p̂ = 3/4, and the general line derives p̂ = k/n — "the observed proportion … now derived"); `TheSmoothMaxsShares` differentiates the NLL gap into (−0.3348, 0.2447, 0.0900) = p − one-hot and makes "the gap grows roughly linearly" a theorem (slope → −1) |
 | `logarithms` | `derivative-toolkit` | delivered | `ZeroSlopeFindsThePeak` names the score "the counting strip differentiated — under ln, products become sums of relative rates"; `TheSmoothMaxsShares` differentiates the log-sum-exp ruler itself, its sensitivities landing as the softmax shares |
 | `derivative-toolkit` | `ctc-gradient` | delivered | `TheSmoothMaxsShares`' on-screen closer answered: `TheSensitivityOfTheSum` generalizes the shares reading to path scale (many paths share one cell, so shares add into occupancy) and `SoftmaxMinusOccupancy`'s degeneration beat receives p − one-hot as the one-path special case. Both riders resolved: the bare product rule was **not needed** — the log-sensitivity route replaced it (plan 010 decision 2, the rectangle stays in the drawer) — and occupancy-as-expectation grounds in `TheBalancePoint` (A's dwell row, 1.7578 of 4 frames, on screen; the uniform beat's on-screen sum is 1.4 + 1.4 + 1.2 = 4 = T) |
-| `counting-rules` | `inclusion-exclusion` | delivered (inclusion–exclusion strand; Pascal, stars & bars, the binomial theorem still promised) | The inclusion–exclusion strand closed by plan 016 from the probability side: `TwoSetsOneOverlap` counts the overlap twice on the die strip (3 + 4 − 2 = 5) before the rule becomes area — the "two and three overlapping sets" bullet, struck in `combinatorics/README.md` Ideas with a pointer; `FourSetsNoPicture` names the coefficient row 4, 6, 4, 1 and `EveryPointCountedOnce` uses C(k,j) with the pairing argument in place of the binomial theorem. What remains of the old row: Pascal (screen precedent `TheLatticeRecounted`'s R(i,j) = R(i−1,j) + R(i,j−1); `TheSignatureInTheWild` restates the queue on screen), stars & bars, and the binomial theorem — now restated on screen a second time by `EveryPointCountedOnce`'s caption ("(1 − 1)^k = 0 … the binomial theorem, queued in combinatorics/") |
+| `counting-rules` | `inclusion-exclusion` | delivered | Row 79's inclusion–exclusion strand, closed by plan 016 from the probability side: `TwoSetsOneOverlap` counts the overlap twice on the die strip (3 + 4 − 2 = 5) before the rule becomes area — the "two and three overlapping sets" bullet, struck in `combinatorics/README.md` Ideas with a pointer; `FourSetsNoPicture` names the coefficient row 4, 6, 4, 1 and `EveryPointCountedOnce` uses C(k,j) with the pairing argument in place of the binomial theorem. The rest of the old bundle has its own promised row below |
+| `counting-rules` | *(Pascal, stars & bars, the binomial theorem)* | promised | `combinatorics/README.md` Ideas not yet built (the residue of the old bundled row, split out per the plan-015 label-prior precedent). Restated on screen three times: `TheLatticeRecounted`'s R(i,j) = R(i−1,j) + R(i,j−1) is Pascal's identity in block-walking form; `TheSignatureInTheWild` restates the queue ("queued back home in counting"); `EveryPointCountedOnce`'s caption names the binomial theorem as "queued in combinatorics/" — and the 4, 6, 4, 1 row plus the toggle pairing are waiting to be re-read as (1 − 1)^k |
 | `logarithms` | `e-and-ln` | delivered | `TheSplitYear` replays `MultiplyIsAdd`'s deferral caption on screen ("the wait ends here"); `TheNaturalStride` names the mystery constants as ln and re-rules the strip in natural units; `TheDebtRepaid` re-reads `TheUnderflowCliff`'s identity symbol by symbol — the graph's only on-screen debt, closed; and since the plan-011 refactor the promise side is on screen too: the underflow scene's loan note ("ln and e are names on loan from calculus … it earns them, then re-reads this exact line" — the MathTex is character-identical in both modules) |
 | `logarithms` | *(the log-odds inference scene in `probability/`)* | promised | `algebra/README.md` Ideas ("this series builds the ruler; that series owns the inference") — the residual of the delivered bayes→logarithms edge. `TheBestExplanation` grew it a second passenger: the 864/343 rung stops exactly where a prior would enter, so MLE→MAP (the ratio through a 1:1 prior) rides the same future scene — its numbers already verified in plan 008 addendum A1. Third passenger since plan 015: `TheLoopClosed`'s fusion formula Q(c) = log P(c\|x) + α log P_lm(c) is the MAP move in deployment costume — a log-likelihood plus a weighted log-prior, already rendered; the future scene teaches the move that formula performs |
 | `logarithms` | *(information as log-counting — bits, entropy)* | promised | `algebra/README.md` Ideas; `ShrinkCounts`' −log₂ = 4 is the HHTH cell's surprisal. Both halves now exist: `ProportionsConverge` says "average surprisal over the 16 equal cells is exactly 4 bits" on screen — entropy is one series away — H = E[surprisal] is `TheBalancePoint`'s fulcrum under `ShrinkCounts`' stamps, averaged the sorted-square way — with nats vs bits a unit change on `TheNaturalStride`'s device. The freight grew on the plan-008 branch: `probability/README.md` Scope queues KL and soft-target cross-entropy behind this row, and `TheLossThatTrains` names the alias on screen ('the negative log-likelihood (its alias: "cross-entropy loss")') — the one-beat payoff waiting for entropy to exist. Third hook, from the gradient series: `WhyTheSpikesAppear`'s family portrait puts "distillation — the teacher's soft outputs" on screen — soft-target cross-entropy, named before entropy exists |
 | `e-and-ln` | `derivative-toolkit` | delivered | `TheSlopeIsAFunction` generalizes `ZoomUntilStraight` and says so on screen (d/dx names the settling ratio); `TheCurveThatIsItsOwnSlope` re-reads `TheMysteryConstants` in d/dx notation (Euler §186/§188 anchored) and differentiates `TheDebtRepaid`'s undo pair into ln′ = 1/x |
 | `e-and-ln` | *(ln as area under 1/t, Euler's formula, growth in the wild)* | promised | `calculus/README.md` Ideas not yet built; the derivative-toolkit entry was struck delivered by the derivatives series |
-| `independence` | `inclusion-exclusion` | delivered | `TwoSetsOneOverlap` re-reads `NotMutualExclusivity` (disjoint is the case where the sum is exact) and `TheProductRule` (independent is the case where the overlap is a product — 1/3 = 1/2 · 2/3 on `OneDieTwoEvents`' own pair); `ThreeSetsOneLedger` brings back `ChainsOfTrials`' Bernstein coins as the empty-centre three-set case (3/2 − 3/4 + 0 = 3/4) and the licence beat (1 − (1/2)³ = 7/8 misses by exactly the product the triple term is not: "multiply the complements" needs mutual independence) — the seed audit's "Bernstein ↔ inclusion–exclusion device reuse", acted on |
-| `random-variables` | `inclusion-exclusion` | delivered | `FourSetsNoPicture` names the coefficient row 4, 6, 4, 1 as "the sorted square's columns" (`SortTheSquare`'s (1, 4, 6, 4, 1)); `TheMatchingLimit` sets D(n)/n! beside `TheBinomialColumns`' (1 − 1/n)ⁿ — 0.375 vs 0.3164 at n = 4, the same 1/e by a road with no independence in it |
+| `independence` | `inclusion-exclusion` | delivered | `TwoSetsOneOverlap` re-reads `NotMutualExclusivity` (disjoint is the case where the sum is exact) and `TheProductRule` (independent is the case where the overlap is a product — 1/3 = 1/2 · 2/3 on `OneDieTwoEvents`' own pair); `ThreeSetsOneLedger` brings back `ChainsOfTrials`' Bernstein coins as the empty-centre three-set case (3/2 − 3/4 + 0 = 3/4) and the licence beat (1 − (1/2)³ = 7/8 misses by exactly the product the triple term is not: "multiply the complements" needs mutual independence) — the seed audit's "Bernstein ↔ inclusion–exclusion device reuse", acted on. `TheProductRule`'s furniture returns twice: its 6×6 grid with the same two events and the same (6, 6) cell (there boxed ACCENT as 1/36 = 1/6 × 1/6, in `TwoSetsOneOverlap`'s closer boxed WARM as the overlap subtracted — "the sum rule, the product rule's sibling" is the closing gloss), and its 2×2 coin grid as the Bernstein beat |
+| `random-variables` | `inclusion-exclusion` | delivered | `FourSetsNoPicture` names the coefficient row 4, 6, 4, 1 as "the sorted square's columns" (`SortTheSquare`'s (1, 4, 6, 4, 1)); `TheMatchingLimit` sets D(n)/n! beside `TheBinomialColumns`' (1 − 1/n)ⁿ — 0.375 vs 0.3164 at n = 4, the same 1/e by a road with no independence in it; and `EveryPointCountedOnce`'s indicator pointer names the linearity it leans on as "SameOutcomesAdd's, which needed no independence either" |
 | `e-and-ln` | `inclusion-exclusion` | delivered | `TheMatchingLimit`'s caption cites e as "calculus/'s compound-interest ceiling" (`TheSplitYear`) and 1/e as the binomial's zero-success limit; the series itself is named as unbuilt (next row) |
 | `inclusion-exclusion` | *(the exponential series Σ xᵏ/k! = eˣ)* | promised | `TheMatchingLimit` on screen: "the series Σ(−1)^k/k! = 1/e is a fact this repo has not built"; `probability/README.md` row 5. Home `calculus/` — Taylor series, parked since plan 009 ("none of them gated the CTC gradient") |
 | `inclusion-exclusion` | *(the sieve: exactly m of n events)* | promised | `WhenToReachForIt`'s fifth row on screen: "the sieve (Feller IV.3) — not built here"; `probability/README.md` row 7 |
@@ -117,15 +118,21 @@ one topic should meet the same picture, upgraded, in the next:
   reweighted to probability) → the aligned unit square →
   `PathsThroughACell`'s prefix-bundle × suffix-bundle waist (ways in ×
   ways out, on the trellis) → `TheTrellisWasAMemo`'s waist ring, the
-  same picture renamed a stored answer.
+  same picture renamed a stored answer. Plan 016 rebuilds `TheProductRule`'s
+  6×6 and 2×2 grids cell for cell (`TwoSetsOneOverlap`'s closer,
+  `ThreeSetsOneLedger`'s Bernstein beat): the same cells, product then
+  overlap.
 - **"Divide out / drop what doesn't matter" in WARM**: cancelled
   orderings (combinatorics) → merged repeats and dropped blanks (CTC) →
   failed product tests (independence) → duplicate subtrees greyed into
   lookups (`WriteTheAnswersDown`'s fold — the fourth thing WARM
   removes: repeated work) → `TheTwoLedgers`' one-ledger 3/8 chip, WARM
-  marking the overcount itself.
-- **The closing `WhenToUseIt` mapping scene**: same layout in six
-  series (including `WhenToCondition`, `algorithms/`'s
+  marking the overcount itself. Sixth stop: `TwoSetsOneOverlap`'s doubly
+  covered cells, the 7/6 alarm and the overlap filled WARM then removed;
+  `EveryPointCountedOnce`'s cancelled subset pairs.
+- **The closing `WhenToUseIt` mapping scene**: same layout in seven
+  series (including `WhenToCondition`, `WhenToReachForIt` with its five
+  rows and Blitzstein & Hwang's verdict, `algorithms/`'s
   `TheSignatureInTheWild` whose verdicts are the states, and
   `TheLoopClosed`'s decision rule — peaked→greedy, hedging→beam,
   language→the splice) — problem
@@ -248,16 +255,10 @@ one topic should meet the same picture, upgraded, in the next:
   one pair of coins, LR 9 — first the common-cause lesson, then the
   iterated-update engine; the same factor as the prevalence test, named
   on screen ("one number, two stories").
-- **The per-cell ledger** (`SortTheSquare`'s stamped cells →
+- **The per-cell ledger** (`TheStampedSquare`'s stamps, sorted by
+  `SortTheSquare` →
   `ThreeSetsOneLedger`): every cell of the two-dice grid stamped with a
   running count as the inclusion–exclusion terms arrive — +1 per set,
   −1 per pair, +1 for the triple — so (6, 6) visibly reads 3, 0, 1; the
   same ledger reads 4 − 6 + 4 − 1 in `FourSetsNoPicture` and becomes
   the toggle pairing's alternating row in `EveryPointCountedOnce`.
-- **The WARM overcount, sixth stop** (`CombinationRule`'s r! duplicates
-  → … → `TwoSetsOneOverlap`'s doubly covered cells and the 7/6 alarm,
-  `EveryPointCountedOnce`'s cancelled subset pairs): what was counted
-  too many times is WARM before it is removed.
-- **The mapping close, seventh stop** (`WhenToReachForIt` in
-  `inclusion_exclusion_manim.py`): question → arrow → verdict, five
-  rows, with the closing verdict quoted from Blitzstein & Hwang.

@@ -85,7 +85,38 @@ Branch `feat/probability-inclusion-exclusion`, cut from `main` at
   conditional series met the same collision and chose
   `WhenToCondition`). `make test` green (259), `make check` green,
   `make study` green
-- [ ] Phase 4
+- [x] Phase 4: local CodeRabbit returned one minor finding, applied
+  (the Bernstein 2×2's "B: second H" tag sat over the top row — A's —
+  and now sits over the left column, as in `TheProductRule`). Audit:
+  22 findings, zero numeric — every on-screen number re-derived in
+  exact fractions against anchors A–R. The TOP one built rather than
+  trued: scene 1 now SAYS the headline-misconception counter under its
+  three rows ("disjoint and independent are the two ends of the
+  overlap — zero, or a product; never the same thing"), which the
+  plan design and the primitive had claimed and the scene only
+  juxtaposed. Also built: the unit-square overlap is filled WARM and
+  faded out as the −P(A∩B) term writes ("removed once" was a caption,
+  not a picture); the 24 outside cells stamped 0; the ellipse caption
+  no longer contradicts Grünbaum's five ("Venn stopped at four; five
+  took Grünbaum (1975)"); "de Moivre stated the general case"
+  (Montmort's was the solved one); the indicator caption names
+  `SameOutcomesAdd`'s linearity. Graph: row 80 split into a plain
+  delivered row and a promised counting-residue row (Pascal, stars &
+  bars, binomial theorem — the plan-015 label-prior precedent), rows
+  86/87 grew the `TheProductRule` grid-reuse and linearity strands,
+  the outer-product-grid and WARM device bullets gained their stops,
+  the mapping close counts seven; the two promises the series opened
+  got home-queue entries (exponential series in calculus/ Ideas, the
+  sieve in probability/ Ideas); README row 5 trued to the decimals
+  the scene shows and "1/e as a probability limit"; plan design trued
+  (ChainsOfTrials named, not quoted; Ross's aside in the takeaway);
+  primitive nits (n ≥ 2; about four per cent); audit entry + stamp
+  d59000d in the log/INDEX. Root README probability row appended.
+  **The maintainer validated all 34 plan-016 sources same-day — ticks
+  recorded, bib 208/208 verified.** Changed scenes re-rendered and
+  frame-verified (the overlap's fill-and-fade, the zeros, the new
+  caption); linter clean on all seven; `make check` + `make test`
+  (259) green; the primitive re-compiled standalone
 - [ ] Phase 5
 
 ## Decisions (made at design time)
@@ -196,7 +227,10 @@ takeaway quartet closes every scene.
    the overlap is the product (P(A∩B) = 2/6 = (1/2)(2/3); shortcut
    1 − (1/2)(1/3) = 5/6; `TheProductRule` callback); "at least one"
    vs "exactly one" ({1,2,3,4,6} vs {1,3,6}: coefficient −1 vs −2 on
-   the overlap, 5/6 vs 1/2). Closer on the two-dice grid: first 6 /
+   the overlap, 5/6 vs 1/2), then the one-line answer to the headline
+   misconception under the three rows: "disjoint and independent are
+   the two ends of the overlap — zero, or a product; never the same
+   thing". Closer on the two-dice grid: first 6 /
    second 6, 6/36 + 6/36 − 1/36 = 11/36; "12/36 is the overcount".
 2. **`ThreeSetsOneLedger`** — L1: 6×6 grid, row 6 / column 6 / sum ≥
    10 tinted; count the union: 12 cells → 12/36. L2: the ledger —
@@ -212,7 +246,7 @@ takeaway quartet closes every scene.
    beat — 1 − (1/2)³ = 7/8 ≠ 3/4, the error 1/8 is exactly the product
    the triple term is not: every pair term was a correct product, so
    "multiply the complements" is licensed by MUTUAL independence only
-   (`ChainsOfTrials` quoted).
+   (`ChainsOfTrials`' chain is the thing licensed — named, not quoted).
 3. **`FourSetsNoPicture`** — L1: four circles, regions numbered to 14,
    "16 needed — two missing" (the two opposite-pairs-only regions,
    verified geometrically at build); Venn's sentence ("four circles
@@ -250,7 +284,8 @@ takeaway quartet closes every scene.
    1/e beside `TheBinomialColumns`' (1−1/n)ⁿ (0.3164 vs 0.375 at
    n = 4; 0.3436 vs 0.3679 at n = 8) — same limit, one road
    independent, one not; Montmort 1708 / de Moivre 1718 named; Ross's
-   aside ("who would have guessed it doesn't go to 1?").
+   aside ("who would have guessed it doesn't go to 1?") carried by the
+   takeaway ("more hats do not make a match certain").
 6. **`BracketsAndBounds`** — L1: stop the sum early — one term is an
    upper bound (Boole's inequality), two a lower, three an upper, and
    so on (Ross Remark 3's phrasing). L2: the two four-set ladders as
