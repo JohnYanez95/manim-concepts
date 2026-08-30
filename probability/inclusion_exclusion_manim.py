@@ -331,6 +331,13 @@ class ThreeSetsOneLedger(ConceptScene):
             (r"-\,P(B \cap C)", [23, 29, 35], -1),
             (r"+\,P(A \cap B \cap C)", [35], +1),
         ]
+
+        def cell_list(cells) -> Text:
+            # The tuples behind each term, so the intersection is a list of
+            # outcomes a viewer can point at, not a symbol.
+            names = " ".join(f"({c // 6 + 1},{c % 6 + 1})" for c in cells)
+            return Text(names, font_size=18, color=MUTED).move_to(3.2 * RIGHT + 0.15 * UP)
+
         terms = MathTex(
             r"\tfrac{6}{36}",
             r"+\tfrac{6}{36}",
@@ -356,10 +363,11 @@ class ThreeSetsOneLedger(ConceptScene):
         )
         self.play(FadeOut(answer_note), FadeIn(ledger_note), FadeIn(zeros))
         step_label = None
+        cells_label = None
         for i, (tex, cells, delta) in enumerate(steps):
             new_label = MathTex(tex, font_size=34, color=WARM if delta < 0 else MUTED)
             new_label.move_to(3.2 * RIGHT + 0.7 * UP)
-            outs = [step_label] if step_label else []
+            outs = [m for m in (step_label, cells_label) if m]
             olds = [stamps[c] for c in cells if c in stamps]
             if outs or olds:
                 self.play(*[FadeOut(m) for m in outs + olds], run_time=0.3)
@@ -370,10 +378,17 @@ class ThreeSetsOneLedger(ConceptScene):
                 stamps[c] = Text(str(values[c]), font_size=18, color=colour).move_to(grid[c])
                 ins.append(stamps[c])
             step_label = new_label
-            self.play(FadeIn(step_label), *[FadeIn(s) for s in ins], Write(terms[i]), run_time=0.6)
+            cells_label = cell_list(cells)
+            self.play(
+                FadeIn(step_label),
+                FadeIn(cells_label),
+                *[FadeIn(s) for s in ins],
+                Write(terms[i]),
+                run_time=0.6,
+            )
             if i == 5:
                 gone = caption("(6, 6) reads 0 — it has vanished\nfrom a union it belongs to")
-                gone.move_to(3.2 * RIGHT + 0.4 * DOWN)
+                gone.move_to(3.2 * RIGHT + 0.55 * DOWN)
                 flash = SurroundingRectangle(grid[35], color=WARM, buff=0.03)
                 self.play(Create(flash), FadeIn(gone))
                 self.wait(0.9)
@@ -383,7 +398,7 @@ class ThreeSetsOneLedger(ConceptScene):
                 back = caption(
                     "the last term is the only one that knows\nabout the centre — add it back"
                 )
-                back.move_to(3.2 * RIGHT + 0.4 * DOWN)
+                back.move_to(3.2 * RIGHT + 0.55 * DOWN)
                 self.play(FadeIn(back))
             else:
                 self.wait(0.35)
@@ -408,6 +423,7 @@ class ThreeSetsOneLedger(ConceptScene):
                     terms,
                     empty,
                     step_label,
+                    cells_label,
                     back,
                     zeros,
                     *stamps.values(),
@@ -494,22 +510,55 @@ class ThreeSetsOneLedger(ConceptScene):
 # Region centroids of the symmetric four-circle flower (centres (±d, ±d),
 # radius r, with r/d = 12/7), sampled at build time — see plan 016 phase 2.
 # Thirteen inside regions plus the outside make 14; the two "opposite pairs
-# only" regions do not exist. Coordinates are in units of d.
+# only" regions (AC, BD) do not exist. Coordinates are in units of d; the
+# label is the region's membership — A top-left, then B, C, D clockwise.
 _CIRCLE_REGIONS = [
-    (-1.54, 1.54),
-    (1.54, 1.54),
-    (1.54, -1.54),
-    (-1.54, -1.54),
-    (0.0, 1.31),
-    (1.31, 0.0),
-    (0.0, -1.31),
-    (-1.31, 0.0),
-    (0.39, 0.39),
-    (-0.39, 0.39),
-    (-0.39, -0.39),
-    (0.39, -0.39),
-    (0.0, 0.0),
+    ("A", -1.55, 1.55),
+    ("B", 1.55, 1.55),
+    ("C", 1.55, -1.55),
+    ("D", -1.55, -1.55),
+    ("AB", 0.0, 1.31),
+    ("BC", 1.31, 0.0),
+    ("CD", 0.0, -1.31),
+    ("AD", -1.31, 0.0),
+    ("ABC", 0.38, 0.38),
+    ("BCD", 0.38, -0.38),
+    ("ACD", -0.38, -0.38),
+    ("ABD", -0.38, 0.38),
+    ("ABCD", 0.0, 0.0),
 ]
+# The same census for Venn's four ellipses in the scene's layout (before its
+# 0.72 scale): all fifteen inside regions exist, AC and BD included.
+_ELLIPSE_REGIONS = [
+    ("A", -1.54, -1.42),
+    ("B", 1.54, -1.42),
+    ("C", -2.8, 0.24),
+    ("D", 2.8, 0.24),
+    ("AB", 0.0, -0.58),
+    ("AC", -2.08, -0.52),
+    ("BC", -1.49, 1.46),
+    ("AD", 1.49, 1.46),
+    ("BD", 2.08, -0.52),
+    ("CD", 0.0, 2.17),
+    ("ABC", -0.92, 0.35),
+    ("ABD", 0.92, 0.35),
+    ("ACD", 0.75, 1.75),
+    ("BCD", -0.75, 1.75),
+    ("ABCD", 0.0, 1.01),
+]
+
+
+def _region_labels(regions, origin, scale: float) -> VGroup:
+    """Membership labels at the sampled centroids: a viewer reads which sets a
+    region lies in, not a serial number — and sees which combinations exist."""
+    return VGroup(
+        *[
+            Text(name, font_size=14 if len(name) <= 2 else 9, color=MUTED).move_to(
+                origin + np.array([x * scale, y * scale, 0])
+            )
+            for name, x, y in regions
+        ]
+    )
 
 
 class FourSetsNoPicture(ConceptScene):
@@ -537,20 +586,16 @@ class FourSetsNoPicture(ConceptScene):
             ]
         )
         self.play(LaggedStart(*[Create(c) for c in circles], lag_ratio=0.2))
-        numbers = VGroup(
-            *[
-                Text(str(i + 1), font_size=16 if i < 8 else 12, color=MUTED).move_to(
-                    centre + np.array([x * d, y * d, 0])
-                )
-                for i, (x, y) in enumerate(_CIRCLE_REGIONS)
-            ]
-        )
+        numbers = _region_labels(_CIRCLE_REGIONS, centre, d)
         self.play(LaggedStart(*[FadeIn(n) for n in numbers], lag_ratio=0.08, run_time=1.6))
         tally = VGroup(
             Text("13 inside + the outside = 14 regions", font_size=BODY_SIZE),
             MathTex(r"2^4 = 16 \text{ needed}", font_size=40, color=WARM),
             caption(
-                "the two missing: opposite pairs only —\nin A and C but not B or D, and the mirror"
+                "the ring order A → B → C → D decides:\n"
+                "neighbours meet — AB, BC, CD, AD;\n"
+                "opposites meet only inside the others —\n"
+                "'A and C alone' has nowhere to be"
             ),
         ).arrange(DOWN, buff=0.3)
         tally.move_to(3.3 * RIGHT + 0.9 * UP)
@@ -588,12 +633,13 @@ class FourSetsNoPicture(ConceptScene):
             ),
         ).arrange(DOWN, buff=0.3)
         fix.move_to(3.3 * RIGHT + 0.9 * UP)
+        ellipse_labels = _region_labels(_ELLIPSE_REGIONS, centre, s)
         self.play(LaggedStart(*[Create(e) for e in ellipses], lag_ratio=0.2))
-        self.play(FadeIn(fix))
+        self.play(FadeIn(ellipse_labels, lag_ratio=0.05), FadeIn(fix))
         self.wait(1.2)
 
         # --- level 2: four hats — dependent events, counted -------------------------
-        self.play(FadeOut(VGroup(ellipses, fix, venn, prompt)))
+        self.play(FadeOut(VGroup(ellipses, ellipse_labels, fix, venn, prompt)))
         hats_prompt = Text(
             "Four hats handed back at random — someone gets their own?", font_size=BODY_SIZE
         ).next_to(self.head, DOWN, buff=0.3)

@@ -134,7 +134,16 @@ Branch `feat/probability-inclusion-exclusion`, cut from `main` at
   (the two-ends caption, the overlap's fill-and-fade, the outside
   zeros, the ledger-form identity). Linter clean on all seven;
   `make check` + `make test` (259) green; the primitive re-compiled
-  standalone. The plan closes; the PR awaits the maintainer's merge
+  standalone. Maintainer feedback on the open PR (2026-08-29): a
+  numbered region tells a viewer nothing about which sets it lies in,
+  and the four-set lesson is that the existing regions follow the
+  circular order — so both pictures now carry membership labels at
+  sampled centroids (circles: A…D, AB/BC/CD/AD, the four triples,
+  ABCD; ellipses: all fifteen, AC and BD included), the tally caption
+  states the ring rule, and scene 2's ledger lists the outcome tuples
+  behind every term. Scenes 2 and 3 re-rendered at 1080p60, linter
+  clean, frames verified. The plan closes; the PR awaits the
+  maintainer's merge
 
 ## Decisions (made at design time)
 
@@ -255,7 +264,9 @@ takeaway quartet closes every scene.
 2. **`ThreeSetsOneLedger`** — L1: 6×6 grid, row 6 / column 6 / sum ≥
    10 tinted; count the union: 12 cells → 12/36. L2: the ledger —
    every cell stamped as terms arrive: +1 per set containing it (18
-   stamps), −1 per pair (7), +1 for the triple (1); (6,6) reads 3 → 0
+   stamps), −1 per pair (7), +1 for the triple (1), each term listing
+   the outcome tuples it covers ("(6,4) (6,5) (6,6)" under −P(A∩C));
+   (6,6) reads 3 → 0
    → 1 ("after the subtractions it has vanished from a union it
    belongs to; the last term is the only one that knows about the
    centre" — say "add back", never "add"); every union cell ends at 1,
@@ -267,11 +278,15 @@ takeaway quartet closes every scene.
    the triple term is not: every pair term was a correct product, so
    "multiply the complements" is licensed by MUTUAL independence only
    (`ChainsOfTrials`' chain is the thing licensed — named, not quoted).
-3. **`FourSetsNoPicture`** — L1: four circles, regions numbered to 14,
-   "16 needed — two missing" (the two opposite-pairs-only regions,
-   verified geometrically at build); Venn's sentence ("four circles
+3. **`FourSetsNoPicture`** — L1: four circles, every region labelled by
+   its membership (A, AB, ABC, ABCD …) at sampled centroids — 13
+   inside + the outside = 14, "16 needed"; the ring order A → B → C →
+   D decides which exist: neighbours meet (AB, BC, CD, AD), opposites
+   only inside the others, so "A and C alone" has nowhere to be (the
+   two missing masks, verified geometrically at build); Venn's sentence ("four circles
    cannot be so drawn as to intersect one another in the way
-   required"); four ellipses as one still (16, Venn's own fix);
+   required"); four ellipses as one still, its fifteen inside regions
+   labelled the same way — AC and BD now present (16, Venn's own fix);
    circles retired — the grid stays, the ledger continues. L2: four
    hats — the 24 permutations as chips, the 9 derangements GOOD, 15
    with a match; terms 4·(1/4) − 6·(1/12) + 4·(1/24) − 1·(1/24) =
