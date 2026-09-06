@@ -28,7 +28,9 @@ this argument is why. Branch `feat/probability-cantor-diagonal`, cut from
   below as digests; verifier addendum (anchors L–T, the exact on-screen
   objects) pinned — design finalized (seven scenes; decisions D1–D10);
   design approved by the maintainer 2026-09-06
-- [ ] Phase 1
+- [x] Phase 1: module stub (`ArrangedInASequence` built in full — the
+  simplest scene; module docstring listing all seven) + README
+  seventh-series Scope clause, subsection and row 1; `make check` green
 - [ ] Phase 2
 - [ ] Phase 3
 - [ ] Phase 4
@@ -263,8 +265,9 @@ $a_n^n = 1$, then $d_n = 2$ — is ours (verifier flag 5).
 
 ## Scene design (seven scenes, `probability/cantor_diagonal_manim.py`)
 
-Title on every scene: "Cantor's Diagonal". Levels marked. Every number
-below is an anchor reference (A–K in the verifier digest, L–T in the addendum).
+Each scene carries its own title, as every series here does. Levels marked.
+Every number below is an anchor reference (A–K in the verifier digest, L–T in
+the addendum).
 
 1. **`ArrangedInASequence`** (L1, ~40 s). Six `token`s numbered 1..6 (the
    combinatorics counting furniture) become a row that does not end; the

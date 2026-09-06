@@ -3,7 +3,7 @@
 ## Scope
 
 Probability as proportion, built visually: the sample space as a unit
-square, events as regions, probability as area. Six series so far. The
+square, events as regions, probability as area. Seven series so far. The
 first covers **independence** — the product rule P(A∩B) = P(A)·P(B) as
 the *primary* definition, why it is the probability-weighted upgrade of
 the counting grid, the confusions it attracts, and the product over a
@@ -34,7 +34,15 @@ two-dice grid that forces the three-set signs, the picture that breaks
 at four sets and the two examples sharing one coefficient row, the
 n-set formula proved by pairing subsets, the matching problem climbing
 to 1 − 1/e, and the truncated sum as a bound — the counting form
-`combinatorics/` queued, delivered from the probability side.
+`combinatorics/` queued, delivered from the probability side. The
+seventh covers **Cantor's diagonal** — Bertsekas & Tsitsiklis's Problem
+4*, in its own words: what "arranged in a sequence" means and how much a
+sequence holds (the integers, the zigzag over pairs and fractions), every
+point of [0, 1] as a row of digits, the diagonal rule that builds a point
+no row can be, why its digits are 1 or 2, the same diagonal on subsets,
+and the closer that lands here — the additivity axiom is stated for
+*sequences*, a sequence of points has probability 0, so "probability is
+area" was never a sum over points.
 
 This topic exists because two earlier ones promised it: the
 [multiplicative rule](../combinatorics/README.md) counts pairs as
@@ -240,6 +248,27 @@ Renders: `01_TwoSetsOneOverlap.mp4` … `07_WhenToReachForIt.mp4`.
 ```bash
 uv run python probability/inclusion_exclusion_manim.py
 uv run python probability/inclusion_exclusion_manim.py --list
+```
+
+### cantor_diagonal_manim.py
+
+Watch after the independence series — the interval and the unit square
+are its sample spaces, and the halving cover is `ChainsOfTrials`' square
+— and after `combinatorics/`' counting grid, which the second scene
+zigzags. The first series in this topic whose result is a negative
+claim, and it stays in Bertsekas & Tsitsiklis's language throughout:
+"uncountable" means exactly "cannot be arranged in a sequence"; no
+cardinals, no "bigger infinity".
+
+| # | Scene | Formula | What it says | Why it's true | When it's useful |
+| --- | --- | --- | --- | --- | --- |
+| 1 | `ArrangedInASequence` | $n\mapsto n/2,\ -(n-1)/2$ | "Arranged in a sequence" means every element gets a finite position number — and a sequence holds more than it looks. | Six tokens take positions 1–6 and the row keeps going (repeats allowed); the integers stack under the positions with pairing arrows — even n ↦ n/2, odd n ↦ −(n − 1)/2 gives 0, 1, −1, 2, −2, … — so every integer has one position; and a list can always take one more: shift everything one place and a new element fits. | The vocabulary of Problem 4* — B&T's "uncountable" is this sentence negated — and the objection "just add the new point to the list" is answered before the diagonal raises it: adding was never the obstacle. |
+
+Renders: `01_ArrangedInASequence.mp4` … `07_AreaNotSums.mp4`.
+
+```bash
+uv run python probability/cantor_diagonal_manim.py
+uv run python probability/cantor_diagonal_manim.py --list
 ```
 
 ## References
