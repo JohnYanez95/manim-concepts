@@ -343,7 +343,9 @@ Rough queue, in roughly the order they build on each other:
 - ~~The derivative as its own toolkit~~ — delivered by this topic's
   derivatives series; the chain rule and the score carry the kit.
 - ln as area under 1/t — the integral road not taken, and the honest
-  start of accumulation.
+  start of accumulation. `probability/`'s Cantor series (`AreaNotSums`)
+  promises the other half of that road: that length *is* a probability
+  law (Lebesgue) — its existence waits here.
 - The exponential series Σ xᵏ/k! = eˣ — named as unbuilt on screen by
   `probability/`'s `TheMatchingLimit` (its Σ(−1)ᵏ/k! = 1/e is the
   matching limit — the series truncated at n is the no-match

@@ -74,7 +74,33 @@ this argument is why. Branch `feat/probability-cantor-diagonal`, cut from
   ctc-algorithm PDFs rebuilt; welcome re-rendered at sixteen series in
   four rows of four (434 KB, frame verified). `make test` green (285),
   `make check` green, `make study` green
-- [ ] Phase 4
+- [x] Phase 4: local CodeRabbit returned one minor finding, applied
+  (the algorithms/ queue entry said Turing's §8 was "on screen"; the
+  caption says "Turing (1936)" and §8 is the reference). Audit: 25
+  findings, zero numeric — every on-screen and README number re-derived
+  against anchors A–T. Built rather than trued: `AreaNotSums` now says
+  the axiom's first clause is the finite case every series added with
+  (rows 94/95 had hung on a README parenthetical); `TheDiagonalRule`
+  names calculus/'s constants as rows 5 and 6 (row 96 had no citable
+  statement) and says the rows beyond the screen obey the same rule
+  (flag 7, which the design had claimed was on screen); the cover
+  caption names the coin square's halving; scene 1 closes the shifted
+  row with "…"; Cantor's rows relabelled E₁, E₂, E₃ (the series' own
+  subscript convention); the history caption reads "the reals were
+  1874, by nesting"; the names caption grounds itself in the zigzag;
+  the re-run caption says why d′₁ = 3 − d₁; the two names of 1/2
+  recoloured categorical. Documents: design trued (boxes not sliding
+  rows; the axiom condensed and the footnote verbatim; WARM strikes;
+  B&T's closing sentence pinned under anchor A); README intro no
+  longer claims the interval as independence's sample space (the
+  segment is new furniture); rows 2/4/6/7 gained the DP-wavefront,
+  calculus-constants, indicator-table and covered-points clauses;
+  wiki rows 93/94/95/96/98 re-cited, two device bullets written
+  (pairing arrows; the boxed cell), stamp advanced to 14e3f65, audit
+  entry logged; combinatorics/ and calculus/ far ends point back;
+  root README probability row appended. Changed scenes re-rendered at
+  draft and frame-verified (all seven), linter clean; `make check` +
+  `make test` (285) green
 - [ ] Phase 5
 
 ## Phase 0 — research digests (ADR 007: digests, not transcripts)
@@ -168,7 +194,10 @@ $a_n^n = 1$, then $d_n = 2$ — is ours (verifier flag 5).
 
 ### Verifier digest (anchors A–K; every on-screen number traces here or to the addendum)
 
-- **A** Citation — above. Verbatim problem and solution captured.
+- **A** Citation — above. Verbatim problem and solution captured; the
+  closing sentence, quoted on screen, in the README and in the primitive:
+  "Therefore, the sequence x₁, x₂, … does not exhaust the elements of
+  [0, 1], contrary to what was assumed."
 - **B** Uniqueness: x ∈ [0,1] has two expansions iff x = k/10ᵐ, 0 < k < 10ᵐ
   (terminating): 0.d₁…dₘ000… and 0.d₁…(dₘ−1)999…. 0 has one expansion;
   **1 has one "0.digits" expansion, 0.999…** — writing "1.000…" would
@@ -312,7 +341,7 @@ the addendum).
 
 1. **`ArrangedInASequence`** (L1, ~40 s). Six `token`s numbered 1..6 (the
    combinatorics counting furniture) become a row that does not end; the
-   claim chip: "arranged in a sequence = every element gets a finite
+   claim caption: "arranged in a sequence: every element gets a finite
    position number" (repeats allowed — said). Under the naturals, the
    integers stacked with pairing arrows 1↔0, 2↔1, 3↔−1, 4↔2, 5↔−2 (P),
    one caption: "a list can always take one more" (Hilbert's n → n+1) —
@@ -321,7 +350,7 @@ the addendum).
 2. **`TheZigzag`** (L1, ~50 s). The counting grid (rows p, columns q)
    grown open at the right and bottom; the 15 cells with p+q ≤ 6 stamped
    1, 2, 3, … 15 along anti-diagonals (O); then each cell relabelled p/q,
-   the four non-reduced ones (2/2, 2/4, 3/3, 4/2) tinted `MUTED` and
+   the four non-reduced ones (2/2, 2/4, 3/3, 4/2) struck `WARM` (cancelled) and
    skipped, eleven kept — "skipping never breaks a list". Beat: pairs and
    fractions are sequences. The surprise of scene 4 is earned here, before
    it is broken.
@@ -338,8 +367,11 @@ the addendum).
    cell of each row boxed `ACCENT`, never a drawn line. **Diagonal-first**:
    the seven diagonal digits alone, the rule stated as `MathTex`
    ($d_n = 1$ unless $a_n^n = 1$, then $2$), y assembled beneath; then the
-   rows revealed and each slid up beside y with digit n glowing `WARM` —
-   seven times. Closing beat: Martin's off-diagonal selection for one
+   rows revealed, then row by row the row's digit n boxed `WARM` and y's
+   digit n boxed `GOOD` under a one-line caption — seven times; the
+   calculus/ constants named as rows 5 and 6; the rows beyond the screen
+   said to obey the same rule (flag 7). Closing beat: Martin's off-diagonal
+   selection for one
    hold (one cell per row, at most one per column, "any such selection
    works — the diagonal is bookkeeping"). Beat: y differs from row n at
    digit n, for every n, by the rule; the rows beyond the screen follow
@@ -349,13 +381,13 @@ the addendum).
    0.1000… = x₁ (N, `WARM`): different digits, same number — a rule that
    can write 0 or 9 fails; the binary flip on (0.0111…₂, …) lands on the
    row (E). (ii) The 1-or-2 rule: no 0, no 9, so y owns one row (B, D) —
-   "different digit ⇒ different number" (`GOOD`); and the duplicate 1/2 on
-   scene 4's list was harmless. (iii) The re-run (M): y prepended, the
+   "different digit ⇒ different number" (`GOOD`); and both 1/2 rows sit
+   outside [1/9, 2/9]. (iii) The re-run (M): y prepended, the
    rule run again, y′ ≠ y at digit 1 and off the new list — "the claim was
    never *this* list misses y; it is *every* list misses something".
    Close: the direct caption ("for any sequence, the rule finds a point not
-   on it") over B&T's own sentence ("the sequence does not exhaust the
-   elements of [0, 1], contrary to what was assumed").
+   on it") over B&T's own sentence ("the sequence x₁, x₂, … does not
+   exhaust the elements of [0, 1], contrary to what was assumed" — anchor A).
 6. **`TheSameDiagonalTwice`** (L3, ~40 s). Cantor's 1891 rows as a still:
    three sequences of m and w, b_ν ≠ a_{ν,ν} — two symbols, no numbers
    (H). Then the yes/no table for S = {1,2,3,4} and Martin's f (Q): entry
@@ -368,9 +400,12 @@ the addendum).
 7. **`AreaNotSums`** (L3, ~60 s, the closer). `ProbabilityAsArea`'s unit
    segment. A single point given probability p = 0.15: seven equal bars
    stack past 1 (R, `WARM`) — so P(point) = 0 (B&T Ex. 1.4, S). Axiom 2's
-   second clause on screen verbatim with the word **sequence** boxed
-   `ACCENT`. The halving cover: intervals ε/2, ε/4, ε/8, … over listed
-   points, total ε (R; the `ChainsOfTrials` halving) — a listed set has
+   second clause on screen, condensed to its sequence form with the word
+   **sequence** boxed `ACCENT`, its first clause named as the finite case
+   every earlier series added with (the footnote, later, is verbatim). The
+   halving cover: intervals ε/2, ε/4, ε/8, … over listed
+   points, total ε (R; named on screen as the coin square's halving) — a listed
+   set has
    area 0. Then: "if [0, 1] were a sequence, its probability would be
    0 + 0 + ··· = 0, not 1" — B&T's footnote as the caption (I). Beat: the
    additivity axiom is stated for sequences; [0, 1] is not one; that is

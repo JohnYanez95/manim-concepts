@@ -248,13 +248,19 @@ class ArrangedInASequence(ConceptScene):
         step = naturals[1].get_x() - naturals[0].get_x()
         self.play(FadeOut(arrows), integers.animate.shift(step * RIGHT), run_time=0.8)
         shifted = _pairing_arrows(naturals, VGroup(new, *integers[:9]))
-        self.play(FadeIn(new, scale=0.6), FadeIn(shifted), run_time=0.5)
+        goes_on = VGroup(
+            Text("…", font_size=BODY_SIZE, color=COOL).next_to(naturals, RIGHT, buff=0.5),
+            Text("…", font_size=BODY_SIZE).next_to(integers, RIGHT, buff=0.5),
+        )
+        self.play(FadeIn(new, scale=0.6), FadeIn(shifted), FadeIn(goes_on), run_time=0.5)
         room = caption("a list can always take one more: shift everything one place", color=GOOD)
         room.next_to(rule, DOWN, buff=0.22)
         self.play(FadeIn(room))
         self.wait(1.4)
 
-        self.play(FadeOut(VGroup(naturals, integers, shifted, n_tag, z_tag, rule, room, new)))
+        self.play(
+            FadeOut(VGroup(naturals, integers, shifted, n_tag, z_tag, rule, room, new, goes_on))
+        )
         _takeaway(
             self,
             "A sequence gives every element a finite position —\n"
@@ -514,8 +520,10 @@ class EveryPointHasDigits(ConceptScene):
         self.play(FadeOut(VGroup(mid, zoom, dot2, tint2, digit2, address, tint1, dot, dot_label)))
         half = Dot(point_on(top, 0.5), color=ACCENT, radius=0.09)
         half_label = Text("1/2", font_size=LABEL_SIZE, color=ACCENT).next_to(half, UP, buff=0.15)
-        left_tenth = tenth(top, 4, WARM)
-        right_tenth = tenth(top, 5, COOL)
+        # Two names for one point are two distinct things, not an overcount:
+        # the categorical pair, matched to the tenth each name lives in.
+        left_tenth = tenth(top, 4, palette(1))
+        right_tenth = tenth(top, 5, palette(0))
         self.play(FadeIn(half, scale=0.5), FadeIn(half_label))
         self.play(FadeIn(right_tenth), FadeIn(left_tenth))
         edge = Text(
@@ -524,8 +532,8 @@ class EveryPointHasDigits(ConceptScene):
         edge.next_to(top, DOWN, buff=0.35)
         self.play(FadeIn(edge))
         two_rows = VGroup(
-            MathTex(r"0.5000\cdots", font_size=40, color=COOL),
-            MathTex(r"0.4999\cdots", font_size=40, color=WARM),
+            MathTex(r"0.5000\cdots", font_size=40, color=palette(0)),
+            MathTex(r"0.4999\cdots", font_size=40, color=palette(1)),
         ).arrange(RIGHT, buff=1.2)
         two_rows.move_to(0.0 * UP)
         self.play(FadeIn(two_rows))
@@ -616,6 +624,11 @@ class TheDiagonalRule(ConceptScene):
         never.next_to(y_row, DOWN, buff=0.25)
         self.play(FadeIn(never))
         self.wait(1.0)
+        self.play(FadeOut(never))
+        never = caption("rows 5 and 6 are calculus/'s e, as 1/e and e − 2 — to eight digits now")
+        never.next_to(y_row, DOWN, buff=0.25)
+        self.play(FadeIn(never))
+        self.wait(1.0)
 
         # --- compare y with every row at its own column -------------------------------
         self.play(FadeOut(never))
@@ -640,11 +653,14 @@ class TheDiagonalRule(ConceptScene):
             "y differs from row n at digit n — for every n, by the rule", color=ACCENT
         )
         every_n.next_to(y_row, DOWN, buff=0.25)
+        beyond = caption("seven rows fix seven digits of y; the rows beyond obey the same rule")
+        beyond.next_to(every_n, DOWN, buff=0.18)
         self.play(FadeIn(every_n))
+        self.play(FadeIn(beyond))
         self.wait(1.2)
 
         # --- the diagonal is bookkeeping, not geometry -----------------------------------
-        self.play(FadeOut(boxes), FadeOut(every_n))
+        self.play(FadeOut(boxes), FadeOut(every_n), FadeOut(beyond))
         permuted = [(0, 2), (1, 0), (2, 4), (3, 1), (4, 6), (5, 3), (6, 5)]
         other_boxes = VGroup(*[table.box(r, k, color=COOL) for r, k in permuted])
         self.play(Create(other_boxes), run_time=0.8)
@@ -751,10 +767,10 @@ class WhyOneOrTwo(ConceptScene):
         y2.set_color(GOOD)
         self.play(FadeIn(y2))
         first = caption(
-            "y′ ≠ y at digit 1 — always, d′₁ = 3 − d₁ — and off every row at its digit",
+            "y′ ≠ y at digit 1 — the rule on a 1 or 2 returns the other — and off every row",
             color=GOOD,
         )
-        first.next_to(y2, DOWN, buff=0.25)
+        first.next_to(y2, DOWN, buff=0.25).set_x(0)
         self.play(FadeIn(first))
         self.wait(1.2)
         claim = caption(
@@ -797,7 +813,7 @@ class TheSameDiagonalTwice(ConceptScene):
         self.play(FadeIn(prompt))
 
         # --- Cantor's rows (anchor H) --------------------------------------------------------
-        cantor_rows = [("E¹ =", "mmmmmm"), ("E² =", "wwwwww"), ("E³ =", "mwmwmw")]
+        cantor_rows = [("E₁ =", "mmmmmm"), ("E₂ =", "wwwwww"), ("E₃ =", "mwmwmw")]
         cantor = VGroup()
         for r, (name, symbols) in enumerate(cantor_rows):
             y = 1.5 - r * 0.5
@@ -839,7 +855,7 @@ class TheSameDiagonalTwice(ConceptScene):
         self.play(FadeIn(new_row))
         own_words = VGroup(
             caption("the new row's nth symbol differs from row n's nth symbol —"),
-            caption("Cantor's 1891 rule, on sequences of m and w; the reals came afterwards"),
+            caption("Cantor's 1891 rule on sequences of m and w — the reals were 1874, by nesting"),
         ).arrange(DOWN, buff=0.12)
         own_words.move_to(1.1 * DOWN)
         self.play(FadeIn(own_words))
@@ -925,14 +941,17 @@ class TheSameDiagonalTwice(ConceptScene):
         pointers = VGroup(
             Text("the same move, elsewhere", font_size=BODY_SIZE),
             caption(
-                "Turing (1936): the diagonal on computable sequences — the list is uncomputable",
+                "Turing (1936): the same diagonal on computable sequences — no list computes",
                 color=MUTED,
             ),
             caption(
                 "(the undecidability story belongs to algorithms/ — promised, not built here)",
                 color=MUTED,
             ),
-            caption("names are finite strings, and finite strings are a sequence —", color=MUTED),
+            caption(
+                "names are finite strings, listed the zigzag's way — by length, then order —",
+                color=MUTED,
+            ),
             caption("so most points of [0, 1] have no name", color=MUTED),
         ).arrange(DOWN, buff=0.28)
         pointers.move_to(0.3 * UP)
@@ -1042,14 +1061,22 @@ class AreaNotSums(ConceptScene):
         seq_box = SurroundingRectangle(axiom_words[1], color=ACCENT, buff=0.08, stroke_width=2.5)
         self.play(FadeIn(axiom_words), FadeIn(axiom))
         self.play(Create(seq_box))
-        same_word = caption("the same word Problem 4* denies to [0, 1]", color=ACCENT)
-        same_word.next_to(axiom, DOWN, buff=0.25)
+        first_clause = caption(
+            "its first clause is the finite case — the union rule every series added with"
+        )
+        first_clause.next_to(axiom, DOWN, buff=0.25)
+        same_word = caption(
+            "this is its second — the same word Problem 4* denies to [0, 1]", color=ACCENT
+        )
+        same_word.next_to(first_clause, DOWN, buff=0.18)
+        self.play(FadeIn(first_clause))
+        self.wait(0.8)
         self.play(FadeIn(same_word))
         self.wait(1.4)
 
         # --- a sequence of points has probability 0: the halving cover (anchor R) -------
         self.play(
-            FadeOut(VGroup(same_word)),
+            FadeOut(VGroup(first_clause, same_word)),
             VGroup(axiom_words, axiom, seq_box).animate.shift(2.05 * DOWN),
         )
         listed = [0.14159, 0.5, 0.33333, 0.41421, 0.36788, 0.71828]
@@ -1074,7 +1101,9 @@ class AreaNotSums(ConceptScene):
             cover.move_to(at(t))
             covers.add(cover)
         self.play(LaggedStart(*[FadeIn(c) for c in covers], lag_ratio=0.25), run_time=1.2)
-        cover_words = caption("cover x₁ by an interval of length ε/2, x₂ by ε/4, x₃ by ε/8, …")
+        cover_words = caption(
+            "cover x₁ by ε/2, x₂ by ε/4, x₃ by ε/8, … — the coin square's halving"
+        )
         cover_words.move_to(0.65 * UP)
         cover_sum = MathTex(
             r"\tfrac{\varepsilon}{2} + \tfrac{\varepsilon}{4} + \tfrac{\varepsilon}{8}"

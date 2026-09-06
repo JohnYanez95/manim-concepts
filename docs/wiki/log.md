@@ -862,3 +862,53 @@ reordered.
   diagonal boxed cell by cell (`TheDiagonalRule`, `WhyOneOrTwo`)
 - branch note: cut from main at ce317e5 (PR #18 merged, clean, level
   with origin)
+
+## [2026-09-06] audit | incremental, plan 017 branch
+
+- scope: diffed d59000d..14e3f65 (the plan-016 finalisation tail and
+  PR #18 merge absorbed as the previous audit's application; the four
+  plan-017 commits read in full plus cited far ends — ProbabilityAsArea,
+  ChainsOfTrials, MultiplicativeRule, TheMysteryConstants, the 1/e
+  captions in random-variables and inclusion–exclusion); no full crawl
+- findings: 6 promised-not-delivered, 5 delivered-not-recorded,
+  6 possible-not-yet-made, 8 graph-health; zero numeric discrepancies —
+  every on-screen and README number re-derived (Decimal at 80 digits,
+  exact Fractions) against anchors A–T; 2 precision items (E¹/E²/E³
+  broke the subscript-is-which-number convention; "the reals came
+  afterwards" read as post-1891)
+- top finding, BUILT: the "first clause" strand — the finite additivity
+  every earlier series used — was README-only and rows 94/95 hung on
+  it; `AreaNotSums` now says it on screen. Also built: `TheDiagonalRule`
+  names calculus/'s constants as rows 5 and 6 (row 96 had no citable
+  statement anywhere) and says the rows beyond the screen obey the same
+  rule (the plan's flag 7 had claimed this was on screen); the cover
+  caption names the coin square's halving; scene 1 closes the shifted
+  row with "…"; Cantor's rows relabelled E₁, E₂, E₃; the history caption
+  now says the reals were 1874, by nesting; the names caption grounds
+  itself in the zigzag; the re-run caption says why d′₁ = 3 − d₁; the
+  two names of 1/2 recoloured categorical (they are two distinct
+  things, not an overcount)
+- plan design trued to the built scenes: boxes not sliding rows; the
+  axiom condensed, the footnote verbatim; WARM strikes not MUTED tints;
+  a caption not a chip; B&T's closing sentence pinned under anchor A
+- correction to the series entry above: only the outer-product grid's
+  stop had reached INDEX's device section; the pairing-arrows and
+  boxed-cell bullets it claimed are now written
+- row 94 re-cited (ProbabilityAsArea draws the square; the segment is
+  new furniture — recorded as such; the on-screen strand is "probability
+  is area — the interval is not a sum over points"); row 93 gained the
+  tokens strand; row 96 the 1/e strand; row 98 the calculus/ cross-ref
+  and the segment-helper intent
+- possible, recorded in README cells: the anti-diagonal walk as the DP
+  wavefront (row 2); the yes/no table as an indicator table (row 6);
+  scene 7's covered points are scene 4's rows with the duplicate
+  dropped (row 7)
+- far ends: combinatorics/ (MultiplicativeRule row) and calculus/ (the
+  ln-as-area bullet) now point back; algorithms/' queue entry no longer
+  says "§8 on screen" and notes the Scope sentence it will need; root
+  README's probability row updated; linear_algebra/ maintainer call
+  still open (ninth entry)
+- local CodeRabbit pass: one minor finding (the same "§8 on screen"
+  overstatement), applied
+- stamp: advance to 14e3f65 (the audited HEAD; findings applied in the
+  commit after it)

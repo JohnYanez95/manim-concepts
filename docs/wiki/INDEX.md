@@ -1,8 +1,8 @@
 # Graph index
 
-Last audited: `d59000d` (2026-08-29, incremental — plan-016 branch;
-the previous stamp `ca95076` was the plan-015 branch, with the
-plan-014 audit at `9226fdf` merged into it)
+Last audited: `14e3f65` (2026-09-06, incremental — plan-017 branch;
+the previous stamp `d59000d` was the plan-016 branch, merged as PR #18
+at `ce317e5`)
 
 The stamp is a commit hash: the state of the repo this graph was last
 reconciled against. The `connection-auditor` diffs from it instead of
@@ -90,12 +90,12 @@ Status: **delivered** (both ends exist and the content makes the link) or
 | `e-and-ln` | `inclusion-exclusion` | delivered | `TheMatchingLimit`'s caption cites e as "calculus/'s compound-interest ceiling" (`TheSplitYear`) and 1/e as the binomial's zero-success limit; the series itself is named as unbuilt (next row) |
 | `inclusion-exclusion` | *(the exponential series Σ xᵏ/k! = eˣ)* | promised | `TheMatchingLimit` on screen: "the series Σ(−1)^k/k! = 1/e is a fact this repo has not built"; `probability/README.md` row 5. Home `calculus/` — Taylor series, parked since plan 009 ("none of them gated the CTC gradient") |
 | `inclusion-exclusion` | *(the sieve: exactly m of n events)* | promised | `WhenToReachForIt`'s fifth row on screen: "the sieve (Feller IV.3) — not built here"; `probability/README.md` row 7 |
-| `counting-rules` | `cantor-diagonal` | delivered | `TheZigzag` on screen: "the counting grid — the multiplicative rule's rectangle, open on two sides", stamped 1..15 along anti-diagonals and relabelled p/q with 2/2, 2/4, 3/3, 4/2 skipped; `probability/README.md` row 2 |
-| `independence` | `cantor-diagonal` | delivered | The unit segment as the sample space (`ProbabilityAsArea`'s picture) carries `EveryPointHasDigits`' address and `AreaNotSums`' cover; `AreaNotSums`' point-mass overflow re-reads finite additivity as Axiom 2's first clause; `probability/README.md` subsection intro ("the halving cover is `ChainsOfTrials`' square") and row 7 |
-| `inclusion-exclusion` | `cantor-diagonal` | delivered | `probability/README.md` row 7: "the finite additivity every earlier series used is its first clause" — the union rule's additivity named as the finite case of the axiom `AreaNotSums` states for sequences |
-| `e-and-ln` | `cantor-diagonal` | delivered | `TheDiagonalRule`'s rows 5 and 6 are 1/e = 0.36787944… and e − 2 = 0.71828182… (anchors F/L), the constants `calculus/` built, now digit rows; `probability/README.md` row 4 |
+| `counting-rules` | `cantor-diagonal` | delivered | `TheZigzag` on screen: "the counting grid — the multiplicative rule's rectangle, open on two sides", stamped 1..15 along anti-diagonals and relabelled p/q with 2/2, 2/4, 3/3, 4/2 skipped; `probability/README.md` row 2; `ArrangedInASequence` opens on `MultiplicativeRule`'s tokens (`token(letter, palette(i))`, documents-only) |
+| `independence` | `cantor-diagonal` | delivered | `AreaNotSums`' closing line "probability is area — the interval is not a sum over points" answers `ProbabilityAsArea`'s boxed P(A) = area(A); its cover caption names the halving as "the coin square's halving" (`ChainsOfTrials`); the unit segment is new furniture (the square's one-dimensional sibling — no earlier scene draws it); `probability/README.md` subsection intro and row 7 |
+| `inclusion-exclusion` | `cantor-diagonal` | delivered | `AreaNotSums` on screen: "its first clause is the finite case — the union rule every series added with" / "this is its second" — the union rule's additivity named as the finite case of the axiom stated for sequences; `probability/README.md` row 7 |
+| `e-and-ln` | `cantor-diagonal` | delivered | `TheDiagonalRule` on screen: "rows 5 and 6 are calculus/'s e, as 1/e and e − 2 — to eight digits now" (0.36787944, 0.71828182; anchors F/L) — the 0.3679 `TheBinomialColumns` and `TheMatchingLimit` rounded, extended; `probability/README.md` row 4 |
 | `cantor-diagonal` | *(undecidability by the diagonal — Turing 1936 §8)* | promised | `TheSameDiagonalTwice` on screen: "the undecidability story belongs to algorithms/ — promised, not built here"; `algorithms/README.md` Ideas not yet built; `probability/README.md` row 6 |
-| `cantor-diagonal` | *(length as a probability law — existence, Lebesgue)* | promised | `AreaNotSums` on screen: "consistency, not existence: that length is a probability law at all is B&T's 'more advanced treatment'"; `probability/README.md` Ideas not yet built (waits on integration in `calculus/`); row 7 |
+| `cantor-diagonal` | *(length as a probability law — existence, Lebesgue)* | promised | `AreaNotSums` on screen: "consistency, not existence: that length is a probability law at all is B&T's 'more advanced treatment'"; `probability/README.md` Ideas not yet built (waits on integration in `calculus/`); row 7; `calculus/README.md` Ideas (the ln-as-area bullet records the wait). When that series lands, promote the unit-segment helper (drawn twice in `cantor_diagonal_manim.py`) to `utils.mobjects` |
 
 ## Shared visual devices
 
@@ -131,6 +131,16 @@ one topic should meet the same picture, upgraded, in the next:
   overlap. Plan 017's `TheZigzag` opens the same grid on two sides and
   walks it: the cells stamped 1..15 along anti-diagonals — the first
   time the grid is read as a *sequence* rather than a count.
+- **Stacked lists with pairing arrows** (`ArrangedInASequence`'s
+  `_pairing_arrows`): two lists one above the other, one arrow per
+  column — never side-by-side sets, which invite the part–whole reading
+  (Tsamir & Tirosh 1999). The repo's picture for "one-to-one" from
+  plan 017 on.
+- **The boxed cell** (`TheProductRule`'s (6, 6) boxed `ACCENT` →
+  `TwoSetsOneOverlap`'s same cell boxed `WARM` → `_DigitTable.box`, one
+  boxed cell per row and never a line, in `TheDiagonalRule`,
+  `WhyOneOrTwo` and `TheSameDiagonalTwice`): the claim is "this cell",
+  and the diagonal is bookkeeping, not geometry.
 - **"Divide out / drop what doesn't matter" in WARM**: cancelled
   orderings (combinatorics) → merged repeats and dropped blanks (CTC) →
   failed product tests (independence) → duplicate subtrees greyed into
