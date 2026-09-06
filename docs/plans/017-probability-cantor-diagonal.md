@@ -101,7 +101,21 @@ this argument is why. Branch `feat/probability-cantor-diagonal`, cut from
   root README probability row appended. Changed scenes re-rendered at
   draft and frame-verified (all seven), linter clean; `make check` +
   `make test` (285) green
-- [ ] Phase 5
+- [x] Phase 5: PR #19 opened. Bot review: one minor finding, valid and
+  applied — the Turing pointer said "no list of them computes" where
+  the precise claim is that a computable complete list would have a
+  computable flipped diagonal absent from it, so no computable list
+  holds every computable sequence; fixed in the `algorithms/` queue
+  entry and in `TheSameDiagonalTwice`'s caption ("Turing (1936): no
+  computable list holds every computable sequence — same move"), the
+  primitive's wording (Turing's own "the fallacy lies in assuming the
+  list is computable") already correct. `clean-drafts`, then 1080p60
+  finals: 7 files, distinct names, 1920×1080 at 60 fps,
+  36/41/34/53/49/39/56 s; contact sheets of scenes 4 and 7 and the
+  reworked Turing frame of scene 6 verified at full resolution; scene 6
+  re-rendered after the fix. Linter clean on all seven; `make check` +
+  `make test` (285) green. The plan closes; the PR awaits the
+  maintainer's merge and the 44 reference ticks
 
 ## Phase 0 — research digests (ADR 007: digests, not transcripts)
 

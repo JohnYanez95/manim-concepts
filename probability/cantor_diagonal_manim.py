@@ -941,7 +941,7 @@ class TheSameDiagonalTwice(ConceptScene):
         pointers = VGroup(
             Text("the same move, elsewhere", font_size=BODY_SIZE),
             caption(
-                "Turing (1936): the same diagonal on computable sequences — no list computes",
+                "Turing (1936): no computable list holds every computable sequence — same move",
                 color=MUTED,
             ),
             caption(

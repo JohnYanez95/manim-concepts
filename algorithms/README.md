@@ -135,8 +135,10 @@ until a human does the same.
 
 - Undecidability by the diagonal — `probability/`'s Cantor series
   (`TheSameDiagonalTwice`) names Turing (1936) on screen: the same
-  one-cell-per-row move on the computable sequences, where no list of
-  them computes (the reference is §8 of the paper). Promised there,
+  one-cell-per-row move on the computable sequences — if a complete
+  list were computable, its flipped diagonal would be computable and
+  absent from it, so no computable list holds every computable
+  sequence (the reference is §8 of the paper). Promised there,
   owed here; cite Sipser (Thm 4.11, 5.1) for the halting form, which
   is not Turing's phrase — and this topic's Scope, which is about
   reorganisation moves, will need a second-strand sentence when it
