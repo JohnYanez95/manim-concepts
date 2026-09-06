@@ -114,6 +114,14 @@ cause: text placed by *estimated* width, and the estimates ran low.
   `init_output_directories` prefers it over the scene name. Scope
   `tempconfig` **per scene**, never per batch — this is why
   `utils/render.py` looks the way it does; do not "simplify" it back.
+- **`Text` renders literally.** A caption reading `p_k = (1/6)^k` shipped
+  to the maintainer with the underscore and caret drawn as typed; the
+  scan that followed found seventeen more across five modules (`e^x`,
+  `2^N`, `p_b`). Only `MathTex` reads TeX. In `Text`/`caption`, an
+  exponent or index is a Unicode super/subscript (`eˣ`, `2ᴺ`, `pₖ`,
+  `(5/6)⁴`) or a word (`e raised to ln x`, `the blank ledger`); anything
+  heavier is a `MathTex`. `tests/test_text_markup.py` fails the module
+  on `^`, `\cmd`, or `_` glued to an index.
 - Manim re-exports numpy, so `np` resolves under `from manim import *`. A
   module that uses numpy imports it explicitly; one that doesn't must not
   (unused `import numpy as np` fails ruff F401).

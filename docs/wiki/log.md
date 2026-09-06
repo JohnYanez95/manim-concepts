@@ -765,3 +765,75 @@ reordered.
   alignment rows 3/6 pointed at the delivered series; the plan's
   false root-README claim corrected in place
 - stamp: advance to ca95076
+
+## [2026-08-29] series | plan 016, inclusion–exclusion
+
+- node added: `inclusion-exclusion` (seven scenes, probability/ — the
+  topic's sixth series; the first new authored study-guide primitive
+  since v1, solve gate 8/8)
+- edge delivered: `counting-rules` → `inclusion-exclusion` (row 79's
+  inclusion–exclusion strand — the "two and three overlapping sets"
+  bullet, re-homed from `combinatorics/README.md` Ideas with a pointer;
+  Pascal, stars & bars and the binomial theorem stay promised on the
+  row, the binomial theorem now restated on screen a second time)
+- edges delivered: `independence` → `inclusion-exclusion` (the
+  Bernstein coins' device reuse the seed audit recorded, acted on:
+  the empty centre and the mutual-independence licence);
+  `random-variables` → `inclusion-exclusion` (the 4, 6, 4, 1 row as
+  the sorted square's columns; D(n)/n! beside (1 − 1/n)ⁿ);
+  `e-and-ln` → `inclusion-exclusion` (e cited as the compound-interest
+  ceiling)
+- edges promised: `inclusion-exclusion` → the exponential series
+  (named unbuilt on screen; home calculus/), → the sieve for exactly
+  m of n (named not built on screen)
+- devices recorded: the per-cell ledger, the WARM overcount's sixth
+  stop, the mapping close's seventh stop
+- branch note: cut from main at 18d4cbb (clean, level with origin)
+
+## [2026-08-29] audit | incremental, plan 016 branch
+
+- scope: diffed 18d4cbb..d59000d (the four plan-016 commits read in
+  full plus the cited far ends — independence scenes 2/3/4/5's
+  inset, random-variables scenes 2/5, calculus scene 1, combinatorics
+  scene 3; root README working tree; every other README and the
+  study INDEX grepped for stale queue wording)
+- findings: 3 promised-not-delivered, 3 delivered-not-recorded,
+  5 possible-not-yet-made, 11 graph-health (1 structural, 10
+  prose-vs-scene); zero numeric discrepancies — every on-screen
+  number re-derived in exact fractions against anchors A–R; 3
+  provenance/print nits
+- top finding: the designed counter to the headline misconception
+  ("disjoint and independent are opposite ends of the overlap" —
+  scene 1 L3, plan design) was not built; the primitive stated it as
+  taught and row 86's "re-reads NotMutualExclusivity" leaned on it
+- row 80's hybrid status buried the counting residue (Pascal, stars &
+  bars, binomial theorem): no promised row from counting-rules
+  remained — split per the plan-015 label-prior precedent
+- both new promised rows lacked a home-queue entry: the exponential
+  series was absent from calculus/ Ideas, the sieve from probability/
+  Ideas
+- "removed once" was said, not shown: the unit-square overlap was
+  outlined WARM and never removed (README row 1, plan design)
+- unrecorded reuse: TheProductRule's 6×6 grid and 2×2 coin grid
+  rebuilt verbatim (scene 1 closer, Bernstein); the indicator pointer
+  leans on SameOutcomesAdd's linearity
+- far ends all verified; no stale queue mentions anywhere; the
+  mapping-close lineage still said "six series"
+- applied (same change): the "two ends of the overlap" caption BUILT
+  under scene 1's three rows; the overlap filled WARM and faded out
+  as the −P(A∩B) term writes; the 24 outside cells stamped 0; the
+  ellipse caption reworded (Venn stopped at four, five took Grünbaum);
+  "de Moivre stated" (Montmort's was the one solved); the indicator
+  caption names SameOutcomesAdd; row 80 split into delivered + the
+  promised counting residue; rows 86/87 grew the grid-reuse and
+  linearity strands; the outer-product-grid and WARM bullets gained
+  their inclusion–exclusion stops, the mapping close counts seven;
+  the exponential series queued in calculus/ Ideas, the sieve in
+  probability/ Ideas; README row 5 trued (decimals on screen; 1/e
+  "as a probability limit"); plan design trued (ChainsOfTrials is
+  named, not quoted; Ross's aside lives in the takeaway); primitive
+  nits (n ≥ 2; about four per cent). Not made, recorded here: the
+  Pascal-row bill as a picture, the Bonferroni truncation on the
+  ledger grid, de Méré's complement named as the chain's product
+  measure, the missing 1/8 drawn as a cell
+- stamp: advance to d59000d

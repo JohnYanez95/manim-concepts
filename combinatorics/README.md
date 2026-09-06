@@ -78,7 +78,11 @@ Rough queue, in roughly the order they build on each other:
 - Pascal's triangle as the recurrence $\binom{n}{r} = \binom{n-1}{r-1} +
   \binom{n-1}{r}$, animated as a choice being made about one element.
 - Stars and bars, for combinations *with* repetition.
-- Inclusion–exclusion on two and three overlapping sets.
+- ~~Inclusion–exclusion on two and three overlapping sets~~ — delivered
+  by [`probability/`](../probability/README.md)'s inclusion–exclusion
+  series, from the counting side first: `TwoSetsOneOverlap` counts the
+  overlap twice on the die strip before the rule becomes area, and the
+  series climbs to four sets and n.
 - The binomial theorem, as the multiplicative rule applied to $(x+y)^n$.
 - A fifth problem shape in `WhenToUseIt` — counting a sequence model's
   alignments, now that `deep_learning/` delivers the payoff. Needs a

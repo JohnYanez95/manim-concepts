@@ -577,7 +577,7 @@ class TheProbabilityMachine(ConceptScene):
             r" = \mathrm{softmax}(z)_i",
             font_size=32,
         ).move_to(2.4 * RIGHT + 1.35 * DOWN)
-        forcing = caption("add c to every score: e^c cancels — exactly the same")
+        forcing = caption("add c to every score: eᶜ cancels — exactly the same")
         forcing2 = caption("distribution; among smooth per-score recipes, only an")
         forcing3 = caption("exponential turns a shift into a factor that cancels")
         forcing.move_to(2.4 * RIGHT + 2.1 * DOWN)
@@ -622,7 +622,7 @@ class TheProbabilityMachine(ConceptScene):
             font_size=34,
             color=GOOD,
         ).move_to(0.0 * UP)
-        mirror = caption("float64 overflows past e^709 — subtracting the max is the")
+        mirror = caption("float64 overflows past e⁷⁰⁹ — subtracting the max is the")
         mirror2 = caption("shift the distribution cannot feel; the workhorse, reversed")
         mirror.move_to(0.85 * DOWN)
         mirror2.next_to(mirror, DOWN, buff=0.15)

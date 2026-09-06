@@ -430,8 +430,8 @@ class TheTwoLedgers(ConceptScene):
         a_chip = _ledger_chip("A", 0.24, 0.40, x=-4.3, y=1.1)
         self.play(FadeIn(a_chip))
         legend = VGroup(
-            caption("ends in blank — p_b", color=PB),
-            caption("ends in its letter — p_nb", color=PNB),
+            caption("ends in blank — the blank ledger", color=PB),
+            caption("ends in its letter — the letter ledger", color=PNB),
         ).arrange(DOWN, buff=0.15, aligned_edge=LEFT)
         legend.next_to(a_chip, DOWN, buff=0.35)
         on_frame(legend)
@@ -447,13 +447,13 @@ class TheTwoLedgers(ConceptScene):
         merge_back = CurvedArrow(
             [-3.2, 0.9, 0], [-4.3, 0.45, 0], angle=1.2, color=PNB, stroke_width=4
         )
-        door_tag = caption("only the p_b share passes — a blank", color=PB)
+        door_tag = caption("only the blank ledger passes — a blank", color=PB)
         door_tag2 = caption("stood between: a genuine double letter", color=PB)
         door_tag.move_to(2.6 * RIGHT + 0.0 * UP)
         door_tag2.next_to(door_tag, DOWN, buff=0.13)
         on_frame(door_tag)
         on_frame(door_tag2)
-        merge_tag = caption("the p_nb share merges silently back", color=PNB)
+        merge_tag = caption("the letter ledger merges silently back", color=PNB)
         merge_tag.next_to(legend, DOWN, buff=0.3)
         on_frame(merge_tag)
         self.play(FadeIn(fork_tag))
@@ -530,7 +530,7 @@ class TheTwoLedgers(ConceptScene):
             FadeIn(alpha_cap4),
             FadeIn(alpha_cap5),
         )
-        init = caption("init: p_b(∅) = 1 — before any frame,")
+        init = caption("init: ∅'s blank ledger = 1 — before any frame,")
         init2 = caption("all mass ends in blank")
         init.move_to(3.3 * RIGHT + 1.9 * DOWN)
         init2.next_to(init, DOWN, buff=0.13)
