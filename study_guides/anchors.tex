@@ -210,3 +210,37 @@
 \expandafter\newcommand\csname anchor@016.O.fourrolls\endcsname{671/1296}
 % 016.R.rare: four independent events at 0.01: exact 1 − 0.99⁴ = 0.03940399 against the union bound 0.04 [docs/plans/016-probability-inclusion-exclusion.md, verifier addendum R]
 \expandafter\newcommand\csname anchor@016.R.rare\endcsname{0.0394}
+% 017.C.range: every y with digits in {1, 2} lies between 0.111… = 1/9 and 0.222… = 2/9 [docs/plans/017-probability-cantor-diagonal.md, verifier anchor C]
+\expandafter\newcommand\csname anchor@017.C.range\endcsname{\tfrac{1}{9} \le y \le \tfrac{2}{9}}
+% 017.L.diagonal: digit n of row n for the seven listed points π−3, 1/2 (0.5000…), 1/3, √2−1, 1/e, e−2, 1/2 (0.4999…) [docs/plans/017-probability-cantor-diagonal.md, verifier addendum L]
+\expandafter\newcommand\csname anchor@017.L.diagonal\endcsname{1, 0, 3, 2, 7, 1, 9}
+% 017.L.eminus: e − 2, first eight digits truncated (row 6) [docs/plans/017-probability-cantor-diagonal.md, verifier addendum L / anchor F]
+\expandafter\newcommand\csname anchor@017.L.eminus\endcsname{0.71828182}
+% 017.L.inve: 1/e, first eight digits truncated (row 5) [docs/plans/017-probability-cantor-diagonal.md, verifier addendum L / anchor F]
+\expandafter\newcommand\csname anchor@017.L.inve\endcsname{0.36787944}
+% 017.L.pi: π − 3, first eight digits truncated (row 1 of the list) [docs/plans/017-probability-cantor-diagonal.md, verifier addendum L / anchor F]
+\expandafter\newcommand\csname anchor@017.L.pi\endcsname{0.14159265}
+% 017.L.sqrt: √2 − 1, first eight digits truncated (row 4) [docs/plans/017-probability-cantor-diagonal.md, verifier addendum L / anchor F]
+\expandafter\newcommand\csname anchor@017.L.sqrt\endcsname{0.41421356}
+% 017.L.y: y under the rule dₙ = 1 unless aₙⁿ = 1, then 2 — the branch to 2 fires at positions 1 and 6 [docs/plans/017-probability-cantor-diagonal.md, verifier addendum L]
+\expandafter\newcommand\csname anchor@017.L.y\endcsname{0.2111121\ldots}
+% 017.M.rerun: the new diagonal after y is prepended and the seven rows shift down one [docs/plans/017-probability-cantor-diagonal.md, verifier addendum M]
+\expandafter\newcommand\csname anchor@017.M.rerun\endcsname{2, 4, 0, 3, 1, 9, 8, 9}
+% 017.M.yprime: y′ from the re-run; d′₁ = 3 − d₁ so y′ ≠ y at digit 1 unconditionally, and y′ is off every shifted row at its own digit [docs/plans/017-probability-cantor-diagonal.md, verifier addendum M]
+\expandafter\newcommand\csname anchor@017.M.yprime\endcsname{0.11112111\ldots}
+% 017.N.plusone: the 'add 1 to the digit' rule on the list 0.0999…, 0.999…, 0.999…, … returns x₁ itself [docs/plans/017-probability-cantor-diagonal.md, verifier addendum N]
+\expandafter\newcommand\csname anchor@017.N.plusone\endcsname{0.1000\ldots = \tfrac{1}{10} = 0.0999\ldots}
+% 017.O.fifteen: cells of the counting grid with p + q ≤ 6, stamped 1..15 in anti-diagonal order (row 1 reads 1, 2, 4, 7, 11) [docs/plans/017-probability-cantor-diagonal.md, verifier addendum O]
+\expandafter\newcommand\csname anchor@017.O.fifteen\endcsname{15}
+% 017.O.kept: fractions kept among the first fifteen stamps (2/2, 2/4, 3/3, 4/2 skipped): 1/1, 1/2, 2/1, 1/3, 3/1, 1/4, 2/3, 3/2, 4/1, 1/5, 5/1 [docs/plans/017-probability-cantor-diagonal.md, verifier addendum O]
+\expandafter\newcommand\csname anchor@017.O.kept\endcsname{11}
+% 017.P.pairs: the integers under positions 1..10: even n ↦ n/2, odd n ↦ −(n − 1)/2 [docs/plans/017-probability-cantor-diagonal.md, verifier addendum P]
+\expandafter\newcommand\csname anchor@017.P.pairs\endcsname{0, 1, -1, 2, -2, 3, -3, 4, -4, 5}
+% 017.Q.D: Martin's example on S = {1, 2, 3, 4}: f(1) = {1, 3}, f(2) = {1, 3, 4}, f(3) = { }, f(4) = {2, 4}; the flipped diagonal [docs/plans/017-probability-cantor-diagonal.md, verifier addendum Q]
+\expandafter\newcommand\csname anchor@017.Q.D\endcsname{\{2, 3\}}
+% 017.Q.subsets: subsets of a four-element set, against at most four hit by any list of four [docs/plans/017-probability-cantor-diagonal.md, verifier addendum Q]
+\expandafter\newcommand\csname anchor@017.Q.subsets\endcsname{16}
+% 017.R.cover: partial sums of the halving cover ε/2 + ε/4 + ⋯ at ε = 1/10 (limit 1/10) [docs/plans/017-probability-cantor-diagonal.md, verifier addendum R]
+\expandafter\newcommand\csname anchor@017.R.cover\endcsname{\tfrac{1}{20}, \tfrac{3}{40}, \tfrac{7}{80}, \tfrac{3}{32}}
+% 017.R.overflow: B&T Example 1.4's overflow instance: p = 3/20, N = 7 is the least N with Np > 1 [docs/plans/017-probability-cantor-diagonal.md, verifier addendum R]
+\expandafter\newcommand\csname anchor@017.R.overflow\endcsname{7 \times 0.15 = 1.05}
