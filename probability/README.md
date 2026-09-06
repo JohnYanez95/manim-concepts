@@ -72,11 +72,15 @@ Deliberately **not** covered here:
   deterministic systems, not binomial machines — skipped by evidence,
   not oversight; the sorted square does its honest job.
 - Continuous distributions and densities — the road not taken until
-  integration exists.
+  integration exists; the Cantor series says why that road cannot be a
+  sum over points, and stops there.
 - The binomial theorem and Pascal's triangle — `combinatorics/` owns
   them; the (1, 4, 6, 4, 1) row may nod, never depend.
 - Measure-theoretic formality. "Probability is area" is used as a
-  faithful picture, not developed as measure theory.
+  faithful picture, not developed as measure theory; countable
+  additivity is *stated* once, as B&T's Axiom 2, which the earlier
+  series used silently in its finite form — and that length is a
+  probability law at all (Lebesgue) stays the "more advanced treatment".
 - Counting itself — that is `combinatorics/`'s job; this topic starts
   where counting hands over to proportion. (The inclusion–exclusion series
   counts cells on the die strip for one beat — the counting form
@@ -263,6 +267,12 @@ cardinals, no "bigger infinity".
 | # | Scene | Formula | What it says | Why it's true | When it's useful |
 | --- | --- | --- | --- | --- | --- |
 | 1 | `ArrangedInASequence` | $n\mapsto n/2,\ -(n-1)/2$ | "Arranged in a sequence" means every element gets a finite position number — and a sequence holds more than it looks. | Six tokens take positions 1–6 and the row keeps going (repeats allowed); the integers stack under the positions with pairing arrows — even n ↦ n/2, odd n ↦ −(n − 1)/2 gives 0, 1, −1, 2, −2, … — so every integer has one position; and a list can always take one more: shift everything one place and a new element fits. | The vocabulary of Problem 4* — B&T's "uncountable" is this sentence negated — and the objection "just add the new point to the list" is answered before the diagonal raises it: adding was never the obstacle. |
+| 2 | `TheZigzag` | $(p,q)\mapsto\tfrac{(p+q-2)(p+q-1)}{2}+p$ | Pairs of positions — and the fractions — are a sequence too: walk the counting grid along its anti-diagonals. | The multiplicative rule's grid, open on two sides; the 15 cells with p + q ≤ 6 stamped 1..15 in anti-diagonal order (row 1 reads 1, 2, 4, 7, 11), so every cell gets a finite position; relabelled p/q, the four cells not in lowest terms (2/2, 2/4, 3/3, 4/2) are skipped and eleven fractions take positions 1..11 (1/1, 1/2, 2/1, 1/3, 3/1, …) — every positive fraction has one lowest-terms cell, so one position, and skipping never breaks a list. | The countability precedents (the integers, pairs, fractions) in one owned picture — and the reason the interval's failure in scene 4 is a surprise rather than a truism: "more than the naturals" in every naive sense is still a sequence. |
+| 3 | `EveryPointHasDigits` | $x = 0.d_1 d_2 d_3\cdots$ | Every point of [0, 1] is a row of digits — and a few points own two rows. | The unit segment cut into tenths: 1/3 lies in the fourth tenth (first digit 3), then in the fourth hundredth inside it (second digit 3) — B&T's own 1/3 = 0.333…, the digits as an address; 1/2 sits on a tick, the edge of two tenths, and 3 × 0.333… = 0.999… while 3 × 1/3 = 1, so 0.5000… and 0.4999… are two rows for one point; B&T: "this is the only kind of exception" — rows ending in all zeros or all nines. | The representation every diagonal argument on the reals needs, and its one trap — the terminating decimals, each with two rows — which scene 5 shows is the whole reason for "1 or 2". |
+| 4 | `TheDiagonalRule` | $d_n = 1 \text{ if } a_n^n \neq 1,\ \text{else } 2$ | Suppose [0, 1] is arranged in a sequence; read digit n of row n, choose a digit it is not, and the number built from the choices is on no row. | Seven listed rows (π − 3, 1/2, 1/3, √2 − 1, 1/e, e − 2, and 1/2 again as 0.4999…); the diagonal digits 1, 0, 3, 2, 7, 1, 9 appear before any other digit and y = 0.2111121… is built from them (both branches of the rule fire, at positions 1 and 6), then the rows fill in — the other digits never mattered; row by row, y's digit n differs from row n's digit n; and any one cell per row, at most one per column, works alike — the diagonal is bookkeeping, not geometry. | The argument itself, in B&T's notation ($x_n = 0.a_n^1 a_n^2 a_n^3\cdots$); the one-cell-per-row selection is the shape every later diagonal — subsets, machines — reuses. |
+| 5 | `WhyOneOrTwo` | $\tfrac{1}{9} \le y \le \tfrac{2}{9}$ | Why the digits are 1 or 2 — and why the claim survives "just add y to the list". | The rule "add 1" on the list 0.0999…, 0.999…, 0.999…, … returns 0.1000… = 1/10 = x₁: different digits, the same number (the binary flip fails alike, 0.0111…₂ = 0.1000…₂ = 1/2); with digits in {1, 2}, y ends in neither zeros nor nines, so it owns exactly one row and a different digit means a different number — and 1/9 ≤ y ≤ 2/9 puts y inside [0, 1] while both 1/2 rows sit outside that range; prepend y and re-run: the new diagonal 2, 4, 0, 3, 1, 9, 8, 9 gives y′ = 0.11112111…, off the new list too (d′₁ = 3 − d₁, always). | The claim in its honest form — for any sequence, the rule finds a point not on it — and then B&T's sentence: "the sequence x₁, x₂, … does not exhaust the elements of [0, 1], contrary to what was assumed". |
+| 6 | `TheSameDiagonalTwice` | $D = \{\,s : s \notin f(s)\,\}$ | The same move on other objects: Cantor's own rows of two symbols, and a list of subsets whose flipped diagonal is a subset on no row. | Cantor (1891) diagonalised sequences of m and w — the new row's nth symbol differs from row n's — with no decimals in sight; for S = {1, 2, 3, 4} and the listed subsets {1, 3}, {1, 3, 4}, { }, {2, 4}, the yes/no table's diagonal reads yes, no, no, yes, its flip is D = {2, 3}, on no row: 4 listed, 16 exist. | No list of subsets of a set is complete (Cantor's theorem); the same diagonal on computable sequences is Turing's (1936) — the undecidability story is `algorithms/`'s, promised not built; and names are finite strings, a sequence, so most points of [0, 1] have no name. |
+| 7 | `AreaNotSums` | $P(A_1 \cup A_2 \cup \cdots) = P(A_1) + P(A_2) + \cdots$ | The additivity axiom is stated for sequences of events; [0, 1] is not a sequence; that is why probability is area and not a sum over points. | If one point had p = 0.15 so would every other, and seven of them stack to 1.05 > 1 — any p > 0 overflows with N > 1/p points, so a point has probability 0 (B&T Example 1.4); Axiom 2's second clause is for a *sequence* of disjoint events (the finite additivity every earlier series used is its first clause); cover the listed points by intervals of length ε/2, ε/4, ε/8, … — total ε, for any ε — so a sequence of points has probability 0 + 0 + ⋯ = 0; if [0, 1] were a sequence, P([0, 1]) = 0 ≠ 1 — B&T's own footnote. | Why the continuous model this topic's Scope defers was never a point-sum — with the boundary stated: this proves the uniform law is consistent *only if* the interval is uncountable, not that it exists (Lebesgue, B&T's "more advanced treatment" — queued), and uncountable does not mean positive area (the Cantor set). |
 
 Renders: `01_ArrangedInASequence.mp4` … `07_AreaNotSums.mp4`.
 
@@ -600,10 +610,155 @@ on 2026-08-29):
       — the 1880 citation (vol. 10 no. 59); "only 14 regions as opposed to 2⁴ =
       16"; Venn's ellipses; Grünbaum's five.
 
+From the plan-017 research pass
+([`docs/plans/017-probability-cantor-diagonal.md`](../docs/plans/017-probability-cantor-diagonal.md)):
+the Cantor's-diagonal series. Every entry started unchecked.
+
+- [ ] [Bertsekas and Tsitsiklis, Introduction to Probability, 1st ed. — Ch. 1](http://www.athenasc.com/Ch1.pdf)
+      — Problem 4* "Cantor's diagonalization argument" with its solution
+      (pp. 52–53); the Probability Axioms box (p. 9, Axiom 2's sequence
+      clause); Example 1.4, the wheel of fortune (pp. 12–13); the p. 13
+      footnote (countable ⇒ probability 0) quoted in `AreaNotSums`.
+- [ ] [Bertsekas and Tsitsiklis, Introduction to Probability, 2nd ed. (2008)](http://www.athenasc.com/probbook.html)
+      — ISBN 978-1-886529-23-6; Problem 4* on pp. 53–54 (the maintainer's
+      scan, header "54 Sample Space and Probability Chap. 1").
+- [ ] [Bertsekas and Tsitsiklis, 2nd ed. — Selected Summary Material (OCW)](https://ocw.mit.edu/courses/res-6-012-introduction-to-probability-spring-2018/d973b10c2587781f86ca4f2aff49098f_MITRES_6_012S18_Textbook.pdf)
+      — the axioms box and the contents (Problems begin p. 53).
+- [ ] [Bertsekas and Tsitsiklis, Problem Solutions, 1st and 2nd editions](http://athenasc.com/prob-solved_2ndedition.pdf)
+      — starred problems 1.3/1.4 omitted: solved in the text (1st ed.
+      manual at athenasc.com/probsolved.pdf).
+- [ ] [Bertsekas and Tsitsiklis, MIT 6.041 lecture notes, Fall 2000 (mirror)](https://web.jfet.org/6.041-text/Probability.pdf)
+      — the same solved problem as Problem 2* (p. 50); Example 1.5's
+      unit square.
+- [ ] [Georg Cantor, Ueber eine Eigenschaft des Inbegriffs (Crelle 77, 1874)](https://eudml.org/doc/148238)
+      — "… aller reellen algebraischen Zahlen", J. reine angew. Math.
+      77, 258–262; the first uncountability
+      proof, by nested intervals, not the diagonal.
+- [ ] [Cantor, Ueber eine elementare Frage der Mannigfaltigkeitslehre (1891)](http://www.logicmuseum.com/cantor/diagarg.htm)
+      — Georg Cantor, Jahresbericht der DMV 1, 75–78 (The Logic Museum
+      transcription); sequences of m and w, "b_ν …
+      von a_{ν,ν} verschieden"; `TheSameDiagonalTwice`'s rows.
+- [ ] [James R Meyer, Cantor's 1891 Diagonal Proof — English translation](https://jamesrmeyer.com/infinite/cantors-original-1891-proof)
+      — the second (two-valued function) half; translation only — the
+      site argues against Cantor, used for wording alone.
+- [ ] [J J O'Connor and E F Robertson, Georg Cantor (MacTutor)](https://mathshistory.st-andrews.ac.uk/Biographies/Cantor/)
+      — uncountability proved by December 1873, published 1874.
+- [ ] [Robert Gray, Georg Cantor and Transcendental Numbers (AMM 101, 1994)](https://www.tandfonline.com/doi/abs/10.1080/00029890.1994.11997035)
+      — the 1874 proof's history (citation only).
+- [ ] [Knapp and Silva, The Uncountability of the Unit Interval (arXiv, 2014)](https://arxiv.org/abs/1209.5119)
+      — Christina Knapp and Cesar E. Silva, arXiv 1209.5119; the 1874
+      nested-interval proof (Thm 2.1) and a survey of
+      measure, game and Baire proofs.
+- [ ] [A. M. Turing, On Computable Numbers (Proc. LMS, 1936–37)](https://people.math.ethz.ch/~halorenz/4students/Literatur/TuringFullText.pdf)
+      — "with an Application to the Entscheidungsproblem", Proc. London
+      Math. Soc. (2) 42, 230–265; §8 "Application of the
+      diagonal process". "Halting problem" is a later name.
+- [ ] [Michael Sipser, Introduction to the Theory of Computation, 3rd ed.](https://cs.brown.edu/courses/csci1810/fall-2023/resources/ch2_readings/Sipser_Introduction.to.the.Theory.of.Computation.3E.pdf)
+      — Theorem 4.11 (A_TM undecidable, by diagonalization), Theorem
+      4.17 (ℝ uncountable; "never selecting the digits 0 or 9"),
+      Corollary 4.18, Theorem 5.1 (HALT_TM).
+- [ ] [Daniel J. Velleman, How to Prove It, 2nd ed. (Cambridge, 2006), ch. 7](https://users.metu.edu.tr/serge/courses/111-2011/textbook-math111.pdf)
+      — "listability" (Def. 7.1.4); ℤ⁺ ~ ℤ; the pairing figure; ℚ
+      denumerable (Thm 7.1.6); Cantor's theorem with the yes/no table
+      (7.2.5); ℝ uncountable via digits 3/7 (7.2.6); unnameable reals
+      (ex. 7.2.11).
+- [ ] [Jeremy Martin, Cantor's Diagonal Argument (Math 410, Kansas, 2009)](https://jeremymartinmath.github.io/courses/math410-S09/cantor.pdf)
+      — the decimal table with the off-diagonal selection ("at least one
+      digit in each row and at most one in each column"); the S =
+      {1, 2, 3, 4} example, f(1) = {1, 3}, f(2) = {1, 3, 4}, f(3) = { },
+      f(4) = {2, 4}, X = {2, 3} — `TheSameDiagonalTwice`'s table; its
+      "add 1" rule admits 0/9 and its "1895" is wrong.
+- [ ] [Jeremy Martin, Math 410 Spring 2009 course page](https://jeremymartinmath.github.io/courses/math410-S09/)
+      — author credit for the handout.
+- [ ] [Mini and Li, Understanding Analysis Solutions (Abbott §1.6)](https://uli.rocks/understanding-analysis-solutions/main.pdf)
+      — Ulisse Mini and Jesse Li; Abbott's rule bₙ = 2 if aₙₙ ≠ 2, else 3; the
+      two complaints of
+      1.6.3; binary sequences in 1.6.4. Its rebuttal to 1.6.3(a)
+      ("infinitely many digits ⇒ irrational") is wrong — not imported.
+- [ ] [Samuel C. Hsieh, Two Answers to a Common Question on Diagonalization](https://arxiv.org/abs/1501.01207)
+      — why the argument does not make ℚ uncountable.
+- [ ] [stevecheng, Existence and uniqueness of decimal expansion (PlanetMath)](https://planetmath.org/existenceanduniquenessofdecimalexpansion)
+      — non-uniqueness exactly for expansions ending in all 0s / all 9s.
+- [ ] [UCI Math 140A, Decimal Expansions of Real Numbers (handout)](https://webapps.math.uci.edu/~ndonalds/math140a/decimals.html)
+      — uniqueness except for terminating decimals.
+- [ ] [Michigan State Math 320, Decimal Expansions of Real Numbers (2006)](https://users.math.msu.edu/users/shapiro/Teaching/classes/320/Handouts/DecExp.pdf)
+      — existence via nested tenths — `EveryPointHasDigits`' zoom.
+- [ ] [Real numbers as infinite decimals (DPMMS page, uncredited)](https://www.dpmms.cam.ac.uk/~wtg10/decimals.html)
+      — the convention that removes the 0.999… ambiguity.
+- [ ] [Wilfrid Hodges, An Editor Recalls Some Hopeless Papers (BSL 4, 1998)](https://www.math.ucla.edu/~asl/bsl/0401/0401-001.ps)
+      — the diagonal taught badly: "several points of basic elementary
+      logic that we usually teach and explain very badly, or not at all".
+- [ ] [Andrej Bauer, Proof of negation and proof by contradiction (2010)](https://math.andrej.com/2010/03/29/proof-of-negation-and-proof-by-contradiction/)
+      — why the diagonal is a proof of a negation; `WhyOneOrTwo`'s
+      direct-then-contradiction close.
+- [ ] [Dave Kilian, Cantor and Contradictions (2022)](https://davekilian.com/cantor-and-contradictions.html)
+      — the finite-table trap (10ᵏ rows against k digits).
+- [ ] [Jason Filippou, A better number sequence to present Cantor's diagonal](https://www.jasonfilippou.com/blog/better-cantor)
+      — write the diagonal first — `TheDiagonalRule`'s reveal order.
+- [ ] [Alon, Bousquet, Larsen, Moran and Moran, Diagonalization Games (2023)](https://arxiv.org/abs/2301.01924)
+      — Noga Alon, Olivier Bousquet, Kasper Green Larsen, Shay Moran and
+      Shlomo Moran, arXiv 2301.01924; the Kronecker/Cantor query game: n
+      queries for n rows.
+- [ ] [John D. Norton, The Material Theory of Induction (2021), ch. 14](https://sites.pitt.edu/~jdnorton/papers/material_theory/material_theory_April_23_chapters/14_Uncountable.pdf)
+      — no countably additive uniform law on a countable space; "the
+      summation of an uncountable infinity of zeros is not a well-defined
+      operation".
+- [ ] [Tsamir and Tirosh, Consistency and Representations (JRME 30, 1999)](https://www.nctm.org/Publications/journal-for-research-in-mathematics-education/1999/Vol30/Issue2/Consistency-and-Representations_-The-Case-of-Actual-Infinity/)
+      — Pessia Tsamir and Dina Tirosh, "The Case of Actual Infinity";
+      side-by-side sets elicit part–whole, stacked lists elicit
+      one-to-one — `ArrangedInASequence`'s layout (abstract only;
+      paywalled).
+- [ ] [Narli and Baser, Cantorian Set Theory and Teaching Prospective Teachers](https://files.eric.ed.gov/fulltext/ED506476.pdf)
+      — Serkan Narli and Nes'e Baser, IJESE 3 (2008); the ℕ² zigzag
+      animation; its ℕ ≁ (0, 1) animation's digit rule
+      admits 0 — the pitfall named.
+- [ ] [Wikipedia, Cantor's diagonal argument](https://en.wikipedia.org/wiki/Cantor%27s_diagonal_argument)
+      — the s₁…s₇ figure; 1891 vs 1874; the dyadic-rational handling.
+      Its 1874 citation is the 1878 paper's (vol. 84) — EuDML has the
+      correct record.
+- [ ] [Wikipedia, Cantor's first set theory article](https://en.wikipedia.org/wiki/Cantor%27s_first_set_theory_article)
+      — the 1874 proof "differs from the more familiar proof using his
+      diagonal argument".
+- [ ] [Wikipedia, Cantor's theorem](https://en.wikipedia.org/wiki/Cantor%27s_theorem)
+      — B = {x : x ∉ f(x)}; the 1891 indicator-function form.
+- [ ] [Wikipedia, Countable set](https://en.wikipedia.org/wiki/Countable_set)
+      — "arranged in an infinite sequence"; countable unions.
+- [ ] [Wikipedia, Hilbert's paradox of the Grand Hotel](https://en.wikipedia.org/wiki/Hilbert%27s_paradox_of_the_Grand_Hotel)
+      — n → n + 1; the 1924–25 lecture, Gamow 1947 —
+      `ArrangedInASequence`'s "one more".
+- [ ] [Wikipedia, Turing's proof](https://en.wikipedia.org/wiki/Turing%27s_proof)
+      — §8's diagonal on computable sequences: "the fallacy … lies in the
+      assumption that B is computable".
+- [ ] [Wikipedia, Halting problem](https://en.wikipedia.org/wiki/Halting_problem)
+      — attributing the halting problem to Turing 1936 "is not correct".
+- [ ] [Wikipedia, Null set](https://en.wikipedia.org/wiki/Null_set)
+      — countable subsets of ℝ are null; the Cantor set is uncountable
+      and null — `AreaNotSums`' guard.
+- [ ] [Wikipedia, Controversy over Cantor's theory](https://en.wikipedia.org/wiki/Controversy_over_Cantor%27s_theory)
+      — Hodges' "harmless little argument".
+- [ ] [Grant Sanderson, Music and Measure Theory (3Blue1Brown, 2015)](https://www.3blue1brown.com/lessons/music-and-measure-theory/)
+      — the ε/2ⁿ cover of a listed set — `AreaNotSums`' halving cover
+      (content recalled by the researcher; page did not render).
+- [ ] [Haran and Grime, Infinity is bigger than you think (Numberphile, 2012)](https://www.numberphile.com/videos/infinity-is-bigger-than-you-think)
+      — Brady Haran and James Grime; the popular decimal-list version
+      (rule on screen not verified).
+- [ ] [Michael Stevens, How To Count Past Infinity (Vsauce, 2016)](https://www.youtube.com/watch?v=SrU9YDoXE88)
+      — the diagonal on the power set / sequences (not verified).
+- [ ] [Douglas R. Hofstadter, Gödel, Escher, Bach (1979), ch. XIII](http://www.egodeath.com/geb.htm)
+      — "The Diagonal Method", "Cantor's Original Diagonal Argument",
+      "What Does a Diagonal Argument Prove?" (figure not verified).
+- [ ] [Paul R. Halmos, Naive Set Theory (1960) — section list (ETSU notes)](https://faculty.etsu.edu/gardnerr/Set-Theory-Intro/Halmos-notes-G.htm)
+      — §23 Countable Sets (location of Cantor's theorem not verified).
+
 ## Ideas not yet built
 
 Rough queue, in roughly the order they build on each other:
 
+- Length as a probability law — existence. `AreaNotSums` proves the
+  uniform law on [0, 1] is consistent *only if* the interval is
+  uncountable, and says so; that length *is* a probability law is
+  B&T's "more advanced treatment" (Lebesgue), waiting on integration
+  in `calculus/` — the promise the Cantor series opens.
 - The sieve — "exactly m of n events" (Feller IV.3), named not built
   by `WhenToReachForIt`. Its numbers are pinned already: scene 1's
   "exactly one" coefficient −2 and plan 016's anchor M (exactly one of

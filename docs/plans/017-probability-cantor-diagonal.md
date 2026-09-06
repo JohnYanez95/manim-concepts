@@ -48,7 +48,32 @@ this argument is why. Branch `feat/probability-cantor-diagonal`, cut from
   read apart). Bug caught by the linter's dry run: the y′ row indexed
   the table's first row for column positions and that row is a digit
   shorter — columns now come from the table geometry
-- [ ] Phase 3
+- [x] Phase 3: README complete (seven rows, all three levels; Scope's
+  two exclusions reworded — the Cantor series says why the continuous
+  road cannot be a point-sum, countable additivity stated once as
+  Axiom 2; 44 plan-017 references unchecked for the maintainer's pass,
+  titles kept under the 80-column rule with full author names in the
+  descriptions); queue entries for the two promises opened
+  (probability/ Ideas: length as a probability law — existence;
+  algorithms/ Ideas: undecidability by the diagonal); wiki —
+  `cantor-diagonal` node, four delivered edges (`counting-rules`,
+  `independence`, `inclusion-exclusion`, `e-and-ln`), two promised
+  rows, the outer-product grid's plan-017 stop, log entry with the
+  branch note; **ADR-008 step**: `primitives/cantor-diagonal.tex`
+  (seven sections retold from the scenes, nine problems),
+  `answers/cantor_diagonal.py` (every answer by exact Fractions and
+  integer long division, every rule asserted), seventeen `017.*`
+  anchors (121 total), study INDEX row (no guide retrieves it — with
+  inclusion–exclusion it seeds the counting-and-chance objective);
+  **the independent solve gate passed 9/9** (a fresh-context solver
+  given statements only reproduced every answer, including the
+  re-run's y′ = 0.212111… and the zigzag's stamp 20 = 5/2); compiled
+  standalone in guide and solutions modes (8 + 3 pages, every anchor
+  spliced, every citation resolved); `sync_references` (252 entries,
+  208 verified) and `build_anchors` committed in sync, both
+  ctc-algorithm PDFs rebuilt; welcome re-rendered at sixteen series in
+  four rows of four (434 KB, frame verified). `make test` green (285),
+  `make check` green, `make study` green
 - [ ] Phase 4
 - [ ] Phase 5
 

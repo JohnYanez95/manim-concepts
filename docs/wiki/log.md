@@ -837,3 +837,28 @@ reordered.
   ledger grid, de Méré's complement named as the chain's product
   measure, the missing 1/8 drawn as a cell
 - stamp: advance to d59000d
+
+## [2026-09-06] series | plan 017, Cantor's diagonal
+
+- node added: `cantor-diagonal` (seven scenes, probability/ — the
+  topic's seventh series; the first whose result is a negative claim;
+  study-guide primitive authored, solve gate recorded in the plan)
+- edges delivered: `counting-rules` → `cantor-diagonal` (the grid
+  zigzagged — stamped 1..15, relabelled p/q, four cells skipped);
+  `independence` → `cantor-diagonal` (the unit segment as sample
+  space; the halving cover; finite additivity re-read as Axiom 2's
+  first clause); `inclusion-exclusion` → `cantor-diagonal` (the union
+  rule's additivity as the finite case of the axiom stated for
+  sequences); `e-and-ln` → `cantor-diagonal` (1/e and e − 2 as digit
+  rows)
+- edges promised: `cantor-diagonal` → undecidability by the diagonal
+  (Turing 1936 §8, named on screen; home algorithms/, queue entry
+  added); → length as a probability law, existence (Lebesgue, named
+  on screen as B&T's "more advanced treatment"; home probability/
+  Ideas, waits on integration)
+- devices recorded: the outer-product grid's plan-017 stop (read as a
+  sequence); stacked lists with pairing arrows (`ArrangedInASequence`,
+  never side-by-side sets — Tsamir & Tirosh); the digit table with its
+  diagonal boxed cell by cell (`TheDiagonalRule`, `WhyOneOrTwo`)
+- branch note: cut from main at ce317e5 (PR #18 merged, clean, level
+  with origin)
