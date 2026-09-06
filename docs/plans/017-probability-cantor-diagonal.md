@@ -31,7 +31,23 @@ this argument is why. Branch `feat/probability-cantor-diagonal`, cut from
 - [x] Phase 1: module stub (`ArrangedInASequence` built in full — the
   simplest scene; module docstring listing all seven) + README
   seventh-series Scope clause, subsection and row 1; `make check` green
-- [ ] Phase 2
+- [x] Phase 2: seven scenes at draft (7 files, distinct names; 36, 41,
+  34, 47, 49, 39, 54 s). `_DigitTable` shared by scenes 4 and 5 (the
+  diagonal boxed cell by cell, never a line). Linter: 63 findings on the
+  first pass — the zigzag's "q = n" column heads wider than their cells
+  (bare digits plus one axis letter now), the walk's polyline through
+  every stamp (dropped: the stamps appearing in order are the walk), the
+  {1, 2} rule on the first caption of scene 5, scene 6's heading on a
+  column head, the cover rectangles grazing the point names in the
+  closer — all fixed, linter clean on all seven. Width discipline: every
+  caption trimmed to ≤ 76 characters and side-column captions to ≤ 30,
+  by the CLAUDE.md budget, before the first render. Frames verified on
+  12-frame contact sheets for all seven, plus scene 4's
+  caption-replacement window (27–39 s: one caption, one boxed row at a
+  time) and the closer's cover beat (names staggered so x₃, x₅, x₄
+  read apart). Bug caught by the linter's dry run: the y′ row indexed
+  the table's first row for column positions and that row is a digit
+  shorter — columns now come from the table geometry
 - [ ] Phase 3
 - [ ] Phase 4
 - [ ] Phase 5
