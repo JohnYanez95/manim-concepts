@@ -185,7 +185,8 @@ in [`docs/plans/`](docs/plans/), the graph in
 [`docs/wiki/`](docs/wiki/README.md), declined findings in
 [`docs/adr/`](docs/adr/README.md). The diagram source is
 [`docs/workflow.mmd`](docs/workflow.mmd); re-render it with
-`npx @mermaid-js/mermaid-cli -i docs/workflow.mmd -o docs/workflow.png`.
+`npx @mermaid-js/mermaid-cli -i docs/workflow.mmd -o docs/workflow.png -s 2`
+(`-s 2` is the 2× scale the committed PNG is rendered at).
 
 ### Working on a scene
 

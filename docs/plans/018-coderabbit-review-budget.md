@@ -138,6 +138,15 @@ Decline (recorded in the ADR with reasons):
   checked: a copy with an overlong tone fails the schema, a misspelt
   pause key fails the explicit key read (the schema tolerates unknown
   keys, so the key read is what pins the name). `make check` green (285)
-- [ ] Phase 2
+- [x] Phase 2: `docs/workflow.mmd` splits CodeRabbit into the local CLI
+  and the bot; phase 4 reads auditor → applied → self-check → one local
+  pass with the rerun and stop rules as a note; phase 5 reads review 1 +
+  pause, an `opt` block for the batched push and single request, finals
+  only after the bot round closes. First render failed — a `;` in a
+  message is a mermaid statement separator — fixed; PNG re-rendered at
+  the committed 2× scale (the README's command now says `-s 2`; it did
+  not reproduce the committed file before) on mermaid's default white
+  background (the old file was transparent, unreadable on a dark page);
+  PNG opened and each new arrow read against CLAUDE.md's Review budget
 - [ ] Phase 3
 - [ ] Phase 4
