@@ -44,9 +44,12 @@ the review budget (ADR 009).
    `algebra/`'s logarithm series — delivering the dB strand of that
    topic's "log scales in the wild" Idea.
 5. **Second study-guide objective, approved 2026-09-19:** "from air to
-   log-mel". This series' primitive is its first chapter; series C–E
-   author theirs toward it (ADR 008). Guide structure is designed in
-   phase 0 alongside the scenes.
+   log-mel". This series' primitive is its first chapter. Guide
+   structure is designed in phase 0 alongside the scenes. *Superseded
+   the same day, after the chapter was built:* study-guide work now waits
+   for the maintainer's explicit request (ADR 010) — series C–E carry no
+   chapter unless he asks, and the guide stays at one chapter until
+   then.
 
 ## Phases
 

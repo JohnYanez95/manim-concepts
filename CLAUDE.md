@@ -50,7 +50,7 @@ gate, updated as phases complete, never deleted.
 | 0 | Fresh branch from pulled `main`; research pass | Scene design written into the plan |
 | 1 | Topic dir, README skeleton, first scene stub | `make check` |
 | 2 | Scenes, iterated at draft quality | Layout linter clean + drafts verified by eye |
-| 3 | Numbered concepts table, references as `- [ ]`; the series' study-guide primitive authored with solve-gated problems, their committed answer script, and plan-cited anchors, guide manifests + glue updated (ADR 008); new series → re-render `docs/assets/welcome.gif` (its series row is hand-listed) | `make test` |
+| 3 | Numbered concepts table, references as `- [ ]`; new series → re-render `docs/assets/welcome.gif` (its series row is hand-listed). **No study-guide work unless the maintainer has asked for it for this series** (ADR 010) — never propose it, never list its absence as a gap; when asked, ADR 008's method applies | `make test` |
 | 4 | `connection-auditor` pass, findings applied and committed; *then* one local CodeRabbit pass on the diff the PR will carry (see Review budget) | Review clean |
 | 5 | PR, the bot's one automatic review; fixes batched into one push; one re-review request only if a finding required a change; finalise once the bot round is closed | `clean-drafts` + 1080p render; bot reviews spent (≤ 2) recorded in the plan |
 

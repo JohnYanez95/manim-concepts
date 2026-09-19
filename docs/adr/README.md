@@ -22,5 +22,6 @@ part.
 | [005](005-no-pixel-or-frame-comparison-tests.md) | No pixel or frame-comparison tests of rendered output |
 | [006](006-human-ticked-references-stay-ticked.md) | Human-ticked reference checkboxes stay ticked |
 | [007](007-plans-pin-digests-not-transcripts.md) | Plans pin research digests, not full transcripts |
-| [008](008-every-series-carries-its-primitive-forward.md) | Every series carries its study-guide primitive forward |
+| [008](008-every-series-carries-its-primitive-forward.md) | Every series carries its study-guide primitive forward — suspended by ADR 010 |
 | [009](009-coderabbit-reviews-are-a-budget.md) | CodeRabbit reviews are a budget: one local pass, two bot reviews; draft-first PRs declined |
+| [010](010-study-guide-work-waits-for-a-request.md) | Study-guide work waits for the maintainer's explicit request (suspends ADR 008's standing process) |
