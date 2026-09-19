@@ -742,7 +742,7 @@ class TheBankOfDetectors(ConceptScene):
             self,
             note,
             caption(
-                "each bar is its pair's distance — the last scene's lesson, inside the bank"
+                "each bar is its pair's distance — the previous scene's lesson, inside the bank"
             ).move_to(3.2 * DOWN),
         )
         self.wait(1.4)
@@ -891,7 +891,11 @@ class NoDoubleCounting(ConceptScene):
         count = VGroup(
             Text("C(8, 2) = 28 different pairs", font_size=LABEL_SIZE),
             Text("all 28 read exactly 0", font_size=LABEL_SIZE, color=GOOD),
-            Text("computed, not proved", font_size=SMALL_SIZE, color=MUTED),
+            Text(
+                "computed, not proved — for every N,\nthe reason needs Euler's formula",
+                font_size=SMALL_SIZE,
+                color=MUTED,
+            ),
         ).arrange(DOWN, buff=0.25, aligned_edge=LEFT)
         count.move_to(np.array([3.6, 1.2, 0.0]))
         for line in count:
@@ -1452,7 +1456,7 @@ class TheFoldAtNyquist(ConceptScene):
             self,
             note,
             caption(
-                "1000 Hz and 7000 Hz pass through the same 8 samples — the 1000 Hz row fires"
+                "1000 and 7000 Hz cosines through the same 8 samples — the 1000 Hz row fires"
             ).move_to(3.2 * DOWN),
         )
         self.wait(2.0)
@@ -1504,8 +1508,9 @@ class TheFoldAtNyquist(ConceptScene):
         lines = [
             "the first scene's promise: more than two samples per lap — strictly below sr ÷ 2",
             "exactly at sr ÷ 2, a sine lands on 0 at every stop: the samples are silence",
-            "the impostor is a clean lower tone, not noise — so filter it out before sampling",
+            "the impostor is a clean lower tone, not noise — so remove it before sampling",
             "hence 8000 Hz for telephone speech and 16 000 Hz for speech models",
+            "in numpy, the upper half of fft's output is this mirror — rfft returns the bank",
         ]
         for line in lines:
             note = _swap_caption(self, note, caption(line).move_to(3.2 * DOWN))
@@ -1522,6 +1527,7 @@ class TheFoldAtNyquist(ConceptScene):
                 "which tones are in it?  →  the bank of detectors", font_size=LABEL_SIZE, color=GOOD
             ),
             Text("quiet beside loud?  →  decibels", font_size=LABEL_SIZE, color=GOOD),
+            Text("echoes and smoothing?  →  convolution", font_size=LABEL_SIZE, color=MUTED),
             Text("a tone between rows?  →  windowing", font_size=LABEL_SIZE, color=MUTED),
             Text(
                 "tones that change over time?  →  the short-time transform",

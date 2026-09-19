@@ -1,0 +1,19 @@
+% The retrieval manifest for this objective — the ordered \primitive calls
+% ARE the remix map's spine (plan 012 R6); both build targets (guide and
+% solutions manual) input this one file, so the stitching is single-sourced.
+%
+% Four chapters, one per main-line series of signal_processing/ (plan 019's
+% road table). Only chapter 1 exists; the others are retrieved here when
+% their series land (ADR 008), never as stubs:
+%
+%   1  spectrum                         built (plan 019)
+%   2  convolution                      planned — series not built
+%   3  windowing -> STFT -> spectrogram planned — series not built
+%   4  mel                              planned — series not built
+%
+% No glue yet: a transition sits BETWEEN two chapters and is authored from
+% the wiki edges its neighbours land, so glue-01.tex arrives with chapter
+% 2, in the same change that adds its retrieval below and flips its
+% station in macros.tex (\builtstations).
+
+\primitive{spectrum}

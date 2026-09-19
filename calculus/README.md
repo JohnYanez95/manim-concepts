@@ -353,6 +353,12 @@ Rough queue, in roughly the order they build on each other:
   1/e, not the same terms); the natural next stop after
   `TheCurveThatIsItsOwnSlope`.
 - Euler's formula and complex rotation — the other famous thing e does.
+  Its first waiting customer:
+  [`signal_processing/`](../signal_processing/README.md)'s spectrum
+  series builds every probe as a real sine-and-cosine pair and checks
+  orthogonality at N = 8 only (`NoDoubleCounting`: "computed, not
+  proved"); the complex form — one number per row instead of a pair —
+  and the reason the zeros hold for every N wait here.
 - Growth in the wild: half-life and doubling time as the same picture
   (radioactive decay, population, interest — one dial, e^(rt)). The
   descent series' bowl walk w_k = 4·2⁻ᵏ already pre-draws the

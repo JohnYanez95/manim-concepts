@@ -244,3 +244,81 @@
 \expandafter\newcommand\csname anchor@017.R.cover\endcsname{\tfrac{1}{20}, \tfrac{3}{40}, \tfrac{7}{80}, \tfrac{3}{32}}
 % 017.R.overflow: B&T Example 1.4's overflow instance: p = 3/20, N = 7 is the least N with Np > 1 [docs/plans/017-probability-cantor-diagonal.md, verifier addendum R]
 \expandafter\newcommand\csname anchor@017.R.overflow\endcsname{7 \times 0.15 = 1.05}
+% 019.B.ends: an amplitude-1 tone on an END row (k = 0 or N/2) at N = 8, started at 0°, 30°, 45°, 90°: A·N·|cos φ| — the end rows depend on the start (interior rows always read 4) [docs/plans/019-signal-processing-spectrum.md, anchor B; correction 1]
+\expandafter\newcommand\csname anchor@019.B.ends\endcsname{8,\ 6.9282,\ 5.6569,\ 0}
+% 019.E.heights: the 1-lap sine probe at the 8 stops (the sampled 1000 Hz tone), 2 dp; exact values 0, ±√2/2, ±1 [docs/plans/019-signal-processing-spectrum.md, anchor E; signal_processing/README.md row 1]
+\expandafter\newcommand\csname anchor@019.E.heights\endcsname{0,\ 0.71,\ 1,\ 0.71,\ 0,\ -0.71,\ -1,\ -0.71}
+% 019.E.shadows: the 1-lap cosine probe at the 8 stops (the shadow), 2 dp — the heights a quarter-turn ahead [docs/plans/019-signal-processing-spectrum.md, anchor E]
+\expandafter\newcommand\csname anchor@019.E.shadows\endcsname{1,\ 0.71,\ 0,\ -0.71,\ -1,\ -0.71,\ 0,\ 0.71}
+% 019.F.match: the 2-lap sine tone on the 2-lap sine probe: pointwise products, all squares, sum N/2 [docs/plans/019-signal-processing-spectrum.md, anchor F (pointwise product rows); scene-2 design row]
+\expandafter\newcommand\csname anchor@019.F.match\endcsname{0 + 1 + 0 + 1 + 0 + 1 + 0 + 1 = 4}
+% 019.H.speechrate: aliasing at sr = 16 000 Hz: a 10 kHz tone lands on 6 kHz [docs/plans/019-signal-processing-spectrum.md, anchor H]
+\expandafter\newcommand\csname anchor@019.H.speechrate\endcsname{10\,000 \to 6000}
+% 019.I.amplitudedouble: 20·log₁₀ 2 — doubling an amplitude, in dB [docs/plans/019-signal-processing-spectrum.md, anchor I]
+\expandafter\newcommand\csname anchor@019.I.amplitudedouble\endcsname{6.0206}
+% 019.I.powerdouble: 10·log₁₀ 2 — doubling a power, in dB [docs/plans/019-signal-processing-spectrum.md, anchor I]
+\expandafter\newcommand\csname anchor@019.I.powerdouble\endcsname{3.0103}
+% 019.L.rows: Whisper's row count, N/2 + 1 at N = 400, reaching 8000 Hz [docs/plans/019-signal-processing-spectrum.md, anchors D and L]
+\expandafter\newcommand\csname anchor@019.L.rows\endcsname{201}
+% 019.L.spacing: Whisper's detector spacing in Hz: 16 000 / 400 [docs/plans/019-signal-processing-spectrum.md, anchor L]
+\expandafter\newcommand\csname anchor@019.L.spacing\endcsname{40}
+% 019.L.window: Whisper's window in ms: 400 samples at 16 000 Hz [docs/plans/019-signal-processing-spectrum.md, anchor L]
+\expandafter\newcommand\csname anchor@019.L.window\endcsname{25}
+% 019.M.harmonics: the trumpet note's first five harmonics in Hz (librosa `trumpet`, first 4096 samples at 22 050 Hz, Hann) [docs/plans/019-signal-processing-spectrum.md, anchor M (restated in the addendum)]
+\expandafter\newcommand\csname anchor@019.M.harmonics\endcsname{624.46,\ 1248.93,\ 1873.39,\ 2497.85,\ 3122.31}
+% 019.M.levels: the trumpet harmonics' levels in dB re the strongest — the second harmonic beats the fundamental; not on detector frequencies, the window shapes these levels [docs/plans/019-signal-processing-spectrum.md, anchor M (restated in the addendum)]
+\expandafter\newcommand\csname anchor@019.M.levels\endcsname{-1.56,\ 0.00,\ -3.23,\ -7.21,\ -11.98}
+% 019.M.rows: rows for N = 4096: N/2 + 1 [docs/plans/019-signal-processing-spectrum.md, anchor M]
+\expandafter\newcommand\csname anchor@019.M.rows\endcsname{2049}
+% 019.M.spacing: detector spacing in Hz at sr 22 050, N 4096 (the scene's caption rounds to 5.4) [docs/plans/019-signal-processing-spectrum.md, anchor M]
+\expandafter\newcommand\csname anchor@019.M.spacing\endcsname{5.3833}
+% 019.Q.distance: the 3-4-5 tone's reading on row 2, the hypotenuse of every pair in 019.Q.pairs (20 ÷ 4 = amplitude 5) [docs/plans/019-signal-processing-spectrum.md, verifier addendum Q]
+\expandafter\newcommand\csname anchor@019.Q.distance\endcsname{20}
+% 019.Q.pairs: the 3-4-5 tone's (cosine sum, sine sum) on row 2 at delays 0, 1, 2, 3 samples — a quarter-turn per sample [docs/plans/019-signal-processing-spectrum.md, verifier addendum Q]
+\expandafter\newcommand\csname anchor@019.Q.pairs\endcsname{(12, 16),\ (-16, 12),\ (-12, -16),\ (16, -12)}
+% 019.Q.sineonly: what the sine probe alone reads on the 3-4-5 tone at delays 0, 1, 2, 3 — fooled by the start [docs/plans/019-signal-processing-spectrum.md, verifier addendum Q]
+\expandafter\newcommand\csname anchor@019.Q.sineonly\endcsname{16,\ 12,\ -16,\ -12}
+% 019.Q.tone: the 3-4-5 tone 3c₂ + 4s₂, one period of its 8 samples: a 2000 Hz tone of amplitude exactly 5 (max |sample| = 4) [docs/plans/019-signal-processing-spectrum.md, verifier addendum Q]
+\expandafter\newcommand\csname anchor@019.Q.tone\endcsname{3,\ 4,\ -3,\ -4}
+% 019.R.readings: Lyons' mix, the five readings on rows 0–4: rows 1 and 2 read 4 and 2, rows 0, 3, 4 exactly 0 [docs/plans/019-signal-processing-spectrum.md, verifier addendum R]
+\expandafter\newcommand\csname anchor@019.R.readings\endcsname{0,\ 4,\ 2,\ 0,\ 0}
+% 019.R.rowonepair: Lyons' mix, row 1: plus-signed (cosine sum, sine sum); reading 4 [docs/plans/019-signal-processing-spectrum.md, verifier addendum R]
+\expandafter\newcommand\csname anchor@019.R.rowonepair\endcsname{(0, 4)}
+% 019.R.rowtwopair: Lyons' mix, row 2: plus-signed pair (+1.4142, −1.4142) at 2 dp; reading 2. numpy's X(2) = 1.414 + j1.414 — the sine sum is the negative of its imaginary part [docs/plans/019-signal-processing-spectrum.md, verifier addendum R; decision D6]
+\expandafter\newcommand\csname anchor@019.R.rowtwopair\endcsname{(1.41, -1.41)}
+% 019.R.samples: Lyons' Example 1 — sin(2π·1000·n/8000) + 0.5·sin(2π·2000·n/8000 + 3π/4) — its 8 samples, 4 dp (exact forms in √2/4) [docs/plans/019-signal-processing-spectrum.md, verifier addendum R]
+\expandafter\newcommand\csname anchor@019.R.samples\endcsname{0.3536,\ 0.3536,\ 0.6464,\ 1.0607,\ 0.3536,\ -1.0607,\ -1.3536,\ -0.3536}
+% 019.S.halfdb: half the reading, in dB re the loudest row: 20·log₁₀(½) = −20 × 0.301 (the repo's owned log₁₀ 2) [docs/plans/019-signal-processing-spectrum.md, verifier addendum S; anchor G (−6.0206)]
+\expandafter\newcommand\csname anchor@019.S.halfdb\endcsname{-6.02}
+% 019.S.hundredthdb: a hundredth of the reading, in dB re the loudest row: 20·log₁₀(1/100), exact [docs/plans/019-signal-processing-spectrum.md, verifier addendum S]
+\expandafter\newcommand\csname anchor@019.S.hundredthdb\endcsname{-40}
+% 019.S.readings: three-tone mix (Lyons' mix + 0.01 × a 3000 Hz sine): the nonzero readings, rows 1–3 [docs/plans/019-signal-processing-spectrum.md, verifier addendum S]
+\expandafter\newcommand\csname anchor@019.S.readings\endcsname{4,\ 2,\ 0.04}
+% 019.T.teaser: a 1500 Hz sine starting at 0, N = 8 at 8000 Hz: magnitudes on rows 0–4 at 2 dp (anchor T at 4 dp: 1.4966, 2.8478, 2.4142, 0.8478, 0.6682) — the one tone off a detector's frequency [docs/plans/019-signal-processing-spectrum.md, verifier addendum T; scene-5 design row (2 dp)]
+\expandafter\newcommand\csname anchor@019.T.teaser\endcsname{1.50,\ 2.85,\ 2.41,\ 0.85,\ 0.67}
+% 019.U.cosfold: the table extended past row 4: Σ c₃·c₅ = +4 (also at (1,7), (2,6)) — not 0 [docs/plans/019-signal-processing-spectrum.md, verifier addendum U; correction 2]
+\expandafter\newcommand\csname anchor@019.U.cosfold\endcsname{4}
+% 019.U.diagonal: diagonal of the probe-against-probe table over c₀, c₁, s₁, c₂, s₂, c₃, s₃, c₄ at N = 8 [docs/plans/019-signal-processing-spectrum.md, verifier addendum U]
+\expandafter\newcommand\csname anchor@019.U.diagonal\endcsname{8,\ 4,\ 4,\ 4,\ 4,\ 4,\ 4,\ 8}
+% 019.U.sinfold: the table extended past row 4: Σ s₃·s₅ = −4 (also at (1,7), (2,6)) — not 0 [docs/plans/019-signal-processing-spectrum.md, verifier addendum U; correction 2]
+\expandafter\newcommand\csname anchor@019.U.sinfold\endcsname{-4}
+% 019.U.zeros: C(8, 2) off-diagonal probe pairs, every one exactly 0 at N = 8 — computed, not proved [docs/plans/019-signal-processing-spectrum.md, verifier addendum U]
+\expandafter\newcommand\csname anchor@019.U.zeros\endcsname{28}
+% 019.V.cosinesquares: c₁² at the 8 stops; sums to 4; s₁² + c₁² = 1 at every stop [docs/plans/019-signal-processing-spectrum.md, verifier addendum V]
+\expandafter\newcommand\csname anchor@019.V.cosinesquares\endcsname{1,\ \tfrac12,\ 0,\ \tfrac12,\ 1,\ \tfrac12,\ 0,\ \tfrac12}
+% 019.V.sinesquares: s₁² at the 8 stops; sums to 4 [docs/plans/019-signal-processing-spectrum.md, verifier addendum V]
+\expandafter\newcommand\csname anchor@019.V.sinesquares\endcsname{0,\ \tfrac12,\ 1,\ \tfrac12,\ 0,\ \tfrac12,\ 1,\ \tfrac12}
+% 019.W.angles: angles (degrees) visited stepping ⅞ lap per sample — identical to stepping ⅛ lap backwards [docs/plans/019-signal-processing-spectrum.md, verifier addendum W]
+\expandafter\newcommand\csname anchor@019.W.angles\endcsname{0,\ 315,\ 270,\ 225,\ 180,\ 135,\ 90,\ 45}
+% 019.W.ruler: the fold at sr = 8000 Hz, in Hz: reading 4, cosine identical, sine negated. Past 8000 the pattern changes — the ruler shows these three only [docs/plans/019-signal-processing-spectrum.md, verifier addendum W; anchor H]
+\expandafter\newcommand\csname anchor@019.W.ruler\endcsname{5000 \to 3000,\quad 6000 \to 2000,\quad 7000 \to 1000}
+% 019.X.first: bank (sr 8000, N 8): duration, spacing, rows [docs/plans/019-signal-processing-spectrum.md, verifier addendum X; anchor D]
+\expandafter\newcommand\csname anchor@019.X.first\endcsname{1\ \text{ms},\ 1000\ \text{Hz apart},\ 5\ \text{rows}}
+% 019.X.second: bank (sr 16 000, N 16): duration, spacing, rows — the faster rate bought reach, not spacing [docs/plans/019-signal-processing-spectrum.md, verifier addendum X; anchor D]
+\expandafter\newcommand\csname anchor@019.X.second\endcsname{1\ \text{ms},\ 1000\ \text{Hz apart},\ 9\ \text{rows}}
+% 019.X.third: bank (sr 8000, N 16): duration, spacing, rows — listening longer bought spacing [docs/plans/019-signal-processing-spectrum.md, verifier addendum X; anchor D]
+\expandafter\newcommand\csname anchor@019.X.third\endcsname{2\ \text{ms},\ 500\ \text{Hz apart},\ 9\ \text{rows}}
+% 019.Y.fifth: a 3:2 perfect fifth in semitones, 12·log₂(3/2) [docs/plans/019-signal-processing-spectrum.md, verifier addendum Y]
+\expandafter\newcommand\csname anchor@019.Y.fifth\endcsname{7.0196}
+% 019.Z.floor: Whisper's floor in dB below its loudest value: 8 decades of power (8 log₁₀-power units, not 160 dB); loudest over the whole 30 s input, after an absolute clamp at 10⁻¹⁰ [docs/plans/019-signal-processing-spectrum.md, verifier addendum Z (openai/whisper 8609812, audio.py ll. 147–157)]
+\expandafter\newcommand\csname anchor@019.Z.floor\endcsname{80}

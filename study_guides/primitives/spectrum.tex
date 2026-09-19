@@ -1,0 +1,773 @@
+% Primitive: spectrum — authored from signal_processing/spectrum_manim.py,
+% its README concepts table (seven scenes, watched in order) and plan 019's
+% verified anchors (verifier report A–P plus the addendum Q–Z). Real
+% sine-and-cosine probe pairs throughout — Steven W. Smith's "real DFT" —
+% because the repo has built no complex number; the complex form is a
+% forward pointer to Euler's formula and nothing here leans on it. The word
+% is "detector": one frame gives one number per row. Every tone sits on a
+% detector's frequency except the single 1500 Hz pointer. Problem answers
+% are computed by answers/spectrum.py (the solve-gate anchor): exact in
+% Q(√2), cross-checked against np.fft (whose imaginary part is the
+% NEGATIVE of this chapter's plus-signed sine sum).
+\chapter{The spectrum: a bank of detectors}
+
+\begin{narrative}
+A speech model never hears a sound. It reads a picture of one — a
+spectrogram — and every column of that picture is the object this
+chapter builds: a spectrum. The usual introduction makes the spectrum a
+new kind of thing, reached through a new kind of number. This chapter
+makes it an old one. Eight samples go in; five detectors listen to the
+same eight samples, each at its own fixed frequency; and each detector
+does nothing but the multiply-and-add that the \primref{random-variables}
+chapter built for expectation. The spectrum is a column of weighted sums, read
+off a bank of detectors — the formulation Steven W.~Smith calls the real
+DFT~\cite{signal_processing-smith-guide-to-dsp-ch-8-the-dft}. All the
+arithmetic runs on one grid: $N = 8$ samples at a sample rate of $sr =
+8000$ per second.
+
+\section{Pressure into numbers}
+
+Sound is air pressure changing over time, and the simplest sound is a
+pure tone. Picture it as a point going round a circle at a steady
+speed; the microphone reads the point's \emph{height}. One lap per
+millisecond is a thousand laps a second: a $1000$~Hz tone. A computer
+cannot keep the whole motion. It keeps the height at regular instants —
+$8000$ of them a second, so $8$ in this one millisecond, one every
+$45^\circ$ of the lap. The $8$ stops on the circle \emph{are} the $8$
+samples:
+\begin{gather*}
+  x[n] = \sin(2\pi n/8), \quad n = 0, \ldots, 7: \\
+  \anchor{019.E.heights}.
+\end{gather*}
+
+\begin{center}
+\begin{tikzpicture}[x=0.9cm, y=0.9cm]
+  % PressureIntoNumbers: the 8 stops on the circle are the 8 samples —
+  % stems, never a staircase (nothing between the samples is stored).
+  \draw[Muted] (0, 0) circle (1.5);
+  \foreach \n in {0,...,7}
+    \fill[CoolInk] ({1.5*cos(45*\n)}, {1.5*sin(45*\n)}) circle (1.6pt);
+  \draw[Muted] (2.6, 0) -- (10.6, 0);
+  \draw[Muted, densely dashed] ({1.5*cos(45)}, {1.5*sin(45)}) -- (3.95, {1.5*sin(45)});
+  \foreach [count=\i from 0] \v/\t in
+      {0/0, 0.7071/0.71, 1/1, 0.7071/0.71, 0/0, -0.7071/-0.71, -1/-1, -0.7071/-0.71} {
+    \draw[CoolInk, line width=1pt] (3+\i, 0) -- (3+\i, 1.5*\v);
+    \fill[CoolInk] (3+\i, 1.5*\v) circle (2pt);
+    \node[color=Muted] at (3+\i, -2.1) {\scriptsize $\i$};
+    \node[color=CoolInk] at (3+\i, -2.6) {\small $\t$};
+  }
+  \node[left, color=Muted] at (2.45, -2.1) {\scriptsize sample $n$};
+  \node[left, color=CoolInk] at (2.45, -2.6) {\small height};
+  \node[color=Muted] at (0, 2.0) {\scriptsize $8$ stops, $45^\circ$ apart};
+  \node[right, color=Muted] at (10.7, 0) {\scriptsize $1$ ms};
+\end{tikzpicture}
+\end{center}
+
+The samples are drawn as stems because nothing between them is stored.
+A staircase — each value held until the next — draws information the
+recording does not contain; as Montgomery's demonstration puts it, the
+stairsteps aren't really
+there~\cite{signal_processing-montgomery-digital-show-and-tell-2013}.
+Read the same point sideways and you get its \emph{shadow}: the same
+motion a quarter-turn ahead,
+\[
+  \anchor{019.E.shadows}
+\]
+— two readings of one rotation. The height is the sine and the shadow
+is the cosine, and the next section needs both.
+
+Every digital recording starts here: $8000$ samples a second for
+telephone speech, $16\,000$ for speech
+models~\cite{signal_processing-jurafsky-martin-speech-and-language-processing-ch-15}.
+One thing is planted for the last section: this tone gets $8$ samples
+per lap; a faster tone gets fewer, and needs at least two. And real
+sound is never one tone. Here are $8$ samples of a mix,
+\[
+  \anchor{019.R.samples},
+\]
+and the chapter's question: which tones are hiding in them?
+
+\section{The probe}
+
+To ask whether a $2000$~Hz tone is present, build one: a \emph{probe} is
+a known tone that fits a whole number of laps into the window, and the
+$2$-lap sine probe happens to be all integers at the $8$ stops — $0, 1,
+0, -1, 0, 1, 0, -1$. Multiply the samples by the probe, stop by stop,
+and add. That is the weighted sum $\sum_x x \cdot P(X = x)$ of the
+\primref{random-variables} chapter, with two differences stated plainly: these
+weights can be negative, and they add to $0$. They are a pattern to
+match, not a probability.
+
+\begin{center}
+\begin{tikzpicture}[x=0.95cm, y=0.55cm]
+  % TheProbe: match (every product a square, nothing can cancel) and
+  % mismatch (four halves up, two wholes down) as product rows.
+  \foreach [count=\i from 0] \a/\p in {0/0, 1/1, 0/0, -1/1, 0/0, 1/1, 0/0, -1/1} {
+    \node[color=CoolInk] at (\i, 0) {\small $\a$};
+    \node[color=Muted] at (\i, -1) {\small $\a$};
+    \node[color=GoodInk] at (\i, -2.3) {\small $\p$};
+  }
+  \draw[Muted] (-0.45, -1.65) -- (7.45, -1.65);
+  \node[left, color=CoolInk] at (-0.75, 0) {\small $2$-lap tone};
+  \node[left, color=Muted] at (-0.75, -1) {\small $2$-lap probe};
+  \node[left, color=GoodInk] at (-0.75, -2.3) {\small products};
+  \node[right, color=AccentInk] at (7.75, -2.3) {\small sum $= 4$};
+  \foreach [count=\i from 0] \a/\b/\p in
+      {0/0/0, 0.71/0.71/0.5, 1/-1/-1, 0.71/0.71/0.5,
+       0/0/0, -0.71/-0.71/0.5, -1/1/-1, -0.71/-0.71/0.5} {
+    \node[color=CoolInk] at (\i, -4.6) {\small $\a$};
+    \node[color=Muted] at (\i, -5.6) {\small $\b$};
+    \node[color=WarmInk] at (\i, -6.9) {\small $\p$};
+  }
+  \draw[Muted] (-0.45, -6.25) -- (7.45, -6.25);
+  \node[left, color=CoolInk] at (-0.75, -4.6) {\small $1$-lap tone};
+  \node[left, color=Muted] at (-0.75, -5.6) {\small $3$-lap probe};
+  \node[left, color=WarmInk] at (-0.75, -6.9) {\small products};
+  \node[right, color=AccentInk] at (7.75, -6.9) {\small sum $= 0$};
+\end{tikzpicture}
+\end{center}
+
+A \emph{match} first: the $2$-lap tone against the $2$-lap probe. Every
+product is a square, so nothing can cancel: $\anchor{019.F.match}$. Then
+a \emph{mismatch}: a $1$-lap tone against the $3$-lap probe. The
+products take both signs — four halves up, two wholes down — and the
+sum is exactly $0$. This detector hears nothing. It is Smith's
+correlation picture, rebuilt small enough to
+count~\cite{signal_processing-smith-ch-8-analysis-calculating-the-dft}.
+
+One probe is not enough, though. Take a louder $2000$~Hz tone whose
+samples run $\anchor{019.Q.tone}$ and repeat. The sine probe reads
+$16$. Start the \emph{same tone} one sample later and it reads $12$:
+the detector has been fooled by when the tone
+starts~\cite{signal_processing-schaedler-seeing-circles-sines-and-signals}.
+The repair is the shadow. Run the $2$-lap cosine probe as well and keep
+the \emph{pair},
+\begin{gather*}
+  a_k = \sum_{n=0}^{7} x[n] \cos(2\pi k n/8), \qquad
+  b_k = \sum_{n=0}^{7} x[n] \sin(2\pi k n/8), \\
+  \text{reading} = \sqrt{a_k^2 + b_k^2} ,
+\end{gather*}
+both sums plus-signed. At the four starts the pair is
+\[
+  \anchor{019.Q.pairs} :
+\]
+one sample later is a quarter-turn of the pair, and its distance from
+the origin is $\anchor{019.Q.distance}$ every time. The sine probe alone saw only the height of that turning point —
+$\anchor{019.Q.sineonly}$.
+
+\begin{center}
+\begin{tikzpicture}[x=0.1cm, y=0.1cm]
+  % TheProbe's pair plane: the pair-point walks a circle of radius 20.
+  \draw[Muted, ->] (-27, 0) -- (27, 0);
+  \draw[Muted, ->] (0, -27) -- (0, 27);
+  \draw[Muted] (0, 0) circle (20);
+  \draw[AccentInk, line width=1pt] (0, 0) -- (12, 16);
+  \foreach \x/\y in {-16/12, -12/-16, 16/-12}
+    \draw[Muted, densely dashed] (0, 0) -- (\x, \y);
+  \foreach \x/\y in {12/16, -16/12, -12/-16, 16/-12}
+    \fill[AccentInk] (\x, \y) circle (2pt);
+  \node[above right, color=AccentInk] at (13, 17) {\small $(12, 16)$};
+  \node[above left, color=AccentInk] at (-17, 13) {\small $(-16, 12)$};
+  \node[below left, color=AccentInk] at (-13, -17) {\small $(-12, -16)$};
+  \node[below right, color=AccentInk] at (17, -13) {\small $(16, -12)$};
+  \node[right, color=Muted] at (28, 0) {\scriptsize cosine sum};
+  \node[above, color=Muted] at (0, 28) {\scriptsize sine sum};
+  \node[right, align=left, color=AccentInk] at (44, 8)
+    {\small distance $20$\\ \small at every start};
+  \node[right, align=left, color=Muted] at (44, -8)
+    {\scriptsize one sample later:\\ \scriptsize a quarter-turn};
+\end{tikzpicture}
+\end{center}
+
+\noindent The reading ignores when the tone starts — true for every
+starting angle, shown here for the four the grid offers. And it measures
+something the samples never show: $20 \div 4 = 5$ is the tone's
+amplitude (the $4$ is the match sum above), while the largest sample is
+only $4$. One detector, then, is a pair of probes: multiply, add, take
+the distance. Every spectrum plot is this measurement repeated at each
+frequency.
+
+\section{The bank of detectors}
+
+Build one detector for each whole number of laps the window can hold —
+$0$, $1$, $2$, $3$, $4$ — and label the rows $0$, $1000$, $2000$,
+$3000$ and $4000$~Hz \emph{before any sound arrives}. A row is an
+address, not a discovery; what the literature calls a bin is a
+detector's reading at a fixed address, never ``the frequency found in
+the signal''~\cite{signal_processing-j-o-smith-mdft-spectral-bin-numbers}.
+Feed the same $8$ samples to all five. A $2000$~Hz tone lights row $2$
+alone, and it reads $4$. A $3000$~Hz tone started somewhere else
+entirely — a cosine this time — lights row $3$ alone, again $4$. Then
+the mix from the first section, which is Lyons' worked
+example~\cite{signal_processing-lyons-understanding-dsp-3rd-ed-contents}
+(the signal is his; the numbers here are computed): the five readings
+are $\anchor{019.R.readings}$.
+
+\begin{center}
+\begin{tikzpicture}[x=1cm, y=0.8cm]
+  % TheBankOfDetectors: the mix's 8 stems stay on screen beside the bank
+  % (never a spectrum without its waveform); the end rows carry one probe.
+  \draw[Muted] (-0.2, 0) -- (2.3, 0);
+  \foreach [count=\i from 0] \v in
+      {0.3536, 0.3536, 0.6464, 1.0607, 0.3536, -1.0607, -1.3536, -0.3536} {
+    \draw[CoolInk, line width=0.8pt] (0.3*\i, 0) -- (0.3*\i, 0.9*\v);
+    \fill[CoolInk] (0.3*\i, 0.9*\v) circle (1.4pt);
+  }
+  \node[color=CoolInk] at (1.05, -2.2) {\scriptsize the $8$ samples};
+  \foreach [count=\k from 0] \hz/\probes/\len/\val in
+      {0/{$c_0$}/0/0, 1000/{$c_1$ $s_1$}/2/4, 2000/{$c_2$ $s_2$}/1/2,
+       3000/{$c_3$ $s_3$}/0/0, 4000/{$c_4$}/0/0} {
+    \pgfmathsetmacro{\y}{2 - \k}
+    \draw[Muted] (2.3, 0) -- (3.0, \y);
+    \node[right] at (3.05, \y) {\scriptsize \hz~Hz};
+    \node[draw=Muted, color=Muted, minimum width=1.15cm, minimum height=0.5cm,
+      inner sep=2pt] (p\k) at (5.2, \y) {\scriptsize \probes};
+    \node[draw=Muted, color=Muted, circle, inner sep=3.5pt] (s\k) at (6.5, \y)
+      {\scriptsize $\Sigma$};
+    \draw[Muted] (4.3, \y) -- (p\k.west);
+    \draw[Muted] (p\k.east) -- (s\k.west);
+    \draw[Muted] (s\k.east) -- (7.0, \y);
+    \ifnum\len>0
+      \fill[AccentInk] (7.1, \y-0.2) rectangle (7.1+\len, \y+0.2);
+      \node[right, color=AccentInk] at (7.25+\len, \y) {\small $\val$};
+    \else
+      \fill[Muted] (7.1, \y-0.2) rectangle (7.14, \y+0.2);
+      \node[right, color=Muted] at (7.3, \y) {\small $\val$};
+    \fi
+  }
+  \node[right, color=AccentInk] at (9.75, 1) {\scriptsize pair $(0,\, 4)$};
+  \node[right, color=AccentInk] at (8.75, 0) {\scriptsize pair $(1.41,\, -1.41)$};
+\end{tikzpicture}
+\end{center}
+
+\noindent Two rows answer. Row $1$'s pair is $\anchor{019.R.rowonepair}$
+and row $2$'s is $\anchor{019.R.rowtwopair}$ — the half-size tone
+started at $135^\circ$, so neither of its probes alone tells the truth,
+and its bar is the pair's distance, $2$: the previous section's lesson
+inside the bank. Reading $\div\, 4$ gives the amplitudes, $1$ and
+$0.5$. Turn the column of bars on its side and it is the plot everyone
+calls \emph{the spectrum} — no new object, a column of weighted sums of
+the same samples. The figure keeps the samples beside the bank on
+purpose: students who are shown spectra without their waveforms
+reliably fail to connect the two
+pictures~\cite{signal_processing-wage-et-al-the-signals-and-systems-concept-inventory-2002}.
+
+In code the bank already exists. \texttt{np.fft.rfft} returns these
+five rows, each pair packed into one complex number — a device this
+road has not built, so take it as a pointer: its real part is the
+cosine sum and its imaginary part is \emph{minus} the sine sum,
+$X[k] = a_k - i\,b_k$~\cite{signal_processing-j-o-smith-mathematics-of-the-dft-the-dft}.
+Row $2$ of the mix, $\anchor{019.R.rowtwopair}$ here, is numpy's
+$1.41 + 1.41i$. The reading — the distance — is the same either way.
+
+\section{No double counting}
+
+Why did the mix split so cleanly into $4$ and $2$, with nothing spilled
+into the other rows? Two facts. First, a detector's reading of a sum is
+the sum of its readings: a weighted sum of a sum is the sum of the
+weighted sums, the same one-line reason the \primref{random-variables}
+chapter gave for $E[X + Y] = E[X] + E[Y]$. (It is the \emph{pair} that adds, cosine
+sum to cosine sum and sine sum to sine sum; the distance is taken
+last.) So it is enough to ask what each probe reads on every other
+probe. Second, the answer: nothing.
+
+\begin{center}
+\begin{tikzpicture}[x=0.72cm, y=0.55cm]
+  % NoDoubleCounting: the 8 x 8 probe-against-probe table (anchor U).
+  \foreach [count=\i from 0] \name/\d in
+      {c_0/8, c_1/4, s_1/4, c_2/4, s_2/4, c_3/4, s_3/4, c_4/8} {
+    \node[color=Muted] at (\i, 1.1) {\small $\name$};
+    \node[color=Muted] at (-1.1, -\i) {\small $\name$};
+    \foreach \j in {0,...,7} {
+      \ifnum\i=\j
+        \node[color=AccentInk] at (\j, -\i) {\small $\mathbf{\d}$};
+      \else
+        \node[color=Muted] at (\j, -\i) {\scriptsize $0$};
+      \fi
+    }
+  }
+  \node[right, align=left] at (8.3, -1.5)
+    {\small $C(8, 2) = 28$ different pairs\\ \small all $28$ read exactly $0$};
+  \node[right, align=left, color=Muted] at (8.3, -4.5)
+    {\scriptsize $c$: cosine probe, $s$: sine probe\\
+     \scriptsize the number: laps per window};
+\end{tikzpicture}
+\end{center}
+
+There are $8$ probes — a cosine for each of the five rows, a sine for
+each of the middle three — and so $64$ multiply-and-add sums. The
+diagonal, each probe against itself, reads
+$\anchor{019.U.diagonal}$. Off the diagonal there are
+$\binom{8}{2} = \anchor{019.U.zeros}$ different pairs, counted the way
+the \primref{counting-rules} chapter counts them, and every one reads exactly $0$.
+That is \emph{computed, not proved}: an exhaustive check at $N = 8$. The
+reason it holds for every $N$ needs a tool this road has not built —
+Euler's formula — and waits for
+it~\cite{signal_processing-j-o-smith-mdft-orthogonality-of-the-dft-sinusoids}.
+The consequence needs no waiting: each detector is exactly deaf to the
+other detectors' tones, so no bar can borrow from another.
+
+Why $4$ on the diagonal? Squares never cancel, and at every stop
+height$^2$ + shadow$^2 = 1$ — it is the circle's radius, by Pythagoras.
+The squared sine probe and the squared cosine probe run
+\begin{gather*}
+  \anchor{019.V.sinesquares} \\
+  \anchor{019.V.cosinesquares}
+\end{gather*}
+— the same values in a different order, summing to $1$ at each stop. Eight stops share out $8$
+between two probes that take the same values — $4$
+each~\cite{signal_processing-j-o-smith-mdft-norm-of-the-dft-sinusoids}.
+
+Why $8$ at the two ends? At $0$ laps and at $4$ laps the sine probe is
+all zeros — $\sin 0$ and $\sin(\pi n)$ vanish at every
+stop~\cite{signal_processing-smith-ch-8-dft-basis-functions} — so the
+cosine has no partner and keeps the whole $8$. The end rows are
+therefore different in two ways, stated once: they read $\div\, 8$, not
+$\div\, 4$~\cite{signal_processing-smith-ch-8-synthesis}; and with only
+one probe they \emph{do} care when the tone starts. A full-size tone on
+an end row reads $\anchor{019.B.ends}$ as its start moves through
+$0^\circ$, $30^\circ$, $45^\circ$ and $90^\circ$. This is why every
+worked tone in this chapter lives on rows $1$ to $3$.
+
+The bookkeeping closes the argument: $1 + 2 \cdot 3 + 1 = 8$ readings
+from $8$ samples~\cite{signal_processing-smith-ch-8-notation-and-format-of-the-real-dft}.
+Nothing is lost, which is why the transform can be undone — the $8$
+readings rebuild the $8$ samples. That is a promise, not something shown
+here. And one warning rides along: each detector is deaf at the
+\emph{other detectors'} frequencies — and only
+there~\cite{signal_processing-j-o-smith-mdft-frequencies-in-the-cracks,signal_processing-lyons-using-the-dft-as-a-filter-2013}.
+The next section meets a tone that sits somewhere else.
+
+\section{What sets the spacing}
+
+What decides where the detectors listen? Probe $k$ fits $k$ laps into
+the window, and the window lasts $N \div sr$ seconds — here $8 \div
+8000$~s, one millisecond. So $k$ laps per millisecond is $k \times
+1000$~Hz, and in general
+\[
+  f_k = k \cdot \frac{sr}{N}, \qquad
+  \text{spacing} = \frac{sr}{N} = \frac{1}{\text{duration}} .
+\]
+The spacing between detectors is one over how long the window listens.
+Three banks, side by side, separate the two things a designer can buy:
+
+\begin{center}
+\begin{tabular}{lll}
+  $sr = 8000$, $N = 8$ & $\anchor{019.X.first}$ & rows to $4000$~Hz \\
+  $sr = 16\,000$, $N = 16$ & $\anchor{019.X.second}$ & rows to $8000$~Hz \\
+  $sr = 8000$, $N = 16$ & $\anchor{019.X.third}$ & rows to $4000$~Hz \\
+\end{tabular}
+\end{center}
+
+\noindent Sampling twice as fast for the same millisecond leaves the
+rows $1000$~Hz apart — the faster rate bought \emph{reach}, not detail.
+Listening twice as long put them $500$~Hz apart: only duration buys
+spacing. The row count is $N/2 + 1$ in every case.
+
+This is a speech model's front end. Whisper takes $400$ samples at
+$16\,000$~Hz — a window of $\anchor{019.L.window}$~ms — which is
+$\anchor{019.L.rows}$ rows, $\anchor{019.L.spacing}$~Hz apart, up to
+$8000$~Hz~\cite{signal_processing-radford-et-al-robust-speech-recognition-2022,signal_processing-openai-whisper-audio-py-at-8609812}.
+And the spacing has a cost, which this chapter shows once and does not
+explain. A $1500$~Hz sine starting at $0$ sits between two rows of the
+small bank, and \emph{every} row answers — on rows $0$ to $4$,
+\[
+  \anchor{019.T.teaser} .
+\]
+That smear is
+\emph{leakage}, and it is the windowing chapter's subject — the one tone
+in this chapter that does not sit on a detector's frequency. Two more
+pointers along the same road: slide the window along the recording and
+each detector's output becomes a signal in its own right, which is when
+the bank earns the name
+\emph{filterbank}~\cite{signal_processing-j-o-smith-spectral-audio-signal-processing-dft-filter-bank};
+and a \emph{mel} filterbank will regroup Whisper's
+$\anchor{019.L.rows}$ rows into $80$.
+
+\section{The spectrum in decibels}
+
+Add a third tone to the mix, a hundred times quieter than the first:
+amplitude $0.01$ at $3000$~Hz. The readings are
+$\anchor{019.S.readings}$, and on ordinary bars the third tone is
+invisible. The cure is the counting strip of the \primref{logarithms} chapter.
+There is one definition: a level in decibels is ten times the common
+logarithm of a \emph{power}
+ratio~\cite{signal_processing-martin-decibel-the-name-for-the-transmission-unit-1929}.
+Power goes as amplitude squared, and the law $\log(xy) = \log x + \log
+y$ — multiplying is adding — turns the square into a factor of $2$ out
+front~\cite{signal_processing-j-o-smith-mdft-decibels,signal_processing-nist-sp-811-8-7-logarithmic-quantities-and-units}:
+\[
+  L = 10 \log_{10} \frac{P}{P_0} = 20 \log_{10} \frac{A}{A_0}
+  \ \text{dB} .
+\]
+A decibel figure means nothing without its reference; here it is the
+loudest row. That row is ratio $1$, and $\log 1 = 0$~dB. Half the
+reading is $20 \log_{10} \tfrac12 = -20 \times \anchor{005.log10two} =
+\anchor{019.S.halfdb}$~dB, on the logarithm chapter's own value of
+$\log_{10} 2$. A hundredth is two tenfoldings down:
+$\anchor{019.S.hundredthdb}$~dB — and now the third tone has a bar.
+
+\begin{center}
+\begin{tikzpicture}[x=1cm, y=1cm]
+  % TheSpectrumInDecibels: the same three readings on linear bars and on a
+  % dB axis whose floor is labelled (a bar's height is a claim).
+  \draw[Muted] (-0.5, 0) -- (3.9, 0);
+  \foreach [count=\k from 0] \h/\t/\hz in
+      {0/0/0, 2/4/1000, 1/2/2000, 0.02/0.04/3000, 0/0/4000} {
+    \ifdim\h pt>0pt
+      \fill[AccentInk] (0.85*\k-0.18, 0) rectangle (0.85*\k+0.18, \h);
+      \node[above, color=AccentInk] at (0.85*\k, \h+0.05) {\scriptsize $\t$};
+    \else
+      \node[above, color=Muted] at (0.85*\k, 0.05) {\scriptsize $\t$};
+    \fi
+    \node[below, color=Muted] at (0.85*\k, -0.12) {\tiny \hz};
+  }
+  \node[color=Muted] at (1.7, 3.2) {\scriptsize readings, by row (Hz)};
+  \draw[Muted] (5.6, 0) -- (11.0, 0);
+  \foreach [count=\k from 0] \h/\t/\hz in
+      {0/{-\infty}/0, 2.5/0/1000, 2.2/{-6.02}/2000, 0.5/{-40}/3000, 0/{-\infty}/4000} {
+    \ifdim\h pt>0pt
+      \fill[AccentInk] (6.2+1.1*\k-0.18, 0) rectangle (6.2+1.1*\k+0.18, \h);
+      \node[above, color=AccentInk] at (6.2+1.1*\k, \h+0.05) {\scriptsize $\t$};
+    \else
+      \node[above, color=Muted] at (6.2+1.1*\k, 0.05) {\scriptsize $\t$};
+    \fi
+    \node[below, color=Muted] at (6.2+1.1*\k, -0.12) {\tiny \hz};
+  }
+  \node[left, color=Muted] at (5.5, 0) {\scriptsize $-50$ dB};
+  \node[color=Muted] at (8.4, 3.2) {\scriptsize dB re: the loudest row, by row (Hz)};
+\end{tikzpicture}
+\end{center}
+
+The empty rows are the boundary reading the logarithm chapter flagged:
+$\log 0 = -\infty$. So $0$~dB means \emph{equal to the reference} — it
+is never silence; silence is $-\infty$~dB. Real systems therefore pick
+a floor. Whisper keeps $8$ decades of power below its loudest value —
+$\anchor{019.Z.floor}$~dB — and clamps the
+rest~\cite{signal_processing-openai-whisper-audio-py-at-8609812}. Two
+conversions are worth carrying: doubling an amplitude is
+$\anchor{019.I.amplitudedouble}$~dB, doubling a power
+$\anchor{019.I.powerdouble}$~dB.
+
+A real note shows what the axis is for. Take $4096$ samples of a
+trumpet at $22\,050$ per second: $\anchor{019.M.rows}$ detectors,
+$\anchor{019.M.spacing}$~Hz apart. Its first five harmonics, in Hz, and their
+levels in dB re the loudest:
+\begin{gather*}
+  \anchor{019.M.harmonics} \\
+  \anchor{019.M.levels}
+\end{gather*}
+The \emph{second} harmonic is the loudest, the fundamental $1.56$~dB
+below it. (The recording is Mihai Sorohan's, from
+Freesound, CC~BY~4.0, measured from librosa's converted
+copy~\cite{signal_processing-sorohan-solo-trumpet-06in-f-90bpm-wav-freesound,signal_processing-librosa-example-files};
+the plot it rebuilds is the Hugging Face audio course's~\cite{signal_processing-hugging-face-audio-course-introduction-to-audio-data}.)
+One honest pointer: a real note lands between rows, so a window shaped
+those levels — the windowing chapter again.
+
+The same ruler is everywhere. Decibels are $10 \times \log_{10}$ of a
+power ratio; pH is $-\log_{10}$ of hydrogen-ion
+activity~\cite{signal_processing-buck-et-al-measurement-of-ph-iupac-2002};
+stellar magnitude is $-2.5 \times \log_{10}$ of a brightness ratio, so
+that five magnitudes are a factor of
+$100$~\cite{signal_processing-pogson-magnitudes-of-thirty-six-of-the-minor-planets-1856};
+semitones are $12 \times \log_2$ of a frequency ratio, which makes a
+$3{:}2$ fifth $\anchor{019.Y.fifth}$ of them. Each is a constant times
+the log of a ratio — the logarithm chapter's strip with its own stride.
+That the ear itself hears in logs is an approximate motivation, not a
+law~\cite{signal_processing-wikipedia-weber-fechner-law}.
+
+\section{The fold at half the sample rate}
+
+Why does the bank stop at row $4$ — at $4000$~Hz, half the sample rate?
+Because a row $5$ would be row $3$ again. At the $8$ stops the $7$-lap
+cosine probe \emph{is} the $1$-lap cosine probe, number for number, and
+the $7$-lap sine probe is the $1$-lap one with every sign flipped:
+\[
+  \cos\bigl(2\pi (8 - k) n/8\bigr) = \cos(2\pi k n/8), \qquad
+  \sin\bigl(2\pi (8 - k) n/8\bigr) = -\sin(2\pi k n/8) .
+\]
+Likewise $6$ laps is $2$, and $5$ laps is $3$. Run the table of zeros
+past row $4$ and it lights up: $c_3$ against $c_5$ adds to
+$\anchor{019.U.cosfold}$, $s_3$ against $s_5$ to
+$\anchor{019.U.sinfold}$ — not $0$. A detector above row $4$ would only
+repeat one below it.
+
+The reason is on the first section's circle. A $7000$~Hz tone steps
+$7/8$ of a lap between samples, visiting the angles (in degrees)
+\[
+  \anchor{019.W.angles}
+\]
+— exactly the stops of a point stepping $1/8$ of a lap \emph{backward}. Same shadow, height flipped: it is the
+wagon wheel that seems to turn the wrong
+way~\cite{signal_processing-wikipedia-aliasing}. Two curves, $1000$~Hz
+and $7000$~Hz, pass through the same $8$ samples, the samples cannot
+say which was played, and it is the $1000$~Hz row that fires. On the
+frequency ruler, sampled at $8000$~Hz:
+\[
+  \anchor{019.W.ruler} .
+\]
+
+\begin{center}
+\begin{tikzpicture}[x=1.6cm, y=1cm]
+  % TheFoldAtNyquist: the frequency ruler folded at sr/2 — 5 -> 3,
+  % 6 -> 2, 7 -> 1 only (past 8000 Hz the pattern changes, anchor W).
+  \draw[Muted, line width=1.2pt] (0, 0) -- (4, 0);
+  \foreach [count=\k from 0] \hz in {0, 1000, 2000, 3000, 4000} {
+    \draw[Muted] (\k, 0.1) -- (\k, -0.1);
+    \node[below] at (\k, -0.2) {\small \hz};
+  }
+  \draw[WarmInk, densely dashed, line width=1pt]
+    (4, 0) arc (-90:90:0.18 and 0.6) -- (0.6, 1.2);
+  \foreach \f/\x in {5000/3, 6000/2, 7000/1} {
+    \node[above, color=WarmInk] at (\x, 1.35) {\small \f};
+    \draw[WarmInk, ->, line width=0.8pt] (\x, 1.12) -- (\x, 0.22);
+  }
+  \node[right, align=left, color=AccentInk] at (4.4, 0.6)
+    {\small the fold:\\ \small $sr/2 = 4000$ Hz};
+  \node[below, color=Muted] at (4.75, -0.2) {\small Hz};
+\end{tikzpicture}
+\end{center}
+
+\noindent (The ruler stops at $7000$ on purpose. From $8000$~Hz up the
+picture is no longer a mirror, and ``cosine the same, sine flipped''
+stops being the rule.)
+
+Now the first section's promise is cashed, strictly. A tone needs
+\emph{more than} two samples per lap: it must lie \emph{below} half the
+sample rate ($sr/2$), not at
+it~\cite{signal_processing-j-o-smith-mdft-sampling-theorem}. Exactly at
+$sr/2$ a sine lands on $0$ at every stop, and the samples are silence —
+the end row's missing partner, met from the other side. (Textbooks
+disagree about what ``the Nyquist frequency'' names, so this chapter
+says ``half the sample rate''
+instead~\cite{signal_processing-oppenheim-schafer-discrete-time-signal-processing-3rd-ed}.)
+And the impostor is a \emph{clean lower tone}, not noise: nothing
+downstream can tell it from the real thing, so whatever lies above
+$sr/2$ has to be removed \emph{before} sampling. Hence $8000$~Hz for
+telephone speech and $16\,000$~Hz for speech models — where, by the same
+fold, $\anchor{019.H.speechrate}$~Hz. In numpy the fold is visible in
+the output itself: the upper half of \texttt{fft}'s output is this
+mirror, and \texttt{rfft} returns the bank. The sampling theorem's credit
+line: E.~T.~Whittaker 1915, Kotelnikov 1933, Shannon
+1949~\cite{signal_processing-shannon-communication-in-the-presence-of-noise-1949,signal_processing-l-ke-the-origins-of-the-sampling-theorem-1999}.
+
+\paragraph{Where this goes.} The series closes on a map. \emph{Which
+tones are in it?} — the bank of detectors. \emph{Quiet beside loud?} —
+decibels. Both are built. \emph{Echoes and smoothing?} —
+convolution. \emph{A tone between rows?} — windowing. \emph{Tones that
+change over time?} — the short-time transform, whose columns stacked
+side by side are the spectrogram. \emph{The ear's own grouping?} — mel.
+Those are the road ahead, convolution first because leakage is best
+explained by it. Three further promises leave
+this chapter. The complex form — one complex number per row instead of
+a pair, and the reason the $\anchor{019.U.zeros}$ zeros hold for every
+$N$ — waits on Euler's formula. The inverse, rebuilding the samples
+from the readings, is unbuilt. And the fast Fourier transform computes
+these same readings in far fewer steps by divide and conquer — an
+algorithms story, Cooley and Tukey's in
+1965~\cite{signal_processing-cooley-tukey-an-algorithm-for-the-machine-calculation-1965},
+though Gauss had the general formula around 1805, published in
+1866~\cite{signal_processing-heideman-johnson-burrus-gauss-and-the-history-of-the-fft}.
+\end{narrative}
+
+\section*{Practice problems}
+
+\begin{problem}
+Eight samples are taken at $8000$ per second. Here they are, above the
+$2000$~Hz detector's two probes at the same $8$ stops:
+\[
+\begin{array}{lrrrrrrrr}
+  \text{samples} & 5 & 12 & -5 & -12 & 5 & 12 & -5 & -12 \\
+  \text{cosine probe} & 1 & 0 & -1 & 0 & 1 & 0 & -1 & 0 \\
+  \text{sine probe} & 0 & 1 & 0 & -1 & 0 & 1 & 0 & -1
+\end{array}
+\]
+Compute the detector's pair (cosine sum, sine sum), its reading, and
+the amplitude of the tone; compare the amplitude with the largest
+sample. Then give the pair of the $1000$~Hz detector, whose probes are
+$\cos(2\pi n/8)$ and $\sin(2\pi n/8)$ for $n = 0, \ldots, 7$.
+\begin{hint}
+Each sum has only four nonzero terms. For the $1000$~Hz detector, pair
+each sample with the one four places later.
+\end{hint}
+\begin{solution}
+Cosine sum: $5 + 5 + 5 + 5 = 20$ (the $-5$s meet the $-1$s). Sine sum:
+$12 + 12 + 12 + 12 = 48$. The pair is $(20, 48)$ and the reading is
+$\sqrt{20^2 + 48^2} = 52$. On an interior row the amplitude is the
+reading $\div\, 4$: $13$ — larger than any sample, the largest being
+$12$, because the tone is $5 \cos + 12 \sin$ and peaks between stops
+($5$–$12$–$13$). For the $1000$~Hz detector, the samples satisfy $x[n +
+4] = x[n]$ while both $1$-lap probes change sign four places later, so
+the terms cancel in pairs: $(0, 0)$.
+\end{solution}
+\end{problem}
+
+\begin{problem}
+All signals here are $8$ samples at $8000$ per second, read by the
+five-detector bank ($0$, $1000$, $2000$, $3000$, $4000$~Hz). (a) The
+signal is $2.5 \sin(2\pi \cdot 3000\, t + 50^\circ)$. Give all five
+readings. (b) The signal is $3 \sin(2\pi \cdot 1000\, t) + 0.5
+\cos(2\pi \cdot 3000\, t)$. Give all five readings, and name the two
+facts that make the other rows read exactly $0$.
+\begin{hint}
+On rows $1$ to $3$ a tone of amplitude $A$ sitting on the row's
+frequency reads $4A$, whatever its starting angle.
+\end{hint}
+\begin{solution}
+(a) Only row $3$ answers: $4 \times 2.5 = 10$, so the readings are $0,
+0, 0, 10, 0$; the $50^\circ$ turns the pair, not its distance. (b) $0,
+12, 0, 2, 0$: row $1$ reads $4 \times 3$, row $3$ reads $4 \times 0.5$.
+The two facts: a reading of a sum is the sum of the readings (the pair
+is a weighted sum, hence linear), and every probe reads exactly $0$ on
+every other probe — all $28$ pairs at $N = 8$ — so each tone reaches
+only its own row.
+\end{solution}
+\end{problem}
+
+\begin{problem}
+For each bank give the window's duration, the spacing between
+detectors, the number of rows, and the highest row's frequency. (a)
+Whisper's: $sr = 16\,000$~Hz, $N = 400$. (b) $sr = 48\,000$~Hz, $N =
+960$. (c) You need detectors $10$~Hz apart at $sr = 16\,000$~Hz: how
+many samples, and how long a window? If you switch to $sr =
+48\,000$~Hz and keep that $N$, what is the spacing — and what $N$
+restores $10$~Hz?
+\begin{hint}
+Spacing $= sr/N = 1/\text{duration}$; rows $= N/2 + 1$; the top row is
+$sr/2$.
+\end{hint}
+\begin{solution}
+(a) $400/16\,000$~s $= 25$~ms; $16\,000/400 = 40$~Hz; $201$ rows; up to
+$8000$~Hz. (b) $20$~ms; $50$~Hz; $481$ rows; up to $24\,000$~Hz. (c)
+$N = 16\,000/10 = 1600$ samples, $100$~ms ($801$ rows). At $48\,000$~Hz
+the same $N$ lasts a third as long and the spacing is $48\,000/1600 =
+30$~Hz — coarser. $10$~Hz needs $N = 4800$, which is again $100$~ms:
+spacing is bought with time, at any sample rate.
+\end{solution}
+\end{problem}
+
+\begin{problem}
+Use $\log_{10} 2 \approx 0.301$. Levels are in dB relative to the
+loudest row unless a power ratio is named. (a) The loudest row reads
+$4$ and another reads $0.5$: what is the second row's level? (b) A row
+sits at $-12.04$~dB: what is its amplitude ratio to the loudest row,
+and the power ratio? (c) What is the level of a tenth of the amplitude?
+Of a tenth of the power? (d) A tone has half the \emph{power} of the
+reference: what is its level, and its amplitude ratio? (e) The loudest
+row reads $4$; another row sits at $-26.02$~dB. What does it read?
+\begin{hint}
+$20 \log_{10}$ of an amplitude ratio, $10 \log_{10}$ of a power ratio;
+split every ratio into halvings and tenfoldings.
+\end{hint}
+\begin{solution}
+(a) $0.5/4 = 1/8$, three halvings: $-20 \times 3 \times 0.301 =
+-18.06$~dB. (b) $-12.04 = -20 \times 2 \times 0.301$, two halvings: an
+amplitude ratio of $1/4$, a power ratio of $1/16$. (c) $20 \log_{10}
+\tfrac{1}{10} = -20$~dB; for power, $10 \log_{10} \tfrac{1}{10} =
+-10$~dB. (d) $10 \log_{10} \tfrac12 = -3.01$~dB; amplitude goes as the
+square root of power, so the ratio is $1/\sqrt2 \approx 0.707$. (e)
+$-26.02 = -20 - 6.02$: a tenth, then a half, so the ratio is $1/20$ and
+the row reads $4/20 = 0.2$.
+\end{solution}
+\end{problem}
+
+\begin{problem}
+(a) A $5000$~Hz tone is sampled at $8000$ per second. At what frequency
+is it heard? (b) At $16\,000$ per second, where are tones of $5000$,
+$9000$ and $10\,000$~Hz heard? (c) Write the $8$ samples of $\sin(2\pi
+\cdot 7000\, t)$ taken at $8000$ per second, starting at $t = 0$, to
+two decimals. Which $1000$~Hz tone has exactly these samples? Give the
+$1000$~Hz detector's pair (cosine sum, sine sum) and reading. (d) The
+same for $\cos(2\pi \cdot 7000\, t)$: pair and reading on the
+$1000$~Hz detector.
+\begin{hint}
+Between $sr/2$ and $sr$ a tone lands at $sr - f$, its cosine part
+unchanged and its sine part negated.
+\end{hint}
+\begin{solution}
+(a) $8000 - 5000 = 3000$~Hz. (b) $5000$~Hz is below $sr/2 = 8000$~Hz
+and stays put; $9000 \to 7000$~Hz and $10\,000 \to 6000$~Hz. (c) The samples are
+\[
+  0,\ -0.71,\ -1,\ -0.71,\ 0,\ 0.71,\ 1,\ 0.71 ,
+\]
+those of $-\sin(2\pi \cdot 1000\, t)$: a $1000$~Hz sine turned upside
+down. The pair is $(0, -4)$
+and the reading $4$. (d) The samples equal those of $\cos(2\pi \cdot
+1000\, t)$ exactly: pair $(4, 0)$, reading $4$. Either way the
+impostor is a clean $1000$~Hz tone at full reading.
+\end{solution}
+\end{problem}
+
+\begin{problem}
+On the $N = 8$, $sr = 8000$~Hz grid the top row listens at $4000$~Hz,
+exactly $sr/2$. (a) Write the samples of $\cos(2\pi \cdot 4000\, t)$.
+What does row $4$ read, and what divisor recovers the amplitude $1$?
+(b) Write the samples of $\sin(2\pi \cdot 4000\, t)$. What does every
+row read? (c) Write the samples of $3 \cos(2\pi \cdot 4000\, t +
+60^\circ)$. What does row $4$ read, and what amplitude does the
+end-row divisor report?
+\begin{hint}
+At $4$ laps the sine probe is all zeros, so row $4$ is its cosine sum
+alone; $\cos(\pi n + \varphi) = (-1)^n \cos\varphi$.
+\end{hint}
+\begin{solution}
+(a) $1, -1, 1, -1, 1, -1, 1, -1$. Row $4$'s cosine probe is the same
+list, so it reads $8$; the end rows divide by $8$, not $4$: $8/8 = 1$.
+(b) $\sin(\pi n) = 0$ at every stop: the samples are silence and every
+row reads $0$ — which is why a tone must lie strictly below $sr/2$.
+(c) $3 \cos 60^\circ = 1.5$, so the samples are $1.5, -1.5, 1.5,
+\ldots$ and row $4$ reads $8 \times 1.5 = 12$; dividing by $8$ reports
+$1.5$, half the true amplitude. With no sine partner the end row reads
+$A \cdot N \cdot |\cos\varphi|$ — it depends on when the tone starts.
+\end{solution}
+\end{problem}
+
+\begin{problem}
+Exactly one of these five claims is true. Which — and what is wrong
+with each of the others? (a) ``Between two samples a recording holds
+the earlier value, so the honest picture of $8$ samples is a
+staircase.'' (b) ``$8$ samples at $8000$ per second put the detectors
+$1000$~Hz apart; $16$ samples at $16\,000$ per second put them $500$~Hz
+apart.'' (c) ``A row at $0$~dB is silent.'' (d) ``A $7000$~Hz tone
+sampled at $8000$ per second shows up as noise spread across the
+rows.'' (e) ``Starting a $2000$~Hz tone a quarter of a lap later
+changes the $2000$~Hz detector's pair but not its reading.''
+\begin{hint}
+Check (b) with $sr/N$, (c) with $\log 1$ and $\log 0$, (d) with the
+fold.
+\end{hint}
+\begin{solution}
+Only (e) is true: the pair turns by a quarter-turn and its distance
+stays put. (a) False: nothing between the samples is stored — a sample
+is a value at an instant, drawn as a stem. (b) False: both windows last
+$1$~ms, so both banks are $1000$~Hz apart; the faster rate bought reach
+(rows to $8000$~Hz), and $500$~Hz takes a $2$~ms window. (c) False:
+$0$~dB means equal to the reference ($\log 1 = 0$); silence is
+$-\infty$~dB. (d) False: it lands on $1000$~Hz as a clean tone — row
+$1$ reads $4$ and every other row $0$.
+\end{solution}
+\end{problem}
+
+\begin{problem}[stretch]
+The tone of the first problem starts one sample later, so the samples
+read $-12, 5, 12, -5, -12, 5, 12, -5$; two samples later they read $-5,
+-12, 5, 12, \ldots$; three samples later $12, -5, -12, 5, \ldots$.
+Give the $2000$~Hz detector's pair (cosine sum, sine sum) and its
+reading at each of the three delays, and say what the sine probe alone
+would have reported at delays $0$ to $3$. Through what angle does one
+sample's delay turn the pair — and through what angle would it turn a
+$1000$~Hz tone's pair on the $1000$~Hz detector?
+\begin{hint}
+The probes have not moved; only the samples have. A tone of $f$~Hz
+advances $f/sr$ of a lap per sample.
+\end{hint}
+\begin{solution}
+Delay $1$: $(-48, 20)$. Delay $2$: $(-20, -48)$. Delay $3$: $(48,
+-20)$. Each is the previous pair turned a quarter-turn anticlockwise —
+$(a, b) \mapsto (-b, a)$ — and the reading is $52$ every time. The sine
+probe alone reports $48, 20, -48, -20$: the same tone, four different
+answers. One sample is $2000/8000$ of a lap, $90^\circ$; for a
+$1000$~Hz tone it is $1000/8000$ of a lap, $45^\circ$.
+\end{solution}
+\end{problem}

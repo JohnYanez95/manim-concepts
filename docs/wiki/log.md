@@ -912,3 +912,56 @@ reordered.
   overstatement), applied
 - stamp: advance to 14e3f65 (the audited HEAD; findings applied in the
   commit after it)
+
+## [2026-09-19] series | plan 019, the spectrum
+
+- node added: `spectrum` (seven scenes, signal_processing/ — a new
+  topic's first series, the first of four on the road from sound to
+  log-mel)
+- edges delivered: `random-variables` → `spectrum` (the weighted sum
+  re-used with signed weights, its differences from expectation said
+  on screen; linearity "owned since dice"); `logarithms` → `spectrum`
+  (the log ruler named on screen; −20 × 0.301 = −6.02 dB; log 0 = −∞
+  behind the floor — the dB strand of algebra/'s log-scales Idea
+  delivered, the essay itself narrowed, not closed);
+  `counting-rules` → `spectrum` (C(8, 2) = 28 pairs on screen, sizing
+  the exhaustive check)
+- edges promised: `spectrum` → convolution (the closing map's first
+  unbuilt line, on screen; README road table and Ideas); → windowing → STFT → spectrogram
+  (leakage and "filterbank" named on screen in `WhatSetsTheSpacing`,
+  the window behind the trumpet's levels in `TheSpectrumInDecibels`,
+  the closing map); → mel (201 rows into 80, on screen; the closing
+  map); → the inverse ("a promise, not shown here", on screen). Home
+  for all four: signal_processing/ Ideas
+- rows amended, no new row: `e-and-ln` → *(ln as area, Euler's
+  formula, growth in the wild)* gains its first waiting customer for
+  the Euler strand (real probe pairs, orthogonality "computed, not
+  proved" at N = 8; the complex form and the every-N reason wait —
+  calculus/ Ideas updated); `dynamic-programming` → *(divide and
+  conquer)* gains the FFT as its second waiting example (README Scope
+  and Ideas only; algorithms/ Ideas updated). algebra/ Ideas'
+  log-scales bullet records the dB strand as built
+- devices recorded: the outer-product grid's plan-019 stop
+  (`NoDoubleCounting`'s probe-against-probe table — a measurement per
+  cell; drawn, not named on screen)
+- linear_algebra/: parked, to be returned to (maintainer, 2026-09-19).
+  Its first concrete on-ramp is recorded in signal_processing/README.md
+  Ideas — the bank as a projection onto probes, the mel filterbank as a
+  matrix. No promised row: nothing on screen names it, and the README
+  states an on-ramp, not a promise
+- not made, recorded here: `spectrum` ↔ the deep_learning/ CTC nodes
+  (the scenes say "speech models" and Whisper, never CTC; no statement
+  links the bank to the per-frame matrix, and deep_learning/'s Scope
+  puts the encoder out of scope); a graph row for the log-scales essay
+  (it never had one; the narrowing rides the `logarithms` → `spectrum`
+  row and algebra/'s Ideas — whether it earns its own promised row is
+  left to the audit);
+  quantization and the source–filter model (Ideas only, no on-screen
+  statement); `TheFoldAtNyquist`'s closing map as the mapping close's
+  eighth stop, and device bullets for the series' new pictures — the
+  sampled rotation, the bank (both left to the audit); the plan's
+  scene-7 `np.fft.fft`/`rfft` beat and the Gauss/Fourier
+  history credits (designed, not built — nothing cites them)
+- stamp: unchanged (14e3f65) — the audit advances it
+- branch note: cut from main at 9277a9c (PR #20 merged, clean, level
+  with origin)

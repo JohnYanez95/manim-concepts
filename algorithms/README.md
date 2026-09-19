@@ -150,7 +150,12 @@ until a human does the same.
   algorithms/ named: shared prefixes, stored once").
 - Divide and conquer as its own concept — the tree-shaped sibling
   scene 5 contrasts in one panel; a full treatment (merge sort's
-  recurrence, the master theorem's pictures) would slot here.
+  recurrence, the master theorem's pictures) would slot here. A second
+  example is waiting:
+  [`signal_processing/`](../signal_processing/README.md)'s spectrum
+  series parks the FFT here — the same readings in N log N steps
+  (Cooley & Tukey 1965; Gauss had an FFT-like method c. 1805, published
+  1866 — history pinned in plan 019's anchors O and P).
 - Edit distance worked in full — the closer names the Wagner–Fischer
   table; a dedicated scene would earn the KITTEN→SITTING grid the
   verifier has already pinned.
