@@ -102,7 +102,7 @@ the review budget (ADR 009).
   curve verified by eye through all eight 1000 Hz samples. README rows
   2–7 written with this commit (the source-order test reds otherwise);
   `make check` green with the new files staged
-- [x] Phase 3: README complete — seven rows at all three levels, 50
+- [x] Phase 3: README complete — seven rows at all three levels, 52
   plan-019 references unchecked for the maintainer's pass (link lines
   kept under the 80-column rule, full names in the descriptions; the
   pedagogy pass's third-party repost of Lyons' chapters deliberately not
@@ -170,7 +170,12 @@ the review budget (ADR 009).
   tag and fan-out arrive once. Verified by re-render (49 s, a
   second-iteration frame checked). Not rerun: the change is the finding's
   own fix, and the bot reviews it on the PR
-- [ ] Phase 5 — bot reviews spent: _ of 2
+- [x] Maintainer's source pass (2026-09-19, before the PR): he verified
+  all fifty-two plan-019 references and directed the ticks (the phase-3
+  entry first miscounted them as 50); `references.bib` re-synced — the
+  chapter's 35 cited keys are now `verified = {yes}` — and the guide
+  rebuilt, PDFs unchanged
+- [ ] Phase 5 — bot reviews spent: none yet, of 2
 
 ## Research digests
 
