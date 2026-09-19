@@ -149,5 +149,11 @@ Decline (recorded in the ADR with reasons):
   background (the old file was transparent — dark text over whatever
   the page behind it is; not checked on a dark page, a judgement call);
   PNG opened and each new arrow read against CLAUDE.md's Review budget
-- [ ] Phase 3
+- [x] Phase 3: one local pass on the committed branch (`--base main`),
+  one minor finding: "regenerate `docs/workflow.png` from the updated
+  diagram". Not valid, and not a decision (so no ADR) — the PNG was
+  regenerated in the phase-2 commit; the reviewer cannot read a binary.
+  Checked by computation, not by assertion: a fresh render of the
+  committed `.mmd` is pixel-identical to the committed PNG (1568×1730).
+  Nothing changed after the pass, so no rerun: local passes spent, 1
 - [ ] Phase 4
