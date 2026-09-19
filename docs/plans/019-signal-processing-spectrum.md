@@ -35,7 +35,7 @@ the review budget (ADR 009).
    device this series leans on.
 2. **The foundation gets at most two of the seven scenes.** The generic
    Fourier visual exists elsewhere and is good; what justifies this
-   series is the speech angle — the bins as a bank of narrow listeners —
+   series is the speech angle — the bins as a bank of listeners —
    and that owns the middle of the series. It is also the thread series E
    picks up.
 3. **Tones are bin-centred throughout.** Leakage is series D's subject;
@@ -68,7 +68,18 @@ the review budget (ADR 009).
   calls as recommended: the trumpet beat stays, credited to the Freesound
   page under its current CC BY 4.0 with librosa's converted copy noted in
   the README; "detector" in this series, "filterbank" earned in series D
-- [ ] Phase 1
+- [x] Phase 1: topic dir `signal_processing/`; module with the shared
+  helpers (`_probe`, `_Stems`, `_number_strip`, `_swap_caption`) and
+  `PressureIntoNumbers` built in full (57 s at draft; linter clean; frames
+  verified on a contact sheet — the mix strip's three negative numbers ran
+  together at 0.95 spacing, so the sample pitch went to 1.0 and the mix
+  strip to size 18); README with Scope (six exclusions), the road table,
+  row 1, one reference; `references.bib` regenerated (the sync test reds
+  on any new README reference — run `tools/sync_references.py`);
+  `make check` green — but its hooks only see tracked files: the new
+  README's over-long reference title was caught by the commit hook, not
+  the gate (reference link lines stay ≤ 80 columns, full names in the
+  description)
 - [ ] Phase 2
 - [ ] Phase 3
 - [ ] Phase 4
