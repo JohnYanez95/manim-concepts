@@ -146,7 +146,8 @@ Decline (recorded in the ADR with reasons):
   message is a mermaid statement separator — fixed; PNG re-rendered at
   the committed 2× scale (the README's command now says `-s 2`; it did
   not reproduce the committed file before) on mermaid's default white
-  background (the old file was transparent, unreadable on a dark page);
+  background (the old file was transparent — dark text over whatever
+  the page behind it is; not checked on a dark page, a judgement call);
   PNG opened and each new arrow read against CLAUDE.md's Review budget
 - [ ] Phase 3
 - [ ] Phase 4
