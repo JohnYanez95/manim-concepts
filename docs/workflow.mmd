@@ -5,8 +5,9 @@ sequenceDiagram
     participant PR as pedagogy-researcher
     participant SV as source-verifier
     participant B as Bookkeeping<br/>(plans, wiki, ADRs)
-    participant CR as CodeRabbit<br/>(local CLI + PR bot)
     participant CA as connection-auditor
+    participant CR as CodeRabbit<br/>(local CLI)
+    participant Bot as CodeRabbit bot<br/>(on the PR)
 
     M->>C: start the TOPIC branch
     C->>C: checkout main, pull, verify the tip<br/>cut a FRESH feat/TOPIC from it — never stack
@@ -29,19 +30,27 @@ sequenceDiagram
     end
 
     rect rgba(160, 140, 100, 0.12)
-        note over C, CA: Phase 4 — two independent reviews
-        C->>CR: local review (tuned config)
+        note over C, CR: Phase 4 — two reviews, in sequence (ADR 009)
         C->>CA: graph-first incremental audit<br/>(diff from the wiki stamp)
-        CR-->>C: content findings
         CA-->>C: promised, delivered, possible, health
-        C->>B: findings applied or declined via ADR<br/>log appended, stamp advanced
+        C->>B: audit findings applied and committed<br/>log appended, stamp advanced
+        C->>C: self-check the diff against CLAUDE.md<br/>(colour, structure, Text markup)
+        C->>CR: ONE local pass, last — the committed branch,<br/>the diff the PR will carry (--base main)
+        CR-->>C: content findings
+        C->>B: fixed, or declined via ADR
+        note over C, CR: rerun only if code changed after the pass<br/>two passes, new edge, same spot → stop:<br/>write the test or linter rule first
     end
 
     rect rgba(160, 120, 120, 0.12)
-        note over M, CR: Phase 5 — ship
+        note over M, Bot: Phase 5 — ship, on a budget of two bot reviews
         C->>M: PR (body names the next branch's gaps)
-        CR-->>C: bot review (second pass) — resolved
-        C->>C: make clean-drafts, render 1080p60<br/>verify count, ffprobe, frames
-        C->>B: plan closed, finalise log entry
+        Bot-->>C: review 1 — automatic on open, then the bot pauses
+        opt a finding required a change
+            C->>C: read every thread first<br/>batch every fix into ONE push
+            C->>Bot: @coderabbitai review<br/>(once, inside the rate-limit window)
+            Bot-->>C: review 2, the last — a third is the maintainer's call
+        end
+        C->>C: bot round closed: make clean-drafts, render 1080p60<br/>verify count, ffprobe, frames
+        C->>B: plan closed (reviews spent recorded), finalise log entry<br/>— pushes free under the pause
         M->>C: merge — next series cuts fresh from main
     end
