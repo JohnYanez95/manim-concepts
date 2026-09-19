@@ -139,7 +139,7 @@ the review budget (ADR 009).
   and `make check` green with everything staged. **For the maintainer:**
   plan 012 R5's on-page "unverified" mark was never implemented — this
   chapter, like the two before it, cites `verified={no}` keys unmarked
-- [ ] Phase 4: `connection-auditor` run on 94c3c10 (incremental; zero
+- [x] Phase 4: `connection-auditor` run on 94c3c10 (incremental; zero
   numeric discrepancies). **Top finding built:** scene 4 said "reading of
   (A + B) = reading of A + reading of B" — false where "reading" is the
   distance (the series' own 12 and 16 make 20, not 28); linearity belongs
@@ -162,7 +162,14 @@ the review budget (ADR 009).
   against CLAUDE.md: no raw colours, no `palette()` (the rows are ranked),
   every in-place replacement out-then-in, every bar chart's floor
   labelled; one over-budget caption trimmed. Drafts re-rendered (7 files),
-  linter clean. Local CodeRabbit pass: pending
+  linter clean. **The one local CodeRabbit pass**
+  (`coderabbit review --agent --base main`, on 99c1304, 27 files): one
+  finding, minor, valid — `TheBankOfDetectors`' feed loop tested `signal`
+  after assigning it, so the second pass faded the "the 8 samples" tag in
+  again while it was already on screen; the loop now enumerates, and the
+  tag and fan-out arrive once. Verified by re-render (49 s, a
+  second-iteration frame checked). Not rerun: the change is the finding's
+  own fix, and the bot reviews it on the PR
 - [ ] Phase 5 — bot reviews spent: _ of 2
 
 ## Research digests

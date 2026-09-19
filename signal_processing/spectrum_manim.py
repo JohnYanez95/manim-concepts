@@ -687,13 +687,16 @@ class TheBankOfDetectors(ConceptScene):
             (_probe(3, "c"), "a 3000 Hz tone, started elsewhere: row 3 alone — again 4"),
         ]
         signal = bars = numbers = None
-        for samples, line in feeds:
-            if signal is not None:
+        for index, (samples, line) in enumerate(feeds):
+            if index:
                 self.play(FadeOut(signal), FadeOut(bars), FadeOut(numbers), run_time=0.5)
             signal = frame(samples)
             bars, numbers = bank.readout(samples)
-            self.play(FadeIn(signal), FadeIn(samples_tag) if signal is not None else Wait(0.1))
-            if bank.fan not in self.mobjects:
+            if index:
+                self.play(FadeIn(signal))
+            else:
+                # The tag and the fan-out arrive once, with the first frame of samples.
+                self.play(FadeIn(signal), FadeIn(samples_tag))
                 self.play(Create(bank.fan), run_time=0.6)
             self.play(
                 LaggedStart(
