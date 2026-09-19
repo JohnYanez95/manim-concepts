@@ -80,7 +80,28 @@ the review budget (ADR 009).
   README's over-long reference title was caught by the commit hook, not
   the gate (reference link lines stay ≤ 80 columns, full names in the
   description)
-- [ ] Phase 2
+- [x] Phase 2: seven scenes at draft (7 files, distinct names; 57, 72,
+  49, 51, 55, 66, 78 s). Shared devices: `_Stems` (lollipops), `_Bank`
+  (five rows — probe-pair thumbnails, Σ node, bar; the end rows drawn with
+  one probe), `_uprights` (bar charts), `_reading` (plus-signed pair and
+  distance). Linter clean on all seven; what it caught on the way: the
+  match note and the pair label at the frame edge, the pair plane's axis
+  tags and point labels crossed by its circle (tags became a legend under
+  the plane, labels hang outward from their points), Σ glyphs touching
+  their node circles, the probe table's key under the caption line, the
+  dB tag on the "0 dB" label. What only eyes caught, on contact sheets:
+  number strips running together (−0.71 −1 −0.71) — pitch widened, strips
+  to size 18; the row labels touching the probe thumbnails; two ladder
+  headers reading as one line; dB charts with no labelled floor (−50 dB
+  and −20 dB now on screen — a bar's height is a claim). Bugs: FadeIn on
+  an `always_redraw` mobject fails (its family is rebuilt every frame —
+  add, don't fade); `_Stems` stored `self.scale`, shadowing
+  `Mobject.scale`, which broke `FadeIn` on the group itself. Transition
+  windows: every in-place replacement goes through `_swap_caption`
+  (out, then in); mid-fade frames checked on scenes 4 and 6. The 7000 Hz
+  curve verified by eye through all eight 1000 Hz samples. README rows
+  2–7 written with this commit (the source-order test reds otherwise);
+  `make check` green with the new files staged
 - [ ] Phase 3
 - [ ] Phase 4
 - [ ] Phase 5 — bot reviews spent: _ of 2
