@@ -156,4 +156,11 @@ Decline (recorded in the ADR with reasons):
   Checked by computation, not by assertion: a fresh render of the
   committed `.mmd` is pixel-identical to the committed PNG (1568×1730).
   Nothing changed after the pass, so no rerun: local passes spent, 1
-- [ ] Phase 4
+- [x] Phase 4: PR #20 opened. The bot's automatic review: no actionable
+  comments, and the summary then read "Reviews paused …
+  `auto_pause_after_reviewed_commits`" — the pause is read from the PR
+  branch's own config and took effect on its first PR. No finding, so no
+  request: **bot reviews spent, 1 of 2**; local passes, 1. The bot
+  reported the allowance at 4 reviews per hour on the trailing week, 3
+  available after this one. This closure pushes under the pause.
+  Merge authorized by the maintainer, 2026-09-19
