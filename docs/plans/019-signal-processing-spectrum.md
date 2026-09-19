@@ -139,7 +139,30 @@ the review budget (ADR 009).
   and `make check` green with everything staged. **For the maintainer:**
   plan 012 R5's on-page "unverified" mark was never implemented — this
   chapter, like the two before it, cites `verified={no}` keys unmarked
-- [ ] Phase 4
+- [ ] Phase 4: `connection-auditor` run on 94c3c10 (incremental; zero
+  numeric discrepancies). **Top finding built:** scene 4 said "reading of
+  (A + B) = reading of A + reading of B" — false where "reading" is the
+  distance (the series' own 12 and 16 make 20, not 28); linearity belongs
+  to each probe's sum, and the scene now says so ("the pair adds, sum by
+  sum — the distance is taken last"). **Second, built in part:** D8's
+  "never a spectrum without its waveform" held in scene 3 only — the
+  leakage chart now stands beside its 8 samples ("one and a half laps in
+  the window — not a whole number"); scene 6's charts have no room, so the
+  claim was narrowed in the README and D8, not built. Wording applied:
+  rows 59 and 88 trued, row 101's pH strand, a promised row for the
+  log-scales essay, three device bullets (the sampled rotation; stems,
+  never staircases; the linear-then-log replot shared with
+  `TheRoadsOwnWalk`), the far-end scenes named in the topic Scope with
+  matching cells in `probability/` and `combinatorics/`, "appears once" →
+  twice (the trumpet is a second off-row tone), the guide's "two curves" →
+  "two cosines", scene 7 quoting scene 1 accurately; design section trued
+  to the build; stamp advanced to 94c3c10. Not made, logged: spectrum ↔
+  CTC (the STFT hop is the honest joint; Whisper is not a CTC model),
+  orthogonality as disjointness, the shadow as sin′ = cos. Self-check
+  against CLAUDE.md: no raw colours, no `palette()` (the rows are ranked),
+  every in-place replacement out-then-in, every bar chart's floor
+  labelled; one over-budget caption trimmed. Drafts re-rendered (7 files),
+  linter clean. Local CodeRabbit pass: pending
 - [ ] Phase 5 — bot reviews spent: _ of 2
 
 ## Research digests
@@ -426,7 +449,7 @@ samples at sr = 8000 Hz** — 1 ms of sound, rows at 0, 1, 2, 3, 4 kHz.
 - **D4 — demonstrated, not proved.** Orthogonality is an exhaustive check
   at N = 8 ("computed, not proved"); phase-invariance is shown at the
   phases the grid offers ("true for every starting angle — shown here for
-  these"). The all-N reason is a promised pointer to Euler's formula.
+  four"). The all-N reason is a promised pointer to Euler's formula.
 - **D5 — the weighted sum is re-grounded with its differences stated**:
   `TheBalancePoint`'s Σ x·w, but these weights can be negative and sum
   to 0 — they are a pattern to match, not a probability.
@@ -437,8 +460,11 @@ samples at sr = 8000 Hz** — 1 ms of sound, rows at 0, 1, 2, 3, 4 kHz.
 - **D7 — stems, never staircases;** a continuous curve through samples
   is a claim, drawn only for the source tone (scene 1) and the two
   aliases (scene 7).
-- **D8 — never a spectrum without its waveform:** the 8-stem strip stays
-  on screen beside the bank in scenes 3–6.
+- **D8 — the bank scenes keep the waveform beside their readings:** the
+  8-stem strip sits beside the bank in scene 3 and beside the leakage
+  chart in scene 5. Scene 6's charts stand without it (no room) — so
+  "never a spectrum without its waveform" is narrowed to the bank
+  scenes, not built (trued after the phase-4 audit).
 - **D9 — dB always carries its reference on screen** ("re: the loudest
   row"). One definition (10·log₁₀ of a power ratio, Martin 1929); the 20
   is `MultiplyIsAdd` pulling the square out front. Silence is −∞
@@ -465,16 +491,17 @@ samples at sr = 8000 Hz** — 1 ms of sound, rows at 0, 1, 2, 3, 4 kHz.
 
 | # | Scene | Level | What is on screen |
 | --- | --- | --- | --- |
-| 1 | `PressureIntoNumbers` | 1 · foundation | A pure tone as a point going round a circle; the microphone reads its height. Sample 8 times in 1 ms: the 8 stops at 45° steps become 8 stems, then a strip of 8 numbers (sr = 8000 per second, so 8 samples last 8/8000 = 1 ms). The shadow (horizontal) is the same motion a quarter-turn ahead — two readings of one point. Planted for scene 7: "at least two samples in every cycle". Closing question: which tones are hiding in these 8 numbers? |
+| 1 | `PressureIntoNumbers` | 1 · foundation | A pure tone as a point going round a circle; the microphone reads its height. Sample 8 times in 1 ms: the 8 stops at 45° steps become 8 stems, then a strip of 8 numbers (sr = 8000 per second, so 8 samples last 8/8000 = 1 ms). The shadow (horizontal) is the same motion a quarter-turn ahead — two readings of one point. Planted for scene 7, as built: "8 samples per lap here; a faster tone gets fewer — and needs at least two". Closing question: which tones are hiding in these 8 numbers? |
 | 2 | `TheProbe` | 1 → 2 · foundation | Probe k is a point doing k laps per window; k = 2 has integer values (0, 1, 0, −1… and 1, 0, −1, 0…). Multiply-and-sum is the owned weighted sum with signed weights (D5). Match: s₂ on s₂ → 0, 1, 0, 1, 0, 1, 0, 1 = 4 — squares cannot cancel. Mismatch: s₁ on s₃ → four halves up, two wholes down, cancelled in WARM = 0. Then the sine probe alone is fooled: the tone 3, 4, −3, −4… reads 16; delayed one sample, 12. Add the shadow probe: (12, 16), hypotenuse 20; delayed (−16, 12), still 20 — the pair-point walks a circle, its distance never changes; amplitude 20 ÷ 4 = 5, a peak the samples never touch. |
 | 3 | `TheBankOfDetectors` | 1 (the bank) | The 8-stem strip fans out to five rows — 0, 1, 2, 3, 4 kHz — each a probe pair, a Σ node, an output bar; the rows stand labelled *before* any signal arrives (a row is an address, not a discovery). Pure tones one at a time: exactly one row lights. Lyons' mix: row 1's pair (0, 4) reads 4, row 2's pair (1.41, −1.41) reads 2 — the bar is the hypotenuse, scene 2's lesson inside the bank → amplitudes 1 and 0.5. The bar column turns on its side: that is the spectrum — no new object, a column of weighted sums. |
-| 4 | `NoDoubleCounting` | 2 | Why the mix split cleanly. (i) Linearity: a detector's reading of a sum is the sum of its readings — `SameOutcomesAdd`'s move. (ii) The 8 × 8 probe-against-probe table (a bare table of numbers — the counting grid's descendant, drawn, not named on screen): diagonal 8, 4, 4, 4, 4, 4, 4, 8 lit, all C(8, 2) = 28 off-diagonal cells 0 — computed, not proved (D4). Why 4: height² + shadow² = 1 at every stop (the radius), 8 stops give 8, and sine and cosine take the same values in a different order — 4 each. Why 8 at the ends: no sine partner, the cosine keeps it all (D3). Bookkeeping: 1 + 2·3 + 1 = 8 readings from 8 samples — nothing lost; "the readings rebuild the samples" is a promise. |
-| 5 | `WhatSetsTheSpacing` | 2 → 3 | Probe k fits k laps in a window lasting N/sr seconds, so row k listens at k·sr/N: spacing = sr/N = 1 ÷ duration. Three banks side by side: (8 kHz, 8) and (16 kHz, 16) — both 1000 Hz apart, the faster rate bought *reach* (to 8 kHz), not finer spacing; (8 kHz, 16) — 500 Hz apart, listening longer bought spacing. Whisper's bank: 16 000 Hz, 400 samples → 25 ms, 40 Hz apart, 201 rows to 8000 Hz. When-useful: slide the frame and each detector's output becomes a signal — a filterbank (series D); a 1.5 kHz sine starting at 0 sits between rows and every row answers — bars 1.50, 2.85, 2.41, 0.85, 0.67, one magnitude per row, phase named in the caption — leakage, the one honest teaser (series D); a mel filterbank regroups these 201 rows into 80 (series E). |
+| 4 | `NoDoubleCounting` | 2 | Why the mix split cleanly. (i) Linearity, as built — of each probe's *sum*, not of the reading: "a probe's sum on (tone A + tone B)" / "= its sum on A + its sum on B" — `SameOutcomesAdd`'s move ("a weighted sum of a sum is the sum of the weighted sums — owned since dice") — then the guard "the pair adds, sum by sum — the distance is taken last (12 and 16 made 20)" and "so it is enough to ask: what does each probe sum to on every other probe?". (ii) The 8 × 8 probe-against-probe table (a bare table of numbers — the counting grid's descendant, drawn, not named on screen): diagonal 8, 4, 4, 4, 4, 4, 4, 8 lit, all C(8, 2) = 28 off-diagonal cells 0 — computed, not proved (D4). Why 4: height² + shadow² = 1 at every stop (the radius), 8 stops give 8, and sine and cosine take the same values in a different order — 4 each. Why 8 at the ends: no sine partner, the cosine keeps it all (D3). Bookkeeping: 1 + 2·3 + 1 = 8 readings from 8 samples — nothing lost; "the readings rebuild the samples" is a promise. |
+| 5 | `WhatSetsTheSpacing` | 2 → 3 | Probe k fits k laps in a window lasting N/sr seconds, so row k listens at k·sr/N: spacing = sr/N = 1 ÷ duration. Three banks side by side: (8 kHz, 8) and (16 kHz, 16) — both 1000 Hz apart, the faster rate bought *reach* (to 8 kHz), not finer spacing; (8 kHz, 16) — 500 Hz apart, listening longer bought spacing. Whisper's bank: 16 000 Hz, 400 samples → 25 ms, 40 Hz apart, 201 rows to 8000 Hz. When-useful: slide the frame and each detector's output becomes a signal — a filterbank (series D); a 1.5 kHz sine starting at 0 — its 8 samples drawn as stems to the left of the chart, tagged "the 8 samples", under the beat's first caption "a 1500 Hz sine: one and a half laps in the window — not a whole number" — sits between rows and every row answers — bars 1.50, 2.85, 2.41, 0.85, 0.67, one magnitude per row, phase named in the caption — leakage, the one computed teaser (series D); a mel filterbank regroups these 201 rows into 80 (series E). |
 | 6 | `TheSpectrumInDecibels` | 1 · 2 · 3 for dB | The flagship mix gains a third tone at amplitude 0.01: readings 4, 2, 0.04 — on linear bars the third is invisible. dB re the loudest row: 0, −6.02, −40. One definition — 10·log₁₀ of a power ratio; power goes as amplitude², and `MultiplyIsAdd` pulls the 2 out front: 20·log₁₀ of an amplitude ratio; −6.02 = −20 × 0.301, the repo's own log₁₀ 2. Empty rows: log 0 = −∞, so real systems choose a floor — Whisper keeps 8 decades of power below its loudest value, 80 dB. When-useful: the trumpet (D11), second harmonic 0 dB, fundamental −1.56, then −3.23, −7.21, −11.98; and the log-scales table — dB, pH, stellar magnitude, semitones, each a constant × a log of a ratio, a ruler with its own stride; Weber–Fechner named as approximate. |
-| 7 | `TheFoldAtNyquist` | 3 · limits, closer | Why the bank stops at row 4. At the 8 stops probe 7 *is* probe 1 — c₇ = c₁, s₇ = −s₁ — likewise 6 ↔ 2, 5 ↔ 3; scene 4's table extended past row 4 lights cells it called zero (probes 3 and 5: +4 and −4). Three short pictures: the point stepping ⅞ lap per sample is the point stepping ⅛ lap backwards (the wagon wheel — and why the sine flips sign, shown not hidden); two curves through the same 8 dots, 7 kHz in WARM over 1 kHz; the frequency ruler folded at 4 kHz — 5 → 3, 6 → 2, 7 → 1. Scene 1's "two samples per cycle" cashed, strictly: *below* sr/2 (row 4's sine is silence). The aliased tone is a clean lower tone, not noise — so it must be removed *before* sampling. In practice: 8 kHz telephone, 16 kHz speech models; `np.fft.fft`'s upper half is this mirror, `rfft` returns the bank. Credit line (D10). Closing map: which tones → the bank · quiet beside loud → dB · between rows → windowing · changing over time → the STFT · the ear's grouping → mel. |
+| 7 | `TheFoldAtNyquist` | 3 · limits, closer | Why the bank stops at row 4. At the 8 stops probe 7 *is* probe 1 — c₇ = c₁, s₇ = −s₁ — likewise 6 ↔ 2, 5 ↔ 3; scene 4's table extended past row 4 lights cells it called zero (probes 3 and 5: +4 and −4). Three short pictures: the point stepping ⅞ lap per sample is the point stepping ⅛ lap backwards (the wagon wheel — and why the sine flips sign, shown not hidden); two cosines through the same 8 dots, 7 kHz in WARM over 1 kHz; the frequency ruler folded at 4 kHz — 5 → 3, 6 → 2, 7 → 1. Scene 1's planted line cashed, quoted as built: "the first scene said at least two per lap — strictly, more than two: below sr ÷ 2" (row 4's sine is silence). The aliased tone is a clean lower tone, not noise — so it must be removed *before* sampling. In practice: 8 kHz telephone, 16 kHz speech models; "in numpy, the upper half of fft's output is this mirror — rfft returns the bank". Credit line (D10). Closing map, six lines — two GOOD (built), four MUTED (ahead): which tones → the bank · quiet beside loud → dB · echoes and smoothing → convolution · between rows → windowing · changing over time → the STFT · the ear's grouping → mel. |
 
-Foundation: scenes 1–2. The bank is on screen in scenes 3–7, and scenes
-3–5 are about nothing else.
+Foundation: scenes 1–2. The bank is drawn in scene 3; scenes 5–7 show
+its readings as ladders, upright bars and probe strips. Scenes 3–5 are
+about nothing else.
 
 ### What the series opens and closes (wiki, phase 3)
 

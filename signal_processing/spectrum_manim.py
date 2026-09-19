@@ -749,9 +749,9 @@ class TheBankOfDetectors(ConceptScene):
         note = _swap_caption(
             self,
             note,
-            caption(
-                "reading ÷ 4 = amplitude: a 1000 Hz tone of size 1 plus a 2000 Hz tone of size 0.5"
-            ).move_to(3.2 * DOWN),
+            caption("reading ÷ 4 = amplitude: 1000 Hz at size 1 plus 2000 Hz at size 0.5").move_to(
+                3.2 * DOWN
+            ),
         )
         self.wait(1.8)
 
@@ -810,8 +810,8 @@ class TheBankOfDetectors(ConceptScene):
 
 
 class NoDoubleCounting(ConceptScene):
-    """Why the mix split cleanly: a detector's reading of a sum is the sum of its readings,
-    and every probe reads exactly 0 on every other probe — all 28 pairs, checked."""
+    """Why the mix split cleanly: each probe's sum on a mix is the sum of its sums on the
+    parts, and every probe sums to exactly 0 against every other probe — all 28 pairs, checked."""
 
     def construct(self):
         self.play(FadeIn(self.title("No Double Counting"), shift=0.3 * DOWN))
@@ -821,8 +821,8 @@ class NoDoubleCounting(ConceptScene):
 
         # --- level 2, first half: the weighted sum is linear ----------------------------
         split = VGroup(
-            Text("reading of (tone A + tone B)", font_size=LABEL_SIZE),
-            Text("= reading of A + reading of B", font_size=LABEL_SIZE, color=ACCENT),
+            Text("a probe's sum on (tone A + tone B)", font_size=LABEL_SIZE),
+            Text("= its sum on A + its sum on B", font_size=LABEL_SIZE, color=ACCENT),
         ).arrange(DOWN, buff=0.3)
         split.move_to(0.6 * UP)
         self.play(FadeIn(split[0]))
@@ -835,11 +835,17 @@ class NoDoubleCounting(ConceptScene):
             ).move_to(3.2 * DOWN),
         )
         self.wait(1.6)
-        follow = caption("so it is enough to ask: what does each probe read on every other probe?")
-        follow.move_to(0.7 * DOWN)
+        last = caption("the pair adds, sum by sum — the distance is taken last (12 and 16 made 20)")
+        last.move_to(0.7 * DOWN)
+        self.play(FadeIn(last))
+        self.wait(1.6)
+        follow = caption(
+            "so it is enough to ask: what does each probe sum to on every other probe?"
+        )
+        follow.move_to(1.3 * DOWN)
         self.play(FadeIn(follow))
         self.wait(1.6)
-        self.play(FadeOut(VGroup(split, follow, prompt, note)))
+        self.play(FadeOut(VGroup(split, last, follow, prompt, note)))
 
         # --- level 2, second half: the probe-against-probe table (anchor U) -------------
         probes = [("c", 0), ("c", 1), ("s", 1), ("c", 2), ("s", 2), ("c", 3), ("s", 3), ("c", 4)]
@@ -1094,7 +1100,7 @@ class WhatSetsTheSpacing(ConceptScene):
         )
         self.wait(2.0)
 
-        # --- level 3: what the spacing costs — the one honest teaser (anchor T) ---------
+        # --- level 3: what the spacing costs — the one computed teaser (anchor T) ---------
         self.play(FadeOut(VGroup(scale_marks, first, second, third, dense, whisper, note)))
         between = np.sin(2 * np.pi * 1.5 * np.arange(_N) / _N)
         readings = [_reading(between, k)[2] for k in range(_N // 2 + 1)]
@@ -1107,10 +1113,24 @@ class WhatSetsTheSpacing(ConceptScene):
             pitch=1.2,
         )
         chart_tag = caption("Hz").next_to(chart[3], RIGHT, buff=0.3)
-        self.play(FadeIn(chart), FadeIn(chart_tag))
+        strip = _Stems(between, -6.6, 0.36, -0.6, 0.6, radius=0.05)
+        strip_axis = Line(
+            np.array([-6.8, -0.6, 0.0]), np.array([-3.85, -0.6, 0.0]), color=MUTED, stroke_width=1.5
+        )
+        strip_tag = caption("the 8 samples", COOL).move_to(np.array([-5.35, -1.75, 0.0]))
+        self.play(FadeIn(strip_axis), FadeIn(strip), FadeIn(strip_tag))
         note = _swap_caption(
             self,
             None,
+            caption(
+                "a 1500 Hz sine: one and a half laps in the window — not a whole number"
+            ).move_to(3.2 * DOWN),
+        )
+        self.wait(1.4)
+        self.play(FadeIn(chart), FadeIn(chart_tag))
+        note = _swap_caption(
+            self,
+            note,
             caption(
                 "a 1500 Hz sine, starting at 0, sits between two rows — and every row answers"
             ).move_to(3.2 * DOWN),
@@ -1141,7 +1161,7 @@ class WhatSetsTheSpacing(ConceptScene):
         )
         self.wait(1.6)
 
-        self.play(FadeOut(VGroup(chart, chart_tag, note)))
+        self.play(FadeOut(VGroup(chart, chart_tag, strip, strip_axis, strip_tag, note)))
         _takeaway(
             self,
             "Spacing = sr ÷ N = 1 ÷ how long you listen —\n"
@@ -1506,7 +1526,7 @@ class TheFoldAtNyquist(ConceptScene):
         )
         self.wait(1.8)
         lines = [
-            "the first scene's promise: more than two samples per lap — strictly below sr ÷ 2",
+            "the first scene said at least two per lap — strictly, more than two: below sr ÷ 2",
             "exactly at sr ÷ 2, a sine lands on 0 at every stop: the samples are silence",
             "the impostor is a clean lower tone, not noise — so remove it before sampling",
             "hence 8000 Hz for telephone speech and 16 000 Hz for speech models",

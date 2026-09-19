@@ -965,3 +965,91 @@ reordered.
 - stamp: unchanged (14e3f65) — the audit advances it
 - branch note: cut from main at 9277a9c (PR #20 merged, clean, level
   with origin)
+
+## [2026-09-19] audit | incremental, plan 019 branch
+
+- scope: diffed 14e3f65..94c3c10 (the plan-017 finalisation tail and
+  PR #19 merge absorbed as the previous audit's application; plan 018's
+  review-budget PR #20 is process only; the four plan-019 commits read
+  in full plus cited far ends — TheBalancePoint, SameOutcomesAdd,
+  MultiplyIsAdd, ShrinkCounts, TheUnderflowCliff, CombinationRule,
+  deep_learning/ Scope, TheRoadsOwnWalk); no full crawl
+- findings: 3 promised-not-delivered, 6 delivered-not-recorded,
+  5 possible-not-yet-made, 8 graph-health; zero numeric discrepancies —
+  the 28 pairs, the teaser bars, the fold cells and the 96.33 dB
+  recomputed
+- top finding, BUILT: `NoDoubleCounting`'s "reading of (A + B) =
+  reading of A + reading of B" was false where "reading" is the
+  distance — the series' own 12, 16, 20. The scene now says "a probe's
+  sum on (tone A + tone B)" / "= its sum on A + its sum on B", then "the
+  pair adds, sum by sum — the distance is taken last (12 and 16 made
+  20)"; README row 4, the guide chapter's lead-in sentence and the
+  plan's scene-4 row follow it
+- second finding, BUILT in part: `WhatSetsTheSpacing`'s 1500 Hz leakage
+  chart now stands beside its 8 samples, under a new first caption ("a
+  1500 Hz sine: one and a half laps in the window — not a whole
+  number"); `TheSpectrumInDecibels`' charts still stand alone (no room),
+  so "never a spectrum without its waveform" was narrowed to the bank
+  scenes — signal_processing/README.md's Wage reference and plan D8
+- correction to the series entry above: the scene-7 numpy beat WAS
+  built ("in numpy, the upper half of fft's output is this mirror — rfft
+  returns the bank"); only the on-screen Gauss/Fourier credit is unbuilt
+  (the guide chapter prints Gauss c. 1805). Row 59's tail narrowed
+  accordingly — READMEs and print state the FFT, the screen names
+  numpy's functions and never the algorithm; row 88's README quote
+  trued ("needs Euler's formula, and the screen says so") and its
+  doubled tail removed
+- asymmetry closed: signal_processing/README.md Scope gained a
+  paragraph naming the far-end scenes (TheBalancePoint,
+  SameOutcomesAdd, MultiplyIsAdd, ShrinkCounts, TheUnderflowCliff,
+  CombinationRule, and deep_learning/ from the other side); three
+  far-end when-useful cells now point back — probability/
+  (TheBalancePoint, SameOutcomesAdd) and combinatorics/
+  (CombinationRule)
+- "appears once" was false — the trumpet is a second off-row tone:
+  README Scope and the guide chapter (its header comment too) now say
+  twice, one computed and one measured; the guide's "two curves" →
+  "two cosines"; scene 7 now quotes scene 1 accurately ("at least two…
+  strictly, more than two"), and README row 7, the guide and the plan's
+  scene-1 and scene-7 rows follow
+- devices: the mapping close counts eight series, `TheFoldAtNyquist`'s
+  map the first whose verdicts include unbuilt series (two GOOD, four
+  MUTED); WARM's seventh stop (`TheProbe`'s cancelled mismatch products,
+  `TheFoldAtNyquist`'s impostor); three new bullets — the sampled
+  rotation (scenes 1, 2, 7; the picture the Euler series should
+  inherit), stems never staircases (`_Stems`, scenes 1, 2, 3, 5, 7),
+  the linear-then-log replot (`TheRoadsOwnWalk` →
+  `TheSpectrumInDecibels`, a reuse stated nowhere on screen)
+- row added: `logarithms` → *(log scales in the wild — the visual
+  essay)*, promised — `TheUnderflowCliff`'s closer lists the scales on
+  screen; placed as row 102, under the `logarithms` → `spectrum` row
+  that narrows it (the series entry had left the question to the
+  audit). Row 101 gained the pH strand (`ShrinkCounts`' concentration,
+  `TheSpectrumInDecibels`' activity — IUPAC's wording) and the
+  005.log10two print splice; rows 100 and 103 gained their `\primref`
+  print citations, row 100 the new on-screen linearity lines
+- riders, not rows: row 88 — the Euler series can open on the sampled
+  circle (the shadow a quarter-turn ahead is sin′ = cos in picture
+  form; `TheProbe`'s pair plane is already the complex plane's picture;
+  calculus/ has no trig yet); row 105 (windowing) — the new leakage
+  caption, and the honest joint to the CTC nodes when the STFT series
+  lands: the STFT hop becoming `TheAlignmentProblem`'s frames, the
+  encoder out of scope on both sides and Whisper not a CTC model, so
+  the source-verifier pins that first
+- not made, recorded here: `spectrum` ↔ the CTC nodes (the rider
+  above, nothing more); orthogonality as disjointness
+  (`NoDoubleCounting` ↔ `TwoSetsOneOverlap`, leakage as the overlap — a
+  candidate level-3 beat for the windowing series); the shadow as
+  sin′ = cos and the sampled rotation as the Euler series' opening
+  picture (recorded as the rider and the device bullet, no edge)
+- plan design trued to the built scenes: D4's "shown here for four";
+  D8 narrowed; scene 1's planted line, scene 4's linearity beat, scene
+  5's samples-beside-the-teaser, scene 7's quote, numpy line and
+  six-line closing map (convolution included); "the bank is drawn in
+  scene 3"
+- linear_algebra/: parked, to be returned to (maintainer, 2026-09-19).
+  No live text frames it otherwise — README Ideas' Mel bullet and row
+  106 now say "on-ramp", not "customer" or "no promise opened"; earlier
+  log entries stand unedited
+- stamp: advance to 94c3c10 (the audited HEAD; findings applied in the
+  commit after it)

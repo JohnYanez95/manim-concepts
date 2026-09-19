@@ -4,8 +4,9 @@
 % sine-and-cosine probe pairs throughout — Steven W. Smith's "real DFT" —
 % because the repo has built no complex number; the complex form is a
 % forward pointer to Euler's formula and nothing here leans on it. The word
-% is "detector": one frame gives one number per row. Every tone sits on a
-% detector's frequency except the single 1500 Hz pointer. Problem answers
+% is "detector": one frame gives one number per row. Every worked tone sits
+% on a detector's frequency; two do not, both pointers — the computed
+% 1500 Hz sine and the measured trumpet note. Problem answers
 % are computed by answers/spectrum.py (the solve-gate anchor): exact in
 % Q(√2), cross-checked against np.fft (whose imaginary part is the
 % NEGATIVE of this chapter's plus-signed sine sum).
@@ -263,12 +264,13 @@ $1.41 + 1.41i$. The reading — the distance — is the same either way.
 \section{No double counting}
 
 Why did the mix split so cleanly into $4$ and $2$, with nothing spilled
-into the other rows? Two facts. First, a detector's reading of a sum is
-the sum of its readings: a weighted sum of a sum is the sum of the
+into the other rows? Two facts. First, each probe's sum on a mix is the
+sum of its sums on the parts: a weighted sum of a sum is the sum of the
 weighted sums, the same one-line reason the \primref{random-variables}
-chapter gave for $E[X + Y] = E[X] + E[Y]$. (It is the \emph{pair} that adds, cosine
-sum to cosine sum and sine sum to sine sum; the distance is taken
-last.) So it is enough to ask what each probe reads on every other
+chapter gave for $E[X + Y] = E[X] + E[Y]$. (It is the \emph{pair} that
+adds, cosine sum to cosine sum and sine sum to sine sum; the distance is
+taken last, and distances do not add — the sums $12$ and $16$ made
+$20$.) So it is enough to ask what each probe sums to on every other
 probe. Second, the answer: nothing.
 
 \begin{center}
@@ -368,15 +370,19 @@ This is a speech model's front end. Whisper takes $400$ samples at
 $16\,000$~Hz — a window of $\anchor{019.L.window}$~ms — which is
 $\anchor{019.L.rows}$ rows, $\anchor{019.L.spacing}$~Hz apart, up to
 $8000$~Hz~\cite{signal_processing-radford-et-al-robust-speech-recognition-2022,signal_processing-openai-whisper-audio-py-at-8609812}.
-And the spacing has a cost, which this chapter shows once and does not
-explain. A $1500$~Hz sine starting at $0$ sits between two rows of the
-small bank, and \emph{every} row answers — on rows $0$ to $4$,
+And the spacing has a cost, which this chapter shows and does not
+explain. A $1500$~Hz sine starting at $0$ fits one and a half laps into
+the window — its $8$ samples show it: not a whole number of laps — so it
+sits between two rows of the small bank, and \emph{every} row answers —
+on rows $0$ to $4$,
 \[
   \anchor{019.T.teaser} .
 \]
 That smear is
-\emph{leakage}, and it is the windowing chapter's subject — the one tone
-in this chapter that does not sit on a detector's frequency. Two more
+\emph{leakage}, and it is the windowing chapter's subject — the one
+computed tone in this chapter that does not sit on a detector's
+frequency (the next section's trumpet note is the other, measured
+rather than computed). Two more
 pointers along the same road: slide the window along the recording and
 each detector's output becomes a signal in its own right, which is when
 the bank earns the name
@@ -500,7 +506,7 @@ $7/8$ of a lap between samples, visiting the angles (in degrees)
 \]
 — exactly the stops of a point stepping $1/8$ of a lap \emph{backward}. Same shadow, height flipped: it is the
 wagon wheel that seems to turn the wrong
-way~\cite{signal_processing-wikipedia-aliasing}. Two curves, $1000$~Hz
+way~\cite{signal_processing-wikipedia-aliasing}. Two cosines, $1000$~Hz
 and $7000$~Hz, pass through the same $8$ samples, the samples cannot
 say which was played, and it is the $1000$~Hz row that fires. On the
 frequency ruler, sampled at $8000$~Hz:
@@ -533,8 +539,9 @@ frequency ruler, sampled at $8000$~Hz:
 picture is no longer a mirror, and ``cosine the same, sine flipped''
 stops being the rule.)
 
-Now the first section's promise is cashed, strictly. A tone needs
-\emph{more than} two samples per lap: it must lie \emph{below} half the
+Now the first section's promise is cashed. It said a tone needs at least
+two samples per lap; strictly, it needs \emph{more than} two: it must lie
+\emph{below} half the
 sample rate ($sr/2$), not at
 it~\cite{signal_processing-j-o-smith-mdft-sampling-theorem}. Exactly at
 $sr/2$ a sine lands on $0$ at every stop, and the samples are silence —
