@@ -23,3 +23,4 @@ part.
 | [006](006-human-ticked-references-stay-ticked.md) | Human-ticked reference checkboxes stay ticked |
 | [007](007-plans-pin-digests-not-transcripts.md) | Plans pin research digests, not full transcripts |
 | [008](008-every-series-carries-its-primitive-forward.md) | Every series carries its study-guide primitive forward |
+| [009](009-coderabbit-reviews-are-a-budget.md) | CodeRabbit reviews are a budget: one local pass, two bot reviews; draft-first PRs declined |

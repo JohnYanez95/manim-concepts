@@ -51,8 +51,8 @@ gate, updated as phases complete, never deleted.
 | 1 | Topic dir, README skeleton, first scene stub | `make check` |
 | 2 | Scenes, iterated at draft quality | Layout linter clean + drafts verified by eye |
 | 3 | Numbered concepts table, references as `- [ ]`; the series' study-guide primitive authored with solve-gated problems, their committed answer script, and plan-cited anchors, guide manifests + glue updated (ADR 008); new series → re-render `docs/assets/welcome.gif` (its series row is hand-listed) | `make test` |
-| 4 | Local CodeRabbit pass + `connection-auditor` pass, findings addressed | Review clean |
-| 5 | PR, bot review, finalise | `clean-drafts` + 1080p render |
+| 4 | `connection-auditor` pass, findings applied and committed; *then* one local CodeRabbit pass on the diff the PR will carry (see Review budget) | Review clean |
+| 5 | PR, the bot's one automatic review; fixes batched into one push; one re-review request only if a finding required a change; finalise once the bot round is closed | `clean-drafts` + 1080p render; bot reviews spent (≤ 2) recorded in the plan |
 
 ## Workflow: draft first, review before PR, finalise last
 
@@ -61,10 +61,39 @@ Never render at the default 1080p while iterating.
 Plan (Step 0) → iterate at `--quality draft` (480p15) → verify the render
 (see below; "the file exists" is not verification) → **local CodeRabbit
 review before the PR** (`coderabbit:code-review` skill on the branch — not
-optional, and not the same as the bot) → open the PR, the bot as independent
-second pass → address the bot review, finalise → `make clean-drafts`, then
+optional, not the same as the bot, and run once: see Review budget) → open
+the PR, the bot as independent second pass → address the bot review in one
+batched push, finalise → `make clean-drafts`, then
 render at the 1080p default — the PR is only done once the final render
 exists. (`clean-drafts` keeps finals; `make clean` removes everything.)
+
+### Review budget
+
+CodeRabbit reviews are a budget, not a loop to spin (ADR 009): the bot's
+allowance is a rolling per-developer window that shrinks with weekly volume
+and is shared with the maintainer's other repos; the local CLI has its own
+five per hour. PRs #15–#17 each drew a rate-limit notice, and every PR spent
+a second bot review nobody asked for.
+
+- **The local pass runs once, last.** Phase 4 is a sequence: the
+  `connection-auditor` first (its findings build things), findings applied
+  and committed, a self-check of the diff against this file (colour,
+  structure, `Text` markup — cheaper than a review), *then* `coderabbit
+  review --agent --base main` on the committed branch. Rerun it only when
+  code changed after it.
+- **Same-spot stop rule.** Two consecutive local passes each finding a new
+  edge in the same function or scene: stop, and write the check that would
+  have caught both (a test, or a layout-linter rule) before the next pass.
+- **At most two bot reviews per PR.** Opening the PR is the one automatic
+  review; the bot then pauses (`auto_pause_after_reviewed_commits: 1`), so
+  pushes are free. Read every thread before touching anything; batch every
+  fix into **one** push; then post one `@coderabbitai review` — only if a
+  finding required a change, and only inside the window the bot's
+  rate-limit notice gives. The 1080p render waits until the bot round is
+  closed (a late finding would stale it); the plan's phase-5 closure then
+  pushes free under the pause. A third review is the maintainer's call.
+- A finding is fixed, or declined with a reason as an ADR — the ADRs are fed
+  to the reviewer as code guidelines, so a declined finding stays declined.
 
 ## Verifying anything
 

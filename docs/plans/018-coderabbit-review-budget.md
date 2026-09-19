@@ -76,10 +76,13 @@ Adopt:
   budget stated in the config header.
 - **A2. Two bot reviews per PR, by budget.** The PR-open review, and one
   `@coderabbitai review` only when a finding required a change. Read
-  every thread first; bot fixes, the plan's phase-5 closure and the
-  verified 1080p render land as **one** commit and **one** push; the
-  request goes inside the window. A third review is the maintainer's
-  call, not the loop's.
+  every thread first; every fix is batched into **one** push; the
+  request goes inside the window. The 1080p render waits until the bot
+  round is closed (a late finding would stale it), and the plan's
+  phase-5 closure then pushes free under the pause — refined in phase 1
+  from "one commit carries fixes, closure and render", which would have
+  rendered finals before the re-review could still change a scene. A
+  third review is the maintainer's call, not the loop's.
 - **A3. Phase 4 becomes a sequence**: `connection-auditor` first, its
   findings applied and committed; then a cheap self-check of the diff
   against CLAUDE.md's Colour / Structure / `Text` rules; then **one**
@@ -127,7 +130,14 @@ Decline (recorded in the ADR with reasons):
 
 - [x] Phase 0: decisions A1–A6 / D1–D3 approved by the maintainer as
   proposed, 2026-09-19
-- [ ] Phase 1
+- [x] Phase 1: `.coderabbit.yaml` carries the pause, the ADR file pattern,
+  the terser tone (229 of 250 characters) and the budget in its header;
+  ADR 009 recorded; CLAUDE.md's phase rows 4–5, workflow paragraph and
+  "Review budget" section; README steps 3–5 and alt text. Config checked
+  against CodeRabbit's published schema by script — and the check
+  checked: a copy with an overlong tone fails the schema, a misspelt
+  pause key fails the explicit key read (the schema tolerates unknown
+  keys, so the key read is what pins the name). `make check` green (285)
 - [ ] Phase 2
 - [ ] Phase 3
 - [ ] Phase 4

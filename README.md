@@ -169,15 +169,16 @@ re-renders what changed. Pass `--no-cache` if a stale partial is suspected.
 ### How a series gets built
 
 Every series runs the same agentic workflow — research first, phase
-gates, two independent reviews, and a knowledge graph that keeps the
-topics honest about what they promise each other:
+gates, two independent reviews on a fixed budget, and a knowledge graph
+that keeps the topics honest about what they promise each other:
 
 ![Sequence diagram of the series workflow: the maintainer starts a
 branch; the main agent runs pedagogy-researcher and source-verifier
 before any scene; phases 1-3 build against commit gates while the
-maintainer verifies references; phase 4 runs CodeRabbit and the
-connection-auditor; phase 5 ships the PR and the final
-render](docs/workflow.png)
+maintainer verifies references; phase 4 runs the connection-auditor,
+applies its findings, then one local CodeRabbit pass; phase 5 opens the
+PR for the bot's one automatic review, batches fixes into one push with
+at most one re-review request, then renders the finals](docs/workflow.png)
 
 To use it: say "start the TOPIC branch" and the phases run — plans land
 in [`docs/plans/`](docs/plans/), the graph in
@@ -204,9 +205,15 @@ Iterating at 1080p is a waste of wall-clock, so the loop itself is draft-first:
    verification, and both render bugs found so far passed that check.
    [`CLAUDE.md`](CLAUDE.md) has the checklist.
 3. Run the CodeRabbit review locally, **before** opening the PR, and address
-   what it finds. The PR should open clean rather than accumulate rounds.
-4. Open the PR; the bot reviews it as an independent second pass.
-5. Finalise, then `make clean-drafts` and render at the 1080p default.
+   what it finds — once, after the `connection-auditor`'s findings are in,
+   so it reads the diff the PR will carry. The PR should open clean rather
+   than accumulate rounds.
+4. Open the PR; the bot reviews it once as an independent second pass, then
+   pauses. Batch the fixes into one push and ask for one re-review only if a
+   finding required a change — reviews are a budget
+   ([ADR 009](docs/adr/009-coderabbit-reviews-are-a-budget.md)).
+5. Once the bot round is closed: finalise, then `make clean-drafts` and
+   render at the 1080p default.
 
 ```bash
 uv run python combinatorics/counting_rules_manim.py -q draft   # iterate

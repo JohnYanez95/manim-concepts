@@ -1,12 +1,19 @@
 # yaml-language-server: $schema=https://coderabbit.ai/integrations/schema.v2.json
 #
-# Review policy for the GitHub bot.
+# Review policy. Two passes share this file and the same engine:
+#   1. local: `coderabbit review --agent --base main` on the committed branch
+#      BEFORE the PR opens — once, after the connection-auditor's findings are
+#      applied, and again only when code changed after it;
+#   2. bot: the GitHub app on the PR — the independent second pass.
+# The two do not share state — a clean local run does not pre-satisfy the bot,
+# and that redundancy is deliberate.
 #
-# Note the workflow this assumes: the CodeRabbit review runs locally on the
-# branch BEFORE the PR is opened (cheap first pass, findings fixed in place),
-# and this bot review is the second, independent pass on the PR itself. The two
-# do not share state — a clean local run does not pre-satisfy the bot, and that
-# redundancy is deliberate. See CLAUDE.md for the full loop.
+# Reviews are a budget (ADR 009): the bot's allowance is a rolling
+# per-developer window that fair usage lowers with trailing-week volume, shared
+# with every other repo the maintainer runs. A PR spends at most two bot
+# reviews — the automatic one when it opens, and one explicit
+# `@coderabbitai review` only when a finding required a change. See
+# "Review budget" in CLAUDE.md for the full loop.
 #
 # The posture here is deliberately lax on code style and strict on structure.
 # Style is already fully settled by machines that run before the PR exists:
@@ -26,7 +33,10 @@ language: "en-US"
 # cloud bot auto-reads as code guidelines). That lesson was learned here:
 # a comment block pointing at the declined-findings record was ignored for
 # three review rounds because comments never reach the model.
-tone_instructions: "Review code and factual claims for correctness. Do not nitpick prose style, formatting, or record-keeping conventions in docs/ — the repo has its own machinery for those."
+tone_instructions: >-
+  Review code and factual claims for correctness; cite the CLAUDE.md section a
+  finding rests on. Never comment on prose style, formatting, or record-keeping
+  conventions in docs/ (the repo has its own machinery for those). Be terse.
 
 reviews:
   # "chill" over "assertive" on purpose. This is a personal research repo,
@@ -36,6 +46,14 @@ reviews:
   auto_review:
     enabled: true
     drafts: false
+    # Two bot reviews per PR, by construction: the PR opening reviews
+    # automatically, then the bot pauses and every later push waits for an
+    # explicit `@coderabbitai review` (one request, after the batched fixes,
+    # inside the rate-limit window). Before this, the phase-5 fix push spent
+    # a second automatic review nobody asked for on every PR, and PRs #15–#17
+    # each drew a rate-limit notice. Fully on demand (`enabled: false`) is
+    # the fallback.
+    auto_pause_after_reviewed_commits: 1
   high_level_summary: true
   poem: false
 
@@ -215,6 +233,12 @@ knowledge_base:
     scope: "local"
   code_guidelines:
     enabled: true
+    # CLAUDE.md is read by default; the ADRs are not. The path instruction on
+    # docs/adr/** only applies when an ADR is in the diff, so on an ordinary
+    # series PR the declined-findings record never reached the reviewer.
+    filePatterns:
+      - "CLAUDE.md"
+      - "docs/adr/*.md"
 
 chat:
   auto_reply: true
