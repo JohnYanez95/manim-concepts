@@ -178,7 +178,16 @@ the review budget (ADR 009).
   entry first miscounted them as 50); `references.bib` re-synced — the
   chapter's 35 cited keys are now `verified = {yes}` — and the guide
   rebuilt, PDFs unchanged
-- [ ] Phase 5 — bot reviews spent: none yet, of 2
+- [ ] Phase 5 — PR #21 opened 2026-09-19 with ADR 010 riding in it
+  (study-guide work now waits for the maintainer's explicit request). The
+  bot's one automatic review: one finding, minor, valid — problem 2's
+  solution in `spectrum.tex` still said "a reading of a sum is the sum of
+  the readings", the last surviving copy of the claim the audit had fixed
+  on screen, in the README and in the chapter body (a grep for the old
+  wording across the branch now finds nothing). Fixed in one push; guide
+  rebuilt. No re-review requested: the change is the finding's own
+  one-sentence fix, and the budget is better kept. **Bot reviews spent:
+  1 of 2.** Finals: pending
 
 ## Research digests
 
