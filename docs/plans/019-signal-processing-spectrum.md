@@ -178,7 +178,7 @@ the review budget (ADR 009).
   entry first miscounted them as 50); `references.bib` re-synced — the
   chapter's 35 cited keys are now `verified = {yes}` — and the guide
   rebuilt, PDFs unchanged
-- [ ] Phase 5 — PR #21 opened 2026-09-19 with ADR 010 riding in it
+- [x] Phase 5 — PR #21 opened 2026-09-19 with ADR 010 riding in it
   (study-guide work now waits for the maintainer's explicit request). The
   bot's one automatic review: one finding, minor, valid — problem 2's
   solution in `spectrum.tex` still said "a reading of a sum is the sum of
@@ -187,7 +187,11 @@ the review budget (ADR 009).
   wording across the branch now finds nothing). Fixed in one push; guide
   rebuilt. No re-review requested: the change is the finding's own
   one-sentence fix, and the budget is better kept. **Bot reviews spent:
-  1 of 2.** Finals: pending
+  1 of 2.** Finals, after the bot round closed: `make clean-drafts`, then
+  seven files at 1080p60, distinct names (`01_PressureIntoNumbers` …
+  `07_TheFoldAtNyquist`; 57, 73, 49, 55, 60, 66, 82 s; 3442, 4351, 2965,
+  3276, 3575, 3949, 4892 frames), frames checked at full resolution on
+  scenes 2, 4, 6 and 7. The plan closes; the merge is the maintainer's
 
 ## Research digests
 
