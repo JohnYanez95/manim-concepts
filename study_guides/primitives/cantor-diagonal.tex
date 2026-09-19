@@ -1,0 +1,358 @@
+% Primitive: cantor-diagonal — authored from
+% probability/cantor_diagonal_manim.py, its README concepts table (seven
+% scenes) and plan 017's verified anchors (verifier report A–K plus the
+% addendum L–T). Follows Bertsekas & Tsitsiklis's Problem 4* in its own
+% language: "uncountable" means "cannot be arranged in a sequence", and
+% nothing heavier is claimed. Problem answers are computed by
+% answers/cantor_diagonal.py (the solve-gate anchor); every digit there is
+% integer long division, never a float.
+\chapter{Cantor's diagonal}
+
+\begin{narrative}
+Every chapter so far has counted something and then reweighted the
+count into area. This chapter is about the one set the repo's pictures
+have quietly relied on and never counted: the interval $[0,1]$, the
+sample space of the wheel of fortune. Bertsekas and Tsitsiklis pose it
+as a starred problem — \emph{show that the unit interval $[0,1]$ is
+uncountable, i.e., its elements cannot be arranged in a
+sequence}~\cite{probability-bertsekas-and-tsitsiklis-introduction-to-probability-2nd-ed} —
+and the whole chapter is their solution, slowed down until each step is
+a picture. The payoff lands back in probability: the additivity axiom is
+stated for \emph{sequences} of events, and the interval is not one.
+
+\section{Arranged in a sequence}
+
+``Arranged in a sequence'' means exactly this: every element gets a
+finite position number. Six tokens take positions one to six, the row
+keeps going, and nothing stops a point from being named twice —
+repeats are allowed. Velleman calls the property
+\emph{listability}~\cite{probability-daniel-j-velleman-how-to-prove-it-2nd-ed-cambridge-2006-ch-7},
+and the surprise of the chapter is how much can be listed. Stack the
+integers under the positions and pair them off: even $n$ goes to $n/2$,
+odd $n$ to $-(n-1)/2$, so positions $1, 2, 3, \ldots, 10$ hold
+$\anchor{017.P.pairs}$ and every integer has exactly one position. The
+lists are drawn stacked, one above the other, with an arrow per column —
+never side by side — because side-by-side sets invite the part–whole
+reading (``the integers are bigger, they contain the naturals'') that
+the pairing is meant to
+replace~\cite{probability-tsamir-and-tirosh-consistency-and-representations-jrme-30-19}.
+One more fact, stated now because the diagonal will need it later: a
+list can always take one more. Shift every element one place to the
+right and a new element fits at position one — Hilbert's
+hotel~\cite{probability-wikipedia-hilbert-s-paradox-of-the-grand-hotel}.
+Running out of room is never the obstacle.
+
+\section{The zigzag}
+
+Pairs of positions $(p, q)$ are the counting grid of the first chapter,
+now open on two sides. Walk it along the anti-diagonals — $p + q = 2$,
+then $3$, then $4$, starting each diagonal at the top row — and stamp
+the cells $1, 2, 3, \ldots$ as you go: the first row reads $1, 2, 4, 7,
+11$, and the $\anchor{017.O.fifteen}$ cells with $p + q \le 6$ are
+stamped $1$ to $15$. Every cell gets a finite position, so pairs are a
+sequence. Now read each cell as the fraction $p/q$. Some fractions
+appear twice — $2/2$ is $1/1$ again, $2/4$ is $1/2$ — so skip any cell
+not in lowest terms. Among the first fifteen stamps four are skipped
+and $\anchor{017.O.kept}$ are kept, and the kept ones take positions
+$1$ to $11$ in walk order: $1/1, 1/2, 2/1, 1/3, 3/1, 1/4, 2/3, 3/2,
+4/1, 1/5, 5/1$. Skipping never breaks a list: the next kept cell takes
+the next position. Every positive fraction has exactly one lowest-terms
+cell, so exactly one position — the rationals are a
+sequence~\cite{probability-wikipedia-countable-set}. This is the beat
+that earns the surprise to come: ``more than the naturals'' in every
+naive sense is still a sequence.
+
+\section{Every point has digits}
+
+Cut the unit segment into tenths. The point $1/3$ lies in the fourth
+tenth, $[0.3, 0.4)$, so its first digit is $3$; cut that tenth into
+tenths again and it lies in the fourth of those, so the second digit is
+$3$ — and so on for ever, $1/3 = 0.333\cdots$, the example the source
+itself uses. The digits are the point's address, and every point has
+one~\cite{probability-michigan-state-math-320-decimal-expansions-of-real-numbers-2}.
+A few points have two. The point $1/2$ sits on a tick, the shared edge
+of $[0.4, 0.5)$ and $[0.5, 0.6)$, and it can be written either way:
+$0.5000\cdots$ or $0.4999\cdots$. That these are the same number is
+$1/3$'s example again — three times $0.333\cdots$ is $0.999\cdots$, and
+three times $1/3$ is $1$. Bertsekas and Tsitsiklis state, without
+proof, that ``this is the only kind of exception'': the rows that end
+in an infinite string of zeros or of
+nines~\cite{probability-stevecheng-existence-and-uniqueness-of-decimal-expansion-pla}.
+Hold on to the exception; the next section but one is about it.
+
+\section{The diagonal rule}
+
+Suppose the points of $[0,1]$ \emph{are} arranged in a sequence $x_1,
+x_2, x_3, \ldots$, and write each as its row of digits, in the source's
+notation $x_n = 0.a_n^1 a_n^2 a_n^3 \cdots$ — the subscript says which
+number, the superscript which digit. Seven rows stand in for the
+sequence: $\pi - 3 = \anchor{017.L.pi}\ldots$, then $1/2$ as
+$0.5000\ldots$, $1/3$, $\sqrt2 - 1 = \anchor{017.L.sqrt}\ldots$, $1/e =
+\anchor{017.L.inve}\ldots$, $e - 2 = \anchor{017.L.eminus}\ldots$, and
+$1/2$ once more, deliberately, under its other name $0.4999\ldots$.
+Read digit $n$ of row $n$ — one cell per row, the cells boxed one at a
+time, never a line drawn through them. The seven diagonal digits are
+$\anchor{017.L.diagonal}$. Now the rule: the $n$th digit of the new
+number $y$ is $1$ unless the diagonal digit is $1$, in which case it is
+$2$ — the source says only ``$1$ or $2$, chosen so that it is different
+from the $n$th digit of $x_n$'', and this is one way to choose. The
+choices give $y = \anchor{017.L.y}$, both branches of the rule firing
+(at positions one and six). Only now are the other digits of the rows
+filled in, because they never mattered: $y$ was built from the diagonal
+alone~\cite{probability-jason-filippou-a-better-number-sequence-to-present-cantor-s}.
+Compare $y$ with row $n$ at column $n$ and they differ, row after row —
+by construction, for every $n$, including the rows beyond the page,
+since the rule is the same rule there. The picture is bookkeeping, not
+geometry: any selection of one cell per row and at most one per column
+would do the same
+job~\cite{probability-jeremy-martin-cantor-s-diagonal-argument-math-410-kansas-200}.
+
+\section{Why one or two}
+
+Why not simply ``add one to the digit''? Because a rule that can write
+$0$ or $9$ can land on a listed point under its other name. Take the
+list $x_1 = 0.0999\ldots$, $x_2 = 0.999\ldots$, $x_3 = 0.999\ldots$,
+and so on. Its diagonal is $0, 9, 9, \ldots$, and ``add one'' returns
+$y = \anchor{017.N.plusone} = x_1$: different digits, the same number,
+and the argument proves nothing~\cite{probability-michael-sipser-introduction-to-the-theory-of-computation-3rd}.
+The binary flip fails the same way, since $0.0111\ldots_2$ and
+$0.1000\ldots_2$ are both $1/2$; Cantor's own 1891 argument avoids the
+issue by working on sequences of symbols rather than
+numbers~\cite{probability-wikipedia-cantor-s-diagonal-argument}. With
+its digits drawn from $\{1, 2\}$, $y$ ends in neither zeros nor nines,
+so by the exception of the digits section it owns exactly one row.
+That is the whole license: if $y$ were some $x_n$, the listed row of
+$x_n$ would be a row for $y$ — its only row — so the two rows would
+agree at digit $n$, where they were built to differ. A different digit
+means a different number, \emph{because} $y$ never writes $0$ or $9$.
+Two further comforts: $\anchor{017.C.range}$, so $y$ is inside $[0,1]$
+(and both $1/2$ rows lie outside that range — the duplicate on the
+list was harmless); and the objection ``just add $y$ to the list''
+answers itself. Put $y$ at the front, shift the rows down, and run the
+rule again: the new diagonal is $\anchor{017.M.rerun}$ and the new
+number is $y' = \anchor{017.M.yprime}$ — different from $y$ at digit
+one (always: $d'_1 = 3 - d_1$) and off every shifted row at its own
+digit. The claim was never ``this list misses $y$''; it is ``every list
+misses one''. Said directly, without the wrapper: for any sequence, the
+rule produces a point not on
+it~\cite{probability-andrej-bauer-proof-of-negation-and-proof-by-contradiction-20}.
+Said as the source says it: ``the sequence $x_1, x_2, \ldots$ does not
+exhaust the elements of $[0,1]$, contrary to what was assumed.''
+
+\section{The same diagonal twice}
+
+Cantor's 1891 paper never mentions
+decimals~\cite{probability-cantor-ueber-eine-elementare-frage-der-mannigfaltigkeitslehr}.
+Its rows are sequences of two symbols, $m$ and $w$ — $E^1 = (m, m, m,
+\ldots)$, $E^2 = (w, w, w, \ldots)$, $E^3 = (m, w, m, w, \ldots)$ — and
+the new row's $n$th symbol is whichever symbol row $n$'s $n$th symbol
+is not. Two symbols, no representation to worry about; the reals came
+afterwards, and the first uncountability proof (1874) used nested
+intervals rather than a diagonal at
+all~\cite{probability-georg-cantor-ueber-eine-eigenschaft-des-inbegriffs-crelle-77,probability-knapp-and-silva-the-uncountability-of-the-unit-interval-arxi}.
+The same move works on subsets. List four subsets of $S = \{1, 2, 3,
+4\}$ — Martin's example (his set is called $X$), $f(1) = \{1, 3\}$, $f(2) = \{1, 3, 4\}$, $f(3)
+= \{\,\}$, $f(4) = \{2, 4\}$ — and draw the yes/no table whose entry
+$(m, n)$ says whether $n$ is in the $m$th subset. Its diagonal reads
+yes, no, no, yes. Flip it: the set $D$ that holds $n$ exactly when the
+$n$th subset does not is $D = \anchor{017.Q.D}$, and it is on no row,
+since it disagrees with row $n$ at $n$. Four subsets were listed and
+$\anchor{017.Q.subsets}$ exist; no list of subsets of a set is ever
+complete~\cite{probability-wikipedia-cantor-s-theorem}. The move recurs
+once more in this repo's future: Turing ran it on the computable
+sequences, where the fallacy lies in assuming the list itself can be
+computed~\cite{probability-a-m-turing-on-computable-numbers-proc-lms-1936-37,probability-wikipedia-turing-s-proof}
+— the undecidability story belongs to the algorithms topic, promised
+there. And a smaller consequence, free: names are finite strings, and
+finite strings are a sequence, so most points of $[0,1]$ have no name.
+
+\section{Area, not sums}
+
+Back to the wheel of fortune. What is the probability of a single
+point? Suppose one point had $p = 0.15$; by symmetry so would every
+other, and seven of them already stack to $\anchor{017.R.overflow} >
+1$. Any $p > 0$ overflows with more than $1/p$ points, so a point has
+probability zero — Example 1.4 of the
+source~\cite{probability-bertsekas-and-tsitsiklis-introduction-to-probability-1st-ed}.
+Now read the additivity axiom exactly as it is written: if $A_1, A_2,
+\ldots$ is a \emph{sequence} of disjoint events, then $P(A_1 \cup A_2
+\cup \cdots) = P(A_1) + P(A_2) + \cdots$. The finite additivity every
+earlier chapter used is the same axiom's first clause; this is its
+second, and it is stated for sequences — the same word Problem 4*
+denies to $[0,1]$. A sequence of points therefore has probability $0 +
+0 + \cdots = 0$, and the picture makes it visible without the axiom:
+cover $x_1$ by an interval of length $\varepsilon/2$, $x_2$ by
+$\varepsilon/4$, $x_3$ by $\varepsilon/8$, and the total length is
+$\varepsilon$ — at $\varepsilon = 1/10$ the running totals are
+$\anchor{017.R.cover}, \ldots$ — for any $\varepsilon$ at all. So if
+$[0,1]$ were a sequence, $P([0,1])$ would be $0$, not $1$. The source
+says so in a footnote: ``if the unit interval had a countable number of
+elements, with each element having zero probability, the additivity
+axiom would imply that the whole interval has zero probability, which
+would contradict the normalization
+axiom.''~\cite{probability-bertsekas-and-tsitsiklis-introduction-to-probability-1st-ed}
+Probability is area on the interval \emph{because} the interval is not
+a sum over points. Two guards close the chapter. This is consistency,
+not existence: the argument shows a uniform law on $[0,1]$ is possible
+only if the interval is uncountable, and that length \emph{is} a
+probability law at all is the ``more advanced treatment'' the footnote
+defers to — Lebesgue's, queued for the integration
+series~\cite{probability-john-d-norton-the-material-theory-of-induction-2021-ch-14}.
+And uncountable does not mean positive area: the Cantor set is
+uncountable with length zero~\cite{probability-wikipedia-null-set}.
+\end{narrative}
+
+\section*{Practice problems}
+
+\begin{problem}
+Five points of $[0,1]$ are listed: $x_1 = 2/7$, $x_2 = 1/9$, $x_3 =
+5/9$, $x_4 = 1/11$, $x_5 = 3/8$. Write each as a row of digits, read
+the diagonal (digit $n$ of row $n$), and apply the chapter's rule ($1$
+unless the diagonal digit is $1$, then $2$). Give the first five digits
+of $y$ and check that $y$ differs from each row at its own digit.
+\begin{hint}
+$1/9 = 0.111\ldots$ and $1/11 = 0.0909\ldots$; the fourth digit of the
+latter is a $9$, the fifth digit of $3/8 = 0.375$ is a $0$.
+\end{hint}
+\begin{solution}
+The rows begin $0.28571$, $0.11111$, $0.55555$, $0.09090$, $0.37500$,
+so the diagonal is $2, 1, 5, 9, 0$ and the rule gives $y = 0.12111
+\ldots$ (the second digit is the branch to $2$). Column by column, $1
+\ne 2$, $2 \ne 1$, $1 \ne 5$, $1 \ne 9$, $1 \ne 0$.
+\end{solution}
+\end{problem}
+
+\begin{problem}
+Put the $y$ of the previous problem at the front of its list (as $x_1$)
+and shift the five rows down. Read the new diagonal — six digits now —
+and the new number $y'$. Why must $y'$ differ from $y$ at the first
+digit, whatever the list?
+\begin{hint}
+Only $y$'s first digit is consulted; the other five diagonal digits
+come from the original rows, one column further right.
+\end{hint}
+\begin{solution}
+The new diagonal is $y$'s first digit $1$, then $2/7$'s second digit
+$8$, $1/9$'s third $1$, $5/9$'s fourth $5$, $1/11$'s fifth $0$, $3/8$'s
+sixth $0$: $1, 8, 1, 5, 0, 0$, so $y' = 0.212111\ldots$. Its first
+digit is $3 - d_1$: the rule sends $1$ to $2$ and anything else to $1$,
+so applied to $y$'s own first digit, which is $1$ or $2$, it always
+returns the other one.
+\end{solution}
+\end{problem}
+
+\begin{problem}
+Run the rule ``add one to the diagonal digit'' on the list $x_1 =
+0.0999\ldots$, $x_2 = 0.999\ldots$, $x_3 = 0.999\ldots$, $\ldots$.
+What number results, and why does this not show the list is
+incomplete? Name the smallest change to the rule that repairs it.
+\begin{hint}
+Sum the geometric tails: $0.0999\ldots = (9/100)/(1 - 1/10)$.
+\end{hint}
+\begin{solution}
+The diagonal is $0, 9, 9, \ldots$, so the rule returns $0.1000\ldots =
+1/10$ — and $0.0999\ldots = (9/100)/(9/10) = 1/10$ is $x_1$ itself.
+The new number differs from every row digit by digit and is still on
+the list, because a row ending in nines has a second name. Choosing the
+new digits from $\{1, 2\}$ (any two digits other than $0$ and $9$)
+repairs it: the new number then has one name only.
+\end{solution}
+\end{problem}
+
+\begin{problem}
+Compute $0.111\ldots$ and $0.222\ldots$ as fractions, and show that
+every number whose digits are all $1$s and $2$s lies between them.
+\begin{hint}
+Compare the two numbers digit by digit with $y$.
+\end{hint}
+\begin{solution}
+$0.111\ldots = \tfrac{1/10}{1 - 1/10} = 1/9$ and $0.222\ldots = 2/9$.
+For $y = \sum d_n 10^{-n}$ with every $d_n \in \{1, 2\}$, each term
+satisfies $10^{-n} \le d_n 10^{-n} \le 2 \cdot 10^{-n}$, so summing,
+$1/9 \le y \le 2/9$ — strictly inside $[0,1]$, whatever the list was.
+\end{solution}
+\end{problem}
+
+\begin{problem}
+Which points of $[0,1]$ have two decimal expansions? How many of them
+have a terminating expansion of at most two digits after the point?
+Write $1/2$ both ways.
+\begin{hint}
+Terminating decimals $k/10^m$ with $0 < k < 10^m$; count $m \le 2$ and
+do not count the tenths twice.
+\end{hint}
+\begin{solution}
+Exactly the terminating decimals strictly between $0$ and $1$: $k/10^m$
+with $0 < k < 10^m$, written as $0.d_1 \cdots d_m 000\ldots$ or with
+the last nonzero digit lowered by one and followed by nines. With at
+most two digits they are $k/100$ for $k = 1, \ldots, 99$: ninety-nine
+points, nine of which ($k$ a multiple of $10$) already have a one-digit
+name. $1/2 = 0.5000\ldots = 0.4999\ldots$.
+\end{solution}
+\end{problem}
+
+\begin{problem}
+On the zigzag walk (anti-diagonals $p + q = 2, 3, \ldots$, each started
+at the top row), which cell carries stamp $20$, and what fraction is
+it? In the list of kept fractions (cells not in lowest terms skipped),
+what position does $3/5$ take?
+\begin{hint}
+The stamp of $(p, q)$ is $(s-2)(s-1)/2 + p$ with $s = p + q$; list the
+kept fractions in walk order and count.
+\end{hint}
+\begin{solution}
+Stamp $20$ is cell $(5, 2)$, the fraction $5/2$ (its anti-diagonal
+$s = 7$ starts at stamp $16$). The kept list runs $1/1, 1/2, 2/1, 1/3,
+3/1, 1/4, 2/3, 3/2, 4/1, 1/5, 5/1, 1/6, 2/5, 3/4, 4/3, 5/2, 6/1, 1/7,
+3/5, \ldots$, so $3/5$ (stamp $24$) is the nineteenth kept fraction.
+\end{solution}
+\end{problem}
+
+\begin{problem}
+Under the pairing of the first section (even $n \mapsto n/2$, odd $n
+\mapsto -(n-1)/2$), which position does $-37$ occupy, and which integer
+sits at position $100$?
+\begin{hint}
+Invert the two branches: a positive integer $z$ came from $2z$, a
+non-positive one from $1 - 2z$.
+\end{hint}
+\begin{solution}
+$-37$ is non-positive, so its position is $1 - 2(-37) = 75$ (check:
+$75$ is odd and $-(75 - 1)/2 = -37$). Position $100$ is even and holds
+$100/2 = 50$.
+\end{solution}
+\end{problem}
+
+\begin{problem}
+Let $S = \{1, 2, 3, 4, 5\}$ and list five subsets: $f(1) = \{2, 3\}$,
+$f(2) = \{1, 2, 5\}$, $f(3) = \{\,\}$, $f(4) = S$, $f(5) = \{4\}$. Find
+$D = \{s : s \notin f(s)\}$ and check it is none of the five. How many
+subsets does $S$ have, and how many can any list of five reach?
+\begin{hint}
+Ask, for each $s$, whether $s$ lies in its own subset.
+\end{hint}
+\begin{solution}
+$1 \notin f(1)$, $2 \in f(2)$, $3 \notin f(3)$, $4 \in f(4)$, $5 \notin
+f(5)$, so $D = \{1, 3, 5\}$. It differs from $f(s)$ at $s$ for every
+$s$: $1 \in D$ but not in $f(1)$, $2 \in f(2)$ but not in $D$, and so
+on. $S$ has $2^5 = 32$ subsets; a list of five reaches at most five.
+\end{solution}
+\end{problem}
+
+\begin{problem}[stretch]
+Suppose every point of $[0,1]$ had probability $p = 0.03$. What is the
+least number of points whose total exceeds $1$? Then cover a sequence
+of points by intervals of lengths $\varepsilon/2, \varepsilon/4,
+\varepsilon/8, \ldots$ with $\varepsilon = 1/100$: give the first four
+running totals and say why the whole sequence has probability $0$.
+\begin{hint}
+$N > 1/p$; the running totals are $\varepsilon(1 - 2^{-k})$.
+\end{hint}
+\begin{solution}
+$1/p = 33.3\ldots$, so $N = 34$: $34 \times 0.03 = 1.02 > 1$. The
+totals are $1/200, 3/400, 7/800, 15/1600$, and every total stays below
+$1/100$. The covered set has probability at most $\varepsilon$ for
+every $\varepsilon > 0$, hence $0$ — which is what the additivity axiom
+says directly: $0 + 0 + \cdots = 0$.
+\end{solution}
+\end{problem}

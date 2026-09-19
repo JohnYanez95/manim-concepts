@@ -22,6 +22,7 @@ primitives land.
 | ctc-gradient | `primitives/ctc-gradient.tex` | deep_learning gradient series (authored) | `010.*`, `009.G.nllgradient` | `deep_learning-` |
 | ctc-decoding | `primitives/ctc-decoding.tex` | deep_learning decoding series (series-backed since plan 015; formerly guide-first — the third seed to sprout) | `012.dec.*` | `deep_learning-` |
 | inclusion-exclusion | `primitives/inclusion-exclusion.tex` | probability inclusion–exclusion series (authored — the first new primitive since v1; no guide retrieves it yet, it seeds a future counting-and-chance objective) | `016.*` | `probability-` |
+| cantor-diagonal | `primitives/cantor-diagonal.tex` | probability Cantor's-diagonal series (authored; no guide retrieves it yet — with inclusion–exclusion it seeds the counting-and-chance objective) | `017.*` | `probability-` |
 
 Problem answer scripts (the solve-gate anchors, plan 012 R3) live in
 `primitives/answers/` with underscored module names

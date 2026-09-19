@@ -535,3 +535,88 @@
   description: "of 1..30, the integers divisible by 2, 3 or 5: 15 + 10 + 6 − 5 − 3 − 2 + 1; eight survivors, φ(30)"
   source: "docs/plans/016-probability-inclusion-exclusion.md, verifier anchor C"
   method: "enumeration of 1..30"
+"017.L.diagonal":
+  value: "1, 0, 3, 2, 7, 1, 9"
+  description: "digit n of row n for the seven listed points π−3, 1/2 (0.5000…), 1/3, √2−1, 1/e, e−2, 1/2 (0.4999…)"
+  source: "docs/plans/017-probability-cantor-diagonal.md, verifier addendum L"
+  method: "80-digit Decimal (Machin π, exp, sqrt) cross-checked against mpmath; digits truncated, never rounded"
+"017.L.y":
+  value: "0.2111121\\ldots"
+  description: "y under the rule dₙ = 1 unless aₙⁿ = 1, then 2 — the branch to 2 fires at positions 1 and 6"
+  source: "docs/plans/017-probability-cantor-diagonal.md, verifier addendum L"
+  method: "rule applied to anchor L's diagonal; y ≠ row n at digit n asserted for n = 1..7"
+"017.L.pi":
+  value: "0.14159265"
+  description: "π − 3, first eight digits truncated (row 1 of the list)"
+  source: "docs/plans/017-probability-cantor-diagonal.md, verifier addendum L / anchor F"
+  method: "80-digit Decimal, Machin's formula; agrees with mpmath at 60 digits"
+"017.L.sqrt":
+  value: "0.41421356"
+  description: "√2 − 1, first eight digits truncated (row 4)"
+  source: "docs/plans/017-probability-cantor-diagonal.md, verifier addendum L / anchor F"
+  method: "Decimal(2).sqrt() at 80 digits; agrees with mpmath"
+"017.L.inve":
+  value: "0.36787944"
+  description: "1/e, first eight digits truncated (row 5)"
+  source: "docs/plans/017-probability-cantor-diagonal.md, verifier addendum L / anchor F"
+  method: "Decimal exp at 80 digits; agrees with mpmath"
+"017.L.eminus":
+  value: "0.71828182"
+  description: "e − 2, first eight digits truncated (row 6)"
+  source: "docs/plans/017-probability-cantor-diagonal.md, verifier addendum L / anchor F"
+  method: "Decimal exp at 80 digits; agrees with mpmath"
+"017.M.rerun":
+  value: "2, 4, 0, 3, 1, 9, 8, 9"
+  description: "the new diagonal after y is prepended and the seven rows shift down one"
+  source: "docs/plans/017-probability-cantor-diagonal.md, verifier addendum M"
+  method: "digit n of new row n read from the verified expansions; y's own tail never consulted"
+"017.M.yprime":
+  value: "0.11112111\\ldots"
+  description: "y′ from the re-run; d′₁ = 3 − d₁ so y′ ≠ y at digit 1 unconditionally, and y′ is off every shifted row at its own digit"
+  source: "docs/plans/017-probability-cantor-diagonal.md, verifier addendum M"
+  method: "rule applied to anchor M's diagonal; asserted for n = 1..8"
+"017.N.plusone":
+  value: "0.1000\\ldots = \\tfrac{1}{10} = 0.0999\\ldots"
+  description: "the 'add 1 to the digit' rule on the list 0.0999…, 0.999…, 0.999…, … returns x₁ itself"
+  source: "docs/plans/017-probability-cantor-diagonal.md, verifier addendum N"
+  method: "geometric tails as exact Fractions: (9/100)/(1 − 1/10) = 1/10"
+"017.C.range":
+  value: "\\tfrac{1}{9} \\le y \\le \\tfrac{2}{9}"
+  description: "every y with digits in {1, 2} lies between 0.111… = 1/9 and 0.222… = 2/9"
+  source: "docs/plans/017-probability-cantor-diagonal.md, verifier anchor C"
+  method: "exact geometric sums; all 2⁸ eight-digit prefixes checked"
+"017.O.fifteen":
+  value: "15"
+  description: "cells of the counting grid with p + q ≤ 6, stamped 1..15 in anti-diagonal order (row 1 reads 1, 2, 4, 7, 11)"
+  source: "docs/plans/017-probability-cantor-diagonal.md, verifier addendum O"
+  method: "stamp(p, q) = (s−2)(s−1)/2 + p with s = p + q, checked against the walk for stamps 1..171"
+"017.O.kept":
+  value: "11"
+  description: "fractions kept among the first fifteen stamps (2/2, 2/4, 3/3, 4/2 skipped): 1/1, 1/2, 2/1, 1/3, 3/1, 1/4, 2/3, 3/2, 4/1, 1/5, 5/1"
+  source: "docs/plans/017-probability-cantor-diagonal.md, verifier addendum O"
+  method: "lowest-terms test on the walk; kept values pairwise distinct over 171 stamps"
+"017.P.pairs":
+  value: "0, 1, -1, 2, -2, 3, -3, 4, -4, 5"
+  description: "the integers under positions 1..10: even n ↦ n/2, odd n ↦ −(n − 1)/2"
+  source: "docs/plans/017-probability-cantor-diagonal.md, verifier addendum P"
+  method: "bijection onto a range checked for n = 1..2000; inverse z > 0 ↦ 2z, z ≤ 0 ↦ 1 − 2z"
+"017.Q.D":
+  value: "\\{2, 3\\}"
+  description: "Martin's example on S = {1, 2, 3, 4}: f(1) = {1, 3}, f(2) = {1, 3, 4}, f(3) = { }, f(4) = {2, 4}; the flipped diagonal"
+  source: "docs/plans/017-probability-cantor-diagonal.md, verifier addendum Q"
+  method: "table computed; D ≠ f(m) witnessed at the diagonal cell for each m"
+"017.Q.subsets":
+  value: "16"
+  description: "subsets of a four-element set, against at most four hit by any list of four"
+  source: "docs/plans/017-probability-cantor-diagonal.md, verifier addendum Q"
+  method: "2⁴"
+"017.R.overflow":
+  value: "7 \\times 0.15 = 1.05"
+  description: "B&T Example 1.4's overflow instance: p = 3/20, N = 7 is the least N with Np > 1"
+  source: "docs/plans/017-probability-cantor-diagonal.md, verifier addendum R"
+  method: "exact Fractions: 21/20"
+"017.R.cover":
+  value: "\\tfrac{1}{20}, \\tfrac{3}{40}, \\tfrac{7}{80}, \\tfrac{3}{32}"
+  description: "partial sums of the halving cover ε/2 + ε/4 + ⋯ at ε = 1/10 (limit 1/10)"
+  source: "docs/plans/017-probability-cantor-diagonal.md, verifier addendum R"
+  method: "exact Fractions, ε(1 − 2⁻ᵏ)"

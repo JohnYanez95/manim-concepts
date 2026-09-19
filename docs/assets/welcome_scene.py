@@ -71,12 +71,14 @@ class Welcome(ConceptScene):
         self.play(GrowArrow(arrows[0]), FadeIn(levels[1], shift=0.2 * RIGHT), run_time=0.6)
         self.play(GrowArrow(arrows[1]), FadeIn(levels[2], shift=0.2 * RIGHT), run_time=0.6)
 
-        # Fifteen series across three rows keep every name readable without
-        # shrinking the type (two rows clipped at the frame edge at fifteen).
+        # Sixteen series across four rows keep every name readable without
+        # shrinking the type (two rows clipped at the frame edge at fifteen
+        # in three rows; the sixteenth made the rows four by four).
         names = [
-            ["counting", "CTC", "independence", "conditioning", "Bayes"],
-            ["logs", "e & ln", "random vars", "softmax", "derivatives"],
-            ["descent", "CTC gradient", "dyn. prog.", "decoding", "incl.–excl."],
+            ["counting", "CTC", "independence", "conditioning"],
+            ["Bayes", "logs", "e & ln", "random vars"],
+            ["softmax", "derivatives", "descent", "CTC gradient"],
+            ["dyn. prog.", "decoding", "incl.–excl.", "Cantor"],
         ]
         rows = [
             VGroup(*[Text(t, font_size=LABEL_SIZE, color=MUTED) for t in row]).arrange(
