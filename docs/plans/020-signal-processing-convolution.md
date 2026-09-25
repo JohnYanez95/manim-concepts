@@ -85,7 +85,23 @@ Branch `feat/signal-processing-convolution`, cut from `main` at fdf2672
   line is the harder limit at this indentation). README rows 1–7 written
   with the scenes (the source-order test reds otherwise); `make check`
   green
-- [ ] Phase 3
+- [x] Phase 3: README — 26 plan-020 references unchecked (the O&S entry
+  renamed so its slug does not collide with the spectrum series' ticked
+  one: the sync silently overwrote the verified entry until it did), Ideas
+  rewritten (convolution struck; source–filter, circular convolution as a
+  concept, the other kernels queued); wiki — `convolution` node, the
+  `spectrum` → convolution row flipped delivered in place, a delivered row
+  from `random-variables`, a promised row for the source–filter model, the
+  windowing / Euler / FFT / mel rows amended, four device stops (the
+  walking window is new); Ideas amended in `calculus/` and `algorithms/`;
+  `welcome.gif` at eighteen series (430 KB); root README row and "what's
+  next". **Prose checked against the built scenes** (the wiki pass): the
+  closing map is six lines, not seven — source–filter is the comb beat,
+  not a map line; the FFT is "parked elsewhere" on screen; the walking
+  window has no Σ node (docstring fixed); the plan's design section trued
+  to all three. Not made, logged: convolutional layers (a level-3 pointer
+  with no home node); the two-dice diagonals as a pmf convolution.
+  `make test` green
 - [ ] Phase 4
 - [ ] Phase 5 — bot reviews spent: none yet, of 2
 
@@ -226,8 +242,9 @@ response; conv layers; the sliding detector → filterbank; the closing
 map).
 
 **Other devices.** The walking window (kernel weights as MUTED tokens
-under three adjacent stems, a Σ node dropping one ACCENT stem into a
-second strip — `TheProbe`'s picture with the probe moving). The click
+under three adjacent stems, an ACCENT frame whose foot drops one ACCENT
+stem into a second strip — built without the Σ node the pedagogy report
+proposed — `TheProbe`'s picture with the probe moving). The click
 that becomes the kernel; a scaled click → a scaled shape, a later click →
 a later shape; the input-side stack and the output-side machine landing
 on the same numbers on one screen (S. W. Smith Figs. 6-6 and 6-8). Tones
@@ -418,8 +435,8 @@ clicks, steps and the 4-sample superposition, which never touch the bank.
 | 3 | `TheFlip` | 2 | The echo kernel [1, 0, 0, ½] on a click: the probe's slide (pattern unreversed) puts ½ at stop −3 — a pre-echo, WARM; the flipped slide puts it at +3 — an echo. Same numbers, one list reversed; the moving average hid it because ⅓ ⅓ ⅓ reversed is itself. Correlation = a detector's question; convolution = a filter's. Causality: the centred average peeks one sample ahead; the causal one is the same output a stop late (the step 0, 0, 0, 1, 1, 1, 1, 1 → 0, 0, ⅓, ⅔, 1, 1, 1, 1). When-useful: convolutional layers correlate and call it convolution — a learned kernel does not mind. |
 | 4 | `AMovingAverageIsALowPass` | 1 → 2 | Whole-lap tones through the centred 3-tap on the ring, the bank read before and after: 1000 Hz → 0.80 as tall (4 → 3.22); 2000 Hz → exactly ⅓ (4 → 1.33); 3000 Hz → 0.14 and sign-flipped (WARM; 4 → 0.55); 4000 Hz → ⅓ and flipped (8 → 2.67, ÷ 8 noted); 0 Hz → unchanged. "Low-pass: slow tones pass, fast tones shrink — it scales, it does not remove." The 2-tap [½, ½] on 4000 Hz: all eight exactly 0 — gain 0, the special case; on 2000 Hz the pair turns 45° (the half-sample delay). S. W. Smith's verdict: the best smoother, the worst frequency separator — row 3 quieter than row 4. |
 | 5 | `TheKernelsOwnReading` | 2 · core | The kernel itself on the bank (⅓ at stops 7, 0, 1 — "the stop before 0 is stop 7 on the ring"): its readings are the five gains, 1, 0.80, 0.33, 0.14, 0.33, with rows 3 and 4 negative. Why, on `TheProbe`'s pair plane: a delayed tone is a turned pair (45°·k per sample); the output is a weighted sum of delayed copies; the row's sum is linear — three arrows of length ⅓ at 0, +45°k, −45°k summed head to tail: k = 1 → 0.80; k = 2 → ⅓ (the side arrows cancel); k = 3 → −0.14; k = 4 → −⅓. Boxed: filtering in time = multiplying the readings, row by row. "Checked on one kernel and four rows — for every kernel and every N, the proof needs Euler's formula." The 2-tap's row-2 pair (½, ½): length 0.71, turned 45° — the turn of scene 4 explained. |
-| 6 | `MultiplyingInTime` | 2 → 3 | The dual, stated: multiply two signals stop by stop and the readings convolve — each line of one gets a copy of the other's lines. Checked once: the 2000 Hz tone (row 2 reads 4) × a 1000 Hz cosine (row 1 reads 4): row 2 empties, rows 1 and 3 read 2 each — "4 × 4 ÷ 8 = 2, for this pair"; × the all-ones tone changes nothing. Then the hook: every frame *is* a multiplication — the 8 samples are an endless tone × a rectangle of eight ones; a whole-lap tone does not notice; the 1500 Hz sine from `WhatSetsTheSpacing` (bars 1.5, 2.85, 2.41, 0.85, 0.67, re-shown) does — its smear is the rectangle's lines copied onto the tone's: leakage, by the theorem — series D. Level 3: the source–filter model — glottal pulses at 115 Hz (a comb at 115, 230, 345, 460 Hz) shaped by the vocal tract, a filter. |
-| 7 | `WhereConvolutionLives` | 3 · closer | Reverb: a room's impulse response is the echo kernel grown long — a 2 s tail at 50 kHz is 100 000 taps, 100 000 multiply-adds per output sample, which is why FFT convolution exists (the FFT, parked in `algorithms/`). Convolutional layers: learned kernels slid over the input. Source–filter restated. The sliding detector: slide the probe and the bank becomes a filterbank whose impulse responses are the reversed probes — series D. Closing map: echoes → reverb · smoothing and sharpening → kernels · learned kernels → conv layers · harmonics under formants → source–filter · a tone between rows → windowing (D) · tones changing over time → the short-time transform (D). |
+| 6 | `MultiplyingInTime` | 2 → 3 | The dual, stated: multiply two signals stop by stop and the readings convolve — each line of one gets a copy of the other's lines. Checked once: the 2000 Hz tone (row 2 reads 4) × a 1000 Hz cosine (row 1 reads 4): row 2 empties, rows 1 and 3 read 2 each — "4 × 4 ÷ 8 = 2, for this pair"; × the all-ones tone changes nothing. Then the hook: every frame *is* a multiplication — the 8 samples are an endless tone × a rectangle of eight ones; a whole-lap tone does not notice; the 1500 Hz sine from `WhatSetsTheSpacing` (bars 1.5, 2.85, 2.41, 0.85, 0.67, re-shown) does — its smear is the rectangle's lines copied onto the tone's: leakage, by the theorem — series D. (Source–filter moved wholly to scene 7 at build — open call 2, as recommended.) |
+| 7 | `WhereConvolutionLives` | 3 · closer | Reverb: a room's impulse response is the echo kernel grown long — a 2 s tail at 50 kHz is 100 000 taps, 100 000 multiply-adds per output sample, which is why FFT convolution exists (the FFT — on screen "an algorithm story, parked elsewhere"; the README names `algorithms/`). Convolutional layers: learned kernels slid over the input. Source–filter restated. The sliding detector: slide the probe and the bank becomes a filterbank whose impulse responses are the reversed probes — series D. Closing map, six lines: echoes and rooms → reverb, one long kernel · smoothing and sharpening → a kernel's own reading · kernels a network chooses → convolutional layers · a tone between rows → windowing (D) · tones that change over time → the short-time transform (D) · the ear's own grouping → mel. (Built as six lines; the source–filter pointer lives in the comb beat above, not on the map.) |
 
 Foundation: scenes 1–3 (the sliding sum, the impulse response, the
 flip). The theorem owns scenes 4–6; scene 7 maps.

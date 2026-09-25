@@ -112,11 +112,11 @@ Renders are numbered to match:
 
 Ticks are human-gated — see
 [reference verification](../README.md#reference-verification-is-human-gated).
-Every entry below came out of the plan-019 research pass and started
-unchecked; all fifty-two were then verified by the maintainer, who directed
-the ticks (2026-09-19). Notes such as "not opened by the research pass"
-record what the agents could reach, not the maintainer's check. Future
-entries start unchecked until a human does the same.
+The spectrum series' fifty-two entries came out of the plan-019 research
+pass and were verified by the maintainer, who directed the ticks
+(2026-09-19). The convolution series' entries (plan 020) start unchecked
+below them. Notes such as "not opened by the research pass" record what
+the agents could reach, not the maintainer's check.
 
 The formulation — the DFT as correlation with real probes:
 
@@ -294,29 +294,156 @@ The other log scales, and history:
       — MacTutor: the memoir read 21 December 1807; *Théorie analytique
       de la chaleur*, 1822.
 
+### Convolution (plan 020)
+
+The formulation:
+
+- [ ] [Smith, ch. 6 "Convolution"](https://www.dspguide.com/ch6.htm)
+      — Steven W. Smith, *The Scientist and Engineer's Guide to Digital
+      Signal Processing*, ch. 6: the impulse response, the input-side
+      and output-side views this series puts on one screen.
+- [ ] [Smith, ch. 6, "The Sum of Weighted Inputs"](https://www.dspguide.com/ch6/5.htm)
+      — "each point in the output signal receives a contribution from
+      many points in the input signal, multiplied by a flipped impulse
+      response" — the weighted-sum reading this series grounds in
+      expectation.
+- [ ] [Smith, ch. 7, "Common Impulse Responses"](https://www.dspguide.com/ch7/1.htm)
+      — the echo ("the input signal plus a delayed version of the input
+      signal"), the first difference, and the sum rule: *if* the DC gain
+      is one, the kernel's points sum to one.
+- [ ] [Smith, ch. 7, "Correlation"](https://www.dspguide.com/ch7/3.htm)
+      — "the signal inside of the convolution machine is flipped
+      left-for-right"; "very different DSP procedures".
+- [ ] [Smith, ch. 9, "Convolution via the Frequency Domain"](https://www.dspguide.com/ch9/3.htm)
+      — magnitudes multiply, phases add; the wrap-around and
+      zero-padding this series meets but does not teach.
+- [ ] [Smith, ch. 15 "Moving Average Filters"](https://www.dspguide.com/ch15.htm)
+      — eq. 15-2 for the gains; "an exceptionally good smoothing filter
+      … but an exceptionally bad low-pass filter".
+- [ ] [Lyons, *Understanding DSP*, 3rd ed. — ch. 5 (contents)](https://ptgmedia.pearsoncmg.com/images/9780137027415/samplepages/0137027419.pdf)
+      — Richard G. Lyons, Prentice Hall, © 2011: §5.1 "An Introduction
+      to FIR Filters" (the 5-tap averager), §5.2 "Convolution in FIR
+      Filters". Contents pages only; the chapter was not opened by the
+      research pass.
+- [ ] [J. O. Smith, *Filters*, "The Simplest Lowpass Filter"](https://ccrma.stanford.edu/~jos/filters/Simplest_Lowpass_Filter.html)
+      — Julius O. Smith III, W3K, 2007: y = x[n] + x[n−1] as the
+      teaching vehicle; ["Sine-Wave Analysis"](https://ccrma.stanford.edu/~jos/filters/Sine_Wave_Analysis.html):
+      a sinusoid in, the same sinusoid out, scaled and shifted.
+- [ ] [J. O. Smith, MDFT, "Convolution"](https://ccrma.stanford.edu/~jos/mdft/Convolution.html)
+      — the cyclic definition; convolution as the probe's inner product
+      with the shifted, flipped kernel.
+- [ ] [J. O. Smith, MDFT, "Convolution Example 1"](https://ccrma.stanford.edu/~jos/mdft/Convolution_Example_1_Smoothing.html)
+      — ⅓ ⅓ ⅓ on a pulse gives ⅓, ⅔, 1; "smeared to the 'right'
+      (forward in time) because the filter impulse response starts at
+      time zero. Such a filter is said to be causal".
+- [ ] [J. O. Smith, MDFT, "Convolution Theorem"](https://ccrma.stanford.edu/~jos/mdft/Convolution_Theorem.html)
+      — x ⊛ y ↔ X·Y, "perhaps the most important single Fourier theorem
+      of all"; the [dual](https://ccrma.stanford.edu/~jos/mdft/Dual_Convolution_Theorem.html):
+      x·y ↔ (1/N) X ⊛ Y — series D's statement.
+- [ ] [Oppenheim & Schafer, DTSP 3rd ed. — ch. 2, §8.6–8.7](https://ocw.mit.edu/courses/res-6-dtsp-discrete-time-signal-processing/mitres_6-dtsp_s26_thirdedition.pdf)
+      — §2.2–2.3 (linearity, time invariance, the convolution sum derived
+      from both, eq. 2.49); §8.6.5 circular convolution (eq. 8.114) and
+      the theorem (8.126–8.127); §8.7.2: circular equals linear when
+      N ≥ L + P − 1.
+- [ ] [MIT OCW 6.341, Lecture 16 "Circular Convolution"](https://ocw.mit.edu/courses/6-341-discrete-time-signal-processing-fall-2005/6e5190ef6e0d66c78bfdce2be6ce7125_lec16.pdf)
+      — circular as linear wrapped mod N.
+- [ ] [Wikipedia, "Convolution"](https://en.wikipedia.org/wiki/Convolution)
+      — the reflect-offset-slide picture; the term's history (pointers
+      only).
+
+How it is taught:
+
+- [ ] [Sanderson, "But what is a convolution?" (2022)](https://www.3blue1brown.com/lessons/convolutions)
+      — Grant Sanderson (3Blue1Brown), 18 Nov 2022: the two-dice table
+      with its flipped row, image kernels, polynomial multiplication and
+      the FFT speed-up — the pictures this series does not remake.
+- [ ] [Azad, "Intuitive Guide to Convolution"](https://betterexplained.com/articles/intuitive-convolution/)
+      — Kalid Azad, BetterExplained: "fancy multiplication"; the flipped
+      patient list.
+- [ ] [Wilczek, "Circular vs. Linear Convolution"](https://thewolfsound.com/circular-vs-linear-convolution-whats-the-difference/)
+      — Jan Wilczek, WolfSound: a delay by one on four samples, the
+      last one wrapping to the front.
+- [ ] [Wage, Buck & Hjalmarson, "Analyzing Misconceptions…" (2006)](https://ieeexplore.ieee.org/document/4041044/)
+      — Kathleen E. Wage, John R. Buck, Margret A. Hjalmarson, IEEE DSP
+      Workshop 2006: students compute convolution without seeing it
+      rests on linearity and time invariance — why the two facts are
+      named on screen. Abstract only.
+- [ ] [Goodfellow, Bengio & Courville, *Deep Learning*, ch. 9](https://www.deeplearningbook.org/contents/convnets.html)
+      — MIT Press, 2016, p. 328: "many neural network libraries
+      implement a related function called the cross-correlation, which
+      is the same as convolution but without flipping the kernel".
+
+When it is useful:
+
+- [ ] [J. O. Smith, "Artificial Reverberation and Spatialization"](https://ccrma.stanford.edu/~jos/Reverb/Reverb_4up.pdf)
+      — Julius O. Smith III, MUS420/EE367A: "the output is given by six
+      convolutions"; t60 = 2 s at 50 kHz → "100,000 multiplies and
+      additions per sample"; "In principle, this is an exact
+      computational model".
+- [ ] [J. O. Smith, PASP, "Exact Reverb via Transfer-Function Modeling"](https://ccrma.stanford.edu/~jos/pasp/Exact_Reverb_Transfer_Function_Modeling.html)
+      — *Physical Audio Signal Processing*, W3K, 2010: sources convolved
+      with source-to-ear impulse responses.
+- [ ] [Allen & Berkley, "Image method for … small-room acoustics" (1979)](https://doi.org/10.1121/1.382599)
+      — Jont B. Allen and David A. Berkley, J. Acoust. Soc. Am. 65(4):
+      the simulated impulse response, convolved with speech; not opened
+      by the research pass.
+- [ ] [LeCun et al., "Gradient-Based Learning Applied to Document Recognition" (1998)](https://doi.org/10.1109/5.726791)
+      — Yann LeCun, Léon Bottou, Yoshua Bengio, Patrick Haffner, Proc.
+      IEEE 86(11), §II.A: "The kernel of the convolution is the set of
+      connection weights"; TDNNs for phoneme recognition. Read from the
+      [preprint](http://leon.bottou.org/publications/pdf/ieee-1998.pdf).
+- [ ] [Jurafsky & Martin, SLP3, §15.4.6 "The Source-Filter Model"](https://web.stanford.edu/~jurafsky/slp3/15.pdf)
+      — draft of 19 Aug 2026: "a 115 Hz glottal fold vibration leads to
+      harmonics … of 230 Hz, 345 Hz, 460 Hz"; Fig. 15.24, the vocal
+      tract as a filter.
+- [ ] [Wikipedia, "Source–filter model"](https://en.wikipedia.org/wiki/Source%E2%80%93filter_model)
+      — the impulse-train source shaped by the tract; Fant credited.
+- [ ] Gunnar Fant, *Acoustic Theory of Speech Production*, Mouton, The
+      Hague, 1960 — citation only (no URL); not opened.
+
+History:
+
+- [ ] [Domínguez, "A History of the Convolution Operation" (2015)](https://www.embs.org/pulse/articles/history-convolution-operation/)
+      — Alejandro Domínguez, IEEE Pulse, 24 Jan 2015: Laplace 1778;
+      "Faltung" (Doetsch 1923); the theorem in Borel 1899 — secondary,
+      and the only source for the credit.
+- [ ] [Domínguez-Torres, "The Origin and History of Convolution I" (2010)](https://slideshare.net/Alexdfar/origin-adn-history-of-convolution)
+      — the discrete operation's history; secondary.
+
 ## Ideas not yet built
 
-- **Convolution** — the road's next series: the sliding weighted sum as
-  filtering (a moving average is a low-pass), then the convolution
-  theorem; returns in reverb and in convolutional layers.
-- **Windowing → STFT → spectrogram** — `WhatSetsTheSpacing`'s 1500 Hz
-  tone explained (leakage as the convolution theorem at work), the word
-  "filterbank" earned by sliding the frame, framing and hop, the
-  time–frequency tradeoff.
+- **Windowing → STFT → spectrogram** — the road's next series:
+  `MultiplyingInTime` has stated the mechanism (every frame is a
+  multiplication by a rectangle; leakage by the theorem; a window with
+  quieter lines copies less) and `WhereConvolutionLives` the opening
+  move (slide the probe and the bank becomes a filterbank, its kernels
+  the probes reversed); left to build: the Hann window's lines, framing
+  and hop, the time–frequency tradeoff, the spectrogram.
 - **Mel** — a matrix of triangles regrouping Whisper's 201 rows into
   80, a log on top: the log-mel spectrogram. The natural on-ramp for
   the parked `linear_algebra/` topic (to be returned to): the bank is a
   projection onto probes, the mel filterbank a matrix.
+- **The source–filter model of speech** — `WhereConvolutionLives` draws
+  it once, not to scale (a 115 Hz comb under a formant envelope); a
+  series would build the vocal tract's own reading from a real vowel,
+  and the cepstrum that separates the two.
 - **The inverse** — `NoDoubleCounting` promises that 8 readings rebuild
   8 samples; synthesis ("signals are sums of sines") is unbuilt.
-- **The complex form** — one complex number per row instead of a pair,
-  and the all-N reason for the 28 zeros: waits on Euler's formula in
+- **The complex form** — one complex number per row instead of a pair;
+  the all-N reason for the 28 zeros; and the convolution theorem for
+  every kernel and every N (`TheKernelsOwnReading` checks one kernel on
+  four rows): all wait on Euler's formula in
   [`calculus/`](../calculus/README.md).
-- **The FFT** — the same readings in N log N steps; the second example
-  the divide-and-conquer Idea in
+- **The FFT** — the same readings in N log N steps, and the reason a
+  100 000-tap room can be applied at all (multiply spectra, do not
+  slide): the second example the divide-and-conquer Idea in
   [`algorithms/`](../algorithms/README.md) is waiting for (Cooley &
   Tukey 1965; Gauss c. 1805).
+- **Circular convolution as a concept** — the DFT's theorem is circular
+  and this road meets it only where circular and linear agree (Scope);
+  the wrap, zero-padding and overlap-add are unbuilt.
+- **Other kernels** — the first difference [1, −1] as a high-pass (gains
+  0, 0.77, 1.41, 1.85, 2 on this grid), [1, 2, 1]/4 as the ½ ½ window
+  squared: pinned in plan 020, not on screen.
 - **Quantization** — bit depth as noise; 16 bits span
   20 × log₁₀(2¹⁶) = 96.33 dB from full range to one step.
-- **The source–filter model of speech** — a harmonic comb times a
-  formant envelope; needs convolution first.

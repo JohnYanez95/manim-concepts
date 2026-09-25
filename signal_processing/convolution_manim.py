@@ -274,7 +274,7 @@ def _strip(values, x0, dx, y, scale, color=COOL, size=18, label=None, numbers=Tr
 
 
 class _Window(VGroup):
-    """The kernel's weights as tokens under ``taps`` adjacent stems, with a Σ node."""
+    """The kernel's weights as tokens under the ``taps`` adjacent stems it covers, framed."""
 
     def __init__(self, kernel, stems: _Stems, at: int, centred: bool, y: float):
         super().__init__()

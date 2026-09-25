@@ -1053,3 +1053,89 @@ reordered.
   log entries stand unedited
 - stamp: advance to 94c3c10 (the audited HEAD; findings applied in the
   commit after it)
+
+## [2026-09-24] series | plan 020, convolution
+
+- node added: `convolution` (seven scenes, signal_processing/ — the
+  road's second series, after the spectrum and before windowing)
+- edge closed: `spectrum` → *(convolution)* flipped to `spectrum` →
+  `convolution`, delivered, the row kept in place (the
+  `counting-rules` → `inclusion-exclusion` precedent) — four strands on
+  screen: `TheSlidingWeightedSum`'s "the probe's multiply-and-sum, now
+  walking: one output at every stop" and the boxed "a filter turns a
+  signal into a signal"; `AMovingAverageIsALowPass` reading "the bank
+  from the spectrum series … before and after the window";
+  `TheKernelsOwnReading`'s "recall: delaying a tone by one sample turns
+  its pair — by 45° × the row number" on `TheProbe`'s pair plane;
+  `MultiplyingInTime` re-showing `WhatSetsTheSpacing`'s 1500 Hz bars
+  under "leakage — by the theorem"
+- edges delivered: `random-variables` → `convolution`
+  (`WhatOneClickBecomes`' "sums pass through — the response of a sum is
+  the sum of the responses" and "two owned facts: the weighted sum is
+  linear (the dice); the window never changes" — `SameOutcomesAdd`'s
+  move, spent on the spectrum side by `NoDoubleCounting` and again here
+  on the pair plane; the series named on screen, the scene in README
+  row 2). One row per prerequisite, as for `spectrum`: the `spectrum` →
+  `convolution` row above carries both the closure and the delivered
+  edge — no reverse-direction row
+- rows amended, no new row: `spectrum` → *(windowing → STFT →
+  spectrogram)* gains its mechanism, stated on screen by
+  `MultiplyingInTime` ("every frame is a multiplication: an endless
+  tone × a rectangle of eight ones"; "a window with quieter lines
+  copies less: the windowing series' whole subject") and the filterbank
+  move by `WhereConvolutionLives` ("the bank becomes a filterbank — its
+  kernels the probes, reversed") — the row stays from `spectrum`, the
+  convolution series restating the promise it inherited; `e-and-ln` →
+  *(… Euler's formula …)* gains its second customer
+  (`TheKernelsOwnReading`: "checked on one kernel and four rows; for
+  every kernel and N, the proof needs Euler"; the takeaway's "checked
+  here, proved with Euler's formula"; calculus/ Ideas updated);
+  `dynamic-programming` → *(divide and conquer)* gains the FFT's second
+  reason and its first on-screen naming (`WhereConvolutionLives`:
+  "100 000 multiply-adds for every output sample" / "— which is why
+  long kernels are applied by multiplying spectra" / "the fast way to
+  those spectra is the FFT — an algorithm story, parked elsewhere" —
+  the screen says "parked elsewhere", the README says `algorithms/`;
+  algorithms/ Ideas updated); `spectrum` → *(mel)* notes the closing
+  map's MUTED repeat, unchanged
+- edge promised: `convolution` → *(the source–filter model of speech)*
+  — `WhereConvolutionLives` on screen: "speech: a 115 Hz buzz from the
+  glottis is a comb of lines — 230, 345, 460 Hz …", "the vocal tract is
+  a filter: its own reading, drawn over the comb, makes the vowel", the
+  tag "the source–filter model (a picture, not to scale)"; home
+  signal_processing/ Ideas (the plan-019 entry had it as Ideas-only,
+  no on-screen statement)
+- devices recorded: WARM's eighth stop (`TheFlip`'s "a pre-echo?", the
+  sign-flipped tones of `AMovingAverageIsALowPass` and the negative
+  readings of `TheKernelsOwnReading` — a sign not hidden rather than an
+  overcount, the sense widened); the mapping close's ninth stop
+  (`WhereConvolutionLives`' six lines, three GOOD, three MUTED —
+  verified in code); a new bullet, the walking window (`_Window`'s
+  tokens and ACCENT frame with an arrow dropping one stem into a second
+  strip — no Σ node is drawn, whatever `_Window`'s docstring says); the
+  sampled rotation's fourth stop (`TheKernelsOwnReading`'s turned-arrow
+  sum — the theorem as a picture); stems-never-staircases gains the
+  edge-neighbour ghost stems (scenes 1–3) and the endless wave
+  (scene 6)
+- planned but not stated, recorded here: the plan's scene-7 closing
+  map had a seventh line, "harmonics under formants → source–filter" —
+  the built map has six, so the source–filter row cites the comb beat
+  alone; the plan's scene-6 source–filter pointer moved wholly to scene
+  7 (the design's open call 2, taken); the plan's "(the FFT, parked in
+  `algorithms/`)" reached the screen as "parked elsewhere"
+- not made, recorded here: convolutional layers — a level-3 pointer
+  with no home node (`WhereConvolutionLives`: "a convolutional layer:
+  kernels slid over the input —" / "their weights learned, not
+  designed", the caption "the kernel of the convolution is the set of
+  connection weights — LeCun, 1998"; `TheFlip`'s aside "conv layers
+  slide unflipped yet say "convolution" — a learned kernel does not
+  mind"; deep_learning/ is CTC and has no CNN node, no Ideas bullet
+  queues one, so no promised row — the audit may say whether one is
+  owed); the two-dice diagonals as a convolution of two pmfs (the
+  design allowed a one-caption aside; the build says only "the dice" —
+  not stated, not recorded, probability/ Ideas untouched); circular vs
+  linear convolution as a concept (met, not taught — README Scope's
+  exclusion; the windowing series owns the case where they differ)
+- stamp: unchanged (94c3c10) — the audit advances it
+- branch note: cut from main at fdf2672 (PR #21 merged, clean, level
+  with origin)
