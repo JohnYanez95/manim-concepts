@@ -85,7 +85,7 @@ Branch `feat/signal-processing-convolution`, cut from `main` at fdf2672
   line is the harder limit at this indentation). README rows 1–7 written
   with the scenes (the source-order test reds otherwise); `make check`
   green
-- [x] Phase 3: README — 26 plan-020 references unchecked (the O&S entry
+- [x] Phase 3: README — 28 plan-020 references unchecked (the O&S entry
   renamed so its slug does not collide with the spectrum series' ticked
   one: the sync silently overwrote the verified entry until it did), Ideas
   rewritten (convolution struck; source–filter, circular convolution as a
@@ -137,6 +137,10 @@ Branch `feat/signal-processing-convolution`, cut from `main` at fdf2672
   Minor — the vocal tract's reading was drawn WARM (the cancelled colour);
   a reading is ACCENT. Both verified by re-render. Not rerun: the changes
   are the findings' own fixes, and the bot reviews them on the PR
+- [x] Maintainer's source pass (2026-09-24, PR #22 open, before the bot
+  round closed): he verified all twenty-eight plan-020 references — the
+  Fant entry with a publisher's preview he supplied — and directed the
+  ticks; `references.bib` re-synced (332 entries, 288 verified)
 - [ ] Phase 5 — bot reviews spent: none yet, of 2
 
 ## Research digests
