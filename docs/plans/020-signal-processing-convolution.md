@@ -102,7 +102,7 @@ Branch `feat/signal-processing-convolution`, cut from `main` at fdf2672
   to all three. Not made, logged: convolutional layers (a level-3 pointer
   with no home node); the two-dice diagonals as a pmf convolution.
   `make test` green
-- [ ] Phase 4: `connection-auditor` run on ce6ea65 (incremental; zero
+- [x] Phase 4: `connection-auditor` run on ce6ea65 (incremental; zero
   numeric discrepancies — every on-screen number recomputed). **Top
   finding, README:** the Scope's "Leakage and windows" bullet still said
   a tone between rows appears twice and is never explained —
@@ -126,8 +126,17 @@ Branch `feat/signal-processing-convolution`, cut from `main` at fdf2672
   advanced to ce6ea65. Self-check against CLAUDE.md: no raw colours, no
   `palette()`, every replacement out-then-in, one orphan `boxed()` found
   and named (scene 1's definition box would have sat under the takeaway).
-  Drafts re-rendered (7 files), linter clean. Local CodeRabbit pass:
-  pending
+  Drafts re-rendered (7 files), linter clean. **The one local CodeRabbit
+  pass** (`coderabbit review --agent
+  --base main`, on 656f03c, 13 files): two findings, both valid. Major —
+  `WhatOneClickBecomes`' walked window started over x[0], x[1] for output
+  0, but output n reads x[n−1] and x[n]: the picture claimed the wrong
+  pair (the numbers were right, the frame was one stop late). The strip
+  now carries a zero ghost at each end and the window covers x[n−1], x[n]
+  — "the picture is a claim", caught by the reviewer, not the linter.
+  Minor — the vocal tract's reading was drawn WARM (the cancelled colour);
+  a reading is ACCENT. Both verified by re-render. Not rerun: the changes
+  are the findings' own fixes, and the bot reviews them on the PR
 - [ ] Phase 5 — bot reviews spent: none yet, of 2
 
 ## Research digests

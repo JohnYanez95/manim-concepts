@@ -574,16 +574,24 @@ class WhatOneClickBecomes(ConceptScene):
 
         # The other view: one output at a time, the window read over the input.
         rx0 = 1.9
-        right_in = _strip(np.append(four, 0.0), rx0, ldx, 2.05, lscale, label="in", numbers=False)
-        right_in[1][-1].set_color(MUTED).set_opacity(0.5)
+        # A zero ghost at each end: output n reads x[n−1] and x[n], so the window
+        # needs something before the first sample and after the last.
+        right_in = _strip(
+            np.concatenate([[0.0], four, [0.0]]), rx0 - ldx, ldx, 2.05, lscale, numbers=False
+        )
+        for ghost in (right_in[1][0], right_in[1][-1]):
+            ghost.set_color(MUTED).set_opacity(0.5)
+        right_tag = Text("in", font_size=SMALL_SIZE, color=COOL)
+        right_tag.move_to(np.array([rx0 - 0.75, 2.05, 0.0]), aligned_edge=RIGHT)
         right_out = _strip(result, rx0, ldx, -1.6, lscale, color=ACCENT, label="out")
-        self.play(FadeIn(right_in))
+        self.play(FadeIn(right_in), FadeIn(right_tag))
         window = _Window(kernel, right_in[1], 1, False, 1.35)
         self.play(FadeIn(window))
         for n in range(5):
             if n:
                 self.play(
-                    Transform(window, _Window(kernel, right_in[1], n, False, 1.35)), run_time=0.35
+                    Transform(window, _Window(kernel, right_in[1], n + 1, False, 1.35)),
+                    run_time=0.35,
                 )
             self.play(FadeIn(right_out[1][n]), FadeIn(right_out[2][n]), run_time=0.3)
         self.play(FadeIn(right_out[0]), FadeIn(right_out[3]))
@@ -611,7 +619,8 @@ class WhatOneClickBecomes(ConceptScene):
         ).arrange(DOWN, buff=0.22)
         facts.move_to(0.6 * UP)
         self.play(
-            FadeOut(VGroup(left_in, copies, left_out, right_in, window, match, note)), run_time=0.5
+            FadeOut(VGroup(left_in, copies, left_out, right_in, right_tag, window, match, note)),
+            run_time=0.5,
         )
         self.play(FadeIn(facts))
         note = _swap_caption(
@@ -1435,7 +1444,7 @@ class WhereConvolutionLives(ConceptScene):
                 ]
             ),
             t_range=[0, 1],
-            color=WARM,
+            color=ACCENT,
             stroke_width=2.5,
         )
         self.play(FadeIn(comb_axis), FadeIn(comb), FadeIn(ticks), FadeIn(hz))
