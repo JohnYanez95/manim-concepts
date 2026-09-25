@@ -155,7 +155,12 @@ until a human does the same.
   [`signal_processing/`](../signal_processing/README.md)'s spectrum
   series parks the FFT here — the same readings in N log N steps
   (Cooley & Tukey 1965; Gauss had an FFT-like method c. 1805, published
-  1866 — history pinned in plan 019's anchors O and P).
+  1866 — history pinned in plan 019's anchors O and P). Its convolution
+  series adds the FFT's second reason, FFT convolution: a 2 s room at
+  50 000 samples a second is 100 000 taps, "100 000 multiply-adds for
+  every output sample", so long kernels are applied by multiplying
+  spectra (`WhereConvolutionLives` — "the fast way to those spectra is
+  the FFT — an algorithm story, parked elsewhere"; plan 020's anchor W).
 - Edit distance worked in full — the closer names the Wagner–Fischer
   table; a dedicated scene would earn the KITTEN→SITTING grid the
   verifier has already pinned.

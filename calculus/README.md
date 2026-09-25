@@ -358,7 +358,13 @@ Rough queue, in roughly the order they build on each other:
   series builds every probe as a real sine-and-cosine pair and checks
   orthogonality at N = 8 only (`NoDoubleCounting`: "computed, not
   proved"); the complex form — one number per row instead of a pair —
-  and the reason the zeros hold for every N wait here.
+  and the reason the zeros hold for every N wait here. Its second: the
+  same topic's convolution series checks the convolution theorem on
+  the pair plane for one kernel and four rows (`TheKernelsOwnReading`:
+  "checked on one kernel and four rows; for every kernel and N, the
+  proof needs Euler") — the turned-arrow sum there is "magnitudes
+  multiply, angles add" drawn without a complex number, and the proof
+  for every kernel and every N waits here too.
 - Growth in the wild: half-life and doubling time as the same picture
   (radioactive decay, population, interest — one dial, e^(rt)). The
   descent series' bowl walk w_k = 4·2⁻ᵏ already pre-draws the
