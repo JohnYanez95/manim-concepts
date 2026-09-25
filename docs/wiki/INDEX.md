@@ -1,8 +1,8 @@
 # Graph index
 
-Last audited: `14e3f65` (2026-09-06, incremental — plan-017 branch;
-the previous stamp `d59000d` was the plan-016 branch, merged as PR #18
-at `ce317e5`)
+Last audited: `94c3c10` (2026-09-19, incremental — plan-019 branch;
+the previous stamp `14e3f65` was the plan-017 branch, merged as PR #19
+at `f350d3b`)
 
 The stamp is a commit hash: the state of the repo this graph was last
 reconciled against. The `connection-auditor` diffs from it instead of
@@ -28,6 +28,7 @@ crawling every page; whoever applies an audit's findings updates it.
 | `gradient-descent` | `calculus/gradient_descent_manim.py` | The slope becomes an update: the bowl walk and its automatic brake, the 1−2η factor's four fates, the nudge square's corner as curvature's fee, sign-change stamps on stopping places, the basin hop no ball could make, the road's 12-knob walk read off one readout |
 | `inclusion-exclusion` | `probability/inclusion_exclusion_manim.py` | The union rule from two sets to n: the overlap counted twice on the die strip, the per-cell ledger on the two-dice grid, four circles counted to 14, the toggle pairing, the matching limit 1 − 1/e, the Bonferroni brackets |
 | `cantor-diagonal` | `probability/cantor_diagonal_manim.py` | The interval cannot be arranged in a sequence, in B&T's Problem 4* language: the integers and the zigzag as sequences, every point a row of digits (1/2 owning two), the diagonal rule with y = 0.2111121…, why 1 or 2 (the +1 rule lands on 0.1000… = 0.0999…; the re-run), the same diagonal on m/w rows and subsets, and the closer — Axiom 2 is stated for *sequences*, so P([0, 1]) would be 0 + 0 + ⋯ = 0 |
+| `spectrum` | `signal_processing/spectrum_manim.py` | The spectrum as a bank of detectors: a tone as a point going round, sampled at 8 stops; the probe as a signed weighted sum (match 4, mismatch 0); the sine-and-cosine pair whose distance ignores the start ((12, 16) and (−16, 12), both 20); five rows at fixed addresses, the column of readings turned on its side; the 28 zeros, computed not proved; spacing sr/N = 1/duration; decibels against a stated reference (0, −6.02, −40); the fold at sr/2 (probe 7 is probe 1) |
 
 ## Edges
 
@@ -55,7 +56,7 @@ Status: **delivered** (both ends exist and the content makes the link) or
 | `softmax-likelihood` | `ctc-gradient` | delivered | `TheLossThatTrains`' closer promised "softmax output minus how often the truth used each cell — is the next series"; `WhereTheTruthSpendsItsTime` names that exact phrase as γ on screen, and `SoftmaxMinusOccupancy` lands the identity with Bridle's "one-from-N target" gone soft; the reuse is also named on screen — scene 1's real weights arrive as "the matrix the softmax series scored" |
 | `ctc-alignment` | `dynamic-programming` | delivered | The graph's oldest standing promise (plan 001 gaps; `deep_learning/README.md` row 5 when-useful), closed: `TheTrellisWasAMemo` re-reads the forward trellis on screen — "α_t(s) was a stored answer all along" — with the mini trellis landing 3 + 3 = 6 and the flagship 81/15/20 returning. Both recorded anchors spent in `TheSignatureInTheWild`'s horizon: the recurrence's additions inherit log-space (`TheUnderflowCliff`), and the constant column is the law of total probability over the frame's states (`TotalProbabilityAndTrees`, performed by `PathsThroughACell`); and the third pointer — the same grid swept backward, a second dynamic program over suffixes — names content already delivered (`TheOtherHalfOfTheTrellis`), use-case framing pointing at a built scene |
 | `dynamic-programming` | `counting-rules` | delivered | `TheLatticeRecounted` recounts the walker's 15 = C(6,2) by Pascal addition and checks it against the counting series' answer on screen — the queued fifth `WhenToUseIt` problem shape now has its screen precedent (that re-render stays batched in combinatorics' Ideas) |
-| `dynamic-programming` | *(divide and conquer as its own concept)* | promised | `algorithms/README.md` Ideas, and on screen: `WhatBreaksIt` names "divide and conquer is the tree-shaped sibling" — a merge-sort recurrence module would contrast scene 5's shape table from the tree side |
+| `dynamic-programming` | *(divide and conquer as its own concept)* | promised | `algorithms/README.md` Ideas, and on screen: `WhatBreaksIt` names "divide and conquer is the tree-shaped sibling" — a merge-sort recurrence module would contrast scene 5's shape table from the tree side. Second waiting example since plan 019: the FFT — `spectrum`'s readings in N log N steps. `signal_processing/README.md` Scope excludes it ("an algorithm story — divide and conquer, queued in `algorithms/`") and its Ideas bullet "The FFT" names it "the second example the divide-and-conquer Idea … is waiting for" (Cooley & Tukey 1965; Gauss c. 1805); `algorithms/README.md` Ideas records the customer. Stated in READMEs and in print (`spectrum.tex`, "Where this goes") — on screen `TheFoldAtNyquist` names only numpy's functions ("in numpy, the upper half of fft's output is this mirror — rfft returns the bank"), never the algorithm or its N log N cost |
 | `dynamic-programming` | *(edit distance worked in full)* | promised | `algorithms/README.md` Ideas; the closer names the Wagner–Fischer table, and the KITTEN→SITTING 7×8 grid is already pinned in plan 013 (anchors K/L, distance 3) — the cheapest promise on the board |
 | `dynamic-programming` | `ctc-decoding` | delivered | The hosted-prerequisite promise cashed from the other side: `algorithms/README.md` (Scope and Ideas, both now pointing at the delivered series) hosted the exact-DP prerequisite beam search leans on, and `SearchTheTranscripts` says it on screen — "masses pouring into one prefix MERGE — the move algorithms/ named: shared prefixes, stored once" — the fold's move running on a pruned frontier |
 | `ctc-gradient` | `ctc-decoding` | delivered | Why greedy is the production default: `TheModelHeardNothing`'s closer ("trained outputs are peaked: the max usually speaks for the sum") leans on `WhyTheSpikesAppear`'s delivered peakiness mechanism — README row 3's when-useful cell names the debt — and scene 7's caution restates the spikes-are-not-timestamps rule at deployment's door with the defensible phrasing (the loss never paid for timing) |
@@ -84,7 +85,7 @@ Status: **delivered** (both ends exist and the content makes the link) or
 | `logarithms` | *(the log-odds inference scene in `probability/`)* | promised | `algebra/README.md` Ideas ("this series builds the ruler; that series owns the inference") — the residual of the delivered bayes→logarithms edge. `TheBestExplanation` grew it a second passenger: the 864/343 rung stops exactly where a prior would enter, so MLE→MAP (the ratio through a 1:1 prior) rides the same future scene — its numbers already verified in plan 008 addendum A1. Third passenger since plan 015: `TheLoopClosed`'s fusion formula Q(c) = log P(c\|x) + α log P_lm(c) is the MAP move in deployment costume — a log-likelihood plus a weighted log-prior, already rendered; the future scene teaches the move that formula performs |
 | `logarithms` | *(information as log-counting — bits, entropy)* | promised | `algebra/README.md` Ideas; `ShrinkCounts`' −log₂ = 4 is the HHTH cell's surprisal. Both halves now exist: `ProportionsConverge` says "average surprisal over the 16 equal cells is exactly 4 bits" on screen — entropy is one series away — H = E[surprisal] is `TheBalancePoint`'s fulcrum under `ShrinkCounts`' stamps, averaged the sorted-square way — with nats vs bits a unit change on `TheNaturalStride`'s device. The freight grew on the plan-008 branch: `probability/README.md` Scope queues KL and soft-target cross-entropy behind this row, and `TheLossThatTrains` names the alias on screen ('the negative log-likelihood (its alias: "cross-entropy loss")') — the one-beat payoff waiting for entropy to exist. Third hook, from the gradient series: `WhyTheSpikesAppear`'s family portrait puts "distillation — the teacher's soft outputs" on screen — soft-target cross-entropy, named before entropy exists |
 | `e-and-ln` | `derivative-toolkit` | delivered | `TheSlopeIsAFunction` generalizes `ZoomUntilStraight` and says so on screen (d/dx names the settling ratio); `TheCurveThatIsItsOwnSlope` re-reads `TheMysteryConstants` in d/dx notation (Euler §186/§188 anchored) and differentiates `TheDebtRepaid`'s undo pair into ln′ = 1/x |
-| `e-and-ln` | *(ln as area under 1/t, Euler's formula, growth in the wild)* | promised | `calculus/README.md` Ideas not yet built; the derivative-toolkit entry was struck delivered by the derivatives series |
+| `e-and-ln` | *(ln as area under 1/t, Euler's formula, growth in the wild)* | promised | `calculus/README.md` Ideas not yet built; the derivative-toolkit entry was struck delivered by the derivatives series. The Euler strand's first waiting customer, from plan 019: `spectrum` builds every probe as a real sine-and-cosine pair and checks orthogonality at N = 8 only — `NoDoubleCounting` names the debt on screen under "all 28 read exactly 0": "computed, not proved — for every N, the reason needs Euler's formula" — and `signal_processing/README.md` sends the rest here: Scope's "Complex exponentials" exclusion ("the complex form, and the reason orthogonality holds for every N rather than the N = 8 checked on screen, wait for that series in `calculus/`"), row 4 ("the reason for every N needs Euler's formula, and the screen says so") and its Ideas bullet "The complex form"; `calculus/README.md` Ideas records the customer. Rider: the Euler series can open on `PressureIntoNumbers`' sampled circle — "the shadow: the same motion a quarter-turn ahead" is sin′ = cos in picture form, and `TheProbe`'s (cosine sum, sine sum) plane is already the complex plane's picture (`calculus/` has no trig yet) |
 | `independence` | `inclusion-exclusion` | delivered | `TwoSetsOneOverlap` re-reads `NotMutualExclusivity` (disjoint is the case where the sum is exact) and `TheProductRule` (independent is the case where the overlap is a product — 1/3 = 1/2 · 2/3 on `OneDieTwoEvents`' own pair); `ThreeSetsOneLedger` brings back `ChainsOfTrials`' Bernstein coins as the empty-centre three-set case (3/2 − 3/4 + 0 = 3/4) and the licence beat (1 − (1/2)³ = 7/8 misses by exactly the product the triple term is not: "multiply the complements" needs mutual independence) — the seed audit's "Bernstein ↔ inclusion–exclusion device reuse", acted on. `TheProductRule`'s furniture returns twice: its 6×6 grid with the same two events and the same (6, 6) cell (there boxed ACCENT as 1/36 = 1/6 × 1/6, in `TwoSetsOneOverlap`'s closer boxed WARM as the overlap subtracted — "the sum rule, the product rule's sibling" is the closing gloss), and its 2×2 coin grid as the Bernstein beat |
 | `random-variables` | `inclusion-exclusion` | delivered | `FourSetsNoPicture` names the coefficient row 4, 6, 4, 1 as "the sorted square's columns" (`SortTheSquare`'s (1, 4, 6, 4, 1)); `TheMatchingLimit` sets D(n)/n! beside `TheBinomialColumns`' (1 − 1/n)ⁿ — 0.375 vs 0.3164 at n = 4, the same 1/e by a road with no independence in it; and `EveryPointCountedOnce`'s indicator pointer names the linearity it leans on as "SameOutcomesAdd's, which needed no independence either" |
 | `e-and-ln` | `inclusion-exclusion` | delivered | `TheMatchingLimit`'s caption cites e as "calculus/'s compound-interest ceiling" (`TheSplitYear`) and 1/e as the binomial's zero-success limit; the series itself is named as unbuilt (next row) |
@@ -96,6 +97,14 @@ Status: **delivered** (both ends exist and the content makes the link) or
 | `e-and-ln` | `cantor-diagonal` | delivered | `TheDiagonalRule` on screen: "rows 5 and 6 are calculus/'s e, as 1/e and e − 2 — to eight digits now" (0.36787944, 0.71828182; anchors F/L) — the 0.3679 `TheBinomialColumns` and `TheMatchingLimit` rounded, extended; `probability/README.md` row 4 |
 | `cantor-diagonal` | *(undecidability by the diagonal — Turing 1936 §8)* | promised | `TheSameDiagonalTwice` on screen: "the undecidability story belongs to algorithms/ — promised, not built here"; `algorithms/README.md` Ideas not yet built; `probability/README.md` row 6 |
 | `cantor-diagonal` | *(length as a probability law — existence, Lebesgue)* | promised | `AreaNotSums` on screen: "consistency, not existence: that length is a probability law at all is B&T's 'more advanced treatment'"; `probability/README.md` Ideas not yet built (waits on integration in `calculus/`); row 7; `calculus/README.md` Ideas (the ln-as-area bullet records the wait). When that series lands, promote the unit-segment helper (drawn twice in `cantor_diagonal_manim.py`) to `utils.mobjects` |
+| `random-variables` | `spectrum` | delivered | `TheProbe` on screen: "multiply stop by stop, then add — the weighted sum expectation built", then the differences stated — "but these weights can be negative and add to 0: a pattern, not a probability" (`TheBalancePoint`'s "a weighted average — weights from the measure", with the measure taken away); `NoDoubleCounting`'s linearity beat: "a probe's sum on (tone A + tone B)" / "= its sum on A + its sum on B", under it "a weighted sum of a sum is the sum of the weighted sums — owned since dice" — `SameOutcomesAdd`'s move on the two-dice grid — and then the guard "the pair adds, sum by sum — the distance is taken last (12 and 16 made 20)", so the linearity claimed is each probe's sum's, never the reading's; `TheBankOfDetectors` closes on "the spectrum — a column of weighted sums, nothing new". The series is named on screen ("expectation", "dice"), the scenes are not — `signal_processing/README.md` Scope names both (`TheBalancePoint`, `SameOutcomesAdd`), with rows 2–4; in print, `study_guides/primitives/spectrum.tex` grounds the chapter with `\primref` to the random-variables primitive |
+| `logarithms` | `spectrum` | delivered | `TheSpectrumInDecibels` on screen: "the log ruler from the logarithm series: multiplying becomes adding" — `MultiplyIsAdd`'s law turning amplitude² into × 2, so 10 × log₁₀ of a power ratio becomes 20 × log₁₀ of an amplitude ratio; "half the reading: 20 × log₁₀(½) = −20 × 0.301 = −6.02 dB" spends `MultiplyIsAdd`'s own log₁₀2 ≈ 0.301; "empty rows: log 0 = −∞. So 0 dB means equal to the reference — not silence" is `ShrinkCounts`' log 0 = −∞ with a floor chosen (Whisper's 8 decades of power, 80 dB). This delivers the dB strand of `algebra/README.md` Ideas' "log scales in the wild" — planted on screen by `TheUnderflowCliff`'s closer ("the same ruler everywhere the world multiplies: decibels, pH, earthquake magnitudes, semitones"): the scene's closing table sets pH, star magnitude and semitones beside decibels ("each one a constant × the log of a ratio — the same ruler with its own stride"), Weber–Fechner kept as "an approximate motivation, not a law". The pH strand comes home too: `ShrinkCounts` already says "pH is the everyday version: −log₁₀ of a tiny concentration", and `TheSpectrumInDecibels` returns it as "pH = −log₁₀ (hydrogen-ion activity)" — concentration there, activity here (the newer wording is IUPAC's). The visual essay itself stays unbuilt in that Ideas bullet — narrowed, not closed (its own promised row follows); `signal_processing/README.md` row 6. The print splice: `spectrum.tex` grounds the section with `\primref` to the logarithms primitive and spends the logarithm chapter's own anchor `005.log10two` for the 0.301 |
+| `logarithms` | *(log scales in the wild — the visual essay)* | promised | `TheUnderflowCliff`'s closer lists the scales on screen: "the same ruler everywhere the world multiplies: decibels, pH, earthquake magnitudes, semitones — and every per-frame product"; `algebra/README.md` Ideas carries the bullet ("Log scales in the wild as their own visual essay"). Narrowed by `logarithms` → `spectrum` (the row above): dB built; pH, star magnitude and semitones written as formulas in `TheSpectrumInDecibels`' closing table. Earthquake magnitudes and the side-by-side pictures — each scale with its own — unbuilt |
+| `counting-rules` | `spectrum` | delivered | `NoDoubleCounting` on screen: "multiply and add every probe against every probe — 8 probes, 64 sums", then "C(8, 2) = 28 different pairs" / "all 28 read exactly 0" / "computed, not proved" — `CombinationRule`'s count sizing an exhaustive check; `signal_processing/README.md` Scope (naming the scene) and row 4; in print, `study_guides/primitives/spectrum.tex` counts the 28 pairs with `\primref` to the counting-rules primitive. The probe-against-probe table is the outer-product grid's plan-019 stop (devices, below) — drawn, not named on screen |
+| `spectrum` | *(convolution — the sliding weighted sum as filtering)* | promised | `TheFoldAtNyquist`'s closing map names it on screen as the first road still ahead ("echoes and smoothing? → convolution"); `signal_processing/README.md`'s road table ("Convolution … not built") and Ideas' first bullet ("the road's next series"). Home `signal_processing/` (plan 019's series C) |
+| `spectrum` | *(windowing → STFT → spectrogram: leakage explained, "filterbank" earned)* | promised | `WhatSetsTheSpacing` on screen, its 8 samples beside the bars: "a 1500 Hz sine: one and a half laps in the window — not a whole number" / "a 1500 Hz sine, starting at 0, sits between two rows — and every row answers" / "that smear is leakage: the windowing series explains it — and tames it" / "slide the window along and each detector's output becomes a signal: a filterbank"; `TheSpectrumInDecibels`: "a real note lands between rows: a window shaped these levels — a later series"; `TheFoldAtNyquist`'s closing map, MUTED as still ahead: "a tone between rows? → windowing", "tones that change over time? → the short-time transform". `signal_processing/README.md` row 5, Scope ("The word 'filter'", "Leakage and windows"), road table and Ideas (series D). Rider (not made now): when the STFT series lands, the honest joint to the CTC nodes is the STFT hop becoming `TheAlignmentProblem`'s frames — the encoder between is out of scope on both sides and Whisper is not a CTC model, so the `source-verifier` pins that first |
+| `spectrum` | *(mel — the filterbank regrouping the spectrum's rows; log-mel)* | promised | `WhatSetsTheSpacing` on screen: "and a mel filterbank will regroup Whisper's 201 rows into 80"; `TheFoldAtNyquist`'s closing map: "the ear's own grouping? → mel" under "still ahead on the road to the spectrogram a speech model reads"; `signal_processing/README.md` row 5, road table and Ideas (series E) — the Ideas bullet also records the parked `linear_algebra/` topic's on-ramp (the bank as a projection onto probes, the mel filterbank a matrix); parked, to be returned to — recorded as an on-ramp, not a row |
+| `spectrum` | *(the inverse — the 8 readings rebuild the 8 samples; synthesis)* | promised | `NoDoubleCounting` on screen: "1 + 2·3 + 1 = 8 readings from 8 samples — nothing lost", then "that the 8 readings rebuild the 8 samples is a promise, not shown here"; `signal_processing/README.md` Scope ("Synthesis"), row 4 ("promised, not shown") and Ideas ("The inverse") |
 
 ## Shared visual devices
 
@@ -130,7 +139,14 @@ one topic should meet the same picture, upgraded, in the next:
   `ThreeSetsOneLedger`'s Bernstein beat): the same cells, product then
   overlap. Plan 017's `TheZigzag` opens the same grid on two sides and
   walks it: the cells stamped 1..15 along anti-diagonals — the first
-  time the grid is read as a *sequence* rather than a count.
+  time the grid is read as a *sequence* rather than a count. Plan 019's
+  `NoDoubleCounting` crosses the 8 probes with themselves: 64
+  multiply-and-add sums, the diagonal 8, 4, 4, 4, 4, 4, 4, 8, the
+  C(8, 2) = 28 pairs above it all 0 — the first time a cell holds a
+  *measurement* rather than a count or a weight. Drawn as a bare table
+  of numbers (no cell boxes) and not named as the counting grid on
+  screen; `TheFoldAtNyquist` re-reads it in a caption ("the table of
+  zeros, run past row 4: c₃ × c₅ adds to 4, s₃ × s₅ to −4 — not 0").
 - **Stacked lists with pairing arrows** (`ArrangedInASequence`'s
   `_pairing_arrows`): two lists one above the other, one arrow per
   column — never side-by-side sets, which invite the part–whole reading
@@ -148,8 +164,11 @@ one topic should meet the same picture, upgraded, in the next:
   removes: repeated work) → `TheTwoLedgers`' one-ledger 3/8 chip, WARM
   marking the overcount itself. Sixth stop: `TwoSetsOneOverlap`'s doubly
   covered cells, the 7/6 alarm and the overlap filled WARM then removed;
-  `EveryPointCountedOnce`'s cancelled subset pairs.
-- **The closing `WhenToUseIt` mapping scene**: same layout in seven
+  `EveryPointCountedOnce`'s cancelled subset pairs. Seventh stop, in
+  `spectrum`: `TheProbe`'s mismatch products that cancel to 0, and
+  `TheFoldAtNyquist`'s impostor — the 7-lap sine row, the 7000 Hz curve
+  and the folded ghosts (5000, 6000, 7000) on the ruler.
+- **The closing `WhenToUseIt` mapping scene**: same layout in eight
   series (including `WhenToCondition`, `WhenToReachForIt` with its five
   rows and Blitzstein & Hwang's verdict, `algorithms/`'s
   `TheSignatureInTheWild` whose verdicts are the states, and
@@ -157,7 +176,12 @@ one topic should meet the same picture, upgraded, in the next:
   language→the splice) — problem
   shapes left, verdicts right. `TheHostsProtocol` deliberately breaks
   the pattern: its close is a caption trio, since the protocol table
-  already did the mapping.
+  already did the mapping. Eighth: `TheFoldAtNyquist`'s closing map —
+  six questions left, their series right — the first mapping close
+  whose verdicts include unbuilt series: two lines GOOD (the bank of
+  detectors, decibels), four MUTED (convolution, windowing, the
+  short-time transform, mel), under "built here, and still ahead on the
+  road to the spectrogram a speech model reads".
 - **The per-frame matrix**: built by the alignment series, scored one
   column at a time by `TheLossThatTrains` ("this topic's own
   per-frame matrix"), reopened by the gradient series ("the matrix
@@ -281,3 +305,29 @@ one topic should meet the same picture, upgraded, in the next:
   −1 per pair, +1 for the triple — so (6, 6) visibly reads 3, 0, 1; the
   same ledger reads 4 − 6 + 4 − 1 in `FourSetsNoPicture` and becomes
   the toggle pairing's alternating row in `EveryPointCountedOnce`.
+- **The sampled rotation** (new in `spectrum`): `PressureIntoNumbers`'
+  circle with 8 stops, read twice — the height and "the shadow: the same
+  motion a quarter-turn ahead — two readings of one point" → `TheProbe`'s
+  pair plane, where the (cosine sum, sine sum) point turns instead of the
+  tone ("one sample later is a quarter-turn of the pair — the distance
+  stays 20") → `TheFoldAtNyquist`, the same circle walked 7/8 of a lap
+  forward and 1/8 back ("the same stops as 1/8 of a lap backward: same
+  shadow, the height flipped"). The picture the Euler series should
+  inherit: the shadow a quarter-turn ahead is sin′ = cos in picture form,
+  and the pair plane is already the complex plane's picture.
+- **Stems, never staircases** (`_Stems`, in `spectrum`'s scenes 1, 2, 3, 5
+  and 7 — the tone and the mix, the probe rows, the bank's 8 samples and
+  probe thumbnails, the leakage beat's 8 samples, the two cosines' shared
+  samples):
+  a sample is a dot on a stalk from the axis, because "nothing between the
+  samples is stored" — no held step, no joined line (Montgomery's "the
+  stairsteps aren't really there"). A continuous curve appears only as a
+  tone that *could* have produced the stems.
+- **The linear-then-log replot** (`TheRoadsOwnWalk` →
+  `TheSpectrumInDecibels`): the training curve's linear panel ("the cliff
+  — most of the loss gone at once") beside its log-axis twin ("five
+  samples, η = 1 — the tail still falls" / "× per step: a straight march
+  on the log ruler"), and the spectrum's linear bars ("readings 4, 2 and
+  0.04 — on these bars the third tone is invisible") beside the dB bars
+  ("now the third tone has a bar"). Both put what a linear axis hides onto
+  the log ruler — a reuse stated nowhere on screen.

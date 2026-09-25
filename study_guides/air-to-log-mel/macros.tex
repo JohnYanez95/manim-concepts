@@ -1,0 +1,37 @@
+% Guide-owned assembly macros (plan 012 R4) — split from guide.tex so
+% tools/check_study_layout.py can render macro-generated figures
+% standalone.
+% The roadmap — guide-owned assembly state. \roadmap{n} draws the
+% objective's four stations with the first n filled (read). Stations past
+% \builtstations are drawn dashed: planned, not yet written — the picture
+% must not claim chapters the guide does not contain. Not shared with
+% ctc-algorithm/macros.tex: that roadmap has no planned state, and a
+% guide's road is its own.
+\newcommand{\roadmapstations}{%
+  the spectrum, convolution, {windowing \& STFT}, mel}
+\newcommand{\builtstations}{1}
+\newcommand{\roadmap}[1]{%
+  \begin{center}
+  \begin{tikzpicture}[x=3.1cm, y=1cm,
+      station/.style={rounded rectangle, draw=Muted, font=\scriptsize,
+        inner sep=4pt, minimum height=5.5mm},
+      done/.style={station, fill=GoodInk!25, draw=GoodInk},
+      planned/.style={station, densely dashed, text=Muted},
+      hop/.style={Muted, ->, shorten >=2pt, shorten <=2pt}]
+    \foreach [count=\i] \name in \roadmapstations {
+      \ifnum\i>\builtstations
+        \node[planned] (s\i) at (\i, 0) {\name};
+      \else
+        \ifnum\i>#1
+          \node[station] (s\i) at (\i, 0) {\name};
+        \else
+          \node[done] (s\i) at (\i, 0) {\name};
+        \fi
+      \fi
+      \ifnum\i>1
+        \pgfmathtruncatemacro{\prev}{\i - 1}
+        \draw[hop] (s\prev.east) -- (s\i.west);
+      \fi
+    }
+  \end{tikzpicture}
+  \end{center}}

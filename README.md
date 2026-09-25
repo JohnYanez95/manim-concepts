@@ -28,7 +28,9 @@ topics sits [`study_guides/`](study_guides/INDEX.md): the print track —
 per-series textbook sections stitched into objective-named guides
 (reading, end-of-chapter problems, and a separate solutions manual as
 committed PDFs), their worked numbers spliced from the same verification
-anchors the scenes use (`make study` rebuilds them):
+anchors the scenes use (`make study` rebuilds them). Two objectives so
+far: the CTC algorithm, complete; and from air to log-mel, whose first
+chapter — the spectrum — is written:
 
 ```bash
 uv run python combinatorics/counting_rules_manim.py
@@ -60,12 +62,17 @@ command, so none of them are committed.
 | [`algebra/`](algebra/README.md) | Logarithms: the counting strip, the evidence ruler, the underflow cliff |
 | [`algorithms/`](algorithms/README.md) | Dynamic programming: the recursion tree folded, the lattice by Pascal's sum, the trellis re-read as a stored answer, the state's price |
 | [`calculus/`](calculus/README.md) | e and ln (the split year, the mystery constants, the natural stride, the debt repaid); the derivative toolkit (the slope as a function, the score, the smooth max's shares); gradient descent (the slope becomes a step, the learning rate's bet, the corner's fee, the walk is not a ball, the road's own walk) |
+| [`signal_processing/`](signal_processing/README.md) | The spectrum as a bank of detectors: sound sampled into numbers, the sine-and-cosine probe pair, five detectors on the same 8 samples, why they never double-count, spacing sr/N, decibels, the fold at half the sample rate |
 
 Topics are added as they are written. The CTC gradient — the road's
-long-standing target — is now built, and the decoding series closes
-the road's loop; likely next: `linear_algebra/`
-or the deep-learning backlog (the label-prior
-variant, forced alignment). The
+long-standing target — is built, and the decoding series closed that
+road's loop. The road now being walked starts from the other end of the
+speech pipeline: `signal_processing/` runs from sound to the log-mel
+spectrogram a speech model reads (the spectrum is built; convolution,
+the short-time transform and mel are next). Parked, to be returned to:
+`linear_algebra/` — the mel filterbank, a matrix, is its natural
+on-ramp — and the deep-learning backlog (the label-prior variant, forced
+alignment). The
 layout is expected to drift — if a topic only ever holds one file, it can
 collapse into a flatter arrangement later without anything else changing.
 

@@ -1,0 +1,56 @@
+% Guide 2 — objective: read a log-mel spectrogram with understanding
+% (plan 019, "The second study-guide objective"; ADR 008).
+% Build: make study   ->  air-to-log-mel.pdf (this) + the solutions manual.
+\providecommand{\StudyRoot}{..}
+\documentclass[11pt]{report}
+\usepackage{theme}
+\usepackage[hidelinks]{hyperref}
+\input{\StudyRoot/anchors}
+
+\input{macros}
+
+\title{From Air to Log-Mel\\[0.4em]
+  \large A study guide, stitched from the manim-concepts road}
+\author{manim-concepts}
+\date{}
+
+\begin{document}
+\maketitle
+\tableofcontents
+
+\chapter*{How to read this guide}
+\addcontentsline{toc}{chapter}{How to read this guide}
+The objective is to read a log-mel spectrogram with understanding — the
+picture a speech model is handed in place of sound — knowing what every
+axis, every row and every shade of it measures, and what was thrown
+away to make it. The road has four stations, one per video series of
+the repo's signal-processing topic:
+
+\roadmap{0}
+
+\noindent This guide grows with the road. \emph{The spectrum} is
+written: one column of the picture, built as a bank of detectors on
+samples you can count. The dashed stations are planned and not yet
+written — \emph{convolution} (the sliding weighted sum, and the theorem
+that explains leakage), \emph{windowing, the short-time transform and
+the spectrogram} (the columns side by side), and \emph{mel} (the rows
+regrouped the way the ear groups them, with a log on top). Each is
+written when it is asked for, and with it comes a transition page that
+says why the next station needs exactly what the last one built.
+
+The first chapter leans on three chapters of this repo's other guide,
+\emph{The CTC Algorithm}: random variables (the weighted sum),
+logarithms (multiplying is adding, and $\log_{10} 2$) and the counting
+rules ($\binom{n}{k}$). Each use restates what it needs, so the chapter
+reads on its own. Practice problems close every chapter — sized to
+double as a diagnostic before you study digital audio — and worked
+solutions live in the separate solutions manual, keyed by the same
+problem numbers. Worked numbers are spliced from the repo's
+verification anchors — for instance, the chapter's two-tone mix reads
+$\anchor{019.R.readings}$ on its five detectors — never retyped.
+
+\input{manifest}
+
+\printbibliography[heading=bibintoc]
+
+\end{document}

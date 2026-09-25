@@ -1,7 +1,10 @@
 # ADR 008: every series carries its study-guide primitive forward
 
-Status: accepted — maintainer directive, 2026-08-12 (plan 012's
-standing note, executed after v1 of the CTC guide merged in PR #13).
+Status: **suspended 2026-09-19 by [ADR 010](010-study-guide-work-waits-for-a-request.md)**
+— study-guide work now waits for the maintainer's explicit request. The
+method below still governs any chapter that is requested. Originally
+accepted as a maintainer directive, 2026-08-12 (plan 012's standing
+note, executed after v1 of the CTC guide merged in PR #13).
 
 ## Context
 

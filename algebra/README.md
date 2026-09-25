@@ -111,6 +111,13 @@ Rough queue, in roughly the order they build on each other:
   series builds the ruler; that series owns the inference).
 - Log scales in the wild as their own visual essay — dB vs pH vs
   magnitude vs semitones, with the Weber–Fechner motivation given its
-  honest approximate status.
+  honest approximate status. The dB strand is now built, in
+  [`signal_processing/`](../signal_processing/README.md):
+  `TheSpectrumInDecibels` runs this series' ruler on a spectrum
+  (−20 × 0.301 = −6.02 dB, against a stated reference), and its closing
+  table names pH, stellar magnitude and semitones — each a constant
+  times the log of a ratio — with Weber–Fechner kept as an approximate
+  motivation, not a law. The essay itself — the scales side by side,
+  each with its own picture — remains unbuilt.
 - Information as log-counting (bits, entropy) — the natural bridge
   from this topic toward information theory.

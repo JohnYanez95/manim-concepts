@@ -114,7 +114,10 @@ def word_boxes(pdf: Path) -> list[tuple[str, float, float, float, float]]:
         out,
     ):
         x0, y0, x1, y1 = (float(m.group(i)) for i in range(1, 5))
-        text = ET.fromstring(f"<w>{m.group(5)}</w>").text or ""
+        # pdftotext passes big-delimiter glyphs through as C0 control characters
+        # (a binomial in a TikZ node emits 0x01), which are not legal XML.
+        word = re.sub(r"[\x00-\x08\x0b\x0c\x0e-\x1f]", "", m.group(5))
+        text = ET.fromstring(f"<w>{word}</w>").text or ""
         boxes.append((text, x0, y0, x1, y1))
     return boxes
 
