@@ -50,7 +50,23 @@ Branch `feat/signal-processing-convolution`, cut from `main` at fdf2672
   recommended (the conv-layer line stays in scene 3; source–filter moves
   to scene 7 only if scene 6 runs long); the verifier addendum (O–Y) lands
   in phase 1
-- [ ] Phase 1
+- [x] Phase 1: `convolution_manim.py` — the spectrum series' helpers
+  copied in (`_probe`, `_reading`, `_fmt`, `_Stems`, `_number_strip`,
+  `_swap_caption`, `_takeaway`, `_Bank`, `_uprights`; topic dirs are not
+  packages, and this is the second series to need them — a third should
+  promote them to `utils`), plus `_slide` (linear, edge neighbours drawn)
+  and `_ring` (circular) with the kernel's alignment explicit, and
+  `_Window` (weight tokens under the stems the window covers).
+  `TheSlidingWeightedSum` built in full (50 s at draft; linter clean —
+  the strip carries its two edge neighbours as muted ghost stems so the
+  window can read them at the ends, and the prompt retires before the
+  8-high spike arrives under it; frames verified by eye). Bug caught by
+  the anchors: the causal offset was off by one (the 2-tap gave 2, 2, 5,
+  5 instead of 2, 2, 2, 5, 5) — every kernel alignment is now checked
+  against anchors O–P before a scene uses it. README: the road table's
+  convolution row, Scope's "filter" bullet rewritten for two series and
+  a circular-convolution exclusion added, subsection + row 1; verifier
+  addendum (O–Y) pinned; `make check` green
 - [ ] Phase 2
 - [ ] Phase 3
 - [ ] Phase 4
@@ -247,14 +263,68 @@ Wage, Buck & Hjalmarson 2006 (abstract); Sanderson 2022; Azad; Wilczek;
 Jurafsky & Martin §15.4.6; Wikipedia (three pages, pointers). Third-party
 reposts consulted and not to be linked.
 
-### Verifier addendum (anchors O–)
+### Verifier addendum (anchors O–Y — `source-verifier` resumed, 2026-09-24)
 
-*(pending — the exact on-screen objects the design introduces that A–N
-do not cover: the spike; the click and the 1, 2, 0, 3 superposition; the
-echo kernel both ways; the centred kernel's bank readings placed at stops
-7, 0, 1; the turned-arrow sums; s₂ × c₁ and the ÷ 8 scope; the step on a
-longer strip; Lyons' 5-tap numbers; the reverb arithmetic and J&M's
-harmonics)*
+**Corrections that bind the design.** (1) Under the repo's plus-signed
+sine sum a unit impulse at stop m has pair (cos 45°km, **+sin** 45°km)
+on row k — the arrow for stop m turns *counter-clockwise* by 45°·k per
+stop; any kernel's row-k pair is Σ h[m]·(cos, +sin). (2) Σy = Σx·Σh is a
+theorem for the full linear output with zeros beyond both ends, and for
+the ring; for eight drawn outputs with constant neighbours it holds only
+when what leaks in equals what leaks out — true of the spike (x[0] = x[7]
+= 2 = the neighbours), so 22 → 22 and 66 are exact, but the caption must
+not claim the rule for an arbitrary strip. (3) J. O. Smith's causality
+phrase is "the pulse is smeared to the 'right' (forward in time) because
+the filter impulse response starts at time zero. Such a filter is said to
+be causal" — and his example is a 14-point ring. (4) Goodfellow's verbatim
+is "many neural network libraries implement a related function called the
+cross-correlation, which is the same as convolution but without flipping
+the kernel" and "Many machine learning libraries implement
+cross-correlation but call it convolution." (5) S. W. Smith's sum rule is
+conditional: "*If* a low-pass filter has a gain of one at DC … then the
+sum of all of the points in the impulse response must be equal to one."
+(6) Lyons' 5-tap gains: 0.9619 (not 0.9618) and 0.6857; his cars table
+NOT verified — not on screen. (7) s₂ × c₄ = −s₂ reads 4 on row 2 as ONE
+term of the complex sum (the mirror copy) — "two copies" only in the real
+picture; scope the "4 × 4 ÷ 8" caption to its instance.
+
+**Anchors.** O — the spike through the centred 3-tap → 2, 2, 4, 4, 4, 2,
+2, 2 (Σ 22); through the causal 2-tap with x[−1] = 2 → 2, 2, 2, 5, 5, 2,
+2, 2; through [1, 1, 1] → 6, 6, 12, 12, 12, 6, 6, 6 (Σ 66). P — the click
+through the causal 3-tap → ⅓, ⅓, ⅓, 0…; −2× → −⅔ ×3; at stop 3 → ⅓ at 3,
+4, 5 (a click at stop 6 or 7 would wrap — avoid). [1, 2, 0, 3] ∗ [½, ½]
+linear → 0.5, 1.5, 1, 1.5, 1.5 = 1·[½,½,0,0,0] + 2·[0,½,½,0,0] +
+3·[0,0,0,½,½]; y[3] = ½·3 + ½·0. Q — the echo kernel [1, 0, 0, ½] on a
+click: convolution 1 at 0, ½ at +3; the unflipped slide ½ at −3, 1 at 0;
+the centred 3-tap is identical both ways, E is not. R — the centred
+3-tap at stops 7, 0, 1: pairs (1, 0), ((1+√2)/3, 0), (⅓, 0), ((1−√2)/3,
+0), (−⅓, 0), every sine sum exactly 0 — equal to the turned-arrow sums
+⅓(1 + 2cos 45°k); the causal 2-tap at stops 0, 1: row 2 pair (½, ½),
+0.7071 at 45°, row 4 (0, 0). S — delay by one turns row k's pair
+counter-clockwise by 45°·k: s₂ → (−4, 0) (+90°), s₁ → (−2√2, 2√2) (+45°).
+T — s₂ × c₁: pairs (0,0), (0,2), (0,0), (0,2), (0,0), readings [0, 2, 0,
+2, 0]; each is one term X[2]·W[∓1]/8 = (4 × 4)/8 — exact for this
+instance; s₂ × c₀ = s₂. U — the step 0, 0, 0, 1, 1, 1, 1, 1 (x[8] = 1
+drawn) through the centred 3-tap → 0, 0, ⅓, ⅔, 1, 1, 1, 1; through the
+causal 2-tap → 0, 0, 0, ½, 1, 1, 1, 1; the ring versions wrap (do not
+draw them as the strip). J. O. Smith's example reproduced: "the corners
+of the rectangular pulse are 'smoothed' by the three-point filter"; the
+centred version "smoothed 'in place' with no added delay". V — Lyons'
+5-tap: 0.9619, 0.6857. W — J. O. Smith, CCRMA Lecture 3 (opened): "Let
+t60 = 2 seconds, fs = 50 kHz — each filter requires 100,000 multiplies
+and additions per sample, or 5 billion multiply-adds per second"; "In
+principle, this is an exact computational model"; "the output is given
+by six convolutions". Jurafsky & Martin §15.4.6 verbatim: "a 115 Hz
+glottal fold vibration leads to harmonics (other waves) of 230 Hz, 345
+Hz, 460 Hz"; Fig. 15.24 "Visualizing the vocal tract position as a
+filter". X — S. W. Smith verbatim: "each point in the output signal
+receives a contribution from many points in the input signal, multiplied
+by a flipped impulse response"; "Convolving any signal with a delta
+function results in exactly the same signal"; the echo: "the input signal
+plus a delayed version of the input signal". Y — Goodfellow per
+correction 4. Three sources added (MDFT "Convolution Example 1"; the
+CCRMA reverb handout; S. W. Smith ch. 6 §"Sum of Weighted Inputs" and
+ch. 7 §"Common Impulse Responses").
 
 ## Scene design
 

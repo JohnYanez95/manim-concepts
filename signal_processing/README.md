@@ -27,7 +27,7 @@ The road, in dependency order ([plan 019](../docs/plans/019-signal-processing-sp
 | Series | Lands | Status |
 | --- | --- | --- |
 | The spectrum | Sampling; one detector as a probe pair; the bank; why it never double-counts; spacing sr/N; decibels; the fold at half the sample rate | `spectrum_manim.py` |
-| Convolution | The sliding weighted sum as filtering; the convolution theorem | not built |
+| Convolution | The sliding weighted sum as a filter; what one click becomes; the flip; a moving average as a low-pass; the kernel's own reading as the convolution theorem; multiplying in time | `convolution_manim.py` |
 | Windowing → STFT → spectrogram | Leakage as the convolution theorem at work; framing and hop; the time–frequency tradeoff | not built |
 | Mel | The mel filterbank regroups the spectrum's rows; log-mel | not built |
 
@@ -38,9 +38,17 @@ Deliberately **not** covered here:
   hypotenuse — Steven W. Smith's "real DFT". The complex form, and the
   reason orthogonality holds for every N rather than the N = 8 checked
   on screen, wait for that series in [`calculus/`](../calculus/README.md).
-- **The word "filter".** One frame gives one number per detector; a
-  filter's output is a signal, which only exists once the frame slides.
-  The windowing series earns the word "filterbank".
+- **The word "filter".** In the spectrum series one frame gives one
+  number per detector, and a filter's output is a signal — so that
+  series says "detector" throughout. The convolution series earns
+  "filter" in its first scene, by sliding the window: from then on a
+  detector is one number per frame and a filter is a signal per signal.
+- **Circular convolution.** On the 8-sample grid the DFT's convolution
+  theorem is circular (Oppenheim & Schafer §8.6.5). The convolution
+  series meets it where circular and linear agree — whole-lap tones on
+  the ring, and clicks and steps on a longer strip with the zeros beyond
+  its ends drawn — and never teaches the wrap. The windowing series owns
+  the case where they differ.
 - **Leakage and windows.** Every worked tone here sits exactly on a
   detector's frequency. A tone between detectors appears twice, each
   time as an honest pointer and never explained: `WhatSetsTheSpacing`'s
@@ -76,6 +84,23 @@ verification pass (anchors A–Z).
 
 Renders are numbered to match:
 `01_PressureIntoNumbers.mp4` … `07_TheFoldAtNyquist.mp4`.
+
+### convolution_manim.py
+
+Watch after the spectrum series. The first three scenes build the filter
+(the window walks; what one click becomes; the flip and what it is for);
+the middle three are the convolution theorem — a moving average read on
+the bank, the kernel's own reading, multiplying in time; the last maps
+where convolution lives. Every number traces to
+[plan 020](../docs/plans/020-signal-processing-convolution.md)'s
+verification pass (anchors A–Y).
+
+| # | Scene | Formula | What it says | Why it's true | When it's useful |
+| --- | --- | --- | --- | --- | --- |
+| 1 | `TheSlidingWeightedSum` | $y[n] = \tfrac13\,(x[n{-}1] + x[n] + x[n{+}1])$ | Slide a window of weights along a signal, multiplying and adding at every stop, and the output is a signal too: that is a filter, and the window is its kernel. | The spectrum series' probe did multiply-and-sum once, for one number; here the same window of three weights of ⅓ walks the strip 2, 2, 2, 8, 2, 2, 2, 2 (steady at 2 beyond both ends, drawn) and drops one output at every stop — 2, 2, 4, 4, 4, 2, 2, 2: the spike spread over three stops and lowered, a moving average. The weights sum to 1, so the totals agree (22 in, 22 out); weights 1, 1, 1 make everything three times as loud (66) — the sum of the weights is the gain. | "A filter turns a signal into a signal" — the word the spectrum series withheld, earned by sliding. Every smoothing, every echo and every learned kernel in a network is this walk with a different window; the moving average is the first and the plainest. |
+
+Renders are numbered to match:
+`01_TheSlidingWeightedSum.mp4` … `07_WhereConvolutionLives.mp4`.
 
 ## References
 
