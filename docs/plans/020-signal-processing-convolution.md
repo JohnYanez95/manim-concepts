@@ -157,7 +157,11 @@ Branch `feat/signal-processing-convolution`, cut from `main` at fdf2672
   and all" listed the readings unsigned. Riding in the same push: the
   KaTeX `\*` fix in `deep_learning/`, Fant's URL, the maintainer's
   twenty-eight ticks. One re-review requested — findings required
-  changes. **Bot reviews spent: 1 of 2.** Finals: pending
+  changes. The re-review: one minor finding, valid — scene 4's 4000 Hz caption
+  said "the end row reads ÷ 8", a normalisation the bars do not show;
+  now "8 became 2.67 (an end row starts at 8)", README and wiki following.
+  Pushed under the pause, no third review (ADR 009). **Bot reviews spent:
+  2 of 2.** Finals: pending
 
 ## Research digests
 

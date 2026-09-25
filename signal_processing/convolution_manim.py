@@ -866,7 +866,7 @@ class AMovingAverageIsALowPass(ConceptScene):
             (1, "s", "1000 Hz: the same tone, 0.80 as tall — the reading 4 became 3.22"),
             (2, "s", "2000 Hz: the same tone, exactly ⅓ as tall — 4 became 1.33"),
             (3, "s", "3000 Hz: 0.14 as tall, upside down — 4 became 0.55, the sign flipped"),
-            (4, "c", "4000 Hz: ⅓ as tall and upside down — the end row reads ÷ 8: 8 became 2.67"),
+            (4, "c", "4000 Hz: ⅓ as tall and upside down — 8 became 2.67 (an end row starts at 8)"),
             (0, "c", "0 Hz — a constant: unchanged. Slow tones pass, fast tones shrink"),
         ]
         in_strip = out_strip = before = after = None
