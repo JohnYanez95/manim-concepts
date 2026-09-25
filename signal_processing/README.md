@@ -415,8 +415,12 @@ When it is useful:
       tract as a filter.
 - [ ] [Wikipedia, "Source–filter model"](https://en.wikipedia.org/wiki/Source%E2%80%93filter_model)
       — the impulse-train source shaped by the tract; Fant credited.
-- [ ] Gunnar Fant, *Acoustic Theory of Speech Production*, Mouton, The
-      Hague, 1960 — citation only (no URL); not opened.
+- [ ] [Fant, *Acoustic Theory of Speech Production* (1960) — preview](https://api.pageplace.de/preview/DT0400.9783110873429_A20720807/preview-9783110873429_A20720807.pdf)
+      — Gunnar Fant, Mouton & Co., The Hague, © 1960 (the publisher's
+      preview, second printing 1970; ISBN 978-3-11-087342-9): the
+      source–filter theory in the original — "simple resonator systems
+      and the theory of sound sources in speech". Front matter opened;
+      the body not.
 
 History:
 
