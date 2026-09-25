@@ -141,7 +141,7 @@ Branch `feat/signal-processing-convolution`, cut from `main` at fdf2672
   round closed): he verified all twenty-eight plan-020 references — the
   Fant entry with a publisher's preview he supplied — and directed the
   ticks; `references.bib` re-synced (332 entries, 288 verified)
-- [ ] Phase 5 — PR #22 opened 2026-09-24. The bot's one automatic review:
+- [x] Phase 5 — PR #22 opened 2026-09-24. The bot's one automatic review:
   seven findings, all valid on inspection, applied in one push. The one
   that mattered: `MultiplyingInTime` said "every frame is × a rectangle
   of eight ones" one beat after showing that × eight ones on the ring
@@ -161,7 +161,11 @@ Branch `feat/signal-processing-convolution`, cut from `main` at fdf2672
   said "the end row reads ÷ 8", a normalisation the bars do not show;
   now "8 became 2.67 (an end row starts at 8)", README and wiki following.
   Pushed under the pause, no third review (ADR 009). **Bot reviews spent:
-  2 of 2.** Finals: pending
+  2 of 2.** Finals, after the round closed: `make clean-drafts`, then seven
+  files at 1080p60, distinct names (`01_TheSlidingWeightedSum` …
+  `07_WhereConvolutionLives`; 50, 55, 51, 66, 69, 56, 43 s; 3019, 3319,
+  3079, 3960, 4159, 3383, 2603 frames), frames checked at full resolution
+  on scenes 1, 3, 5 and 6. The plan closes; the merge is the maintainer's
 
 ## Research digests
 
