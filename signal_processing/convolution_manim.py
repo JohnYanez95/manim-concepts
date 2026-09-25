@@ -403,7 +403,8 @@ class TheSlidingWeightedSum(ConceptScene):
             font_size=LABEL_SIZE,
             color=ACCENT,
         ).move_to(2.4 * DOWN)
-        self.play(FadeIn(definition), Create(boxed(definition, buff=0.2)))
+        definition_box = boxed(definition, buff=0.2)
+        self.play(FadeIn(definition), Create(definition_box))
         note = _swap_caption(
             self,
             note,
@@ -462,6 +463,7 @@ class TheSlidingWeightedSum(ConceptScene):
                     heavy_numbers,
                     window,
                     definition,
+                    definition_box,
                     totals[0],
                     heavier,
                     note,
@@ -859,7 +861,7 @@ class AMovingAverageIsALowPass(ConceptScene):
         cases = [
             (1, "s", "1000 Hz: the same tone, 0.80 as tall — the reading 4 became 3.22"),
             (2, "s", "2000 Hz: the same tone, exactly ⅓ as tall — 4 became 1.33"),
-            (3, "s", "3000 Hz: 0.14 as tall, and upside down — the sign flipped"),
+            (3, "s", "3000 Hz: 0.14 as tall, upside down — 4 became 0.55, the sign flipped"),
             (4, "c", "4000 Hz: ⅓ as tall and upside down — the end row reads ÷ 8: 8 became 2.67"),
             (0, "c", "0 Hz — a constant: unchanged. Slow tones pass, fast tones shrink"),
         ]
@@ -1504,7 +1506,7 @@ class WhereConvolutionLives(ConceptScene):
             self,
             None,
             caption(
-                "built here — next on the road: the window behind every frame, then the spectrogram"
+                "met here — next on the road: the window behind every frame, then the spectrogram"
             ).move_to(3.2 * DOWN),
         )
         self.wait(2.2)

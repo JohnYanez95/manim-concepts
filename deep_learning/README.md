@@ -59,7 +59,10 @@ Deliberately **not** covered here:
   fix, not built as its own loss variant.
 - The encoder itself. RNN and transformer acoustic models are out of
   scope: CTC begins at the per-frame probability matrix, and so does this
-  topic.
+  topic. [`signal_processing/`](../signal_processing/README.md) walks
+  the road from the other end and stops at the same encoder:
+  `WhereConvolutionLives` names the convolutional layer and goes no
+  further.
 
 ## Concepts
 

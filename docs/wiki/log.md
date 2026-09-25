@@ -1139,3 +1139,87 @@ reordered.
 - stamp: unchanged (94c3c10) — the audit advances it
 - branch note: cut from main at fdf2672 (PR #21 merged, clean, level
   with origin)
+
+## [2026-09-24] audit | incremental, plan 020 branch
+
+- scope: diffed 94c3c10..ce6ea65 (the plan-019 finalisation tail and
+  PR #21 merge absorbed as the previous audit's application; the six
+  plan-020 commits read in full plus cited far ends — SameOutcomesAdd,
+  NoDoubleCounting, TheProbe, WhatSetsTheSpacing, TheSpectrumInDecibels,
+  TheFoldAtNyquist, TheSlopeIsAFunction, deep_learning/ Scope,
+  probability/ row 4); no full crawl
+- findings: 5 promised-not-delivered (4 standing, 1 ruled a Scope
+  exclusion), 3 delivered-not-recorded, 7 possible-not-yet-made
+  (1 declined), 6 graph-health; zero numeric discrepancies — the
+  moving-average gains (1, 0.80, ⅓, 0.14, ⅓ and 3.22, 1.33, 0.55, 2.67),
+  the ½ ½ window's 0.71 at 45°, the 0.5, 1.5, 1, 1.5, 1.5 both ways, the
+  step's 0, ⅓, ⅔, 1, the product's 4 × 4 ÷ 8 = 2, the 1500 Hz bars, the
+  100 000 taps and the 115 Hz comb recomputed
+- top finding, FIXED: signal_processing/README.md's Scope said a tone
+  between detectors appears twice, "each time as an honest pointer and
+  never explained" — contradicted by `MultiplyingInTime`, which re-shows
+  the 1500 Hz bars under "leakage — by the theorem" and explains the
+  smear (the rectangle's lines copied onto the tone's) without taming
+  it. The bullet now says three times, explained but not tamed; the
+  window's shape stays the windowing series'
+- second finding, BUILT (scene 7): the closing map's line "built here —
+  next on the road…" sat over three GOOD lines of which only the
+  kernel's own reading is built — reverb and convolutional layers are
+  named as where the walk lives, not built. The caption now reads "met
+  here — next on the road: the window behind every frame, then the
+  spectrogram"; README row 7 ("met here — one built, two named as where
+  the walk lives") and both wiki quotes (row 107, the mapping-close
+  bullet) follow
+- BUILT (scene 4): the 3000 Hz reading 0.55 was on the bank and in the
+  plan's anchors but not in the caption; it now reads "3000 Hz: 0.14 as
+  tall, upside down — 4 became 0.55, the sign flipped" — README row 4
+  and the WARM device bullet quote it
+- convolutional layers: ruled a Scope exclusion, not a row. The map
+  colours the line GOOD, there is no home node, and deep_learning/'s
+  Scope excludes the encoder — so no promise stands to record.
+  signal_processing/ Scope gained the bullet (`WhereConvolutionLives`'
+  LeCun caption, `TheFlip`'s unflipped aside; "named, not promised: no
+  series is queued"), and deep_learning/'s encoder bullet now says the
+  same from its side
+- windowing bookkeeping confirmed: one row (107, `spectrum` → windowing)
+  carrying the spectrum's promise and convolution's mechanism, per the
+  series entry; the row now states its closure rule — at closure it
+  flips delivered in place (the `spectrum` → `convolution` precedent)
+  and `convolution` → the windowing node gets its own delivered row
+- asymmetries closed: probability/README.md row 4's when-useful cell
+  now points at `WhatOneClickBecomes` ("the weighted sum is linear (the
+  dice)") beside `NoDoubleCounting`; signal_processing/ Scope's
+  three-series paragraph now says which prior scenes the convolution
+  series stands on (`SameOutcomesAdd` once more, then the spectrum
+  series alone — `TheSlidingWeightedSum`, `AMovingAverageIsALowPass`,
+  `TheKernelsOwnReading`); deep_learning/'s encoder bullet names
+  signal_processing/ stopping at the same encoder
+- plan design trued to the built scenes: scene 1's "Σ node" (the
+  window's frame drops the stem; no Σ node is drawn), scene 7's
+  "restated" (the source–filter model is stated in scene 7 only, scene
+  6 no longer carrying it) and the map's "met here"
+- README row 6's unsourced sentence cut: "Modulation, mixing and every
+  'multiply by a carrier' in radio is this same copying of lines" — no
+  anchor in plan 020 and nothing on screen supports it
+- riders, not rows: row 106 (`random-variables` → `convolution`) — the
+  two-dice diagonals are the die's pmf slid against itself,
+  `SameOutcomesAdd`'s level sets as a convolution, not stated on either
+  side, a candidate beat for the variance series (row 73);
+  signal_processing/ Ideas' "Other kernels" — the first difference's
+  far end is `TheSlopeIsAFunction` (calculus/), S. W. Smith's discrete
+  derivative as the slope born as a signal, and [1, 2, 1]/4 re-checks
+  the theorem (gains multiply); pinned, not on screen
+- not made, recorded here: a trellis/DP reading of the sliding sum
+  (`dynamic-programming`) — declined, the weights are input-dependent
+  there and fixed here, so the shapes only look alike; the bank
+  diagonalising a circulant matrix (`TheKernelsOwnReading`'s readings
+  as eigenvalues, the probes as eigenvectors) — the strongest on-ramp
+  yet for the parked `linear_algebra/`, recorded as an on-ramp only;
+  Whisper's two convolutional layers as the fact-bridge from
+  `WhereConvolutionLives` to `TheAlignmentProblem`'s frames — encoder,
+  out of scope on both sides, not opened
+- linear_algebra/: parked, to be returned to (maintainer, 2026-09-19).
+  No live text frames it otherwise — the circulant on-ramp above is
+  recorded as an on-ramp, not a customer
+- stamp: advance to ce6ea65 (the audited HEAD; findings applied in the
+  commit after it)

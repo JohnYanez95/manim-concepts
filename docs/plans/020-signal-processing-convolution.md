@@ -102,7 +102,32 @@ Branch `feat/signal-processing-convolution`, cut from `main` at fdf2672
   to all three. Not made, logged: convolutional layers (a level-3 pointer
   with no home node); the two-dice diagonals as a pmf convolution.
   `make test` green
-- [ ] Phase 4
+- [ ] Phase 4: `connection-auditor` run on ce6ea65 (incremental; zero
+  numeric discrepancies — every on-screen number recomputed). **Top
+  finding, README:** the Scope's "Leakage and windows" bullet still said
+  a tone between rows appears twice and is never explained —
+  `MultiplyingInTime` shows it a third time and explains the smear; the
+  bullet now says explained, not tamed. **Second, on screen:** the
+  closing map's "built here" sat over three GOOD lines of which only the
+  kernel's own reading is built (reverb drawn and priced, conv layers
+  named) — now "met here"; README row 7 and both wiki quotes follow. Also
+  applied: the 3000 Hz reading (0.55) captioned as its siblings are;
+  convolutional layers ruled a Scope exclusion, not a promised row (the
+  map colours it GOOD, no home node exists and none is owed); the
+  windowing row keeps one row with its closure rule written in;
+  asymmetries closed (`probability/` row 4, `deep_learning/`'s encoder
+  bullet, the topic Scope naming this series' far ends); an unsourced
+  modulation sentence cut from row 6; the first difference's far end
+  (`TheSlopeIsAFunction` on stems) named in Ideas; design section trued
+  (no Σ node; source–filter stated once). Not made, logged: a trellis/DP
+  reading (declined — weights input-dependent), the bank as diagonalising
+  a circulant matrix (the strongest on-ramp yet for parked
+  `linear_algebra/`), Whisper's two conv layers as the fact-bridge. Stamp
+  advanced to ce6ea65. Self-check against CLAUDE.md: no raw colours, no
+  `palette()`, every replacement out-then-in, one orphan `boxed()` found
+  and named (scene 1's definition box would have sat under the takeaway).
+  Drafts re-rendered (7 files), linter clean. Local CodeRabbit pass:
+  pending
 - [ ] Phase 5 — bot reviews spent: none yet, of 2
 
 ## Research digests
@@ -430,13 +455,13 @@ clicks, steps and the 4-sample superposition, which never touch the bank.
 
 | # | Scene | Level | What is on screen |
 | --- | --- | --- | --- |
-| 1 | `TheSlidingWeightedSum` | 1 | The spike 2, 2, 2, 8, 2, 2, 2, 2 on a long strip; three ⅓ tokens under three adjacent stems — `TheProbe`'s multiply-and-sum, now walked along: at every stop the Σ node drops one ACCENT stem into a second strip, 2, 2, 4, 4, 4, 2, 2, 2. "A filter turns a signal into a signal — the detector gave one number; slide the window and the numbers become a signal." Both totals 22: the weights sum to 1. The plain sum [1, 1, 1] triples everything (66). Named: the moving average, the kernel. |
+| 1 | `TheSlidingWeightedSum` | 1 | The spike 2, 2, 2, 8, 2, 2, 2, 2 on a long strip; three ⅓ tokens under three adjacent stems — `TheProbe`'s multiply-and-sum, now walked along: at every stop the window's frame drops one ACCENT stem into a second strip (no Σ node is drawn), 2, 2, 4, 4, 4, 2, 2, 2. "A filter turns a signal into a signal — the detector gave one number; slide the window and the numbers become a signal." Both totals 22: the weights sum to 1. The plain sum [1, 1, 1] triples everything (66). Named: the moving average, the kernel. |
 | 2 | `WhatOneClickBecomes` | 1 → 2 | One click through the kernel gives the kernel back — the impulse response, what one click becomes; −2× the click → −2× the shape; a click at stop 3 → the shape at 3, 4, 5. Then 1, 2, 0, 3 through [½, ½] two ways on one screen: the input-side stack (three scaled shifted copies of the shape, summed) and the output-side machine (one output at a time, the window read backwards) land on the same 0.5, 1.5, 1, 1.5, 1.5 — length 4 + 2 − 1 = 5, the ends drawn. The two facts named with their owners: "sums pass through" (`SameOutcomesAdd`'s move) and "the same rule at every stop". |
 | 3 | `TheFlip` | 2 | The echo kernel [1, 0, 0, ½] on a click: the probe's slide (pattern unreversed) puts ½ at stop −3 — a pre-echo, WARM; the flipped slide puts it at +3 — an echo. Same numbers, one list reversed; the moving average hid it because ⅓ ⅓ ⅓ reversed is itself. Correlation = a detector's question; convolution = a filter's. Causality: the centred average peeks one sample ahead; the causal one is the same output a stop late (the step 0, 0, 0, 1, 1, 1, 1, 1 → 0, 0, ⅓, ⅔, 1, 1, 1, 1). When-useful: convolutional layers correlate and call it convolution — a learned kernel does not mind. |
 | 4 | `AMovingAverageIsALowPass` | 1 → 2 | Whole-lap tones through the centred 3-tap on the ring, the bank read before and after: 1000 Hz → 0.80 as tall (4 → 3.22); 2000 Hz → exactly ⅓ (4 → 1.33); 3000 Hz → 0.14 and sign-flipped (WARM; 4 → 0.55); 4000 Hz → ⅓ and flipped (8 → 2.67, ÷ 8 noted); 0 Hz → unchanged. "Low-pass: slow tones pass, fast tones shrink — it scales, it does not remove." The 2-tap [½, ½] on 4000 Hz: all eight exactly 0 — gain 0, the special case; on 2000 Hz the pair turns 45° (the half-sample delay). S. W. Smith's verdict: the best smoother, the worst frequency separator — row 3 quieter than row 4. |
 | 5 | `TheKernelsOwnReading` | 2 · core | The kernel itself on the bank (⅓ at stops 7, 0, 1 — "the stop before 0 is stop 7 on the ring"): its readings are the five gains, 1, 0.80, 0.33, 0.14, 0.33, with rows 3 and 4 negative. Why, on `TheProbe`'s pair plane: a delayed tone is a turned pair (45°·k per sample); the output is a weighted sum of delayed copies; the row's sum is linear — three arrows of length ⅓ at 0, +45°k, −45°k summed head to tail: k = 1 → 0.80; k = 2 → ⅓ (the side arrows cancel); k = 3 → −0.14; k = 4 → −⅓. Boxed: filtering in time = multiplying the readings, row by row. "Checked on one kernel and four rows — for every kernel and every N, the proof needs Euler's formula." The 2-tap's row-2 pair (½, ½): length 0.71, turned 45° — the turn of scene 4 explained. |
 | 6 | `MultiplyingInTime` | 2 → 3 | The dual, stated: multiply two signals stop by stop and the readings convolve — each line of one gets a copy of the other's lines. Checked once: the 2000 Hz tone (row 2 reads 4) × a 1000 Hz cosine (row 1 reads 4): row 2 empties, rows 1 and 3 read 2 each — "4 × 4 ÷ 8 = 2, for this pair"; × the all-ones tone changes nothing. Then the hook: every frame *is* a multiplication — the 8 samples are an endless tone × a rectangle of eight ones; a whole-lap tone does not notice; the 1500 Hz sine from `WhatSetsTheSpacing` (bars 1.5, 2.85, 2.41, 0.85, 0.67, re-shown) does — its smear is the rectangle's lines copied onto the tone's: leakage, by the theorem — series D. (Source–filter moved wholly to scene 7 at build — open call 2, as recommended.) |
-| 7 | `WhereConvolutionLives` | 3 · closer | Reverb: a room's impulse response is the echo kernel grown long — a 2 s tail at 50 kHz is 100 000 taps, 100 000 multiply-adds per output sample, which is why FFT convolution exists (the FFT — on screen "an algorithm story, parked elsewhere"; the README names `algorithms/`). Convolutional layers: learned kernels slid over the input. Source–filter restated. The sliding detector: slide the probe and the bank becomes a filterbank whose impulse responses are the reversed probes — series D. Closing map, six lines: echoes and rooms → reverb, one long kernel · smoothing and sharpening → a kernel's own reading · kernels a network chooses → convolutional layers · a tone between rows → windowing (D) · tones that change over time → the short-time transform (D) · the ear's own grouping → mel. (Built as six lines; the source–filter pointer lives in the comb beat above, not on the map.) |
+| 7 | `WhereConvolutionLives` | 3 · closer | Reverb: a room's impulse response is the echo kernel grown long — a 2 s tail at 50 kHz is 100 000 taps, 100 000 multiply-adds per output sample, which is why FFT convolution exists (the FFT — on screen "an algorithm story, parked elsewhere"; the README names `algorithms/`). Convolutional layers: learned kernels slid over the input. Source–filter, stated here — its only statement (scene 6 no longer carries it). The sliding detector: slide the probe and the bank becomes a filterbank whose impulse responses are the reversed probes — series D. Closing map, six lines under "met here — next on the road: the window behind every frame, then the spectrogram": echoes and rooms → reverb, one long kernel · smoothing and sharpening → a kernel's own reading · kernels a network chooses → convolutional layers · a tone between rows → windowing (D) · tones that change over time → the short-time transform (D) · the ear's own grouping → mel. (Built as six lines; the source–filter pointer lives in the comb beat above, not on the map.) |
 
 Foundation: scenes 1–3 (the sliding sum, the impulse response, the
 flip). The theorem owns scenes 4–6; scene 7 maps.
