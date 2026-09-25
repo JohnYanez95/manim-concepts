@@ -67,7 +67,24 @@ Branch `feat/signal-processing-convolution`, cut from `main` at fdf2672
   convolution row, Scope's "filter" bullet rewritten for two series and
   a circular-convolution exclusion added, subsection + row 1; verifier
   addendum (O–Y) pinned; `make check` green
-- [ ] Phase 2
+- [x] Phase 2: seven scenes at draft (7 files, distinct names; 50, 55,
+  51, 66, 69, 53, 43 s). New devices: `_strip` (a stem strip with its
+  numbers dropped below its negative reach), `_Window` (weight tokens
+  sized to the stem pitch, single-glyph ⅓ and ½), `_bank_readout` (bars
+  at any column and unit — the bank's own readout is too long for two
+  columns), the edge-neighbour ghost stems, the turned-arrow sum on the
+  pair plane. Linter: every scene clean; what it caught — side tags off
+  the left edge, the prompt under the 8-high spike, a title crossed by a
+  stem, number strips crossed by negative stems, window frames crossing
+  the numbers under them, an unnamed `boxed()` left behind by a FadeOut,
+  side-column facts too wide for a side column (moved to two-line
+  blocks, per CLAUDE.md's 35-character rule). Eyes caught — the scene-4
+  caption lagging the picture by a beat (captions now leave with the old
+  tone), the endless wave off-centre, the stacked responses too tight.
+  Width discipline: every caption ≤ 82 characters (ruff's 100-column
+  line is the harder limit at this indentation). README rows 1–7 written
+  with the scenes (the source-order test reds otherwise); `make check`
+  green
 - [ ] Phase 3
 - [ ] Phase 4
 - [ ] Phase 5 — bot reviews spent: none yet, of 2

@@ -1151,5 +1151,370 @@ class TheKernelsOwnReading(ConceptScene):
         )
 
 
+class MultiplyingInTime(ConceptScene):
+    """The dual: multiply two signals stop by stop and their readings convolve — each line of
+    one gets a copy of the other's lines. Every frame is such a multiplication, by a
+    rectangle of ones: a whole-lap tone does not notice, the 1500 Hz tone does — leakage."""
+
+    def construct(self):
+        self.play(FadeIn(self.title("Multiplying in Time"), shift=0.3 * DOWN))
+        prompt = Text(
+            "Filtering multiplies the readings. What multiplies the samples?", font_size=BODY_SIZE
+        )
+        prompt.next_to(self.head, DOWN, buff=0.3)
+        self.play(FadeIn(prompt))
+        self.wait(1.2)
+        self.play(FadeOut(prompt))
+
+        # --- the dual, checked once (anchor T) ------------------------------------------
+        x0, dx, scale = -5.9, 0.34, 0.55
+        feed = np.array([x0 + 7 * dx + 0.25, 0.4, 0.0])
+        bank = _Bank(feed)
+        bank.shift(0.3 * RIGHT)
+        self.play(FadeIn(bank.labels), FadeIn(bank.thumbs), FadeIn(bank.wires), FadeIn(bank.nodes))
+        tone = _probe(2, "s")
+        window = _probe(1, "c")
+        product = tone * window
+        strip_a = _strip(tone, x0, dx, 1.6, scale, numbers=False)
+        strip_b = _strip(window, x0, dx, 0.4, scale, color=MUTED, label="×", numbers=False)
+        strip_c = _strip(product, x0, dx, -0.9, scale, color=ACCENT, label="=", numbers=False)
+        col_a = _bank_readout(bank, tone, 1.25, color=COOL)
+        col_b = _bank_readout(bank, window, 2.6, color=MUTED)
+        col_c = _bank_readout(bank, product, 3.95, color=ACCENT)
+        heads = VGroup(
+            caption("tone", COOL).move_to(np.array([1.7, 2.55, 0.0])),
+            caption("× window", MUTED).move_to(np.array([3.0, 2.55, 0.0])),
+            caption("= product", ACCENT).move_to(np.array([4.75, 2.55, 0.0])),
+        )
+        self.play(FadeIn(strip_a), FadeIn(col_a[0]), FadeIn(col_a[1]), FadeIn(heads[0]))
+        note = _swap_caption(
+            self,
+            None,
+            caption(
+                "a 2000 Hz tone: row 2 reads 4. Multiply it, stop by stop, by a 1000 Hz cosine"
+            ).move_to(3.2 * DOWN),
+        )
+        self.play(FadeIn(strip_b), FadeIn(col_b[0]), FadeIn(col_b[1]), FadeIn(heads[1]))
+        self.wait(1.0)
+        self.play(FadeIn(strip_c), FadeIn(col_c[0]), FadeIn(col_c[1]), FadeIn(heads[2]))
+        note = _swap_caption(
+            self,
+            note,
+            caption(
+                "row 2 empties; rows 1 and 3 read 2 each — the tone's line took the window's lines"
+            ).move_to(3.2 * DOWN),
+        )
+        self.wait(1.6)
+        arithmetic = Text("4 × 4 ÷ 8 = 2, for this pair", font_size=SMALL_SIZE, color=ACCENT)
+        arithmetic.move_to(np.array([3.1, -2.45, 0.0]))
+        self.play(FadeIn(arithmetic))
+        note = _swap_caption(
+            self,
+            note,
+            caption(
+                "multiply in time and the readings convolve — the theorem's other half, stated"
+            ).move_to(3.2 * DOWN),
+        )
+        self.wait(1.8)
+        self.play(
+            FadeOut(VGroup(strip_b, strip_c, col_b[0], col_b[1], col_c[0], col_c[1], arithmetic)),
+            run_time=0.4,
+        )
+        ones = _probe(0, "c")
+        strip_b = _strip(ones, x0, dx, 0.4, scale, color=MUTED, label="×", numbers=False)
+        strip_c = _strip(tone * ones, x0, dx, -0.9, scale, color=ACCENT, label="=", numbers=False)
+        col_b = _bank_readout(bank, ones, 2.6, unit=0.1, color=MUTED)
+        col_c = _bank_readout(bank, tone * ones, 3.95, color=ACCENT)
+        self.play(FadeIn(strip_b), FadeIn(col_b[0]), FadeIn(col_b[1]))
+        self.play(FadeIn(strip_c), FadeIn(col_c[0]), FadeIn(col_c[1]))
+        note = _swap_caption(
+            self,
+            note,
+            caption(
+                "multiply by all ones — a window that reads only on row 0 — and nothing moves"
+            ).move_to(3.2 * DOWN),
+        )
+        self.wait(1.6)
+
+        # --- every frame is a multiplication: the hook to series D (anchor T of plan 019) --
+        self.play(
+            FadeOut(
+                VGroup(
+                    strip_a,
+                    strip_b,
+                    strip_c,
+                    col_a[0],
+                    col_a[1],
+                    col_b[0],
+                    col_b[1],
+                    col_c[0],
+                    col_c[1],
+                    heads,
+                    bank,
+                    note,
+                )
+            )
+        )
+        between = np.sin(2 * np.pi * 1.5 * np.arange(_N) / _N)
+        long_x0, long_dx = -3.6, 0.36
+        long_t = np.arange(-8, 24)
+        endless = np.sin(2 * np.pi * 1.5 * long_t / 8)
+        wave = _Stems(endless, long_x0 - 8 * long_dx, long_dx, 1.5, 0.55, color=MUTED, radius=0.04)
+        frame_box = Rectangle(width=8 * long_dx + 0.2, height=1.5, stroke_width=2, color=ACCENT)
+        frame_box.move_to(np.array([long_x0 + 3.5 * long_dx, 1.5, 0.0]))
+        # Only the stems inside the frame are kept; the rest is what the rectangle of ones zeroed.
+        for n, stem in enumerate(wave):
+            if 8 <= n < 16:
+                stem.set_color(COOL)
+        self.play(FadeIn(wave))
+        self.play(Create(frame_box))
+        note = _swap_caption(
+            self,
+            None,
+            caption(
+                "every frame is a multiplication: an endless tone × a rectangle of eight ones"
+            ).move_to(3.2 * DOWN),
+        )
+        self.wait(1.4)
+        readings = [_reading(between, k)[2] for k in range(_N // 2 + 1)]
+        chart = _uprights(
+            [0.5 * r for r in readings],
+            [_fmt(r) for r in readings],
+            [f"{k * _SR // _N}" for k in range(_N // 2 + 1)],
+            left=1.2,
+            base_y=-1.6,
+            pitch=1.05,
+        )
+        chart_tag = caption("Hz").next_to(chart[3], RIGHT, buff=0.25)
+        whole = caption(
+            "a whole-lap tone × the rectangle: unchanged — no neighbouring line to copy onto"
+        )
+        whole.move_to(2.45 * DOWN)
+        self.play(FadeIn(whole))
+        self.wait(1.6)
+        self.play(FadeOut(whole), run_time=0.3)
+        self.play(FadeIn(chart), FadeIn(chart_tag))
+        note = _swap_caption(
+            self,
+            note,
+            caption(
+                "the spectrum series' 1500 Hz sine: the rectangle's lines, copied onto its own"
+            ).move_to(3.2 * DOWN),
+        )
+        self.wait(1.6)
+        leak = Text("leakage — by the theorem", font_size=LABEL_SIZE, color=ACCENT).move_to(
+            np.array([3.4, 0.6, 0.0])
+        )
+        self.play(FadeIn(leak))
+        note = _swap_caption(
+            self,
+            note,
+            caption(
+                "a window with quieter lines copies less: the windowing series' whole subject"
+            ).move_to(3.2 * DOWN),
+        )
+        self.wait(1.8)
+
+        self.play(FadeOut(VGroup(wave, frame_box, chart, chart_tag, leak, note)))
+        _takeaway(
+            self,
+            "Multiply two signals and their readings convolve — so cutting a\n"
+            "frame out of a sound is a multiplication too, and its readings\n"
+            "smear by exactly the rectangle's own",
+        )
+
+
+class WhereConvolutionLives(ConceptScene):
+    """A room, a learned kernel, a vocal tract: where the sliding weighted sum shows up, and
+    the two roads it opens — the sliding detector, and the window behind every frame."""
+
+    def construct(self):
+        self.play(FadeIn(self.title("Where Convolution Lives"), shift=0.3 * DOWN))
+
+        # --- reverb: the echo kernel grown long (anchor W) -----------------------------
+        x0, dx = -4.6, 0.52
+        taps = 16
+        decay = np.array(
+            [1.0]
+            + [0.0] * 3
+            + [0.5]
+            + [0.0] * 2
+            + [0.3, 0.0, 0.2, 0.15, 0.0, 0.1, 0.08, 0.05, 0.03]
+        )
+        room = _Stems(decay, x0, dx, 1.0, 1.1, color=MUTED, radius=0.05)
+        room_axis = Line(
+            np.array([x0 - 0.3, 1.0, 0.0]),
+            np.array([x0 + (taps - 1) * dx + 0.3, 1.0, 0.0]),
+            color=MUTED,
+            stroke_width=1.5,
+        )
+        room_tag = caption(
+            "a room's impulse response: one clap, and everything it becomes"
+        ).move_to(np.array([-0.5, 2.65, 0.0]))
+        self.play(FadeIn(room_axis), FadeIn(room), FadeIn(room_tag))
+        note = _swap_caption(
+            self,
+            None,
+            caption(
+                "reverb is the echo kernel grown long — a hall's is two seconds of taps"
+            ).move_to(3.2 * DOWN),
+        )
+        self.wait(1.4)
+        cost = VGroup(
+            Text("2 s of tail at 50 000 samples a second: 100 000 taps", font_size=SMALL_SIZE),
+            Text("100 000 multiply-adds for every output sample", font_size=SMALL_SIZE),
+            Text(
+                "— which is why long kernels are applied by multiplying spectra",
+                font_size=SMALL_SIZE,
+                color=ACCENT,
+            ),
+        ).arrange(DOWN, buff=0.2)
+        cost.move_to(0.0 * UP + 0.1 * DOWN)
+        for line in cost:
+            self.play(FadeIn(line, shift=0.1 * UP), run_time=0.5)
+        note = _swap_caption(
+            self,
+            note,
+            caption(
+                "the fast way to those spectra is the FFT — an algorithm story, parked elsewhere"
+            ).move_to(3.2 * DOWN),
+        )
+        self.wait(1.8)
+        self.play(FadeOut(VGroup(room, room_axis, room_tag, cost, note)))
+
+        # --- learned kernels, and the source shaped by a filter (anchors L, W) ----------
+        conv = (
+            VGroup(
+                Text("a convolutional layer: kernels slid over the input —", font_size=LABEL_SIZE),
+                Text("their weights learned, not designed", font_size=LABEL_SIZE, color=ACCENT),
+            )
+            .arrange(DOWN, buff=0.2)
+            .move_to(1.4 * UP)
+        )
+        self.play(FadeIn(conv))
+        note = _swap_caption(
+            self,
+            None,
+            caption(
+                "the kernel of the convolution is the set of connection weights — LeCun, 1998"
+            ).move_to(3.2 * DOWN),
+        )
+        self.wait(1.6)
+        comb_x0, comb_dx = -3.6, 0.9
+        harmonics = [115 * (k + 1) for k in range(8)]
+        envelope = np.array([0.55, 0.9, 1.0, 0.7, 0.35, 0.5, 0.6, 0.3])
+        comb = _Stems(envelope, comb_x0, comb_dx, -1.3, 1.1, color=COOL, radius=0.05)
+        comb_axis = Line(
+            np.array([comb_x0 - 0.4, -1.3, 0.0]),
+            np.array([comb_x0 + 7 * comb_dx + 0.4, -1.3, 0.0]),
+            color=MUTED,
+            stroke_width=1.5,
+        )
+        ticks = VGroup(
+            *[
+                caption(str(h)).move_to(np.array([comb_x0 + k * comb_dx, -1.65, 0.0]))
+                for k, h in enumerate(harmonics)
+            ]
+        )
+        hz = caption("Hz").next_to(ticks, RIGHT, buff=0.2)
+        curve = ParametricFunction(
+            lambda t: np.array(
+                [
+                    comb_x0 + 7 * comb_dx * t,
+                    -1.3
+                    + 1.1
+                    * (
+                        0.45
+                        + 0.55 * np.exp(-((t - 0.28) ** 2) / 0.035)
+                        + 0.3 * np.exp(-((t - 0.82) ** 2) / 0.03)
+                    )
+                    * 0.92,
+                    0.0,
+                ]
+            ),
+            t_range=[0, 1],
+            color=WARM,
+            stroke_width=2.5,
+        )
+        self.play(FadeIn(comb_axis), FadeIn(comb), FadeIn(ticks), FadeIn(hz))
+        note = _swap_caption(
+            self,
+            note,
+            caption(
+                "speech: a 115 Hz buzz from the glottis is a comb of lines — 230, 345, 460 Hz …"
+            ).move_to(3.2 * DOWN),
+        )
+        self.wait(1.2)
+        self.play(Create(curve))
+        note = _swap_caption(
+            self,
+            note,
+            caption(
+                "the vocal tract is a filter: its own reading, drawn over the comb, makes the vowel"
+            ).move_to(3.2 * DOWN),
+        )
+        source_tag = caption("the source–filter model (a picture, not to scale)").move_to(
+            np.array([-0.5, -2.35, 0.0])
+        )
+        self.play(FadeIn(source_tag))
+        self.wait(1.8)
+        self.play(FadeOut(VGroup(conv, comb, comb_axis, ticks, hz, curve, source_tag, note)))
+
+        # --- the sliding detector, and the closing map --------------------------------
+        slide = (
+            VGroup(
+                Text(
+                    "slide the probe and the detector's one number becomes a signal:",
+                    font_size=SMALL_SIZE,
+                ),
+                Text(
+                    "the bank becomes a filterbank — its kernels the probes, reversed",
+                    font_size=SMALL_SIZE,
+                    color=ACCENT,
+                ),
+            )
+            .arrange(DOWN, buff=0.18)
+            .move_to(1.9 * UP)
+        )
+        self.play(FadeIn(slide))
+        self.wait(1.6)
+        road = VGroup(
+            Text("echoes and rooms?  →  reverb, one long kernel", font_size=LABEL_SIZE, color=GOOD),
+            Text(
+                "smoothing and sharpening?  →  a kernel's own reading",
+                font_size=LABEL_SIZE,
+                color=GOOD,
+            ),
+            Text(
+                "kernels a network chooses?  →  convolutional layers",
+                font_size=LABEL_SIZE,
+                color=GOOD,
+            ),
+            Text("a tone between rows?  →  windowing", font_size=LABEL_SIZE, color=MUTED),
+            Text(
+                "tones that change over time?  →  the short-time transform",
+                font_size=LABEL_SIZE,
+                color=MUTED,
+            ),
+            Text("the ear's own grouping?  →  mel", font_size=LABEL_SIZE, color=MUTED),
+        ).arrange(DOWN, buff=0.26, aligned_edge=LEFT)
+        road.move_to(0.45 * DOWN)
+        self.play(LaggedStart(*[FadeIn(line, shift=0.15 * UP) for line in road], lag_ratio=0.25))
+        note = _swap_caption(
+            self,
+            None,
+            caption(
+                "built here — next on the road: the window behind every frame, then the spectrogram"
+            ).move_to(3.2 * DOWN),
+        )
+        self.wait(2.2)
+        self.play(FadeOut(VGroup(slide, road, note)))
+        _takeaway(
+            self,
+            "A sliding weighted sum is a room, a learned layer and a vocal\n"
+            "tract — and, read on the bank, the multiplication it hides",
+        )
+
+
 if __name__ == "__main__":
     raise SystemExit(render_cli())
