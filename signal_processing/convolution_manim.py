@@ -806,5 +806,350 @@ class TheFlip(ConceptScene):
         )
 
 
+def _bank_readout(bank: _Bank, samples, x: float, unit: float = 0.2, color=ACCENT):
+    """Bars for one ring of samples at column ``x`` — ``unit`` scene units per reading."""
+    bars, numbers = VGroup(), VGroup()
+    for k, y in enumerate(bank.ROWS_Y):
+        distance = _reading(samples, k)[2]
+        live = distance > 1e-9
+        bar = Rectangle(width=max(unit * distance, 0.02), height=0.32, stroke_width=0)
+        bar.set_fill(color if live else MUTED, opacity=0.9)
+        bar.move_to(np.array([x, y, 0.0]), aligned_edge=LEFT)
+        number = Text(_fmt(distance), font_size=SMALL_SIZE, color=color if live else MUTED)
+        number.next_to(bar, RIGHT, buff=0.12)
+        bars.add(bar)
+        numbers.add(number)
+    return bars, numbers
+
+
+class AMovingAverageIsALowPass(ConceptScene):
+    """Every whole-lap tone comes out of the moving average as the same tone, scaled — slow
+    ones barely, fast ones a lot, two with their sign flipped: a low-pass scales, it does
+    not remove. Gain 0 is the special case."""
+
+    def construct(self):
+        self.play(FadeIn(self.title("A Moving Average Is a Low-Pass"), shift=0.3 * DOWN))
+        prompt = Text("What does the ⅓ ⅓ ⅓ window do to a tone?", font_size=BODY_SIZE)
+        prompt.next_to(self.head, DOWN, buff=0.3)
+        self.play(FadeIn(prompt))
+        self.wait(1.0)
+        self.play(FadeOut(prompt))
+
+        # Left: the tone in and out on the ring. Right: the bank read before and after.
+        x0, dx, scale = -5.7, 0.32, 0.5
+        in_y, out_y = 1.4, -0.6
+        feed = np.array([x0 + 7 * dx + 0.25, 0.4, 0.0])
+        bank = _Bank(feed)
+        bank.shift(0.3 * RIGHT)
+        self.play(FadeIn(bank.labels), FadeIn(bank.thumbs), FadeIn(bank.wires), FadeIn(bank.nodes))
+        heads = VGroup(
+            caption("before", COOL).move_to(np.array([2.0, 2.55, 0.0])),
+            caption("after", ACCENT).move_to(np.array([4.5, 2.55, 0.0])),
+        )
+        self.play(FadeIn(heads))
+        note = _swap_caption(
+            self,
+            None,
+            caption(
+                "the bank from the spectrum series reads the tone before and after the window"
+            ).move_to(3.2 * DOWN),
+        )
+
+        # Anchor D (centred 3-tap): 1000 Hz → 0.80, 2000 → ⅓, 3000 → 0.14 flipped, 4000 → ⅓ flipped.
+        cases = [
+            (1, "s", "1000 Hz: the same tone, 0.80 as tall — the reading 4 became 3.22"),
+            (2, "s", "2000 Hz: the same tone, exactly ⅓ as tall — 4 became 1.33"),
+            (3, "s", "3000 Hz: 0.14 as tall, and upside down — the sign flipped"),
+            (4, "c", "4000 Hz: ⅓ as tall and upside down — the end row reads ÷ 8: 8 became 2.67"),
+            (0, "c", "0 Hz — a constant: unchanged. Slow tones pass, fast tones shrink"),
+        ]
+        in_strip = out_strip = before = after = None
+        for k, kind, line in cases:
+            tone = _probe(k, kind)
+            out = _ring(tone, _K3, centred=True)
+            flipped = k in (3, 4)
+            new_in = _strip(tone, x0, dx, in_y, scale, label="in", numbers=False)
+            new_out = _strip(
+                out,
+                x0,
+                dx,
+                out_y,
+                scale,
+                color=WARM if flipped else ACCENT,
+                label="out",
+                numbers=False,
+            )
+            new_before = _bank_readout(bank, tone, 1.25, color=COOL)
+            new_after = _bank_readout(bank, out, 3.75, color=WARM if flipped else ACCENT)
+            olds = [m for m in (in_strip, out_strip) if m is not None]
+            if before is not None:
+                olds += [before[0], before[1], after[0], after[1]]
+            # The old caption leaves with the old tone, so the words never lag the picture.
+            self.play(FadeOut(VGroup(*olds, note)), run_time=0.4)
+            in_strip, out_strip, before, after = new_in, new_out, new_before, new_after
+            self.play(FadeIn(in_strip), FadeIn(before[0]), FadeIn(before[1]))
+            self.play(FadeIn(out_strip), FadeIn(after[0]), FadeIn(after[1]))
+            note = _swap_caption(self, None, caption(line).move_to(3.2 * DOWN))
+            self.wait(1.6)
+
+        verdict = Text("a low-pass scales — it does not remove", font_size=LABEL_SIZE, color=ACCENT)
+        verdict.move_to(2.5 * DOWN)
+        verdict_box = boxed(verdict, buff=0.2)
+        self.play(FadeIn(verdict), Create(verdict_box))
+        self.wait(1.6)
+        self.play(
+            FadeOut(
+                VGroup(
+                    in_strip,
+                    out_strip,
+                    before[0],
+                    before[1],
+                    after[0],
+                    after[1],
+                    verdict,
+                    verdict_box,
+                    note,
+                )
+            )
+        )
+
+        # --- the special case: gain 0 -----------------------------------------------------
+        tone = _probe(4, "c")
+        out = _ring(tone, _K2, centred=False)
+        in_strip = _strip(tone, x0, dx, in_y, scale, label="in", numbers=False)
+        out_strip = _strip(out, x0, dx, out_y, scale, color=MUTED, label="out", numbers=False)
+        before = _bank_readout(bank, tone, 1.25, color=COOL)
+        after = _bank_readout(bank, out, 3.75, color=ACCENT)
+        self.play(FadeIn(in_strip), FadeIn(before[0]), FadeIn(before[1]))
+        note = _swap_caption(
+            self,
+            None,
+            caption(
+                "a two-weight window, ½ ½, on the 4000 Hz tone: 1, −1, 1, −1 … averages to 0"
+            ).move_to(3.2 * DOWN),
+        )
+        self.play(FadeIn(out_strip), FadeIn(after[0]), FadeIn(after[1]))
+        note = _swap_caption(
+            self,
+            note,
+            caption(
+                "all eight outputs exactly 0 — removed, because its gain happens to be 0"
+            ).move_to(3.2 * DOWN),
+        )
+        self.wait(1.6)
+        self.play(
+            FadeOut(VGroup(in_strip, out_strip, before[0], before[1], after[0], after[1])),
+            run_time=0.4,
+        )
+        tone = _probe(2, "s")
+        out = _ring(tone, _K2, centred=False)
+        in_strip = _strip(tone, x0, dx, in_y, scale, label="in", numbers=False)
+        out_strip = _strip(out, x0, dx, out_y, scale, color=ACCENT, label="out", numbers=False)
+        before = _bank_readout(bank, tone, 1.25, color=COOL)
+        after = _bank_readout(bank, out, 3.75, color=ACCENT)
+        self.play(FadeIn(in_strip), FadeIn(before[0]), FadeIn(before[1]))
+        self.play(FadeIn(out_strip), FadeIn(after[0]), FadeIn(after[1]))
+        note = _swap_caption(
+            self,
+            note,
+            caption(
+                "same window on 2000 Hz: 0.71 as tall, half a sample late — the pair turned 45°"
+            ).move_to(3.2 * DOWN),
+        )
+        self.wait(1.8)
+        smith = caption(
+            "the best smoother and a poor frequency separator: row 3 is quieter than row 4"
+        )
+        smith.move_to(2.5 * DOWN)
+        self.play(FadeIn(smith))
+        self.wait(1.8)
+
+        self.play(
+            FadeOut(
+                VGroup(
+                    in_strip,
+                    out_strip,
+                    before[0],
+                    before[1],
+                    after[0],
+                    after[1],
+                    bank,
+                    heads,
+                    note,
+                    smith,
+                )
+            )
+        )
+        _takeaway(
+            self,
+            "A tone through a filter is the same tone, scaled — by a number\n"
+            "that depends on the frequency. Low-pass: slow tones pass, fast\n"
+            "tones shrink. Gain 0 is the one case where a tone is removed",
+        )
+
+
+class TheKernelsOwnReading(ConceptScene):
+    """Feed the kernel itself to the bank and its readings are the gains — because a delay
+    turns a tone's pair, sums pass through, and the kernel is a sum of delayed clicks:
+    filtering in time multiplies the readings, row by row."""
+
+    def construct(self):
+        self.play(FadeIn(self.title("The Kernel's Own Reading"), shift=0.3 * DOWN))
+        prompt = Text("Where did 0.80, ⅓, 0.14, ⅓ come from?", font_size=BODY_SIZE)
+        prompt.next_to(self.head, DOWN, buff=0.3)
+        self.play(FadeIn(prompt))
+        self.wait(1.0)
+        self.play(FadeOut(prompt))
+
+        # --- the kernel on the bank -------------------------------------------------------
+        x0, dx, scale = -5.7, 0.32, 0.9
+        kernel_ring = np.zeros(_N)
+        kernel_ring[[7, 0, 1]] = 1 / 3
+        feed = np.array([x0 + 7 * dx + 0.25, 0.4, 0.0])
+        bank = _Bank(feed)
+        bank.shift(0.3 * RIGHT)
+        strip = _strip(kernel_ring, x0, dx, 0.4, scale, color=MUTED, numbers=False)
+        strip_tag = caption("the kernel, as a signal").move_to(np.array([x0 + 3.5 * dx, 1.75, 0.0]))
+        self.play(FadeIn(bank.labels), FadeIn(bank.thumbs), FadeIn(bank.wires), FadeIn(bank.nodes))
+        self.play(FadeIn(strip))
+        note = _swap_caption(
+            self,
+            None,
+            caption(
+                "the kernel as a signal: ⅓ at stops 7, 0, 1 — on the ring, the stop before 0 is 7"
+            ).move_to(3.2 * DOWN),
+        )
+        self.wait(1.2)
+        bars, numbers = _bank_readout(bank, kernel_ring, 1.25, unit=0.55)
+        # The sine sums are all 0 here, so the cosine sum carries the sign: show it.
+        signed = VGroup()
+        for k, number in enumerate(numbers):
+            a = _reading(kernel_ring, k)[0]
+            label = Text(_fmt(a), font_size=SMALL_SIZE, color=WARM if a < 0 else ACCENT)
+            signed.add(label.move_to(number, aligned_edge=LEFT))
+        self.play(*[GrowFromEdge(bar, LEFT) for bar in bars], FadeIn(numbers))
+        self.play(FadeOut(numbers), run_time=0.3)
+        self.play(FadeIn(signed), run_time=0.4)
+        note = _swap_caption(
+            self,
+            note,
+            caption(
+                "its readings 1, 0.80, 0.33, 0.14, 0.33: the previous scene's gains, signs and all"
+            ).move_to(3.2 * DOWN),
+        )
+        self.wait(2.0)
+        self.play(FadeOut(VGroup(bank, strip, strip_tag, bars, signed, note)))
+
+        # --- why: on the pair plane, a delay is a turn, and sums pass through --------------
+        origin = np.array([-3.4, -0.2, 0.0])
+        unit = 1.9
+        plane = VGroup(
+            Line(origin + 2.2 * LEFT, origin + 2.2 * RIGHT, color=MUTED, stroke_width=2),
+            Line(origin + 2.2 * DOWN, origin + 2.2 * UP, color=MUTED, stroke_width=2),
+            Circle(radius=unit, color=MUTED, stroke_width=1.5).move_to(origin),
+        )
+        plane_tag = caption("the pair plane: across cosine sum, up sine sum").move_to(
+            np.array([-3.4, -2.65, 0.0])
+        )
+        self.play(Create(plane), FadeIn(plane_tag))
+        note = _swap_caption(
+            self,
+            None,
+            caption(
+                "recall: delaying a tone by one sample turns its pair — by 45° × the row number"
+            ).move_to(3.2 * DOWN),
+        )
+        self.wait(1.4)
+        facts = VGroup(
+            Text("the kernel is three clicks:\n⅓ early, ⅓ now, ⅓ late", font_size=SMALL_SIZE),
+            Text("each click's copy of the tone\nis the tone, turned", font_size=SMALL_SIZE),
+            Text("sums pass through — so add\nthree arrows of length ⅓", font_size=SMALL_SIZE),
+        ).arrange(DOWN, buff=0.3, aligned_edge=LEFT)
+        facts.move_to(np.array([3.6, 1.3, 0.0]))
+        for line in facts:
+            self.play(FadeIn(line, shift=0.1 * UP), run_time=0.5)
+        self.wait(1.0)
+
+        readout = Text("", font_size=LABEL_SIZE)
+        arrows = VGroup()
+        for k in range(1, 5):
+            angle = np.pi / 4 * k
+            steps = [(1 / 3, -angle), (1 / 3, 0.0), (1 / 3, angle)]
+            tip = origin.copy()
+            new_arrows = VGroup()
+            for length, theta in steps:
+                head = tip + unit * length * np.array([np.cos(theta), np.sin(theta), 0.0])
+                new_arrows.add(
+                    Arrow(
+                        tip,
+                        head,
+                        buff=0,
+                        color=ACCENT,
+                        stroke_width=3,
+                        max_tip_length_to_length_ratio=0.25,
+                    )
+                )
+                tip = head
+            total = (tip - origin)[0] / unit
+            resultant = Line(origin, tip, color=GOOD, stroke_width=4)
+            label = Text(f"row {k}: {_fmt(total)}", font_size=LABEL_SIZE, color=GOOD)
+            label.move_to(np.array([3.4, -0.2, 0.0]))
+            if arrows:
+                self.play(FadeOut(arrows), FadeOut(readout), run_time=0.3)
+            arrows = VGroup(new_arrows, resultant)
+            readout = label
+            self.play(LaggedStart(*[GrowArrow(a) for a in new_arrows], lag_ratio=0.4), run_time=1.0)
+            self.play(Create(resultant), FadeIn(readout))
+            lines = {
+                1: "row 1: the side arrows lean forward — ⅓ + 2 × ⅓ × cos 45° = 0.80",
+                2: "row 2: the side arrows point straight up and down and cancel — ⅓",
+                3: "row 3: they lean backward — 0.14 the wrong way: the flipped sign",
+                4: "row 4: both side arrows point backward — −⅓",
+            }
+            note = _swap_caption(self, note, caption(lines[k]).move_to(3.2 * DOWN))
+            self.wait(1.6)
+
+        rule = Text(
+            "filtering in time = multiplying the readings, row by row",
+            font_size=LABEL_SIZE,
+            color=ACCENT,
+        ).move_to(2.45 * DOWN)
+        rule_box = boxed(rule, buff=0.2)
+        self.play(FadeOut(plane_tag), run_time=0.3)
+        self.play(FadeIn(rule), Create(rule_box))
+        note = _swap_caption(
+            self,
+            note,
+            caption(
+                "the output's pair is the input's pair times the kernel's reading: the theorem"
+            ).move_to(3.2 * DOWN),
+        )
+        self.wait(1.8)
+        debt = caption(
+            "checked on one kernel and four rows; for every kernel and N, the proof needs Euler"
+        )
+        debt.move_to(3.2 * DOWN)
+        self.play(FadeOut(note), run_time=0.3)
+        self.play(FadeIn(debt))
+        self.wait(1.8)
+        self.play(FadeOut(debt))
+        note = _swap_caption(
+            self,
+            None,
+            caption(
+                "½ ½ reads (½, ½) on row 2: length 0.71, turned 45° — the previous scene's turn"
+            ).move_to(3.2 * DOWN),
+        )
+        self.wait(1.8)
+
+        self.play(FadeOut(VGroup(plane, facts, arrows, readout, rule, rule_box, note)))
+        _takeaway(
+            self,
+            "Read the kernel on the bank and you have read what it does to\n"
+            "every tone: filtering in time is multiplying the readings,\n"
+            "row by row — checked here, proved with Euler's formula",
+        )
+
+
 if __name__ == "__main__":
     raise SystemExit(render_cli())
