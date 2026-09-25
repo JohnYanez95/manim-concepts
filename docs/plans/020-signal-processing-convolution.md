@@ -141,7 +141,23 @@ Branch `feat/signal-processing-convolution`, cut from `main` at fdf2672
   round closed): he verified all twenty-eight plan-020 references — the
   Fant entry with a publisher's preview he supplied — and directed the
   ticks; `references.bib` re-synced (332 entries, 288 verified)
-- [ ] Phase 5 — bot reviews spent: none yet, of 2
+- [ ] Phase 5 — PR #22 opened 2026-09-24. The bot's one automatic review:
+  seven findings, all valid on inspection, applied in one push. The one
+  that mattered: `MultiplyingInTime` said "every frame is × a rectangle
+  of eight ones" one beat after showing that × eight ones on the ring
+  changes nothing — the rectangle only has lines of its own on the long
+  strip, where the product's spectrum is the tone's line spread by them
+  and *then* read at the rows; the captions, README row 6 and the Scope
+  bullet now say so, and the whole-lap case is stated precisely (the
+  copies land on the other rows' exact zeros). The rest: `FadeOut(bank)`
+  would have flashed the never-added fan (`_bank_drawn` fades the drawn
+  parts); the kernel tokens are `utils.chip`, scaled — its label size is
+  fixed; scene 4's Smith caption names its kernel (it appeared over the
+  ½ ½ picture); scene 5's tag faded in only during its fade-out; "signs
+  and all" listed the readings unsigned. Riding in the same push: the
+  KaTeX `\*` fix in `deep_learning/`, Fant's URL, the maintainer's
+  twenty-eight ticks. One re-review requested — findings required
+  changes. **Bot reviews spent: 1 of 2.** Finals: pending
 
 ## Research digests
 

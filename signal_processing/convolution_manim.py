@@ -39,6 +39,7 @@ from utils import (
     ConceptScene,
     boxed,
     caption,
+    chip,
     render_cli,
 )
 
@@ -284,12 +285,9 @@ class _Window(VGroup):
         self.tokens = VGroup()
         for m, weight in enumerate(kernel):
             n = first + m
-            token = VGroup(
-                RoundedRectangle(width=width, height=0.36, corner_radius=0.08, stroke_width=1.5)
-                .set_stroke(MUTED)
-                .set_fill(MUTED, opacity=0.18),
-                Text(_weight(weight), font_size=18, color=MUTED),
-            ).move_to(np.array([stems.x(n), y, 0.0]))
+            # chip's label size is fixed at LABEL_SIZE; scaled to 0.6 it fits under a stem.
+            token = chip(_weight(weight), MUTED, width=width / 0.6, height=0.6).scale(0.6)
+            token.move_to(np.array([stems.x(n), y, 0.0]))
             self.tokens.add(token)
         self.frame = SurroundingRectangle(
             VGroup(*[stems[first + m] for m in range(taps)], self.tokens),
@@ -675,15 +673,7 @@ class TheFlip(ConceptScene):
 
         signal = strip_with_stops(click, top_y, COOL, "the click")
         kernel_tokens = VGroup(
-            *[
-                VGroup(
-                    RoundedRectangle(width=0.5, height=0.36, corner_radius=0.08, stroke_width=1.5)
-                    .set_stroke(MUTED)
-                    .set_fill(MUTED, opacity=0.18),
-                    Text(_weight(w), font_size=18, color=MUTED),
-                )
-                for w in echo
-            ]
+            *[chip(_weight(w), MUTED, width=0.5 / 0.6, height=0.6).scale(0.6) for w in echo]
         ).arrange(RIGHT, buff=0.12)
         kernel_tag = Text("the echo kernel\n1, 0, 0, ½", font_size=SMALL_SIZE, line_spacing=1.0)
         kernel_tag.next_to(kernel_tokens, UP, buff=0.15)
@@ -833,6 +823,11 @@ def _bank_readout(bank: _Bank, samples, x: float, unit: float = 0.2, color=ACCEN
     return bars, numbers
 
 
+def _bank_drawn(bank: _Bank) -> VGroup:
+    """The parts of a bank these scenes draw — never its fan, which stays out of the scene."""
+    return VGroup(bank.labels, bank.thumbs, bank.wires, bank.nodes)
+
+
 class AMovingAverageIsALowPass(ConceptScene):
     """Every whole-lap tone comes out of the moving average as the same tone, scaled — slow
     ones barely, fast ones a lot, two with their sign flipped: a low-pass scales, it does
@@ -969,7 +964,7 @@ class AMovingAverageIsALowPass(ConceptScene):
         )
         self.wait(1.8)
         smith = caption(
-            "the best smoother and a poor frequency separator: row 3 is quieter than row 4"
+            "Smith on ⅓ ⅓ ⅓: the best smoother, a poor frequency separator — row 3 below row 4"
         )
         smith.move_to(2.5 * DOWN)
         self.play(FadeIn(smith))
@@ -984,7 +979,7 @@ class AMovingAverageIsALowPass(ConceptScene):
                     before[1],
                     after[0],
                     after[1],
-                    bank,
+                    _bank_drawn(bank),
                     heads,
                     note,
                     smith,
@@ -1020,9 +1015,9 @@ class TheKernelsOwnReading(ConceptScene):
         bank = _Bank(feed)
         bank.shift(0.3 * RIGHT)
         strip = _strip(kernel_ring, x0, dx, 0.4, scale, color=MUTED, numbers=False)
-        strip_tag = caption("the kernel, as a signal").move_to(np.array([x0 + 3.5 * dx, 1.75, 0.0]))
+        strip_tag = caption("the kernel").move_to(np.array([x0 + 3.5 * dx, -0.5, 0.0]))
         self.play(FadeIn(bank.labels), FadeIn(bank.thumbs), FadeIn(bank.wires), FadeIn(bank.nodes))
-        self.play(FadeIn(strip))
+        self.play(FadeIn(strip), FadeIn(strip_tag))
         note = _swap_caption(
             self,
             None,
@@ -1045,11 +1040,11 @@ class TheKernelsOwnReading(ConceptScene):
             self,
             note,
             caption(
-                "its readings 1, 0.80, 0.33, 0.14, 0.33: the previous scene's gains, signs and all"
+                "readings 1, 0.80, 0.33, −0.14, −0.33: the previous scene's gains, signs and all"
             ).move_to(3.2 * DOWN),
         )
         self.wait(2.0)
-        self.play(FadeOut(VGroup(bank, strip, strip_tag, bars, signed, note)))
+        self.play(FadeOut(VGroup(_bank_drawn(bank), strip, strip_tag, bars, signed, note)))
 
         # --- why: on the pair plane, a delay is a turn, and sums pass through --------------
         origin = np.array([-3.4, -0.2, 0.0])
@@ -1261,7 +1256,7 @@ class MultiplyingInTime(ConceptScene):
                     col_c[0],
                     col_c[1],
                     heads,
-                    bank,
+                    _bank_drawn(bank),
                     note,
                 )
             )
@@ -1298,10 +1293,18 @@ class MultiplyingInTime(ConceptScene):
         )
         chart_tag = caption("Hz").next_to(chart[3], RIGHT, buff=0.25)
         whole = caption(
-            "a whole-lap tone × the rectangle: unchanged — no neighbouring line to copy onto"
+            "the rectangle has lines of its own on the long strip; from 8 stops it is all ones"
         )
         whole.move_to(2.45 * DOWN)
         self.play(FadeIn(whole))
+        self.wait(1.6)
+        note = _swap_caption(
+            self,
+            note,
+            caption(
+                "a whole-lap tone: the copies land on the other rows' exact zeros — unchanged"
+            ).move_to(3.2 * DOWN),
+        )
         self.wait(1.6)
         self.play(FadeOut(whole), run_time=0.3)
         self.play(FadeIn(chart), FadeIn(chart_tag))
@@ -1309,7 +1312,7 @@ class MultiplyingInTime(ConceptScene):
             self,
             note,
             caption(
-                "the spectrum series' 1500 Hz sine: the rectangle's lines, copied onto its own"
+                "the 1500 Hz sine: the rectangle's lines copied onto its own, then read at the rows"
             ).move_to(3.2 * DOWN),
         )
         self.wait(1.6)
