@@ -31,6 +31,7 @@ from utils import (
     ACCENT,
     BODY_SIZE,
     COOL,
+    GOOD,
     LABEL_SIZE,
     MUTED,
     SMALL_SIZE,
@@ -57,6 +58,15 @@ def _reading(samples, k: int) -> tuple[float, float, float]:
     a = float(np.dot(samples, _probe(k, "c")))
     b = float(np.dot(samples, _probe(k, "s")))
     return a, b, float(np.hypot(a, b))
+
+
+def _weight(value: float) -> str:
+    """A kernel weight as one glyph where one exists: ⅓, ½ — otherwise ``_fmt``."""
+    if abs(value - 1 / 3) < 1e-9:
+        return "⅓"
+    if abs(value - 0.5) < 1e-9:
+        return "½"
+    return _fmt(value)
 
 
 def _fmt(value: float) -> str:
@@ -243,21 +253,42 @@ def _ring(values, kernel, centred: bool) -> np.ndarray:
     return out
 
 
+def _strip(values, x0, dx, y, scale, color=COOL, size=18, label=None, numbers=True):
+    """A stem strip on its own axis with (optionally) its numbers under it and a tag left."""
+    values = np.asarray(values, dtype=float)
+    stems = _Stems(values, x0, dx, y, scale, color=color, radius=0.055)
+    axis = Line(
+        np.array([x0 - 0.35, y, 0.0]),
+        np.array([x0 + (len(values) - 1) * dx + 0.35, y, 0.0]),
+        color=MUTED,
+        stroke_width=1.5,
+    )
+    group = VGroup(axis, stems)
+    if numbers:
+        drop = 0.42 + scale * max(0.0, -float(values.min()))
+        group.add(_number_strip(values, stems, y - drop, color=color, size=size))
+    if label is not None:
+        tag = Text(label, font_size=SMALL_SIZE, color=color)
+        group.add(tag.move_to(np.array([x0 - 0.75, y, 0.0]), aligned_edge=RIGHT))
+    return group
+
+
 class _Window(VGroup):
     """The kernel's weights as tokens under ``taps`` adjacent stems, with a Σ node."""
 
     def __init__(self, kernel, stems: _Stems, at: int, centred: bool, y: float):
         super().__init__()
         taps = len(kernel)
+        width = min(0.5, stems.dx - 0.14)
         first = at - (taps // 2 if centred else taps - 1)
         self.tokens = VGroup()
         for m, weight in enumerate(kernel):
             n = first + m
             token = VGroup(
-                RoundedRectangle(width=0.5, height=0.36, corner_radius=0.08, stroke_width=1.5)
+                RoundedRectangle(width=width, height=0.36, corner_radius=0.08, stroke_width=1.5)
                 .set_stroke(MUTED)
                 .set_fill(MUTED, opacity=0.18),
-                Text(_fmt(weight) if weight != 1 / 3 else "⅓", font_size=18, color=MUTED),
+                Text(_weight(weight), font_size=18, color=MUTED),
             ).move_to(np.array([stems.x(n), y, 0.0]))
             self.tokens.add(token)
         self.frame = SurroundingRectangle(
@@ -442,6 +473,336 @@ class TheSlidingWeightedSum(ConceptScene):
             "Slide a window of weights along a signal, multiplying and adding at\n"
             "every stop — the output is a signal too. That is a filter, and the\n"
             "window is its kernel",
+        )
+
+
+class WhatOneClickBecomes(ConceptScene):
+    """One click through the kernel gives the kernel back — the impulse response — and a
+    signal is a sum of scaled, shifted clicks, so its output is the same sum of scaled,
+    shifted responses: sums pass through, and the same rule holds at every stop."""
+
+    def construct(self):
+        self.play(FadeIn(self.title("What One Click Becomes"), shift=0.3 * DOWN))
+        x0, dx, scale = -4.6, 0.8, 0.9
+        click = np.array([1, 0, 0, 0, 0, 0, 0, 0], dtype=float)
+        top_y, out_y = 1.7, -0.3
+
+        # --- level 1: the click comes out as the kernel -------------------------------
+        signal = _strip(click, x0, dx, top_y, scale, label="in")
+        output = _strip(
+            _slide(click, _K3, centred=False), x0, dx, out_y, scale, color=ACCENT, label="out"
+        )
+        self.play(FadeIn(signal))
+        note = _swap_caption(
+            self,
+            None,
+            caption("one click — a single 1 in a run of zeros — through the ⅓ ⅓ ⅓ window").move_to(
+                3.2 * DOWN
+            ),
+        )
+        self.play(FadeIn(output))
+        note = _swap_caption(
+            self,
+            note,
+            caption(
+                "out comes the kernel itself, ⅓ ⅓ ⅓ — the impulse response: what one click becomes"
+            ).move_to(3.2 * DOWN),
+        )
+        self.wait(1.6)
+
+        # A scaled click, a later click.
+        for values, line in (
+            (-2 * click, "a click of −2: the same shape, −2 as tall"),
+            (np.roll(click, 3), "a click three stops later: the same shape, three stops later"),
+        ):
+            new_in = _strip(values, x0, dx, top_y, scale, label="in")
+            new_out = _strip(
+                _slide(values, _K3, centred=False), x0, dx, out_y, scale, color=ACCENT, label="out"
+            )
+            self.play(FadeOut(signal), FadeOut(output), run_time=0.35)
+            signal, output = new_in, new_out
+            self.play(FadeIn(signal), FadeIn(output))
+            note = _swap_caption(self, note, caption(line).move_to(3.2 * DOWN))
+            self.wait(1.3)
+        rule = Text(
+            "scaled in → scaled out · later in → later out", font_size=LABEL_SIZE, color=ACCENT
+        )
+        rule.move_to(2.3 * DOWN)
+        self.play(FadeIn(rule))
+        self.wait(1.4)
+        self.play(FadeOut(VGroup(signal, output, rule, note)))
+
+        # --- level 2: a signal is a sum of clicks, so its output is a sum of responses ---
+        four = np.array([1, 2, 0, 3], dtype=float)
+        kernel = _K2
+        result = np.array([0.5, 1.5, 1.0, 1.5, 1.5])  # anchor P: length 4 + 2 − 1 = 5
+        lx0, ldx, lscale = -4.9, 0.6, 0.16
+        left_in = _strip(np.append(four, 0.0), lx0, ldx, 2.05, lscale, label="in")
+        for ghost in (left_in[1][-1],):
+            ghost.set_color(MUTED).set_opacity(0.5)
+        self.play(FadeIn(left_in))
+        note = _swap_caption(
+            self,
+            None,
+            caption(
+                "1, 2, 0, 3 through the window ½ ½ — read as three clicks, each with a response"
+            ).move_to(3.2 * DOWN),
+        )
+        copies = VGroup()
+        ys = (1.1, 0.2, -0.7)
+        for (stop, amount), y in zip(((0, 1.0), (1, 2.0), (3, 3.0)), ys, strict=True):
+            piece = np.zeros(5)
+            piece[stop : stop + 2] = amount * kernel
+            copy = _strip(piece, lx0, ldx, y, lscale, color=MUTED, size=16)
+            tag = Text(f"{_fmt(amount)}× at {stop}", font_size=16, color=MUTED)
+            tag.move_to(np.array([lx0 - 0.55, y, 0.0]), aligned_edge=RIGHT)
+            copies.add(VGroup(copy, tag))
+        self.play(LaggedStart(*[FadeIn(c) for c in copies], lag_ratio=0.3))
+        self.wait(1.0)
+        left_out = _strip(result, lx0, ldx, -1.6, lscale, color=GOOD, label="sum")
+        self.play(FadeIn(left_out))
+        note = _swap_caption(
+            self,
+            note,
+            caption(
+                "stack the responses and add by column: 0.5, 1.5, 1, 1.5, 1.5 — five from four"
+            ).move_to(3.2 * DOWN),
+        )
+        self.wait(1.6)
+
+        # The other view: one output at a time, the window read over the input.
+        rx0 = 1.9
+        right_in = _strip(np.append(four, 0.0), rx0, ldx, 2.05, lscale, label="in", numbers=False)
+        right_in[1][-1].set_color(MUTED).set_opacity(0.5)
+        right_out = _strip(result, rx0, ldx, -1.6, lscale, color=ACCENT, label="out")
+        self.play(FadeIn(right_in))
+        window = _Window(kernel, right_in[1], 1, False, 1.35)
+        self.play(FadeIn(window))
+        for n in range(5):
+            if n:
+                self.play(
+                    Transform(window, _Window(kernel, right_in[1], n, False, 1.35)), run_time=0.35
+                )
+            self.play(FadeIn(right_out[1][n]), FadeIn(right_out[2][n]), run_time=0.3)
+        self.play(FadeIn(right_out[0]), FadeIn(right_out[3]))
+        note = _swap_caption(
+            self,
+            note,
+            caption(
+                "or walk the window as before: one output at a time — the same five numbers"
+            ).move_to(3.2 * DOWN),
+        )
+        match = Text("the same answer, two ways", font_size=SMALL_SIZE, color=GOOD)
+        match.move_to(np.array([rx0 + 1.2, 0.0, 0.0]))
+        self.play(FadeIn(match))
+        self.wait(1.6)
+
+        facts = VGroup(
+            Text(
+                "sums pass through — the response of a sum is the sum of the responses",
+                font_size=SMALL_SIZE,
+            ),
+            Text(
+                "the same rule at every stop — a later click gets a later response",
+                font_size=SMALL_SIZE,
+            ),
+        ).arrange(DOWN, buff=0.22)
+        facts.move_to(0.6 * UP)
+        self.play(
+            FadeOut(VGroup(left_in, copies, left_out, right_in, window, match, note)), run_time=0.5
+        )
+        self.play(FadeIn(facts))
+        note = _swap_caption(
+            self,
+            None,
+            caption(
+                "two owned facts: the weighted sum is linear (the dice); the window never changes"
+            ).move_to(3.2 * DOWN),
+        )
+        self.wait(2.0)
+
+        self.play(FadeOut(VGroup(right_out, facts, note)))
+        _takeaway(
+            self,
+            "A filter is known by what one click becomes. A signal is a sum\n"
+            "of scaled, shifted clicks — so its output is the same sum of\n"
+            "scaled, shifted responses",
+        )
+
+
+class TheFlip(ConceptScene):
+    """Slide a pattern the probe's way and an echo lands before the click; flip it and the
+    echo lands after — the flip is what makes the sliding sum answer "what does this system
+    do to a click", and a symmetric kernel hides it."""
+
+    def construct(self):
+        self.play(FadeIn(self.title("The Flip"), shift=0.3 * DOWN))
+        prompt = Text(
+            "The probe never flipped anything. Why does convolution?", font_size=BODY_SIZE
+        )
+        prompt.next_to(self.head, DOWN, buff=0.3)
+        self.play(FadeIn(prompt))
+        self.wait(1.2)
+        self.play(FadeOut(prompt))
+
+        # A strip from stop −4 to stop 4, the click at 0.
+        stops = np.arange(-4, 5)
+        x0, dx, scale = -3.4, 0.7, 1.0
+        click = (stops == 0).astype(float)
+        echo = np.array([1.0, 0.0, 0.0, 0.5])
+        top_y, mid_y, low_y = 1.7, 0.1, -1.5
+
+        def strip_with_stops(values, y, color, label):
+            group = _strip(values, x0, dx, y, scale, color=color, label=label, numbers=False)
+            ticks = VGroup(
+                *[
+                    caption(str(stop)).move_to(np.array([x0 + i * dx, y - 0.35, 0.0]))
+                    for i, stop in enumerate(stops)
+                ]
+            )
+            return VGroup(group, ticks)
+
+        signal = strip_with_stops(click, top_y, COOL, "the click")
+        kernel_tokens = VGroup(
+            *[
+                VGroup(
+                    RoundedRectangle(width=0.5, height=0.36, corner_radius=0.08, stroke_width=1.5)
+                    .set_stroke(MUTED)
+                    .set_fill(MUTED, opacity=0.18),
+                    Text(_weight(w), font_size=18, color=MUTED),
+                )
+                for w in echo
+            ]
+        ).arrange(RIGHT, buff=0.12)
+        kernel_tag = Text("the echo kernel\n1, 0, 0, ½", font_size=SMALL_SIZE, line_spacing=1.0)
+        kernel_tag.next_to(kernel_tokens, UP, buff=0.15)
+        VGroup(kernel_tokens, kernel_tag).move_to(np.array([5.1, top_y + 0.1, 0.0]))
+        self.play(FadeIn(signal), FadeIn(kernel_tokens), FadeIn(kernel_tag))
+        note = _swap_caption(
+            self,
+            None,
+            caption("a kernel with a memory: the click now, and half of it three stops on").move_to(
+                3.2 * DOWN
+            ),
+        )
+        self.wait(1.4)
+
+        # The probe's way: the pattern slid unreversed — the half-click lands early.
+        pre = np.zeros(9)
+        pre[4] = 1.0
+        pre[1] = 0.5
+        probe_way = strip_with_stops(pre, mid_y, WARM, "slid as is")
+        self.play(FadeIn(probe_way))
+        note = _swap_caption(
+            self,
+            note,
+            caption(
+                "slide the pattern as the probe did, multiply and add: the half lands at −3"
+            ).move_to(3.2 * DOWN),
+        )
+        pre_tag = Text("a pre-echo?", font_size=SMALL_SIZE, color=WARM)
+        pre_tag.move_to(np.array([5.1, mid_y, 0.0]))
+        self.play(FadeIn(pre_tag))
+        self.wait(1.6)
+
+        post = np.zeros(9)
+        post[4] = 1.0
+        post[7] = 0.5
+        flipped_way = strip_with_stops(post, low_y, ACCENT, "flipped")
+        self.play(FadeIn(flipped_way))
+        note = _swap_caption(
+            self,
+            note,
+            caption(
+                "flip the pattern first and the half lands at +3 — an echo after the click"
+            ).move_to(3.2 * DOWN),
+        )
+        post_tag = Text("the echo, after", font_size=SMALL_SIZE, color=ACCENT)
+        post_tag.move_to(np.array([5.1, low_y, 0.0]))
+        self.play(FadeIn(post_tag))
+        self.wait(1.8)
+
+        verdict = VGroup(
+            Text(
+                "correlation asks: how much does the signal look like this pattern, here?",
+                font_size=SMALL_SIZE,
+            ),
+            Text(
+                "convolution asks: what does this system do to a click?",
+                font_size=SMALL_SIZE,
+                color=ACCENT,
+            ),
+        ).arrange(DOWN, buff=0.18)
+        verdict.move_to(2.5 * DOWN)
+        self.play(FadeOut(note), run_time=0.3)
+        self.play(FadeIn(verdict))
+        self.wait(2.0)
+        self.play(FadeOut(verdict))
+        note = _swap_caption(
+            self,
+            None,
+            caption(
+                "same numbers, one list reversed — ⅓ ⅓ ⅓ reversed is itself, so the average hid it"
+            ).move_to(3.2 * DOWN),
+        )
+        self.wait(1.8)
+
+        # --- causality: the centred window peeks ahead --------------------------------
+        self.play(
+            FadeOut(
+                VGroup(
+                    signal,
+                    probe_way,
+                    flipped_way,
+                    kernel_tokens,
+                    kernel_tag,
+                    pre_tag,
+                    post_tag,
+                    note,
+                )
+            )
+        )
+        step = np.array([0, 0, 0, 1, 1, 1, 1, 1], dtype=float)
+        sx0, sdx, sscale = -3.0, 0.9, 0.9
+        s_in = _strip(np.append(step, 1.0), sx0, sdx, 1.6, sscale, label="a step")
+        s_in[1][-1].set_color(MUTED).set_opacity(0.5)
+        # Anchor U: the strip continues at 1 beyond its right end (drawn), at 0 before it.
+        centred_vals = np.array([0, 0, 1 / 3, 2 / 3, 1, 1, 1, 1])
+        causal_vals = np.array([0, 0, 0, 1 / 3, 2 / 3, 1, 1, 1])
+        centred = _strip(centred_vals, sx0, sdx, 0.0, sscale, color=ACCENT, label="centred")
+        causal = _strip(causal_vals, sx0, sdx, -1.6, sscale, color=ACCENT, label="causal")
+        self.play(FadeIn(s_in))
+        self.play(FadeIn(centred))
+        note = _swap_caption(
+            self,
+            None,
+            caption(
+                "a step through the centred window: smoothed in place — but it read one stop ahead"
+            ).move_to(3.2 * DOWN),
+        )
+        self.wait(1.6)
+        self.play(FadeIn(causal))
+        note = _swap_caption(
+            self,
+            note,
+            caption(
+                "reading only the past gives the same numbers a stop late: delay is the price"
+            ).move_to(3.2 * DOWN),
+        )
+        self.wait(1.8)
+        aside = caption(
+            'conv layers slide unflipped yet say "convolution" — a learned kernel does not mind'
+        )
+        aside.move_to(2.5 * DOWN)
+        self.play(FadeIn(aside))
+        self.wait(1.8)
+
+        self.play(FadeOut(VGroup(s_in, centred, causal, note, aside)))
+        _takeaway(
+            self,
+            'The flip turns "does the signal match this pattern here" into\n'
+            '"what does this system do to a click" — a symmetric kernel\n'
+            "cannot tell the two apart",
         )
 
 
